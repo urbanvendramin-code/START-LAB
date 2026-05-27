@@ -16,9 +16,9 @@ export default function Navbar() {
   ];
 
   const languages = [
-    { code: 'sl', name: 'SL', flag: '🇸🇮' },
-    { code: 'en', name: 'EN', flag: '🇬🇧' },
-    { code: 'it', name: 'IT', flag: '🇮🇹' },
+    { code: 'sl', name: 'SL', flagUrl: 'https://flagcdn.com/w40/si.png' },
+    { code: 'en', name: 'EN', flagUrl: 'https://flagcdn.com/w40/gb.png' },
+    { code: 'it', name: 'IT', flagUrl: 'https://flagcdn.com/w40/it.png' },
   ];
 
   return (
@@ -52,10 +52,15 @@ export default function Navbar() {
                <button 
                  key={lang.code}
                  onClick={() => i18n.changeLanguage(lang.code)}
-                 className={`text-xs font-bold transition-all px-3 py-1.5 rounded-xl flex items-center gap-1 ${i18n.language === lang.code ? 'bg-brand-red text-white shadow-md' : 'text-slate-400 hover:bg-white/5'}`}
+                 className={`text-xs font-bold transition-all px-3 py-1.5 rounded-xl flex items-center gap-2 ${i18n.language === lang.code ? 'bg-brand-red text-white shadow-md' : 'text-slate-400 hover:bg-white/5'}`}
                  title={lang.name}
                >
-                 <span>{lang.flag}</span>
+                 <img 
+                   src={lang.flagUrl} 
+                   alt={`${lang.name} flag`} 
+                   className="w-4 h-3 object-cover rounded-sm border border-white/20" 
+                   referrerPolicy="no-referrer"
+                 />
                  {lang.name}
                </button>
              ))}
@@ -106,7 +111,12 @@ export default function Navbar() {
                   }}
                   className={`flex items-center gap-2 text-xs font-bold px-3 py-2 rounded-xl ${i18n.language === lang.code ? 'bg-brand-red text-white font-extrabold' : 'bg-slate-900 text-slate-300'}`}
                 >
-                  <span>{lang.flag}</span>
+                  <img 
+                    src={lang.flagUrl} 
+                    alt={`${lang.name} flag`} 
+                    className="w-4 h-3 object-cover rounded-sm border border-white/20" 
+                    referrerPolicy="no-referrer"
+                  />
                   {lang.name}
                 </button>
               ))}
