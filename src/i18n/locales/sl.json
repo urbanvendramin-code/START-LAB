@@ -66,10 +66,8 @@
     "list": [
       "3D tiskalniki (FDM & SLA)",
       "Laserski rezalnik",
-      "CNC stroji",
       "Elektronske postaje",
-      "VR/AR očala",
-      "Robotika"
+      "VR/AR očala"
     ],
     "pro": "10x Pro postaje",
     "center": "3D Printing Center"
@@ -159,7 +157,6 @@
       "mobile-app": { "title": "Ustvari svojo mobilno aplikacijo", "desc": "Iz ideje izdelajte preprosto mobilno aplikacijo in jo preizkusite." },
       "unreal-engine": { "title": "Izdelava videoiger (Unreal Engine)", "desc": "Ustvarite osnovno 3D okolje in razumejte nastanek igric." },
       "vr-worlds": { "title": "VR – virtualna resničnost", "desc": "Doživite virtualna okolja in interaktivne svetove." },
-      "physics-exp": { "title": "Fizikalni poskusi", "desc": "Znanost v praksi skozi zanimive eksperimente." },
       "disassemble-create": { "title": "Razstavi in ustvari", "desc": "Kreativna tehnika: iz starih naprav do novih izumov." },
       "long-term-project": { "title": "Dolgoročna projektna delavnica", "desc": "Od ideje do rešitve skozi prototipiranje in testiranje." },
       "hackathon-eco": { "title": "Čezmejni trajnostni hackathon", "desc": "Ekipno reševanje realnih izzivov." },

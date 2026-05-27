@@ -66,10 +66,8 @@
     "list": [
       "3D printers (FDM & SLA)",
       "Laser cutter",
-      "CNC machines",
       "Electronic stations",
-      "VR/AR goggles",
-      "Robotics"
+      "VR/AR goggles"
     ],
     "pro": "10x Pro stations",
     "center": "3D Printing Center"
@@ -159,7 +157,6 @@
       "mobile-app": { "title": "Create Your Own Mobile App", "desc": "Turn an idea into a simple mobile application and test it." },
       "unreal-engine": { "title": "Video Game Development (Unreal Engine)", "desc": "Create a basic 3D environment and understand how games are made." },
       "vr-worlds": { "title": "VR – Virtual Reality", "desc": "Experience virtual environments and interactive worlds." },
-      "physics-exp": { "title": "Physics Experiments", "desc": "Science in practice through interesting experiments." },
       "disassemble-create": { "title": "Disassemble and Create", "desc": "Creative technique: from old devices to new inventions." },
       "long-term-project": { "title": "Long-term Project Workshop", "desc": "From idea to solution through prototyping and testing." },
       "hackathon-eco": { "title": "Cross-border Sustainable Hackathon", "desc": "Team solving of real-world challenges." },

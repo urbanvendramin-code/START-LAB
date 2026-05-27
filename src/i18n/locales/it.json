@@ -66,10 +66,8 @@
     "list": [
       "Stampanti 3D (FDM e SLA)",
       "Taglierina laser",
-      "Macchine CNC",
       "Stazioni elettroniche",
-      "Occhiali VR/AR",
-      "Robotica"
+      "Occhiali VR/AR"
     ],
     "pro": "10x Stazioni Pro",
     "center": "Centro Stampa 3D"
@@ -159,7 +157,6 @@
       "mobile-app": { "title": "Crea la Tua App Mobile", "desc": "Trasforma un'idea in una semplice applicazione mobile e testala." },
       "unreal-engine": { "title": "Sviluppo di Videogiochi (Unreal Engine)", "desc": "Crea un ambiente 3D di base e comprendi come vengono realizzati i giochi." },
       "vr-worlds": { "title": "VR – Realtà Virtuale", "desc": "Sperimenta ambienti virtuali e mondi interattivi." },
-      "physics-exp": { "title": "Esperimenti di Fisica", "desc": "Scienza in pratica attraverso esperimenti interessanti." },
       "disassemble-create": { "title": "Smonta e Crea", "desc": "Tecnica creativa: dai vecchi dispositivi alle nuove invenzioni." },
       "long-term-project": { "title": "Workshop Progetto a Lungo Termine", "desc": "Dall'idea alla soluzione attraverso la prototipazione e il test." },
       "hackathon-eco": { "title": "Hackathon Sostenibile Transfrontaliero", "desc": "Risoluzione di squadra di sfide del mondo reale." },
