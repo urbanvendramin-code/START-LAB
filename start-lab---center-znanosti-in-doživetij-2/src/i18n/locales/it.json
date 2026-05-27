@@ -1,0 +1,250 @@
+{
+  "nav": {
+    "vizija": "Visione",
+    "programi": "Programmi",
+    "delavnice": "Workshop",
+    "koledar": "Calendario",
+    "partner": "Partner",
+    "kontakt": "Contatto"
+  },
+  "hero": {
+    "badge": "Goriška ha bisogno dello Start Lab",
+    "title_start": "SPAZIO PER",
+    "title_end": "INNOVATORI",
+    "subtitle": "Il primo hub high-tech nella regione della Goriška, dove bambini e ragazzi trasformano la curiosità in soluzioni digitali concrete.",
+    "cta": "Scopri i workshop",
+    "stats": {
+      "workshops": "Workshop",
+      "practical": "Pratico",
+      "equipment": "Attrezzatura"
+    }
+  },
+  "vision": {
+    "title": "Visione",
+    "text": "\"START LAB è un luogo dove la scienza incontra la velocità dello sviluppo e dell'esperienza – dove bambini e giovani trasformano rapidamente le idee in esperienze e soluzioni reali attraverso la creazione, il test e la scoperta.\""
+  },
+  "mission": {
+    "title": "Missione",
+    "text": "\"START LAB avvicina la scienza e la tecnologia ai giovani attraverso la creazione pratica e l'esperienza – con uno spazio sicuro, strumenti e tutoraggio dove la curiosità diventa conoscenza e la conoscenza diventa soluzioni utili.\""
+  },
+  "why": {
+    "title_start": "PERCHÉ TUO FIGLIO HA BISOGNO DI",
+    "title_brand": "START LAB?",
+    "subtitle_highlight": "non esiste altro spazio",
+    "subtitle_rest": "Nella regione della Goriška , che permetta a bambini e ragazzi la creazione tecnologica e lo sviluppo delle proprie idee nel pomeriggio.",
+    "exploration": {
+       "title": "Ricerca Indipendente",
+       "desc": "I giovani hanno bisogno della possibilità di provare l'attrezzatura da soli. Solo attraverso la pratica riconoscono il loro percorso."
+    },
+    "industry": {
+       "title": "Connessione con l'industria",
+       "desc": "Permettiamo il contatto diretto con sfide reali ed esperti dell'ambiente locale."
+    }
+  },
+  "goals": {
+    "title": "I Nostri Obiettivi",
+    "goal1": { "t": "Creatività", "d": "Sviluppo di competenze digitali e pensiero critico." },
+    "goal2": { "t": "Talenti", "d": "Riconoscimento precoce dei talenti tecnici e ingegneristici." },
+    "goal3": { "t": "Innovazione", "d": "Supporto nello sviluppo di prototipi e progetti propri." },
+    "goal4": { "t": "Rete", "d": "Forte rete con scuole primarie, secondarie e università." },
+    "goal5": { "t": "Riconoscimento", "d": "Diventare un centro scientifico – anche per il turismo regionale." }
+  },
+  "happening": {
+    "badge": "Allaccia le cinture: la scienza va a gonfie vele!",
+    "title": "Cosa sta succedendo allo Start Lab?",
+    "items": [
+      { "id": "01", "t": "Workshop per bambini", "d": "Scoperta giocosa della scienza e della tecnologia - sicura, comprensibile ed emozionante." },
+      { "id": "02", "t": "Workshop per giovani", "d": "Programmi approfonditi per costruire fiducia nelle professioni tecniche." },
+      { "id": "03", "t": "Ispirazioni dalla Pratica", "d": "Incontri con ricercatori e innovatori sulla tecnologia moderna." },
+      { "id": "04", "t": "Connessione Aziendale", "d": "Conoscere le professioni e gli ambienti di lavoro nelle aziende locali." },
+      { "id": "05", "t": "Mostre Scientifiche", "d": "Eventi che rendono la scienza visibile, tangibile e attraente." }
+    ]
+  },
+  "equipment": {
+    "title": "Attrezzatura del Laboratorio",
+    "subtitle": "Il laboratorio è un'infrastruttura di sviluppo aperta, adatta a partner e programmi di tutti i livelli.",
+    "list": [
+      "Stampanti 3D (FDM e SLA)",
+      "Taglierina laser",
+      "Macchine CNC",
+      "Stazioni elettroniche",
+      "Occhiali VR/AR",
+      "Robotica"
+    ],
+    "pro": "10x Stazioni Pro",
+    "center": "Centro Stampa 3D"
+  },
+  "projects": {
+    "title": "I Nostri Progetti",
+    "subtitle": "Cosa creano i nostri giovani ricercatori con le loro mani."
+  },
+  "partners": {
+    "title": "Partner nello Sviluppo",
+    "subtitle": "Uniamoci e creiamo le condizioni per lo sviluppo dei futuri professionisti.",
+    "item_ung": {
+      "name": "UNG",
+      "fullName": "Università di Nova Gorica – Laboratorio di fisica della materia organica",
+      "label": "Partner di Ricerca",
+      "desc": "Condurrà vari laboratori ed esperimenti pratici presso lo Start Lab."
+    },
+    "item_ptp": {
+      "name": "PTP",
+      "fullName": "Parco Tecnologico della Primorska",
+      "label": "Partner Imprenditoriale",
+      "desc": "Il Parco Tecnologico della Primorska (PTP) e Start Lab si completano a vicenda. Il PTP offre ai giovani contenuti sullo sviluppo di idee imprenditoriali e organizza il concorso POPRI, mentre Start Lab offre tutoraggio tecnico-scientifico nel laboratorio per trasformare le idee in prototipi fisici."
+    },
+    "item_ehisa": {
+      "name": "E-House",
+      "fullName": "Centro giovanile – E-House",
+      "label": "Partner Scientifico",
+      "desc": "e-House organizza laboratori scientifici nelle scuole elementari durante l'orario scolastico per avvicinare i giovani alla scienza. Start Lab, a Solkan, offre approfondimenti pomeridiani nel makerspace attrezzato. Lavoriamo in modo complementare per ampliare l'offerta STEM."
+    },
+    "item_mic": {
+      "name": "IL MIC",
+      "fullName": "Laboratorio di innovazione del Centro di istruzione interaziendale (IL MIC)",
+      "label": "Partner Tecnologico",
+      "desc": "IL MIC opera durante l'orario scolastico (fino alle 15:00) per consentire agli studenti di sviluppare competenze pratiche. Start Lab è aperto dopo le 16:00, offrendo uno spazio per la ricerca libera e la prototipazione extrascolastica. Entrambi fungono da potenziamento formale e pomeridiano."
+    },
+    "for_companies": {
+      "title": "Per le Aziende",
+      "desc": "Invitiamo le aziende a co-creare workshop, team-building e investire nel futuro personale della regione. Diventa parte dell'ambiente di sviluppo aperto della Goriška.",
+      "cta": "Diventa partner"
+    }
+  },
+  "contact": {
+    "title": "Contattaci",
+    "location": "Posizione",
+    "city": "Solkan, Slovenia",
+    "form": {
+      "name": "Nome e Cognome",
+      "email": "Email",
+      "message": "Messaggio",
+      "placeholder": "...",
+      "placeholder_msg": "Sono interessato a...",
+      "submit": "Invia Messaggio"
+    }
+  },
+  "workshops_page": {
+    "title_start": "Tutti i",
+    "title_brand": "Workshop",
+    "subtitle": "Scegli il tuo percorso di esplorazione. Dalla produzione digitale alle tecnologie più avanzate.",
+    "schedules_soon": "Le date saranno pubblicate a breve",
+    "important_notice": "Avviso importante",
+    "register": "Registrazione",
+    "workshop_label": "Workshop Selezionato",
+    "child_name": "Nome e Cognome del Bambino",
+    "child_age": "Età del Bambino",
+    "parent_email": "Email del Genitore",
+    "parent_phone": "Telefono del Genitore",
+    "submit": "Invia Candidatura",
+    "dates_soon": "Le date saranno note a breve",
+    "help_title": "Serve aiuto?",
+    "help_text": "Se non sei sicuro di quale workshop sia adatto a tuo figlio, contattaci a info@startlab.si.",
+    "duration": "5 x 2 ore"
+  },
+  "workshops_data": {
+    "sections": {
+      "digital": "Produzione Digitale e Design",
+      "electronics": "Elettronica, Programmazione e Sistemi Intelligenti",
+      "science": "Esperienze Digitali, Scienza e Innovazione",
+      "solution": "Dall'Idea alla Soluzione"
+    },
+    "items": {
+      "3d-print": { "title": "Stampa 3D – dall'idea al prodotto", "desc": "Scopri il processo dalla modellazione 3D al prodotto finale utilizzando le stampanti 3D." },
+      "laser": { "title": "Taglio Laser – dal disegno al prodotto", "desc": "Impara a preparare piani di taglio laser e a creare prodotti unici." },
+      "3d-pro": { "title": "Modellazione 3D Professionale", "desc": "Scopri strumenti avanzati per la modellazione 3D e il design ingegneristico." },
+      "electronics-basic": { "title": "Basi di Elettronica – circuiti DC", "desc": "I partecipanti apprendono i componenti base e le leggi dell'elettricità e assemblano semplici circuiti." },
+      "arduino-micro": { "title": "Microcontrollori e Programmazione (Arduino)", "desc": "I partecipanti creano un progetto interattivo con sensori e attuatori." },
+      "smart-home": { "title": "Case Intelligenti", "desc": "Come funzionano nella pratica i dispositivi intelligenti e l'automazione." },
+      "mobile-app": { "title": "Crea la Tua App Mobile", "desc": "Trasforma un'idea in una semplice applicazione mobile e testala." },
+      "unreal-engine": { "title": "Sviluppo di Videogiochi (Unreal Engine)", "desc": "Crea un ambiente 3D di base e comprendi come vengono realizzati i giochi." },
+      "vr-worlds": { "title": "VR – Realtà Virtuale", "desc": "Sperimenta ambienti virtuali e mondi interattivi." },
+      "physics-exp": { "title": "Esperimenti di Fisica", "desc": "Scienza in pratica attraverso esperimenti interessanti." },
+      "disassemble-create": { "title": "Smonta e Crea", "desc": "Tecnica creativa: dai vecchi dispositivi alle nuove invenzioni." },
+      "long-term-project": { "title": "Workshop Progetto a Lungo Termine", "desc": "Dall'idea alla soluzione attraverso la prototipazione e il test." },
+      "hackathon-eco": { "title": "Hackathon Sostenibile Transfrontaliero", "desc": "Risoluzione di squadra di sfide del mondo reale." },
+      "graphene-transistor": { "title": "Fabbricazione di Transistor al Grafene", "desc": "Workshop pratico sulla realizzazione di un transistor in collaborazione con l'UNG." }
+    }
+  },
+  "partner_page": {
+    "title_start": "Diventa un",
+    "title_brand": "Partner",
+    "subtitle": "Start Lab è un ambiente di sviluppo aperto dove i giovani della Goriška scoprono i propri talenti. Insieme costruiamo uno spazio per i futuri innovatori.",
+    "colab_title": "Chi invitiamo?",
+    "colab_subtitle": "Aziende, mentori ed esperti.",
+    "benefit_title": "Cosa ottieni?",
+    "benefit_subtitle": "Accesso al talento e forte promozione locale.",
+    "goal_title": "Il nostro obiettivo",
+    "goal_subtitle": "Creare un ambiente in cui il talento rimanga a casa.",
+    "quote": "\"Se vogliamo che il talento rimanga nella Goriška, dobbiamo creare oggi insieme un ambiente in cui possa nascere.\"",
+    "form_title": "Collaboriamo",
+    "company_label": "Nome e Cognome / Azienda",
+    "coop_type": {
+      "label": "Tipo di Collaborazione",
+      "placeholder": "Scegli...",
+      "sponsorship": "Azienda - Sponsorizzazione / Connessione",
+      "mentoring": "Mentore - Ingegnere / Studente",
+      "equipment": "Supporto - Donazione di Attrezzature",
+      "other": "Altro"
+    },
+    "message_placeholder": "Descrivi come vorresti partecipare...",
+    "submit": "Invia Richiesta",
+    "agreement": "Inviando il modulo, accetti che Start Lab utilizzi i tuoi dati allo scopo di stabilire una partnership.",
+    "thanks": "Grazie per l'interesse!",
+    "callback": "Ti contatteremo il prima possibile.",
+    "new_request": "Invia una nuova domanda"
+  },
+  "calendar_page": {
+    "title_start": "Calendario",
+    "title_brand": "Eventi",
+    "subtitle": "Rimani aggiornato su tutti i workshop, le conferenze e gli eventi nel nostro laboratorio.",
+    "events_soon": "Gli eventi saranno pubblicati a breve.",
+    "mon": "Lun", "tue": "Mar", "wed": "Mer", "thu": "Gio", "fri": "Ven", "sat": "Sab", "sun": "Dom",
+    "workshop": "Workshop",
+    "event": "Evento",
+    "lecture": "Conferenza",
+    "register": "Iscriviti",
+    "details": "Dettagli"
+  },
+  "privacy": {
+    "title": "Informativa sulla Privacy",
+    "last_update": "Ultimo aggiornamento: Maggio 2026",
+    "sections": {
+      "gen": "1. Generale",
+      "data": "2. Raccolta Dati",
+      "usage": "3. Scopo dell'Uso",
+      "protect": "4. Protezione dei dati",
+      "rights": "5. I Tuoi Diritti",
+      "cookies": "6. Cookie"
+    }
+  },
+  "terms": {
+    "title": "Condizioni d'Uso",
+    "last_update": "Ultimo aggiornamento: Maggio 2026",
+    "sections": {
+      "gen": "1. Introduzione",
+      "reg": "2. Registrazione e partecipazione",
+      "content": "3. Proprietà intellettuale",
+      "limit": "4. Limitazione di Responsabilità",
+      "change": "5. Modifiche ai termini"
+    }
+  },
+  "footer": {
+    "rights": "TUTTI I DIRITTI RISERVATI.",
+    "privacy": "Privacy",
+    "terms": "Termini di utilizzo"
+  },
+  "seo": {
+    "home_title": "Start Lab - Centro di Scienza e Avventura | Hub ad alta tecnologia nel Goriziano",
+    "home_desc": "Il Centro di Scienza e Avventura Start Lab è uno spazio innovativo nel Goriziano dove la curiosità incontra lo sviluppo tecnologico. Offriamo fantastici laboratori di stampa 3D, taglio laser e programmazione per bambini e giovani.",
+    "workshops_title": "Laboratori STEM ad Alta Tecnologia per Bambini e Ragazzi | Start Lab",
+    "workshops_desc": "Esplora i nostri laboratori pratici dedicati a stampa 3D, taglio laser e modellazione digitale 3D per ragazzi a Gorizia e dintorni.",
+    "partner_title": "Diventa Partner e Sostenitore | Start Lab",
+    "partner_desc": "Sostieni lo sviluppo dei giovani talenti e l'apprendimento delle tecnologie future nel Goriziano. Collabora con noi.",
+    "calendar_title": "Calendario dei Laboratori e degli Eventi | Start Lab",
+    "calendar_desc": "Rimani aggiornato su tutti i workshop, le conferenze e gli eventi nel nostro laboratorio ad alta tecnologia.",
+    "privacy_title": "Informativa sulla Privacy e Tutela dei Dati | Start Lab",
+    "terms_title": "Condizioni d'Uso del Sito Web | Start Lab",
+    "keywords": "Start Lab, Centro della scienza, laboratori STEM per bambini, Goriziano, Nova Gorica, stampa 3D, taglio laser, programmazione bambini, fabbricazione digitale"
+  }
+}

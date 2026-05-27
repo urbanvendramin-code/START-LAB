@@ -1,0 +1,250 @@
+{
+  "nav": {
+    "vizija": "Vizija",
+    "programi": "Programi",
+    "delavnice": "Delavnice",
+    "koledar": "Koledar",
+    "partner": "Partner",
+    "kontakt": "Kontakt"
+  },
+  "hero": {
+    "badge": "Goriška potrebuje Start Lab",
+    "title_start": "PROSTOR ZA",
+    "title_end": "INOVATORJE",
+    "subtitle": "Prva visokotehnološka stična točka na Goriškem, kjer otroci in mladi spreminjajo radovednost v konkretne digitalne rešitve.",
+    "cta": "Preveri delavnice",
+    "stats": {
+      "workshops": "Delavnic",
+      "practical": "Praktično",
+      "equipment": "Oprema"
+    }
+  },
+  "vision": {
+    "title": "Vizija",
+    "text": "\"START LAB je prostor, kjer se znanost sreča s hitrostjo razvoja in doživetij – kjer otroci in mladi skozi ustvarjanje, preizkušanje in odkrivanje hitro spreminjajo ideje v resnične izkušnje in rešitve.\""
+  },
+  "mission": {
+    "title": "Poslanstvo",
+    "text": "\"START LAB mladim približuje znanost in tehniko skozi praktično ustvarjanje in doživetja – z varnim prostorom, orodji in mentorstvom, kjer radovednost postane znanje, znanje pa uporabne rešitve.\""
+  },
+  "why": {
+    "title_start": "ZAKAJ VAŠ OTROK POTREBUJE",
+    "title_brand": "START LAB?",
+    "subtitle_highlight": "ne obstaja drugi prostor",
+    "subtitle_rest": "Na Goriškem trenutno , ki bi v popoldanskem času otrokom in mladim omogočal tehnološko ustvarjanje in razvoj lastnih idej.",
+    "exploration": {
+       "title": "Samostojno raziskovanje",
+       "desc": "Mladi potrebujejo možnost, da sami preizkusijo opremo. Šele s prakso prepoznajo svojo pot."
+    },
+    "industry": {
+       "title": "Povezava z industrijo",
+       "desc": "Omogočamo neposreden stik z realnimi izzivi in strokovnjaki iz lokalnega okolja."
+    }
+  },
+  "goals": {
+    "title": "Naši cilji",
+    "goal1": { "t": "Kreativnost", "d": "Razvijanje digitalnih veščin in kritičnega razmišljanja." },
+    "goal2": { "t": "Talenti", "d": "Zgodnje odkrivanje tehničnih in inženirskih talentov." },
+    "goal3": { "t": "Inovacije", "d": "Podpora pri razvoju prototipov in lastnih projektov." },
+    "goal4": { "t": "Mreža", "d": "Močna mreža z OŠ, srednjimi šolami in univerzami." },
+    "goal5": { "t": "Prepoznavnost", "d": "Postati center znanosti – tudi za turizem regije." }
+  },
+  "happening": {
+    "badge": "Pripni se: znanost gre na polno!",
+    "title": "Kaj se dogaja v Start Labu?",
+    "items": [
+      { "id": "01", "t": "Delavnice za otroke", "d": "Igrivo odkrivanje znanosti in tehnike - varno, razumljivo in navdušujoče." },
+      { "id": "02", "t": "Delavnice za mlade", "d": "Poglobljeni programi za gradnjo samozavesti za tehnične poklice." },
+      { "id": "03", "t": "Navdihi iz prakse", "d": "Srečanja z raziskovalci in inovatorji o sodobni tehnologiji." },
+      { "id": "04", "t": "Povezovanje s podjetji", "d": "Spoznavanje poklicev in delovnih okolij v lokalnih podjetjih." },
+      { "id": "05", "t": "Znanstvene razstave", "d": "Dogodki, ki naredijo znanost vidno, otipljivo in privlačno." }
+    ]
+  },
+  "equipment": {
+    "title": "Oprema laboratorija",
+    "subtitle": "Laboratorij je odprta, razvojna infrastruktura, primerna za partnerje in programe vseh stopenj.",
+    "list": [
+      "3D tiskalniki (FDM & SLA)",
+      "Laserski rezalnik",
+      "CNC stroji",
+      "Elektronske postaje",
+      "VR/AR očala",
+      "Robotika"
+    ],
+    "pro": "10x Pro postaje",
+    "center": "3D Printing Center"
+  },
+  "projects": {
+    "title": "Naši projekti",
+    "subtitle": "Kaj vse nastane pod rokami naših mladih raziskovalcev."
+  },
+  "partners": {
+    "title": "Partnerji v razvoju",
+    "subtitle": "Stopimo skupaj in ustvarimo pogoje za razvoj prihodnjih strokovnjakov.",
+    "item_ung": {
+      "name": "UNG",
+      "fullName": "Univerza v Novi Gorici – Laboratorij za fiziko organskih snovi",
+      "label": "Raziskovalni partner",
+      "desc": "V Start Labu bo izvajal različne delavnice"
+    },
+    "item_ptp": {
+      "name": "PTP",
+      "fullName": "Primorski Tehnološki park",
+      "label": "Podjetniški partner",
+      "desc": "Primorski tehnološki park (PTP) in Start Lab se vsebinsko dopolnjujeta. PTP mladim nudi vsebine na področju poslovnega razvoja idej v podjetniške zgodbe ter organizira nacionalno in mednarodno podjetniško tekmovanje za mlade POPRI, Start Lab pa izvaja mentorstvo in delavnice na tehnično-naravoslovnem področju, kjer se ideje pretvarjajo v prototipe in rešitve."
+    },
+    "item_ehisa": {
+      "name": "E-Hiša",
+      "fullName": "Mladinski center – E-Hiša",
+      "label": "Znanstveni partner",
+      "desc": "e-Hiša izvaja delavnice med šolskim časom po osnovnih šolah, kjer učencem približuje znanost in tehniko skozi praktične eksperimente. Start Lab organizira delavnice na fiksni lokaciji v Solkanu, v opremljenem laboratoriju, kjer omogoča poglobljeno delo in nadgradnjo znanja. Delovali bomo komplementarno – e-Hiša v šolskem okolju, Start Lab kot nadaljevanje in razširitev aktivnosti v specializiranem prostoru."
+    },
+    "item_mic": {
+      "name": "IL MIC",
+      "fullName": "Inovacijski laboratorij Medpodjetniškega izobraževalnega centra (IL MIC)",
+      "label": "Tehnični partner",
+      "desc": "IL MIC deluje v času pouka (do 15. ure) in dijakom Šolskega centra Nova Gorica omogoča praktično delo ter razvoj tehničnih kompetenc. Start Lab je odprt po 16. uri ter nudi prostor za raziskovanje, prototipiranje in razvoj idej izven šolskega časa – za dijake, uporabnike IL MIC-a in osnovnošolce. Delujeta komplementarno: IL MIC v okviru formalnega izobraževanja, Start Lab kot popoldanska nadgradnja."
+    },
+    "for_companies": {
+      "title": "Za podjetja",
+      "desc": "Vabimo podjetja k soustvarjanju delavnic, team-buildingom in naložbi v prihodnje kadre regije. Postanite del odprtega razvojnega okolja na Goriškem.",
+      "cta": "Postanite partner"
+    }
+  },
+  "contact": {
+    "title": "Stopite v stik",
+    "location": "Lokacija",
+    "city": "Solkan, Slovenija",
+    "form": {
+      "name": "Ime in priimek",
+      "email": "Email",
+      "message": "Sporočilo",
+      "placeholder": "...",
+      "placeholder_msg": "Zanima me...",
+      "submit": "Pošlji sporočilo"
+    }
+  },
+  "workshops_page": {
+    "title_start": "Vse",
+    "title_brand": "Delavnice",
+    "subtitle": "Izberite svojo pot raziskovanja. Od digitalne proizvodnje do najnaprednejših tehnologij.",
+    "schedules_soon": "Termini bodo objavljeni kmalu",
+    "important_notice": "Pomembno obvestilo",
+    "register": "Prijava",
+    "workshop_label": "Izbrana delavnica",
+    "child_name": "Ime in priimek otroka",
+    "child_age": "Starost otroka",
+    "parent_email": "Email starša",
+    "parent_phone": "Telefon starša",
+    "submit": "Oddaj prijavo",
+    "dates_soon": "Termini bodo znani kmalu",
+    "help_title": "Potrebujete pomoč?",
+    "help_text": "Če niste prepričani katera delavnica je primerna za vašega otroka, nas kontaktirajte na info@startlab.si.",
+    "duration": "5 x 2 uri"
+  },
+  "workshops_data": {
+    "sections": {
+      "digital": "Digitalna proizvodnja & oblikovanje",
+      "electronics": "Elektronika, programiranje & pametni sistemi",
+      "science": "Digitalna doživetja, znanost & inovacije",
+      "solution": "Od ideje do rešitve"
+    },
+    "items": {
+      "3d-print": { "title": "3D tisk – od ideje do izdelka", "desc": "Spoznajte postopek od 3D modeliranja do končnega izdelka s pomočjo 3D tiskalnikov." },
+      "laser": { "title": "Laserski razrez – od risbe do izdelka", "desc": "Naučite se pripraviti načrte za laserski razrez in izdelati unikatne izdelke." },
+      "3d-pro": { "title": "Profesionalno 3D modeliranje", "desc": "Spoznajte napredna orodja za 3D modeliranje in inženirsko načrtovanje." },
+      "electronics-basic": { "title": "Osnove elektronike – DC vezja", "desc": "Udeleženci spoznajo osnovne komponente in zakonitosti elektrike ter sestavijo enostavna vezja." },
+      "arduino-micro": { "title": "Mikrokrmilniki in programiranje (Arduino)", "desc": "Udeleženci ustvarijo interaktiven projekt s senzorji in aktuatorji." },
+      "smart-home": { "title": "Pametne hiše", "desc": "Kako delujejo pametne naprave in avtomatizacije v praksi." },
+      "mobile-app": { "title": "Ustvari svojo mobilno aplikacijo", "desc": "Iz ideje izdelajte preprosto mobilno aplikacijo in jo preizkusite." },
+      "unreal-engine": { "title": "Izdelava videoiger (Unreal Engine)", "desc": "Ustvarite osnovno 3D okolje in razumejte nastanek igric." },
+      "vr-worlds": { "title": "VR – virtualna resničnost", "desc": "Doživite virtualna okolja in interaktivne svetove." },
+      "physics-exp": { "title": "Fizikalni poskusi", "desc": "Znanost v praksi skozi zanimive eksperimente." },
+      "disassemble-create": { "title": "Razstavi in ustvari", "desc": "Kreativna tehnika: iz starih naprav do novih izumov." },
+      "long-term-project": { "title": "Dolgoročna projektna delavnica", "desc": "Od ideje do rešitve skozi prototipiranje in testiranje." },
+      "hackathon-eco": { "title": "Čezmejni trajnostni hackathon", "desc": "Ekipno reševanje realnih izzivov." },
+      "graphene-transistor": { "title": "Izdelave grafenskega tranzistorja", "desc": "Praktična delavnica izdelave tranzistorja v sodelovanju z UNG." }
+    }
+  },
+  "partner_page": {
+    "title_start": "Postani",
+    "title_brand": "Partner",
+    "subtitle": "Start Lab je odprto razvojno okolje, kjer mladi na Goriškem odkrivajo svoje talente. Skupaj gradimo prostor za prihodnje inovatorje.",
+    "colab_title": "Koga vabimo?",
+    "colab_subtitle": "Podjetja, mentorje in strokovnjake.",
+    "benefit_title": "Kaj pridobite?",
+    "benefit_subtitle": "Dostop do talentov in močno lokalno promocijo.",
+    "goal_title": "Naš cilj",
+    "goal_subtitle": "Ustvariti okolje, kjer talenti ostanejo doma.",
+    "quote": "\"Če želimo, da talent ostane na Goriškem, moramo danes skupaj ustvariti okolje, kjer lahko nastane.\"",
+    "form_title": "Sodelujmo",
+    "company_label": "Ime in priimek / Podjetje",
+    "coop_type": {
+      "label": "Tip sodelovanja",
+      "placeholder": "Izberite...",
+      "sponsorship": "Podjetje - Sponzorstvo / Povezovanje",
+      "mentoring": "Mentor - Inženir / Študent",
+      "equipment": "Podpora - Donacija opreme",
+      "other": "Drugo"
+    },
+    "message_placeholder": "Opišite kako bi želeli sodelovati...",
+    "submit": "Pošlji povpraševanje",
+    "agreement": "Z oddajo obrazca se strinjate, da Start Lab uporabi vaše podatke za namen vzpostavitve partnerstva.",
+    "thanks": "Hvala za zanimanje!",
+    "callback": "Kontaktirali vas bomo v najkrajšem možnem času.",
+    "new_request": "Pošlji novo prijavo"
+  },
+  "calendar_page": {
+    "title_start": "Koledar",
+    "title_brand": "Dogodkov",
+    "subtitle": "Bodite na tekočem z vsemi delavnicami, predavanji in dogodki v našem laboratoriju.",
+    "events_soon": "Dogodki bodo objavljeni kmalu.",
+    "mon": "Pon", "tue": "Tor", "wed": "Sre", "thu": "Čet", "fri": "Pet", "sat": "Sob", "sun": "Ned",
+    "workshop": "Delavnica",
+    "event": "Dogodek",
+    "lecture": "Predavanje",
+    "register": "Prijava",
+    "details": "Podrobnosti"
+  },
+  "privacy": {
+    "title": "Pravilnik o zasebnosti",
+    "last_update": "Zadnja posodobitev: maj 2026",
+    "sections": {
+      "gen": "1. Splošno",
+      "data": "2. Zbiranje podatkov",
+      "usage": "3. Namen uporabe",
+      "protect": "4. Varovanje podatkov",
+      "rights": "5. Vaše pravice",
+      "cookies": "6. Piškotki"
+    }
+  },
+  "terms": {
+    "title": "Pogoji uporabe",
+    "last_update": "Zadnja posodobitev: maj 2026",
+    "sections": {
+      "gen": "1. Uvod",
+      "reg": "2. Prijava in udeležba",
+      "content": "3. Intelektualna lastnina",
+      "limit": "4. Omejitev odgovornosti",
+      "change": "5. Spremembe pogojev"
+    }
+  },
+  "footer": {
+    "rights": "VSE PRAVICE PRIDRŽANE.",
+    "privacy": "Zasebnost",
+    "terms": "Pogoji uporabe"
+  },
+  "seo": {
+    "home_title": "Start Lab - Center znanosti in doživetij | Prva visokotehnološka stična točka na Goriškem",
+    "home_desc": "Center znanosti in doživetij Start Lab je kreativni prostor na Goriškem, kjer se radovednost sreča z znanostjo. Ponujamo vrhunske delavnice 3D tiska, laserskega razreza in programiranja za otroke in mlade.",
+    "workshops_title": "Visokotehnološke delavnice za otroke in mladostnike | Start Lab",
+    "workshops_desc": "Preglejte aktualne tehnične delavnice na področju 3D tiska, laserskega razreza in digitalnega oblikovanja za otroke na Goriškem.",
+    "partner_title": "Postanite partner ali podpornik | Start Lab",
+    "partner_desc": "Podprite razvoj mladih talentov in učenje sodobnih tehnologij na Goriškem. Sodelujte z našim Centrom znanosti in doživetij.",
+    "calendar_title": "Koledar dogodkov in predavanj | Start Lab",
+    "calendar_desc": "Preverite datume in prihajajoče delavnice, zanimive dogodke in predavanja v našem visokotehnološkem laboratoriju.",
+    "privacy_title": "Varstvo zasebnosti in osebnih podatkov | Start Lab",
+    "terms_title": "Splošni pogoji uporabe spletnega mesta | Start Lab",
+    "keywords": "Start Lab, Center znanosti, tehnične delavnice za otroke, Goriška, Nova Gorica, 3D tisk, laserski razrez, programiranje za otroke, inovacije, digitalno oblikovanje, STEM delavnice"
+  }
+}
