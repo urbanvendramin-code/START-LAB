@@ -50,11 +50,6 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="lg:col-span-7"
           >
-            <div className="inline-flex items-center gap-2.5 bg-play-yellow/20 border-2 border-play-yellow/50 px-5 py-2.5 rounded-full mb-8">
-              <span className="w-2.5 h-2.5 rounded-full bg-brand-red animate-ping" />
-              <span className="text-xs font-display font-extrabold uppercase tracking-widest text-slate-800">{t('hero.badge')}</span>
-            </div>
-            
             <h1 className="text-5xl sm:text-6xl md:text-[6.5rem] font-display font-black mb-8 leading-[0.95] tracking-tight text-slate-950">
               {t('hero.title_start')} <br />
               <span className="text-brand-red relative inline-block">

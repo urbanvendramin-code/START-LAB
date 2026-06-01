@@ -6,6 +6,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
+import ProjectPage from './pages/ProjectPage';
 import WorkshopsPage from './pages/WorkshopsPage';
 import PartnerPage from './pages/PartnerPage';
 import CalendarPage from './pages/CalendarPage';
@@ -40,6 +41,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="o-projektu" element={<ProjectPage />} />
           <Route path="delavnice" element={<WorkshopsPage />} />
           <Route path="partner" element={<PartnerPage />} />
           <Route path="koledar" element={<CalendarPage />} />

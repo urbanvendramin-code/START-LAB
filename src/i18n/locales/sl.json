@@ -1,5 +1,6 @@
 {
   "nav": {
+    "oprojektu": "O projektu",
     "vizija": "Vizija",
     "programi": "Programi",
     "delavnice": "Delavnice",
@@ -19,13 +20,16 @@
       "equipment": "Oprema"
     }
   },
+  "project": {
+    "funding_text": "Projekt financira Evropska unija iz Sklada za male projekte GO!2025 programa Interreg VI-A Italija-Slovenija 2021-2027, ki ga upravlja EZTS GO."
+  },
   "vision": {
     "title": "Vizija",
-    "text": "\"START LAB je prostor, kjer se znanost sreča s hitrostjo razvoja in doživetij – kjer otroci in mladi skozi ustvarjanje, preizkušanje in odkrivanje hitro spreminjajo ideje v resnične izkušnje in rešitve.\""
+    "text": "Postati goriško stičišče idej, znanja in inovacij, iz katerega bodo nastajali prihodnji raziskovalci, inženirji, izumitelji ter tehnološki preboji."
   },
   "mission": {
     "title": "Poslanstvo",
-    "text": "\"START LAB mladim približuje znanost in tehniko skozi praktično ustvarjanje in doživetja – z varnim prostorom, orodji in mentorstvom, kjer radovednost postane znanje, znanje pa uporabne rešitve.\""
+    "text": "Poslanstvo START LAB-a je mladim približati znanost, tehnologijo in inovacije ter jim omogočiti pridobivanje praktičnih izkušenj, ki jih formalno izobraževanje pogosto ne nudi. Verjamemo, da pravo znanje nastane takrat, ko teorijo povežemo s prakso, raziskovanjem in preizkušanjem novih idej."
   },
   "why": {
     "title_start": "ZAKAJ VAŠ OTROK POTREBUJE",

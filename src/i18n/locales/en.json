@@ -1,5 +1,6 @@
 {
   "nav": {
+    "oprojektu": "About project",
     "vizija": "Vision",
     "programi": "Programs",
     "delavnice": "Workshops",
@@ -19,13 +20,16 @@
       "equipment": "Equipment"
     }
   },
+  "project": {
+    "funding_text": "The project is co-funded by the European Union from the Small Project Fund GO!2025 of the Interreg VI-A Italy-Slovenia 2021-2027 programme, managed by EGTC GO."
+  },
   "vision": {
     "title": "Vision",
-    "text": "\"START LAB is a place where science meets the speed of development and experience – where children and young people quickly turn ideas into real experiences and solutions through creation, testing, and discovery.\""
+    "text": "To become the Goriška hub of ideas, knowledge, and innovation, from which future researchers, engineers, inventors, and technological breakthroughs will emerge."
   },
   "mission": {
     "title": "Mission",
-    "text": "\"START LAB brings science and technology closer to young people through practical creation and experience – with a safe space, tools, and mentorship where curiosity becomes knowledge, and knowledge becomes useful solutions.\""
+    "text": "START LAB's mission is to bring science, technology, and innovation closer to young people and enable them to gain practical experience that formal education often does not provide. We believe that real knowledge is created when theory is connected with practice, research, and testing of new ideas."
   },
   "why": {
     "title_start": "WHY YOUR CHILD NEEDS",
