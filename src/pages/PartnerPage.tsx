@@ -32,7 +32,7 @@ export default function PartnerPage() {
   };
 
   return (
-    <div className="pt-28 md:pt-36 pb-20 px-4 md:px-6 relative">
+    <div className="pt-60 md:pt-52 pb-20 px-4 md:px-6 relative">
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-12 gap-12 md:gap-16 items-start">
           
