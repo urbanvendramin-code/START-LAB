@@ -17,8 +17,8 @@ export default function Navbar() {
 
   const languages = [
     { code: 'sl', name: 'SL', flagUrl: 'https://flagcdn.com/w40/si.png' },
-    { code: 'en', name: 'EN', flagUrl: 'https://flagcdn.com/w40/gb.png' },
     { code: 'it', name: 'IT', flagUrl: 'https://flagcdn.com/w40/it.png' },
+    { code: 'en', name: 'EN', flagUrl: 'https://flagcdn.com/w40/gb.png' },
   ];
 
   return (
