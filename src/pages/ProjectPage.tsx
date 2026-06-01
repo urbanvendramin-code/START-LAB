@@ -6,25 +6,15 @@ export default function ProjectPage() {
   const { t } = useTranslation();
 
   return (
-    <div className="pt-24 md:pt-32 pb-12 md:pb-20 px-4 md:px-6 relative min-h-[80vh] flex flex-col items-center justify-center selections:bg-brand-red/20">
+    <div className="pt-52 md:pt-64 pb-12 md:pb-20 px-4 md:px-6 relative min-h-[80vh] flex flex-col items-center justify-center selections:bg-brand-red/20">
       <div className="max-w-4xl mx-auto w-full text-center space-y-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col items-center gap-12 bg-slate-50/50 rounded-3xl p-8 md:p-16 border border-slate-100 shadow-sm"
+          className="flex flex-col items-center bg-slate-50/50 rounded-3xl p-8 md:p-16 border border-slate-100 shadow-sm"
           id="project-about-card"
         >
-          {/* Logo at the top center */}
-          <div className="relative flex justify-center w-full max-w-[320px] md:max-w-[400px]">
-            <img 
-              src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1780041788/start_mesmgf.png" 
-              alt="Start Lab Logo" 
-              className="w-full h-auto object-contain"
-              referrerPolicy="no-referrer"
-            />
-          </div>
-
           {/* Text and Links under the logo */}
           <div className="space-y-8">
             <p className="text-lg md:text-xl font-medium text-slate-700 leading-relaxed max-w-2xl mx-auto">
