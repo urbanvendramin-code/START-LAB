@@ -225,11 +225,7 @@
     "company_label": "Name and Surname / Company",
     "coop_type": {
       "label": "Collaboration Type",
-      "placeholder": "Choose...",
-      "sponsorship": "Company - Sponsorship / Connection",
-      "mentoring": "Mentor - Engineer / Student",
-      "equipment": "Support - Equipment Donation",
-      "other": "Other"
+      "placeholder": "..."
     },
     "message_placeholder": "Describe how you would like to participate...",
     "submit": "Send Inquiry",

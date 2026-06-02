@@ -259,18 +259,14 @@ export default function PartnerPage() {
 
                   <div className="space-y-2">
                     <label className="text-xs font-display font-black uppercase text-slate-500">{t('partner_page.coop_type.label')}</label>
-                    <select 
+                    <input 
                       required 
+                      type="text"
                       value={coopType}
                       onChange={(e) => setCoopType(e.target.value)}
-                      className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium appearance-none"
-                    >
-                      <option value="" disabled>{t('partner_page.coop_type.placeholder')}</option>
-                      <option>{t('partner_page.coop_type.sponsorship')}</option>
-                      <option>{t('partner_page.coop_type.mentoring')}</option>
-                      <option>{t('partner_page.coop_type.equipment')}</option>
-                      <option>{t('partner_page.coop_type.other')}</option>
-                    </select>
+                      placeholder={t('partner_page.coop_type.placeholder')}
+                      className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium" 
+                    />
                   </div>
 
                   <div className="space-y-2">

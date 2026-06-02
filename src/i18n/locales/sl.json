@@ -225,11 +225,7 @@
     "company_label": "Ime in priimek / Podjetje",
     "coop_type": {
       "label": "Tip sodelovanja",
-      "placeholder": "Izberite...",
-      "sponsorship": "Podjetje - Sponzorstvo / Povezovanje",
-      "mentoring": "Mentor - Inženir / Študent",
-      "equipment": "Podpora - Donacija opreme",
-      "other": "Drugo"
+      "placeholder": "..."
     },
     "message_placeholder": "Opišite kako bi želeli sodelovati...",
     "submit": "Pošlji povpraševanje",

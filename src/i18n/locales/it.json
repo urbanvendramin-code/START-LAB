@@ -225,11 +225,7 @@
     "company_label": "Nome e Cognome / Azienda",
     "coop_type": {
       "label": "Tipo di Collaborazione",
-      "placeholder": "Scegli...",
-      "sponsorship": "Azienda - Sponsorizzazione / Connessione",
-      "mentoring": "Mentore - Ingegnere / Studente",
-      "equipment": "Supporto - Donazione di Attrezzature",
-      "other": "Altro"
+      "placeholder": "..."
     },
     "message_placeholder": "Descrivi come vorresti partecipare...",
     "submit": "Invia Richiesta",
