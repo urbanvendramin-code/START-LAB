@@ -4,7 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { 
   Mail, 
   MapPin, 
-  CheckCircle2
+  CheckCircle2,
+  AlertTriangle,
+  Loader2
 } from 'lucide-react';
 
 export default function ContactPage() {
@@ -12,26 +14,34 @@ export default function ContactPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-  const [status, setStatus] = useState<'idle' | 'success'>('idle');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setStatus('loading');
+    setErrorMessage('');
     try {
-      await fetch('/api/contact/general', {
+      const res = await fetch('/api/contact/general', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, message })
       });
-    } catch (err) {
+      const data = await res.json();
+      if (data.success) {
+        setStatus('success');
+        setName('');
+        setEmail('');
+        setMessage('');
+      } else {
+        setStatus('error');
+        setErrorMessage(data.error || 'Neznana napaka pri pošiljanju.');
+      }
+    } catch (err: any) {
       console.error(err);
+      setStatus('error');
+      setErrorMessage(err?.message || 'Napaka pri vzpostavitvi povezave.');
     }
-    setStatus('success');
-    setName('');
-    setEmail('');
-    setMessage('');
-    setTimeout(() => {
-      setStatus('idle');
-    }, 5000);
   };
 
   return (
@@ -89,6 +99,23 @@ export default function ContactPage() {
                    {t('partner_page.new_request')}
                  </button>
                </div>
+             ) : status === 'error' ? (
+               <div className="text-center py-16">
+                 <div className="w-20 h-20 bg-brand-red/15 text-brand-red border-2 border-brand-red/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                   <AlertTriangle size={40} className="stroke-[3]" />
+                 </div>
+                 <h3 className="text-2xl font-display font-black uppercase mb-2 text-slate-900">Napaka pri pošiljanju</h3>
+                 <p className="text-slate-600 font-semibold max-w-md mx-auto mb-4">Sporočila ni bilo mogoče poslati neposredno preko SMTP strežnika.</p>
+                 <div className="bg-red-50 text-red-700 p-4 rounded-2xl text-xs font-mono break-all max-w-md mx-auto text-left mb-8 border border-red-100">
+                   <strong>Diagnostic SMTP Error:</strong> {errorMessage}
+                 </div>
+                 <button 
+                   onClick={() => setStatus('idle')}
+                   className="btn-primary py-3 px-8 shadow-md"
+                 >
+                   Poskusi ponovno
+                 </button>
+               </div>
              ) : (
                <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid md:grid-cols-2 gap-5">
@@ -99,7 +126,8 @@ export default function ContactPage() {
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           required
-                          className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl px-4 py-3.5 outline-none focus:border-brand-red text-slate-800 font-medium font-sans text-sm focus:bg-white transition-all" 
+                          disabled={status === 'loading'}
+                          className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl px-4 py-3.5 outline-none focus:border-brand-red text-slate-800 font-medium font-sans text-sm focus:bg-white transition-all disabled:opacity-50" 
                           placeholder={t('contact.form.placeholder')} 
                         />
                      </div>
@@ -110,7 +138,8 @@ export default function ContactPage() {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           required
-                          className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl px-4 py-3.5 outline-none focus:border-brand-red text-slate-800 font-medium font-sans text-sm focus:bg-white transition-all" 
+                          disabled={status === 'loading'}
+                          className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl px-4 py-3.5 outline-none focus:border-brand-red text-slate-800 font-medium font-sans text-sm focus:bg-white transition-all disabled:opacity-50" 
                           placeholder={t('contact.form.placeholder')} 
                         />
                      </div>
@@ -122,12 +151,24 @@ export default function ContactPage() {
                        value={message}
                        onChange={(e) => setMessage(e.target.value)}
                        required
-                       className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl px-4 py-3.5 outline-none focus:border-brand-red text-slate-800 font-medium font-sans text-sm focus:bg-white transition-all resize-none" 
+                       disabled={status === 'loading'}
+                       className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl px-4 py-3.5 outline-none focus:border-brand-red text-slate-800 font-medium font-sans text-sm focus:bg-white transition-all resize-none disabled:opacity-50" 
                        placeholder={t('contact.form.placeholder_msg')} 
                      />
                   </div>
-                  <button type="submit" className="btn-primary w-full justify-center py-4 mt-2 shadow-lg cursor-pointer">
-                    {t('contact.form.submit')}
+                  <button 
+                    type="submit" 
+                    disabled={status === 'loading'}
+                    className="btn-primary w-full justify-center py-4 mt-2 shadow-lg cursor-pointer flex items-center gap-2 disabled:opacity-80"
+                  >
+                    {status === 'loading' ? (
+                      <>
+                        <Loader2 className="animate-spin" size={20} />
+                        Pošiljanje...
+                      </>
+                    ) : (
+                      t('contact.form.submit')
+                    )}
                   </button>
                </form>
              )}

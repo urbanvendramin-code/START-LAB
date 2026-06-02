@@ -23,10 +23,13 @@ async function startServer() {
 
     if (smtpHost && smtpUser && smtpPass) {
       try {
+        const isSecure = process.env.SMTP_SECURE !== "false";
+        console.log(`[SMTP Initiating] Host: ${smtpHost}, Port: ${smtpPort}, User: ${smtpUser}, Secure: ${isSecure}`);
+        
         const transporter = nodemailer.createTransport({
           host: smtpHost,
           port: parseInt(smtpPort || "465"),
-          secure: process.env.SMTP_SECURE !== "false", // defaults to true
+          secure: isSecure, // defaults to true
           auth: {
             user: smtpUser,
             pass: smtpPass,
@@ -36,17 +39,17 @@ async function startServer() {
           }
         });
 
-        await transporter.sendMail({
+        const info = await transporter.sendMail({
           from: `"Start Lab Website" <${smtpUser}>`,
           to: "info@startlab.si",
           subject: subject,
           html: htmlContent,
         });
-        console.log(`[Direct Email Sent] To: info@startlab.si | Subject: ${subject}`);
-        return true;
-      } catch (error) {
-        console.error("SMTP direct send failed:", error);
-        return false;
+        console.log(`[Direct Email Sent] To: info@startlab.si | MessageId: ${info.messageId} | Subject: ${subject}`);
+        return { success: true };
+      } catch (error: any) {
+        console.error("SMTP direct send failed with full error:", error);
+        return { success: false, error: error?.message || String(error) };
       }
     } else {
       console.warn("SMTP credentials not configured. Graceful fallback. Email simulated successfully:");
@@ -54,9 +57,45 @@ async function startServer() {
       console.log(`Subject: ${subject}`);
       console.log(`Content:\n${htmlContent.replace(/<[^>]*>/g, '')}`);
       console.log(`-----------------------------------------------------`);
-      return false;
+      return { success: false, error: "Credentials missing in env" };
     }
   };
+
+  // Run instant connection check on server startup to verify credentials & port settings
+  const checkSmtpConnection = () => {
+    const smtpHost = process.env.SMTP_HOST;
+    const smtpPort = process.env.SMTP_PORT;
+    const smtpUser = process.env.SMTP_USER;
+    const smtpPass = process.env.SMTP_PASS;
+
+    if (smtpHost && smtpUser && smtpPass) {
+      const isSecure = process.env.SMTP_SECURE !== "false";
+      console.log(`[SMTP Connection Diagnostic] Verifying connection to ${smtpHost}:${smtpPort} as ${smtpUser} ...`);
+      const transporter = nodemailer.createTransport({
+        host: smtpHost,
+        port: parseInt(smtpPort || "465"),
+        secure: isSecure,
+        auth: {
+          user: smtpUser,
+          pass: smtpPass,
+        },
+        tls: {
+          rejectUnauthorized: false
+        }
+      });
+      transporter.verify((error) => {
+        if (error) {
+          console.error(`[SMTP Startup Diagnostic] ❌ Verification failed for ${smtpHost}:${smtpPort}!`, error);
+        } else {
+          console.log(`[SMTP Startup Diagnostic]  Verification verified successfully! SMTP server is ready.`);
+        }
+      });
+    } else {
+      console.warn("[SMTP Startup Diagnostic] No SMTP credentials provided in environment variables.");
+    }
+  };
+
+  checkSmtpConnection();
 
   // API Call matching: Partner Form
   app.post("/api/contact/partner", async (req, res) => {
@@ -70,8 +109,8 @@ async function startServer() {
       <p><strong>Sporočilo:</strong></p>
       <p style="white-space: pre-wrap;">${message || '/'}</p>
     `;
-    const sent = await sendEmail(subject, html);
-    res.json({ success: true, sent });
+    const result = await sendEmail(subject, html);
+    res.json({ success: result.success, error: result.error });
   });
 
   // API Call matching: Developer Form
@@ -86,8 +125,8 @@ async function startServer() {
       <p><strong>Sporočilo:</strong></p>
       <p style="white-space: pre-wrap;">${devMessage || '/'}</p>
     `;
-    const sent = await sendEmail(subject, html);
-    res.json({ success: true, sent });
+    const result = await sendEmail(subject, html);
+    res.json({ success: result.success, error: result.error });
   });
 
   // API Call matching: Mentor Form
@@ -102,8 +141,8 @@ async function startServer() {
       <p><strong>Sporočilo:</strong></p>
       <p style="white-space: pre-wrap;">${mentorMessage || '/'}</p>
     `;
-    const sent = await sendEmail(subject, html);
-    res.json({ success: true, sent });
+    const result = await sendEmail(subject, html);
+    res.json({ success: result.success, error: result.error });
   });
 
   // API Call matching: General Contact Form
@@ -117,8 +156,8 @@ async function startServer() {
       <p><strong>Sporočilo:</strong></p>
       <p style="white-space: pre-wrap;">${message}</p>
     `;
-    const sent = await sendEmail(subject, html);
-    res.json({ success: true, sent });
+    const result = await sendEmail(subject, html);
+    res.json({ success: result.success, error: result.error });
   });
 
   // Serve with Vite in dev, static built assets in production

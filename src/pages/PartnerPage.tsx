@@ -11,7 +11,9 @@ import {
   ArrowRight,
   Cpu,
   BookOpen,
-  ChevronDown
+  ChevronDown,
+  AlertTriangle,
+  Loader2
 } from 'lucide-react';
 
 export default function PartnerPage() {
@@ -19,21 +21,24 @@ export default function PartnerPage() {
   const [activeTab, setActiveTab] = useState<'partners' | 'developers' | 'mentors'>('partners');
   
   // Partner Form State
-  const [status, setStatus] = useState<'idle' | 'success'>('idle');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
   const [company, setCompany] = useState('');
   const [email, setEmail] = useState('');
   const [coopType, setCoopType] = useState('');
   const [message, setMessage] = useState('');
 
   // Developer Form State
-  const [devStatus, setDevStatus] = useState<'idle' | 'success'>('idle');
+  const [devStatus, setDevStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [devErrorMessage, setDevErrorMessage] = useState('');
   const [devName, setDevName] = useState('');
   const [devEmail, setDevEmail] = useState('');
   const [devExpertise, setDevExpertise] = useState('');
   const [devMessage, setDevMessage] = useState('');
 
   // Mentor Form State
-  const [mentorStatus, setMentorStatus] = useState<'idle' | 'success'>('idle');
+  const [mentorStatus, setMentorStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [mentorErrorMessage, setMentorErrorMessage] = useState('');
   const [mentorName, setMentorName] = useState('');
   const [mentorEmail, setMentorEmail] = useState('');
   const [mentorArea, setMentorArea] = useState('');
@@ -41,59 +46,86 @@ export default function PartnerPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setStatus('loading');
+    setErrorMessage('');
     try {
-      await fetch('/api/contact/partner', {
+      const res = await fetch('/api/contact/partner', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ company, email, coopType, message })
       });
-    } catch (err) {
+      const data = await res.json();
+      if (data.success) {
+        setStatus('success');
+        setCompany('');
+        setEmail('');
+        setCoopType('');
+        setMessage('');
+      } else {
+        setStatus('error');
+        setErrorMessage(data.error || 'Neznana napaka pri pošiljanju.');
+      }
+    } catch (err: any) {
       console.error(err);
+      setStatus('error');
+      setErrorMessage(err?.message || 'Napaka pri povezavi.');
     }
-    setStatus('success');
-    setCompany('');
-    setEmail('');
-    setCoopType('');
-    setMessage('');
-    setTimeout(() => setStatus('idle'), 5000);
   };
 
   const handleDevSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setDevStatus('loading');
+    setDevErrorMessage('');
     try {
-      await fetch('/api/contact/developer', {
+      const res = await fetch('/api/contact/developer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ devName, devEmail, devExpertise, devMessage })
       });
-    } catch (err) {
+      const data = await res.json();
+      if (data.success) {
+        setDevStatus('success');
+        setDevName('');
+        setDevEmail('');
+        setDevExpertise('');
+        setDevMessage('');
+      } else {
+        setDevStatus('error');
+        setDevErrorMessage(data.error || 'Neznana napaka pri pošiljanju.');
+      }
+    } catch (err: any) {
       console.error(err);
+      setDevStatus('error');
+      setDevErrorMessage(err?.message || 'Napaka pri povezavi.');
     }
-    setDevStatus('success');
-    setDevName('');
-    setDevEmail('');
-    setDevExpertise('');
-    setDevMessage('');
-    setTimeout(() => setDevStatus('idle'), 5000);
   };
 
   const handleMentorSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setMentorStatus('loading');
+    setMentorErrorMessage('');
     try {
-      await fetch('/api/contact/mentor', {
+      const res = await fetch('/api/contact/mentor', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ mentorName, mentorEmail, mentorArea, mentorMessage })
       });
-    } catch (err) {
+      const data = await res.json();
+      if (data.success) {
+        setMentorStatus('success');
+        setMentorName('');
+        setMentorEmail('');
+        setMentorArea('');
+        setMentorMessage('');
+      } else {
+        setMentorStatus('error');
+        setMentorErrorMessage(data.error || 'Neznana napaka pri pošiljanju.');
+      }
+    } catch (err: any) {
       console.error(err);
+      setMentorStatus('error');
+      setMentorErrorMessage(err?.message || 'Napaka pri povezavi.');
     }
-    setMentorStatus('success');
-    setMentorName('');
-    setMentorEmail('');
-    setMentorArea('');
-    setMentorMessage('');
-    setTimeout(() => setMentorStatus('idle'), 5000);
   };
 
   return (
@@ -230,6 +262,23 @@ export default function PartnerPage() {
                     {t('partner_page.new_request')}
                   </button>
                 </div>
+              ) : status === 'error' ? (
+                <div className="text-center py-16">
+                  <div className="w-20 h-20 bg-brand-red/15 text-brand-red border-2 border-brand-red/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <AlertTriangle size={40} className="stroke-[3]" />
+                  </div>
+                  <h3 className="text-2xl font-display font-black uppercase mb-2 text-slate-900">Napaka pri pošiljanju</h3>
+                  <p className="text-slate-600 font-semibold max-w-md mx-auto mb-4">Sporočila ni bilo mogoče poslati neposredno preko SMTP strežnika.</p>
+                  <div className="bg-red-50 text-red-700 p-4 rounded-2xl text-xs font-mono break-all max-w-md mx-auto text-left mb-8 border border-red-100">
+                    <strong>Diagnostic SMTP Error:</strong> {errorMessage}
+                  </div>
+                  <button 
+                    onClick={() => setStatus('idle')}
+                    className="btn-primary py-3 px-8 shadow-md"
+                  >
+                    Poskusi ponovno
+                  </button>
+                </div>
               ) : (
                 <form className="space-y-4" onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 gap-4">
@@ -239,8 +288,9 @@ export default function PartnerPage() {
                         required 
                         type="text" 
                         value={company}
+                        disabled={status === 'loading'}
                         onChange={(e) => setCompany(e.target.value)}
-                        className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium" 
+                        className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium disabled:opacity-50" 
                         placeholder="..." 
                       />
                     </div>
@@ -250,8 +300,9 @@ export default function PartnerPage() {
                         required 
                         type="email" 
                         value={email}
+                        disabled={status === 'loading'}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium" 
+                        className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium disabled:opacity-50" 
                         placeholder="..." 
                       />
                     </div>
@@ -263,9 +314,10 @@ export default function PartnerPage() {
                       required 
                       type="text"
                       value={coopType}
+                      disabled={status === 'loading'}
                       onChange={(e) => setCoopType(e.target.value)}
                       placeholder={t('partner_page.coop_type.placeholder')}
-                      className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium" 
+                      className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium disabled:opacity-50" 
                     />
                   </div>
 
@@ -274,15 +326,29 @@ export default function PartnerPage() {
                     <textarea 
                       rows={5} 
                       value={message}
+                      disabled={status === 'loading'}
                       onChange={(e) => setMessage(e.target.value)}
-                      className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium resize-none" 
+                      className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium resize-none disabled:opacity-50" 
                       placeholder={t('partner_page.message_placeholder')}
                     />
                   </div>
 
-                  <button type="submit" className="btn-primary w-full justify-center group py-4 mt-2 shadow-lg">
-                    {t('partner_page.submit')} 
-                    <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform stroke-[3]" />
+                  <button 
+                    type="submit" 
+                    disabled={status === 'loading'}
+                    className="btn-primary w-full justify-center group py-4 mt-2 shadow-lg flex items-center gap-2 justify-center disabled:opacity-80 disabled:cursor-not-allowed"
+                  >
+                    {status === 'loading' ? (
+                      <>
+                        <Loader2 className="animate-spin" size={20} />
+                        Pošiljanje...
+                      </>
+                    ) : (
+                      <>
+                        {t('partner_page.submit')} 
+                        <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform stroke-[3]" />
+                      </>
+                    )}
                   </button>
 
                   <p className="text-[10px] text-slate-500 uppercase tracking-widest text-center mt-6 font-bold leading-relaxed">
@@ -372,6 +438,23 @@ export default function PartnerPage() {
                     {t('partner_page.new_request')}
                   </button>
                 </div>
+              ) : devStatus === 'error' ? (
+                <div className="text-center py-16">
+                  <div className="w-20 h-20 bg-brand-red/15 text-brand-red border-2 border-brand-red/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <AlertTriangle size={40} className="stroke-[3]" />
+                  </div>
+                  <h3 className="text-2xl font-display font-black uppercase mb-2 text-slate-900">Napaka pri pošiljanju</h3>
+                  <p className="text-slate-600 font-semibold max-w-md mx-auto mb-4">Sporočila ni bilo mogoče poslati neposredno preko SMTP strežnika.</p>
+                  <div className="bg-red-50 text-red-700 p-4 rounded-2xl text-xs font-mono break-all max-w-md mx-auto text-left mb-8 border border-red-100">
+                    <strong>Diagnostic SMTP Error:</strong> {devErrorMessage}
+                  </div>
+                  <button 
+                    onClick={() => setDevStatus('idle')}
+                    className="btn-primary py-3 px-8 shadow-md bg-play-purple border-play-purple hover:bg-play-purple/90"
+                  >
+                    Poskusi ponovno
+                  </button>
+                </div>
               ) : (
                 <form className="space-y-4" onSubmit={handleDevSubmit}>
                   <div className="grid grid-cols-1 gap-4">
@@ -381,8 +464,9 @@ export default function PartnerPage() {
                         required 
                         type="text" 
                         value={devName}
+                        disabled={devStatus === 'loading'}
                         onChange={(e) => setDevName(e.target.value)}
-                        className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium" 
+                        className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium disabled:opacity-50" 
                         placeholder="..." 
                       />
                     </div>
@@ -392,8 +476,9 @@ export default function PartnerPage() {
                         required 
                         type="email" 
                         value={devEmail}
+                        disabled={devStatus === 'loading'}
                         onChange={(e) => setDevEmail(e.target.value)}
-                        className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium" 
+                        className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium disabled:opacity-50" 
                         placeholder="..." 
                       />
                     </div>
@@ -405,8 +490,9 @@ export default function PartnerPage() {
                       <select 
                         required 
                         value={devExpertise}
+                        disabled={devStatus === 'loading'}
                         onChange={(e) => setDevExpertise(e.target.value)}
-                        className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 pr-10 outline-none focus:border-brand-red text-sm text-slate-800 font-medium appearance-none cursor-pointer"
+                        className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 pr-10 outline-none focus:border-brand-red text-sm text-slate-800 font-medium appearance-none cursor-pointer disabled:opacity-50"
                       >
                         <option value="" disabled>{t('partner_page.devs_tiers.level_placeholder')}</option>
                         <option value="Bronze">{t('partner_page.devs_tiers.level_bronze')}</option>
@@ -426,15 +512,29 @@ export default function PartnerPage() {
                     <textarea 
                       rows={5} 
                       value={devMessage}
+                      disabled={devStatus === 'loading'}
                       onChange={(e) => setDevMessage(e.target.value)}
-                      className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium resize-none" 
+                      className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium resize-none disabled:opacity-50" 
                       placeholder={t('partner_page.devs_message_placeholder')}
                     />
                   </div>
 
-                  <button type="submit" className="btn-primary w-full justify-center group py-4 mt-2 shadow-lg bg-play-purple border-play-purple hover:bg-play-purple/90">
-                    {t('partner_page.submit')} 
-                    <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform stroke-[3]" />
+                  <button 
+                    type="submit" 
+                    disabled={devStatus === 'loading'}
+                    className="btn-primary w-full justify-center group py-4 mt-2 shadow-lg bg-play-purple border-play-purple hover:bg-play-purple/90 flex items-center gap-2 justify-center disabled:opacity-80 disabled:cursor-not-allowed"
+                  >
+                    {devStatus === 'loading' ? (
+                      <>
+                        <Loader2 className="animate-spin" size={20} />
+                        Pošiljanje...
+                      </>
+                    ) : (
+                      <>
+                        {t('partner_page.submit')} 
+                        <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform stroke-[3]" />
+                      </>
+                    )}
                   </button>
 
                   <p className="text-[10px] text-slate-500 uppercase tracking-widest text-center mt-6 font-bold leading-relaxed">
@@ -524,6 +624,23 @@ export default function PartnerPage() {
                     {t('partner_page.new_request')}
                   </button>
                 </div>
+              ) : mentorStatus === 'error' ? (
+                <div className="text-center py-16">
+                  <div className="w-20 h-20 bg-brand-red/15 text-brand-red border-2 border-brand-red/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <AlertTriangle size={40} className="stroke-[3]" />
+                  </div>
+                  <h3 className="text-2xl font-display font-black uppercase mb-2 text-slate-900">Napaka pri pošiljanju</h3>
+                  <p className="text-slate-600 font-semibold max-w-md mx-auto mb-4">Sporočila ni bilo mogoče poslati neposredno preko SMTP strežnika.</p>
+                  <div className="bg-red-50 text-red-700 p-4 rounded-2xl text-xs font-mono break-all max-w-md mx-auto text-left mb-8 border border-red-100">
+                    <strong>Diagnostic SMTP Error:</strong> {mentorErrorMessage}
+                  </div>
+                  <button 
+                    onClick={() => setMentorStatus('idle')}
+                    className="btn-primary py-3 px-8 shadow-md bg-play-teal border-play-teal hover:bg-play-teal/90"
+                  >
+                    Poskusi ponovno
+                  </button>
+                </div>
               ) : (
                 <form className="space-y-4" onSubmit={handleMentorSubmit}>
                   <div className="grid grid-cols-1 gap-4">
@@ -533,8 +650,9 @@ export default function PartnerPage() {
                         required 
                         type="text" 
                         value={mentorName}
+                        disabled={mentorStatus === 'loading'}
                         onChange={(e) => setMentorName(e.target.value)}
-                        className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium" 
+                        className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium disabled:opacity-50" 
                         placeholder="..." 
                       />
                     </div>
@@ -544,8 +662,9 @@ export default function PartnerPage() {
                         required 
                         type="email" 
                         value={mentorEmail}
+                        disabled={mentorStatus === 'loading'}
                         onChange={(e) => setMentorEmail(e.target.value)}
-                        className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium" 
+                        className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium disabled:opacity-50" 
                         placeholder="..." 
                       />
                     </div>
@@ -557,8 +676,9 @@ export default function PartnerPage() {
                       required 
                       type="text" 
                       value={mentorArea}
+                      disabled={mentorStatus === 'loading'}
                       onChange={(e) => setMentorArea(e.target.value)}
-                      className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium" 
+                      className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium disabled:opacity-50" 
                       placeholder={t('partner_page.mentors_expertise_placeholder')}
                     />
                   </div>
@@ -568,15 +688,29 @@ export default function PartnerPage() {
                     <textarea 
                       rows={5} 
                       value={mentorMessage}
+                      disabled={mentorStatus === 'loading'}
                       onChange={(e) => setMentorMessage(e.target.value)}
-                      className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium resize-none" 
+                      className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium resize-none disabled:opacity-50" 
                       placeholder={t('partner_page.mentors_message_placeholder')}
                     />
                   </div>
 
-                  <button type="submit" className="btn-primary w-full justify-center group py-4 mt-2 shadow-lg bg-play-teal border-play-teal hover:bg-play-teal/90">
-                    {t('partner_page.submit')} 
-                    <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform stroke-[3]" />
+                  <button 
+                    type="submit" 
+                    disabled={mentorStatus === 'loading'}
+                    className="btn-primary w-full justify-center group py-4 mt-2 shadow-lg bg-play-teal border-play-teal hover:bg-play-teal/90 flex items-center gap-2 justify-center disabled:opacity-80 disabled:cursor-not-allowed"
+                  >
+                    {mentorStatus === 'loading' ? (
+                      <>
+                        <Loader2 className="animate-spin" size={20} />
+                        Pošiljanje...
+                      </>
+                    ) : (
+                      <>
+                        {t('partner_page.submit')} 
+                        <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform stroke-[3]" />
+                      </>
+                    )}
                   </button>
 
                   <p className="text-[10px] text-slate-500 uppercase tracking-widest text-center mt-6 font-bold leading-relaxed">
