@@ -54,25 +54,6 @@ export default function ProjectPage() {
             transition={{ duration: 0.6, delay: 0.1 }}
             whileHover={{ y: -5 }}
             className="p-8 md:p-10 bg-white rounded-3xl border border-slate-100 shadow-sm relative overflow-hidden group"
-            id="project-vision-card"
-          >
-            <div className="absolute top-0 right-0 w-24 h-24 bg-play-pink/10 rounded-bl-[4.5rem] flex items-center justify-center text-play-pink group-hover:scale-110 transition-transform duration-300">
-              <Rocket size={36} className="mr-[-10px] mt-[-10px]" />
-            </div>
-            <h3 className="text-2xl md:text-3xl font-display font-black mb-6 text-play-pink uppercase tracking-tight">
-              {t('vision.title')}
-            </h3>
-            <p className="text-base text-slate-600 leading-relaxed font-semibold">
-              {t('vision.text')}
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            whileHover={{ y: -5 }}
-            className="p-8 md:p-10 bg-white rounded-3xl border border-slate-100 shadow-sm relative overflow-hidden group"
             id="project-mission-card"
           >
             <div className="absolute top-0 right-0 w-24 h-24 bg-play-blue/10 rounded-bl-[4.5rem] flex items-center justify-center text-play-blue group-hover:scale-110 transition-transform duration-300">
@@ -83,6 +64,25 @@ export default function ProjectPage() {
             </h3>
             <p className="text-base text-slate-600 leading-relaxed font-semibold">
               {t('mission.text')}
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            whileHover={{ y: -5 }}
+            className="p-8 md:p-10 bg-white rounded-3xl border border-slate-100 shadow-sm relative overflow-hidden group"
+            id="project-vision-card"
+          >
+            <div className="absolute top-0 right-0 w-24 h-24 bg-play-pink/10 rounded-bl-[4.5rem] flex items-center justify-center text-play-pink group-hover:scale-110 transition-transform duration-300">
+              <Rocket size={36} className="mr-[-10px] mt-[-10px]" />
+            </div>
+            <h3 className="text-2xl md:text-3xl font-display font-black mb-6 text-play-pink uppercase tracking-tight">
+              {t('vision.title')}
+            </h3>
+            <p className="text-base text-slate-600 leading-relaxed font-semibold">
+              {t('vision.text')}
             </p>
           </motion.div>
         </div>

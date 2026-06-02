@@ -12,7 +12,7 @@ export default function Navbar() {
     { name: t('nav.oprojektu'), path: '/o-projektu' },
     { name: t('nav.delavnice'), path: '/delavnice' },
     { name: t('nav.partner'), path: '/partner' },
-    { name: t('nav.kontakt'), path: '/#kontakt' },
+    { name: t('nav.kontakt'), path: '/kontakt' },
   ];
 
   const languages = [

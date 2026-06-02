@@ -10,6 +10,7 @@ import ProjectPage from './pages/ProjectPage';
 import WorkshopsPage from './pages/WorkshopsPage';
 import PartnerPage from './pages/PartnerPage';
 import CalendarPage from './pages/CalendarPage';
+import ContactPage from './pages/ContactPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import SEOManager from './components/SEOManager';
@@ -45,6 +46,7 @@ export default function App() {
           <Route path="delavnice" element={<WorkshopsPage />} />
           <Route path="partner" element={<PartnerPage />} />
           <Route path="koledar" element={<CalendarPage />} />
+          <Route path="kontakt" element={<ContactPage />} />
           <Route path="zasebnost" element={<PrivacyPage />} />
           <Route path="pogoji-uporabe" element={<TermsPage />} />
         </Route>

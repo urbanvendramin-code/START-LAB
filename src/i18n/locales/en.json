@@ -5,13 +5,15 @@
     "programi": "Programs",
     "delavnice": "Workshops",
     "koledar": "Calendar",
-    "partner": "Partner",
+    "partner": "Ecosystem",
     "kontakt": "Contact"
   },
   "hero": {
     "badge": "Goriška needs Start Lab",
     "title_start": "SPACE FOR",
-    "title_end": "INNOVATORS",
+    "title_end_before_highlight": "FUTURE ",
+    "title_end_highlight": "CREATORS",
+    "title_end_after_highlight": "",
     "subtitle": "The first high-tech hub in the Goriška region, where children and youth transform curiosity into concrete digital solutions.",
     "cta": "Check workshops",
     "stats": {
@@ -25,11 +27,11 @@
   },
   "vision": {
     "title": "Vision",
-    "text": "To become the Goriška hub of ideas, knowledge, and innovation, from which future researchers, engineers, inventors, and technological breakthroughs will emerge."
+    "text": "To become the Goriška hub of ideas, knowledge, and innovation, where future creators will develop talents from which future researchers, engineers, inventors, entrepreneurs, and technological breakthroughs will emerge."
   },
   "mission": {
     "title": "Mission",
-    "text": "START LAB's mission is to bring science, technology, and innovation closer to young people and enable them to gain practical experience that formal education often does not provide. We believe that real knowledge is created when theory is connected with practice, research, and testing of new ideas."
+    "text": "START LAB's mission is to bring science, technology, and innovation closer to children, pupils, and students – the future creators – and enable them to gain practical experience that formal education often does not provide. We believe that real knowledge is created when theory is connected with practice, research, and the creation of new ideas."
   },
   "why": {
     "title_start": "WHY YOUR CHILD NEEDS",
@@ -115,6 +117,10 @@
   },
   "contact": {
     "title": "Get in Touch",
+    "title_start_page": "Get in",
+    "title_brand_page": "Touch",
+    "subtitle_page": "Get in touch with us for any questions, registration info, or potential collaborations.",
+    "info_title": "Contact Information",
     "location": "Location",
     "city": "Solkan, Slovenia",
     "form": {
@@ -168,9 +174,46 @@
     }
   },
   "partner_page": {
+    "tab_partners": "PARTNERS",
+    "tab_developers": "TALENT DEVELOPERS",
+    "tab_mentors": "MENTORS",
     "title_start": "Become a",
     "title_brand": "Partner",
     "subtitle": "Start Lab is an open developmental environment where youth in Goriška discover their talents. Together we build a space for future innovators.",
+    "devs_title_start": "Become a",
+    "devs_title_brand": "Talent Developer",
+    "devs_subtitle": "Enable youth in Goriška to access the state-of-the-art technology and high-quality free programs.",
+    "devs_colab_title": "Why support Start Lab?",
+    "devs_colab_desc": "With your support, you directly invest in the knowledge of youth in Goriška. Talent developers provide financial means for materials, lab operations and professional equipment.",
+    "devs_form_title": "Become a Talent Developer",
+    "devs_name_label": "Full Name or Company",
+    "devs_expertise_label": "Desired level / way of cooperation",
+    "devs_expertise_placeholder": "e.g. Gold developer, general sponsorship, equipment purchase...",
+    "devs_message_placeholder": "Describe your interest in sponsorship or cooperation as a talent developer...",
+    "devs_agreement": "By submitting the form, you agree to the storage of data for the purpose of establishing sponsorship or talent developer status.",
+    "devs_offer_title": "What do we offer?",
+    "devs_offer_desc": "Visibility of your brand across all our events and materials, the opportunity to connect with exceptional young talents, and direct social responsibility in the local environment.",
+    "mentors_title_start": "Become a",
+    "mentors_title_brand": "Mentor",
+    "mentors_subtitle": "Share your expertise and experience with young minds and help co-create the future of technological progress in Goriška.",
+    "mentors_colab_title": "Why become a mentor?",
+    "mentors_colab_desc": "Through mentoring, you directly influence the development of local talents, pass on valuable experience, and help build a strong technological community.",
+    "mentors_offer_title": "What does mentoring include?",
+    "mentors_offer_desc": "Flexible participation in exciting projects with youth (robotics, programming, 3D printing, electronics), holding workshops, and networking with other professionals.",
+    "mentors_form_title": "Become a Mentor at Start Lab",
+    "mentors_name_label": "Full Name",
+    "mentors_expertise_label": "Your Field of Expertise",
+    "mentors_expertise_placeholder": "e.g., embedded systems, Python, 3D modeling, robotics...",
+    "mentors_message_placeholder": "Describe your experience and how you would like to help young talents...",
+    "mentors_agreement": "By submitting the form, you agree to the storage of data for the purpose of establishing mentorship at Start Lab.",
+    "devs_tiers": {
+      "level_placeholder": "Select cooperation level...",
+      "level_bronze": "🥉 Bronze Talent Developer – Supporter",
+      "level_silver": "🥈 Silver Talent Developer – Promoter",
+      "level_gold": "🥇 Gold Talent Developer – Accelerator",
+      "level_platinum": "💎 Platinum Talent Developer – Strategist",
+      "level_diamond": "💠 Diamond Talent Developer – Visionary"
+    },
     "colab_title": "Whom do we invite?",
     "colab_subtitle": "Companies, mentors and experts.",
     "benefit_title": "What do you gain?",

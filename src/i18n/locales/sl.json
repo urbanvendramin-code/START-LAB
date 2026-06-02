@@ -5,13 +5,15 @@
     "programi": "Programi",
     "delavnice": "Delavnice",
     "koledar": "Koledar",
-    "partner": "Partner",
+    "partner": "Eko sistem",
     "kontakt": "Kontakt"
   },
   "hero": {
     "badge": "Goriška potrebuje Start Lab",
     "title_start": "PROSTOR ZA",
-    "title_end": "INOVATORJE",
+    "title_end_before_highlight": "",
+    "title_end_highlight": "USTVARJALCE",
+    "title_end_after_highlight": " PRIHODNOSTI",
     "subtitle": "Prva visokotehnološka stična točka na Goriškem, kjer otroci in mladi spreminjajo radovednost v konkretne digitalne rešitve.",
     "cta": "Preveri delavnice",
     "stats": {
@@ -25,11 +27,11 @@
   },
   "vision": {
     "title": "Vizija",
-    "text": "Postati goriško stičišče idej, znanja in inovacij, iz katerega bodo nastajali prihodnji raziskovalci, inženirji, izumitelji ter tehnološki preboji."
+    "text": "Postati goriško stičišče idej, znanja in inovacij, kjer bodo ustvarjalci prihodnosti razvijali talente, iz katerih bodo nastajali prihodnji raziskovalci, inženirji, izumitelji, podjetniki in tehnološki preboji."
   },
   "mission": {
     "title": "Poslanstvo",
-    "text": "Poslanstvo START LAB-a je mladim približati znanost, tehnologijo in inovacije ter jim omogočiti pridobivanje praktičnih izkušenj, ki jih formalno izobraževanje pogosto ne nudi. Verjamemo, da pravo znanje nastane takrat, ko teorijo povežemo s prakso, raziskovanjem in preizkušanjem novih idej."
+    "text": "Poslanstvo START LAB-a je otrokom, dijakom in študentom – ustvarjalcem prihodnosti – približati znanost, tehnologijo in inovacije ter jim omogočiti pridobivanje praktičnih izkušenj, ki jih formalno izobraževanje pogosto ne nudi. Verjamemo, da pravo znanje nastane takrat, ko teorijo povežemo s prakso, raziskovanjem in ustvarjanjem novih idej."
   },
   "why": {
     "title_start": "ZAKAJ VAŠ OTROK POTREBUJE",
@@ -115,6 +117,10 @@
   },
   "contact": {
     "title": "Stopite v stik",
+    "title_start_page": "Stopite v",
+    "title_brand_page": "Stik",
+    "subtitle_page": "Stopite v stik z nami za vsa vprašanja, informacije o vpisu ali morebitnih sodelovanjih.",
+    "info_title": "Kontaktni podatki",
     "location": "Lokacija",
     "city": "Solkan, Slovenija",
     "form": {
@@ -168,9 +174,46 @@
     }
   },
   "partner_page": {
+    "tab_partners": "PARTNERJI",
+    "tab_developers": "RAZVIJALCI TALENTOV",
+    "tab_mentors": "MENTORJI",
     "title_start": "Postani",
     "title_brand": "Partner",
     "subtitle": "Start Lab je odprto razvojno okolje, kjer mladi na Goriškem odkrivajo svoje talente. Skupaj gradimo prostor za prihodnje inovatorje.",
+    "devs_title_start": "Postani",
+    "devs_title_brand": "Razvijalec talentov",
+    "devs_subtitle": "Omogočite otrokom ter mladim na Goriškem dostop do najsodobnejše tehnologije in brezplačnih vrhunskih programov.",
+    "devs_colab_title": "Zakaj podpreti Start Lab?",
+    "devs_colab_desc": "Z vašo podporo neposredno vlagate v znanje goriške mladine. Razvijalci talentov zagotavljajo finančna sredstva za materiale, delovanje laboratorija ter vrhunsko opremo.",
+    "devs_form_title": "Postani razvijalec talentov",
+    "devs_name_label": "Ime in priimek / Podjetje",
+    "devs_expertise_label": "Želena raven / način sodelovanja",
+    "devs_expertise_placeholder": "npr. Zlati razvijalec, generalno sponzorstvo, nakup opreme...",
+    "devs_message_placeholder": "Opišite vaše zanimanje za sponzorstvo oziroma sodelovanje kot razvijalec talentov...",
+    "devs_agreement": "Z oddajo obrazca se strinjate s hrambo podatkov za namen vzpostavitve sponzorstva oz. statusa razvijalca talentov.",
+    "devs_offer_title": "Kaj nudimo?",
+    "devs_offer_desc": "Prepoznavnost vaše blagovne znamke ob vseh naših dogodkih in gradivih, možnost povezovanja z izjemnimi mladimi talenti ter neposredno družbeno odgovornost v lokalnem okolju.",
+    "mentors_title_start": "Postani",
+    "mentors_title_brand": "Mentor",
+    "mentors_subtitle": "Delite svoje strokovno znanje in izkušnje z mladimi ter soustvarjajte prihodnost tehnološkega napredka na Goriškem.",
+    "mentors_colab_title": "Zakaj postati mentor?",
+    "mentors_colab_desc": "Z mentorstvom neposredno vplivate na razvoj lokalnih talentov, prenašate dragocene izkušnje in pomagate graditi močno tehnološko skupnost.",
+    "mentors_offer_title": "Kaj obsega mentorstvo?",
+    "mentors_offer_desc": "Prilagodljivo sodelovanje na zanimivih projektih z mladimi (robotika, programiranje, 3D tisk, elektronika), izvajanje delavnic ter mreženje z drugimi strokovnjaki.",
+    "mentors_form_title": "Postani mentor v Start Labu",
+    "mentors_name_label": "Ime in priimek",
+    "mentors_expertise_label": "Vaše strokovno področje",
+    "mentors_expertise_placeholder": "npr. embedded sistemi, Python, 3D modeliranje, robotika...",
+    "mentors_message_placeholder": "Opišite vaše izkušnje in kako bi želeli pomagati mladim talentom...",
+    "mentors_agreement": "Z oddajo obrazca se strinjate s hrambo podatkov za namen vzpostavitve mentorstva v Start Labu.",
+    "devs_tiers": {
+      "level_placeholder": "Izberite raven sodelovanja...",
+      "level_bronze": "🥉 Bronasti razvijalec talentov – Podpornik",
+      "level_silver": "🥈 Srebrni razvijalec talentov – Promotor",
+      "level_gold": "🥇 Zlati razvijalec talentov – Pospeševalec",
+      "level_platinum": "💎 Platinasti razvijalec talentov – Strateg",
+      "level_diamond": "💠 Diamantni razvijalec talentov – Vizionar"
+    },
     "colab_title": "Koga vabimo?",
     "colab_subtitle": "Podjetja, mentorje in strokovnjake.",
     "benefit_title": "Kaj pridobite?",

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -7,8 +7,6 @@ import {
   Rocket, 
   Users, 
   CheckCircle2, 
-  Mail, 
-  MapPin, 
   Settings,
   Cpu,
   Boxes,
@@ -18,16 +16,6 @@ import { LAB_EQUIPMENT } from '../constants';
 
 export default function Home() {
   const { t } = useTranslation();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const subject = encodeURIComponent(`Start Lab - Sporočilo od ${name}`);
-    const body = encodeURIComponent(`Ime: ${name}\nE-pošta: ${email}\n\nSporočilo:\n${message}`);
-    window.location.href = `mailto:info@startlab.si?subject=${subject}&body=${body}`;
-  };
 
   return (
     <>
@@ -50,13 +38,17 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="lg:col-span-7"
           >
-            <h1 className="text-5xl sm:text-6xl md:text-[6.5rem] font-display font-black mb-8 leading-[0.95] tracking-tight text-slate-950">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-display font-black mb-8 leading-[1.05] tracking-tight text-slate-950">
               {t('hero.title_start')} <br />
-              <span className="text-brand-red relative inline-block">
-                {t('hero.title_end')}
-                <svg className="absolute left-0 -bottom-2 w-full h-3 text-play-yellow opacity-80" viewBox="0 0 100 10" preserveAspectRatio="none">
-                  <path d="M0,5 Q50,10 100,5" stroke="currentColor" strokeWidth="6" fill="none" strokeLinecap="round" />
-                </svg>
+              <span className="text-brand-red">
+                {t('hero.title_end_before_highlight')}
+                <span className="relative inline-block whitespace-nowrap">
+                  {t('hero.title_end_highlight')}
+                  <svg className="absolute left-0 -bottom-2 w-full h-3 text-play-yellow opacity-80" viewBox="0 0 100 10" preserveAspectRatio="none">
+                    <path d="M0,5 Q50,10 100,5" stroke="currentColor" strokeWidth="6" fill="none" strokeLinecap="round" />
+                  </svg>
+                </span>
+                {t('hero.title_end_after_highlight')}
               </span>
             </h1>
             
@@ -127,24 +119,24 @@ export default function Home() {
             whileHover={{ y: -5 }}
             className="play-card p-8 md:p-12 bg-white relative overflow-hidden group border-2 border-slate-100"
           >
-            <div className="absolute top-0 right-0 w-24 h-24 bg-play-pink/10 rounded-bl-[4rem] flex items-center justify-center text-play-pink group-hover:scale-110 transition-transform">
-              <Rocket size={40} className="mr-[-10px] mt-[-10px]" />
-            </div>
-            <h2 className="text-3xl md:text-4xl font-display font-black mb-6 text-play-pink uppercase tracking-tight">{t('vision.title')}</h2>
-            <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
-              {t('vision.text')}
-            </p>
-          </motion.div>
-          <motion.div 
-            whileHover={{ y: -5 }}
-            className="play-card p-8 md:p-12 bg-white relative overflow-hidden group border-2 border-slate-100"
-          >
             <div className="absolute top-0 right-0 w-24 h-24 bg-play-blue/10 rounded-bl-[4rem] flex items-center justify-center text-play-blue group-hover:scale-110 transition-transform">
               <Boxes size={40} className="mr-[-10px] mt-[-10px]" />
             </div>
             <h2 className="text-3xl md:text-4xl font-display font-black mb-6 text-play-blue uppercase tracking-tight">{t('mission.title')}</h2>
             <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
               {t('mission.text')}
+            </p>
+          </motion.div>
+          <motion.div 
+            whileHover={{ y: -5 }}
+            className="play-card p-8 md:p-12 bg-white relative overflow-hidden group border-2 border-slate-100"
+          >
+            <div className="absolute top-0 right-0 w-24 h-24 bg-play-pink/10 rounded-bl-[4rem] flex items-center justify-center text-play-pink group-hover:scale-110 transition-transform">
+              <Rocket size={40} className="mr-[-10px] mt-[-10px]" />
+            </div>
+            <h2 className="text-3xl md:text-4xl font-display font-black mb-6 text-play-pink uppercase tracking-tight">{t('vision.title')}</h2>
+            <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
+              {t('vision.text')}
             </p>
           </motion.div>
         </div>
@@ -305,152 +297,6 @@ export default function Home() {
                   <div className="text-[11px] font-display font-black text-slate-800 leading-tight uppercase">{t('equipment.center')}</div>
                </motion.div>
             </div>
-          </div>
-        </div>
-      </section>
-
-
-      {/* Partners / Companies Section */}
-      <section id="podjetja" className="py-20 px-4 md:px-6 relative">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3.5xl md:text-5xl font-display font-black uppercase tracking-tight mb-4 text-slate-950">{t('partners.title')}</h2>
-          <p className="text-slate-500 font-semibold mb-12 max-w-xl mx-auto italic">{t('partners.subtitle')}</p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto text-left">
-             {[
-               { key: 'item_ung', bg: "bg-play-pink/5 border-play-pink/15 hover:border-play-pink/35 text-play-pink hover:scale-[1.01]", badgeColor: "bg-play-pink/12 text-play-pink", href: "https://ung.si/sl/raziskave/laboratorij-za-fiziko-organskih-snovi/" },
-               { key: 'item_ptp', bg: "bg-play-yellow/5 border-play-yellow/15 hover:border-play-yellow/35 text-play-yellow hover:scale-[1.01]", badgeColor: "bg-play-yellow/12 text-play-yellow", href: "https://popri.si/" },
-               { key: 'item_ehisa', bg: "bg-play-teal/5 border-play-teal/15 hover:border-play-teal/35 text-play-teal hover:scale-[1.01]", badgeColor: "bg-play-teal/12 text-play-teal", href: "https://www.e-hisa.si/" },
-               { key: 'item_mic', bg: "bg-play-blue/5 border-play-blue/15 hover:border-play-blue/35 text-play-blue hover:scale-[1.01]", badgeColor: "bg-play-blue/12 text-play-blue", href: "https://mic.scng.si/domov/kontakti-mic/" }
-             ].map((item, idx) => {
-               const name = t(`partners.${item.key}.name`);
-               const fullName = t(`partners.${item.key}.fullName`);
-               const label = t(`partners.${item.key}.label`);
-               const desc = t(`partners.${item.key}.desc`);
-
-               const CardComponent = item.href ? motion.a : motion.div;
-               const customProps = item.href ? { href: item.href, target: "_blank", rel: "noopener noreferrer" } : {};
-
-               return (
-                 <CardComponent 
-                   whileHover={{ y: -6 }}
-                   key={idx} 
-                   className={`rounded-[2.5rem] border-2 bg-white p-8 transition-all flex flex-col justify-between shadow-[0_12px_24px_rgba(15,23,42,0.02)] hover:shadow-xl hover:border-slate-950/20 ${item.bg}`}
-                   {...customProps}
-                 >
-                   <div>
-                     <div className="flex items-center gap-3 mb-4">
-                       <span className={`px-4 py-1.5 rounded-full font-display font-black text-xs tracking-wider ${item.badgeColor}`}>
-                         {name}
-                       </span>
-                       <span className="text-[10px] font-display font-black text-slate-400 uppercase tracking-widest">
-                         {label}
-                       </span>
-                     </div>
-                     <h3 className="text-lg md:text-xl font-display font-black text-slate-950 mb-3 leading-snug">
-                       {fullName}
-                     </h3>
-                     <p className="text-sm text-slate-600 font-semibold leading-relaxed">
-                       {desc}
-                     </p>
-                   </div>
-                 </CardComponent>
-               );
-             })}
-          </div>
-
-          <div className="mt-16 md:mt-24 play-card p-0 max-w-5xl mx-auto bg-linear-to-tr from-play-yellow/15 via-play-pink/5 to-white overflow-hidden border-2 border-slate-950/10">
-             <div className="grid md:grid-cols-12 items-center">
-                <div className="p-8 md:p-14 order-2 md:order-1 md:col-span-7 text-left">
-                   <h3 className="text-2xl md:text-3.5xl font-display font-black mb-4 uppercase text-slate-900 leading-tight">{t('partners.for_companies.title')}</h3>
-                   <p className="text-sm md:text-base text-slate-600 mb-8 leading-relaxed font-semibold">
-                      {t('partners.for_companies.desc')}
-                   </p>
-                   <Link to="/partner" className="btn-primary inline-flex shadow-lg">{t('partners.for_companies.cta')} <ArrowRight size={20} className="stroke-[3]" /></Link>
-                </div>
-                <div className="h-56 md:h-full min-h-[240px] md:min-h-[350px] order-1 md:order-2 md:col-span-5 relative">
-                   <img 
-                      src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80" 
-                      alt="Partnership" 
-                      className="w-full h-full object-cover transition-all duration-700 hover:scale-105"
-                   />
-                </div>
-             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="kontakt" className="py-20 px-4 md:px-6 relative">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-5 text-left">
-            <h2 className="text-4xl md:text-6xl font-display font-black uppercase mb-8 leading-tight text-slate-950">
-              {t('contact.title').split(' ').map((word, i) => <span key={i} className="block">{word}</span>)}
-            </h2>
-            
-            <div className="space-y-4">
-               <div className="flex items-center gap-4 bg-play-pink/10 border border-play-pink/25 rounded-2xl p-4 max-w-sm">
-                  <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-play-pink shadow-md">
-                     <Mail size={24} className="stroke-[2.5]" />
-                  </div>
-                  <div>
-                     <div className="text-[10px] uppercase font-bold font-display text-slate-500">{t('contact.form.email')}</div>
-                     <div className="font-display font-extrabold text-slate-800">info@startlab.si</div>
-                  </div>
-               </div>
-               <div className="flex items-center gap-4 bg-play-blue/10 border border-play-blue/25 rounded-2xl p-4 max-w-sm">
-                  <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-play-blue shadow-md">
-                     <MapPin size={24} className="stroke-[2.5]" />
-                  </div>
-                  <div>
-                     <div className="text-[10px] uppercase font-bold font-display text-slate-500">{t('contact.location')}</div>
-                     <div className="font-display font-extrabold text-slate-800">{t('contact.city')}</div>
-                  </div>
-               </div>
-            </div>
-
-
-          </div>
-
-          <div className="lg:col-span-7 play-card p-8 md:p-12 bg-white border-2 border-slate-950/10 shadow-[0_24px_50px_rgba(15,23,42,0.06)]">
-             <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid md:grid-cols-2 gap-5">
-                   <div className="space-y-2">
-                      <label className="text-xs font-display font-black uppercase text-slate-500">{t('contact.form.name')}</label>
-                      <input 
-                        type="text" 
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                        className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl px-4 py-3.5 outline-none focus:border-brand-red text-slate-800 font-medium font-sans text-sm focus:bg-white transition-all" 
-                        placeholder={t('contact.form.placeholder')} 
-                      />
-                   </div>
-                   <div className="space-y-2">
-                      <label className="text-xs font-display font-black uppercase text-slate-500">{t('contact.form.email')}</label>
-                      <input 
-                        type="email" 
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl px-4 py-3.5 outline-none focus:border-brand-red text-slate-800 font-medium font-sans text-sm focus:bg-white transition-all" 
-                        placeholder={t('contact.form.placeholder')} 
-                      />
-                   </div>
-                </div>
-                <div className="space-y-2">
-                   <label className="text-xs font-display font-black uppercase text-slate-500">{t('contact.form.message')}</label>
-                   <textarea 
-                     rows={4} 
-                     value={message}
-                     onChange={(e) => setMessage(e.target.value)}
-                     required
-                     className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl px-4 py-3.5 outline-none focus:border-brand-red text-slate-800 font-medium font-sans text-sm focus:bg-white transition-all resize-none" 
-                     placeholder={t('contact.form.placeholder_msg')} 
-                   />
-                </div>
-                <button type="submit" className="btn-primary w-full justify-center py-4 mt-2 shadow-lg">{t('contact.form.submit')}</button>
-             </form>
           </div>
         </div>
       </section>
