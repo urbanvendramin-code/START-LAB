@@ -14,16 +14,22 @@ export default function ContactPage() {
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState<'idle' | 'success'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Start Lab - Sporočilo od ${name}`);
-    const body = encodeURIComponent(`Ime: ${name}\nE-pošta: ${email}\n\nSporočilo:\n${message}`);
-    window.location.href = `mailto:info@startlab.si?subject=${subject}&body=${body}`;
+    try {
+      await fetch('/api/contact/general', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message })
+      });
+    } catch (err) {
+      console.error(err);
+    }
     setStatus('success');
+    setName('');
+    setEmail('');
+    setMessage('');
     setTimeout(() => {
-      setName('');
-      setEmail('');
-      setMessage('');
       setStatus('idle');
     }, 5000);
   };

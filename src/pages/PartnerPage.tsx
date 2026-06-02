@@ -39,30 +39,60 @@ export default function PartnerPage() {
   const [mentorArea, setMentorArea] = useState('');
   const [mentorMessage, setMentorMessage] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Start Lab Partnerstvo - ${company}`);
-    const body = encodeURIComponent(`Podjetje/Organizacija: ${company}\nE-pošta: ${email}\nTip sodelovanja: ${coopType}\n\nSporočilo:\n${message}`);
-    window.location.href = `mailto:info@startlab.si?subject=${subject}&body=${body}`;
+    try {
+      await fetch('/api/contact/partner', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ company, email, coopType, message })
+      });
+    } catch (err) {
+      console.error(err);
+    }
     setStatus('success');
+    setCompany('');
+    setEmail('');
+    setCoopType('');
+    setMessage('');
     setTimeout(() => setStatus('idle'), 5000);
   };
 
-  const handleDevSubmit = (e: React.FormEvent) => {
+  const handleDevSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Start Lab Razvijalec Talentov - ${devName}`);
-    const body = encodeURIComponent(`Ime in priimek: ${devName}\nE-pošta: ${devEmail}\nPodročje: ${devExpertise}\n\nSporočilo:\n${devMessage}`);
-    window.location.href = `mailto:info@startlab.si?subject=${subject}&body=${body}`;
+    try {
+      await fetch('/api/contact/developer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ devName, devEmail, devExpertise, devMessage })
+      });
+    } catch (err) {
+      console.error(err);
+    }
     setDevStatus('success');
+    setDevName('');
+    setDevEmail('');
+    setDevExpertise('');
+    setDevMessage('');
     setTimeout(() => setDevStatus('idle'), 5000);
   };
 
-  const handleMentorSubmit = (e: React.FormEvent) => {
+  const handleMentorSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Start Lab Mentorstvo - ${mentorName}`);
-    const body = encodeURIComponent(`Ime in priimek: ${mentorName}\nE-pošta: ${mentorEmail}\nPodročje: ${mentorArea}\n\nSporočilo:\n${mentorMessage}`);
-    window.location.href = `mailto:info@startlab.si?subject=${subject}&body=${body}`;
+    try {
+      await fetch('/api/contact/mentor', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ mentorName, mentorEmail, mentorArea, mentorMessage })
+      });
+    } catch (err) {
+      console.error(err);
+    }
     setMentorStatus('success');
+    setMentorName('');
+    setMentorEmail('');
+    setMentorArea('');
+    setMentorMessage('');
     setTimeout(() => setMentorStatus('idle'), 5000);
   };
 
