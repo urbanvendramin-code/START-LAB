@@ -54,6 +54,17 @@ export default function PartnerPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ company, email, coopType, message })
       });
+
+      if (!res.ok) {
+        throw new Error(`Strežnik je vrnil napako s statusom: ${res.status} (${res.statusText || 'Status Text Missing'})`);
+      }
+
+      const contentType = res.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        const text = await res.text();
+        throw new Error(`Strežnik ni vrnil pričakovanega JSON formata (prejeli smo "${contentType || 'unknown'}"). Odgovor strežnika: "${text.slice(0, 160)}..."`);
+      }
+
       const data = await res.json();
       if (data.success) {
         setStatus('success');
@@ -68,7 +79,7 @@ export default function PartnerPage() {
     } catch (err: any) {
       console.error(err);
       setStatus('error');
-      setErrorMessage(err?.message || 'Napaka pri povezavi.');
+      setErrorMessage(err?.message || 'Napaka pri povezavi s strežnikom.');
     }
   };
 
@@ -82,6 +93,17 @@ export default function PartnerPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ devName, devEmail, devExpertise, devMessage })
       });
+
+      if (!res.ok) {
+        throw new Error(`Strežnik je vrnil napako s statusom: ${res.status} (${res.statusText || 'Status Text Missing'})`);
+      }
+
+      const contentType = res.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        const text = await res.text();
+        throw new Error(`Strežnik ni vrnil pričakovanega JSON formata (prejeli smo "${contentType || 'unknown'}"). Odgovor strežnika: "${text.slice(0, 160)}..."`);
+      }
+
       const data = await res.json();
       if (data.success) {
         setDevStatus('success');
@@ -96,7 +118,7 @@ export default function PartnerPage() {
     } catch (err: any) {
       console.error(err);
       setDevStatus('error');
-      setDevErrorMessage(err?.message || 'Napaka pri povezavi.');
+      setDevErrorMessage(err?.message || 'Napaka pri povezavi s strežnikom.');
     }
   };
 
@@ -110,6 +132,17 @@ export default function PartnerPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ mentorName, mentorEmail, mentorArea, mentorMessage })
       });
+
+      if (!res.ok) {
+        throw new Error(`Strežnik je vrnil napako s statusom: ${res.status} (${res.statusText || 'Status Text Missing'})`);
+      }
+
+      const contentType = res.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        const text = await res.text();
+        throw new Error(`Strežnik ni vrnil pričakovanega JSON formata (prejeli smo "${contentType || 'unknown'}"). Odgovor strežnika: "${text.slice(0, 160)}..."`);
+      }
+
       const data = await res.json();
       if (data.success) {
         setMentorStatus('success');
@@ -124,7 +157,7 @@ export default function PartnerPage() {
     } catch (err: any) {
       console.error(err);
       setMentorStatus('error');
-      setMentorErrorMessage(err?.message || 'Napaka pri povezavi.');
+      setMentorErrorMessage(err?.message || 'Napaka pri povezavi s strežnikom.');
     }
   };
 

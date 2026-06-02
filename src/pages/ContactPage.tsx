@@ -27,6 +27,17 @@ export default function ContactPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, message })
       });
+      
+      if (!res.ok) {
+        throw new Error(`Strežnik je vrnil napako s statusom: ${res.status} (${res.statusText || 'Status Text Missing'})`);
+      }
+
+      const contentType = res.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        const text = await res.text();
+        throw new Error(`Strežnik ni vrnil pričakovanega JSON formata (prejeli smo "${contentType || 'unknown'}"). Odgovor strežnika: "${text.slice(0, 160)}..."`);
+      }
+
       const data = await res.json();
       if (data.success) {
         setStatus('success');
@@ -40,7 +51,7 @@ export default function ContactPage() {
     } catch (err: any) {
       console.error(err);
       setStatus('error');
-      setErrorMessage(err?.message || 'Napaka pri vzpostavitvi povezave.');
+      setErrorMessage(err?.message || 'Napaka pri vzpostavitvi povezave s strežnikom.');
     }
   };
 
