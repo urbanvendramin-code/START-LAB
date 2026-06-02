@@ -43,7 +43,7 @@ export default function PartnerPage() {
     e.preventDefault();
     const subject = encodeURIComponent(`Start Lab Partnerstvo - ${company}`);
     const body = encodeURIComponent(`Podjetje/Organizacija: ${company}\nE-pošta: ${email}\nTip sodelovanja: ${coopType}\n\nSporočilo:\n${message}`);
-    window.location.href = `mailto:ing@startlab.si?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:info@startlab.si?subject=${subject}&body=${body}`;
     setStatus('success');
     setTimeout(() => setStatus('idle'), 5000);
   };
@@ -52,7 +52,7 @@ export default function PartnerPage() {
     e.preventDefault();
     const subject = encodeURIComponent(`Start Lab Razvijalec Talentov - ${devName}`);
     const body = encodeURIComponent(`Ime in priimek: ${devName}\nE-pošta: ${devEmail}\nPodročje: ${devExpertise}\n\nSporočilo:\n${devMessage}`);
-    window.location.href = `mailto:ing@startlab.si?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:info@startlab.si?subject=${subject}&body=${body}`;
     setDevStatus('success');
     setTimeout(() => setDevStatus('idle'), 5000);
   };
@@ -61,7 +61,7 @@ export default function PartnerPage() {
     e.preventDefault();
     const subject = encodeURIComponent(`Start Lab Mentorstvo - ${mentorName}`);
     const body = encodeURIComponent(`Ime in priimek: ${mentorName}\nE-pošta: ${mentorEmail}\nPodročje: ${mentorArea}\n\nSporočilo:\n${mentorMessage}`);
-    window.location.href = `mailto:ing@startlab.si?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:info@startlab.si?subject=${subject}&body=${body}`;
     setMentorStatus('success');
     setTimeout(() => setMentorStatus('idle'), 5000);
   };

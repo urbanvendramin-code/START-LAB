@@ -18,7 +18,7 @@ export default function ContactPage() {
     e.preventDefault();
     const subject = encodeURIComponent(`Start Lab - Sporočilo od ${name}`);
     const body = encodeURIComponent(`Ime: ${name}\nE-pošta: ${email}\n\nSporočilo:\n${message}`);
-    window.location.href = `mailto:ing@startlab.si?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:info@startlab.si?subject=${subject}&body=${body}`;
     setStatus('success');
     setTimeout(() => {
       setName('');
