@@ -24,6 +24,29 @@ export default function Footer() {
            <Link to="/pogoji-uporabe" className="hover:text-slate-800 transition-colors">{t('footer.terms')}</Link>
         </div>
       </div>
+
+      <div className="max-w-3xl mx-auto mt-10 pt-8 border-t border-slate-100 text-center text-[11px] text-slate-500 font-sans leading-relaxed">
+        <div className="grid md:grid-cols-2 gap-6 text-left bg-slate-50 p-6 rounded-2xl border border-slate-100 mb-6">
+          <div>
+            <p className="text-slate-600 font-medium">
+              Projekt financira Evropska unija iz Sklada za male projekte GO!2025 programa Interreg VI-A Italija-Slovenija 2021-2027, ki ga upravlja EZTS GO.
+            </p>
+          </div>
+          <div>
+            <p className="text-slate-600 font-medium">
+              Il progetto è finanziato dall’Unione europea nell’ambito del Fondo per piccoli progetti (Small Project Fund) GO! 2025 del Programma Interreg VI-A Italia-Slovenia 2021-2027, gestito dal GECT GO.
+            </p>
+          </div>
+        </div>
+        <div className="flex justify-center gap-6 font-mono text-xs font-semibold">
+          <a href="https://www.ita-slo.eu" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-slate-900 hover:underline transition-colors">
+            www.ita-slo.eu
+          </a>
+          <a href="https://www.euro-go.eu/spf" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-slate-900 hover:underline transition-colors">
+            www.euro-go.eu/spf
+          </a>
+        </div>
+      </div>
     </footer>
   );
 }
