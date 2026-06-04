@@ -2,5 +2,5 @@
   "name": "Start Lab - Center znanosti in doživetij",
   "description": "Kreativna spletna stran za Center znanosti in doživetij Start Lab, kjer se znanost sreča s hitrostjo razvoja in inovacij.",
   "requestFramePermissions": [],
-  "majorCapabilities": []
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
