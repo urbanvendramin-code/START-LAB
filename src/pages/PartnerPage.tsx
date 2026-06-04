@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import { 
@@ -187,6 +187,25 @@ function DeveloperCompanyCard({ company }: { company: DeveloperCompany; key?: an
 export default function PartnerPage() {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<'partners' | 'developers' | 'mentors'>('partners');
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const handleTabClick = (tab: 'partners' | 'developers' | 'mentors') => {
+    setActiveTab(tab);
+    setTimeout(() => {
+      const idMap = {
+        partners: 'podjetja',
+        developers: 'razvijalci-podjetja',
+        mentors: 'mentorji'
+      };
+      const element = document.getElementById(idMap[tab]);
+      if (element) {
+        const yOffset = -150; // generous offset to keep section headings beautifully visible
+        const rect = element.getBoundingClientRect();
+        const y = rect.top + window.scrollY + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    }, 120);
+  };
   
   // Partner Form State
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -342,43 +361,126 @@ export default function PartnerPage() {
     <div className="pt-60 md:pt-52 pb-20 px-4 md:px-6 relative">
       <div className="max-w-7xl mx-auto">
         
-        {/* Tab switcher */}
-        <div className="flex justify-center mb-16">
-          <div className="flex flex-col md:flex-row bg-slate-100 p-2 rounded-[2rem] border-2 border-slate-950/10 gap-2 shadow-xs w-full max-w-sm md:max-w-none md:w-auto md:rounded-3xl justify-center">
-            <button
-              onClick={() => setActiveTab('partners')}
-              className={`w-full md:w-auto px-6 md:px-8 py-3 md:py-3.5 rounded-2xl font-display font-black text-xs uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+        {/* Elegant interactive 3-pillar community cards switcher conforming to visual/graphic rules */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-20">
+          {/* Card 1: Podporne Organizacije */}
+          <motion.button
+            whileHover={{ y: -6, scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
+            onClick={() => handleTabClick('partners')}
+            className={`text-left p-8 md:p-10 rounded-[2.5rem] border-3 transition-all duration-300 flex flex-col justify-between h-full cursor-pointer relative overflow-hidden ${
+              activeTab === 'partners'
+                ? 'bg-white border-play-pink shadow-[0_20px_45px_rgba(225,29,72,0.12)] ring-4 ring-play-pink/5'
+                : 'bg-white/80 border-slate-200/60 hover:border-play-pink/30 hover:bg-white shadow-[0_8px_30px_rgba(15,23,42,0.02)]'
+            }`}
+          >
+            {activeTab === 'partners' && (
+              <div className="absolute top-0 right-0 w-32 h-32 bg-play-pink/4 rounded-bl-[8rem] pointer-events-none" />
+            )}
+            <div>
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 border-2 transition-all duration-300 ${
                 activeTab === 'partners'
-                  ? 'bg-brand-red text-white shadow-md'
-                  : 'text-slate-600 hover:text-slate-900 bg-transparent hover:bg-slate-200/50'
-              }`}
-            >
-              {t('partner_page.tab_partners')}
-            </button>
-            <button
-              onClick={() => setActiveTab('developers')}
-              className={`w-full md:w-auto px-6 md:px-8 py-3 md:py-3.5 rounded-2xl font-display font-black text-xs uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                  ? 'bg-play-pink text-white border-play-pink shadow-[0_0_15px_rgba(225,29,72,0.25)]'
+                  : 'bg-play-pink/10 text-play-pink border-play-pink/20'
+              }`}>
+                <Handshake size={28} className="stroke-[2.5]" />
+              </div>
+              <h3 className="text-xl md:text-2xl font-display font-black uppercase mb-3 text-slate-950 tracking-tight leading-none">
+                {t('partner_page.tab_partners')}
+              </h3>
+              <p className="text-sm text-slate-600 font-semibold leading-relaxed font-sans mt-2">
+                {t('partners.subtitle')}
+              </p>
+            </div>
+            
+            <div className={`mt-8 flex items-center gap-2 text-xs font-display font-black uppercase tracking-wider transition-colors duration-300 ${
+              activeTab === 'partners' ? 'text-play-pink' : 'text-slate-400'
+            }`}>
+              <span>Prikaži</span>
+              <ArrowRight size={14} className={`stroke-[3.5] transition-transform duration-300 ${activeTab === 'partners' ? 'translate-x-1.5' : ''}`} />
+            </div>
+          </motion.button>
+
+          {/* Card 2: Razvijalci Talentov */}
+          <motion.button
+            whileHover={{ y: -6, scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
+            onClick={() => handleTabClick('developers')}
+            className={`text-left p-8 md:p-10 rounded-[2.5rem] border-3 transition-all duration-300 flex flex-col justify-between h-full cursor-pointer relative overflow-hidden ${
+              activeTab === 'developers'
+                ? 'bg-white border-play-purple shadow-[0_20px_45px_rgba(124,58,237,0.12)] ring-4 ring-play-purple/5'
+                : 'bg-white/80 border-slate-200/60 hover:border-play-purple/30 hover:bg-white shadow-[0_8px_30px_rgba(15,23,42,0.02)]'
+            }`}
+          >
+            {activeTab === 'developers' && (
+              <div className="absolute top-0 right-0 w-32 h-32 bg-play-purple/4 rounded-bl-[8rem] pointer-events-none" />
+            )}
+            <div>
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 border-2 transition-all duration-300 ${
                 activeTab === 'developers'
-                  ? 'bg-brand-red text-white shadow-md'
-                  : 'text-slate-600 hover:text-slate-900 bg-transparent hover:bg-slate-200/50'
-              }`}
-            >
-              {t('partner_page.tab_developers')}
-            </button>
-            <button
-              onClick={() => setActiveTab('mentors')}
-              className={`w-full md:w-auto px-6 md:px-8 py-3 md:py-3.5 rounded-2xl font-display font-black text-xs uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                  ? 'bg-play-purple text-white border-play-purple shadow-[0_0_15px_rgba(124,58,237,0.25)]'
+                  : 'bg-play-purple/10 text-play-purple border-play-purple/20'
+              }`}>
+                <Target size={28} className="stroke-[2.5]" />
+              </div>
+              <h3 className="text-xl md:text-2xl font-display font-black uppercase mb-3 text-slate-950 tracking-tight leading-none">
+                {t('partner_page.tab_developers')}
+              </h3>
+              <p className="text-sm text-slate-600 font-semibold leading-relaxed font-sans mt-2">
+                {t('talent_developers.subtitle')}
+              </p>
+            </div>
+            
+            <div className={`mt-8 flex items-center gap-2 text-xs font-display font-black uppercase tracking-wider transition-colors duration-300 ${
+              activeTab === 'developers' ? 'text-play-purple' : 'text-slate-400'
+            }`}>
+              <span>Prikaži</span>
+              <ArrowRight size={14} className={`stroke-[3.5] transition-transform duration-300 ${activeTab === 'developers' ? 'translate-x-1.5' : ''}`} />
+            </div>
+          </motion.button>
+
+          {/* Card 3: Mentorji */}
+          <motion.button
+            whileHover={{ y: -6, scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
+            onClick={() => handleTabClick('mentors')}
+            className={`text-left p-8 md:p-10 rounded-[2.5rem] border-3 transition-all duration-300 flex flex-col justify-between h-full cursor-pointer relative overflow-hidden ${
+              activeTab === 'mentors'
+                ? 'bg-white border-play-teal shadow-[0_20px_45px_rgba(13,148,136,0.12)] ring-4 ring-play-teal/5'
+                : 'bg-white/80 border-slate-200/60 hover:border-play-teal/30 hover:bg-white shadow-[0_8px_30px_rgba(15,23,42,0.02)]'
+            }`}
+          >
+            {activeTab === 'mentors' && (
+              <div className="absolute top-0 right-0 w-32 h-32 bg-play-teal/4 rounded-bl-[8rem] pointer-events-none" />
+            )}
+            <div>
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 border-2 transition-all duration-300 ${
                 activeTab === 'mentors'
-                  ? 'bg-brand-red text-white shadow-md'
-                  : 'text-slate-600 hover:text-slate-900 bg-transparent hover:bg-slate-200/50'
-              }`}
-            >
-              {t('partner_page.tab_mentors')}
-            </button>
-          </div>
+                  ? 'bg-play-teal text-white border-play-teal shadow-[0_0_15px_rgba(13,148,136,0.25)]'
+                  : 'bg-play-teal/10 text-play-teal border-play-teal/20'
+              }`}>
+                <Users size={28} className="stroke-[2.5]" />
+              </div>
+              <h3 className="text-xl md:text-2xl font-display font-black uppercase mb-3 text-slate-950 tracking-tight leading-none">
+                {t('partner_page.tab_mentors')}
+              </h3>
+              <p className="text-sm text-slate-600 font-semibold leading-relaxed font-sans mt-2">
+                {t('mentors.subtitle')}
+              </p>
+            </div>
+            
+            <div className={`mt-8 flex items-center gap-2 text-xs font-display font-black uppercase tracking-wider transition-colors duration-300 ${
+              activeTab === 'mentors' ? 'text-play-teal' : 'text-slate-400'
+            }`}>
+              <span>Prikaži</span>
+              <ArrowRight size={14} className={`stroke-[3.5] transition-transform duration-300 ${activeTab === 'mentors' ? 'translate-x-1.5' : ''}`} />
+            </div>
+          </motion.button>
         </div>
 
-        {/* Tab Contents: Partners */}
+        {/* Tab Contents Anchor Container */}
+        <div ref={contentRef} className="scroll-mt-32">
+          {/* Tab Contents: Partners */}
         {activeTab === 'partners' && (
           <div className="grid lg:grid-cols-12 gap-12 md:gap-16 items-start">
             
@@ -1047,6 +1149,7 @@ export default function PartnerPage() {
             </div>
           </div>
         )}
+        </div>
       </div>
     </div>
   );
