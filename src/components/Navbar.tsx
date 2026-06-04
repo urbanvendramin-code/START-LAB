@@ -23,9 +23,9 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 w-full z-50 bg-white/95 backdrop-blur-xl border-b border-slate-200/80 px-6 select-none shadow-sm">
-      <div className="max-w-7xl mx-auto min-h-24 py-2 flex items-center justify-between w-full">
-        <Link to="/" className="flex items-center gap-2 h-[168px] relative group" onClick={() => setIsOpen(false)}>
-          <div className="absolute inset-y-8 inset-x-0 bg-brand-red/10 rounded-full blur-xl scale-75 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+      <div className="max-w-7xl mx-auto min-h-28 md:min-h-36 lg:min-h-24 py-4 md:py-6 lg:py-2 flex items-center justify-between w-full">
+        <Link to="/" className="flex items-center gap-2 h-24 md:h-32 lg:h-[168px] relative group" onClick={() => setIsOpen(false)}>
+          <div className="absolute inset-0 bg-brand-red/10 rounded-full blur-xl scale-75 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
           <img 
             src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1780041788/start_mesmgf.png" 
             alt="Start Lab Logo" 
@@ -66,9 +66,6 @@ export default function Navbar() {
                </button>
              ))}
           </div>
-          <Link to="/delavnice" className="bg-slate-900 hover:bg-slate-800 text-white font-display font-bold uppercase tracking-wider text-xs px-5 py-3 rounded-2xl transform hover:scale-105 active:scale-95 transition-all shadow-[0_4px_0_0_rgba(15,23,42,0.15)]">
-            {t('nav.delavnice')}
-          </Link>
         </div>
  
         {/* Mobile Menu Toggle */}
@@ -90,7 +87,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="lg:hidden absolute top-24 left-0 right-0 w-full border-b border-slate-200 bg-white/95 backdrop-blur-2xl px-6 py-6 flex flex-col gap-5 shadow-2xl"
+            className="lg:hidden absolute top-full left-0 right-0 w-full border-b border-slate-200 bg-white/95 backdrop-blur-2xl px-6 py-6 flex flex-col gap-5 shadow-2xl"
           >
             {navLinks.map((link) => (
               <Link 
