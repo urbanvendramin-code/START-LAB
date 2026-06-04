@@ -16,6 +16,77 @@ import {
   Loader2
 } from 'lucide-react';
 
+interface Mentor {
+  name: string;
+  role: string;
+  image: string;
+  bg: string;
+  badgeColor: string;
+  desc: string;
+}
+
+function MentorCard({ mentor }: { mentor: Mentor; key?: any }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const { t } = useTranslation();
+
+  // Split description by double newlines
+  const paragraphs = mentor.desc.split('\n\n');
+  const firstParagraph = paragraphs[0] || '';
+  const remainingParagraphs = paragraphs.slice(1);
+
+  return (
+    <motion.div 
+      whileHover={{ y: -4 }}
+      className={`rounded-[2.5rem] border-2 bg-white p-6 md:p-10 transition-all flex flex-col md:flex-row gap-8 items-center md:items-start shadow-[0_12px_24px_rgba(15,23,42,0.02)] hover:shadow-xl hover:border-[#00a896]/20 ${mentor.bg}`}
+    >
+      <div className="w-32 h-32 md:w-44 md:h-44 shrink-0 rounded-[2rem] overflow-hidden border-4 border-white shadow-md">
+        <img 
+          src={mentor.image} 
+          alt={mentor.name} 
+          className="w-full h-full object-cover"
+          referrerPolicy="no-referrer"
+        />
+      </div>
+      <div className="flex-1 w-full text-left">
+        <div className="flex flex-wrap items-center gap-3 mb-4">
+          <span className={`px-4 py-1.5 rounded-full font-display font-black text-xs tracking-wider ${mentor.badgeColor}`}>
+            {mentor.name}
+          </span>
+          <span className="text-[10px] font-display font-black text-slate-400 uppercase tracking-widest block sm:inline">
+            {mentor.role}
+          </span>
+        </div>
+        
+        <div className="space-y-4 text-sm text-slate-600 font-semibold leading-relaxed font-sans whitespace-pre-line text-left">
+          <p>{firstParagraph}</p>
+          
+          {isExpanded && remainingParagraphs.map((para, i) => (
+            <motion.p 
+              key={i}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.25, delay: i * 0.05 }}
+              className="mt-4"
+            >
+              {para}
+            </motion.p>
+          ))}
+        </div>
+
+        {paragraphs.length > 1 && (
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="mt-6 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-50 border-2 border-slate-100 text-xs font-display font-black uppercase tracking-widest text-[#00a896] hover:bg-[#00a896]/5 hover:border-[#00a896]/30 transition-all cursor-pointer shadow-sm focus:outline-none"
+          >
+            <span>{isExpanded ? t('partner_page.read_less') : t('partner_page.read_more')}</span>
+            <ChevronDown size={14} className={`stroke-[3.5] transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
+          </button>
+        )}
+      </div>
+    </motion.div>
+  );
+}
+
 export default function PartnerPage() {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<'partners' | 'developers' | 'mentors'>('partners');
@@ -807,6 +878,35 @@ export default function PartnerPage() {
                      </CardComponent>
                    );
                  })}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Mentors Section */}
+        {activeTab === 'mentors' && (
+          <div id="mentorji" className="mt-24 md:mt-32 pt-20 border-t border-slate-900/10">
+            <div className="text-center">
+              <h2 className="text-3.5xl md:text-5xl font-display font-black uppercase tracking-tight mb-4 text-slate-950">
+                {t('mentors.title')}
+              </h2>
+              <p className="text-slate-500 font-semibold mb-12 max-w-xl mx-auto italic">
+                {t('mentors.subtitle')}
+              </p>
+              
+              <div className="grid grid-cols-1 gap-12 max-w-4xl mx-auto text-left">
+                  {[
+                    { 
+                      name: "Uroš Polanc",
+                      role: t('mentors.uros.role'),
+                      image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1780571436/1563522851336_jmb4il.jpg",
+                      bg: "bg-play-teal/5 border-play-teal/15 hover:border-play-teal/35 text-play-teal hover:scale-[1.01]", 
+                      badgeColor: "bg-play-teal/12 text-play-teal",
+                      desc: t('mentors.uros.desc') 
+                    }
+                  ].map((mentor, idx) => (
+                    <MentorCard mentor={mentor} key={idx} />
+                  ))}
               </div>
             </div>
           </div>

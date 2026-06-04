@@ -230,6 +230,8 @@
     "message_placeholder": "Opišite kako bi želeli sodelovati...",
     "submit": "Pošlji povpraševanje",
     "agreement": "Z oddajo obrazca se strinjate, da Start Lab uporabi vaše podatke za namen vzpostavitve partnerstva.",
+    "read_more": "Preberi več",
+    "read_less": "Preberi manj",
     "thanks": "Hvala za zanimanje!",
     "callback": "Kontaktirali vas bomo v najkrajšem možnem času.",
     "new_request": "Pošlji novo prijavo"
@@ -273,6 +275,14 @@
     "rights": "VSE PRAVICE PRIDRŽANE.",
     "privacy": "Zasebnost",
     "terms": "Pogoji uporabe"
+  },
+  "mentors": {
+    "title": "Mentorji Start Laba",
+    "subtitle": "Strokovnjaki in vizionarji, ki prenašajo znanje in navdušujejo naslednjo generacijo.",
+    "uros": {
+      "role": "SOUSTVARJALEC & MENTOR",
+      "desc": "Uroš Polanc je razvojni inženir, mentor, ustvarjalec in vizionar, ki že vrsto let navdušuje mlade za tehnologijo, inovacije in podjetništvo. Svoje bogate izkušnje je pridobival kot vodja FABLAB-a, učitelj strokovnih predmetov, razvojni inženir ter vodja številnih mednarodnih projektov s področja digitalnih tehnologij, prototipiranja in izobraževanja mladih.\n\nV svoji karieri je vodil stotine delavnic za otroke, dijake, učitelje in podjetja s področij 3D-tiskanja, robotike, elektronike, programiranja, razvoja videoiger, virtualne resničnosti in podjetništva. Posebno pozornost namenja ustvarjanju varnega, spodbudnega in ustvarjalnega okolja, kjer lahko mladi razvijajo svoje ideje, pridobivajo samozavest in se učijo skozi praktično delo.\n\nKot mentor verjame, da ima vsak otrok potencial za velike stvari, če mu ponudimo pravo okolje, podporo in priložnost za raziskovanje. Zato pri delu združuje sodobne tehnologije, ustvarjalnost, timsko delo in reševanje resničnih izzivov iz vsakdanjega življenja.\n\nNjegove projekte zaznamujejo inovativnost, povezovanje izobraževanja z gospodarstvom ter razvoj kompetenc prihodnosti. Vodil je mednarodne hackathone, evropske projekte, razvoj virtualnih učnih okolij in številne pobude, ki mladim približujejo svet tehnologije na zabaven in navdihujoč način."
+    }
   },
   "seo": {
     "home_title": "Start Lab - Center znanosti in doživetij | Prva visokotehnološka stična točka na Goriškem",

@@ -230,6 +230,8 @@
     "message_placeholder": "Descrivi come vorresti partecipare...",
     "submit": "Invia Richiesta",
     "agreement": "Inviando il modulo, accetti che Start Lab utilizzi i tuoi dati allo scopo di stabilire una partnership.",
+    "read_more": "Leggi di più",
+    "read_less": "Leggi di meno",
     "thanks": "Grazie per l'interesse!",
     "callback": "Ti contatteremo il prima possibile.",
     "new_request": "Invia una nuova domanda"
@@ -273,6 +275,14 @@
     "rights": "TUTTI I DIRITTI RISERVATI.",
     "privacy": "Privacy",
     "terms": "Termini di utilizzo"
+  },
+  "mentors": {
+    "title": "Mentori di Start Lab",
+    "subtitle": "Esperti e visionari che trasmettono conoscenza e ispirano la prossima generazione.",
+    "uros": {
+      "role": "CO-CREATORE & MENTORE",
+      "desc": "Uroš Polanc è un ingegnere dello sviluppo, mentore, creatore e visionario che da molti anni ispira i giovani verso la tecnologia, l'innovazione e l'imprenditorialità. Ha maturato la sua ricca esperienza come responsabile di FABLAB, insegnante di materie tecniche, ingegnere di sviluppo e leader di numerosi progetti internazionali nel campo delle tecnologie digitali, della prototipazione e dell'educazione dei giovani.\n\nNella sua carriera, ha condotto centinaia di workshop per bambini, studenti delle scuole superiori, insegnanti e aziende nei settori della stampa 3D, della robotica, dell'elettronica, della programmazione, dello sviluppo di videogiochi, della realtà virtuale e dell'imprenditorialità. Dedica particolare attenzione alla creazione di un ambiente sicuro, incoraggiante e creativo in cui i giovani possano sviluppare le proprie idee, acquisire fiducia e apprendere attraverso il lavoro pratico.\n\nCome mentore, crede che ogni bambino abbia il potenziale per fare grandi cose se gli viene offerto l'ambiente giusto, il supporto e l'opportunità di esplorare. Per questo unisce nel suo lavoro tecnologie moderne, creatività, lavoro di squadra e risoluzione di sfide reali della vita quotidiana.\n\nI suoi progetti sono caratterizzati dall'innovazione, dal collegamento tra istruzione ed economia e dallo sviluppo delle competenze del futuro. Ha guidato hackathon internazionali, progetti europei, lo sviluppo di ambienti di apprendimento virtuale e numerose iniziative che avvicinano il mondo della tecnologia ai giovani in modo divertente e stimolante."
+    }
   },
   "seo": {
     "home_title": "Start Lab - Centro di Scienza e Avventura | Hub ad alta tecnologia nel Goriziano",

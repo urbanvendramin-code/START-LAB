@@ -230,6 +230,8 @@
     "message_placeholder": "Describe how you would like to participate...",
     "submit": "Send Inquiry",
     "agreement": "By submitting the form, you agree that Start Lab uses your data for the purpose of establishing a partnership.",
+    "read_more": "Read more",
+    "read_less": "Read less",
     "thanks": "Thank you for your interest!",
     "callback": "We will contact you as soon as possible.",
     "new_request": "Send a new application"
@@ -273,6 +275,14 @@
     "rights": "ALL RIGHTS RESERVED.",
     "privacy": "Privacy",
     "terms": "Terms of Use"
+  },
+  "mentors": {
+    "title": "Start Lab Mentors",
+    "subtitle": "Experts and visionaries sharing knowledge and inspiring the next generation of innovators.",
+    "uros": {
+      "role": "CO-CREATOR & MENTOR",
+      "desc": "Uroš Polanc is a development engineer, mentor, creator, and visionary who has been inspiring young people about technology, innovation, and entrepreneurship for many years. He gained his rich experience as a FABLAB manager, technical subject teacher, development engineer, and leader of numerous international projects in the field of digital technologies, prototyping, and youth education.\n\nIn his career, he has led hundreds of workshops for children, high school students, teachers, and companies in the fields of 3D printing, robotics, electronics, programming, video game development, virtual reality, and entrepreneurship. He pays special attention to creating a safe, encouraging, and creative environment where young people can develop their ideas, gain confidence, and learn through practical work.\n\nAs a mentor, he believes that every child has the potential for great things if given the right environment, support, and opportunity to explore. That's why he combines modern technologies, creativity, teamwork, and solving real-life challenges in his work.\n\nHis projects are characterized by innovation, connecting education with the economy, and developing future competences. He has led international hackathons, European projects, the development of virtual learning environments, and numerous initiatives that bring the world of technology closer to young people in a fun and inspiring way."
+    }
   },
   "seo": {
     "home_title": "Start Lab - Science & Adventure Center | High-Tech Hub in Goriška Region",
