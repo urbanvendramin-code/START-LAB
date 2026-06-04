@@ -13,9 +13,10 @@ import {
   BookOpen,
   ChevronDown,
   AlertTriangle,
-  Loader2
+  Loader2,
+  ExternalLink
 } from 'lucide-react';
-
+ 
 interface Mentor {
   name: string;
   role: string;
@@ -23,6 +24,16 @@ interface Mentor {
   bg: string;
   badgeColor: string;
   desc: string;
+}
+
+interface DeveloperCompany {
+  name: string;
+  role: string;
+  image: string;
+  bg: string;
+  badgeColor: string;
+  desc: string;
+  href?: string;
 }
 
 function MentorCard({ mentor }: { mentor: Mentor; key?: any }) {
@@ -39,11 +50,11 @@ function MentorCard({ mentor }: { mentor: Mentor; key?: any }) {
       whileHover={{ y: -4 }}
       className={`rounded-[2.5rem] border-2 bg-white p-6 md:p-10 transition-all flex flex-col md:flex-row gap-8 items-center md:items-start shadow-[0_12px_24px_rgba(15,23,42,0.02)] hover:shadow-xl hover:border-[#00a896]/20 ${mentor.bg}`}
     >
-      <div className="w-32 h-32 md:w-44 md:h-44 shrink-0 rounded-[2rem] overflow-hidden border-4 border-white shadow-md">
+      <div className="w-32 h-32 md:w-44 md:h-44 shrink-0 rounded-[2rem] overflow-hidden border-4 border-white shadow-md bg-slate-50 flex items-center justify-center p-4">
         <img 
           src={mentor.image} 
           alt={mentor.name} 
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover rounded-[2rem]"
           referrerPolicy="no-referrer"
         />
       </div>
@@ -82,6 +93,92 @@ function MentorCard({ mentor }: { mentor: Mentor; key?: any }) {
             <ChevronDown size={14} className={`stroke-[3.5] transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
           </button>
         )}
+      </div>
+    </motion.div>
+  );
+}
+
+function DeveloperCompanyCard({ company }: { company: DeveloperCompany; key?: any }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const { t } = useTranslation();
+
+  const paragraphs = company.desc.split('\n\n');
+  const firstParagraph = paragraphs[0] || '';
+  const remainingParagraphs = paragraphs.slice(1);
+
+  return (
+    <motion.div 
+      whileHover={{ y: -4 }}
+      className={`rounded-[2.5rem] border-2 bg-white p-6 md:p-10 transition-all flex flex-col md:flex-row gap-8 items-center md:items-start shadow-[0_12px_24px_rgba(15,23,42,0.02)] hover:shadow-xl hover:border-[#a855f7]/20 ${company.bg}`}
+    >
+      <div className="w-32 h-32 md:w-44 md:h-44 shrink-0 rounded-[2rem] overflow-hidden border-4 border-white shadow-md bg-white flex items-center justify-center p-4">
+        {company.href ? (
+          <a href={company.href} target="_blank" rel="noopener noreferrer" className="w-full h-full flex items-center justify-center">
+            <img 
+              src={company.image} 
+              alt={company.name} 
+              className="w-full h-full object-contain"
+              referrerPolicy="no-referrer"
+            />
+          </a>
+        ) : (
+          <img 
+            src={company.image} 
+            alt={company.name} 
+            className="w-full h-full object-contain"
+            referrerPolicy="no-referrer"
+          />
+        )}
+      </div>
+      <div className="flex-1 w-full text-left">
+        <div className="flex flex-wrap items-center gap-3 mb-4">
+          <span className={`px-4 py-1.5 rounded-full font-display font-black text-xs tracking-wider ${company.badgeColor}`}>
+            {company.name}
+          </span>
+          <span className="text-[10px] font-display font-black text-slate-400 uppercase tracking-widest block sm:inline">
+            {company.role}
+          </span>
+        </div>
+        
+        <div className="space-y-4 text-sm text-slate-600 font-semibold leading-relaxed font-sans whitespace-pre-line text-left">
+          <p>{firstParagraph}</p>
+          
+          {isExpanded && remainingParagraphs.map((para, i) => (
+            <motion.p 
+              key={i}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.25, delay: i * 0.05 }}
+              className="mt-4"
+            >
+              {para}
+            </motion.p>
+          ))}
+        </div>
+
+        <div className="flex flex-wrap gap-4 mt-6">
+          {paragraphs.length > 1 && (
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-50 border-2 border-slate-100 text-xs font-display font-black uppercase tracking-widest text-[#a855f7] hover:bg-[#a855f7]/5 hover:border-[#a855f7]/30 transition-all cursor-pointer shadow-sm focus:outline-none"
+            >
+              <span>{isExpanded ? t('partner_page.read_less') : t('partner_page.read_more')}</span>
+              <ChevronDown size={14} className={`stroke-[3.5] transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
+            </button>
+          )}
+
+          {company.href && (
+            <a
+              href={company.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-50 border-2 border-slate-100 text-xs font-display font-black uppercase tracking-widest text-[#a855f7] hover:bg-[#a855f7]/5 hover:border-[#a855f7]/30 transition-all cursor-pointer shadow-sm focus:outline-none"
+            >
+              <span>Spletna stran</span>
+              <ExternalLink size={14} className="stroke-[3.5]" />
+            </a>
+          )}
+        </div>
       </div>
     </motion.div>
   );
@@ -466,7 +563,8 @@ export default function PartnerPage() {
 
         {/* Tab Contents: Developers */}
         {activeTab === 'developers' && (
-          <div className="grid lg:grid-cols-12 gap-12 md:gap-16 items-start">
+          <>
+            <div className="grid lg:grid-cols-12 gap-12 md:gap-16 items-start">
             
             {/* Content Side */}
             <motion.div 
@@ -648,7 +746,36 @@ export default function PartnerPage() {
               )}
             </motion.div>
           </div>
-        )}
+
+          {/* Companies listing for Talent Developers */}
+          <div id="razvijalci-podjetja" className="mt-24 md:mt-32 pt-20 border-t border-slate-900/10">
+            <div className="text-center">
+              <h2 className="text-3.5xl md:text-5xl font-display font-black uppercase tracking-tight mb-4 text-slate-950">
+                {t('talent_developers.title')}
+              </h2>
+              <p className="text-slate-500 font-semibold mb-12 max-w-xl mx-auto italic">
+                {t('talent_developers.subtitle')}
+              </p>
+              
+              <div className="grid grid-cols-1 gap-12 max-w-4xl mx-auto text-left">
+                  {[
+                    { 
+                      name: "SIQ Ljubljana",
+                      role: t('talent_developers.siq.role'),
+                      image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1780579720/SIQ_logo_RGB_brez_www_ue0l5s.png",
+                      bg: "bg-play-purple/5 border-play-purple/15 hover:border-play-purple/35 text-play-purple hover:scale-[1.01]", 
+                      badgeColor: "bg-play-purple/12 text-play-purple",
+                      desc: t('talent_developers.siq.desc'),
+                      href: "https://www.siq.si/"
+                    }
+                  ].map((company, idx) => (
+                    <DeveloperCompanyCard company={company} key={idx} />
+                  ))}
+              </div>
+            </div>
+          </div>
+        </>
+      )}
 
         {/* Tab Contents: Mentors */}
         {activeTab === 'mentors' && (

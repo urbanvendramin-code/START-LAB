@@ -284,6 +284,14 @@
       "desc": "Uroš Polanc è un ingegnere dello sviluppo, mentore, creatore e visionario che da molti anni ispira i giovani verso la tecnologia, l'innovazione e l'imprenditorialità. Ha maturato la sua ricca esperienza come responsabile di FABLAB, insegnante di materie tecniche, ingegnere di sviluppo e leader di numerosi progetti internazionali nel campo delle tecnologie digitali, della prototipazione e dell'educazione dei giovani.\n\nNella sua carriera, ha condotto centinaia di workshop per bambini, studenti delle scuole superiori, insegnanti e aziende nei settori della stampa 3D, della robotica, dell'elettronica, della programmazione, dello sviluppo di videogiochi, della realtà virtuale e dell'imprenditorialità. Dedica particolare attenzione alla creazione di un ambiente sicuro, incoraggiante e creativo in cui i giovani possano sviluppare le proprie idee, acquisire fiducia e apprendere attraverso il lavoro pratico.\n\nCome mentore, crede che ogni bambino abbia il potenziale per fare grandi cose se gli viene offerto l'ambiente giusto, il supporto e l'opportunità di esplorare. Per questo unisce nel suo lavoro tecnologie moderne, creatività, lavoro di squadra e risoluzione di sfide reali della vita quotidiana.\n\nI suoi progetti sono caratterizzati dall'innovazione, dal collegamento tra istruzione ed economia e dallo sviluppo delle competenze del futuro. Ha guidato hackathon internazionali, progetti europei, lo sviluppo di ambienti di apprendimento virtuale e numerose iniziative che avvicinano il mondo della tecnologia ai giovani in modo divertente e stimolante."
     }
   },
+  "talent_developers": {
+    "title": "Sviluppatori di Talenti",
+    "subtitle": "Aziende e organizzazioni che, investendo in Start Lab, supportano direttamente i giovani del Goriziano, consentendo attrezzature d'eccellenza e programmi gratuiti.",
+    "siq": {
+      "role": "SOSTENITORE & DONATORE",
+      "desc": "SIQ Ljubljana è un'istituzione internazionale, professionale, indipendente, imparziale e senza scopo di lucro che offre servizi completi nei settori del collaudo dei prodotti, della certificazione, della metrologia e dei sistemi di gestione. È un organismo notificato per 7 direttive e 2 regolamenti e accreditato per oltre 500 standard. Con 184 dipendenti e 350 esperti esterni, opera in vari settori, servendo clienti provenienti da più di 60 paesi."
+    }
+  },
   "seo": {
     "home_title": "Start Lab - Centro di Scienza e Avventura | Hub ad alta tecnologia nel Goriziano",
     "home_desc": "Il Centro di Scienza e Avventura Start Lab è uno spazio innovativo nel Goriziano dove la curiosità incontra lo sviluppo tecnologico. Offriamo fantastici laboratori di stampa 3D, taglio laser e programmazione per bambini e giovani.",

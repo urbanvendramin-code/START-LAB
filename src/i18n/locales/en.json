@@ -284,6 +284,14 @@
       "desc": "Uroš Polanc is a development engineer, mentor, creator, and visionary who has been inspiring young people about technology, innovation, and entrepreneurship for many years. He gained his rich experience as a FABLAB manager, technical subject teacher, development engineer, and leader of numerous international projects in the field of digital technologies, prototyping, and youth education.\n\nIn his career, he has led hundreds of workshops for children, high school students, teachers, and companies in the fields of 3D printing, robotics, electronics, programming, video game development, virtual reality, and entrepreneurship. He pays special attention to creating a safe, encouraging, and creative environment where young people can develop their ideas, gain confidence, and learn through practical work.\n\nAs a mentor, he believes that every child has the potential for great things if given the right environment, support, and opportunity to explore. That's why he combines modern technologies, creativity, teamwork, and solving real-life challenges in his work.\n\nHis projects are characterized by innovation, connecting education with the economy, and developing future competences. He has led international hackathons, European projects, the development of virtual learning environments, and numerous initiatives that bring the world of technology closer to young people in a fun and inspiring way."
     }
   },
+  "talent_developers": {
+    "title": "Talent Developers",
+    "subtitle": "Companies and organizations directly supporting the youth of Goriška through investments in Start Lab, enabling high-tech equipment and free programming.",
+    "siq": {
+      "role": "SUPPORTER & DONOR",
+      "desc": "SIQ Ljubljana is an international, professional, independent, impartial, and non-profit institution providing complete solutions in the fields of product testing, certification, metrology, and management systems. It is a notified body for 7 directives and 2 regulations, and accredited for more than 500 standards. With 184 employees and 350 external experts, it operates in various industries, serving clients from more than 60 countries."
+    }
+  },
   "seo": {
     "home_title": "Start Lab - Science & Adventure Center | High-Tech Hub in Goriška Region",
     "home_desc": "Start Lab Science and Adventure Center is an innovative hub in Nova Gorica / Goriška region, where curiosity meets tech learning. We offer advanced 3D printing, laser cutting, and coding workshops for kids & youth.",

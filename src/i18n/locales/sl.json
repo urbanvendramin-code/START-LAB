@@ -284,6 +284,14 @@
       "desc": "Uroš Polanc je razvojni inženir, mentor, ustvarjalec in vizionar, ki že vrsto let navdušuje mlade za tehnologijo, inovacije in podjetništvo. Svoje bogate izkušnje je pridobival kot vodja FABLAB-a, učitelj strokovnih predmetov, razvojni inženir ter vodja številnih mednarodnih projektov s področja digitalnih tehnologij, prototipiranja in izobraževanja mladih.\n\nV svoji karieri je vodil stotine delavnic za otroke, dijake, učitelje in podjetja s področij 3D-tiskanja, robotike, elektronike, programiranja, razvoja videoiger, virtualne resničnosti in podjetništva. Posebno pozornost namenja ustvarjanju varnega, spodbudnega in ustvarjalnega okolja, kjer lahko mladi razvijajo svoje ideje, pridobivajo samozavest in se učijo skozi praktično delo.\n\nKot mentor verjame, da ima vsak otrok potencial za velike stvari, če mu ponudimo pravo okolje, podporo in priložnost za raziskovanje. Zato pri delu združuje sodobne tehnologije, ustvarjalnost, timsko delo in reševanje resničnih izzivov iz vsakdanjega življenja.\n\nNjegove projekte zaznamujejo inovativnost, povezovanje izobraževanja z gospodarstvom ter razvoj kompetenc prihodnosti. Vodil je mednarodne hackathone, evropske projekte, razvoj virtualnih učnih okolij in številne pobude, ki mladim približujejo svet tehnologije na zabaven in navdihujoč način."
     }
   },
+  "talent_developers": {
+    "title": "Razvijalci talentov",
+    "subtitle": "Podjetja in organizacije, ki z vlaganjem v Start Lab neposredno podpirajo goriško mladino in omogočajo vrhunsko opremo ter brezplačne programe.",
+    "siq": {
+      "role": "PODPORNIK & DONATOR",
+      "desc": "SIQ Ljubljana je mednarodna strokovna, neodvisna, nepristranska in neprofitna institucija, ki nudi celovite storitve certificiranja, kontrole, preskušanja, kalibriranja, validiranja, preverjanja in izobraževanja. Je priglašeni organ za 7 direktiv in 2 uredbi ter akreditiran za več kot 500 standardov. S 184 zaposlenimi in 350 zunanjimi strokovnjaki deluje v različnih industrijah, stranke SIQ pa prihajajo iz več kot 60 držav."
+    }
+  },
   "seo": {
     "home_title": "Start Lab - Center znanosti in doživetij | Prva visokotehnološka stična točka na Goriškem",
     "home_desc": "Center znanosti in doživetij Start Lab je kreativni prostor na Goriškem, kjer se radovednost sreča z znanostjo. Ponujamo vrhunske delavnice 3D tiska, laserskega razreza in programiranja za otroke in mlade.",
