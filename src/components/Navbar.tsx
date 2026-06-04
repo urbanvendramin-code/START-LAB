@@ -24,11 +24,12 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 w-full z-50 bg-white/95 backdrop-blur-xl border-b border-slate-200/80 px-6 select-none shadow-sm">
       <div className="max-w-7xl mx-auto min-h-24 py-2 flex items-center justify-between w-full">
-        <Link to="/" className="flex items-center gap-2 h-[168px]" onClick={() => setIsOpen(false)}>
+        <Link to="/" className="flex items-center gap-2 h-[168px] relative group" onClick={() => setIsOpen(false)}>
+          <div className="absolute inset-y-8 inset-x-0 bg-brand-red/10 rounded-full blur-xl scale-75 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
           <img 
             src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1780041788/start_mesmgf.png" 
             alt="Start Lab Logo" 
-            className="h-full w-auto object-contain"
+            className="h-full w-auto object-contain relative z-10"
           />
         </Link>
         
@@ -44,15 +45,15 @@ export default function Navbar() {
             </Link>
           ))}
         </div>
-
+ 
         {/* Desktop Language & CTA */}
         <div className="hidden lg:flex items-center gap-4">
-          <div className="flex gap-2 bg-slate-100 p-1.5 rounded-2xl border border-slate-200">
+          <div className="flex gap-2 bg-slate-50 p-1.5 rounded-2xl border border-slate-200">
              {languages.map((lang) => (
                <button 
                  key={lang.code}
                  onClick={() => i18n.changeLanguage(lang.code)}
-                 className={`text-xs font-bold transition-all px-3 py-1.5 rounded-xl flex items-center gap-2 ${i18n.language === lang.code ? 'bg-brand-red text-white shadow-md' : 'text-slate-600 hover:bg-slate-200/60'}`}
+                 className={`text-xs font-bold transition-all px-3 py-1.5 rounded-xl flex items-center gap-2 ${i18n.language === lang.code ? 'bg-brand-red text-white shadow-md' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'}`}
                  title={lang.name}
                >
                  <img 
@@ -65,15 +66,15 @@ export default function Navbar() {
                </button>
              ))}
           </div>
-          <Link to="/delavnice" className="bg-play-yellow hover:bg-play-yellow/90 text-slate-950 font-display font-bold uppercase tracking-wider text-xs px-5 py-3 rounded-2xl transform hover:scale-105 active:scale-95 transition-all shadow-[0_4px_0_0_#d1a115]">
+          <Link to="/delavnice" className="bg-slate-900 hover:bg-slate-800 text-white font-display font-bold uppercase tracking-wider text-xs px-5 py-3 rounded-2xl transform hover:scale-105 active:scale-95 transition-all shadow-[0_4px_0_0_rgba(15,23,42,0.15)]">
             {t('nav.delavnice')}
           </Link>
         </div>
-
+ 
         {/* Mobile Menu Toggle */}
         <div className="flex lg:hidden items-center gap-4">
           <button 
-            className="text-slate-800 p-2 hover:bg-slate-100 rounded-full transition-all"
+            className="text-slate-800 p-2 hover:bg-slate-100 rounded-full transition-all border border-slate-200/80 bg-slate-50"
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X size={28} className="text-slate-800" /> : <Menu size={28} className="text-slate-800" />}
@@ -123,7 +124,7 @@ export default function Navbar() {
             </div>
             <Link 
               to="/delavnice" 
-              className="bg-play-yellow hover:bg-play-yellow/90 text-slate-950 font-display font-bold text-center uppercase tracking-wider py-4 rounded-2xl transition-all shadow-[0_4px_0_0_#d1a115]"
+              className="bg-brand-red hover:bg-brand-red/90 text-white font-display font-bold text-center uppercase tracking-wider py-4 rounded-2xl transition-all shadow-[0_4px_0_0_rgba(222,59,59,0.2)]"
               onClick={() => setIsOpen(false)}
             >
               {t('nav.delavnice')}

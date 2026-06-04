@@ -92,6 +92,7 @@ async function startServer() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "Accept": "application/json",
             "Content-Length": Buffer.byteLength(postData),
           },
         };

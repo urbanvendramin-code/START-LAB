@@ -15,17 +15,17 @@ export default function Footer() {
           />
         </Link>
         
-        <div className="text-xs text-gray-500 font-bold uppercase tracking-widest font-mono">
+        <div className="text-xs text-slate-500 font-bold uppercase tracking-widest font-mono">
           © {new Date().getFullYear()} START LAB. {t('footer.rights')}
         </div>
 
-        <div className="flex gap-8 text-[10px] font-black uppercase italic tracking-widest text-slate-500">
-           <Link to="/zasebnost" className="hover:text-slate-800 transition-colors">{t('footer.privacy')}</Link>
-           <Link to="/pogoji-uporabe" className="hover:text-slate-800 transition-colors">{t('footer.terms')}</Link>
+        <div className="flex gap-8 text-[10px] font-black uppercase italic tracking-widest text-slate-400">
+           <Link to="/zasebnost" className="hover:text-brand-red transition-colors">{t('footer.privacy')}</Link>
+           <Link to="/pogoji-uporabe" className="hover:text-brand-red transition-colors">{t('footer.terms')}</Link>
         </div>
       </div>
 
-      <div className="max-w-3xl mx-auto mt-10 pt-8 border-t border-slate-100 text-center text-[11px] text-slate-500 font-sans leading-relaxed">
+      <div className="max-w-3xl mx-auto mt-10 pt-8 border-t border-slate-200 text-center text-[11px] text-slate-500 font-sans leading-relaxed">
         <div className="grid md:grid-cols-2 gap-6 text-left bg-slate-50 p-6 rounded-2xl border border-slate-100 mb-6">
           <div>
             <p className="text-slate-600 font-medium">
@@ -39,10 +39,10 @@ export default function Footer() {
           </div>
         </div>
         <div className="flex justify-center gap-6 font-mono text-xs font-semibold">
-          <a href="https://www.ita-slo.eu" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-slate-900 hover:underline transition-colors">
+          <a href="https://www.ita-slo.eu" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-brand-red hover:underline transition-colors">
             www.ita-slo.eu
           </a>
-          <a href="https://www.euro-go.eu/spf" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-slate-900 hover:underline transition-colors">
+          <a href="https://www.euro-go.eu/spf" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-brand-red hover:underline transition-colors">
             www.euro-go.eu/spf
           </a>
         </div>

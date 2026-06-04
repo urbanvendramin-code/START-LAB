@@ -16,22 +16,22 @@
 
 @layer base {
   body {
-    @apply bg-[#fdfaf6] text-slate-800 font-sans antialiased overflow-x-hidden;
+    @apply bg-slate-50 text-slate-900 font-sans antialiased overflow-x-hidden;
   }
 }
 
-/* Playful Bubble cards */
+/* Futuristic Tech Glassmorphism cards */
 .play-card {
-  @apply bg-white border-2 border-slate-900/10 rounded-[2rem] shadow-[0_12px_0_0_rgba(15,23,42,0.06)] hover:shadow-[0_16px_0_0_rgba(15,23,42,0.08)] transition-all duration-300;
+  @apply bg-white/90! backdrop-blur-md border border-slate-200/80 rounded-[2rem] shadow-[0_8px_30px_rgba(15,23,42,0.03)] hover:shadow-[0_16px_40px_rgba(222,59,59,0.06)] hover:border-brand-red/30 transition-all duration-300;
 }
 
-/* High contrast thick-border buttons in style of modern websites like Papumba */
+/* High contrast cyber kinetic buttons */
 .btn-primary {
-  @apply bg-brand-red hover:bg-brand-red/90 text-white px-8 py-4 rounded-[1.5rem] font-display font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_12px_0_0_rgba(222,59,59,0.25)] active:translate-y-0 active:shadow-none flex items-center justify-center gap-2;
+  @apply bg-brand-red hover:bg-brand-red/90 text-white px-8 py-4 rounded-[1.5rem] font-display font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_0_24px_rgba(222,59,59,0.3)] active:translate-y-0 active:shadow-none flex items-center justify-center gap-2;
 }
 
 .btn-secondary {
-  @apply bg-play-yellow hover:bg-play-yellow/90 text-slate-900 px-8 py-4 rounded-[1.5rem] font-display font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_12px_0_0_rgba(245,158,11,0.25)] active:translate-y-0 active:shadow-none flex items-center justify-center gap-2 border-2 border-slate-900/5;
+  @apply bg-white hover:bg-slate-50 text-slate-800 px-8 py-4 rounded-[1.5rem] font-display font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(15,23,42,0.05)] active:translate-y-0 active:shadow-none flex items-center justify-center gap-2 border border-slate-200 hover:border-slate-400;
 }
 
 .btn-teal {
