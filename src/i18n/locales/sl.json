@@ -174,11 +174,11 @@
     }
   },
   "partner_page": {
-    "tab_partners": "PARTNERJI",
+    "tab_partners": "PODPORNE ORGANIZACIJE",
     "tab_developers": "RAZVIJALCI TALENTOV",
     "tab_mentors": "MENTORJI",
-    "title_start": "Postani",
-    "title_brand": "Partner",
+    "title_start": "Podpri",
+    "title_brand": "mlade raziskovalce",
     "subtitle": "Start Lab je odprto razvojno okolje, kjer mladi na Goriškem odkrivajo svoje talente. Skupaj gradimo prostor za prihodnje inovatorje.",
     "devs_title_start": "Postani",
     "devs_title_brand": "Razvijalec talentov",

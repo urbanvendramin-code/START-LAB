@@ -174,11 +174,11 @@
     }
   },
   "partner_page": {
-    "tab_partners": "PARTNER",
+    "tab_partners": "ORGANIZZAZIONI DI SUPPORTO",
     "tab_developers": "SVILUPPATORI DI TALENTI",
     "tab_mentors": "MENTORI",
-    "title_start": "Diventa un",
-    "title_brand": "Partner",
+    "title_start": "Sostieni",
+    "title_brand": "i giovani ricercatori",
     "subtitle": "Start Lab è un ambiente di sviluppo aperto dove i giovani della Goriška scoprono i propri talenti. Insieme costruiamo uno spazio per i futuri innovatori.",
     "devs_title_start": "Diventa uno",
     "devs_title_brand": "Sviluppatore di Talenti",
