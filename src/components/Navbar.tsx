@@ -24,7 +24,14 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 w-full z-50 bg-white/95 backdrop-blur-xl border-b border-slate-200/80 px-6 select-none shadow-sm">
       <div className="max-w-7xl mx-auto min-h-28 md:min-h-36 lg:min-h-24 py-4 md:py-6 lg:py-2 flex items-center justify-between w-full">
-        <Link to="/" className="flex items-center gap-2 h-24 md:h-32 lg:h-[168px] relative group" onClick={() => setIsOpen(false)}>
+        <Link 
+          to="/" 
+          className="flex items-center gap-2 h-24 md:h-32 lg:h-[168px] relative group" 
+          onClick={() => {
+            setIsOpen(false);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        >
           <div className="absolute inset-0 bg-brand-red/10 rounded-full blur-xl scale-75 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
           <img 
             src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1780041788/start_mesmgf.png" 
