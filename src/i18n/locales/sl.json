@@ -91,9 +91,9 @@
     "subtitle": "Občine, šole, fakultete, razvojne agencije, tehnološki parki, raziskovalne ustanove, društva in druge organizacije, ki s sodelovanjem in podporo pomagajo ustvarjati razvojno okolje za mlade.",
     "item_ung": {
       "name": "UNG",
-      "fullName": "Univerza v Novi Gorici – Laboratorij za fiziko organskih snovi",
+      "fullName": "Laboratorij za fiziko organskih snovi (LFOS)",
       "label": "Raziskovalni partner",
-      "desc": "V Start Labu bo izvajal različne delavnice"
+      "desc": "Univerze v Novi Gorici je mednarodno uveljavljen raziskovalni laboratorij na področju naprednih materialov, organske elektronike in nanotehnologij. Pod vodstvom prof. dr. Egona Pavlice povezuje vrhunske raziskave z inovacijami. Raziskovalci laboratorija bodo v okviru Start Laba izvajali delavnice in mladim približali sodobne tehnologije ter raziskovalno delo."
     },
     "item_ptp": {
       "name": "PTP",
@@ -286,6 +286,14 @@
     "uros": {
       "role": "SOUSTVARJALEC & MENTOR",
       "desc": "Uroš Polanc je razvojni inženir, mentor, ustvarjalec in vizionar, ki že vrsto let navdušuje mlade za tehnologijo, inovacije in podjetništvo. Svoje bogate izkušnje je pridobival kot vodja FABLAB-a, učitelj strokovnih predmetov, razvojni inženir ter vodja številnih mednarodnih projektov s področja digitalnih tehnologij, prototipiranja in izobraževanja mladih.\n\nV svoji karieri je vodil stotine delavnic za otroke, dijake, učitelje in podjetja s področij 3D-tiskanja, robotike, elektronike, programiranja, razvoja videoiger, virtualne resničnosti in podjetništva. Posebno pozornost namenja ustvarjanju varnega, spodbudnega in ustvarjalnega okolja, kjer lahko mladi razvijajo svoje ideje, pridobivajo samozavest in se učijo skozi praktično delo.\n\nKot mentor verjame, da ima vsak otrok potencial za velike stvari, če mu ponudimo pravo okolje, podporo in priložnost za raziskovanje. Zato pri delu združuje sodobne tehnologije, ustvarjalnost, timsko delo in reševanje resničnih izzivov iz vsakdanjega življenja.\n\nNjegove projekte zaznamujejo inovativnost, povezovanje izobraževanja z gospodarstvom ter razvoj kompetenc prihodnosti. Vodil je mednarodne hackathone, evropske projekte, razvoj virtualnih učnih okolij in številne pobude, ki mladim približujejo svet tehnologije na zabaven in navdihujoč način."
+    },
+    "borut": {
+      "role": "PEDAGOG & MENTOR",
+      "desc": "Borut Fiorelli je pedagog, mentor in pionir uvajanja robotike v osnovnošolsko izobraževanje na Goriškem. Na Osnovni šoli Dornberk že vrsto let poučuje tehniko, računalništvo ter izbirna predmeta Robotika v tehniki in Elektronika z robotiko, s katerima učencem približuje programiranje, avtomatizacijo, elektroniko in sodobne tehnologije.\n\nKot mentor številnim ekipam na podjetniškem tekmovanju POPRI uspešno spodbuja inovativnost, ustvarjalnost in podjetniško razmišljanje mladih. Njegovi mentoriranci redno razvijajo inovativne projekte in se uvrščajo med najboljše ekipe v Sloveniji.\n\nPosebno mesto v njegovem delu imajo tehniški projekti in tekmovanja. Na državnem tekmovanju Elastomobil, ki ga organizira Hiša eksperimentov, so učenci pod njegovim mentorstvom dosegli več vrhunskih rezultatov, med drugim 3. in 4. mesto ter prejeli nagrado strokovne komisije za najbolj domiselno tehnično rešitev. Tudi v preteklih letih so ekipe OŠ Dornberk na tekmovanju Elastomobil osvajale najvišja mesta in posebna priznanja za inovativnost ter tehnično odličnost.\n\nPoleg dela v šoli je sodeloval tudi z Ljudsko univerzo Nova Gorica, kjer je izvajal izobraževanja s področja digitalnih kompetenc in napredne uporabe programskih orodij. Njegovo delo povezuje tehniko, podjetništvo, inovacije in vseživljenjsko učenje ter navdušuje mlade za ustvarjanje rešitev prihodnosti."
+    },
+    "egon": {
+      "role": "FIZIK, PROFESOR & MENTOR",
+      "desc": "dr. Egon Pavlica je fizik, raziskovalec, profesor in dekan Fakultete za naravoslovje Univerze v Novi Gorici. Njegovo raziskovalno delo na področju naprednih materialov, nanoelektronike, organskih polprevodnikov in inovativnih tehnologij ga uvršča med vodilne slovenske raziskovalce na področju fizike materialov. Je avtor številnih znanstvenih objav v najuglednejših mednarodnih revijah ter sodeluje v številnih evropskih raziskovalnih projektih.\n\nKot mentor spodbuja radovednost, raziskovalni pristop in razvoj inovativnih idej. Mladim pomaga razumeti, kako znanstvena odkritja pretvoriti v tehnološke rešitve z dejanskim vplivom na družbo in gospodarstvo. S svojim delom povezuje raziskovalno odličnost, podjetništvo in razvoj visokotehnoloških produktov ter predstavlja pomemben most med akademskim okoljem in gospodarstvom."
     }
   },
   "talent_developers": {

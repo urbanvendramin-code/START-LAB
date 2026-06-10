@@ -1151,7 +1151,7 @@ export default function PartnerPage() {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto text-left">
                  {[
-                   { key: 'item_ung', bg: "bg-play-pink/5 border-play-pink/15 hover:border-play-pink/35 text-play-pink hover:scale-[1.01]", badgeColor: "bg-play-pink/12 text-play-pink", href: "https://ung.si/sl/raziskave/laboratorij-za-fiziko-organskih-snovi/" },
+                   { key: 'item_ung', bg: "bg-play-pink/5 border-play-pink/15 hover:border-play-pink/35 text-play-pink hover:scale-[1.01]", badgeColor: "bg-play-pink/12 text-play-pink", href: "https://www-lfos.ung.si/" },
                    { key: 'item_ptp', bg: "bg-play-yellow/5 border-play-yellow/15 hover:border-play-yellow/35 text-play-yellow hover:scale-[1.01]", badgeColor: "bg-play-yellow/12 text-play-yellow", href: "https://popri.si/" },
                    { key: 'item_ehisa', bg: "bg-play-teal/5 border-play-teal/15 hover:border-play-teal/35 text-play-teal hover:scale-[1.01]", badgeColor: "bg-play-teal/12 text-play-teal", href: "https://www.e-hisa.si/" },
                    { key: 'item_mic', bg: "bg-play-blue/5 border-play-blue/15 hover:border-play-blue/35 text-play-blue hover:scale-[1.01]", badgeColor: "bg-play-blue/12 text-play-blue", href: "https://mic.scng.si/domov/kontakti-mic/" }
@@ -1215,6 +1215,22 @@ export default function PartnerPage() {
                       bg: "bg-play-teal/5 border-play-teal/15 hover:border-play-teal/35 text-play-teal hover:scale-[1.01]", 
                       badgeColor: "bg-play-teal/12 text-play-teal",
                       desc: t('mentors.uros.desc') 
+                    },
+                    { 
+                      name: "Borut Fiorelli",
+                      role: t('mentors.borut.role'),
+                      image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781090371/image_2_jtawyc.png",
+                      bg: "bg-play-blue/5 border-play-blue/15 hover:border-play-blue/35 text-play-blue hover:scale-[1.01]", 
+                      badgeColor: "bg-play-blue/12 text-play-blue",
+                      desc: t('mentors.borut.desc') 
+                    },
+                    { 
+                      name: "dr. Egon Pavlica",
+                      role: t('mentors.egon.role'),
+                      image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781090371/image_1_gdzusa.png",
+                      bg: "bg-play-pink/5 border-play-pink/15 hover:border-play-pink/35 text-play-pink hover:scale-[1.01]", 
+                      badgeColor: "bg-play-pink/12 text-play-pink",
+                      desc: t('mentors.egon.desc') 
                     }
                   ].map((mentor, idx) => (
                     <MentorCard mentor={mentor} key={idx} />

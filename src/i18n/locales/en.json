@@ -91,9 +91,9 @@
     "subtitle": "Municipalities, schools, faculties, development agencies, technology parks, research institutions, associations and other organizations that through cooperation and support help create a developmental environment for youth.",
     "item_ung": {
       "name": "UNG",
-      "fullName": "University of Nova Gorica – Laboratory for Organic Matter Physics",
+      "fullName": "Organic Matter Physics Laboratory (LFOS)",
       "label": "Research Partner",
-      "desc": "Will conduct various hands-on workshops and activities at Start Lab."
+      "desc": "of the University of Nova Gorica is an internationally recognized research laboratory in the field of advanced materials, organic electronics and nanotechnologies. Under the leadership of Prof. Dr. Egon Pavlica, it connects scientific research with innovations. The laboratory's researchers will conduct workshops as part of Start Lab to bring modern technologies and scientific research closer to young people."
     },
     "item_ptp": {
       "name": "PTP",
@@ -286,6 +286,14 @@
     "uros": {
       "role": "CO-CREATOR & MENTOR",
       "desc": "Uroš Polanc is a development engineer, mentor, creator, and visionary who has been inspiring young people about technology, innovation, and entrepreneurship for many years. He gained his rich experience as a FABLAB manager, technical subject teacher, development engineer, and leader of numerous international projects in the field of digital technologies, prototyping, and youth education.\n\nIn his career, he has led hundreds of workshops for children, high school students, teachers, and companies in the fields of 3D printing, robotics, electronics, programming, video game development, virtual reality, and entrepreneurship. He pays special attention to creating a safe, encouraging, and creative environment where young people can develop their ideas, gain confidence, and learn through practical work.\n\nAs a mentor, he believes that every child has the potential for great things if given the right environment, support, and opportunity to explore. That's why he combines modern technologies, creativity, teamwork, and solving real-life challenges in his work.\n\nHis projects are characterized by innovation, connecting education with the economy, and developing future competences. He has led international hackathons, European projects, the development of virtual learning environments, and numerous initiatives that bring the world of technology closer to young people in a fun and inspiring way."
+    },
+    "borut": {
+      "role": "PEDAGOGUE & MENTOR",
+      "desc": "Borut Fiorelli is an educator, mentor, and pioneer of introducing robotics into primary school education in the Goriška region. At Dornberk Primary School, he has been teaching technology, computer science, and elective subjects Robotics in Technology and Electronics with Robotics for many years, bringing programming, automation, electronics, and modern technologies closer to students.\n\nAs a mentor to numerous teams in the POPRI youth entrepreneurship competition, he successfully encourages innovation, creativity, and entrepreneurial thinking among young people. His mentees regularly develop innovative projects and rank among the best teams in Slovenia.\n\nTechnical projects and competitions hold a special place in his work. In the national Elastomobil competition, organized by the House of Experiments, students under his mentorship achieved several outstanding results, including 3rd and 4th place, as well as receiving the expert commission's award for the most imaginative technical solution. Over the years, teams from Dornberk Primary School have consistently won top spots and special recognition for innovation and technical excellence at Elastomobil.\n\nIn addition to his school work, he has collaborated with the Ljudska Univerza Nova Gorica (People's University of Nova Gorica), where he conducted educational programs in digital competencies and advanced software applications. His work connects engineering, entrepreneurship, innovation, and lifelong learning, inspiring young people to create the solutions of the future."
+    },
+    "egon": {
+      "role": "PHYSICIST, PROFESSOR & MENTOR",
+      "desc": "Dr. Egon Pavlica is a physicist, researcher, professor, and Dean of the School of Science at the University of Nova Gorica. His research work on advanced materials, nanoelectronics, organic semiconductors, and innovative technologies ranks him among the leading Slovenian researchers in physical materials science. He is the author of numerous scientific publications in prestigious international journals and collaborates on various European research projects.\n\nAs a mentor, he fosters curiosity, a research-oriented approach, and the development of innovative ideas. He helps youth grasp how scientific breakthroughs translate into technological solutions with real-world impact on society and the economy. Through his work, he blends research excellence, entrepreneurship, and the development of high-tech products, representing a crucial bridge between academia and industry."
     }
   },
   "talent_developers": {
