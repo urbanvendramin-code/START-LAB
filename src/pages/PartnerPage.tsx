@@ -398,7 +398,7 @@ export default function PartnerPage() {
   };
 
   return (
-    <div className="pt-60 md:pt-52 pb-20 px-4 md:px-6 relative">
+    <div className="pt-[220px] md:pt-[275px] pb-20 px-4 md:px-6 relative">
       <div className="max-w-7xl mx-auto">
         
         {/* Elegant interactive 3-pillar community cards switcher conforming to visual/graphic rules */}

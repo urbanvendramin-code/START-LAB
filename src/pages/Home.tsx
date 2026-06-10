@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative pt-44 md:pt-52 lg:pt-56 pb-16 md:pb-28 px-4 md:px-6 min-h-screen flex items-center overflow-hidden">
+      <section className="relative pt-[220px] md:pt-[275px] lg:pt-[300px] pb-16 md:pb-28 px-4 md:px-6 min-h-screen flex items-center overflow-hidden">
         {/* Modern Background with Photography */}
         <div className="absolute inset-0 z-0 opacity-40 mix-blend-multiply">
           <img 

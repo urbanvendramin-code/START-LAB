@@ -54,7 +54,7 @@ export default function WorkshopsPage() {
   };
 
   return (
-    <div className="pt-60 md:pt-52 pb-20 px-4 md:px-6 relative">
+    <div className="pt-[220px] md:pt-[275px] pb-20 px-4 md:px-6 relative">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-16 md:flex items-end justify-between gap-8">
