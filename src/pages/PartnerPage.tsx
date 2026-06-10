@@ -911,6 +911,15 @@ export default function PartnerPage() {
               <div className="grid grid-cols-1 gap-12 max-w-4xl mx-auto text-left">
                   {[
                     { 
+                      name: "Shelly Group",
+                      role: t('talent_developers.shelly.role'),
+                      image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781073944/shelly_logo_blue_240x140_1_vglthl.png",
+                      bg: "bg-play-blue/5 border-play-blue/15 hover:border-play-blue/35 text-play-blue hover:scale-[1.01]", 
+                      badgeColor: "bg-play-blue/12 text-play-blue",
+                      desc: t('talent_developers.shelly.desc'),
+                      href: "https://www.shelly.com/"
+                    },
+                    { 
                       name: "SIQ Ljubljana",
                       role: t('talent_developers.siq.role'),
                       image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1780579720/SIQ_logo_RGB_brez_www_ue0l5s.png",
@@ -918,15 +927,6 @@ export default function PartnerPage() {
                       badgeColor: "bg-play-purple/12 text-play-purple",
                       desc: t('talent_developers.siq.desc'),
                       href: "https://www.siq.si/"
-                    },
-                    { 
-                      name: "Shelly Europe Ltd.",
-                      role: t('talent_developers.shelly.role'),
-                      image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781073944/shelly_logo_blue_240x140_1_vglthl.png",
-                      bg: "bg-play-blue/5 border-play-blue/15 hover:border-play-blue/35 text-play-blue hover:scale-[1.01]", 
-                      badgeColor: "bg-play-blue/12 text-play-blue",
-                      desc: t('talent_developers.shelly.desc'),
-                      href: "https://www.shelly.com/"
                     },
                     { 
                       name: "Gorenje GSI, d.o.o.",
