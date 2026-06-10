@@ -920,6 +920,15 @@ export default function PartnerPage() {
                       href: "https://www.shelly.com/"
                     },
                     { 
+                      name: "KA3 d.o.o.",
+                      role: t('talent_developers.ka3.role'),
+                      image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781082903/KA3_vector_xmx4id.png",
+                      bg: "bg-play-yellow/5 border-play-yellow/15 hover:border-play-yellow/35 text-play-yellow hover:scale-[1.01]", 
+                      badgeColor: "bg-play-yellow/12 text-play-yellow",
+                      desc: t('talent_developers.ka3.desc'),
+                      href: "https://www.ka3.si/"
+                    },
+                    { 
                       name: "SIQ Ljubljana",
                       role: t('talent_developers.siq.role'),
                       image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1780579720/SIQ_logo_RGB_brez_www_ue0l5s.png",
