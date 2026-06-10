@@ -16,6 +16,13 @@ i18n
       it: { translation: it },
     },
     fallbackLng: 'sl',
+    supportedLngs: ['sl', 'it', 'en'],
+    nonExplicitSupportedLngs: true,
+    detection: {
+      order: ['querystring', 'cookie', 'localStorage', 'navigator', 'htmlTag'],
+      lookupQuerystring: 'lng',
+      caches: ['localStorage', 'cookie'],
+    },
     interpolation: {
       escapeValue: false,
     },

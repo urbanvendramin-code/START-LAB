@@ -69,6 +69,42 @@ export default function SEOManager() {
     // 6. Update HTML lang tag to match dynamic i18n selection
     document.documentElement.lang = i18n.language || 'sl';
 
+    // 7. Update Multilingual Hreflang Tags for International SEO
+    const supportedLangs = ['sl', 'it', 'en'];
+    const currentOrigin = window.location.origin;
+    const cleanPath = pathname; // e.g., "/" or "/delavnice"
+    const baseUrl = `${currentOrigin}${cleanPath}`;
+
+    // Remove any previously added alternate link tags
+    const oldAlternates = document.querySelectorAll('link[rel="alternate"][hreflang]');
+    oldAlternates.forEach(el => el.parentNode?.removeChild(el));
+
+    // Create x-default alternate tag (defaults to Slovenian or main landing)
+    const linkDefault = document.createElement('link');
+    linkDefault.setAttribute('rel', 'alternate');
+    linkDefault.setAttribute('hreflang', 'x-default');
+    linkDefault.setAttribute('href', baseUrl);
+    document.head.appendChild(linkDefault);
+
+    // Create alternate tags for each language variant
+    supportedLangs.forEach(lang => {
+      const linkLang = document.createElement('link');
+      linkLang.setAttribute('rel', 'alternate');
+      linkLang.setAttribute('hreflang', lang);
+      linkLang.setAttribute('href', `${baseUrl}?lng=${lang}`);
+      document.head.appendChild(linkLang);
+    });
+
+    // 8. Update Canonical URL tag
+    let canonicalTag = document.querySelector('link[rel="canonical"]');
+    if (!canonicalTag) {
+      canonicalTag = document.createElement('link');
+      canonicalTag.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalTag);
+    }
+    const activeLang = i18n.language || 'sl';
+    canonicalTag.setAttribute('href', `${baseUrl}?lng=${activeLang}`);
+
   }, [pathname, t, i18n.language]);
 
   return null;
