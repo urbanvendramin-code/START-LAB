@@ -952,6 +952,15 @@ export default function PartnerPage() {
                         { label: "Gorenje", href: "https://si.gorenje.com/" },
                         { label: "Hisense", href: "https://si.hisense.com/" }
                       ]
+                    },
+                    { 
+                      name: "A2R d.o.o.",
+                      role: t('talent_developers.a2r.role'),
+                      image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781097985/a2r_logo_pcnykd.png",
+                      bg: "bg-play-pink/5 border-play-pink/15 hover:border-play-pink/35 text-play-pink hover:scale-[1.01]", 
+                      badgeColor: "bg-play-pink/12 text-play-pink",
+                      desc: t('talent_developers.a2r.desc'),
+                      href: "https://a2r.si"
                     }
                   ].map((company, idx) => (
                     <DeveloperCompanyCard company={company} key={idx} />
