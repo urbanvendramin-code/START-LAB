@@ -67,17 +67,18 @@
     ]
   },
   "equipment": {
-    "title": "Laboratory Equipment",
-    "subtitle": "The laboratory is an open, developmental infrastructure, suitable for partners and programs of all levels.",
+    "title": "Science and Technology Center",
+    "intro": "Across 350 m² of modern, fully-equipped spaces, we merge creativity, technology, and practical learning. The Center features:",
     "list": [
-      "3D printers",
-      "Laser cutter",
-      "Workshop with laser cutter, drilling machines, saw, ...",
-      "Electrical engineering laboratory",
-      "10 workstations for courses in electrical engineering, programming, ...",
+      "3D printers for prototype and model fabrication",
+      "Laser cutter for precise material processing",
+      "Technical workshop with drills, saws, and other tools",
+      "Laboratory for electrical engineering and electronics",
+      "10 workstations for programming, electrical engineering, and robotics classes",
       "Lecture hall for 30 people",
-      "Virtual reality with VR goggles and simulators"
+      "VR center with virtual reality goggles and simulators"
     ],
+    "outro": "The Center is dedicated to education, research, prototype development, and exploring modern technologies for all generations.",
     "pro": "10x Pro stations",
     "center": "3D Printing Center"
   },

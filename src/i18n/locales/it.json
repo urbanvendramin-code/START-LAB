@@ -67,17 +67,18 @@
     ]
   },
   "equipment": {
-    "title": "Attrezzatura del Laboratorio",
-    "subtitle": "Il laboratorio è un'infrastruttura di sviluppo aperta, adatta a partner e programmi di tutti i livelli.",
+    "title": "Centro di Scienza e Tecnologia",
+    "intro": "Su 350 m² di spazi moderni e attrezzati, uniamo creatività, tecnologia e apprendimento pratico. Il Centro comprende:",
     "list": [
-      "Stampanti 3D",
-      "Taglierina laser",
-      "Officina con taglierina laser, trapani, sega, ...",
-      "Laboratorio di ingegneria elettrica",
-      "10 postazioni di lavoro per corsi di ingegneria elettrica, programmazione, ...",
+      "Stampanti 3D per la realizzazione di prototipi e modelli",
+      "Taglierina laser per la lavorazione precisa dei materiali",
+      "Officina tecnica con trapani, seghe e altri strumenti",
+      "Laboratorio di ingegneria elettrica ed elettronica",
+      "10 postazioni di lavoro per corsi di programmazione, ingegneria elettrica e robotica",
       "Aula magna per 30 persone",
-      "Realtà virtuale con occhiali VR e simulatori"
+      "Centro VR con occhiali per la realtà virtuale e simulatori"
     ],
+    "outro": "Il Centro è dedicato all'istruzione, alla ricerca, allo sviluppo di prototipi e alla scoperta delle moderne tecnologie per tutte le generazioni.",
     "pro": "10x Stazioni Pro",
     "center": "Centro Stampa 3D"
   },

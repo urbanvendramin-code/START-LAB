@@ -67,17 +67,18 @@
     ]
   },
   "equipment": {
-    "title": "Oprema laboratorija",
-    "subtitle": "Laboratorij je odprta, razvojna infrastruktura, primerna za partnerje in programe vseh stopenj.",
+    "title": "Center znanosti in tehnologije",
+    "intro": "Na 350 m² sodobno opremljenih prostorov združujemo ustvarjalnost, tehnologijo in praktično učenje. Center vključuje:",
     "list": [
-      "3D tiskalniki",
-      "Laserski rezalnik",
-      "Delavnica z laserskim rezalnikom, vrtalnimi stroji, žago, ...",
-      "Laboratorij za elektrotehniko",
-      "10 delovnih postaj za tečaje elektrotehnike, programiranja, ...",
-      "Predavalnica za 30 oseb",
-      "Navidezna resničnost s VR očali in simulatorji"
+      "3D-tiskalnike za izdelavo prototipov in modelov",
+      "Laserski rezalnik za natančno obdelavo materialov",
+      "Tehnično delavnico z vrtalnimi stroji, žagami in drugim orodjem",
+      "Laboratorij za elektrotehniko in elektroniko",
+      "10 delovnih postaj za tečaje programiranja, elektrotehnike in robotike",
+      "Predavalnico za 30 oseb",
+      "VR-center z očali za navidezno resničnost in simulatorji"
     ],
+    "outro": "Center je namenjen izobraževanju, raziskovanju, razvoju prototipov ter spoznavanju sodobnih tehnologij za vse generacije.",
     "pro": "10x Pro postaje",
     "center": "3D Printing Center"
   },

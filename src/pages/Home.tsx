@@ -268,34 +268,48 @@ export default function Home() {
           
           <div className="relative z-10 grid lg:grid-cols-12 gap-12 md:gap-16 items-center text-base">
             <div className="lg:col-span-7">
-              <h2 className="text-3xl md:text-5xl font-display font-black uppercase mb-6 text-slate-950 leading-tight">{t('equipment.title')}</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 mb-8">
+              <h2 className="text-3xl md:text-5xl font-display font-black uppercase mb-4 text-slate-950 leading-tight">
+                {t('equipment.title')}
+              </h2>
+              <p className="text-base text-slate-600 mb-8 font-semibold leading-relaxed">
+                {t('equipment.intro')}
+              </p>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                 {(t('equipment.list', { returnObjects: true }) as string[]).map((tool, i) => (
-                  <div key={i} className="flex items-start gap-3 text-sm text-slate-700 font-semibold">
-                    <CheckCircle2 className="text-play-teal shrink-0 stroke-[3] mt-0.5" size={18} />
-                    <span>{tool}</span>
-                  </div>
+                  <motion.div 
+                    key={i} 
+                    whileHover={{ x: 4, scale: 1.01 }}
+                    className="flex items-start gap-3.5 p-3.5 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-slate-50 hover:border-play-teal/20 transition-all duration-200"
+                  >
+                    <div className="w-8 h-8 rounded-xl bg-play-teal/10 flex items-center justify-center shrink-0 text-play-teal">
+                      <CheckCircle2 className="stroke-[3]" size={16} />
+                    </div>
+                    <span className="text-sm text-slate-800 font-bold leading-snug pt-1.5">{tool}</span>
+                  </motion.div>
                 ))}
               </div>
-              <p className="text-xs text-slate-600 italic font-bold uppercase tracking-wider leading-relaxed bg-slate-50 border-l-4 border-play-pink p-3.5 rounded-r-xl">
-                {t('equipment.subtitle')}
-              </p>
+              
+              <div className="p-5 bg-brand-red/5 border-l-4 border-brand-red rounded-r-2xl text-sm text-slate-700 font-bold leading-relaxed shadow-sm">
+                {t('equipment.outro')}
+              </div>
             </div>
-                       <div className="lg:col-span-5 grid grid-cols-2 gap-4">
-               <motion.div 
-                 whileHover={{ scale: 1.05 }}
-                 className="bg-play-pink/8 border-2 border-play-pink/20 rounded-[2rem] aspect-square flex flex-col items-center justify-center p-6 text-center shadow-[0_6px_0_0_#e11d4812] hover:bg-play-pink/12 transition-all"
-               >
-                  <Cpu className="mb-4 text-play-pink" size={44} />
-                  <div className="text-[11px] font-display font-black text-slate-800 leading-tight uppercase">{t('equipment.pro')}</div>
-               </motion.div>
-               <motion.div 
-                 whileHover={{ scale: 1.05 }}
-                 className="bg-play-blue/8 border-2 border-play-blue/20 rounded-[2rem] aspect-square flex flex-col items-center justify-center p-6 text-center shadow-[0_6px_0_0_#2563eb12] hover:bg-play-blue/12 transition-all"
-               >
-                  <Boxes className="mb-4 text-play-blue" size={44} />
-                  <div className="text-[11px] font-display font-black text-slate-800 leading-tight uppercase">{t('equipment.center')}</div>
-               </motion.div>
+            <div className="lg:col-span-5 w-full flex flex-col justify-center">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="relative rounded-[2.5rem] overflow-hidden border-4 border-slate-950 shadow-[8px_8px_0_0_rgba(15,23,42,0.9)] bg-white group"
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 to-transparent z-10 pointer-events-none" />
+                <img 
+                  src="/src/assets/images/fablab_space_1781078255061.png" 
+                  alt="Center znanosti in tehnologije" 
+                  className="w-full h-auto object-cover aspect-[4/3] group-hover:scale-105 transition-transform duration-500 ease-out"
+                  referrerPolicy="no-referrer"
+                />
+              </motion.div>
             </div>
           </div>
         </div>
