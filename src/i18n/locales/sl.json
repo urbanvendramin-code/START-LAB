@@ -70,10 +70,13 @@
     "title": "Oprema laboratorija",
     "subtitle": "Laboratorij je odprta, razvojna infrastruktura, primerna za partnerje in programe vseh stopenj.",
     "list": [
-      "3D tiskalniki (FDM & SLA)",
+      "3D tiskalniki",
       "Laserski rezalnik",
-      "Elektronske postaje",
-      "VR/AR očala"
+      "Delavnica z laserskim rezalnikom, vrtalnimi stroji, žago, ...",
+      "Laboratorij za elektrotehniko",
+      "10 delovnih postaj za tečaje elektrotehnike, programiranja, ...",
+      "Predavalnica za 30 oseb",
+      "Navidezna resničnost s VR očali in simulatorji"
     ],
     "pro": "10x Pro postaje",
     "center": "3D Printing Center"
@@ -290,6 +293,14 @@
     "siq": {
       "role": "🥈 Srebrni razvijalec talentov – Promotor",
       "desc": "SIQ Ljubljana je mednarodna strokovna, neodvisna, nepristranska in neprofitna institucija, ki nudi celovite storitve certificiranja, kontrole, preskušanja, kalibriranja, validiranja, preverjanja in izobraževanja. Je priglašeni organ za 7 direktiv in 2 uredbi ter akreditiran za več kot 500 standardov. S 184 zaposlenimi in 350 zunanjimi strokovnjaki deluje v različnih industrijah, stranke SIQ pa prihajajo iz več kot 60 držav."
+    },
+    "shelly": {
+      "role": "💎 Platinasti razvijalec talentov – Strateg",
+      "desc": "Shelly Group je eno vodilnih evropskih tehnoloških podjetij na področju interneta stvari (IoT) in pametnega upravljanja energije. S svojimi inovativnimi rešitvami za pametne domove, poslovne objekte in energetsko učinkovitost omogoča digitalno preobrazbo milijonom uporabnikov po vsem svetu. Podjetje je prisotno v več kot 100 državah ter s svojo napredno tehnologijo postavlja nove standarde na področju avtomatizacije, povezljivosti in trajnostnega upravljanja energije."
+    },
+    "gorenje_gsi": {
+      "role": "🥈 Srebrni razvijalec talentov – Promotor",
+      "desc": "Družba Gorenje GSI, d. o. o., del skupine Hisense Europe, na slovenskem trgu upravlja trženje, prodajo in poprodajne storitve za blagovne znamke Gorenje, Hisense in Asko. Podjetje združuje veleprodajo, maloprodajo in servis ter zagotavlja celovite, kakovostne rešitve za dom. S strokovno ekipo gradi dolgoročna partnerstva, krepi uporabniško izkušnjo ter aktivno prispeva k razvoju lokalnega okolja in podpira trajnostne pobude skupnosti."
     }
   },
   "seo": {

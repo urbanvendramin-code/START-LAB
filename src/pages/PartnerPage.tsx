@@ -30,10 +30,12 @@ interface DeveloperCompany {
   name: string;
   role: string;
   image: string;
+  images?: string[];
   bg: string;
   badgeColor: string;
   desc: string;
   href?: string;
+  links?: { label: string; href: string }[];
 }
 
 function MentorCard({ mentor }: { mentor: Mentor; key?: any }) {
@@ -111,8 +113,33 @@ function DeveloperCompanyCard({ company }: { company: DeveloperCompany; key?: an
       whileHover={{ y: -4 }}
       className={`rounded-[2.5rem] border-2 bg-white p-6 md:p-10 transition-all flex flex-col md:flex-row gap-8 items-center md:items-start shadow-[0_12px_24px_rgba(15,23,42,0.02)] hover:shadow-xl hover:border-[#a855f7]/20 ${company.bg}`}
     >
-      <div className="w-32 h-32 md:w-44 md:h-44 shrink-0 rounded-[2rem] overflow-hidden border-4 border-white shadow-md bg-white flex items-center justify-center p-4">
-        {company.href ? (
+      <div className="w-32 h-32 md:w-44 md:h-44 shrink-0 rounded-[2rem] overflow-hidden border-4 border-white shadow-md bg-white flex flex-col items-center justify-center p-4">
+        {company.images && company.images.length > 0 ? (
+          <div className="flex flex-col gap-2.5 w-full h-full justify-center items-center">
+            {company.images.map((img, idx) => {
+              const link = company.links && company.links[idx] ? company.links[idx].href : undefined;
+              return link ? (
+                <a key={idx} href={link} target="_blank" rel="noopener noreferrer" className="w-[85%] h-[40%] flex items-center justify-center">
+                  <img 
+                    src={img} 
+                    alt={`${company.name} logo ${idx + 1}`} 
+                    className="w-full h-full object-contain"
+                    referrerPolicy="no-referrer"
+                  />
+                </a>
+              ) : (
+                <div key={idx} className="w-[85%] h-[40%] flex items-center justify-center">
+                  <img 
+                    src={img} 
+                    alt={`${company.name} logo ${idx + 1}`} 
+                    className="w-full h-full object-contain"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+              );
+            })}
+          </div>
+        ) : company.href ? (
           <a href={company.href} target="_blank" rel="noopener noreferrer" className="w-full h-full flex items-center justify-center">
             <img 
               src={company.image} 
@@ -167,7 +194,20 @@ function DeveloperCompanyCard({ company }: { company: DeveloperCompany; key?: an
             </button>
           )}
 
-          {company.href && (
+          {company.links && company.links.length > 0 ? (
+            company.links.map((linkObj, idx) => (
+              <a
+                key={idx}
+                href={linkObj.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-50 border-2 border-slate-100 text-xs font-display font-black uppercase tracking-widest text-[#a855f7] hover:bg-[#a855f7]/5 hover:border-[#a855f7]/30 transition-all cursor-pointer shadow-sm focus:outline-none animate-fade-in"
+              >
+                <span>{linkObj.label}</span>
+                <ExternalLink size={14} className="stroke-[3.5]" />
+              </a>
+            ))
+          ) : company.href ? (
             <a
               href={company.href}
               target="_blank"
@@ -177,7 +217,7 @@ function DeveloperCompanyCard({ company }: { company: DeveloperCompany; key?: an
               <span>Spletna stran</span>
               <ExternalLink size={14} className="stroke-[3.5]" />
             </a>
-          )}
+          ) : null}
         </div>
       </div>
     </motion.div>
@@ -878,6 +918,31 @@ export default function PartnerPage() {
                       badgeColor: "bg-play-purple/12 text-play-purple",
                       desc: t('talent_developers.siq.desc'),
                       href: "https://www.siq.si/"
+                    },
+                    { 
+                      name: "Shelly Europe Ltd.",
+                      role: t('talent_developers.shelly.role'),
+                      image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781073944/shelly_logo_blue_240x140_1_vglthl.png",
+                      bg: "bg-play-blue/5 border-play-blue/15 hover:border-play-blue/35 text-play-blue hover:scale-[1.01]", 
+                      badgeColor: "bg-play-blue/12 text-play-blue",
+                      desc: t('talent_developers.shelly.desc'),
+                      href: "https://www.shelly.com/"
+                    },
+                    { 
+                      name: "Gorenje GSI, d.o.o.",
+                      role: t('talent_developers.gorenje_gsi.role'),
+                      image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781074497/gorenje_logo_k41vil.png",
+                      images: [
+                        "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781074497/gorenje_logo_k41vil.png",
+                        "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781074484/hisense_logo_positive_meoei1.png"
+                      ],
+                      bg: "bg-play-teal/5 border-play-teal/15 hover:border-play-teal/35 text-play-teal hover:scale-[1.01]", 
+                      badgeColor: "bg-play-teal/12 text-play-teal",
+                      desc: t('talent_developers.gorenje_gsi.desc'),
+                      links: [
+                        { label: "Gorenje", href: "https://si.gorenje.com/" },
+                        { label: "Hisense", href: "https://si.hisense.com/" }
+                      ]
                     }
                   ].map((company, idx) => (
                     <DeveloperCompanyCard company={company} key={idx} />

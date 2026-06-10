@@ -70,10 +70,13 @@
     "title": "Laboratory Equipment",
     "subtitle": "The laboratory is an open, developmental infrastructure, suitable for partners and programs of all levels.",
     "list": [
-      "3D printers (FDM & SLA)",
+      "3D printers",
       "Laser cutter",
-      "Electronic stations",
-      "VR/AR goggles"
+      "Workshop with laser cutter, drilling machines, saw, ...",
+      "Electrical engineering laboratory",
+      "10 workstations for courses in electrical engineering, programming, ...",
+      "Lecture hall for 30 people",
+      "Virtual reality with VR goggles and simulators"
     ],
     "pro": "10x Pro stations",
     "center": "3D Printing Center"
@@ -290,6 +293,14 @@
     "siq": {
       "role": "🥈 Silver Talent Developer – Promoter",
       "desc": "SIQ Ljubljana is an international, professional, independent, impartial, and non-profit institution providing complete solutions in the fields of product testing, certification, metrology, and management systems. It is a notified body for 7 directives and 2 regulations, and accredited for more than 500 standards. With 184 employees and 350 external experts, it operates in various industries, serving clients from more than 60 countries."
+    },
+    "shelly": {
+      "role": "💎 Platinum Talent Developer – Strategist",
+      "desc": "Shelly Group is one of the leading European technology companies in the field of Internet of Things (IoT) and smart energy management. With its innovative solutions for smart homes, commercial buildings, and energy efficiency, it enables digital transformation for millions of users worldwide. Present in over 100 countries, the company sets new standards in automation, connectivity, and sustainable energy management with its advanced technology."
+    },
+    "gorenje_gsi": {
+      "role": "🥈 Silver Talent Developer – Promoter",
+      "desc": "Gorenje GSI, d.o.o., a part of the Hisense Europe group, manages the marketing, sales, and after-sales services for Gorenje, Hisense, and Asko brands on the Slovenian market. The company combines wholesale, retail, and service, providing comprehensive, high-quality solutions for the home. With an expert team, it builds long-term partnerships, enhances user experience, actively contributes to the development of the local environment, and supports sustainable community initiatives."
     }
   },
   "seo": {

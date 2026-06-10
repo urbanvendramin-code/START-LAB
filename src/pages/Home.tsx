@@ -38,16 +38,6 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="lg:col-span-7"
           >
-            {/* Inline hero logo */}
-            <div className="mb-6 md:mb-8 flex justify-start">
-              <img 
-                src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1780639272/LOGO3_oplwfo.png" 
-                alt="Start Lab Logo Accent" 
-                className="h-12 md:h-15 w-auto object-contain"
-                referrerPolicy="no-referrer"
-              />
-            </div>
-
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-display font-black mb-8 leading-[1.05] tracking-tight text-slate-950">
               {t('hero.title_start')} <br />
               <span className="text-brand-red">
@@ -281,8 +271,8 @@ export default function Home() {
               <h2 className="text-3xl md:text-5xl font-display font-black uppercase mb-6 text-slate-950 leading-tight">{t('equipment.title')}</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 mb-8">
                 {(t('equipment.list', { returnObjects: true }) as string[]).map((tool, i) => (
-                  <div key={i} className="flex items-center gap-3 text-sm text-slate-700 font-semibold">
-                    <CheckCircle2 className="text-play-teal shrink-0 stroke-[3]" size={18} />
+                  <div key={i} className="flex items-start gap-3 text-sm text-slate-700 font-semibold">
+                    <CheckCircle2 className="text-play-teal shrink-0 stroke-[3] mt-0.5" size={18} />
                     <span>{tool}</span>
                   </div>
                 ))}

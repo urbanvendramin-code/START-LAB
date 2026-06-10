@@ -26,7 +26,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto min-h-28 md:min-h-36 lg:min-h-24 py-4 md:py-6 lg:py-2 flex items-center justify-between w-full">
         <Link 
           to="/" 
-          className="flex items-center gap-2 h-24 md:h-32 lg:h-[168px] relative group" 
+          className="flex flex-col items-center justify-center gap-1.5 h-24 md:h-32 lg:h-[168px] relative group py-1" 
           onClick={() => {
             setIsOpen(false);
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -35,8 +35,15 @@ export default function Navbar() {
           <div className="absolute inset-0 bg-brand-red/10 rounded-full blur-xl scale-75 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
           <img 
             src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1780041788/start_mesmgf.png" 
+            alt="Start Logo" 
+            className="w-36 md:w-40 lg:w-48 h-auto object-contain relative z-10 opacity-90"
+            referrerPolicy="no-referrer"
+          />
+          <img 
+            src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1780639272/LOGO3_oplwfo.png" 
             alt="Start Lab Logo" 
-            className="h-full w-auto object-contain relative z-10"
+            className="w-52 md:w-56 lg:w-72 h-auto object-contain relative z-10"
+            referrerPolicy="no-referrer"
           />
         </Link>
         

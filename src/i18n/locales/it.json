@@ -70,10 +70,13 @@
     "title": "Attrezzatura del Laboratorio",
     "subtitle": "Il laboratorio è un'infrastruttura di sviluppo aperta, adatta a partner e programmi di tutti i livelli.",
     "list": [
-      "Stampanti 3D (FDM e SLA)",
+      "Stampanti 3D",
       "Taglierina laser",
-      "Stazioni elettroniche",
-      "Occhiali VR/AR"
+      "Officina con taglierina laser, trapani, sega, ...",
+      "Laboratorio di ingegneria elettrica",
+      "10 postazioni di lavoro per corsi di ingegneria elettrica, programmazione, ...",
+      "Aula magna per 30 persone",
+      "Realtà virtuale con occhiali VR e simulatori"
     ],
     "pro": "10x Stazioni Pro",
     "center": "Centro Stampa 3D"
@@ -290,6 +293,14 @@
     "siq": {
       "role": "🥈 Sviluppatore di Talenti Argento – Promotore",
       "desc": "SIQ Ljubljana è un'istituzione internazionale, professionale, indipendente, imparziale e senza scopo di lucro che offre servizi completi nei settori del collaudo dei prodotti, della certificazione, della metrologia e dei sistemi di gestione. È un organismo notificato per 7 direttive e 2 regolamenti e accreditato per oltre 500 standard. Con 184 dipendenti e 350 esperti esterni, opera in vari settori, servendo clienti provenienti da più di 60 paesi."
+    },
+    "shelly": {
+      "role": "💎 Sviluppatore di Talenti Platino – Stratega",
+      "desc": "Shelly Group è una delle aziende tecnologiche leader in Europa nel settore dell'Internet delle Cose (IoT) e della gestione intelligente dell'energia. Con le sue soluzioni innovative per case intelligenti, edifici commerciali ed efficienza energetica, consente la trasformazione digitale a milioni di utenti in tutto il mondo. Presente in oltre 100 paesi, l'azienda definisce nuovi standard nei settori dell'automazione, della connettività e della gestione energetica sostenibile grazie alla sua tecnologia all'avanguardia."
+    },
+    "gorenje_gsi": {
+      "role": "🥈 Sviluppatore di Talenti Argento – Promotore",
+      "desc": "Gorenje GSI, d.o.o., parte del gruppo Hisense Europe, gestisce le attività di marketing, vendita e servizi post-vendita per i marchi Gorenje, Hisense e Asko sul mercato sloveno. L'azienda unisce ingrosso, dettaglio e assistenza, fornendo soluzioni complete e di alta qualità per la casa. Con un team di esperti, costruisce partnership a lungo termine, migliora l'esperienza dell'utente, contribuisce attivamente allo sviluppo dell'ambiente locale e sostiene iniziative comunitarie sostenibili."
     }
   },
   "seo": {
