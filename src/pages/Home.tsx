@@ -13,6 +13,7 @@ import {
   ArrowRight
 } from 'lucide-react';
 import { LAB_EQUIPMENT } from '../constants';
+import fablabSpaceImage from '../assets/images/fablab_space_1781078255061.png';
 
 export default function Home() {
   const { t } = useTranslation();
@@ -304,7 +305,7 @@ export default function Home() {
               >
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 to-transparent z-10 pointer-events-none" />
                 <img 
-                  src="/src/assets/images/fablab_space_1781078255061.png" 
+                  src={fablabSpaceImage} 
                   alt="Center znanosti in tehnologije" 
                   className="w-full h-auto object-cover aspect-[4/3] group-hover:scale-105 transition-transform duration-500 ease-out"
                   referrerPolicy="no-referrer"
