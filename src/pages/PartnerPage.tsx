@@ -1250,6 +1250,7 @@ export default function PartnerPage() {
                     { 
                       name: "Nik Tominec",
                       role: t('mentors.nik.role'),
+                      image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781182489/unnamed_fh0rtt.jpg",
                       bg: "bg-play-yellow/5 border-play-yellow/15 hover:border-play-yellow/35 text-play-yellow hover:scale-[1.01]", 
                       badgeColor: "bg-play-yellow/12 text-play-yellow",
                       desc: t('mentors.nik.desc') 
