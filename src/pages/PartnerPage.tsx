@@ -20,7 +20,7 @@ import {
 interface Mentor {
   name: string;
   role: string;
-  image: string;
+  image?: string;
   bg: string;
   badgeColor: string;
   desc: string;
@@ -52,13 +52,19 @@ function MentorCard({ mentor }: { mentor: Mentor; key?: any }) {
       whileHover={{ y: -4 }}
       className={`rounded-[2.5rem] border-2 bg-white p-6 md:p-10 transition-all flex flex-col md:flex-row gap-8 items-center md:items-start shadow-[0_12px_24px_rgba(15,23,42,0.02)] hover:shadow-xl hover:border-[#00a896]/20 ${mentor.bg}`}
     >
-      <div className="w-32 h-32 md:w-44 md:h-44 shrink-0 rounded-[2rem] overflow-hidden border-4 border-white shadow-md bg-slate-50 flex items-center justify-center p-4">
-        <img 
-          src={mentor.image} 
-          alt={mentor.name} 
-          className="w-full h-full object-cover rounded-[2rem]"
-          referrerPolicy="no-referrer"
-        />
+      <div className="w-32 h-32 md:w-44 md:h-44 shrink-0 rounded-[2rem] overflow-hidden border-4 border-white shadow-md bg-slate-50 flex items-center justify-center">
+        {mentor.image ? (
+          <img 
+            src={mentor.image} 
+            alt={mentor.name} 
+            className="w-full h-full object-cover rounded-[2rem]"
+            referrerPolicy="no-referrer"
+          />
+        ) : (
+          <div className="w-full h-full bg-gradient-to-tr from-play-pink/20 to-play-purple/20 flex items-center justify-center text-play-pink font-display font-black text-3xl md:text-5xl select-none">
+            {mentor.name.split(' ').map(n => n[0]).join('')}
+          </div>
+        )}
       </div>
       <div className="flex-1 w-full text-left">
         <div className="flex flex-wrap items-center gap-3 mb-4">
@@ -1240,6 +1246,13 @@ export default function PartnerPage() {
                       bg: "bg-play-pink/5 border-play-pink/15 hover:border-play-pink/35 text-play-pink hover:scale-[1.01]", 
                       badgeColor: "bg-play-pink/12 text-play-pink",
                       desc: t('mentors.egon.desc') 
+                    },
+                    { 
+                      name: "Nik Tominec",
+                      role: t('mentors.nik.role'),
+                      bg: "bg-play-yellow/5 border-play-yellow/15 hover:border-play-yellow/35 text-play-yellow hover:scale-[1.01]", 
+                      badgeColor: "bg-play-yellow/12 text-play-yellow",
+                      desc: t('mentors.nik.desc') 
                     }
                   ].map((mentor, idx) => (
                     <MentorCard mentor={mentor} key={idx} />
