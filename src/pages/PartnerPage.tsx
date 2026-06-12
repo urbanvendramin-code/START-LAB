@@ -1224,6 +1224,14 @@ export default function PartnerPage() {
               <div className="grid grid-cols-1 gap-12 max-w-4xl mx-auto text-left">
                   {[
                     { 
+                      name: "Uroš Polanc",
+                      role: t('mentors.uros.role'),
+                      image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1780571436/1563522851336_jmb4il.jpg",
+                      bg: "bg-play-teal/5 border-play-teal/15 hover:border-play-teal/35 text-play-teal hover:scale-[1.01]", 
+                      badgeColor: "bg-play-teal/12 text-play-teal",
+                      desc: t('mentors.uros.desc') 
+                    },
+                    { 
                       name: "dr. Egon Pavlica",
                       role: t('mentors.egon.role'),
                       image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781090371/image_1_gdzusa.png",
@@ -1254,14 +1262,6 @@ export default function PartnerPage() {
                       bg: "bg-play-yellow/5 border-play-yellow/15 hover:border-play-yellow/35 text-play-yellow hover:scale-[1.01]", 
                       badgeColor: "bg-play-yellow/12 text-play-yellow",
                       desc: t('mentors.nik.desc') 
-                    },
-                    { 
-                      name: "Uroš Polanc",
-                      role: t('mentors.uros.role'),
-                      image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1780571436/1563522851336_jmb4il.jpg",
-                      bg: "bg-play-teal/5 border-play-teal/15 hover:border-play-teal/35 text-play-teal hover:scale-[1.01]", 
-                      badgeColor: "bg-play-teal/12 text-play-teal",
-                      desc: t('mentors.uros.desc') 
                     }
                   ].map((mentor, idx) => (
                     <MentorCard mentor={mentor} key={idx} />
