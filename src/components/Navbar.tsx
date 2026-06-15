@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { Menu, X, Globe } from 'lucide-react';
+import { Menu, X, Globe, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { useTranslation } from 'react-i18next';
+import NewsletterModal from './NewsletterModal';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
   const { t, i18n } = useTranslation();
 
   const navLinks = [
@@ -93,6 +95,15 @@ export default function Navbar() {
                  </button>
                ))}
             </div>
+
+            {/* Newsletter CTA Button */}
+            <button
+              onClick={() => setIsNewsletterOpen(true)}
+              className="bg-brand-red hover:bg-brand-red/90 text-white text-xs font-black uppercase tracking-wider px-5 py-3 rounded-2xl transition-all shadow-[0_4px_0_0_rgba(222,59,59,0.25)] hover:scale-[1.02] active:scale-[0.98] cursor-pointer inline-flex items-center gap-2"
+            >
+              <Mail size={14} className="stroke-[2.5]" />
+              <span>{t('nav.newsletter_btn')}</span>
+            </button>
           </div>
    
           {/* Mobile Menu Toggle */}
@@ -147,6 +158,16 @@ export default function Navbar() {
                 </button>
               ))}
             </div>
+            <button
+              onClick={() => {
+                setIsOpen(false);
+                setIsNewsletterOpen(true);
+              }}
+              className="bg-play-pink hover:bg-play-pink/90 text-white font-display font-bold text-center uppercase tracking-wider py-4 rounded-2xl transition-all shadow-[0_4px_0_0_rgba(236,72,153,0.15)] flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <Mail size={16} className="stroke-[2.5]" />
+              <span>{t('nav.newsletter_btn')}</span>
+            </button>
             <Link 
               to="/delavnice" 
               className="bg-brand-red hover:bg-brand-red/90 text-white font-display font-bold text-center uppercase tracking-wider py-4 rounded-2xl transition-all shadow-[0_4px_0_0_rgba(222,59,59,0.2)]"
@@ -155,6 +176,16 @@ export default function Navbar() {
               {t('nav.delavnice')}
             </Link>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Newsletter signup modal Dialog */}
+      <AnimatePresence>
+        {isNewsletterOpen && (
+          <NewsletterModal 
+            isOpen={isNewsletterOpen} 
+            onClose={() => setIsNewsletterOpen(false)} 
+          />
         )}
       </AnimatePresence>
     </nav>

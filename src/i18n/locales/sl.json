@@ -6,7 +6,19 @@
     "delavnice": "Delavnice",
     "koledar": "Koledar",
     "partner": "Skupnost START LAB",
-    "kontakt": "Kontakt"
+    "kontakt": "Kontakt",
+    "newsletter_btn": "Bodi na tekočem"
+  },
+  "newsletter": {
+    "title": "Bodi na tekočem",
+    "subtitle": "Vpiši svoj e-poštni naslov, da boš prejemal vse novosti, napovedi in novice o Start Labu.",
+    "email_placeholder": "Vpiši svojo e-pošto...",
+    "subscribe_btn": "Naroči se",
+    "subscribing": "Prijava...",
+    "success_title": "Hvala za prijavo!",
+    "success_desc": "Uspešno si se naročil na novice Start Lab. Kmalu ti pošljemo kaj zanimivega!",
+    "error_desc": "Prišlo je do napake pri prijavi. Poskusi znova.",
+    "close_btn": "Zapri"
   },
   "hero": {
     "badge": "Goriška potrebuje Start Lab",

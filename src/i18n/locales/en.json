@@ -6,7 +6,19 @@
     "delavnice": "Workshops",
     "koledar": "Calendar",
     "partner": "START LAB Community",
-    "kontakt": "Contact"
+    "kontakt": "Contact",
+    "newsletter_btn": "Stay Tuned"
+  },
+  "newsletter": {
+    "title": "Stay Tuned",
+    "subtitle": "Enter your email address to receive all the latest news, announcements, and updates about Start Lab.",
+    "email_placeholder": "Enter your email...",
+    "subscribe_btn": "Subscribe",
+    "subscribing": "Subscribing...",
+    "success_title": "Thank you for subscribing!",
+    "success_desc": "You have successfully subscribed to the Start Lab newsletter. We will send you updates soon!",
+    "error_desc": "An error occurred. Please try again.",
+    "close_btn": "Close"
   },
   "hero": {
     "badge": "Goriška needs Start Lab",

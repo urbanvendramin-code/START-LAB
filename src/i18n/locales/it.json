@@ -6,7 +6,19 @@
     "delavnice": "Workshop",
     "koledar": "Calendario",
     "partner": "Comunità START LAB",
-    "kontakt": "Contatto"
+    "kontakt": "Contatto",
+    "newsletter_btn": "Rimani aggiornato"
+  },
+  "newsletter": {
+    "title": "Rimani aggiornato",
+    "subtitle": "Inserisci il tuo indirizzo e-mail per ricevere tutte le ultime novità, annunci e aggiornamenti su Start Lab.",
+    "email_placeholder": "Inserisci la tua e-mail...",
+    "subscribe_btn": "Iscriviti",
+    "subscribing": "Iscrizione...",
+    "success_title": "Grazie per l'iscrizione!",
+    "success_desc": "Ti sei iscritto con successo alla newsletter dello Start Lab. Ti invieremo presto aggiornamenti!",
+    "error_desc": "Si è verificato un errore. Per favore riprova.",
+    "close_btn": "Chiudi"
   },
   "hero": {
     "badge": "Goriška ha bisogno dello Start Lab",

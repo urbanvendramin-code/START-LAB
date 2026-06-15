@@ -254,6 +254,19 @@ async function startServer() {
     res.json({ success: result.success, error: result.error });
   });
 
+  // API Call matching: Newsletter subscription
+  app.post("/api/newsletter/subscribe", async (req, res) => {
+    const { email } = req.body;
+    const subject = `Nova naročnina na novice - Start Lab`;
+    const html = `
+      <h3>Prijava na novice: Bodi na tekočem</h3>
+      <p>Prejeta je bila nova prijava na e-novosti Start Lab.</p>
+      <p><strong>E-pošta:</strong> ${email}</p>
+    `;
+    const result = await sendEmail(subject, html, email, "Naročnik na novice");
+    res.json({ success: result.success, error: result.error });
+  });
+
   // Serve with Vite in dev, static built assets in production
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
