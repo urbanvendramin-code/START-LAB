@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -10,13 +10,29 @@ import {
   Settings,
   Cpu,
   Boxes,
-  ArrowRight
+  ArrowRight,
+  Info
 } from 'lucide-react';
 import { LAB_EQUIPMENT } from '../constants';
 import fablabSpaceImage from '../assets/images/fablab_space_1781078255061.png';
 
+const ROOMS = [
+  { id: 1, key: 'r1', x: 19.8, y: 15.3, color: 'bg-rose-500', ringColor: 'ring-rose-400' },
+  { id: 2, key: 'r2', x: 25.4, y: 40.2, color: 'bg-emerald-500', ringColor: 'ring-emerald-400' },
+  { id: 3, key: 'r3', x: 44.4, y: 27.5, color: 'bg-blue-500', ringColor: 'ring-blue-400' },
+  { id: 4, key: 'r4', x: 42.7, y: 12.0, color: 'bg-purple-500', ringColor: 'ring-purple-400' },
+  { id: 5, key: 'r5', x: 74.6, y: 12.3, color: 'bg-amber-500', ringColor: 'ring-amber-400' },
+  { id: 6, key: 'r6', x: 61.8, y: 32.7, color: 'bg-indigo-500', ringColor: 'ring-indigo-400' },
+  { id: 7, key: 'r7', x: 79.8, y: 46.9, color: 'bg-orange-500', ringColor: 'ring-orange-400' },
+  { id: 8, key: 'r8', x: 69.1, y: 69.8, color: 'bg-teal-500', ringColor: 'ring-teal-400' },
+  { id: 9, key: 'r9', x: 38.3, y: 65.3, color: 'bg-cyan-500', ringColor: 'ring-cyan-400' },
+  { id: 10, key: 'r10', x: 49.8, y: 65.3, color: 'bg-violet-500', ringColor: 'ring-violet-400' },
+  { id: 11, key: 'r11', x: 14.5, y: 70.4, color: 'bg-fuchsia-500', ringColor: 'ring-fuchsia-400' },
+];
+
 export default function Home() {
   const { t } = useTranslation();
+  const [selectedRoom, setSelectedRoom] = useState<number | null>(1);
 
   return (
     <>
@@ -268,7 +284,7 @@ export default function Home() {
           </div>
           
           <div className="relative z-10 grid lg:grid-cols-12 gap-12 md:gap-16 items-center text-base">
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-6">
               <h2 className="text-3xl md:text-5xl font-display font-black uppercase mb-4 text-slate-950 leading-tight">
                 {t('equipment.title')}
               </h2>
@@ -295,21 +311,67 @@ export default function Home() {
                 {t('equipment.outro')}
               </div>
             </div>
-            <div className="lg:col-span-5 w-full flex flex-col justify-center">
+            
+            <div className="lg:col-span-6 w-full flex flex-col justify-center">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="relative rounded-[2.5rem] overflow-hidden border-4 border-slate-950 shadow-[8px_8px_0_0_rgba(15,23,42,0.9)] bg-white group"
+                className="relative rounded-[2.5rem] overflow-hidden border-4 border-slate-950 shadow-[8px_8px_0_0_rgba(15,23,42,0.9)] bg-white flex flex-col"
               >
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 to-transparent z-10 pointer-events-none" />
-                <img 
-                  src={fablabSpaceImage} 
-                  alt="Center znanosti in tehnologije" 
-                  className="w-full h-auto object-cover aspect-[4/3] group-hover:scale-105 transition-transform duration-500 ease-out"
-                  referrerPolicy="no-referrer"
-                />
+                {/* Interactive Map Wrapper */}
+                <div className="relative w-full aspect-[4/3] bg-slate-100 overflow-hidden select-none">
+                  <img 
+                    src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1781530014/ChatGPT_Image_15._jun._2026_13_30_20_cmqupt.png" 
+                    alt="Interaktivni tloris Centra znanosti in tehnologije" 
+                    className="absolute inset-0 w-full h-full object-cover animate-fade-in"
+                    referrerPolicy="no-referrer"
+                  />
+                  
+                  {/* Interactive Hotspots Overlay */}
+                  <div className="absolute inset-0 z-10">
+                    {ROOMS.map((room) => {
+                      const isActive = selectedRoom === room.id;
+                      return (
+                        <button
+                          key={room.id}
+                          type="button"
+                          onClick={() => setSelectedRoom(room.id)}
+                          style={{ left: `${room.x}%`, top: `${room.y}%` }}
+                          className="absolute -translate-x-1/2 -translate-y-1/2 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-all duration-300 group z-20 focus:outline-none cursor-pointer"
+                          title={t(`equipment.rooms.${room.key}`)}
+                        >
+                          {/* Inner pulse effect */}
+                          <span className={`absolute inset-0 rounded-full animate-ping opacity-75 ${room.color} duration-1000`} />
+                          
+                          {/* Ring Border & Solid Dot */}
+                          <span className={`absolute inset-0 rounded-full border-[2px] border-white shadow-[0_2px_8px_rgba(0,0,0,0.3)] transition-all duration-300 ${isActive ? `${room.color} scale-125` : 'bg-slate-950/70 group-hover:bg-slate-950 group-hover:scale-110 scale-100'}`}>
+                            {/* Visual representation of number inside */}
+                            <span className="absolute inset-0 flex items-center justify-center text-[10px] font-black font-mono text-white">
+                              {room.id}
+                            </span>
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Selected Room Metadata Panel */}
+                <div className="p-6 bg-slate-950 text-white border-t-2 border-slate-930 flex items-center gap-4 text-left">
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-display font-black text-white shrink-0 shadow-inner transition-colors duration-300 ${selectedRoom ? ROOMS.find(r => r.id === selectedRoom)?.color : 'bg-white/10'}`}>
+                    {selectedRoom ? selectedRoom : <Info className="text-slate-400" />}
+                  </div>
+                  <div>
+                    <h4 className="text-[10px] font-display font-black uppercase tracking-widest text-slate-400">
+                      {selectedRoom ? t('equipment.rooms.selected_room_title') : t('equipment.rooms.interactive_hint')}
+                    </h4>
+                    <p className="text-sm sm:text-base font-display font-black uppercase text-white leading-tight mt-0.5">
+                      {selectedRoom ? t(`equipment.rooms.r${selectedRoom}`) : t('equipment.rooms.interactive_hint')}
+                    </p>
+                  </div>
+                </div>
               </motion.div>
             </div>
           </div>

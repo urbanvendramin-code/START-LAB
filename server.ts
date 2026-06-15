@@ -192,17 +192,17 @@ async function startServer() {
 
   // API Call matching: Partner Form
   app.post("/api/contact/partner", async (req, res) => {
-    const { company, email, coopType, message } = req.body;
+    const { company, name, email, message } = req.body;
     const subject = `Start Lab Partnerstvo - ${company}`;
     const html = `
       <h3>Spletni obrazec: Partnerstvo</h3>
-      <p><strong>Organizacija:</strong> ${company}</p>
+      <p><strong>Ime organizacije:</strong> ${company}</p>
+      <p><strong>Ime in priimek:</strong> ${name}</p>
       <p><strong>E-pošta:</strong> ${email}</p>
-      <p><strong>Izbira sodelovanja:</strong> ${coopType}</p>
       <p><strong>Sporočilo:</strong></p>
       <p style="white-space: pre-wrap;">${message || '/'}</p>
     `;
-    const result = await sendEmail(subject, html, email, company);
+    const result = await sendEmail(subject, html, email, name || company);
     res.json({ success: result.success, error: result.error });
   });
 

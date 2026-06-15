@@ -80,7 +80,22 @@
     ],
     "outro": "The Center is dedicated to education, research, prototype development, and exploring modern technologies for all generations.",
     "pro": "10x Pro stations",
-    "center": "3D Printing Center"
+    "center": "3D Printing Center",
+    "rooms": {
+      "r1": "Workshop",
+      "r2": "Course area",
+      "r3": "Virtual reality (VR) area",
+      "r4": "Exhibition area of local patents and innovations",
+      "r5": "Exhibition space of local companies (panels on the staircase)",
+      "r6": "Physics experiments",
+      "r7": "Lecture and socializing area",
+      "r8": "Safe and fun driving simulator – cars",
+      "r9": "3D printing area",
+      "r10": "Electronics laboratory",
+      "r11": "Kitchen",
+      "interactive_hint": "Click on the numbers on the floor plan to inspect each room!",
+      "selected_room_title": "Room"
+    }
   },
   "projects": {
     "title": "Our Projects",
@@ -227,7 +242,8 @@
     "goal_subtitle": "To create an environment where talent stays at home.",
     "quote": "\"If we want talent to stay in Goriška, we must together create an environment today where it can arise.\"",
     "form_title": "Let's Collaborate",
-    "company_label": "Name and Surname / Company",
+    "org_label": "Organization Name",
+    "name_label": "Full Name",
     "coop_type": {
       "label": "Collaboration Type",
       "placeholder": "..."

@@ -80,7 +80,22 @@
     ],
     "outro": "Center je namenjen izobraževanju, raziskovanju, razvoju prototipov ter spoznavanju sodobnih tehnologij za vse generacije.",
     "pro": "10x Pro postaje",
-    "center": "3D Printing Center"
+    "center": "3D Printing Center",
+    "rooms": {
+      "r1": "Delavnica",
+      "r2": "Prostor za tečaje",
+      "r3": "Prostor za navidezno resničnost (VR)",
+      "r4": "Razstavni prostor lokalnih patentov in inovacij",
+      "r5": "Razstavni prostor lokalnih podjetij (panoji na stopnišču)",
+      "r6": "Fizikalni poizkusi",
+      "r7": "Prostor za predavanja in druženje",
+      "r8": "Simulator varne in zabavne vožnje – avtomobili",
+      "r9": "Prostor za 3D tisk",
+      "r10": "Elektro laboratorij",
+      "r11": "Kuhinja",
+      "interactive_hint": "Klikni na številko na tlorisu za ogled prostora!",
+      "selected_room_title": "Prostor"
+    }
   },
   "projects": {
     "title": "Naši projekti",
@@ -227,7 +242,8 @@
     "goal_subtitle": "Ustvariti okolje, kjer talenti ostanejo doma.",
     "quote": "\"Če želimo, da talent ostane na Goriškem, moramo danes skupaj ustvariti okolje, kjer lahko nastane.\"",
     "form_title": "Sodelujmo",
-    "company_label": "Ime in priimek / Podjetje",
+    "org_label": "Ime organizacije",
+    "name_label": "Ime in priimek",
     "coop_type": {
       "label": "Tip sodelovanja",
       "placeholder": "..."

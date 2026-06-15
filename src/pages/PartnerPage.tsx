@@ -257,8 +257,8 @@ export default function PartnerPage() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const [company, setCompany] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [coopType, setCoopType] = useState('');
   const [message, setMessage] = useState('');
 
   // Developer Form State
@@ -286,7 +286,7 @@ export default function PartnerPage() {
       const res = await fetch('/api/contact/partner', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ company, email, coopType, message })
+        body: JSON.stringify({ company, name, email, message })
       });
 
       if (!res.ok) {
@@ -303,8 +303,8 @@ export default function PartnerPage() {
       if (data.success) {
         setStatus('success');
         setCompany('');
+        setName('');
         setEmail('');
-        setCoopType('');
         setMessage('');
       } else {
         setStatus('error');
@@ -314,8 +314,8 @@ export default function PartnerPage() {
       console.warn("Express backend API partner contact form failed, falling back to client-side successful simulation:", err);
       setStatus('success');
       setCompany('');
+      setName('');
       setEmail('');
-      setCoopType('');
       setMessage('');
     }
   };
@@ -644,13 +644,25 @@ export default function PartnerPage() {
                 <form className="space-y-4" onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 gap-4">
                     <div className="space-y-2">
-                      <label className="text-xs font-display font-black uppercase text-slate-500">{t('partner_page.company_label')}</label>
+                      <label className="text-xs font-display font-black uppercase text-slate-500">{t('partner_page.org_label')}</label>
                       <input 
                         required 
                         type="text" 
                         value={company}
                         disabled={status === 'loading'}
                         onChange={(e) => setCompany(e.target.value)}
+                        className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium disabled:opacity-50" 
+                        placeholder="..." 
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-xs font-display font-black uppercase text-slate-500">{t('partner_page.name_label')}</label>
+                      <input 
+                        required 
+                        type="text" 
+                        value={name}
+                        disabled={status === 'loading'}
+                        onChange={(e) => setName(e.target.value)}
                         className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium disabled:opacity-50" 
                         placeholder="..." 
                       />
@@ -667,19 +679,6 @@ export default function PartnerPage() {
                         placeholder="..." 
                       />
                     </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-xs font-display font-black uppercase text-slate-500">{t('partner_page.coop_type.label')}</label>
-                    <input 
-                      required 
-                      type="text"
-                      value={coopType}
-                      disabled={status === 'loading'}
-                      onChange={(e) => setCoopType(e.target.value)}
-                      placeholder={t('partner_page.coop_type.placeholder')}
-                      className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium disabled:opacity-50" 
-                    />
                   </div>
 
                   <div className="space-y-2">

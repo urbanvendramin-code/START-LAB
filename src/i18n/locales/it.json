@@ -80,7 +80,22 @@
     ],
     "outro": "Il Centro è dedicato all'istruzione, alla ricerca, allo sviluppo di prototipi e alla scoperta delle moderne tecnologie per tutte le generazioni.",
     "pro": "10x Stazioni Pro",
-    "center": "Centro Stampa 3D"
+    "center": "Centro Stampa 3D",
+    "rooms": {
+      "r1": "Officina",
+      "r2": "Area corsi",
+      "r3": "Area realtà virtuale (VR)",
+      "r4": "Area espositiva brevetti e innovazioni locali",
+      "r5": "Spazio espositivo aziende locali (pannelli sulle scale)",
+      "r6": "Esperimenti di fisica",
+      "r7": "Area conferenze e socializzazione",
+      "r8": "Simulatore di guida sicura e divertente – automobili",
+      "r9": "Area stampa 3D",
+      "r10": "Laboratorio di elettronica",
+      "r11": "Cucina",
+      "interactive_hint": "Fai clic sul numero sulla planimetria per vedere la camera!",
+      "selected_room_title": "Spazio"
+    }
   },
   "projects": {
     "title": "I Nostri Progetti",
@@ -227,7 +242,8 @@
     "goal_subtitle": "Creare un ambiente in cui il talento rimanga a casa.",
     "quote": "\"Se vogliamo che il talento rimanga nella Goriška, dobbiamo creare oggi insieme un ambiente in cui possa nascere.\"",
     "form_title": "Collaboriamo",
-    "company_label": "Nome e Cognome / Azienda",
+    "org_label": "Nome dell'organizzazione",
+    "name_label": "Nome e Cognome",
     "coop_type": {
       "label": "Tipo di Collaborazione",
       "placeholder": "..."
