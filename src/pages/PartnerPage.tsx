@@ -958,6 +958,18 @@ export default function PartnerPage() {
                       badgeColor: "bg-play-pink/12 text-play-pink",
                       desc: t('talent_developers.a2r.desc'),
                       href: "https://a2r.si"
+                    },
+                    { 
+                      name: "Amiteh, merilni sistemi, d.o.o.",
+                      role: t('talent_developers.amiteh.role'),
+                      image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781532221/AMITEH-RIgol_15_LET_qzngpj.png",
+                      bg: "bg-play-yellow/5 border-play-yellow/15 hover:border-play-yellow/35 text-play-yellow hover:scale-[1.01]", 
+                      badgeColor: "bg-play-yellow/12 text-play-yellow",
+                      desc: t('talent_developers.amiteh.desc'),
+                      links: [
+                        { label: "Amiteh", href: "http://www.amiteh.com/" },
+                        { label: "Rigol", href: "http://www.rigol.si/" }
+                      ]
                     }
                   ].map((company, idx) => (
                     <DeveloperCompanyCard company={company} key={idx} />
