@@ -208,13 +208,14 @@ async function startServer() {
 
   // API Call matching: Developer Form
   app.post("/api/contact/developer", async (req, res) => {
-    const { devName, devEmail, devExpertise, devMessage } = req.body;
-    const subject = `Start Lab Razvijalec Talentov - ${devName}`;
+    const { devCompany, devName, devEmail, devExpertise, devMessage } = req.body;
+    const subject = `Start Lab Razvijalec Talentov - ${devName}${devCompany ? ` (${devCompany})` : ''}`;
     const html = `
       <h3>Spletni obrazec: Razvijalec Talentov</h3>
+      ${devCompany ? `<p><strong>Podjetje:</strong> ${devCompany}</p>` : ''}
       <p><strong>Ime in priimek:</strong> ${devName}</p>
       <p><strong>E-pošta:</strong> ${devEmail}</p>
-      <p><strong>Strokovno področje:</strong> ${devExpertise}</p>
+      ${devExpertise ? `<p><strong>Izbira/Strokovnost:</strong> ${devExpertise}</p>` : ''}
       <p><strong>Sporočilo:</strong></p>
       <p style="white-space: pre-wrap;">${devMessage || '/'}</p>
     `;

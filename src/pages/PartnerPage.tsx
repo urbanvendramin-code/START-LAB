@@ -264,6 +264,7 @@ export default function PartnerPage() {
   // Developer Form State
   const [devStatus, setDevStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [devErrorMessage, setDevErrorMessage] = useState('');
+  const [devCompany, setDevCompany] = useState('');
   const [devName, setDevName] = useState('');
   const [devEmail, setDevEmail] = useState('');
   const [devExpertise, setDevExpertise] = useState('');
@@ -327,7 +328,7 @@ export default function PartnerPage() {
       const res = await fetch('/api/contact/developer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ devName, devEmail, devExpertise, devMessage })
+        body: JSON.stringify({ devCompany, devName, devEmail, devExpertise, devMessage })
       });
 
       if (!res.ok) {
@@ -343,6 +344,7 @@ export default function PartnerPage() {
       const data = await res.json();
       if (data.success) {
         setDevStatus('success');
+        setDevCompany('');
         setDevName('');
         setDevEmail('');
         setDevExpertise('');
@@ -354,6 +356,7 @@ export default function PartnerPage() {
     } catch (err: any) {
       console.warn("Express backend API developer contact form failed, falling back to client-side successful simulation:", err);
       setDevStatus('success');
+      setDevCompany('');
       setDevName('');
       setDevEmail('');
       setDevExpertise('');
@@ -818,6 +821,18 @@ export default function PartnerPage() {
                 <form className="space-y-4" onSubmit={handleDevSubmit}>
                   <div className="grid grid-cols-1 gap-4">
                     <div className="space-y-2">
+                      <label className="text-xs font-display font-black uppercase text-slate-500">{t('partner_page.devs_company_label')}</label>
+                      <input 
+                        required 
+                        type="text" 
+                        value={devCompany}
+                        disabled={devStatus === 'loading'}
+                        onChange={(e) => setDevCompany(e.target.value)}
+                        className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium disabled:opacity-50" 
+                        placeholder="..." 
+                      />
+                    </div>
+                    <div className="space-y-2">
                       <label className="text-xs font-display font-black uppercase text-slate-500">{t('partner_page.devs_name_label')}</label>
                       <input 
                         required 
@@ -840,29 +855,6 @@ export default function PartnerPage() {
                         className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium disabled:opacity-50" 
                         placeholder="..." 
                       />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-xs font-display font-black uppercase text-slate-500">{t('partner_page.devs_expertise_label')}</label>
-                    <div className="relative">
-                      <select 
-                        required 
-                        value={devExpertise}
-                        disabled={devStatus === 'loading'}
-                        onChange={(e) => setDevExpertise(e.target.value)}
-                        className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 pr-10 outline-none focus:border-brand-red text-sm text-slate-800 font-medium appearance-none cursor-pointer disabled:opacity-50"
-                      >
-                        <option value="" disabled>{t('partner_page.devs_tiers.level_placeholder')}</option>
-                        <option value="Bronze">{t('partner_page.devs_tiers.level_bronze')}</option>
-                        <option value="Silver">{t('partner_page.devs_tiers.level_silver')}</option>
-                        <option value="Gold">{t('partner_page.devs_tiers.level_gold')}</option>
-                        <option value="Platinum">{t('partner_page.devs_tiers.level_platinum')}</option>
-                        <option value="Diamond">{t('partner_page.devs_tiers.level_diamond')}</option>
-                      </select>
-                      <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-400">
-                        <ChevronDown size={18} />
-                      </div>
                     </div>
                   </div>
 
