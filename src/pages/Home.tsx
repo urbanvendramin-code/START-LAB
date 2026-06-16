@@ -292,19 +292,34 @@ export default function Home() {
                 {t('equipment.intro')}
               </p>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                {(t('equipment.list', { returnObjects: true }) as string[]).map((tool, i) => (
-                  <motion.div 
-                    key={i} 
-                    whileHover={{ x: 4, scale: 1.01 }}
-                    className="flex items-start gap-3.5 p-3.5 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-slate-50 hover:border-play-teal/20 transition-all duration-200"
-                  >
-                    <div className="w-8 h-8 rounded-xl bg-play-teal/10 flex items-center justify-center shrink-0 text-play-teal">
-                      <CheckCircle2 className="stroke-[3]" size={16} />
-                    </div>
-                    <span className="text-sm text-slate-800 font-bold leading-snug pt-1.5">{tool}</span>
-                  </motion.div>
-                ))}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+                {ROOMS.map((room) => {
+                  const isSelected = selectedRoom === room.id;
+                  return (
+                    <motion.button 
+                      key={room.id}
+                      type="button"
+                      onClick={() => setSelectedRoom(room.id)}
+                      whileHover={{ x: 4, scale: 1.01 }}
+                      className={`flex items-center gap-3 p-2.5 rounded-xl border text-left transition-all duration-200 cursor-pointer w-full focus:outline-none ${
+                        isSelected 
+                          ? `bg-slate-900 border-slate-900 text-white shadow-md` 
+                          : `border-slate-100 bg-slate-50/50 hover:bg-slate-50 hover:border-slate-300 text-slate-800`
+                      }`}
+                    >
+                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 font-display font-black text-sm transition-colors duration-300 ${
+                        isSelected ? `${room.color} text-white` : 'bg-slate-200/60 text-slate-700'
+                      }`}>
+                        {room.id}
+                      </div>
+                      <span className={`text-xs sm:text-sm font-bold leading-tight transition-colors duration-300 ${
+                        isSelected ? 'text-white' : 'text-slate-800'
+                      }`}>
+                        {t(`equipment.rooms.${room.key}`)}
+                      </span>
+                    </motion.button>
+                  );
+                })}
               </div>
               
               <div className="p-5 bg-brand-red/5 border-l-4 border-brand-red rounded-r-2xl text-sm text-slate-700 font-bold leading-relaxed shadow-sm">
