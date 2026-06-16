@@ -238,15 +238,9 @@ export default function PartnerPage() {
   const handleTabClick = (tab: 'partners' | 'developers' | 'mentors') => {
     setActiveTab(tab);
     setTimeout(() => {
-      const idMap = {
-        partners: 'podjetja',
-        developers: 'razvijalci-podjetja',
-        mentors: 'mentorji'
-      };
-      const element = document.getElementById(idMap[tab]);
-      if (element) {
-        const yOffset = -150; // generous offset to keep section headings beautifully visible
-        const rect = element.getBoundingClientRect();
+      if (contentRef.current) {
+        const yOffset = -280; // adjusted for the tall fixed double-tier navbar (height ~240px) plus extra padding
+        const rect = contentRef.current.getBoundingClientRect();
         const y = rect.top + window.scrollY + yOffset;
         window.scrollTo({ top: y, behavior: 'smooth' });
       }
