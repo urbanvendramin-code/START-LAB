@@ -744,25 +744,84 @@ export default function PartnerPage() {
                  />
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-8 mb-12">
-                <div className="flex gap-4">
-                  <div className="w-14 h-14 shrink-0 bg-play-purple/12 border-2 border-play-purple/20 rounded-2xl flex items-center justify-center text-play-purple shadow-[0_4px_0_0_#a855f71a]">
-                    <Cpu size={26} className="stroke-[2.5]" />
-                  </div>
-                  <div>
-                    <h3 className="font-display font-black uppercase mb-2 text-slate-900 text-base md:text-lg">{t('partner_page.devs_colab_title')}</h3>
-                    <p className="text-sm text-slate-500 font-medium leading-relaxed">{t('partner_page.devs_colab_desc')}</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="w-14 h-14 shrink-0 bg-play-teal/12 border-2 border-play-teal/20 rounded-2xl flex items-center justify-center text-play-teal shadow-[0_4px_0_0_#0d94881a]">
-                    <BookOpen size={26} className="stroke-[2.5]" />
-                  </div>
-                  <div>
-                    <h3 className="font-display font-black uppercase mb-2 text-slate-900 text-base md:text-lg">{t('partner_page.devs_offer_title')}</h3>
-                    <p className="text-sm text-slate-500 font-medium leading-relaxed font-sans">{t('partner_page.devs_offer_desc')}</p>
-                  </div>
+              {/* Companies listing for Talent Developers */}
+              <div id="razvijalci-podjetja" className="mt-12 pt-12 border-t border-slate-900/10">
+                <h2 className="text-3xl md:text-4xl font-display font-black uppercase tracking-tight mb-4 text-slate-950">
+                  {t('talent_developers.title')}
+                </h2>
+                <p className="text-slate-500 font-semibold mb-8 italic text-sm leading-relaxed">
+                  {t('talent_developers.subtitle')}
+                </p>
+                
+                <div className="grid grid-cols-1 gap-8 text-left">
+                    {[
+                      { 
+                        name: "Shelly Group",
+                        role: t('talent_developers.shelly.role'),
+                        image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781073944/shelly_logo_blue_240x140_1_vglthl.png",
+                        bg: "bg-play-blue/5 border-play-blue/15 hover:border-play-blue/35 text-play-blue hover:scale-[1.01]", 
+                        badgeColor: "bg-play-blue/12 text-play-blue",
+                        desc: t('talent_developers.shelly.desc'),
+                        href: "https://www.shelly.com/"
+                      },
+                      { 
+                        name: "KA3 d.o.o.",
+                        role: t('talent_developers.ka3.role'),
+                        image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781082903/KA3_vector_xmx4id.png",
+                        bg: "bg-play-yellow/5 border-play-yellow/15 hover:border-play-yellow/35 text-play-yellow hover:scale-[1.01]", 
+                        badgeColor: "bg-play-yellow/12 text-play-yellow",
+                        desc: t('talent_developers.ka3.desc'),
+                        href: "https://www.ka3.si/"
+                      },
+                      { 
+                        name: "SIQ Ljubljana",
+                        role: t('talent_developers.siq.role'),
+                        image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1780579720/SIQ_logo_RGB_brez_www_ue0l5s.png",
+                        bg: "bg-play-purple/5 border-play-purple/15 hover:border-play-purple/35 text-play-purple hover:scale-[1.01]", 
+                        badgeColor: "bg-play-purple/12 text-play-purple",
+                        desc: t('talent_developers.siq.desc'),
+                        href: "https://www.siq.si/"
+                      },
+                      { 
+                        name: "Gorenje GSI, d.o.o.",
+                        role: t('talent_developers.gorenje_gsi.role'),
+                        image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781074497/gorenje_logo_k41vil.png",
+                        images: [
+                          "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781074497/gorenje_logo_k41vil.png",
+                          "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781074484/hisense_logo_positive_meoei1.png"
+                        ],
+                        bg: "bg-play-teal/5 border-play-teal/15 hover:border-play-teal/35 text-play-teal hover:scale-[1.01]", 
+                        badgeColor: "bg-play-teal/12 text-play-teal",
+                        desc: t('talent_developers.gorenje_gsi.desc'),
+                        links: [
+                          { label: "Gorenje", href: "https://si.gorenje.com/" },
+                          { label: "Hisense", href: "https://si.hisense.com/" }
+                        ]
+                      },
+                      { 
+                        name: "A2R d.o.o.",
+                        role: t('talent_developers.a2r.role'),
+                        image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781097985/a2r_logo_pcnykd.png",
+                        bg: "bg-play-pink/5 border-play-pink/15 hover:border-play-pink/35 text-play-pink hover:scale-[1.01]", 
+                        badgeColor: "bg-play-pink/12 text-play-pink",
+                        desc: t('talent_developers.a2r.desc'),
+                        href: "https://a2r.si"
+                      },
+                      { 
+                        name: "Amiteh, merilni sistemi, d.o.o.",
+                        role: t('talent_developers.amiteh.role'),
+                        image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781532221/AMITEH-RIgol_15_LET_qzngpj.png",
+                        bg: "bg-play-yellow/5 border-play-yellow/15 hover:border-play-yellow/35 text-play-yellow hover:scale-[1.01]", 
+                        badgeColor: "bg-play-yellow/12 text-play-yellow",
+                        desc: t('talent_developers.amiteh.desc'),
+                        links: [
+                          { label: "Amiteh", href: "http://www.amiteh.com/" },
+                          { label: "Rigol", href: "http://www.rigol.si/" }
+                        ]
+                      }
+                    ].map((company, idx) => (
+                      <DeveloperCompanyCard company={company} key={idx} />
+                    ))}
                 </div>
               </div>
             </motion.div>
@@ -889,88 +948,7 @@ export default function PartnerPage() {
             </motion.div>
           </div>
 
-          {/* Companies listing for Talent Developers */}
-          <div id="razvijalci-podjetja" className="mt-24 md:mt-32 pt-20 border-t border-slate-900/10">
-            <div className="text-center">
-              <h2 className="text-3.5xl md:text-5xl font-display font-black uppercase tracking-tight mb-4 text-slate-950">
-                {t('talent_developers.title')}
-              </h2>
-              <p className="text-slate-500 font-semibold mb-12 max-w-xl mx-auto italic">
-                {t('talent_developers.subtitle')}
-              </p>
-              
-              <div className="grid grid-cols-1 gap-12 max-w-4xl mx-auto text-left">
-                  {[
-                    { 
-                      name: "Shelly Group",
-                      role: t('talent_developers.shelly.role'),
-                      image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781073944/shelly_logo_blue_240x140_1_vglthl.png",
-                      bg: "bg-play-blue/5 border-play-blue/15 hover:border-play-blue/35 text-play-blue hover:scale-[1.01]", 
-                      badgeColor: "bg-play-blue/12 text-play-blue",
-                      desc: t('talent_developers.shelly.desc'),
-                      href: "https://www.shelly.com/"
-                    },
-                    { 
-                      name: "KA3 d.o.o.",
-                      role: t('talent_developers.ka3.role'),
-                      image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781082903/KA3_vector_xmx4id.png",
-                      bg: "bg-play-yellow/5 border-play-yellow/15 hover:border-play-yellow/35 text-play-yellow hover:scale-[1.01]", 
-                      badgeColor: "bg-play-yellow/12 text-play-yellow",
-                      desc: t('talent_developers.ka3.desc'),
-                      href: "https://www.ka3.si/"
-                    },
-                    { 
-                      name: "SIQ Ljubljana",
-                      role: t('talent_developers.siq.role'),
-                      image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1780579720/SIQ_logo_RGB_brez_www_ue0l5s.png",
-                      bg: "bg-play-purple/5 border-play-purple/15 hover:border-play-purple/35 text-play-purple hover:scale-[1.01]", 
-                      badgeColor: "bg-play-purple/12 text-play-purple",
-                      desc: t('talent_developers.siq.desc'),
-                      href: "https://www.siq.si/"
-                    },
-                    { 
-                      name: "Gorenje GSI, d.o.o.",
-                      role: t('talent_developers.gorenje_gsi.role'),
-                      image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781074497/gorenje_logo_k41vil.png",
-                      images: [
-                        "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781074497/gorenje_logo_k41vil.png",
-                        "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781074484/hisense_logo_positive_meoei1.png"
-                      ],
-                      bg: "bg-play-teal/5 border-play-teal/15 hover:border-play-teal/35 text-play-teal hover:scale-[1.01]", 
-                      badgeColor: "bg-play-teal/12 text-play-teal",
-                      desc: t('talent_developers.gorenje_gsi.desc'),
-                      links: [
-                        { label: "Gorenje", href: "https://si.gorenje.com/" },
-                        { label: "Hisense", href: "https://si.hisense.com/" }
-                      ]
-                    },
-                    { 
-                      name: "A2R d.o.o.",
-                      role: t('talent_developers.a2r.role'),
-                      image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781097985/a2r_logo_pcnykd.png",
-                      bg: "bg-play-pink/5 border-play-pink/15 hover:border-play-pink/35 text-play-pink hover:scale-[1.01]", 
-                      badgeColor: "bg-play-pink/12 text-play-pink",
-                      desc: t('talent_developers.a2r.desc'),
-                      href: "https://a2r.si"
-                    },
-                    { 
-                      name: "Amiteh, merilni sistemi, d.o.o.",
-                      role: t('talent_developers.amiteh.role'),
-                      image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781532221/AMITEH-RIgol_15_LET_qzngpj.png",
-                      bg: "bg-play-yellow/5 border-play-yellow/15 hover:border-play-yellow/35 text-play-yellow hover:scale-[1.01]", 
-                      badgeColor: "bg-play-yellow/12 text-play-yellow",
-                      desc: t('talent_developers.amiteh.desc'),
-                      links: [
-                        { label: "Amiteh", href: "http://www.amiteh.com/" },
-                        { label: "Rigol", href: "http://www.rigol.si/" }
-                      ]
-                    }
-                  ].map((company, idx) => (
-                    <DeveloperCompanyCard company={company} key={idx} />
-                  ))}
-              </div>
-            </div>
-          </div>
+
         </>
       )}
 
