@@ -232,7 +232,7 @@ function DeveloperCompanyCard({ company }: { company: DeveloperCompany; key?: an
 
 export default function PartnerPage() {
   const { t } = useTranslation();
-  const [activeTab, setActiveTab] = useState<'partners' | 'developers' | 'mentors'>('partners');
+  const [activeTab, setActiveTab] = useState<'partners' | 'developers' | 'mentors'>('developers');
   const contentRef = useRef<HTMLDivElement>(null);
 
   const handleTabClick = (tab: 'partners' | 'developers' | 'mentors') => {
@@ -406,45 +406,7 @@ export default function PartnerPage() {
         
         {/* Elegant interactive 3-pillar community cards switcher conforming to visual/graphic rules */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-20">
-          {/* Card 1: Podporne Organizacije */}
-          <motion.button
-            whileHover={{ y: -6, scale: 1.01 }}
-            whileTap={{ scale: 0.99 }}
-            onClick={() => handleTabClick('partners')}
-            className={`text-left p-8 md:p-10 rounded-[2.5rem] border-3 transition-all duration-300 flex flex-col justify-between h-full cursor-pointer relative overflow-hidden ${
-              activeTab === 'partners'
-                ? 'bg-white border-play-pink shadow-[0_20px_45px_rgba(225,29,72,0.12)] ring-4 ring-play-pink/5'
-                : 'bg-white/80 border-slate-200/60 hover:border-play-pink/30 hover:bg-white shadow-[0_8px_30px_rgba(15,23,42,0.02)]'
-            }`}
-          >
-            {activeTab === 'partners' && (
-              <div className="absolute top-0 right-0 w-32 h-32 bg-play-pink/4 rounded-bl-[8rem] pointer-events-none" />
-            )}
-            <div>
-              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 border-2 transition-all duration-300 ${
-                activeTab === 'partners'
-                  ? 'bg-play-pink text-white border-play-pink shadow-[0_0_15px_rgba(225,29,72,0.25)]'
-                  : 'bg-play-pink/10 text-play-pink border-play-pink/20'
-              }`}>
-                <Handshake size={28} className="stroke-[2.5]" />
-              </div>
-              <h3 className="text-xl md:text-2xl font-display font-black uppercase mb-3 text-slate-950 tracking-tight leading-none">
-                {t('partner_page.tab_partners')}
-              </h3>
-              <p className="text-sm text-slate-600 font-semibold leading-relaxed font-sans mt-2">
-                {t('partners.subtitle')}
-              </p>
-            </div>
-            
-            <div className={`mt-8 flex items-center gap-2 text-xs font-display font-black uppercase tracking-wider transition-colors duration-300 ${
-              activeTab === 'partners' ? 'text-play-pink' : 'text-slate-400'
-            }`}>
-              <span>Prikaži</span>
-              <ArrowRight size={14} className={`stroke-[3.5] transition-transform duration-300 ${activeTab === 'partners' ? 'translate-x-1.5' : ''}`} />
-            </div>
-          </motion.button>
-
-          {/* Card 2: Razvijalci Talentov */}
+          {/* Card 1: Razvijalci Talentov */}
           <motion.button
             whileHover={{ y: -6, scale: 1.01 }}
             whileTap={{ scale: 0.99 }}
@@ -479,6 +441,44 @@ export default function PartnerPage() {
             }`}>
               <span>Prikaži</span>
               <ArrowRight size={14} className={`stroke-[3.5] transition-transform duration-300 ${activeTab === 'developers' ? 'translate-x-1.5' : ''}`} />
+            </div>
+          </motion.button>
+
+          {/* Card 2: Podporne Organizacije */}
+          <motion.button
+            whileHover={{ y: -6, scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
+            onClick={() => handleTabClick('partners')}
+            className={`text-left p-8 md:p-10 rounded-[2.5rem] border-3 transition-all duration-300 flex flex-col justify-between h-full cursor-pointer relative overflow-hidden ${
+              activeTab === 'partners'
+                ? 'bg-white border-play-pink shadow-[0_20px_45px_rgba(225,29,72,0.12)] ring-4 ring-play-pink/5'
+                : 'bg-white/80 border-slate-200/60 hover:border-play-pink/30 hover:bg-white shadow-[0_8px_30px_rgba(15,23,42,0.02)]'
+            }`}
+          >
+            {activeTab === 'partners' && (
+              <div className="absolute top-0 right-0 w-32 h-32 bg-play-pink/4 rounded-bl-[8rem] pointer-events-none" />
+            )}
+            <div>
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 border-2 transition-all duration-300 ${
+                activeTab === 'partners'
+                  ? 'bg-play-pink text-white border-play-pink shadow-[0_0_15px_rgba(225,29,72,0.25)]'
+                  : 'bg-play-pink/10 text-play-pink border-play-pink/20'
+              }`}>
+                <Handshake size={28} className="stroke-[2.5]" />
+              </div>
+              <h3 className="text-xl md:text-2xl font-display font-black uppercase mb-3 text-slate-950 tracking-tight leading-none">
+                {t('partner_page.tab_partners')}
+              </h3>
+              <p className="text-sm text-slate-600 font-semibold leading-relaxed font-sans mt-2">
+                {t('partners.subtitle')}
+              </p>
+            </div>
+            
+            <div className={`mt-8 flex items-center gap-2 text-xs font-display font-black uppercase tracking-wider transition-colors duration-300 ${
+              activeTab === 'partners' ? 'text-play-pink' : 'text-slate-400'
+            }`}>
+              <span>Prikaži</span>
+              <ArrowRight size={14} className={`stroke-[3.5] transition-transform duration-300 ${activeTab === 'partners' ? 'translate-x-1.5' : ''}`} />
             </div>
           </motion.button>
 
