@@ -5,7 +5,8 @@
     "programi": "Programi",
     "delavnice": "Delavnice",
     "koledar": "Koledar",
-    "partner": "Skupnost START LAB",
+    "partner": "Partnerji",
+    "mentors": "Mentorji",
     "kontakt": "Kontakt",
     "newsletter_btn": "Bodi na tekočem"
   },
@@ -329,13 +330,17 @@
       "desc": "Nik Tominec je inženir elektronike, ustvarjalec in tehnološki entuziast, ki s svojim znanjem in strastjo premika meje sodobne tehnike. Kot strokovnjak na področju elektronike in digitalne fabrikacije združuje teoretično natančnost z močnim praktičnim smislom za ustvarjanje naprednih tehničnih rešitev.\n\nNjegovo delovanje obsega širok spekter sodobnih tehnologij. Specializiran je za razvoj, načrtovanje in risanje elektronskih vezij, kjer kompleksne ideje pretvarja v delujoče prototipe. Svoje inženirsko znanje dopolnjuje z globokim razumevanjem 3D-tiskanja in 3D-oblikovanja, kar mu omogoča celovit razvoj projektov – od prve sheme na zaslonu do končnega, fizičnega izdelka.\n\nPoseben poudarek namenja naprednim sistemom pametnih hiš in celoviti informacijsko-mrežni infrastrukturi. Strokovno se ukvarja z načrtovanjem in optimizacijo stabilnih internetnih ter Wi-Fi omrežij, integracijo sodobnih varnostnih sistemov in kamer ter avtomatizacijo bivalnih prostorov. Vsa ta omrežja in naprave povezuje v inteligentne, varne in učinkovite sisteme, ki jih v ozadju podpira tudi z lastnim tehničnim testiranjem v domačem laboratoriju (home lab / self-hosting). Kot tehnični multipraktik nenehno raziskuje nove tehnologije ter se loteva zapletenih izzivov s področja strojne in programske opreme.\n\nKot vizionar verjame, da prava moč tehnologije leži v njenem praktičnem razumevanju in reševanju vsakdanjih problemov. Zato vsak projekt zaznamujejo visoka stopnja inovativnosti, natančnost pri izvedbi ter nenehna želja po raziskovanju novih tehničnih obzorij, s čimer aktivno sooblikuje prihodnost digitalnega in analognega sveta."
     },
     "kevin": {
-      "role": "MAG. INŽENIR ELEKTRONIKE & MENTOR",
+      "role": "INŽENIR ELEKTRONIKE & MENTOR",
       "desc": "Kevin Peršolja je magistrski študent elektronike na Fakulteti za elektrotehniko v Ljubljani in strasten ustvarjalec, ki ga nenehno žene radovednost o tem, kako tehnologija deluje v samem ozadju. Najbolje se znajde na stičišču strojne in programske opreme, kjer akademsko znanje z lahkoto prepleta z izrazito praktičnim pristopom k reševanju problemov.\n\nV središču njegovega inženirskega znanja je načrtovanje in razvoj tiskanih vezij (PCB) po meri. Odlikuje ga sposobnost, da kompleksne ideje iz osnovnih konceptov pretvori v skrbno načrtovano in izdelano strojno opremo. A izdelava fizičnega vezja je zanj šele prvi korak. Z znanjem programiranja napiše kodo, ki vezjem vdihne življenje, s tem pa odlično poveže analogne komponente z digitalnim svetom in ustvari delujoče vgrajene sisteme.\n\nKot mentor v laboratorij prinaša energičen in izrazito praktičen pristop. Trdno je prepričan, da je najučinkovitejši način za razumevanje sodobne tehnologije prav aktivno eksperimentiranje, najsi bo to spajkanje zahtevne komponente, iskanje napak v programski kodi ali odpravljanje težav na prototipu.\n\nZ deljenjem svojega strokovnega znanja in praktičnih izkušenj želi navdihniti ustvarjalce vseh starosti. Mlade, od radovednih otrok in dijakov do svojih študijskih kolegov spodbuja, naj se samozavestno spoprimejo z inženirskimi izzivi, in jim pomaga njihove najdrznejše tehnološke ideje spremeniti v resničnost."
     }
   },
   "talent_developers": {
     "title": "Razvijalci talentov",
     "subtitle": "Razvijalci talentov so podjetja in posamezniki, ki želijo biti prepoznani med mladimi talenti, jim približati svoje dejavnosti in priložnosti ter graditi ugled s prispevanjem k razvoju prihodnjih strokovnjakov, inovacij in regije.",
+    "itech": {
+      "role": "🥇 Zlati razvijalec talentov – Pospeševalec",
+      "desc": "Instrumentation Technologies je Solkansko visoko-tehnološko podjetje, ki razvija instrumente za visoko hitrostni zajem in obdelavo signalov ter SDR rešitve z nizko latenco. Njihove instrumente uporabljajo vodilni raziskovalni inštituti in industrijske organizacije v tehnološko najzahtevnejših okoljih na svetu, kot so pospeševalniki delcev, nevtronska diagnostika, sistemi za razsoljevanje vode in kvantne tehnologije. Podjetje je bilo ustanovljeno leta 1998 in danes zaposluje približno 60 strokovnjakov. Združuje multidisciplinarno znanje s področij elektronike, FPGA razvoja, obdelave signalov in sistemske integracije."
+    },
     "siq": {
       "role": "🥈 Srebrni razvijalec talentov – Promotor",
       "desc": "SIQ Ljubljana je mednarodna strokovna, neodvisna, nepristranska in neprofitna institucija, ki nudi celovite storitve certificiranja, kontrole, preskušanja, kalibriranja, validiranja, preverjanja in izobraževanja. Je priglašeni organ za 7 direktiv in 2 uredbi ter akreditiran za več kot 500 standardov. S 184 zaposlenimi in 350 zunanjimi strokovnjaki deluje v različnih industrijah, stranke SIQ pa prihajajo iz več kot 60 držav."

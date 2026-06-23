@@ -11,7 +11,8 @@ import {
   Cpu,
   Boxes,
   ArrowRight,
-  Info
+  Info,
+  Mail
 } from 'lucide-react';
 import { LAB_EQUIPMENT } from '../constants';
 import fablabSpaceImage from '../assets/images/fablab_space_1781078255061.png';
@@ -77,9 +78,13 @@ export default function Home() {
               <Link to="/delavnice" className="btn-primary shadow-lg">
                 {t('hero.cta')} <ChevronRight size={22} className="stroke-[3]" />
               </Link>
-              <Link to="/partner" className="btn-secondary">
-                {t('nav.partner')} <Users size={20} className="stroke-[2.5]" />
-              </Link>
+              <button 
+                id="home-newsletter-cta-btn"
+                onClick={() => window.dispatchEvent(new CustomEvent('open-newsletter'))}
+                className="btn-secondary cursor-pointer flex items-center justify-center gap-2"
+              >
+                {t('nav.newsletter_btn')} <Mail size={20} className="stroke-[2.5]" />
+              </button>
             </div>
  
             <div className="grid grid-cols-3 gap-4 md:gap-6">

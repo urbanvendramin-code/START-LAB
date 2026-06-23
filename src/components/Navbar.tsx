@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X, Globe, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
@@ -10,10 +10,21 @@ export default function Navbar() {
   const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
   const { t, i18n } = useTranslation();
 
+  useEffect(() => {
+    const handleOpenNewsletter = () => {
+      setIsNewsletterOpen(true);
+    };
+    window.addEventListener('open-newsletter', handleOpenNewsletter);
+    return () => {
+      window.removeEventListener('open-newsletter', handleOpenNewsletter);
+    };
+  }, []);
+
   const navLinks = [
     { name: t('nav.oprojektu'), path: '/o-projektu' },
     { name: t('nav.delavnice'), path: '/delavnice' },
     { name: t('nav.partner'), path: '/partner' },
+    { name: t('nav.mentors'), path: '/mentorji' },
     { name: t('nav.kontakt'), path: '/kontakt' },
   ];
 
@@ -99,7 +110,7 @@ export default function Navbar() {
             {/* Newsletter CTA Button */}
             <button
               onClick={() => setIsNewsletterOpen(true)}
-              className="bg-brand-red hover:bg-brand-red/90 text-white text-xs font-black uppercase tracking-wider px-5 py-3 rounded-2xl transition-all shadow-[0_4px_0_0_rgba(222,59,59,0.25)] hover:scale-[1.02] active:scale-[0.98] cursor-pointer inline-flex items-center gap-2"
+              className="hidden"
             >
               <Mail size={14} className="stroke-[2.5]" />
               <span>{t('nav.newsletter_btn')}</span>
@@ -163,7 +174,7 @@ export default function Navbar() {
                 setIsOpen(false);
                 setIsNewsletterOpen(true);
               }}
-              className="bg-play-pink hover:bg-play-pink/90 text-white font-display font-bold text-center uppercase tracking-wider py-4 rounded-2xl transition-all shadow-[0_4px_0_0_rgba(236,72,153,0.15)] flex items-center justify-center gap-2 cursor-pointer"
+              className="hidden"
             >
               <Mail size={16} className="stroke-[2.5]" />
               <span>{t('nav.newsletter_btn')}</span>

@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import ProjectPage from './pages/ProjectPage';
 import WorkshopsPage from './pages/WorkshopsPage';
 import PartnerPage from './pages/PartnerPage';
+import MentorPage from './pages/MentorPage';
 import CalendarPage from './pages/CalendarPage';
 import ContactPage from './pages/ContactPage';
 import PrivacyPage from './pages/PrivacyPage';
@@ -45,6 +46,7 @@ export default function App() {
           <Route path="o-projektu" element={<ProjectPage />} />
           <Route path="delavnice" element={<WorkshopsPage />} />
           <Route path="partner" element={<PartnerPage />} />
+          <Route path="mentorji" element={<MentorPage />} />
           <Route path="koledar" element={<CalendarPage />} />
           <Route path="kontakt" element={<ContactPage />} />
           <Route path="zasebnost" element={<PrivacyPage />} />

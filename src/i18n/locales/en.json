@@ -5,7 +5,8 @@
     "programi": "Programs",
     "delavnice": "Workshops",
     "koledar": "Calendar",
-    "partner": "START LAB Community",
+    "partner": "Partners",
+    "mentors": "Mentors",
     "kontakt": "Contact",
     "newsletter_btn": "Stay Tuned"
   },
@@ -336,6 +337,10 @@
   "talent_developers": {
     "title": "Talent Developers",
     "subtitle": "Talent developers are companies and individuals who want to be recognized among young talents, introduce their activities and opportunities to them, and build their reputation by contributing to the development of future experts, innovation, and the region.",
+    "itech": {
+      "role": "🥇 Gold Talent Developer – Accelerator",
+      "desc": "Instrumentation Technologies is a Solkan-based high-tech company that develops instruments for high-speed signal acquisition and processing, and low-latency SDR solutions. Their instruments are used by leading research institutes and industrial organizations in the most technologically demanding environments in the world, such as particle accelerators, neutron diagnostics, water desalination systems, and quantum technologies. Founded in 1998, the company currently employs around 60 experts, combining multidisciplinary knowledge in electronics, FPGA development, signal processing, and system integration."
+    },
     "siq": {
       "role": "🥈 Silver Talent Developer – Promoter",
       "desc": "SIQ Ljubljana is an international, professional, independent, impartial, and non-profit institution providing complete solutions in the fields of product testing, certification, metrology, and management systems. It is a notified body for 7 directives and 2 regulations, and accredited for more than 500 standards. With 184 employees and 350 external experts, it operates in various industries, serving clients from more than 60 countries."
