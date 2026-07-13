@@ -23,6 +23,7 @@ export default function Navbar() {
   const navLinks = [
     { name: t('nav.oprojektu'), path: '/o-projektu' },
     { name: t('nav.delavnice'), path: '/delavnice' },
+    { name: t('nav.koledar'), path: '/koledar' },
     { name: t('nav.partner'), path: '/partner' },
     { name: t('nav.mentors'), path: '/mentorji' },
     { name: t('nav.kontakt'), path: '/kontakt' },
@@ -75,15 +76,28 @@ export default function Navbar() {
           
           {/* Desktop Links with rounded background hover states */}
           <div className="hidden lg:flex items-center gap-2 font-display font-medium text-sm tracking-wide text-slate-200">
-            {navLinks.map((link) => (
-              <Link 
-                key={link.name} 
-                to={link.path} 
-                className="px-4 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-250 font-bold uppercase"
-              >
-                {link.name}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isKoledar = link.path === '/koledar';
+              return (
+                <Link 
+                  key={link.name} 
+                  to={link.path} 
+                  className={`px-4 py-2 rounded-xl transition-all duration-250 font-bold uppercase relative ${
+                    isKoledar 
+                      ? 'text-brand-red animate-pulse bg-brand-red/10 border border-brand-red/30 shadow-[0_0_12px_rgba(222,59,59,0.35)]' 
+                      : 'text-slate-300 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  {link.name}
+                  {isKoledar && (
+                    <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-red opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-red"></span>
+                    </span>
+                  )}
+                </Link>
+              );
+            })}
           </div>
    
           {/* Desktop Language & CTA */}
@@ -139,16 +153,27 @@ export default function Navbar() {
             transition={{ duration: 0.2 }}
             className="lg:hidden absolute top-full left-0 right-0 w-full border-b border-slate-800 bg-slate-950/95 backdrop-blur-2xl px-6 py-6 flex flex-col gap-5 shadow-2xl"
           >
-            {navLinks.map((link) => (
-              <Link 
-                key={link.name} 
-                to={link.path} 
-                className="text-lg font-display font-black uppercase tracking-tight text-white hover:text-brand-red transition-colors py-1"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.name}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isKoledar = link.path === '/koledar';
+              return (
+                <Link 
+                  key={link.name} 
+                  to={link.path} 
+                  className={`text-lg font-display font-black uppercase tracking-tight transition-colors py-1 flex items-center justify-between ${
+                    isKoledar ? 'text-brand-red animate-pulse' : 'text-white hover:text-brand-red'
+                  }`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  <span>{link.name}</span>
+                  {isKoledar && (
+                    <span className="relative flex h-2.5 w-2.5 mr-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-red opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-red"></span>
+                    </span>
+                  )}
+                </Link>
+              );
+            })}
             <div className="flex gap-2 justify-center border-t border-slate-900 pt-4">
               {languages.map((lang) => (
                 <button 

@@ -267,6 +267,25 @@ async function startServer() {
     res.json({ success: result.success, error: result.error });
   });
 
+  // API Call matching: Workshop Registration Form
+  app.post("/api/workshop/register", async (req, res) => {
+    const { name, email, phone, age, workshopTitle, dateSelected, note } = req.body;
+    const subject = `Prijava na delavnico: ${workshopTitle} - ${name}`;
+    const html = `
+      <h3>Spletni obrazec: Prijava na delavnico</h3>
+      <p><strong>Delavnica:</strong> ${workshopTitle}</p>
+      <p><strong>Izbrani termin:</strong> ${dateSelected}</p>
+      <p><strong>Ime in priimek:</strong> ${name}</p>
+      <p><strong>E-pošta:</strong> ${email}</p>
+      <p><strong>Telefon:</strong> ${phone || '/'}</p>
+      <p><strong>Starost:</strong> ${age || '/'}</p>
+      <p><strong>Opombe / sporočilo:</strong></p>
+      <p style="white-space: pre-wrap;">${note || '/'}</p>
+    `;
+    const result = await sendEmail(subject, html, email, name);
+    res.json({ success: result.success, error: result.error });
+  });
+
   // Serve with Vite in dev, static built assets in production
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
