@@ -689,8 +689,8 @@ export default function CalendarPage() {
                       </h4>
                       <p className="text-slate-600 font-semibold text-sm leading-relaxed mb-6">
                         {isSlovenian 
-                          ? `Hvala za prijavo, ${formData.name}! Podrobnosti o delavnici in navodila smo poslali na tvoj e-poštni naslov: ${formData.email}. Kmalu se slišimo!`
-                          : `Thank you, ${formData.name}! Registration details and lab location directives have been dispatched to ${formData.email}. See you soon!`}
+                          ? `Hvala za prijavo, ${formData.name}! Podrobnosti in navodila bomo poslali v kratkem na vaš e-poštni naslov: ${formData.email}.`
+                          : `Thank you, ${formData.name}! Registration details and workshop instructions will be sent shortly to your e-mail address: ${formData.email}.`}
                       </p>
                       <button
                         onClick={() => setIsModalOpen(false)}
