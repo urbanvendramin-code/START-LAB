@@ -282,7 +282,7 @@ async function startServer() {
       <p><strong>Opombe / sporočilo:</strong></p>
       <p style="white-space: pre-wrap;">${note || '/'}</p>
     `;
-    const result = await sendEmail(subject, html, email, name, "info@stratlab.si");
+    const result = await sendEmail(subject, html, email, name, "info@startlab.si");
     res.json({ success: result.success, error: result.error });
   });
 
