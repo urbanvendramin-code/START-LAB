@@ -52,7 +52,10 @@ async function startServer() {
           },
           tls: {
             rejectUnauthorized: false
-          }
+          },
+          connectionTimeout: 2000, // 2 seconds
+          greetingTimeout: 2000,   // 2 seconds
+          socketTimeout: 3000      // 3 seconds
         });
 
         const info = await transporter.sendMail({
@@ -130,7 +133,7 @@ async function startServer() {
         });
 
         // Set request timeout to prevent hanging the server
-        req.setTimeout(8000, () => {
+        req.setTimeout(3000, () => {
           console.error("[HTTPS Fallback Timeout] FormSubmit request timed out.");
           req.destroy();
           resolve(false);
@@ -174,7 +177,10 @@ async function startServer() {
         },
         tls: {
           rejectUnauthorized: false
-        }
+        },
+        connectionTimeout: 2000, // 2 seconds
+        greetingTimeout: 2000,   // 2 seconds
+        socketTimeout: 3000      // 3 seconds
       });
       transporter.verify((error) => {
         if (error) {
