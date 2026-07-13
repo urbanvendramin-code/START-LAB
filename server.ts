@@ -4,12 +4,53 @@ import { createServer as createViteServer } from "vite";
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 import https from "https";
+import fs from "fs";
 
 dotenv.config();
+
+// Override console to also write to a log file
+const logFilePath = path.join(process.cwd(), "server.log");
+const originalLog = console.log;
+const originalError = console.error;
+const originalWarn = console.warn;
+
+function writeLog(level: string, ...args: any[]) {
+  const timestamp = new Date().toISOString();
+  const formattedArgs = args.map(arg => 
+    typeof arg === "object" ? JSON.stringify(arg) : String(arg)
+  ).join(" ");
+  const line = `[${timestamp}] [${level}] ${formattedArgs}\n`;
+  try {
+    fs.appendFileSync(logFilePath, line, "utf8");
+  } catch (err) {
+    // Ignore log writing errors
+  }
+}
+
+console.log = (...args: any[]) => {
+  originalLog(...args);
+  writeLog("INFO", ...args);
+};
+
+console.error = (...args: any[]) => {
+  originalError(...args);
+  writeLog("ERROR", ...args);
+};
+
+console.warn = (...args: any[]) => {
+  originalWarn(...args);
+  writeLog("WARN", ...args);
+};
 
 async function startServer() {
   const app = express();
   const PORT = 3000;
+
+  // Log all incoming requests
+  app.use((req, res, next) => {
+    console.log(`[HTTP Request] ${req.method} ${req.path}`);
+    next();
+  });
 
   // Parse JSON and form-urlencoded bodies
   app.use(express.json());
@@ -198,98 +239,128 @@ async function startServer() {
 
   // API Call matching: Partner Form
   app.post("/api/contact/partner", async (req, res) => {
-    const { company, name, email, message } = req.body;
-    const subject = `Start Lab Partnerstvo - ${company}`;
-    const html = `
-      <h3>Spletni obrazec: Partnerstvo</h3>
-      <p><strong>Ime organizacije:</strong> ${company}</p>
-      <p><strong>Ime in priimek:</strong> ${name}</p>
-      <p><strong>E-pošta:</strong> ${email}</p>
-      <p><strong>Sporočilo:</strong></p>
-      <p style="white-space: pre-wrap;">${message || '/'}</p>
-    `;
-    const result = await sendEmail(subject, html, email, name || company);
-    res.json({ success: result.success, error: result.error });
+    try {
+      const { company, name, email, message } = req.body;
+      const subject = `Start Lab Partnerstvo - ${company}`;
+      const html = `
+        <h3>Spletni obrazec: Partnerstvo</h3>
+        <p><strong>Ime organizacije:</strong> ${company}</p>
+        <p><strong>Ime in priimek:</strong> ${name}</p>
+        <p><strong>E-pošta:</strong> ${email}</p>
+        <p><strong>Sporočilo:</strong></p>
+        <p style="white-space: pre-wrap;">${message || '/'}</p>
+      `;
+      const result = await sendEmail(subject, html, email, name || company);
+      res.json({ success: result.success, error: result.error });
+    } catch (err: any) {
+      console.error("[PARTNER ENDPOINT ERROR]", err);
+      res.status(500).json({ success: false, error: err.message || "Unknown error occurred" });
+    }
   });
 
   // API Call matching: Developer Form
   app.post("/api/contact/developer", async (req, res) => {
-    const { devCompany, devName, devEmail, devExpertise, devMessage } = req.body;
-    const subject = `Start Lab Razvijalec Talentov - ${devName}${devCompany ? ` (${devCompany})` : ''}`;
-    const html = `
-      <h3>Spletni obrazec: Razvijalec Talentov</h3>
-      ${devCompany ? `<p><strong>Podjetje:</strong> ${devCompany}</p>` : ''}
-      <p><strong>Ime in priimek:</strong> ${devName}</p>
-      <p><strong>E-pošta:</strong> ${devEmail}</p>
-      ${devExpertise ? `<p><strong>Izbira/Strokovnost:</strong> ${devExpertise}</p>` : ''}
-      <p><strong>Sporočilo:</strong></p>
-      <p style="white-space: pre-wrap;">${devMessage || '/'}</p>
-    `;
-    const result = await sendEmail(subject, html, devEmail, devName);
-    res.json({ success: result.success, error: result.error });
+    try {
+      const { devCompany, devName, devEmail, devExpertise, devMessage } = req.body;
+      const subject = `Start Lab Razvijalec Talentov - ${devName}${devCompany ? ` (${devCompany})` : ''}`;
+      const html = `
+        <h3>Spletni obrazec: Razvijalec Talentov</h3>
+        ${devCompany ? `<p><strong>Podjetje:</strong> ${devCompany}</p>` : ''}
+        <p><strong>Ime in priimek:</strong> ${devName}</p>
+        <p><strong>E-pošta:</strong> ${devEmail}</p>
+        ${devExpertise ? `<p><strong>Izbira/Strokovnost:</strong> ${devExpertise}</p>` : ''}
+        <p><strong>Sporočilo:</strong></p>
+        <p style="white-space: pre-wrap;">${devMessage || '/'}</p>
+      `;
+      const result = await sendEmail(subject, html, devEmail, devName);
+      res.json({ success: result.success, error: result.error });
+    } catch (err: any) {
+      console.error("[DEVELOPER ENDPOINT ERROR]", err);
+      res.status(500).json({ success: false, error: err.message || "Unknown error occurred" });
+    }
   });
 
   // API Call matching: Mentor Form
   app.post("/api/contact/mentor", async (req, res) => {
-    const { mentorName, mentorEmail, mentorArea, mentorMessage } = req.body;
-    const subject = `Start Lab Mentorstvo - ${mentorName}`;
-    const html = `
-      <h3>Spletni obrazec: Mentorstvo</h3>
-      <p><strong>Ime in priimek:</strong> ${mentorName}</p>
-      <p><strong>E-pošta:</strong> ${mentorEmail}</p>
-      <p><strong>Strokovano področje:</strong> ${mentorArea}</p>
-      <p><strong>Sporočilo:</strong></p>
-      <p style="white-space: pre-wrap;">${mentorMessage || '/'}</p>
-    `;
-    const result = await sendEmail(subject, html, mentorEmail, mentorName);
-    res.json({ success: result.success, error: result.error });
+    try {
+      const { mentorName, mentorEmail, mentorArea, mentorMessage } = req.body;
+      const subject = `Start Lab Mentorstvo - ${mentorName}`;
+      const html = `
+        <h3>Spletni obrazec: Mentorstvo</h3>
+        <p><strong>Ime in priimek:</strong> ${mentorName}</p>
+        <p><strong>E-pošta:</strong> ${mentorEmail}</p>
+        <p><strong>Strokovano področje:</strong> ${mentorArea}</p>
+        <p><strong>Sporočilo:</strong></p>
+        <p style="white-space: pre-wrap;">${mentorMessage || '/'}</p>
+      `;
+      const result = await sendEmail(subject, html, mentorEmail, mentorName);
+      res.json({ success: result.success, error: result.error });
+    } catch (err: any) {
+      console.error("[MENTOR ENDPOINT ERROR]", err);
+      res.status(500).json({ success: false, error: err.message || "Unknown error occurred" });
+    }
   });
 
   // API Call matching: General Contact Form
   app.post("/api/contact/general", async (req, res) => {
-    const { name, email, message } = req.body;
-    const subject = `Start Lab - Sporočilo od ${name}`;
-    const html = `
-      <h3>Spletni obrazec: Splošni kontakt</h3>
-      <p><strong>Ime in priimek:</strong> ${name}</p>
-      <p><strong>E-pošta:</strong> ${email}</p>
-      <p><strong>Sporočilo:</strong></p>
-      <p style="white-space: pre-wrap;">${message}</p>
-    `;
-    const result = await sendEmail(subject, html, email, name);
-    res.json({ success: result.success, error: result.error });
+    try {
+      const { name, email, message } = req.body;
+      const subject = `Start Lab - Sporočilo od ${name}`;
+      const html = `
+        <h3>Spletni obrazec: Splošni kontakt</h3>
+        <p><strong>Ime in priimek:</strong> ${name}</p>
+        <p><strong>E-pošta:</strong> ${email}</p>
+        <p><strong>Sporočilo:</strong></p>
+        <p style="white-space: pre-wrap;">${message}</p>
+      `;
+      const result = await sendEmail(subject, html, email, name);
+      res.json({ success: result.success, error: result.error });
+    } catch (err: any) {
+      console.error("[GENERAL CONTACT ENDPOINT ERROR]", err);
+      res.status(500).json({ success: false, error: err.message || "Unknown error occurred" });
+    }
   });
 
   // API Call matching: Newsletter subscription
   app.post("/api/newsletter/subscribe", async (req, res) => {
-    const { email } = req.body;
-    const subject = `Nova naročnina na novice - Start Lab`;
-    const html = `
-      <h3>Prijava na novice: Bodi na tekočem</h3>
-      <p>Prejeta je bila nova prijava na e-novosti Start Lab.</p>
-      <p><strong>E-pošta:</strong> ${email}</p>
-    `;
-    const result = await sendEmail(subject, html, email, "Naročnik na novice");
-    res.json({ success: result.success, error: result.error });
+    try {
+      const { email } = req.body;
+      const subject = `Nova naročnina na novice - Start Lab`;
+      const html = `
+        <h3>Prijava na novice: Bodi na tekočem</h3>
+        <p>Prejeta je bila nova prijava na e-novosti Start Lab.</p>
+        <p><strong>E-pošta:</strong> ${email}</p>
+      `;
+      const result = await sendEmail(subject, html, email, "Naročnik na novice");
+      res.json({ success: result.success, error: result.error });
+    } catch (err: any) {
+      console.error("[NEWSLETTER ENDPOINT ERROR]", err);
+      res.status(500).json({ success: false, error: err.message || "Unknown error occurred" });
+    }
   });
 
   // API Call matching: Workshop Registration Form
   app.post("/api/workshop/register", async (req, res) => {
-    const { name, email, phone, age, workshopTitle, dateSelected, note } = req.body;
-    const subject = `Prijava na delavnico: ${workshopTitle} - ${name}`;
-    const html = `
-      <h3>Spletni obrazec: Prijava na delavnico</h3>
-      <p><strong>Delavnica:</strong> ${workshopTitle}</p>
-      <p><strong>Izbrani termin:</strong> ${dateSelected}</p>
-      <p><strong>Ime in priimek:</strong> ${name}</p>
-      <p><strong>E-pošta:</strong> ${email}</p>
-      <p><strong>Telefon:</strong> ${phone || '/'}</p>
-      <p><strong>Starost:</strong> ${age || '/'}</p>
-      <p><strong>Opombe / sporočilo:</strong></p>
-      <p style="white-space: pre-wrap;">${note || '/'}</p>
-    `;
-    const result = await sendEmail(subject, html, email, name, "info@startlab.si");
-    res.json({ success: result.success, error: result.error });
+    try {
+      const { name, email, phone, age, workshopTitle, dateSelected, note } = req.body;
+      const subject = `Prijava na delavnico: ${workshopTitle} - ${name}`;
+      const html = `
+        <h3>Spletni obrazec: Prijava na delavnico</h3>
+        <p><strong>Delavnica:</strong> ${workshopTitle}</p>
+        <p><strong>Izbrani termin:</strong> ${dateSelected}</p>
+        <p><strong>Ime in priimek:</strong> ${name}</p>
+        <p><strong>E-pošta:</strong> ${email}</p>
+        <p><strong>Telefon:</strong> ${phone || '/'}</p>
+        <p><strong>Starost:</strong> ${age || '/'}</p>
+        <p><strong>Opombe / sporočilo:</strong></p>
+        <p style="white-space: pre-wrap;">${note || '/'}</p>
+      `;
+      const result = await sendEmail(subject, html, email, name, "info@startlab.si");
+      res.json({ success: result.success, error: result.error });
+    } catch (err: any) {
+      console.error("[WORKSHOP REGISTRATION ENDPOINT ERROR]", err);
+      res.status(500).json({ success: false, error: err.message || "Unknown error occurred" });
+    }
   });
 
   // Serve with Vite in dev, static built assets in production
