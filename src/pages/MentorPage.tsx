@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
+import { submitForm } from '../utils/formSubmit';
 import { 
   Target, 
   Users, 
@@ -102,41 +103,22 @@ export default function MentorPage() {
     e.preventDefault();
     setMentorStatus('loading');
     setMentorErrorMessage('');
-    try {
-      const res = await fetch('/api/contact/mentor', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ mentorName, mentorEmail, mentorArea, mentorMessage })
-      });
 
-      if (!res.ok) {
-        throw new Error(`Strežnik je vrnil napako s statusom: ${res.status} (${res.statusText || 'Status Text Missing'})`);
-      }
+    const result = await submitForm(
+      '/api/contact/mentor',
+      { mentorName, mentorEmail, mentorArea, mentorMessage },
+      `Start Lab Mentorstvo - ${mentorName}`
+    );
 
-      const contentType = res.headers.get("content-type");
-      if (!contentType || !contentType.includes("application/json")) {
-        const text = await res.text();
-        throw new Error(`Strežnik ni vrnil pričakovanega JSON formata (prejeli smo "${contentType || 'unknown'}"). Odgovor strežnika: "${text.slice(0, 160)}..."`);
-      }
-
-      const data = await res.json();
-      if (data.success) {
-        setMentorStatus('success');
-        setMentorName('');
-        setMentorEmail('');
-        setMentorArea('');
-        setMentorMessage('');
-      } else {
-        setMentorStatus('error');
-        setMentorErrorMessage(data.error || 'Neznana napaka pri pošiljanju.');
-      }
-    } catch (err: any) {
-      console.warn("Express backend API mentor contact form failed, falling back to client-side successful simulation:", err);
+    if (result.success) {
       setMentorStatus('success');
       setMentorName('');
       setMentorEmail('');
       setMentorArea('');
       setMentorMessage('');
+    } else {
+      setMentorStatus('error');
+      setMentorErrorMessage(result.error || 'Neznana napaka pri pošiljanju.');
     }
   };
 

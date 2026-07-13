@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
+import { submitForm } from '../utils/formSubmit';
 import { 
   Mail, 
   MapPin, 
@@ -21,39 +22,21 @@ export default function ContactPage() {
     e.preventDefault();
     setStatus('loading');
     setErrorMessage('');
-    try {
-      const res = await fetch('/api/contact/general', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, message })
-      });
-      
-      if (!res.ok) {
-        throw new Error(`Strežnik je vrnil napako s statusom: ${res.status} (${res.statusText || 'Status Text Missing'})`);
-      }
 
-      const contentType = res.headers.get("content-type");
-      if (!contentType || !contentType.includes("application/json")) {
-        const text = await res.text();
-        throw new Error(`Strežnik ni vrnil pričakovanega JSON formata (prejeli smo "${contentType || 'unknown'}"). Odgovor strežnika: "${text.slice(0, 160)}..."`);
-      }
+    const result = await submitForm(
+      '/api/contact/general',
+      { name, email, message },
+      `Start Lab - Sporočilo od ${name}`
+    );
 
-      const data = await res.json();
-      if (data.success) {
-        setStatus('success');
-        setName('');
-        setEmail('');
-        setMessage('');
-      } else {
-        setStatus('error');
-        setErrorMessage(data.error || 'Neznana napaka pri pošiljanju.');
-      }
-    } catch (err: any) {
-      console.warn("Express backend API general contact form failed, falling back to client-side successful simulation:", err);
+    if (result.success) {
       setStatus('success');
       setName('');
       setEmail('');
       setMessage('');
+    } else {
+      setStatus('error');
+      setErrorMessage(result.error || 'Neznana napaka pri pošiljanju.');
     }
   };
 

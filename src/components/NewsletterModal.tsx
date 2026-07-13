@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { X, Mail, Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { submitForm } from '../utils/formSubmit';
 
 interface NewsletterModalProps {
   isOpen: boolean;
@@ -20,23 +21,17 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
     if (!email) return;
 
     setStatus('loading');
-    try {
-      const res = await fetch('/api/newsletter/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
+    const result = await submitForm(
+      '/api/newsletter/subscribe',
+      { email },
+      `Nova naročnina na novice - Start Lab`
+    );
 
-      if (res.ok) {
-        setStatus('success');
-        setEmail('');
-      } else {
-        setStatus('error');
-      }
-    } catch (err) {
-      console.warn("Express backend API newsletter subscription failed, simulating success on client-side:", err);
+    if (result.success) {
       setStatus('success');
       setEmail('');
+    } else {
+      setStatus('error');
     }
   };
 

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
+import { submitForm } from '../utils/formSubmit';
 import { 
   Handshake, 
   Target, 
@@ -191,41 +192,22 @@ export default function PartnerPage() {
     e.preventDefault();
     setStatus('loading');
     setErrorMessage('');
-    try {
-      const res = await fetch('/api/contact/partner', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ company, name, email, message })
-      });
 
-      if (!res.ok) {
-        throw new Error(`Strežnik je vrnil napako s statusom: ${res.status} (${res.statusText || 'Status Text Missing'})`);
-      }
+    const result = await submitForm(
+      '/api/contact/partner',
+      { company, name, email, message },
+      `Start Lab Partnerstvo - ${company}`
+    );
 
-      const contentType = res.headers.get("content-type");
-      if (!contentType || !contentType.includes("application/json")) {
-        const text = await res.text();
-        throw new Error(`Strežnik ni vrnil pričakovanega JSON formata (prejeli smo "${contentType || 'unknown'}"). Odgovor strežnika: "${text.slice(0, 160)}..."`);
-      }
-
-      const data = await res.json();
-      if (data.success) {
-        setStatus('success');
-        setCompany('');
-        setName('');
-        setEmail('');
-        setMessage('');
-      } else {
-        setStatus('error');
-        setErrorMessage(data.error || 'Neznana napaka pri pošiljanju.');
-      }
-    } catch (err: any) {
-      console.warn("Express backend API partner contact form failed, falling back to client-side successful simulation:", err);
+    if (result.success) {
       setStatus('success');
       setCompany('');
       setName('');
       setEmail('');
       setMessage('');
+    } else {
+      setStatus('error');
+      setErrorMessage(result.error || 'Neznana napaka pri pošiljanju.');
     }
   };
 
@@ -233,43 +215,23 @@ export default function PartnerPage() {
     e.preventDefault();
     setDevStatus('loading');
     setDevErrorMessage('');
-    try {
-      const res = await fetch('/api/contact/developer', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ devCompany, devName, devEmail, devExpertise, devMessage })
-      });
 
-      if (!res.ok) {
-        throw new Error(`Strežnik je vrnil napako s statusom: ${res.status} (${res.statusText || 'Status Text Missing'})`);
-      }
+    const result = await submitForm(
+      '/api/contact/developer',
+      { devCompany, devName, devEmail, devExpertise, devMessage },
+      `Start Lab Razvijalec Talentov - ${devName}${devCompany ? ` (${devCompany})` : ''}`
+    );
 
-      const contentType = res.headers.get("content-type");
-      if (!contentType || !contentType.includes("application/json")) {
-        const text = await res.text();
-        throw new Error(`Strežnik ni vrnil pričakovanega JSON formata (prejeli smo "${contentType || 'unknown'}"). Odgovor strežnika: "${text.slice(0, 160)}..."`);
-      }
-
-      const data = await res.json();
-      if (data.success) {
-        setDevStatus('success');
-        setDevCompany('');
-        setDevName('');
-        setDevEmail('');
-        setDevExpertise('');
-        setDevMessage('');
-      } else {
-        setDevStatus('error');
-        setDevErrorMessage(data.error || 'Neznana napaka pri pošiljanju.');
-      }
-    } catch (err: any) {
-      console.warn("Express backend API developer contact form failed, falling back to client-side successful simulation:", err);
+    if (result.success) {
       setDevStatus('success');
       setDevCompany('');
       setDevName('');
       setDevEmail('');
       setDevExpertise('');
       setDevMessage('');
+    } else {
+      setDevStatus('error');
+      setDevErrorMessage(result.error || 'Neznana napaka pri pošiljanju.');
     }
   };
 

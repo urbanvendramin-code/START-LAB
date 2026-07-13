@@ -32,6 +32,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useTranslation } from 'react-i18next';
+import { submitForm } from '../utils/formSubmit';
 
 interface Event {
   id: string;
@@ -245,37 +246,32 @@ export default function CalendarPage() {
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
-    try {
-      const selectedTerm = formData.sessionSelection === 'all' 
-        ? (isSlovenian ? 'Celotna 6-tedenska delavnica (pričetek 7.9.2026)' : 'Full 6-week workshop (starts Sept 7, 2026)')
-        : format(selectedDate, 'd. MMMM yyyy', { locale: currentLocale }) + ` (${modalEvent?.time})`;
+    const selectedTerm = formData.sessionSelection === 'all' 
+      ? (isSlovenian ? 'Celotna 6-tedenska delavnica (pričetek 7.9.2026)' : 'Full 6-week workshop (starts Sept 7, 2026)')
+      : format(selectedDate, 'd. MMMM yyyy', { locale: currentLocale }) + ` (${modalEvent?.time})`;
 
-      const response = await fetch('/api/workshop/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          age: formData.age,
-          workshopTitle: modalEvent?.title || 'Delavnica',
-          dateSelected: selectedTerm,
-          note: formData.note
-        })
-      });
+    const workshopTitle = modalEvent?.title || 'Delavnica';
 
-      const resData = await response.json();
-      if (resData.success) {
-        setSubmitStatus('success');
-      } else {
-        setSubmitStatus('error');
-      }
-    } catch (err) {
-      console.error("Submission error:", err);
+    const result = await submitForm(
+      '/api/workshop/register',
+      {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        age: formData.age,
+        workshopTitle,
+        dateSelected: selectedTerm,
+        note: formData.note
+      },
+      `Prijava na delavnico: ${workshopTitle} - ${formData.name}`
+    );
+
+    if (result.success) {
+      setSubmitStatus('success');
+    } else {
       setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
     }
+    setIsSubmitting(false);
   };
 
   return (
