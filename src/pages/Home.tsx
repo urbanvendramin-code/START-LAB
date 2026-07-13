@@ -32,8 +32,11 @@ const ROOMS = [
 ];
 
 export default function Home() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [selectedRoom, setSelectedRoom] = useState<number | null>(1);
+
+  const isSlovenian = i18n.language === 'sl' || !['en', 'it'].includes(i18n.language);
+  const isItalian = i18n.language === 'it';
 
   return (
     <>
@@ -74,7 +77,7 @@ export default function Home() {
               {t('hero.subtitle')}
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 mb-16">
+            <div className="flex flex-col sm:flex-row gap-4 mb-6">
               <Link to="/delavnice" className="btn-primary shadow-lg">
                 {t('hero.cta')} <ChevronRight size={22} className="stroke-[3]" />
               </Link>
@@ -86,6 +89,51 @@ export default function Home() {
                 {t('nav.newsletter_btn')} <Mail size={20} className="stroke-[2.5]" />
               </button>
             </div>
+
+            {/* Eye-catching first workshop quick link */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="mb-10 max-w-lg"
+            >
+              <Link 
+                to="/koledar" 
+                className="flex items-center gap-4 p-4 rounded-3xl border-2 border-brand-red bg-brand-red/5 hover:bg-brand-red/10 transition-all shadow-[0_8px_30px_rgb(239,68,68,0.12)] group relative overflow-hidden"
+              >
+                {/* Pulsing indicator dot */}
+                <span className="absolute top-3 right-3 flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-red opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-brand-red"></span>
+                </span>
+
+                <div className="w-12 h-12 bg-brand-red text-white rounded-2xl flex flex-col items-center justify-center font-display font-black tracking-tight shrink-0 shadow-md">
+                  <span className="text-sm leading-none">07</span>
+                  <span className="text-[9px] leading-none mt-0.5">SEP</span>
+                </div>
+
+                <div className="text-left flex-1 min-w-0">
+                  <span className="inline-block bg-brand-red text-white text-[9px] font-display font-black uppercase tracking-widest px-2.5 py-1 rounded-lg mb-1.5 leading-none">
+                    {isSlovenian ? 'PRVA DELAVNICA' : isItalian ? 'PRIMO WORKSHOP' : 'FIRST WORKSHOP'}
+                  </span>
+                  <h4 className="text-sm sm:text-base font-display font-black uppercase text-slate-950 group-hover:text-brand-red transition-colors leading-tight truncate">
+                    {isSlovenian 
+                      ? 'Delavnica izdelave grafenskega čipa' 
+                      : isItalian 
+                        ? 'Fabbricazione di chip di grafene' 
+                        : 'Graphene Chip Fabrication Workshop'}
+                  </h4>
+                  <p className="text-[11px] text-slate-600 font-bold leading-normal mt-0.5 flex items-center gap-1">
+                    {isSlovenian 
+                      ? 'Začetek 6-tedenskega programa. Prijavi se zdaj!' 
+                      : isItalian 
+                        ? 'Inizio del programma di 6 settimane. Iscriviti ora!' 
+                        : 'Start of 6-week program. Register now!'}
+                    <ArrowRight size={13} className="inline-block group-hover:translate-x-1 transition-transform stroke-[2.5] text-brand-red" />
+                  </p>
+                </div>
+              </Link>
+            </motion.div>
  
             <div className="grid grid-cols-3 gap-4 md:gap-6">
               <div className="bg-play-pink/10 border-2 border-play-pink/20 rounded-[1.8rem] p-4 text-center transform hover:scale-105 transition-all">
