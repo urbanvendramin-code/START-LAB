@@ -58,6 +58,7 @@ async function startServer() {
         const info = await transporter.sendMail({
           from: `"Start Lab Website" <${smtpUser}>`,
           to: "info@startlab.si",
+          replyTo: senderEmail || smtpUser,
           subject: subject,
           html: htmlContent,
         });
