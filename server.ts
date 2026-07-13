@@ -4,8 +4,22 @@ import { createServer as createViteServer } from "vite";
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 import https from "https";
+import fs from "fs";
 
 dotenv.config();
+
+const LOG_FILE_PATH = path.join(process.cwd(), "server.log");
+
+function writeLog(message: string) {
+  const timestamp = new Date().toISOString();
+  const logMessage = `[${timestamp}] ${message}\n`;
+  console.log(logMessage.trim());
+  try {
+    fs.appendFileSync(LOG_FILE_PATH, logMessage);
+  } catch (err) {
+    console.error("Failed to write to log file:", err);
+  }
+}
 
 async function startServer() {
   const app = express();
@@ -34,13 +48,15 @@ async function startServer() {
     const smtpUser = process.env.SMTP_USER;
     const smtpPass = process.env.SMTP_PASS;
 
+    writeLog(`[Email Request Received] Subject: "${subject}", From: "${senderName} <${senderEmail}>"`);
+
     let smtpSent = false;
     let smtpError: any = null;
 
     if (smtpHost && smtpUser && smtpPass) {
       try {
         const isSecure = process.env.SMTP_SECURE !== "false";
-        console.log(`[SMTP Initiating] Host: ${smtpHost}, Port: ${smtpPort}, User: ${smtpUser}, Secure: ${isSecure}`);
+        writeLog(`[SMTP Initiating] Host: ${smtpHost}, Port: ${smtpPort}, User: ${smtpUser}, Secure: ${isSecure}`);
         
         const transporter = nodemailer.createTransport({
           host: smtpHost,
@@ -62,19 +78,21 @@ async function startServer() {
           subject: subject,
           html: htmlContent,
         });
-        console.log(`[Direct Email Sent] To: info@startlab.si | MessageId: ${info.messageId} | Subject: ${subject}`);
+        writeLog(`[SMTP Direct Email Sent SUCCESS] MessageId: ${info.messageId} | Subject: "${subject}"`);
         smtpSent = true;
         return { success: true };
       } catch (error: any) {
         smtpError = error;
-        console.error("SMTP direct send failed. Trying HTTPS delivery fallback... Error was:", error);
+        writeLog(`[SMTP Direct Email Sent FAILURE] Error: ${error.message || error}`);
       }
+    } else {
+      writeLog(`[SMTP Configuration Missing] SMTP_HOST, SMTP_USER or SMTP_PASS not set.`);
     }
 
     // SMTP either wasn't configured or failed to connect/send (standard for Cloud Run sandboxes blocking raw ports).
     // Let's use standard HTTPS outbound API sending as a guaranteed fallback!
     if (!smtpSent) {
-      console.log(`[HTTPS Delivery fallback initiated] sending to info@startlab.si...`);
+      writeLog(`[HTTPS Delivery Fallback Initiating] sending to info@startlab.si...`);
       const plainTextContent = stripHtml(htmlContent);
 
       const success = await new Promise<boolean>((resolve) => {
@@ -107,18 +125,18 @@ async function startServer() {
             try {
               const parsed = JSON.parse(data);
               if (parsed.success === "true" || parsed.success === true || res.statusCode === 200) {
-                console.log("[HTTPS Fallback Success] Successfully dispatched via FormSubmit to info@startlab.si");
+                writeLog(`[HTTPS Fallback SUCCESS] Successfully dispatched via FormSubmit. Response: ${data}`);
                 resolve(true);
               } else {
-                console.error("[HTTPS Fallback Failure] FormSubmit returned error status:", parsed);
+                writeLog(`[HTTPS Fallback FAILURE] FormSubmit returned error status: ${data}`);
                 resolve(false);
               }
             } catch (e) {
               if (res.statusCode === 200) {
-                console.log("[HTTPS Fallback Success] Dispatched with generic HTTP 200 via FormSubmit.");
+                writeLog(`[HTTPS Fallback SUCCESS] Dispatched with generic HTTP 200 via FormSubmit.`);
                 resolve(true);
               } else {
-                console.error("[HTTPS Fallback Failure] Failed to parse FormSubmit response:", data);
+                writeLog(`[HTTPS Fallback FAILURE] Failed to parse FormSubmit response. StatusCode: ${res.statusCode}, Data: ${data}`);
                 resolve(false);
               }
             }
@@ -126,13 +144,13 @@ async function startServer() {
         });
 
         req.on("error", (error) => {
-          console.error("[HTTPS Fallback Request Error] Connection failed to FormSubmit:", error);
+          writeLog(`[HTTPS Fallback Request Error] Connection failed to FormSubmit: ${error.message || error}`);
           resolve(false);
         });
 
         // Set request timeout to prevent hanging the server
         req.setTimeout(8000, () => {
-          console.error("[HTTPS Fallback Timeout] FormSubmit request timed out.");
+          writeLog(`[HTTPS Fallback Timeout] FormSubmit request timed out.`);
           req.destroy();
           resolve(false);
         });
@@ -145,11 +163,12 @@ async function startServer() {
         return { success: true };
       } else {
         // Ultimate local simulation fallback if internet connectivity to formsubmit has issue or blocked
-        console.warn("Both SMTP and HTTPS fallbacks failed. Running absolute developer terminal simulation.");
-        console.log(`--- EMERGENCY SIMULATED EMAIL SUBMISSION TO info@startlab.si ---`);
-        console.log(`Subject: ${subject}`);
-        console.log(`Content:\n${plainTextContent}`);
-        console.log(`-----------------------------------------------------------------`);
+        writeLog(`[CRITICAL - ALL CARRIER ROUTES FAILED] Running absolute simulated submission.`);
+        writeLog(`--- EMERGENCY SIMULATED EMAIL SUBMISSION ---`);
+        writeLog(`To: info@startlab.si`);
+        writeLog(`Subject: ${subject}`);
+        writeLog(`Content:\n${plainTextContent}`);
+        writeLog(`--------------------------------------------`);
         return { success: true, simulated: true, error: smtpError?.message || "All mail carrier routes failed" };
       }
     }
