@@ -426,9 +426,7 @@ export default function CalendarPage() {
                                 px-2.5 py-1 rounded-xl text-[10px] font-display font-black uppercase tracking-wider
                                 ${isGraphene ? 'bg-brand-red/15 text-brand-red' : 'bg-play-teal/15 text-play-teal'}
                               `}>
-                                {isGraphene 
-                                  ? (isSlovenian ? "EDINSTVEN ROK" : "EXCLUSIVE SERIES") 
-                                  : t('calendar_page.workshop')}
+                                {t('calendar_page.workshop')}
                               </span>
                               {event.ageGroup && (
                                 <span className="px-2.5 py-1 rounded-xl text-[10px] font-display font-semibold bg-slate-100 text-slate-600 uppercase tracking-wider">
@@ -465,6 +463,21 @@ export default function CalendarPage() {
                             <p className="text-slate-600 text-sm font-semibold leading-relaxed mb-6 bg-brand-red/[0.02] border-l-2 border-brand-red/40 pl-3 py-1">
                               {event.description}
                             </p>
+
+                            <div className="bg-slate-50 border border-slate-200/60 rounded-2xl p-4 mb-6 space-y-3 text-xs font-semibold text-slate-700">
+                              <div className="flex items-center gap-2 text-brand-red font-bold">
+                                <Sparkles size={14} className="stroke-[2.5]" />
+                                <span>
+                                  {isSlovenian 
+                                    ? "Brezplačna udeležba • Število mest je omejeno!" 
+                                    : "Free of charge • Limited slots available!"}
+                                </span>
+                              </div>
+                              <div className="border-t border-slate-200/60 pt-2.5 space-y-1">
+                                <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Mentor:" : "Mentor:"}</span> Prof. dr. Egon Pavlica (<a href="mailto:egon.pavlica@ung.si" className="text-brand-red hover:underline font-bold">egon.pavlica@ung.si</a>)</p>
+                                <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Somentor:" : "Co-mentor:"}</span> Dr. Vadym Tkachuk (<a href="mailto:vadym.tkachuk@ung.si" className="text-brand-red hover:underline font-bold">vadym.tkachuk@ung.si</a>)</p>
+                              </div>
+                            </div>
 
                             {/* Toggle More Details Button */}
                             {isGraphene && (
@@ -516,6 +529,10 @@ export default function CalendarPage() {
                                         <div className="space-y-3">
                                           <div className="border-l-2 border-brand-red pl-2.5">
                                             <p className="font-bold text-slate-950">{isSlovenian ? "🔬 Vrhunsko mentorstvo" : "🔬 Academic Mentors"}</p>
+                                             <div className="mt-1.5 text-[10px] text-slate-600 bg-slate-50 border border-slate-100 rounded-lg p-2 space-y-0.5">
+                                               <p><strong>{isSlovenian ? "Mentor:" : "Mentor:"}</strong> Prof. dr. Egon Pavlica (<a href="mailto:egon.pavlica@ung.si" className="text-brand-red hover:underline">egon.pavlica@ung.si</a>)</p>
+                                               <p><strong>{isSlovenian ? "Somentor:" : "Co-mentor:"}</strong> Dr. Vadym Tkachuk (<a href="mailto:vadym.tkachuk@ung.si" className="text-brand-red hover:underline">vadym.tkachuk@ung.si</a>)</p>
+                                             </div>
                                             <p className="text-[11px] text-slate-700 leading-normal">
                                               {isSlovenian 
                                                 ? "Pod vodstvom raziskovalcev Laboratorija za fiziko organskih snovi (LFOS) Univerze v Novi Gorici neposredno v prostorih Start Laba v Solkanu."
@@ -742,49 +759,22 @@ export default function CalendarPage() {
                         </div>
                       </div>
 
-                      {/* Graphene Specific Selection Options */}
-                      {modalEvent.id.startsWith('graphene') && (
-                        <div className="bg-brand-red/[0.02] border-2 border-brand-red/10 rounded-2xl p-4 space-y-3">
-                          <label className="text-xs font-display font-black uppercase tracking-wider text-slate-800 block">
-                            {isSlovenian ? "Izbira obsega prijave:" : "Booking mode:"}
-                          </label>
-                          <div className="grid grid-cols-1 gap-2">
-                            <label className={`border-2 rounded-xl p-3 flex items-start gap-3 cursor-pointer transition-all ${formData.sessionSelection === 'all' ? 'border-brand-red bg-brand-red/5' : 'border-slate-100 bg-white hover:border-slate-300'}`}>
-                              <input 
-                                type="radio" 
-                                name="sessionSelection" 
-                                value="all" 
-                                checked={formData.sessionSelection === 'all'}
-                                onChange={() => setFormData({...formData, sessionSelection: 'all'})}
-                                className="mt-1 accent-brand-red"
-                              />
-                              <div className="text-xs">
-                                <p className="font-bold text-slate-900">{isSlovenian ? "Celo delavnico (vseh 6 tednov) - Priporočeno" : "Complete series (all 6 weeks) - Recommended"}</p>
-                                <p className="text-slate-500 font-medium mt-0.5">{isSlovenian ? "Vpišite se v celoten cikel in si zagotovite izdelavo svojega čipa." : "Book the full cycle to complete all steps of physical fabrication."}</p>
-                              </div>
-                            </label>
-                            
-                            <label className={`border-2 rounded-xl p-3 flex items-start gap-3 cursor-pointer transition-all ${formData.sessionSelection === 'single' ? 'border-brand-red bg-brand-red/5' : 'border-slate-100 bg-white hover:border-slate-300'}`}>
-                              <input 
-                                type="radio" 
-                                name="sessionSelection" 
-                                value="single"
-                                checked={formData.sessionSelection === 'single'}
-                                onChange={() => setFormData({...formData, sessionSelection: 'single'})}
-                                className="mt-1 accent-brand-red"
-                              />
-                              <div className="text-xs">
-                                <p className="font-bold text-slate-900">{isSlovenian ? "Samo ta posamezni termin (srečanje)" : "This single session only"}</p>
-                                <p className="text-slate-500 font-medium mt-0.5">
-                                  {isSlovenian 
-                                    ? `Prijava le na termin ${format(selectedDate, 'd. M.', { locale: currentLocale })}.` 
-                                    : `Observe only on ${format(selectedDate, 'MMMM d', { locale: currentLocale })}.`}
-                                </p>
-                              </div>
-                            </label>
-                          </div>
+                      {/* Free & Limited slots alert + Mentors info */}
+                      <div className="bg-brand-red/[0.03] border border-brand-red/10 rounded-2xl p-4 text-xs font-semibold text-slate-700 space-y-2">
+                        <div className="flex items-center gap-2 text-brand-red font-black uppercase tracking-wider text-[10px]">
+                          <Sparkles size={13} className="stroke-[3]" />
+                          <span>{isSlovenian ? "POMEMBNE INFORMACIJE" : "IMPORTANT INFORMATION"}</span>
                         </div>
-                      )}
+                        <p className="text-slate-900 font-extrabold text-xs">
+                          {isSlovenian 
+                            ? "✓ Delavnice so brezplačne. Število mest je strogo omejeno!" 
+                            : "✓ Workshops are free of charge. Slots are strictly limited!"}
+                        </p>
+                        <div className="border-t border-slate-200/50 pt-2 text-[11px] space-y-0.5 text-slate-600">
+                          <p><strong>{isSlovenian ? "Mentor:" : "Mentor:"}</strong> Prof. dr. Egon Pavlica (<a href="mailto:egon.pavlica@ung.si" className="text-brand-red hover:underline font-bold">egon.pavlica@ung.si</a>)</p>
+                          <p><strong>{isSlovenian ? "Somentor:" : "Co-mentor:"}</strong> Dr. Vadym Tkachuk (<a href="mailto:vadym.tkachuk@ung.si" className="text-brand-red hover:underline font-bold">vadym.tkachuk@ung.si</a>)</p>
+                        </div>
+                      </div>
 
                       {/* Inputs */}
                       <div className="space-y-1">

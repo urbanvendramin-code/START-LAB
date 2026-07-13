@@ -28,7 +28,7 @@ async function startServer() {
   };
 
   // Helper function to send email via SMTP or fallback to a secure HTTPS post delivery
-  const sendEmail = async (subject: string, htmlContent: string, senderEmail?: string, senderName?: string) => {
+  const sendEmail = async (subject: string, htmlContent: string, senderEmail?: string, senderName?: string, toEmail: string = "info@startlab.si") => {
     const smtpHost = process.env.SMTP_HOST;
     const smtpPort = process.env.SMTP_PORT;
     const smtpUser = process.env.SMTP_USER;
@@ -57,11 +57,11 @@ async function startServer() {
 
         const info = await transporter.sendMail({
           from: `"Start Lab Website" <${smtpUser}>`,
-          to: "info@startlab.si",
+          to: toEmail,
           subject: subject,
           html: htmlContent,
         });
-        console.log(`[Direct Email Sent] To: info@startlab.si | MessageId: ${info.messageId} | Subject: ${subject}`);
+        console.log(`[Direct Email Sent] To: ${toEmail} | MessageId: ${info.messageId} | Subject: ${subject}`);
         smtpSent = true;
         return { success: true };
       } catch (error: any) {
@@ -73,13 +73,13 @@ async function startServer() {
     // SMTP either wasn't configured or failed to connect/send (standard for Cloud Run sandboxes blocking raw ports).
     // Let's use standard HTTPS outbound API sending as a guaranteed fallback!
     if (!smtpSent) {
-      console.log(`[HTTPS Delivery fallback initiated] sending to info@startlab.si...`);
+      console.log(`[HTTPS Delivery fallback initiated] sending to ${toEmail}...`);
       const plainTextContent = stripHtml(htmlContent);
 
       const success = await new Promise<boolean>((resolve) => {
         const postData = JSON.stringify({
           name: senderName || "Spletni Obiskovalec",
-          email: senderEmail || "info@startlab.si",
+          email: senderEmail || toEmail,
           _subject: subject,
           message: plainTextContent,
           _honey: "", // Honeypot to prevent spam bots
@@ -88,7 +88,7 @@ async function startServer() {
         const options = {
           hostname: "formsubmit.co",
           port: 443,
-          path: "/ajax/info@startlab.si",
+          path: `/ajax/${toEmail}`,
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -282,7 +282,7 @@ async function startServer() {
       <p><strong>Opombe / sporočilo:</strong></p>
       <p style="white-space: pre-wrap;">${note || '/'}</p>
     `;
-    const result = await sendEmail(subject, html, email, name);
+    const result = await sendEmail(subject, html, email, name, "info@stratlab.si");
     res.json({ success: result.success, error: result.error });
   });
 
