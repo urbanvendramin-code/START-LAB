@@ -195,7 +195,7 @@ export async function submitForm(
 
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 3500); // 3.5 seconds timeout
+    const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 seconds timeout for reliable static delivery
 
     const response = await fetch(`https://formsubmit.co/ajax/${targetEmail}`, {
       method: "POST",
