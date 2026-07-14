@@ -28,7 +28,8 @@ import {
   Brain, 
   Sparkles, 
   GraduationCap, 
-  Briefcase 
+  Briefcase,
+  AlertTriangle
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useTranslation } from 'react-i18next';
@@ -199,6 +200,7 @@ export default function CalendarPage() {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitErrorMessage, setSubmitErrorMessage] = useState('');
   const [showMoreDetails, setShowMoreDetails] = useState(false);
 
   const currentLocale = i18n.language === 'en' ? en : i18n.language === 'it' ? it : sl;
@@ -268,8 +270,10 @@ export default function CalendarPage() {
 
     if (result.success) {
       setSubmitStatus('success');
+      setSubmitErrorMessage('');
     } else {
       setSubmitStatus('error');
+      setSubmitErrorMessage(result.error || '');
     }
     setIsSubmitting(false);
   };
@@ -699,7 +703,7 @@ export default function CalendarPage() {
                         {isSlovenian ? "Zapri okno" : "Close window"}
                       </button>
                     </motion.div>
-                  ) : submitStatus === 'error' ? (
+                  ) : submitStatus === "error" ? (
                     
                     /* Status: ERROR */
                     <motion.div
@@ -707,25 +711,93 @@ export default function CalendarPage() {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      className="text-center py-10"
+                      className="text-center py-6"
                     >
-                      <div className="w-16 h-16 bg-brand-red/10 border-2 border-brand-red/30 rounded-3xl flex items-center justify-center mx-auto mb-6 text-brand-red">
-                        <X size={38} className="stroke-[2.5]" />
-                      </div>
-                      <h4 className="text-xl font-display font-black uppercase mb-3 text-slate-950">
-                        {isSlovenian ? "Ups, nekaj je šlo narobe." : "Something went wrong."}
-                      </h4>
-                      <p className="text-slate-600 font-semibold text-sm leading-relaxed mb-6">
-                        {isSlovenian 
-                          ? "Prišlo je do nepričakovane napake pri oddaji obrazca. Prosimo preverite internetno povezavo in poskusite ponovno ali nam pišite na info@startlab.si."
-                          : "We experienced a temporary connectivity issue. Please retry shortly or contact us directly at info@startlab.si."}
-                      </p>
-                      <button
-                        onClick={() => setSubmitStatus('idle')}
-                        className="w-full py-4 btn-primary select-none bg-brand-red text-white justify-center"
-                      >
-                        {isSlovenian ? "Poskusi znova" : "Retry submission"}
-                      </button>
+                      {submitErrorMessage.toLowerCase().includes("aktivacij") || submitErrorMessage.toLowerCase().includes("activate") ? (
+                        <div className="text-left bg-amber-50 border-2 border-amber-500/25 rounded-3xl p-6 shadow-md font-sans">
+                          <div className="flex items-center gap-4 mb-6">
+                            <div className="w-14 h-14 bg-amber-500/10 text-amber-600 border border-amber-500/20 rounded-2xl flex items-center justify-center shrink-0">
+                              <AlertTriangle size={28} className="stroke-[2.5]" />
+                            </div>
+                            <div>
+                              <h4 className="text-lg font-display font-black uppercase text-slate-900 tracking-tight leading-none">
+                                {isSlovenian ? "Aktivacija obrazca" : "Form Activation"}
+                              </h4>
+                              <p className="text-xs text-slate-500 font-semibold mt-1">
+                                {isSlovenian ? "Enkratni korak za GitHub Pages" : "One-time setup for GitHub Pages"}
+                              </p>
+                            </div>
+                          </div>
+
+                          <p className="text-xs text-slate-700 font-semibold leading-relaxed mb-6">
+                            {isSlovenian 
+                              ? "Ker spletna stran deluje na GitHub Pages (brez lastnega strežnika), se sporočila pošiljajo preko storitve FormSubmit.co. Za začetek prejemanja morate potrditi vaš e-poštni naslov."
+                              : "Since the site runs on GitHub Pages (without a backend server), form submissions use FormSubmit.co. You must activate your email to start receiving messages."}
+                          </p>
+
+                          <div className="space-y-4 mb-6">
+                            <div className="flex gap-3">
+                              <span className="w-5 h-5 shrink-0 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold font-display">1</span>
+                              <p className="text-[11px] text-slate-600 font-bold leading-normal">
+                                {isSlovenian ? "Odprite poštni predal info@startlab.si." : "Open your inbox at info@startlab.si."}
+                              </p>
+                            </div>
+                            <div className="flex gap-3">
+                              <span className="w-5 h-5 shrink-0 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold font-display">2</span>
+                              <p className="text-[11px] text-slate-600 font-bold leading-normal">
+                                {isSlovenian 
+                                  ? "Poiščite potrditveni mail od FormSubmit.co z zadevo \"Action Required: Activate ...\"."
+                                  : "Find the confirmation mail from FormSubmit.co with subject \"Action Required: Activate ...\""}
+                              </p>
+                            </div>
+                            <div className="flex gap-3">
+                              <span className="w-5 h-5 shrink-0 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold font-display">3</span>
+                              <p className="text-[11px] text-slate-600 font-bold leading-normal">
+                                {isSlovenian ? "Kliknite na gumb \"Activate Form\" v mailu." : "Click on the \"Activate Form\" button in the email."}
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4 mb-6 text-[11px] font-semibold text-amber-800 leading-normal">
+                            {isSlovenian 
+                              ? "Po potrditvi bo obrazec takoj aktiviran in vsa naslednja sporočila boste prejeli neposredno v vaš predal!"
+                              : "Once clicked, the form will start delivering submissions directly to your inbox immediately!"}
+                          </div>
+
+                          <button 
+                            type="button"
+                            onClick={() => setSubmitStatus('idle')}
+                            className="w-full btn-primary py-3.5 shadow-md bg-amber-500 border-amber-500 hover:bg-amber-600 justify-center text-xs tracking-wider cursor-pointer font-bold"
+                          >
+                            {isSlovenian ? "Nazaj na obrazec" : "Back to form"}
+                          </button>
+                        </div>
+                      ) : (
+                        <>
+                          <div className="w-16 h-16 bg-brand-red/10 border-2 border-brand-red/30 rounded-3xl flex items-center justify-center mx-auto mb-6 text-brand-red">
+                            <X size={38} className="stroke-[2.5]" />
+                          </div>
+                          <h4 className="text-xl font-display font-black uppercase mb-3 text-slate-950">
+                            {isSlovenian ? "Ups, nekaj je šlo narobe." : "Something went wrong."}
+                          </h4>
+                          <p className="text-slate-600 font-semibold text-sm leading-relaxed mb-4">
+                            {isSlovenian 
+                              ? "Prišlo je do nepričakovane napake pri oddaji obrazca. Prosimo preverite internetno povezavo in poskusite ponovno ali nam pišite na info@startlab.si."
+                              : "We experienced a temporary connectivity issue. Please retry shortly or contact us directly at info@startlab.si."}
+                          </p>
+                          {submitErrorMessage && (
+                            <div className="bg-red-50 text-red-700 p-3 rounded-2xl text-[11px] font-mono break-all max-w-md mx-auto text-left mb-6 border border-red-100">
+                              <strong>Diagnostic Error:</strong> {submitErrorMessage}
+                            </div>
+                          )}
+                          <button
+                            onClick={() => setSubmitStatus('idle')}
+                            className="w-full py-4 btn-primary select-none bg-brand-red text-white justify-center"
+                          >
+                            {isSlovenian ? "Poskusi znova" : "Retry submission"}
+                          </button>
+                        </>
+                      )}
                     </motion.div>
                   ) : (
                     

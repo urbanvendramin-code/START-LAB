@@ -63,13 +63,29 @@ export async function submitForm(
 
     if (response.ok) {
       const result = await response.json();
-      if (result && result.success === "false") {
-        return { success: false, error: result.message || "FormSubmit rejected submission" };
+      if (result && (result.success === "false" || result.success === false)) {
+        let errMsg = result.message || "FormSubmit rejected submission";
+        if (errMsg.toLowerCase().includes("activate") || errMsg.toLowerCase().includes("confirm")) {
+          errMsg = "Aktivacija e-pošte je potrebna: Na naslov info@startlab.si je bil poslan aktivacijski mail s strani FormSubmit.co. Prosimo, odprite vaš poštni predal in potrdite aktivacijo, da bo obrazec začel delovati.";
+        }
+        return { success: false, error: errMsg };
       }
       console.log("[Client FormSubmit Success] Successfully dispatched form directly from browser.");
       return { success: true };
     } else {
-      return { success: false, error: `FormSubmit HTTP error: ${response.status}` };
+      let errMsg = `FormSubmit HTTP error: ${response.status}`;
+      try {
+        const errorJson = await response.json();
+        if (errorJson && errorJson.message) {
+          errMsg = errorJson.message;
+          if (errMsg.toLowerCase().includes("activate") || errMsg.toLowerCase().includes("confirm")) {
+            errMsg = "Aktivacija e-pošte je potrebna: Na naslov info@startlab.si je bil poslan aktivacijski mail s strani FormSubmit.co. Prosimo, odprite vaš poštni predal in potrdite aktivacijo, da bo obrazec začel delovati.";
+          }
+        }
+      } catch (e) {
+        // failed to parse JSON, use status code
+      }
+      return { success: false, error: errMsg };
     }
   } catch (fallbackError: any) {
     console.error("Direct client-side FormSubmit fallback failed as well:", fallbackError);
