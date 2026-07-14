@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   format, 
   addMonths, 
@@ -203,6 +203,18 @@ export default function CalendarPage() {
   const [submitErrorMessage, setSubmitErrorMessage] = useState('');
   const [showMoreDetails, setShowMoreDetails] = useState(false);
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const submitStatusParam = params.get('submit_status');
+    if (submitStatusParam === 'success' || submitStatusParam === 'success_workshop' || submitStatusParam === 'success_calendar') {
+      setSubmitStatus('success');
+      setIsModalOpen(true);
+      // Clean up search params
+      const newUrl = window.location.pathname + window.location.hash;
+      window.history.replaceState({}, document.title, newUrl);
+    }
+  }, []);
+
   const currentLocale = i18n.language === 'en' ? en : i18n.language === 'it' ? it : sl;
 
   const nextMonth = () => setCurrentMonth(addMonths(currentMonth, 1));
@@ -265,7 +277,8 @@ export default function CalendarPage() {
         dateSelected: selectedTerm,
         note: formData.note
       },
-      `Prijava na delavnico: ${workshopTitle} - ${formData.name}`
+      `Prijava na delavnico: ${workshopTitle} - ${formData.name}`,
+      'workshop'
     );
 
     if (result.success) {

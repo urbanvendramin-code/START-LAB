@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import { submitForm } from '../utils/formSubmit';
@@ -188,6 +188,26 @@ export default function PartnerPage() {
   const [devExpertise, setDevExpertise] = useState('');
   const [devMessage, setDevMessage] = useState('');
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const submitStatus = params.get('submit_status');
+    if (submitStatus === 'success_partner') {
+      setStatus('success');
+      setActiveTab('partners');
+      const newUrl = window.location.pathname + window.location.hash;
+      window.history.replaceState({}, document.title, newUrl);
+    } else if (submitStatus === 'success_developer') {
+      setDevStatus('success');
+      setActiveTab('developers');
+      const newUrl = window.location.pathname + window.location.hash;
+      window.history.replaceState({}, document.title, newUrl);
+    } else if (submitStatus === 'success') {
+      setStatus('success');
+      const newUrl = window.location.pathname + window.location.hash;
+      window.history.replaceState({}, document.title, newUrl);
+    }
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('loading');
@@ -196,7 +216,8 @@ export default function PartnerPage() {
     const result = await submitForm(
       '/api/contact/partner',
       { company, name, email, message },
-      `Start Lab Partnerstvo - ${company}`
+      `Start Lab Partnerstvo - ${company}`,
+      'partner'
     );
 
     if (result.success) {
@@ -219,7 +240,8 @@ export default function PartnerPage() {
     const result = await submitForm(
       '/api/contact/developer',
       { devCompany, devName, devEmail, devExpertise, devMessage },
-      `Start Lab Razvijalec Talentov - ${devName}${devCompany ? ` (${devCompany})` : ''}`
+      `Start Lab Razvijalec Talentov - ${devName}${devCompany ? ` (${devCompany})` : ''}`,
+      'developer'
     );
 
     if (result.success) {

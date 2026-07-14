@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import { submitForm } from '../utils/formSubmit';
@@ -99,6 +99,17 @@ export default function MentorPage() {
   const [mentorArea, setMentorArea] = useState('');
   const [mentorMessage, setMentorMessage] = useState('');
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const submitStatus = params.get('submit_status');
+    if (submitStatus === 'success' || submitStatus === 'success_mentor') {
+      setMentorStatus('success');
+      // Clean up search params
+      const newUrl = window.location.pathname + window.location.hash;
+      window.history.replaceState({}, document.title, newUrl);
+    }
+  }, []);
+
   const handleMentorSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setMentorStatus('loading');
@@ -107,7 +118,8 @@ export default function MentorPage() {
     const result = await submitForm(
       '/api/contact/mentor',
       { mentorName, mentorEmail, mentorArea, mentorMessage },
-      `Start Lab Mentorstvo - ${mentorName}`
+      `Start Lab Mentorstvo - ${mentorName}`,
+      'mentor'
     );
 
     if (result.success) {

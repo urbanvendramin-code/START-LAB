@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import { submitForm } from '../utils/formSubmit';
@@ -18,6 +18,17 @@ export default function ContactPage() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const submitStatus = params.get('submit_status');
+    if (submitStatus === 'success' || submitStatus === 'success_general') {
+      setStatus('success');
+      // Clean up search params
+      const newUrl = window.location.pathname + window.location.hash;
+      window.history.replaceState({}, document.title, newUrl);
+    }
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('loading');
@@ -26,7 +37,8 @@ export default function ContactPage() {
     const result = await submitForm(
       '/api/contact/general',
       { name, email, message },
-      `Start Lab - Sporočilo od ${name}`
+      `Start Lab - Sporočilo od ${name}`,
+      'general'
     );
 
     if (result.success) {
