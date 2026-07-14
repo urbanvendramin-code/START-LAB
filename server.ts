@@ -52,6 +52,26 @@ async function startServer() {
     next();
   });
 
+  // Enable CORS manually to allow requests from any origin
+  app.use((req, res, next) => {
+    const origin = req.headers.origin;
+    if (origin) {
+      res.setHeader("Access-Control-Allow-Origin", origin);
+    } else {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+    }
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,content-type,Accept,Authorization");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    
+    // Handle OPTIONS preflight requests
+    if (req.method === "OPTIONS") {
+      res.sendStatus(200);
+    } else {
+      next();
+    }
+  });
+
   // Parse JSON and form-urlencoded bodies
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));

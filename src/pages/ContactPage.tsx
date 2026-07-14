@@ -170,29 +170,34 @@ export default function ContactPage() {
              )}
           </div>
         </div>
-      </div>
 
-      {/* Google Maps Section */}
-      <div className="mt-20 max-w-7xl mx-auto">
-        <h3 className="text-2xl font-display font-black uppercase text-slate-950 mb-6 flex items-center gap-3">
-          <MapPin className="text-brand-red stroke-[2.5]" size={28} />
-          {t('contact.location_title', { defaultValue: 'Kje nas najdete' })}
-        </h3>
-        <div className="play-card overflow-hidden border-2 border-slate-950/10 bg-white p-3 shadow-[0_24px_50px_rgba(15,23,42,0.06)]">
-          <div className="rounded-[2rem] overflow-hidden border-2 border-slate-950/5 aspect-[21/9] min-h-[350px] w-full relative">
-            <iframe
-              title="Start Lab Google Map"
-              src="https://maps.google.com/maps?q=Velika%20pot%207,%205250%20Solkan&t=&z=16&ie=UTF8&iwloc=&output=embed"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
+        {/* Google Maps Location Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="mt-16"
+        >
+          <div className="mb-6">
+            <h3 className="text-xl font-display font-black uppercase text-slate-900 tracking-tight">
+              {t('contact.map_title', { defaultValue: 'Kje nas najdete' })}
+            </h3>
+            <p className="text-sm text-slate-500 font-semibold mt-1">
+              {t('contact.city', { defaultValue: 'Velika pot 33, 5250 Solkan' })}
+            </p>
+          </div>
+          
+          <div className="play-card p-3 bg-white border-2 border-slate-950/10 shadow-[0_24px_50px_rgba(15,23,42,0.06)] overflow-hidden">
+            <iframe 
+              title="Start Lab Google Maps Location"
+              src="https://maps.google.com/maps?q=Velika%20pot%2033,%205250%20Solkan&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              className="w-full h-[350px] md:h-[450px] rounded-[1.8rem] border-0"
               allowFullScreen={true}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="absolute inset-0 w-full h-full grayscale-[10%] contrast-[110%] saturate-[110%]"
             ></iframe>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
