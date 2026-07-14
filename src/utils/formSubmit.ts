@@ -19,7 +19,7 @@
  *    to where they were after a seamless dispatch.
  */
 
-// Mapping helper to convert developer keys into beautiful Slovenian labels for email notifications.
+// Mapping helper to convert developer keys into beautiful Slovenian labels for email notifications (used for FormSubmit fallback or logging).
 function getFriendlyPayload(endpoint: string, data: Record<string, any>, subject: string): Record<string, any> {
   const payload: Record<string, any> = {
     _subject: subject,
@@ -70,6 +70,24 @@ function getFriendlyPayload(endpoint: string, data: Record<string, any>, subject
   return payload;
 }
 
+// Netlify form name generator from target endpoint
+function getNetlifyFormName(endpoint: string): string {
+  if (endpoint.includes("partner")) return "partner";
+  if (endpoint.includes("developer")) return "developer";
+  if (endpoint.includes("mentor")) return "mentor";
+  if (endpoint.includes("general")) return "general";
+  if (endpoint.includes("newsletter") || endpoint.includes("news")) return "newsletter";
+  if (endpoint.includes("workshop") || endpoint.includes("work")) return "workshop";
+  return "general";
+}
+
+// URL-encoding helper for Netlify Forms
+function encodeForm(data: Record<string, any>): string {
+  return Object.keys(data)
+    .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&");
+}
+
 export async function submitForm(
   endpoint: string,
   data: Record<string, any>,
@@ -118,67 +136,63 @@ export async function submitForm(
             console.log("[FormSubmit] Successfully sent via secure backend SMTP.");
             return { success: true };
           } else {
-            console.warn("[FormSubmit] Backend SMTP returned success=false. Trying browser FormSubmit.co fallback...", result?.error);
+            console.warn("[FormSubmit] Backend SMTP returned success=false. Trying fallback...");
           }
         }
       } else {
-        console.warn(`[FormSubmit] Backend API returned HTTP ${response.status}. Trying browser FormSubmit.co fallback...`);
+        console.warn(`[FormSubmit] Backend API returned HTTP ${response.status}. Trying fallback...`);
       }
     } catch (err: any) {
-      console.warn("[FormSubmit] Connection to backend failed or timed out. Trying browser FormSubmit.co fallback...", err);
+      console.warn("[FormSubmit] Connection to backend failed or timed out. Trying fallback...", err);
     }
   }
 
-  // === PRODUCTION MODE (GitHub Pages, Vercel, startlab.si) ===
-  // OR fallback mode if local backend failed or timed out.
-  // Direct client-to-email form submission via FormSubmit.co!
-  console.log("[FormSubmit] Dispatching directly to FormSubmit.co...");
-  
-  const payload = getFriendlyPayload(apiEndpoint, data, formSubmitSubject);
+  // === PRODUCTION MODE (NETLIFY FORMS) ===
+  // Submit securely to Netlify's native Form Processing Engine!
+  const formName = getNetlifyFormName(apiEndpoint);
+  console.log(`[NetlifyForms] Production Mode: Sending to Netlify Form "${formName}"`);
+
+  const payload = {
+    "form-name": formName,
+    ...data
+  };
 
   try {
-    const response = await fetch("https://formsubmit.co/ajax/info@startlab.si", {
+    const response = await fetch("/", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify(payload)
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encodeForm(payload)
     });
 
     if (response.ok) {
-      const result = await response.json();
-      if (result && result.success === "false") {
-        throw new Error(result.message || "FormSubmit service rejected the message.");
-      }
-      console.log("[FormSubmit Success] Message successfully dispatched to info@startlab.si via direct browser pipeline!");
+      console.log(`[NetlifyForms Success] Form "${formName}" successfully registered by Netlify!`);
       return { success: true };
     } else {
-      throw new Error(`FormSubmit HTTP Error: ${response.status}`);
+      throw new Error(`Netlify HTTP Error: ${response.status}`);
     }
   } catch (err: any) {
-    console.warn("[FormSubmit AJAX Failure] Background fetch failed (potentially blocked by adblocker). Invoking ULTIMATE HTML Form Failsafe...", err);
+    console.warn("[NetlifyForms AJAX Failure] Background fetch failed (potentially blocked by strict adblock/privacy shields). Invoking standard HTML Form navigation Failsafe...", err);
     
-    // === ULTIMATE FAILSAFE: STANDARD HTML FORM SUBMISSION ===
-    // Since background AJAX/Fetch requests to formsubmit.co can be aggressively blocked
-    // by privacy shields or adblockers, we dynamically generate a standard HTML <form> element 
-    // and submit it. Browsers process this as a standard page navigation POST request, 
-    // which adblockers CANNOT block without completely breaking standard HTML websites.
+    // === ULTIMATE FAILSAFE: STANDARD HTML FORM SUBMISSION TO NETLIFY ===
+    // Since background AJAX/Fetch requests can be aggressively blocked by privacy extensions,
+    // we dynamically generate a standard HTML <form> element and submit it.
+    // Browsers process this as a standard page navigation POST request, which adblockers 
+    // CANNOT block without completely breaking search engines and form logins.
     try {
       const form = document.createElement("form");
       form.method = "POST";
-      form.action = "https://formsubmit.co/info@startlab.si";
+      form.action = "/";
       form.style.display = "none";
 
-      // Configure a redirect back to the current page after submission completes
-      const nextInput = document.createElement("input");
-      nextInput.type = "hidden";
-      nextInput.name = "_next";
-      nextInput.value = window.location.href;
-      form.appendChild(nextInput);
+      // Configure Netlify Identification
+      const nameInput = document.createElement("input");
+      nameInput.type = "hidden";
+      nameInput.name = "form-name";
+      nameInput.value = formName;
+      form.appendChild(nameInput);
 
       // Add all key-value payload fields as input elements
-      for (const [key, val] of Object.entries(payload)) {
+      for (const [key, val] of Object.entries(data)) {
         const input = document.createElement("input");
         input.type = "hidden";
         input.name = key;
@@ -192,7 +206,7 @@ export async function submitForm(
       // Return success because the form is actively submitting and page will navigate
       return { success: true, redirected: true };
     } catch (fallbackErr: any) {
-      console.error("[FormSubmit Fallback Failure] Standard HTML Form POST submission failed:", fallbackErr);
+      console.error("[NetlifyForms Fallback Failure] Standard HTML Form POST submission failed:", fallbackErr);
       return { success: false, error: "Pošiljanje ni uspelo. Prosimo kontaktirajte nas direktno na info@startlab.si." };
     }
   }

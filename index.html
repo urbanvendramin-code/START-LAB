@@ -49,6 +49,59 @@
   </head>
   <body>
     <div id="root"></div>
+    
+    <!-- Hidden forms for Netlify Forms detection. 
+         Netlify's build bot scans the HTML files at deploy-time and auto-provisions backend pipelines for these. -->
+    <div style="display: none;" aria-hidden="true">
+      <!-- Partner form -->
+      <form name="partner" data-netlify="true">
+        <input type="text" name="company" />
+        <input type="text" name="name" />
+        <input type="email" name="email" />
+        <textarea name="message"></textarea>
+      </form>
+
+      <!-- Developer form -->
+      <form name="developer" data-netlify="true">
+        <input type="text" name="devCompany" />
+        <input type="text" name="devName" />
+        <input type="email" name="devEmail" />
+        <input type="text" name="devExpertise" />
+        <textarea name="devMessage"></textarea>
+      </form>
+
+      <!-- Mentor form -->
+      <form name="mentor" data-netlify="true">
+        <input type="text" name="mentorName" />
+        <input type="email" name="mentorEmail" />
+        <input type="text" name="mentorArea" />
+        <textarea name="mentorMessage"></textarea>
+      </form>
+
+      <!-- General Contact form -->
+      <form name="general" data-netlify="true">
+        <input type="text" name="name" />
+        <input type="email" name="email" />
+        <textarea name="message"></textarea>
+      </form>
+
+      <!-- Newsletter form -->
+      <form name="newsletter" data-netlify="true">
+        <input type="email" name="email" />
+      </form>
+
+      <!-- Workshop Registration form -->
+      <form name="workshop" data-netlify="true">
+        <input type="text" name="name" />
+        <input type="email" name="email" />
+        <input type="text" name="phone" />
+        <input type="text" name="age" />
+        <input type="text" name="workshopTitle" />
+        <input type="text" name="dateSelected" />
+        <textarea name="note"></textarea>
+      </form>
+    </div>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
