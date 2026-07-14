@@ -154,7 +154,8 @@
     "subtitle_page": "Stopite v stik z nami za vsa vprašanja, informacije o vpisu ali morebitnih sodelovanjih.",
     "info_title": "Kontaktni podatki",
     "location": "Lokacija",
-    "city": "Solkan, Slovenija",
+    "city": "Velika pot 27, 5250 Solkan",
+    "map_title": "Kje nas najdete",
     "form": {
       "name": "Ime in priimek",
       "email": "Email",
