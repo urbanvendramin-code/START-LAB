@@ -194,14 +194,20 @@ export async function submitForm(
   const payload = getFriendlyPayload(apiEndpoint, data, formSubmitSubject);
 
   try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3500); // 3.5 seconds timeout
+
     const response = await fetch(`https://formsubmit.co/ajax/${targetEmail}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      signal: controller.signal
     });
+
+    clearTimeout(timeoutId);
 
     if (response.ok) {
       const result = await response.json();
@@ -214,7 +220,7 @@ export async function submitForm(
       throw new Error(`FormSubmit HTTP Error: ${response.status}`);
     }
   } catch (err: any) {
-    console.warn("[FormSubmit AJAX Failure] Background fetch failed (potentially blocked by adblocker). Invoking ULTIMATE HTML Form Failsafe...", err);
+    console.warn("[FormSubmit AJAX Failure] Background fetch failed (potentially blocked by adblocker or timed out). Invoking ULTIMATE HTML Form Failsafe...", err);
     
     // === ULTIMATE FAILSAFE: SUBMIT VIA HIDDEN IFRAME ===
     // This is 100% immune to adblockers because it uses native browser form POST targeting a hidden iframe.
