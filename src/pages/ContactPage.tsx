@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
-import { submitForm } from '../utils/formSubmit';
+import { submitForm, triggerDirectActivation } from '../utils/formSubmit';
 import { 
   Mail, 
   MapPin, 
@@ -113,60 +113,82 @@ export default function ContactPage() {
                  </button>
                </div>
              ) : (
-               <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="grid md:grid-cols-2 gap-5">
-                     <div className="space-y-2">
-                        <label className="text-xs font-display font-black uppercase text-slate-500">{t('contact.form.name')}</label>
-                        <input 
-                          type="text" 
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          required
-                          disabled={status === 'loading'}
-                          className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl px-4 py-3.5 outline-none focus:border-brand-red text-slate-800 font-medium font-sans text-sm focus:bg-white transition-all disabled:opacity-50" 
-                          placeholder={t('contact.form.placeholder')} 
-                        />
-                     </div>
-                     <div className="space-y-2">
-                        <label className="text-xs font-display font-black uppercase text-slate-500">{t('contact.form.email')}</label>
-                        <input 
-                          type="email" 
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          required
-                          disabled={status === 'loading'}
-                          className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl px-4 py-3.5 outline-none focus:border-brand-red text-slate-800 font-medium font-sans text-sm focus:bg-white transition-all disabled:opacity-50" 
-                          placeholder={t('contact.form.placeholder')} 
-                        />
-                     </div>
-                  </div>
-                  <div className="space-y-2">
-                     <label className="text-xs font-display font-black uppercase text-slate-500">{t('contact.form.message')}</label>
-                     <textarea 
-                       rows={5} 
-                       value={message}
-                       onChange={(e) => setMessage(e.target.value)}
-                       required
-                       disabled={status === 'loading'}
-                       className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl px-4 py-3.5 outline-none focus:border-brand-red text-slate-800 font-medium font-sans text-sm focus:bg-white transition-all resize-none disabled:opacity-50" 
-                       placeholder={t('contact.form.placeholder_msg')} 
-                     />
-                  </div>
-                  <button 
-                    type="submit" 
-                    disabled={status === 'loading'}
-                    className="btn-primary w-full justify-center py-4 mt-2 shadow-lg cursor-pointer flex items-center gap-2 disabled:opacity-80"
-                  >
-                    {status === 'loading' ? (
-                      <>
-                        <Loader2 className="animate-spin" size={20} />
-                        Pošiljanje...
-                      </>
-                    ) : (
-                      t('contact.form.submit')
-                    )}
-                  </button>
-               </form>
+               <>
+                 <form onSubmit={handleSubmit} className="space-y-5">
+                    <div className="grid md:grid-cols-2 gap-5">
+                       <div className="space-y-2">
+                          <label className="text-xs font-display font-black uppercase text-slate-500">{t('contact.form.name')}</label>
+                          <input 
+                            type="text" 
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                            disabled={status === 'loading'}
+                            className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl px-4 py-3.5 outline-none focus:border-brand-red text-slate-800 font-medium font-sans text-sm focus:bg-white transition-all disabled:opacity-50" 
+                            placeholder={t('contact.form.placeholder')} 
+                          />
+                       </div>
+                       <div className="space-y-2">
+                          <label className="text-xs font-display font-black uppercase text-slate-500">{t('contact.form.email')}</label>
+                          <input 
+                            type="email" 
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            disabled={status === 'loading'}
+                            className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl px-4 py-3.5 outline-none focus:border-brand-red text-slate-800 font-medium font-sans text-sm focus:bg-white transition-all disabled:opacity-50" 
+                            placeholder={t('contact.form.placeholder')} 
+                          />
+                       </div>
+                    </div>
+                    <div className="space-y-2">
+                       <label className="text-xs font-display font-black uppercase text-slate-500">{t('contact.form.message')}</label>
+                       <textarea 
+                         rows={5} 
+                         value={message}
+                         onChange={(e) => setMessage(e.target.value)}
+                         required
+                         disabled={status === 'loading'}
+                         className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl px-4 py-3.5 outline-none focus:border-brand-red text-slate-800 font-medium font-sans text-sm focus:bg-white transition-all resize-none disabled:opacity-50" 
+                         placeholder={t('contact.form.placeholder_msg')} 
+                       />
+                    </div>
+                    <button 
+                      type="submit" 
+                      disabled={status === 'loading'}
+                      className="btn-primary w-full justify-center py-4 mt-2 shadow-lg cursor-pointer flex items-center gap-2 disabled:opacity-80"
+                    >
+                      {status === 'loading' ? (
+                        <>
+                          <Loader2 className="animate-spin" size={20} />
+                          Pošiljanje...
+                        </>
+                      ) : (
+                        t('contact.form.submit')
+                      )}
+                    </button>
+                 </form>
+
+                 {/* FormSubmit Activation Helper Section */}
+                 <div className="mt-8 pt-6 border-t border-slate-100">
+                   <div className="bg-slate-50 border border-slate-200/60 rounded-2xl p-4 md:p-5 text-left">
+                     <h4 className="text-xs font-display font-black uppercase text-slate-700 tracking-wider flex items-center gap-2 mb-1.5">
+                       <AlertTriangle className="text-brand-red stroke-[2.5]" size={16} />
+                       Težave s prejemanjem e-pošte na GitHubu?
+                     </h4>
+                     <p className="text-xs text-slate-500 font-semibold leading-relaxed mb-4">
+                       Ker je vaša spletna stran statična (objavljena na GitHub Pages), za varno in brezplačno pošiljanje obrazcev uporabljamo platformo FormSubmit. Ob prvem pošiljanju je potrebno vaš e-poštni naslov <strong>info@startlab.si</strong> aktivirati. Kliknite spodnji gumb, ki bo sprožil aktivacijski e-mail. Preverite vaš nabiralnik (tudi Spam/Vsiljeno pošto) in kliknite "Activate Form".
+                     </p>
+                     <button
+                       type="button"
+                       onClick={triggerDirectActivation}
+                       className="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white font-display font-black uppercase text-[10px] tracking-wider py-2.5 px-4 rounded-xl transition-all inline-flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+                     >
+                       Sproži aktivacijski mail za info@startlab.si
+                     </button>
+                   </div>
+                 </div>
+               </>
              )}
           </div>
         </div>

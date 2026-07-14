@@ -241,3 +241,32 @@ export async function submitForm(
     }
   }
 }
+
+/**
+ * Triggers a direct browser-redirect submission to FormSubmit.co
+ * to force them to send the "Activate Form" email to info@startlab.si.
+ * Since this doesn't target a hidden iframe or run via fetch, it WILL navigate
+ * the user's browser to FormSubmit's activation page, guaranteeing the email is sent.
+ */
+export function triggerDirectActivation() {
+  const targetEmail = "info@startlab.si";
+  const form = document.createElement("form");
+  form.method = "POST";
+  form.action = `https://formsubmit.co/${targetEmail}`;
+  
+  const subjectInput = document.createElement("input");
+  subjectInput.type = "hidden";
+  subjectInput.name = "_subject";
+  subjectInput.value = "Aktivacija prejemnika obrazcev za Start Lab";
+  form.appendChild(subjectInput);
+
+  const testInput = document.createElement("input");
+  testInput.type = "hidden";
+  testInput.name = "Sporočilo";
+  testInput.value = "To je testni obrazec za aktivacijo prejemanja e-pošte na info@startlab.si.";
+  form.appendChild(testInput);
+
+  document.body.appendChild(form);
+  form.submit();
+}
+
