@@ -183,14 +183,14 @@ export default function ContactPage() {
               {t('contact.map_title', { defaultValue: 'Kje nas najdete' })}
             </h3>
             <p className="text-sm text-slate-500 font-semibold mt-1">
-              Velika pot 27, 5250 Solkan
+              {t('contact.city', { defaultValue: 'Velika pot 33, 5250 Solkan' })}
             </p>
           </div>
           
           <div className="play-card p-3 bg-white border-2 border-slate-950/10 shadow-[0_24px_50px_rgba(15,23,42,0.06)] overflow-hidden">
             <iframe 
               title="Start Lab Google Maps Location"
-              src="https://maps.google.com/maps?q=Velika%20pot%2027,%205250%20Solkan&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              src="https://maps.google.com/maps?q=Velika%20pot%2033,%205250%20Solkan&t=&z=16&ie=UTF8&iwloc=&output=embed"
               className="w-full h-[350px] md:h-[450px] rounded-[1.8rem] border-0"
               allowFullScreen={true}
               loading="lazy"
