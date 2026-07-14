@@ -258,7 +258,7 @@ async function startServer() {
   checkSmtpConnection();
 
   // API Call matching: Partner Form
-  app.post("/api/contact/partner", async (req, res) => {
+  app.post(["/api/contact/partner", "/api/submit-partner"], async (req, res) => {
     try {
       const { company, name, email, message } = req.body;
       const subject = `Start Lab Partnerstvo - ${company}`;
@@ -279,7 +279,7 @@ async function startServer() {
   });
 
   // API Call matching: Developer Form
-  app.post("/api/contact/developer", async (req, res) => {
+  app.post(["/api/contact/developer", "/api/submit-developer"], async (req, res) => {
     try {
       const { devCompany, devName, devEmail, devExpertise, devMessage } = req.body;
       const subject = `Start Lab Razvijalec Talentov - ${devName}${devCompany ? ` (${devCompany})` : ''}`;
@@ -301,7 +301,7 @@ async function startServer() {
   });
 
   // API Call matching: Mentor Form
-  app.post("/api/contact/mentor", async (req, res) => {
+  app.post(["/api/contact/mentor", "/api/submit-mentor"], async (req, res) => {
     try {
       const { mentorName, mentorEmail, mentorArea, mentorMessage } = req.body;
       const subject = `Start Lab Mentorstvo - ${mentorName}`;
@@ -322,7 +322,7 @@ async function startServer() {
   });
 
   // API Call matching: General Contact Form
-  app.post("/api/contact/general", async (req, res) => {
+  app.post(["/api/contact/general", "/api/submit-general"], async (req, res) => {
     try {
       const { name, email, message } = req.body;
       const subject = `Start Lab - Sporočilo od ${name}`;
@@ -342,7 +342,7 @@ async function startServer() {
   });
 
   // API Call matching: Newsletter subscription
-  app.post("/api/newsletter/subscribe", async (req, res) => {
+  app.post(["/api/newsletter/subscribe", "/api/submit-news"], async (req, res) => {
     try {
       const { email } = req.body;
       const subject = `Nova naročnina na novice - Start Lab`;
@@ -360,7 +360,7 @@ async function startServer() {
   });
 
   // API Call matching: Workshop Registration Form
-  app.post("/api/workshop/register", async (req, res) => {
+  app.post(["/api/workshop/register", "/api/submit-work"], async (req, res) => {
     try {
       const { name, email, phone, age, workshopTitle, dateSelected, note } = req.body;
       const subject = `Prijava na delavnico: ${workshopTitle} - ${name}`;
