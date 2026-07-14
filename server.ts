@@ -52,24 +52,16 @@ async function startServer() {
     next();
   });
 
-  // Enable CORS manually to allow requests from startlab.si and other origins
+  // Enable CORS manually to allow requests from any origin
   app.use((req, res, next) => {
     const origin = req.headers.origin;
     if (origin) {
-      if (
-        origin === "https://startlab.si" ||
-        origin === "https://www.startlab.si" ||
-        origin.endsWith(".run.app") ||
-        origin.includes("localhost") ||
-        origin.includes("127.0.0.1")
-      ) {
-        res.setHeader("Access-Control-Allow-Origin", origin);
-      }
+      res.setHeader("Access-Control-Allow-Origin", origin);
     } else {
       res.setHeader("Access-Control-Allow-Origin", "*");
     }
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
-    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,content-type,Accept");
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,content-type,Accept,Authorization");
     res.setHeader("Access-Control-Allow-Credentials", "true");
     
     // Handle OPTIONS preflight requests
