@@ -212,7 +212,14 @@ export async function submitForm(
     if (response.ok) {
       const result = await response.json();
       if (result && (result.success === "false" || result.success === false)) {
-        throw new Error(result.message || "FormSubmit service rejected the message.");
+        const msg = result.message || "";
+        if (msg.toLowerCase().includes("activate") || msg.toLowerCase().includes("activation")) {
+          return {
+            success: false,
+            error: "Aktivacija potrditve e-pošte je potrebna! FormSubmit je poslal aktivacijski mail na info@startlab.si. Prosimo, preverite vaš nabiralnik (tudi Spam/Vsiljeno pošto) in kliknite 'Activate Form'."
+          };
+        }
+        throw new Error(msg || "FormSubmit service rejected the message.");
       }
       console.log(`[FormSubmit Success] Message successfully dispatched to ${targetEmail} via direct browser pipeline!`);
       return { success: true };
