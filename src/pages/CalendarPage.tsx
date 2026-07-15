@@ -46,6 +46,7 @@ interface Event {
   longDescription?: string;
   ageGroup?: string;
   mentors?: string;
+  image?: string;
 }
 
 const getLocalizedEvents = (lang: string): Event[] => {
@@ -119,7 +120,8 @@ const getLocalizedEvents = (lang: string): Event[] => {
         ? enGrapheneDesc[idx] 
         : itGrapheneDesc[idx],
     ageGroup: ageText,
-    mentors: mentorsText
+    mentors: mentorsText,
+    image: 'https://res.cloudinary.com/dssxhjk8k/image/upload/v1784107569/grafenski_cip2_dxjwk5.jpg'
   }));
 
   // Add some secondary mock events to make the calendar rich and active
@@ -134,7 +136,8 @@ const getLocalizedEvents = (lang: string): Event[] => {
       description: isSl 
         ? 'Spoznajte postopek od 3D modeliranja do končnega izdelka s pomočjo 3D tiskalnikov.'
         : 'Learn the complete workflow from 3D modeling to physical objects on 3D printers.',
-      ageGroup: isSl ? '10 - 18 let' : '10 - 18 years'
+      ageGroup: isSl ? '10 - 18 let' : '10 - 18 years',
+      image: 'https://images.unsplash.com/photo-1615840287214-7fe58a8f3685?auto=format&fit=crop&w=800&q=80'
     },
     {
       id: 'other-2',
@@ -146,7 +149,8 @@ const getLocalizedEvents = (lang: string): Event[] => {
       description: isSl 
         ? 'Spoznajte kako pametne naprave berejo podatke iz senzorjev in upravljajo zunanje naprave.'
         : 'Explore how microcontrollers read environment variables and trigger mechanical elements.',
-      ageGroup: isSl ? '12 - 15 let' : '12 - 15 years'
+      ageGroup: isSl ? '12 - 15 let' : '12 - 15 years',
+      image: 'https://images.unsplash.com/photo-1608564697071-ddf911d8c3e5?auto=format&fit=crop&w=800&q=80'
     },
     {
       id: 'other-3',
@@ -158,7 +162,8 @@ const getLocalizedEvents = (lang: string): Event[] => {
       description: isSl 
         ? 'Naučite se pripraviti načrte za laserski razrez in izdelati unikatne izdelke.'
         : 'Discover how to format vector layouts for high-precision laser routing.',
-      ageGroup: isSl ? '10 - 15 let' : '10 - 15 years'
+      ageGroup: isSl ? '10 - 15 let' : '10 - 15 years',
+      image: 'https://images.unsplash.com/photo-1618090584126-129cd1f3fbaa?auto=format&fit=crop&w=800&q=80'
     },
     {
       id: 'other-4',
@@ -170,7 +175,8 @@ const getLocalizedEvents = (lang: string): Event[] => {
       description: isSl 
         ? 'Pridite, preizkusite našo opremo in se posvetujte z našimi mentorji.'
         : 'Drop by, test our high-tech instrumentation, and brainstorm your hardware ideas.',
-      ageGroup: isSl ? 'Vse starosti' : 'All ages'
+      ageGroup: isSl ? 'Vse starosti' : 'All ages',
+      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80'
     }
   ];
 
@@ -448,6 +454,17 @@ export default function CalendarPage() {
                               )}
                             </div>
                             
+                            {event.image && (
+                              <div className="mb-5 overflow-hidden rounded-2xl border-2 border-slate-950/10 shadow-sm aspect-square">
+                                <img
+                                  src={event.image}
+                                  alt={event.title}
+                                  referrerPolicy="no-referrer"
+                                  className="w-full h-full object-cover hover:scale-[1.03] transition-transform duration-300"
+                                />
+                              </div>
+                            )}
+
                             <h4 className="font-display font-black text-xl md:text-2xl mb-4 text-slate-950 leading-tight">
                               {event.title}
                             </h4>
