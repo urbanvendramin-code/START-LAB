@@ -55,7 +55,7 @@ export default function Navbar() {
       </div>
 
       {/* Main Header (Start Lab Logo & Navigation) - Black Background */}
-      <div className="bg-slate-950 border-b border-slate-900 px-4 sm:px-6 sticky top-0 z-50 shadow-md">
+      <div className="bg-slate-950 border-b border-slate-900 px-4 sm:px-6 sticky top-0 z-50 shadow-md relative">
         <div className="max-w-7xl mx-auto min-h-16 xs:min-h-20 lg:min-h-24 py-2.5 lg:py-2 flex items-center justify-between w-full">
           <Link 
             to="/" 
@@ -141,79 +141,79 @@ export default function Navbar() {
             </button>
           </div>
         </div>
-      </div>
 
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="lg:hidden absolute top-full left-0 right-0 w-full border-b border-slate-800 bg-slate-950/95 backdrop-blur-2xl px-6 py-6 flex flex-col gap-5 shadow-2xl"
-          >
-            {navLinks.map((link) => {
-              const isKoledar = link.path === '/koledar';
-              return (
-                <Link 
-                  key={link.name} 
-                  to={link.path} 
-                  className={`text-lg font-display font-black uppercase tracking-tight transition-colors py-1 flex items-center justify-between ${
-                    isKoledar ? 'text-brand-red animate-pulse' : 'text-white hover:text-brand-red'
-                  }`}
-                  onClick={() => setIsOpen(false)}
-                >
-                  <span>{link.name}</span>
-                  {isKoledar && (
-                    <span className="relative flex h-2.5 w-2.5 mr-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-red opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-red"></span>
-                    </span>
-                  )}
-                </Link>
-              );
-            })}
-            <div className="flex gap-2 justify-center border-t border-slate-900 pt-4">
-              {languages.map((lang) => (
-                <button 
-                  key={lang.code}
-                  onClick={() => {
-                    i18n.changeLanguage(lang.code);
-                    setIsOpen(false);
-                  }}
-                  className={`flex items-center gap-2 text-xs font-bold px-3 py-2 rounded-xl ${i18n.language === lang.code ? 'bg-brand-red text-white font-extrabold' : 'bg-slate-900 text-slate-300 hover:bg-slate-800'}`}
-                >
-                  <img 
-                    src={lang.flagUrl} 
-                    alt={`${lang.name} flag`} 
-                    className="w-4 h-3 object-cover rounded-sm border border-white/20" 
-                    referrerPolicy="no-referrer"
-                  />
-                  {lang.name}
-                </button>
-              ))}
-            </div>
-            <button
-              onClick={() => {
-                setIsOpen(false);
-                setIsNewsletterOpen(true);
-              }}
-              className="hidden"
+        {/* Mobile Menu Overlay */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="lg:hidden absolute top-full left-0 right-0 w-full border-b border-slate-800 bg-slate-950/95 backdrop-blur-2xl px-6 py-6 flex flex-col gap-5 shadow-2xl z-50"
             >
-              <Mail size={16} className="stroke-[2.5]" />
-              <span>{t('nav.newsletter_btn')}</span>
-            </button>
-            <Link 
-              to="/delavnice" 
-              className="bg-brand-red hover:bg-brand-red/90 text-white font-display font-bold text-center uppercase tracking-wider py-4 rounded-2xl transition-all shadow-[0_4px_0_0_rgba(222,59,59,0.2)]"
-              onClick={() => setIsOpen(false)}
-            >
-              {t('nav.delavnice')}
-            </Link>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              {navLinks.map((link) => {
+                const isKoledar = link.path === '/koledar';
+                return (
+                  <Link 
+                    key={link.name} 
+                    to={link.path} 
+                    className={`text-lg font-display font-black uppercase tracking-tight transition-colors py-1 flex items-center justify-between ${
+                      isKoledar ? 'text-brand-red animate-pulse' : 'text-white hover:text-brand-red'
+                    }`}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <span>{link.name}</span>
+                    {isKoledar && (
+                      <span className="relative flex h-2.5 w-2.5 mr-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-red opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-red"></span>
+                      </span>
+                    )}
+                  </Link>
+                );
+              })}
+              <div className="flex gap-2 justify-center border-t border-slate-900 pt-4">
+                {languages.map((lang) => (
+                  <button 
+                    key={lang.code}
+                    onClick={() => {
+                      i18n.changeLanguage(lang.code);
+                      setIsOpen(false);
+                    }}
+                    className={`flex items-center gap-2 text-xs font-bold px-3 py-2 rounded-xl ${i18n.language === lang.code ? 'bg-brand-red text-white font-extrabold' : 'bg-slate-900 text-slate-300 hover:bg-slate-800'}`}
+                  >
+                    <img 
+                      src={lang.flagUrl} 
+                      alt={`${lang.name} flag`} 
+                      className="w-4 h-3 object-cover rounded-sm border border-white/20" 
+                      referrerPolicy="no-referrer"
+                    />
+                    {lang.name}
+                  </button>
+                ))}
+              </div>
+              <button
+                onClick={() => {
+                  setIsOpen(false);
+                  setIsNewsletterOpen(true);
+                }}
+                className="hidden"
+              >
+                <Mail size={16} className="stroke-[2.5]" />
+                <span>{t('nav.newsletter_btn')}</span>
+              </button>
+              <Link 
+                to="/delavnice" 
+                className="bg-brand-red hover:bg-brand-red/90 text-white font-display font-bold text-center uppercase tracking-wider py-4 rounded-2xl transition-all shadow-[0_4px_0_0_rgba(222,59,59,0.2)]"
+                onClick={() => setIsOpen(false)}
+              >
+                {t('nav.delavnice')}
+              </Link>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
 
       {/* Newsletter signup modal Dialog */}
       <AnimatePresence>
