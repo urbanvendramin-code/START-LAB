@@ -50,44 +50,6 @@ interface Event {
 }
 
 const getLocalizedEvents = (lang: string): Event[] => {
-  // September Mondays in 2026: 7, 14, 21, 28
-  // October Mondays in 2026: 5, 12
-  const grapheneDates = [
-    new Date(2026, 8, 7),
-    new Date(2026, 8, 14),
-    new Date(2026, 8, 21),
-    new Date(2026, 8, 28),
-    new Date(2026, 9, 5),
-    new Date(2026, 9, 12)
-  ];
-
-  const slGrapheneDesc = [
-    "Izdelava grafena iz grafita in opazovanje pod optičnim mikroskopom. Spoznavanje materiala prihodnosti skozi prve fizikalne poskuse.",
-    "Načrtovanje elektrod grafenskega tranzistorja. Spoznaj, kako nastajajo elektronske komponente prihodnosti.",
-    "Računalniška simulacija delovanja tranzistorja. Preveri delovanje in se poglobi v delovanje vgrajenih struktur.",
-    "Spoznavanje postopka optične litografije in ogled čiste sobe v laboratoriju (po dogovoru). Edinstven vpogled v vrhunski znanstveni laboratorij.",
-    "Električne meritve izdelanega grafenskega tranzistorja. Preizkusi svoje vezje in izmeri njegove električne lastnosti.",
-    "Priprava raziskovalnega poročila in predstavitev rezultatov. Zaključi svojo pot mladega raziskovalca in pridobi izkušnje za prihodnost."
-  ];
-
-  const enGrapheneDesc = [
-    "Fabricating graphene from graphite and observing it with an optical microscope. Discovering the material of the future.",
-    "Designing electrodes of a graphene transistor. Learn how future electronic components are designed.",
-    "Computer simulation of transistor behavior. Verify operations and dive deep into microarchitectures.",
-    "Understanding optical lithography and touring the cleanroom laboratory. A rare opportunity inside a high-tech facility.",
-    "Electrical measurements of the fabricated graphene transistor. Test your device and measure electrical characteristics.",
-    "Preparing a research report and presenting results. Wrap up your scientific journey and gain invaluable skills."
-  ];
-
-  const itGrapheneDesc = [
-    "Fabbricazione del grafene dalla grafite e osservazione con microscopio ottico. Scopri il materiale del futuro.",
-    "Progettazione degli elettrodi di un transistor al grafene. Scopri come nascono i componenti elettronici.",
-    "Simulazione al computer del funzionamento del transistor. Verifica le operazioni e comprendi le microstrutture.",
-    "Comprendere il processo di litografia ottica e visitare la camera bianca. Un'opportunità unica in un vero laboratorio.",
-    "Misurazioni elettriche del transistor al grafene fabbricato. Metti alla prova il tuo circuito e misura le proprietà.",
-    "Preparazione di una relazione di ricerca e presentazione dei risultati. Concludi il tuo viaggio scientifico."
-  ];
-
   const isSl = lang !== 'en' && lang !== 'it';
   const isEn = lang === 'en';
 
@@ -105,23 +67,83 @@ const getLocalizedEvents = (lang: string): Event[] => {
     ? "LFOS, Univerza v Novi Gorici" 
     : "LFOS, University of Nova Gorica";
 
-  const grapheneEvents = grapheneDates.map((date, idx) => ({
+  const rawGrapheneEvents = [
+    {
+      date: new Date(2026, 8, 7), // Sept 7
+      time: '17:00 - 19:00',
+      location: isSl ? 'Startlab Solkan' : 'Startlab Solkan',
+      title: isSl ? 'Grafenski čip – Sklop 1' : 'Graphene Chip – Part 1',
+      description: isSl 
+        ? "Sklop 1: Izdelava grafena iz grafita in opazovanje pod optičnim mikroskopom. Spoznavanje materiala prihodnosti skozi prve fizikalne poskuse."
+        : "Part 1: Fabricating graphene from graphite and observing it with optical microscope. Getting to know the material of the future through the first physics experiments."
+    },
+    {
+      date: new Date(2026, 8, 14), // Sept 14
+      time: '17:00 - 19:00',
+      location: isSl ? 'Startlab Solkan' : 'Startlab Solkan',
+      title: isSl ? 'Grafenski čip – Sklop 2' : 'Graphene Chip – Part 2',
+      description: isSl 
+        ? "Sklop 2: Načrtovanje elektrod grafenskega tranzistorja. Spoznaj, kako nastajajo elektronske komponente prihodnosti."
+        : "Part 2: Designing electrodes of a graphene transistor. Learn how electronic components of the future are made."
+    },
+    {
+      date: new Date(2026, 8, 18), // Sept 18
+      time: '16h - 18h',
+      location: isSl ? 'LFOS Ajdovščina (opcija)' : 'LFOS Ajdovščina (optional)',
+      title: isSl ? 'Predstavitev LFOS Ajdovščina (opcija)' : 'LFOS Presentation Ajdovščina (optional)',
+      description: isSl 
+        ? "Predstavitev Laboratorija za fiziko organskih snovi (LFOS) v Ajdovščini. Spoznavanje raziskovalnega dela, vrhunske znanstvene opreme in možnosti mentorstva na področju naprednih polprevodnikov."
+        : "Presentation of the Laboratory for Organic Matter Physics (LFOS) in Ajdovščina. Learn about research work, high-end scientific equipment and mentoring possibilities in the field of advanced semiconductors."
+    },
+    {
+      date: new Date(2026, 8, 21), // Sept 21
+      time: '17:00 - 19:00',
+      location: isSl ? 'Startlab Solkan' : 'Startlab Solkan',
+      title: isSl ? 'Grafenski čip – Sklop 3' : 'Graphene Chip – Part 3',
+      description: isSl 
+        ? "Sklop 3: Računalniška simulacija delovanja tranzistorja. Preveri delovanje in se poglobi v delovanje vgrajenih struktur."
+        : "Part 3: Computer simulation of transistor operation. Verify functionality and dive deep into built-in structures."
+    },
+    {
+      date: new Date(2026, 8, 25), // Sept 25
+      time: '17h - 19h',
+      location: isSl ? 'LFOS Ajdovščina' : 'LFOS Ajdovščina',
+      title: isSl ? 'Ogled čiste sobe in litografije v LFOS Ajdovščina (Sklop 4)' : 'Cleanroom Tour and Lithography at LFOS (Part 4)',
+      description: isSl 
+        ? "Sklop 4: Ogled čiste sobe (cleanroom) in spoznavanje optične litografije v Laboratoriju za fiziko organskih snovi (LFOS) Ajdovščina. Edinstven neposreden vpogled v vrhunski znanstveni laboratorij."
+        : "Part 4: Guided cleanroom tour and introduction to optical lithography at the Laboratory for Organic Matter Physics (LFOS) Ajdovščina. An exclusive direct look into a top scientific research laboratory."
+    },
+    {
+      date: new Date(2026, 8, 28), // Sept 28
+      time: '17:00 - 19:00',
+      location: isSl ? 'Startlab Solkan' : 'Startlab Solkan',
+      title: isSl ? 'Grafenski čip – Sklop 5' : 'Graphene Chip – Part 5',
+      description: isSl 
+        ? "Sklop 5: Električne meritve izdelanega grafenskega tranzistorja. Preizkusi svoje vezje in izmeri njegove električne lastnosti."
+        : "Part 5: Electrical measurements of the fabricated graphene transistor. Test your circuit and measure its electrical characteristics."
+    },
+    {
+      date: new Date(2026, 9, 5), // Oct 5
+      time: '17:00 - 19:00',
+      location: isSl ? 'Startlab Solkan' : 'Startlab Solkan',
+      title: isSl ? 'Grafenski čip – Sklop 6' : 'Graphene Chip – Part 6',
+      description: isSl 
+        ? "Sklop 6: Priprava raziskovalnega poročila in predstavitev rezultatov. Zaključi svojo pot mladega raziskovalca in pridobi izkušnje za prihodnost."
+        : "Part 6: Research report preparation and presentation of results. Conclude your journey as a young researcher and gain valuable experience for the future."
+    }
+  ];
+
+  const grapheneEvents = rawGrapheneEvents.map((item, idx) => ({
     id: `graphene-session-${idx + 1}`,
-    title: titleText,
-    date: date,
-    time: '17:00 - 19:00',
-    location: isSl 
-      ? 'Prostori Start Laba, Solkan' 
-      : 'Start Lab Premises, Solkan',
+    title: item.title,
+    date: item.date,
+    time: item.time,
+    location: item.location,
     category: 'workshop' as const,
-    description: isSl 
-      ? slGrapheneDesc[idx] 
-      : isEn 
-        ? enGrapheneDesc[idx] 
-        : itGrapheneDesc[idx],
+    description: item.description,
     ageGroup: ageText,
     mentors: mentorsText,
-    image: 'https://res.cloudinary.com/dssxhjk8k/image/upload/v1784107569/grafenski_cip2_dxjwk5.jpg'
+    image: 'https://res.cloudinary.com/dssxhjk8k/image/upload/v1784192548/grafenski_cip3_tucwpa.jpg'
   }));
 
   // Add some secondary mock events to make the calendar rich and active
@@ -455,12 +477,12 @@ export default function CalendarPage() {
                             </div>
                             
                             {event.image && (
-                              <div className="mb-5 overflow-hidden rounded-2xl border-2 border-slate-950/10 shadow-sm aspect-square">
+                              <div className="mb-5 overflow-hidden rounded-2xl border-2 border-slate-950/10 shadow-sm">
                                 <img
                                   src={event.image}
                                   alt={event.title}
                                   referrerPolicy="no-referrer"
-                                  className="w-full h-full object-cover hover:scale-[1.03] transition-transform duration-300"
+                                  className="w-full h-auto block hover:scale-[1.03] transition-transform duration-300"
                                 />
                               </div>
                             )}
@@ -580,12 +602,41 @@ export default function CalendarPage() {
                                           </div>
 
                                           <div className="border-l-2 border-brand-red pl-2.5">
-                                            <p className="font-bold text-slate-950">{isSlovenian ? "📅 Trajanje in skupine" : "📅 Format & Cohorts"}</p>
-                                            <p className="text-[11px] text-slate-700 leading-normal">
-                                              {isSlovenian 
-                                                ? "Poteka 6 zaporednih tednov, enkrat tedensko, v prostorih Start Laba v Solkanu."
-                                                : "Spans 6 consecutive weeks, once per week, hosted at the Start Lab premises in Solkan."}
-                                            </p>
+                                            <p className="font-bold text-slate-950">{isSlovenian ? "📅 Urnik in lokacije delavnic" : "📅 Workshop Schedule & Locations"}</p>
+                                            <div className="mt-2 space-y-1 bg-slate-50 border border-slate-100 rounded-lg p-2.5 font-mono text-[10px] text-slate-800">
+                                              <p className="flex justify-between border-b border-slate-100 pb-1">
+                                                <span><strong>7. 9.</strong> 17:00 - 19:00</span>
+                                                <span className="text-brand-red">Solkan (Sklop 1)</span>
+                                              </p>
+                                              <p className="flex justify-between border-b border-slate-100 py-1">
+                                                <span><strong>14. 9.</strong> 17:00 - 19:00</span>
+                                                <span className="text-brand-red">Solkan (Sklop 2)</span>
+                                              </p>
+                                              <p className="flex justify-between border-b border-slate-100 py-1 bg-brand-red/5 px-1 rounded">
+                                                <span><strong>18. 9.</strong> 16h - 18h</span>
+                                                <span className="text-brand-red font-semibold text-right">
+                                                  {isSlovenian ? "predstavitev LFOS Ajdovščina (opcija)" : "presentation of LFOS Ajdovščina (optional)"}
+                                                </span>
+                                              </p>
+                                              <p className="flex justify-between border-b border-slate-100 py-1">
+                                                <span><strong>21. 9.</strong> 17:00 - 19:00</span>
+                                                <span className="text-brand-red">Solkan (Sklop 3)</span>
+                                              </p>
+                                              <p className="flex justify-between border-b border-slate-100 py-1 bg-brand-red/5 px-1 rounded">
+                                                <span><strong>25. 9.</strong> 17h - 19h</span>
+                                                <span className="text-brand-red font-semibold text-right">
+                                                  {isSlovenian ? "ogled čiste sobe in litografije v LFOS Ajdovščina (Sklop 4)" : "cleanroom tour and lithography at LFOS Ajdovščina (Part 4)"}
+                                                </span>
+                                              </p>
+                                              <p className="flex justify-between border-b border-slate-100 py-1">
+                                                <span><strong>28. 9.</strong> 17:00 - 19:00</span>
+                                                <span className="text-brand-red">Solkan (Sklop 5)</span>
+                                              </p>
+                                              <p className="flex justify-between pt-1">
+                                                <span><strong>5. 10.</strong> 17:00 - 19:00</span>
+                                                <span className="text-brand-red">Solkan (Sklop 6)</span>
+                                              </p>
+                                            </div>
                                           </div>
                                         </div>
 
