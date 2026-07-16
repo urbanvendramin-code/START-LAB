@@ -52,6 +52,7 @@ interface Event {
 const getLocalizedEvents = (lang: string): Event[] => {
   const isSl = lang !== 'en' && lang !== 'it';
   const isEn = lang === 'en';
+  const isIt = lang === 'it';
 
   const titleText = isSl 
     ? "Delavnica izdelave grafenskega čipa" 
@@ -61,75 +62,93 @@ const getLocalizedEvents = (lang: string): Event[] => {
 
   const ageText = isSl 
     ? "10 - 15 let" 
-    : "10 - 15 years";
+    : isIt
+      ? "10 - 15 anni"
+      : "10 - 15 years";
 
   const mentorsText = isSl 
     ? "LFOS, Univerza v Novi Gorici" 
-    : "LFOS, University of Nova Gorica";
+    : isIt
+      ? "LFOS, Università di Nova Gorica"
+      : "LFOS, University of Nova Gorica";
 
   const rawGrapheneEvents = [
     {
       date: new Date(2026, 8, 7), // Sept 7
       time: '17:00 - 19:00',
       location: isSl ? 'Startlab Solkan' : 'Startlab Solkan',
-      title: isSl ? 'Grafenski čip – Sklop 1' : 'Graphene Chip – Part 1',
+      title: isSl ? 'Grafenski čip – Sklop 1' : isIt ? 'Chip al grafene – Parte 1' : 'Graphene Chip – Part 1',
       description: isSl 
         ? "Sklop 1: Izdelava grafena iz grafita in opazovanje pod optičnim mikroskopom. Spoznavanje materiala prihodnosti skozi prve fizikalne poskuse."
-        : "Part 1: Fabricating graphene from graphite and observing it with optical microscope. Getting to know the material of the future through the first physics experiments."
+        : isIt
+          ? "Parte 1: Produzione di grafene dalla grafite e osservazione al microscopio ottico. Conoscere il materiale del futuro attraverso i primi esperimenti fisici."
+          : "Part 1: Fabricating graphene from graphite and observing it with optical microscope. Getting to know the material of the future through the first physics experiments."
     },
     {
       date: new Date(2026, 8, 14), // Sept 14
       time: '17:00 - 19:00',
       location: isSl ? 'Startlab Solkan' : 'Startlab Solkan',
-      title: isSl ? 'Grafenski čip – Sklop 2' : 'Graphene Chip – Part 2',
+      title: isSl ? 'Grafenski čip – Sklop 2' : isIt ? 'Chip al grafene – Parte 2' : 'Graphene Chip – Part 2',
       description: isSl 
         ? "Sklop 2: Načrtovanje elektrod grafenskega tranzistorja. Spoznaj, kako nastajajo elektronske komponente prihodnosti."
-        : "Part 2: Designing electrodes of a graphene transistor. Learn how electronic components of the future are made."
+        : isIt
+          ? "Parte 2: Progettazione degli elettrodi di un transistor al grafene. Scopri come nascono i componenti elettronici del futuro."
+          : "Part 2: Designing electrodes of a graphene transistor. Learn how electronic components of the future are made."
     },
     {
       date: new Date(2026, 8, 18), // Sept 18
       time: '16h - 18h',
-      location: isSl ? 'LFOS Ajdovščina (opcija)' : 'LFOS Ajdovščina (optional)',
-      title: isSl ? 'Predstavitev LFOS Ajdovščina (opcija)' : 'LFOS Presentation Ajdovščina (optional)',
+      location: isSl ? 'LFOS Ajdovščina (opcija)' : isIt ? 'LFOS Ajdovščina (opzionale)' : 'LFOS Ajdovščina (optional)',
+      title: isSl ? 'Predstavitev LFOS Ajdovščina (opcija)' : isIt ? 'Presentazione LFOS Ajdovščina (opzionale)' : 'LFOS Presentation Ajdovščina (optional)',
       description: isSl 
         ? "Predstavitev Laboratorija za fiziko organskih snovi (LFOS) v Ajdovščini. Spoznavanje raziskovalnega dela, vrhunske znanstvene opreme in možnosti mentorstva na področju naprednih polprevodnikov."
-        : "Presentation of the Laboratory for Organic Matter Physics (LFOS) in Ajdovščina. Learn about research work, high-end scientific equipment and mentoring possibilities in the field of advanced semiconductors."
+        : isIt
+          ? "Presentazione del Laboratorio di Fisica delle Sostanze Organiche (LFOS) ad Ajdovščina. Conoscere il lavoro di ricerca, le attrezzature scientifiche all'avanguardia e le opportunità di tutoraggio nel campo dei semiconduttori avanzati."
+          : "Presentation of the Laboratory for Organic Matter Physics (LFOS) in Ajdovščina. Learn about research work, high-end scientific equipment and mentoring possibilities in the field of advanced semiconductors."
     },
     {
       date: new Date(2026, 8, 21), // Sept 21
       time: '17:00 - 19:00',
-      location: isSl ? 'Startlab Solkan' : 'Startlab Solkan',
-      title: isSl ? 'Grafenski čip – Sklop 3' : 'Graphene Chip – Part 3',
+      location: 'Startlab Solkan',
+      title: isSl ? 'Grafenski čip – Sklop 3' : isIt ? 'Chip al grafene – Parte 3' : 'Graphene Chip – Part 3',
       description: isSl 
         ? "Sklop 3: Računalniška simulacija delovanja tranzistorja. Preveri delovanje in se poglobi v delovanje vgrajenih struktur."
-        : "Part 3: Computer simulation of transistor operation. Verify functionality and dive deep into built-in structures."
+        : isIt
+          ? "Parte 3: Simulazione al computer del funzionamento del transistor. Verifica il funzionamento e approfondisci la conoscenza delle strutture integrate."
+          : "Part 3: Computer simulation of transistor operation. Verify functionality and dive deep into built-in structures."
     },
     {
       date: new Date(2026, 8, 25), // Sept 25
       time: '17h - 19h',
-      location: isSl ? 'LFOS Ajdovščina' : 'LFOS Ajdovščina',
-      title: isSl ? 'Ogled čiste sobe in litografije v LFOS Ajdovščina (Sklop 4)' : 'Cleanroom Tour and Lithography at LFOS (Part 4)',
+      location: isSl ? 'LFOS Ajdovščina' : isIt ? 'LFOS Ajdovščina' : 'LFOS Ajdovščina',
+      title: isSl ? 'Ogled čiste sobe in litografije v LFOS Ajdovščina (Sklop 4)' : isIt ? 'Visita alla camera bianca e alla litografia presso LFOS ad Ajdovščina (Parte 4)' : 'Cleanroom Tour and Lithography at LFOS (Part 4)',
       description: isSl 
         ? "Sklop 4: Ogled čiste sobe (cleanroom) in spoznavanje optične litografije v Laboratoriju za fiziko organskih snovi (LFOS) Ajdovščina. Edinstven neposreden vpogled v vrhunski znanstveni laboratorij."
-        : "Part 4: Guided cleanroom tour and introduction to optical lithography at the Laboratory for Organic Matter Physics (LFOS) Ajdovščina. An exclusive direct look into a top scientific research laboratory."
+        : isIt
+          ? "Parte 4: Visita guidata alla camera bianca (cleanroom) e introduzione alla litografia ottica presso il Laboratorio di Fisica delle Sostanze Organiche (LFOS) ad Ajdovščina. Uno sguardo diretto ed esclusivo all'interno di un laboratorio di ricerca scientifica d'eccellenza."
+          : "Part 4: Guided cleanroom tour and introduction to optical lithography at the Laboratory for Organic Matter Physics (LFOS) Ajdovščina. An exclusive direct look into a top scientific research laboratory."
     },
     {
       date: new Date(2026, 8, 28), // Sept 28
       time: '17:00 - 19:00',
-      location: isSl ? 'Startlab Solkan' : 'Startlab Solkan',
-      title: isSl ? 'Grafenski čip – Sklop 5' : 'Graphene Chip – Part 5',
+      location: 'Startlab Solkan',
+      title: isSl ? 'Grafenski čip – Sklop 5' : isIt ? 'Chip al grafene – Parte 5' : 'Graphene Chip – Part 5',
       description: isSl 
         ? "Sklop 5: Električne meritve izdelanega grafenskega tranzistorja. Preizkusi svoje vezje in izmeri njegove električne lastnosti."
-        : "Part 5: Electrical measurements of the fabricated graphene transistor. Test your circuit and measure its electrical characteristics."
+        : isIt
+          ? "Parte 5: Misurazioni elettriche del transistor al grafene fabbricato. Metti alla prova il tuo circuito e misura le sue proprietà elettriche."
+          : "Part 5: Electrical measurements of the fabricated graphene transistor. Test your circuit and measure its electrical characteristics."
     },
     {
       date: new Date(2026, 9, 5), // Oct 5
       time: '17:00 - 19:00',
-      location: isSl ? 'Startlab Solkan' : 'Startlab Solkan',
-      title: isSl ? 'Grafenski čip – Sklop 6' : 'Graphene Chip – Part 6',
+      location: 'Startlab Solkan',
+      title: isSl ? 'Grafenski čip – Sklop 6' : isIt ? 'Chip al grafene – Parte 6' : 'Graphene Chip – Part 6',
       description: isSl 
         ? "Sklop 6: Priprava raziskovalnega poročila in predstavitev rezultatov. Zaključi svojo pot mladega raziskovalca in pridobi izkušnje za prihodnost."
-        : "Part 6: Research report preparation and presentation of results. Conclude your journey as a young researcher and gain valuable experience for the future."
+        : isIt
+          ? "Parte 6: Preparazione del rapporto di ricerca e presentazione dei risultati. Concludi il tuo percorso come giovane ricercatore e acquisisci preziose esperienze per il futuro."
+          : "Part 6: Research report preparation and presentation of results. Conclude your journey as a young researcher and gain valuable experience for the future."
     }
   ];
 
@@ -151,73 +170,89 @@ const getLocalizedEvents = (lang: string): Event[] => {
       date: new Date(2026, 8, 8), // Sept 8
       time: '17:00 - 19:00',
       location: 'Startlab Solkan',
-      title: isSl ? 'Natisni in izreži – Sklop 1' : 'Print & Cut – Part 1',
+      title: isSl ? 'Natisni in izreži – Sklop 1' : isIt ? 'Stampa e Taglia – Parte 1' : 'Print & Cut – Part 1',
       description: isSl 
         ? "Sklop 1: Uvod v 3D modeliranje z Onshape. Spoznaj osnove risanja v 3D in začni načrtovati svoj unikatni izdelek."
-        : "Part 1: Intro to 3D modeling with Onshape. Learn 3D drafting basics and start designing your unique product."
+        : isIt
+          ? "Parte 1: Introduzione alla modellazione 3D con Onshape. Impara le basi del disegno in 3D e inizia a progettare il tuo prodotto unico."
+          : "Part 1: Intro to 3D modeling with Onshape. Learn 3D drafting basics and start designing your unique product."
     },
     {
       date: new Date(2026, 8, 15), // Sept 15
       time: '17:00 - 19:00',
       location: 'Startlab Solkan',
-      title: isSl ? 'Natisni in izreži – Sklop 2' : 'Print & Cut – Part 2',
+      title: isSl ? 'Natisni in izreži – Sklop 2' : isIt ? 'Stampa e Taglia – Parte 2' : 'Print & Cut – Part 2',
       description: isSl 
         ? "Sklop 2: Naprednejše 3D modeliranje z Onshape. Prilagodi dimenzije in pripravi model za uvoz v program za rezanje."
-        : "Part 2: Advanced 3D modeling with Onshape. Adjust dimensions and prepare your model for importing into slicers."
+        : isIt
+          ? "Parte 2: Modellazione 3D avanzata con Onshape. Regola le dimensioni e prepara il modello per l'importazione nel programma di taglio (slicer)."
+          : "Part 2: Advanced 3D modeling with Onshape. Adjust dimensions and prepare your model for importing into slicers."
     },
     {
       date: new Date(2026, 8, 22), // Sept 22
       time: '17:00 - 19:00',
       location: 'Startlab Solkan',
-      title: isSl ? 'Natisni in izreži – Sklop 3' : 'Print & Cut – Part 3',
+      title: isSl ? 'Natisni in izreži – Sklop 3' : isIt ? 'Stampa e Taglia – Parte 3' : 'Print & Cut – Part 3',
       description: isSl 
         ? "Sklop 3: Priprava v programu Bambu Studio. Nauči se nastaviti parametre tiska (polnilo, sloji, podpora) in spoznaj profesionalne tiskalnike."
-        : "Part 3: Preparation in Bambu Studio. Learn to set up printing parameters (infill, layers, supports) and configure professional 3D printers."
+        : isIt
+          ? "Parte 3: Preparazione nel programma Bambu Studio. Impara a impostare i parametri di stampa (riempimento, strati, supporti) e scopri le stampanti professionali."
+          : "Part 3: Preparation in Bambu Studio. Learn to set up printing parameters (infill, layers, supports) and configure professional 3D printers."
     },
     {
       date: new Date(2026, 8, 29), // Sept 29
       time: '17:00 - 19:00',
       location: 'Startlab Solkan',
-      title: isSl ? 'Natisni in izreži – Sklop 4' : 'Print & Cut – Part 4',
+      title: isSl ? 'Natisni in izreži – Sklop 4' : isIt ? 'Stampa e Taglia – Parte 4' : 'Print & Cut – Part 4',
       description: isSl 
         ? "Sklop 4: Tiskanje in preizkus prvega 3D izdelka. Spremljanje procesa tiska in analiza rezultatov."
-        : "Part 4: Printing and testing the first 3D product. Live monitoring of the print process and result analysis."
+        : isIt
+          ? "Parte 4: Stampa e test del primo prodotto 3D. Monitoraggio del processo di stampa e analisi dei risultati."
+          : "Part 4: Printing and testing the first 3D product. Live monitoring of the print process and result analysis."
     },
     {
       date: new Date(2026, 9, 6), // Oct 6
       time: '17:00 - 19:00',
       location: 'Startlab Solkan',
-      title: isSl ? 'Natisni in izreži – Sklop 5' : 'Print & Cut – Part 5',
+      title: isSl ? 'Natisni in izreži – Sklop 5' : isIt ? 'Stampa e Taglia – Parte 5' : 'Print & Cut – Part 5',
       description: isSl 
         ? "Sklop 5: Oblikovanje v RDWorks za laserski razrez. Spoznaj vektorsko risanje in pripravi načrt za laserski razrez ter graviranje."
-        : "Part 5: Designing in RDWorks for laser cutting. Master vector drawing and compile blueprints for laser cutting and engraving."
+        : isIt
+          ? "Parte 5: Progettazione in RDWorks per il taglio laser. Scopri il disegno vettoriale e prepara il progetto per il taglio e l'incisione laser."
+          : "Part 5: Designing in RDWorks for laser cutting. Master vector drawing and compile blueprints for laser cutting and engraving."
     },
     {
       date: new Date(2026, 9, 13), // Oct 13
       time: '17:00 - 19:00',
       location: 'Startlab Solkan',
-      title: isSl ? 'Natisni in izreži – Sklop 6' : 'Print & Cut – Part 6',
+      title: isSl ? 'Natisni in izreži – Sklop 6' : isIt ? 'Stampa e Taglia – Parte 6' : 'Print & Cut – Part 6',
       description: isSl 
         ? "Sklop 6: Laserski razrez in graviranje v praksi. Samostojno upravljanje laserskega stroja in razrez delov."
-        : "Part 6: Practical laser cutting and engraving. Operate the laser cutter independently and safely slice parts."
+        : isIt
+          ? "Parte 6: Taglio laser e incisione in pratica. Gestione indipendente della macchina laser e taglio dei pezzi."
+          : "Part 6: Practical laser cutting and engraving. Operate the laser cutter independently and safely slice parts."
     },
     {
       date: new Date(2026, 9, 20), // Oct 20
       time: '17:00 - 19:00',
       location: 'Startlab Solkan',
-      title: isSl ? 'Natisni in izreži – Sklop 7' : 'Print & Cut – Part 7',
+      title: isSl ? 'Natisni in izreži – Sklop 7' : isIt ? 'Stampa e Taglia – Parte 7' : 'Print & Cut – Part 7',
       description: isSl 
         ? "Sklop 7: Sestavljanje in dodelava končnega izdelka. Združevanje 3D tiskanih in lasersko izrezanih delov v delujočo celoto."
-        : "Part 7: Assembly and post-processing of the final product. Join 3D-printed and laser-cut parts into a functional design."
+        : isIt
+          ? "Parte 7: Assemblaggio e rifinitura del prodotto finale. Unione delle parti stampate in 3D e tagliate al laser in un insieme funzionante."
+          : "Part 7: Assembly and post-processing of the final product. Join 3D-printed and laser-cut parts into a functional design."
     },
     {
       date: new Date(2026, 9, 27), // Oct 27
       time: '17:00 - 19:00',
       location: 'Startlab Solkan',
-      title: isSl ? 'Natisni in izreži – Sklop 8' : 'Print & Cut – Part 8',
+      title: isSl ? 'Natisni in izreži – Sklop 8' : isIt ? 'Stampa e Taglia – Parte 8' : 'Print & Cut – Part 8',
       description: isSl 
         ? "Sklop 8: Predstavitev, testiranje in prevzem izdelkov. Pokaži svoj končni izdelek in ga odnesi domov."
-        : "Part 8: Presentation, testing, and collection of products. Showcase your final designed product and take it home."
+        : isIt
+          ? "Parte 8: Presentazione, test e ritiro dei prodotti. Mostra il tuo prodotto finale e portalo a casa."
+          : "Part 8: Presentation, testing, and collection of products. Showcase your final designed product and take it home."
     }
   ];
 
@@ -298,6 +333,7 @@ export default function CalendarPage() {
     : events.filter(event => event.id === 'graphene-session-1' || event.id === 'printcut-session-1');
 
   const isSlovenian = i18n.language !== 'en' && i18n.language !== 'it';
+  const isIt = i18n.language === 'it';
 
   const openRegisterModal = (event: Event) => {
     setModalEvent(event);
@@ -325,11 +361,15 @@ export default function CalendarPage() {
       if (modalEvent?.id.startsWith('printcut')) {
         selectedTerm = isSlovenian 
           ? 'Celotna 8-tedenska delavnica (pričetek 8.9.2026)' 
-          : 'Full 8-week workshop (starts Sept 8, 2026)';
+          : isIt
+            ? 'Workshop completo di 8 settimane (inizio 8.9.2026)'
+            : 'Full 8-week workshop (starts Sept 8, 2026)';
       } else {
         selectedTerm = isSlovenian 
           ? 'Celotna 6-tedenska delavnica (pričetek 7.9.2026)' 
-          : 'Full 6-week workshop (starts Sept 7, 2026)';
+          : isIt
+            ? 'Workshop completo di 6 settimane (inizio 7.9.2026)'
+            : 'Full 6-week workshop (starts Sept 7, 2026)';
       }
     } else {
       const activeDate = selectedDate || modalEvent?.date || new Date();
@@ -370,7 +410,7 @@ export default function CalendarPage() {
         {/* Hero Section */}
         <div className="mb-14">
           <span className="text-xs font-display font-black text-brand-red uppercase tracking-widest bg-brand-red/10 px-4 py-2 rounded-full mb-4 inline-block">
-            {isSlovenian ? "RAZPISANI TERMINI IN REZERVACIJE" : "SCHEDULED SESSIONS & RESERVATIONS"}
+            {isSlovenian ? "RAZPISANI TERMINI IN REZERVACIJE" : isIt ? "SESSIONI DI WORKSHOP E PRENOTAZIONI" : "SCHEDULED SESSIONS & RESERVATIONS"}
           </span>
           <h1 className="text-4xl md:text-7xl font-display font-black uppercase leading-[1.0] tracking-tight mb-4 text-slate-950">
             {t('calendar_page.title_start')} <span className="text-brand-red inline-block">{t('calendar_page.title_brand')}</span>
@@ -378,7 +418,9 @@ export default function CalendarPage() {
           <p className="text-lg text-slate-600 font-semibold max-w-2xl leading-relaxed">
             {isSlovenian 
               ? "Preglejte koledar naših tehnoloških delavnic in si zagotovite svoje mesto. Kliknite na označen datum za ogled podrobnosti in enostavno spletno prijavo."
-              : "Browse our calendar of high-tech workshops and reserve your spot. Click on highlighted dates to view descriptions and submit your registration."}
+              : isIt
+                ? "Consulta il calendario dei nostri workshop tecnologici e assicurati il tuo posto. Clicca sulla data evidenziata per visualizzare i dettagli e registrarti online."
+                : "Browse our calendar of high-tech workshops and reserve your spot. Click on highlighted dates to view descriptions and submit your registration."}
           </p>
         </div>
 
@@ -397,14 +439,14 @@ export default function CalendarPage() {
                   <button 
                     onClick={prevMonth}
                     className="w-11 h-11 border-2 border-slate-200 hover:border-slate-900 rounded-full flex items-center justify-center hover:bg-slate-950 hover:text-white transition-all text-slate-800"
-                    title={isSlovenian ? "Prejšnji mesec" : "Previous month"}
+                    title={isSlovenian ? "Prejšnji mesec" : isIt ? "Mese precedente" : "Previous month"}
                   >
                     <ChevronLeft size={20} className="stroke-[2.5]" />
                   </button>
                   <button 
                     onClick={nextMonth}
                     className="w-11 h-11 border-2 border-slate-200 hover:border-slate-900 rounded-full flex items-center justify-center hover:bg-slate-950 hover:text-white transition-all text-slate-800"
-                    title={isSlovenian ? "Naslednji mesec" : "Next month"}
+                    title={isSlovenian ? "Naslednji mesec" : isIt ? "Mese successivo" : "Next month"}
                   >
                     <ChevronRight size={20} className="stroke-[2.5]" />
                   </button>
@@ -464,9 +506,9 @@ export default function CalendarPage() {
                       {hasEvents && (
                         <div className="flex gap-1 justify-center mt-auto w-full">
                           {isGrapheneEvent ? (
-                            <span className={`w-2 h-2 rounded-full ${isSelected ? 'bg-brand-red border border-white' : 'bg-brand-red animate-pulse'}`} title={isSlovenian ? "Grafenski čip" : "Graphene Chip"} />
+                            <span className={`w-2 h-2 rounded-full ${isSelected ? 'bg-brand-red border border-white' : 'bg-brand-red animate-pulse'}`} title={isSlovenian ? "Grafenski čip" : isIt ? "Chip al grafene" : "Graphene Chip"} />
                           ) : isPrintCutEvent ? (
-                            <span className={`w-2 h-2 rounded-full ${isSelected ? 'bg-play-teal border border-white' : 'bg-play-teal animate-pulse'}`} title={isSlovenian ? "Natisni in izreži" : "Print & Cut"} />
+                            <span className={`w-2 h-2 rounded-full ${isSelected ? 'bg-play-teal border border-white' : 'bg-play-teal animate-pulse'}`} title={isSlovenian ? "Natisni in izreži" : isIt ? "Stampa e taglia" : "Print & Cut"} />
                           ) : (
                             <span className="w-2 h-2 rounded-full bg-slate-400" />
                           )}
@@ -482,15 +524,15 @@ export default function CalendarPage() {
             <div className="mt-8 pt-4 border-t border-slate-200 flex flex-wrap gap-4 items-center justify-between text-xs text-slate-700 font-bold select-none">
               <span className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-brand-red inline-block" />
-                {isSlovenian ? "Grafenski čip" : "Graphene chip series"}
+                {isSlovenian ? "Grafenski čip" : isIt ? "Serie chip al grafene" : "Graphene chip series"}
               </span>
               <span className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-play-teal inline-block" />
-                {isSlovenian ? "Natisni in izreži" : "Print & Cut series"}
+                {isSlovenian ? "Natisni in izreži" : isIt ? "Serie stampa e taglia" : "Print & Cut series"}
               </span>
               <span className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-slate-400 inline-block" />
-                {isSlovenian ? "Spremljevalne delavnice" : "Other workshops"}
+                {isSlovenian ? "Spremljevalne delavnice" : isIt ? "Altri workshop" : "Other workshops"}
               </span>
             </div>
           </div>
@@ -504,14 +546,14 @@ export default function CalendarPage() {
                     <CalendarIcon className="text-brand-red stroke-[2.5]" size={22} />
                     {selectedDate 
                       ? format(selectedDate, 'd. MMMM yyyy', { locale: currentLocale }) 
-                      : (isSlovenian ? "Aktualni delavnici" : "Featured Workshops")}
+                      : (isSlovenian ? "Aktualni delavnici" : isIt ? "Workshop in evidenza" : "Featured Workshops")}
                   </h3>
                   {selectedDate && (
                     <button
                       onClick={() => setSelectedDate(null)}
                       className="px-3 py-1.5 rounded-xl border border-slate-250 hover:border-slate-950 text-xs font-bold transition-all text-slate-600 hover:text-slate-950 bg-slate-50 hover:bg-slate-100"
                     >
-                      {isSlovenian ? "Prikaži obe" : "Show both"}
+                      {isSlovenian ? "Prikaži obe" : isIt ? "Mostra entrambi" : "Show both"}
                     </button>
                   )}
                 </div>
@@ -539,7 +581,7 @@ export default function CalendarPage() {
                               </span>
                               {event.ageGroup && (
                                 <span className="px-2.5 py-1 rounded-xl text-[10px] font-display font-semibold bg-slate-100 text-slate-600 uppercase tracking-wider">
-                                  {isSlovenian ? `Starost: ${event.ageGroup}` : `Age: ${event.ageGroup}`}
+                                  {isSlovenian ? `Starost: ${event.ageGroup}` : isIt ? `Età: ${event.ageGroup}` : `Age: ${event.ageGroup}`}
                                 </span>
                               )}
                             </div>
@@ -566,10 +608,10 @@ export default function CalendarPage() {
                                   <p className="font-bold text-slate-800">{event.time}</p>
                                   <p className="text-[10px] text-slate-600 font-bold uppercase mt-0.5">
                                     {isGraphene 
-                                      ? (isSlovenian ? "Enkrat tedensko, 6 tednov" : "Once a week, 6 weeks") 
+                                      ? (isSlovenian ? "Enkrat tedensko, 6 tednov" : isIt ? "Una volta alla settimana, 6 settimane" : "Once a week, 6 weeks") 
                                       : isPrintCut
-                                        ? (isSlovenian ? "Enkrat tedensko, 8 tednov" : "Once a week, 8 weeks")
-                                        : (isSlovenian ? "Enkratni termin" : "Single session")}
+                                        ? (isSlovenian ? "Enkrat tedensko, 8 tednov" : isIt ? "Una volta alla settimana, 8 settimane" : "Once a week, 8 weeks")
+                                        : (isSlovenian ? "Enkratni termin" : isIt ? "Sessione singola" : "Single session")}
                                   </p>
                                 </div>
                               </div>
@@ -592,22 +634,24 @@ export default function CalendarPage() {
                                 <span>
                                   {isSlovenian 
                                     ? "Brezplačna udeležba • Število mest je omejeno!" 
-                                    : "Free of charge • Limited slots available!"}
+                                    : isIt
+                                      ? "Partecipazione gratuita • Posti strettamente limitati!"
+                                      : "Free of charge • Limited slots available!"}
                                 </span>
                               </div>
                               <div className="border-t border-slate-200/60 pt-2.5 space-y-1">
                                 {isGraphene ? (
                                   <>
-                                    <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Mentor:" : "Mentor:"}</span> Prof. dr. Egon Pavlica (<a href="mailto:egon.pavlica@ung.si" className="text-brand-red hover:underline font-bold">egon.pavlica@ung.si</a>)</p>
-                                    <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Somentor:" : "Co-mentor:"}</span> Dr. Vadym Tkachuk (<a href="mailto:vadym.tkachuk@ung.si" className="text-brand-red hover:underline font-bold">vadym.tkachuk@ung.si</a>)</p>
+                                    <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Mentor:" : isIt ? "Mentore:" : "Mentor:"}</span> Prof. dr. Egon Pavlica (<a href="mailto:egon.pavlica@ung.si" className="text-brand-red hover:underline font-bold">egon.pavlica@ung.si</a>)</p>
+                                    <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Somentor:" : isIt ? "Co-mentore:" : "Co-mentor:"}</span> Dr. Vadym Tkachuk (<a href="mailto:vadym.tkachuk@ung.si" className="text-brand-red hover:underline font-bold">vadym.tkachuk@ung.si</a>)</p>
                                   </>
                                 ) : isPrintCut ? (
                                   <>
-                                    <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Mentor:" : "Mentor:"}</span> Uroš Polanc (<a href="mailto:info@startlab.si" className="text-brand-red hover:underline font-bold">info@startlab.si</a>)</p>
-                                    <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Lokacija:" : "Location:"}</span> Start Lab, Solkan</p>
+                                    <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Mentor:" : isIt ? "Mentore:" : "Mentor:"}</span> Uroš Polanc (<a href="mailto:info@startlab.si" className="text-brand-red hover:underline font-bold">info@startlab.si</a>)</p>
+                                    <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Lokacija:" : isIt ? "Luogo:" : "Location:"}</span> Start Lab, Solkan</p>
                                   </>
                                 ) : (
-                                  <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Mentor:" : "Mentor:"}</span> Start Lab ekipa (<a href="mailto:info@startlab.si" className="text-brand-red hover:underline font-bold">info@startlab.si</a>)</p>
+                                  <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Mentor:" : isIt ? "Mentore:" : "Mentor:"}</span> Start Lab ekipa (<a href="mailto:info@startlab.si" className="text-brand-red hover:underline font-bold">info@startlab.si</a>)</p>
                                 )}
                               </div>
                             </div>
@@ -620,7 +664,7 @@ export default function CalendarPage() {
                                   onClick={() => setShowMoreDetails(!showMoreDetails)}
                                   className={`w-full flex items-center justify-between text-xs font-display font-black uppercase hover:opacity-80 transition-colors py-1 cursor-pointer select-none ${isGraphene ? 'text-brand-red' : 'text-play-teal'}`}
                                 >
-                                  <span>{isSlovenian ? "Več o delavnici" : "More about the workshop"}</span>
+                                  <span>{isSlovenian ? "Več o delavnici" : isIt ? "Più info sul workshop" : "More about the workshop"}</span>
                                   <span className="text-xs">{showMoreDetails ? "▲" : "▼"}</span>
                                 </button>
                                 
@@ -639,53 +683,65 @@ export default function CalendarPage() {
                                             <p className="font-extrabold text-sm text-slate-950">
                                               {isSlovenian 
                                                 ? "Delavnica izdelave grafenskega čipa" 
-                                                : "Graphene Chip Fabrication Workshop"}
+                                                : isIt
+                                                  ? "Workshop di fabbricazione di chip al grafene"
+                                                  : "Graphene Chip Fabrication Workshop"}
                                             </p>
                                             
                                             <p className="text-brand-red font-bold">
                                               {isSlovenian 
                                                 ? "Odkrij material prihodnosti in izdelaj svoj prvi grafenski tranzistor!"
-                                                : "Discover the material of the future and fabricate your first graphene transistor!"}
+                                                : isIt
+                                                  ? "Scopri il materiale del futuro e realizza il tuo primo transistor al grafene!"
+                                                  : "Discover the material of the future and fabricate your first graphene transistor!"}
                                             </p>
 
                                             <div className="bg-slate-100 border border-slate-200 rounded-xl p-3 space-y-2">
                                               <p className="font-extrabold text-slate-900">
                                                 {isSlovenian 
                                                   ? "Kako nastane čip? Kaj je grafen?" 
-                                                  : "How is a chip born? What is graphene?"}
+                                                  : isIt
+                                                    ? "Come nasce un chip? Cos'è il grafene?"
+                                                    : "How is a chip born? What is graphene?"}
                                               </p>
                                               <p className="text-[11px] text-slate-700 leading-normal">
                                                 {isSlovenian 
                                                   ? "Udeleženci bodo stopili v vlogo raziskovalcev in izdelali grafenski tranzistor – elektronsko stikalo, ki predstavlja osnovni gradnik vseh sodobnih naprav."
-                                                  : "Participants step into the shoes of research scientists to fabricate a graphene transistor – the fundamental electronic switch."}
+                                                  : isIt
+                                                    ? "I partecipanti vestiranno i panni di ricercatori scientifici per fabbricare un transistor al grafene – l'interruttore elettronico fondamentale alla base di ogni dispositivo moderno."
+                                                    : "Participants step into the shoes of research scientists to fabricate a graphene transistor – the fundamental electronic switch."}
                                               </p>
                                             </div>
 
                                             <div className="space-y-3">
                                               <div className="border-l-2 border-brand-red pl-2.5">
-                                                <p className="font-bold text-slate-950">{isSlovenian ? "🔬 Vrhunsko mentorstvo" : "🔬 Academic Mentors"}</p>
+                                                <p className="font-bold text-slate-950">{isSlovenian ? "🔬 Vrhunsko mentorstvo" : isIt ? "🔬 Mentori accademici" : "🔬 Academic Mentors"}</p>
                                                 <div className="mt-1.5 text-[10px] text-slate-600 bg-slate-50 border border-slate-100 rounded-lg p-2 space-y-0.5">
-                                                  <p><strong>{isSlovenian ? "Mentor:" : "Mentor:"}</strong> Prof. dr. Egon Pavlica (<a href="mailto:egon.pavlica@ung.si" className="text-brand-red hover:underline">egon.pavlica@ung.si</a>)</p>
-                                                  <p><strong>{isSlovenian ? "Somentor:" : "Co-mentor:"}</strong> Dr. Vadym Tkachuk (<a href="mailto:vadym.tkachuk@ung.si" className="text-brand-red hover:underline">vadym.tkachuk@ung.si</a>)</p>
+                                                  <p><strong>{isSlovenian ? "Mentor:" : isIt ? "Mentore:" : "Mentor:"}</strong> Prof. dr. Egon Pavlica (<a href="mailto:egon.pavlica@ung.si" className="text-brand-red hover:underline">egon.pavlica@ung.si</a>)</p>
+                                                  <p><strong>{isSlovenian ? "Somentor:" : isIt ? "Co-mentore:" : "Co-mentor:"}</strong> Dr. Vadym Tkachuk (<a href="mailto:vadym.tkachuk@ung.si" className="text-brand-red hover:underline">vadym.tkachuk@ung.si</a>)</p>
                                                 </div>
                                                 <p className="text-[11px] text-slate-700 leading-normal">
                                                   {isSlovenian 
                                                     ? "Pod vodstvom raziskovalcev Laboratorija za fiziko organskih snovi (LFOS) Univerze v Novi Gorici neposredno v prostorih Start Laba v Solkanu."
-                                                    : "Under the guidance of researchers from the Laboratory for Organic Matter Physics (LFOS) of the University of Nova Gorica at the Start Lab premises in Solkan."}
+                                                    : isIt
+                                                      ? "Sotto la guida dei ricercatori del Laboratorio di Fisica della Materia Organica (LFOS) dell'Università di Nova Gorica, direttamente presso la sede di Start Lab a Solkan."
+                                                      : "Under the guidance of researchers from the Laboratory for Organic Matter Physics (LFOS) of the University of Nova Gorica at the Start Lab premises in Solkan."}
                                                 </p>
                                               </div>
 
                                               <div className="border-l-2 border-brand-red pl-2.5">
-                                                <p className="font-bold text-slate-950">{isSlovenian ? "⚡ Material prihodnosti" : "⚡ Silicon Successor"}</p>
+                                                <p className="font-bold text-slate-950">{isSlovenian ? "⚡ Material prihodnosti" : isIt ? "⚡ Il materiale del futuro" : "⚡ Silicon Successor"}</p>
                                                 <p className="text-[11px] text-slate-700 leading-normal">
                                                   {isSlovenian 
                                                     ? "Grafen je najbolj obetaven naslednik silicija, saj omogoča hitrejšo, učinkovitejšo in neprimerljivo varčnejšo elektroniko."
-                                                    : "Graphene is the most promising successor to silicon, enabling faster and more efficient electronics."}
+                                                    : isIt
+                                                      ? "Il grafene è il successore del silicio più promettente, in quanto consente un'elettronica più veloce, efficiente ed incredibilmente a basso consumo energetico."
+                                                      : "Graphene is the most promising successor to silicon, enabling faster and more efficient electronics."}
                                                 </p>
                                               </div>
 
                                               <div className="border-l-2 border-brand-red pl-2.5">
-                                                <p className="font-bold text-slate-950">{isSlovenian ? "📅 Urnik in lokacije delavnic" : "📅 Workshop Schedule & Locations"}</p>
+                                                <p className="font-bold text-slate-950">{isSlovenian ? "📅 Urnik in lokacije delavnic" : isIt ? "📅 Orari e sedi dei workshop" : "📅 Workshop Schedule & Locations"}</p>
                                                 <div className="mt-2 space-y-1 bg-slate-50 border border-slate-100 rounded-lg p-2.5 font-mono text-[10px] text-slate-800">
                                                   <p className="flex justify-between border-b border-slate-100 pb-1">
                                                     <span><strong>7. 9.</strong> 17:00 - 19:00</span>
@@ -698,7 +754,7 @@ export default function CalendarPage() {
                                                   <p className="flex justify-between border-b border-slate-100 py-1 bg-brand-red/5 px-1 rounded">
                                                     <span><strong>18. 9.</strong> 16h - 18h</span>
                                                     <span className="text-brand-red font-semibold text-right">
-                                                      {isSlovenian ? "predstavitev LFOS Ajdovščina (opcija)" : "presentation of LFOS Ajdovščina (optional)"}
+                                                      {isSlovenian ? "predstavitev LFOS Ajdovščina (opcija)" : isIt ? "presentazione LFOS Ajdovščina (opzionale)" : "presentation of LFOS Ajdovščina (optional)"}
                                                     </span>
                                                   </p>
                                                   <p className="flex justify-between border-b border-slate-100 py-1">
@@ -708,7 +764,7 @@ export default function CalendarPage() {
                                                   <p className="flex justify-between border-b border-slate-100 py-1 bg-brand-red/5 px-1 rounded">
                                                     <span><strong>25. 9.</strong> 17h - 19h</span>
                                                     <span className="text-brand-red font-semibold text-right">
-                                                      {isSlovenian ? "ogled čiste sobe in litografije v LFOS Ajdovščina (Sklop 4)" : "cleanroom tour and lithography at LFOS Ajdovščina (Part 4)"}
+                                                      {isSlovenian ? "ogled čiste sobe in litografije v LFOS Ajdovščina (Sklop 4)" : isIt ? "visita cleanroom e litografia al LFOS Ajdovščina (Parte 4)" : "cleanroom tour and lithography at LFOS Ajdovščina (Part 4)"}
                                                     </span>
                                                   </p>
                                                   <p className="flex justify-between border-b border-slate-100 py-1">
@@ -724,7 +780,7 @@ export default function CalendarPage() {
                                             </div>
 
                                             <div className="border-t border-slate-200 pt-3">
-                                              <p className="font-extrabold text-slate-950 mb-2">{isSlovenian ? "Kaj boste počeli?" : "What you will experience:"}</p>
+                                              <p className="font-extrabold text-slate-950 mb-2">{isSlovenian ? "Kaj boste počeli?" : isIt ? "Cosa farai?" : "What you will experience:"}</p>
                                               <ul className="space-y-1.5 list-decimal list-inside text-[11px] text-slate-700">
                                                 {(isSlovenian 
                                                   ? [
@@ -735,14 +791,23 @@ export default function CalendarPage() {
                                                       "Ogledali si delo v čisti sobi (cleanroom) raziskovalnega centra",
                                                       "Izvedli električne meritve svojega grafenskega tranzistorja"
                                                     ] 
-                                                  : [
-                                                      "Synthesize graphene from graphite and characterize it with high-power microscopes",
-                                                      "Design micro-electrodes for the customized graphene transistor layout",
-                                                      "Perform software-driven microarchitectural computer simulations",
-                                                      "Master the physical fundamentals of optical photolithography steps",
-                                                      "Tour and observe cleanrooms within professional physics facilities",
-                                                      "Run real electrical sweep and measurement operations on your fabricated chip"
-                                                    ]
+                                                  : isIt
+                                                    ? [
+                                                        "Sintetizzare il grafene dalla grafite e caratterizzarlo con microscopi ad alta potenza",
+                                                        "Progettare microelettrodi per il layout personalizzato del transistor al grafene",
+                                                        "Eseguire simulazioni computerizzate guidate da software",
+                                                        "Padroneggiare i fondamenti fisici dei processi di fotolitografia ottica",
+                                                        "Visitare e osservare le camere bianche (cleanroom) all'interno di strutture di ricerca professionali",
+                                                        "Eseguire misurazioni elettriche reali sul chip da te fabbricato"
+                                                      ]
+                                                    : [
+                                                        "Synthesize graphene from graphite and characterize it with high-power microscopes",
+                                                        "Design micro-electrodes for the customized graphene transistor layout",
+                                                        "Perform software-driven microarchitectural computer simulations",
+                                                        "Master the physical fundamentals of optical photolithography steps",
+                                                        "Tour and observe cleanrooms within professional physics facilities",
+                                                        "Run real electrical sweep and measurement operations on your fabricated chip"
+                                                      ]
                                                 ).map((item, i) => (
                                                   <li key={i} className="pl-1 leading-normal">{item}</li>
                                                 ))}
@@ -754,49 +819,61 @@ export default function CalendarPage() {
                                             <p className="font-extrabold text-sm text-slate-950">
                                               {isSlovenian 
                                                 ? "Natisni in izreži: 3D modeliranje, tisk in laserski razrez" 
-                                                : "Print & Cut: 3D Modeling, Printing & Laser Cutting"}
+                                                : isIt
+                                                  ? "Stampa e taglia: Modellazione 3D, Stampa e Taglio laser"
+                                                  : "Print & Cut: 3D Modeling, Printing & Laser Cutting"}
                                             </p>
                                             
                                             <p className="text-play-teal font-bold">
                                               {isSlovenian 
                                                 ? "Od ideje do pravega izdelka pod vodstvom izkušenega mentorja Uroša Polanca!"
-                                                : "From idea to physical product guided by our experienced mentor Uroš Polanc!"}
+                                                : isIt
+                                                  ? "Dall'idea al prodotto reale sotto la guida del nostro esperto mentore Uroš Polanc!"
+                                                  : "From idea to physical product guided by our experienced mentor Uroš Polanc!"}
                                             </p>
 
                                             <div className="bg-slate-100 border border-slate-200 rounded-xl p-3 space-y-2">
                                               <p className="font-extrabold text-slate-900">
                                                 {isSlovenian 
                                                   ? "Spoznaj orodja inženirjev in oblikovalcev" 
-                                                  : "Learn the tools of professional engineers"}
+                                                  : isIt
+                                                    ? "Impara gli strumenti di ingegneri e designer professionisti"
+                                                    : "Learn the tools of professional engineers"}
                                               </p>
                                               <p className="text-[11px] text-slate-700 leading-normal">
                                                 {isSlovenian 
                                                   ? "Imaš idejo za predmet? Obesek, model avtomobila, stojalo za telefon, robot, karkoli — na tej delavnici ga bomo skupaj ustvarili od začetka do konca. Ne potrebuješ predhodnih izkušenj!"
-                                                  : "Have an idea? A keychain, car model, phone stand, robot — we will build it together from scratch. No prior experience is required!"}
+                                                  : isIt
+                                                    ? "Hai un'idea per un oggetto? Un portachiavi, un modellino d'auto, un supporto per telefono, un robot, qualsiasi cosa — in questo workshop lo creeremo insieme dall'inizio alla fine. Nessuna esperienza precedente è richiesta!"
+                                                    : "Have an idea? A keychain, car model, phone stand, robot — we will build it together from scratch. No prior experience is required!"}
                                               </p>
                                             </div>
 
                                             <div className="space-y-3">
                                               <div className="border-l-2 border-play-teal pl-2.5">
-                                                <p className="font-bold text-slate-950">{isSlovenian ? "🧑‍🏫 Mentor delavnice" : "🧑‍🏫 Instructor"}</p>
+                                                <p className="font-bold text-slate-950">{isSlovenian ? "🧑‍🏫 Mentor delavnice" : isIt ? "🧑‍🏫 Mentore del workshop" : "🧑‍🏫 Instructor"}</p>
                                                 <p className="text-[11px] text-slate-700 leading-normal">
                                                   {isSlovenian 
                                                     ? "Delavnico vodi Uroš Polanc, izkušen mentor in strokovnjak za digitalno fabrikacijo. Pomagal ti bo prehoditi pot od računalniškega 3D modela do delujočega izdelka."
-                                                    : "The workshop is led by Uroš Polanc, an experienced digital fabrication expert. He will guide you through drafting in 3D to holding the final product in your hands."}
+                                                    : isIt
+                                                      ? "Il workshop è condotto da Uroš Polanc, mentore esperto ed esperto di fabbricazione digitale. Ti aiuterà a passare dal modello 3D al computer al prodotto finito e funzionante."
+                                                      : "The workshop is led by Uroš Polanc, an experienced digital fabrication expert. He will guide you through drafting in 3D to holding the final product in your hands."}
                                                 </p>
                                               </div>
 
                                               <div className="border-l-2 border-play-teal pl-2.5">
-                                                <p className="font-bold text-slate-950">{isSlovenian ? "👥 Velikost skupine" : "👥 Group Size"}</p>
+                                                <p className="font-bold text-slate-950">{isSlovenian ? "👥 Velikost skupine" : isIt ? "👥 Dimensioni del gruppo" : "👥 Group Size"}</p>
                                                 <p className="text-[11px] text-slate-700 leading-normal">
                                                   {isSlovenian 
-                                                    ? "Skupina je omejena na največ 20 udeležencev (starost med 10 in 15 let), kar omogoča individualno podporo in varno delo z opremo."
-                                                    : "The group is limited to max 20 participants (ages 10 to 15), allowing for direct 1-on-1 support and safe machine operation."}
+                                                    ? "Skupina je omejena na največ 20 udeležencev (starost med 10 in 15 let), varovano delo z opremo in individualno podporo."
+                                                    : isIt
+                                                      ? "Il gruppo è limitato a un massimo di 20 partecipanti (età compresa tra 10 e 15 anni), consentendo un supporto individuale e un lavoro sicuro con le attrezzature."
+                                                      : "The group is limited to max 20 participants (ages 10 to 15), allowing for direct 1-on-1 support and safe machine operation."}
                                                 </p>
                                               </div>
 
                                               <div className="border-l-2 border-play-teal pl-2.5">
-                                                <p className="font-bold text-slate-950">{isSlovenian ? "📅 Urnik delavnic (8 srečanj)" : "📅 Workshop Schedule (8 Sessions)"}</p>
+                                                <p className="font-bold text-slate-950">{isSlovenian ? "📅 Urnik delavnic (8 srečanj)" : isIt ? "📅 Programma dei workshop (8 incontri)" : "📅 Workshop Schedule (8 Sessions)"}</p>
                                                 <div className="mt-2 space-y-1 bg-slate-50 border border-slate-100 rounded-lg p-2.5 font-mono text-[10px] text-slate-800">
                                                   <p className="flex justify-between border-b border-slate-100 pb-1">
                                                     <span><strong>8. 9.</strong> 17:00 - 19:00</span>
@@ -835,7 +912,7 @@ export default function CalendarPage() {
                                             </div>
 
                                             <div className="border-t border-slate-200 pt-3">
-                                              <p className="font-extrabold text-slate-950 mb-2">{isSlovenian ? "Kaj vse boš delal in odnesel domov?" : "What you will experience & build:"}</p>
+                                              <p className="font-extrabold text-slate-950 mb-2">{isSlovenian ? "Kaj vse boš delal in odnesel domov?" : isIt ? "Cosa farai e cosa porterai a casa?" : "What you will experience & build:"}</p>
                                               <ul className="space-y-1.5 list-decimal list-inside text-[11px] text-slate-700">
                                                 {(isSlovenian 
                                                   ? [
@@ -846,14 +923,23 @@ export default function CalendarPage() {
                                                       "Sestavil in dokončal boš svoj končni, popolnoma funkcionalen izdelek",
                                                       "Svoj unikatni izdelek (ne le maketo!) odneseš ponosno domov"
                                                     ] 
-                                                  : [
-                                                      "Draft your custom 3D model on a computer using Onshape CAD",
-                                                      "Prepare and print your object on a professional Bambu Lab 3D printer",
-                                                      "Layout high-precision vector designs for laser routing in RDWorks",
-                                                      "Operate a high-power laser cutter to slice components and engrave custom graphics",
-                                                      "Assemble and post-process your finished, fully functional design",
-                                                      "Take your unique, custom-made product (no mockups!) home with you"
-                                                    ]
+                                                  : isIt
+                                                    ? [
+                                                        "Disegnerai al computer il tuo modello 3D secondo le tue idee usando Onshape CAD",
+                                                        "Preparerai e stamperai il tuo modello su una stampante 3D professionale Bambu Lab",
+                                                        "Progetterai design vettoriali ad alta precisione per il taglio laser con RDWorks",
+                                                        "Gestirai autonomamente il macchinario per il taglio laser per tagliare componenti in legno o plexiglass",
+                                                        "Assemblerai e rifinirai il tuo prodotto finale completamente funzionale",
+                                                        "Porterai orgogliosamente a casa il tuo prodotto unico e personalizzato (non un semplice modellino!)"
+                                                      ]
+                                                    : [
+                                                        "Draft your custom 3D model on a computer using Onshape CAD",
+                                                        "Prepare and print your object on a professional Bambu Lab 3D printer",
+                                                        "Layout high-precision vector designs for laser routing in RDWorks",
+                                                        "Operate a high-power laser cutter to slice components and engrave custom graphics",
+                                                        "Assemble and post-process your finished, fully functional design",
+                                                        "Take your unique, custom-made product (no mockups!) home with you"
+                                                      ]
                                                 ).map((item, i) => (
                                                   <li key={i} className="pl-1 leading-normal">{item}</li>
                                                 ))}
@@ -872,7 +958,7 @@ export default function CalendarPage() {
                               onClick={() => openRegisterModal(event)}
                               className="w-full py-4 btn-primary justify-center shadow-lg uppercase text-sm tracking-wider font-black select-none"
                             >
-                              {isSlovenian ? "Prijavi se na delavnico" : "Register for workshop"} <Rocket size={18} className="stroke-[3]" />
+                              {isSlovenian ? "Prijavi se na delavnico" : isIt ? "Iscriviti al workshop" : "Register for workshop"} <Rocket size={18} className="stroke-[3]" />
                             </button>
                           </motion.div>
                         );
@@ -889,7 +975,9 @@ export default function CalendarPage() {
                         <p className="text-slate-500 font-semibold text-sm">
                           {isSlovenian 
                             ? "Na ta dan ni javno načrtovanih dogodkov. Izberite označen datum na koledarju." 
-                            : "No public events scheduled for this day. Please select a highlighted date on the calendar."}
+                            : isIt
+                              ? "In questo giorno non ci sono eventi pubblici in programma. Seleziona una data evidenziata sul calendario."
+                              : "No public events scheduled for this day. Please select a highlighted date on the calendar."}
                         </p>
                       </motion.div>
                     )}
@@ -901,7 +989,9 @@ export default function CalendarPage() {
               <div className="mt-8 bg-slate-100 border border-slate-200 rounded-2xl p-4 text-xs text-slate-700 leading-normal font-bold text-left">
                 {isSlovenian 
                   ? "Za vsa vprašanja glede urnikov ali organizacije nas lahko kontaktirate na info@startlab.si ali preko spletnega obrazca na strani Kontakt."
-                  : "For scheduling inquiries, feel free to write to us at info@startlab.si or reach out via our Contact page."}
+                  : isIt
+                    ? "Per qualsiasi domanda sugli orari o l'organizzazione, puoi contattarci a info@startlab.si o tramite il modulo sul sito web alla pagina Contatti."
+                    : "For scheduling inquiries, feel free to write to us at info@startlab.si or reach out via our Contact page."}
               </div>
             </div>
           </div>
@@ -937,12 +1027,12 @@ export default function CalendarPage() {
                 <button 
                   onClick={() => setIsModalOpen(false)}
                   className="absolute top-5 right-5 text-slate-400 hover:text-white transition-colors bg-white/5 border border-white/10 w-9 h-9 rounded-full flex items-center justify-center hover:scale-105"
-                  title={isSlovenian ? "Zapri" : "Close"}
+                  title={isSlovenian ? "Zapri" : isIt ? "Chiudi" : "Close"}
                 >
                   <X size={18} />
                 </button>
                 <span className="text-[10px] font-display font-black text-brand-red uppercase tracking-widest bg-brand-red/15 border border-brand-red/25 px-2.5 py-1 rounded-full mb-2 inline-block">
-                  {isSlovenian ? "RESERVACIJA TERMINA" : "TERM BOOKING"}
+                  {isSlovenian ? "RESERVACIJA TERMINA" : isIt ? "PRENOTAZIONE DEL WORKSHOP" : "TERM BOOKING"}
                 </span>
                 <h3 className="text-xl md:text-2xl font-display font-black uppercase tracking-tight leading-tight mr-8 text-white">
                   {modalEvent.title}
@@ -966,18 +1056,20 @@ export default function CalendarPage() {
                         <CheckCircle2 size={38} className="stroke-[2.5] animate-bounce" />
                       </div>
                       <h4 className="text-2xl font-display font-black uppercase mb-3 text-slate-950">
-                        {isSlovenian ? "Uspešna prijava!" : "Registration Successful!"}
+                        {isSlovenian ? "Uspešna prijava!" : isIt ? "Registrazione completata!" : "Registration Successful!"}
                       </h4>
                       <p className="text-slate-600 font-semibold text-sm leading-relaxed mb-6">
                         {isSlovenian 
                           ? `Hvala za prijavo, ${formData.name}! Podrobnosti in navodila bomo poslali v kratkem na vaš e-poštni naslov: ${formData.email}.`
-                          : `Thank you, ${formData.name}! Registration details and workshop instructions will be sent shortly to your e-mail address: ${formData.email}.`}
+                          : isIt
+                            ? `Grazie per esserti registrato, ${formData.name}! Ti invieremo presto i dettagli e le istruzioni all'indirizzo e-mail indicato: ${formData.email}.`
+                            : `Thank you, ${formData.name}! Registration details and workshop instructions will be sent shortly to your e-mail address: ${formData.email}.`}
                       </p>
                       <button
                         onClick={() => setIsModalOpen(false)}
                         className="w-full py-4 btn-secondary select-none"
                       >
-                        {isSlovenian ? "Zapri okno" : "Close window"}
+                        {isSlovenian ? "Zapri okno" : isIt ? "Chiudi finestra" : "Close window"}
                       </button>
                     </motion.div>
                   ) : submitStatus === "error" ? (
@@ -1089,7 +1181,7 @@ export default function CalendarPage() {
                         <div className="flex items-center gap-2">
                           <CalendarIcon size={14} className="text-brand-red shrink-0" />
                           <span>
-                            {isSlovenian ? "Izbrani termin:" : "Selected Date:"}{' '}
+                            {isSlovenian ? "Izbrani termin:" : isIt ? "Data selezionata:" : "Selected Date:"}{' '}
                             <strong className="text-slate-800">
                               {format(selectedDate || modalEvent?.date || new Date(), 'd. MMMM yyyy', { locale: currentLocale })}
                             </strong>
@@ -1098,7 +1190,7 @@ export default function CalendarPage() {
                         <div className="flex items-center gap-2">
                           <Clock size={14} className="text-brand-red shrink-0" />
                           <span>
-                            {isSlovenian ? "Čas srečanja:" : "Meeting hour:"}{' '}
+                            {isSlovenian ? "Čas srečanja:" : isIt ? "Ora dell'incontro:" : "Meeting hour:"}{' '}
                             <strong className="text-slate-800">{modalEvent.time}</strong>
                           </span>
                         </div>
@@ -1108,26 +1200,28 @@ export default function CalendarPage() {
                       <div className="bg-brand-red/[0.03] border border-brand-red/10 rounded-2xl p-4 text-xs font-semibold text-slate-700 space-y-2">
                         <div className="flex items-center gap-2 text-brand-red font-black uppercase tracking-wider text-[10px]">
                           <Sparkles size={13} className="stroke-[3]" />
-                          <span>{isSlovenian ? "POMEMBNE INFORMACIJE" : "IMPORTANT INFORMATION"}</span>
+                          <span>{isSlovenian ? "POMEMBNE INFORMACIJE" : isIt ? "INFORMAZIONI IMPORTANTI" : "IMPORTANT INFORMATION"}</span>
                         </div>
                         <p className="text-slate-900 font-extrabold text-xs">
                           {isSlovenian 
                             ? "✓ Delavnice so brezplačne. Število mest je strogo omejeno!" 
-                            : "✓ Workshops are free of charge. Slots are strictly limited!"}
+                            : isIt
+                              ? "✓ I workshop sono gratuiti. I posti sono strettamente limitati!"
+                              : "✓ Workshops are free of charge. Slots are strictly limited!"}
                         </p>
                         <div className="border-t border-slate-200/50 pt-2 text-[11px] space-y-0.5 text-slate-600">
                           {modalEvent?.id.startsWith('graphene') ? (
                             <>
-                              <p><strong>{isSlovenian ? "Mentor:" : "Mentor:"}</strong> Prof. dr. Egon Pavlica (<a href="mailto:egon.pavlica@ung.si" className="text-brand-red hover:underline font-bold">egon.pavlica@ung.si</a>)</p>
-                              <p><strong>{isSlovenian ? "Somentor:" : "Co-mentor:"}</strong> Dr. Vadym Tkachuk (<a href="mailto:vadym.tkachuk@ung.si" className="text-brand-red hover:underline font-bold">vadym.tkachuk@ung.si</a>)</p>
+                              <p><strong>{isSlovenian ? "Mentor:" : isIt ? "Mentore:" : "Mentor:"}</strong> Prof. dr. Egon Pavlica (<a href="mailto:egon.pavlica@ung.si" className="text-brand-red hover:underline font-bold">egon.pavlica@ung.si</a>)</p>
+                              <p><strong>{isSlovenian ? "Somentor:" : isIt ? "Co-mentore:" : "Co-mentor:"}</strong> Dr. Vadym Tkachuk (<a href="mailto:vadym.tkachuk@ung.si" className="text-brand-red hover:underline font-bold">vadym.tkachuk@ung.si</a>)</p>
                             </>
                           ) : modalEvent?.id.startsWith('printcut') ? (
                             <>
-                              <p><strong>{isSlovenian ? "Mentor:" : "Mentor:"}</strong> Uroš Polanc (<a href="mailto:info@startlab.si" className="text-brand-red hover:underline font-bold">info@startlab.si</a>)</p>
-                              <p><strong>{isSlovenian ? "Lokacija:" : "Location:"}</strong> Start Lab, Solkan</p>
+                              <p><strong>{isSlovenian ? "Mentor:" : isIt ? "Mentore:" : "Mentor:"}</strong> Uroš Polanc (<a href="mailto:info@startlab.si" className="text-brand-red hover:underline font-bold">info@startlab.si</a>)</p>
+                              <p><strong>{isSlovenian ? "Lokacija:" : isIt ? "Sede:" : "Location:"}</strong> Start Lab, Solkan</p>
                             </>
                           ) : (
-                            <p><strong>{isSlovenian ? "Mentor:" : "Mentor:"}</strong> Start Lab ekipa (<a href="mailto:info@startlab.si" className="text-brand-red hover:underline font-bold">info@startlab.si</a>)</p>
+                            <p><strong>{isSlovenian ? "Mentor:" : isIt ? "Mentore:" : "Mentor:"}</strong> Start Lab ekipa (<a href="mailto:info@startlab.si" className="text-brand-red hover:underline font-bold">info@startlab.si</a>)</p>
                           )}
                         </div>
                       </div>
@@ -1135,28 +1229,28 @@ export default function CalendarPage() {
                       {/* Inputs */}
                       <div className="space-y-1">
                         <label className="text-xs font-display font-black uppercase tracking-wider text-slate-800">
-                          {isSlovenian ? "Ime in priimek udeleženca:" : "Participant's Full Name:"} <span className="text-brand-red">*</span>
+                          {isSlovenian ? "Ime in priimek udeleženca:" : isIt ? "Nome e cognome del partecipante:" : "Participant's Full Name:"} <span className="text-brand-red">*</span>
                         </label>
                         <input
                           type="text"
                           required
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          placeholder={isSlovenian ? "Napiši svoje ime..." : "e.g. Liam Novak..."}
+                          placeholder={isSlovenian ? "Napiši svoje ime..." : isIt ? "Scrivi il tuo nome..." : "e.g. Liam Novak..."}
                           className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-sm focus:bg-white focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 transition-all focus:outline-none"
                         />
                       </div>
 
                       <div className="space-y-1">
                         <label className="text-xs font-display font-black uppercase tracking-wider text-slate-800">
-                          {isSlovenian ? "E-poštni naslov:" : "E-mail Address:"} <span className="text-brand-red">*</span>
+                          {isSlovenian ? "E-poštni naslov:" : isIt ? "Indirizzo e-mail:" : "E-mail Address:"} <span className="text-brand-red">*</span>
                         </label>
                         <input
                           type="email"
                           required
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          placeholder={isSlovenian ? "Napiši svoj e-poštni naslov..." : "example@domain.com"}
+                          placeholder={isSlovenian ? "Napiši svoj e-poštni naslov..." : isIt ? "Scrivi il tuo indirizzo e-mail..." : "example@domain.com"}
                           className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-sm focus:bg-white focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 transition-all focus:outline-none"
                         />
                       </div>
@@ -1164,25 +1258,25 @@ export default function CalendarPage() {
                       <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-1">
                           <label className="text-xs font-display font-black uppercase tracking-wider text-slate-800">
-                            {isSlovenian ? "Telefon:" : "Phone:"}
+                            {isSlovenian ? "Telefon:" : isIt ? "Telefono:" : "Phone:"}
                           </label>
                           <input
                             type="tel"
                             value={formData.phone}
                             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                            placeholder={isSlovenian ? "040 123 456..." : "+386..."}
+                            placeholder={isSlovenian ? "040 123 456..." : isIt ? "040 123 456..." : "+386..."}
                             className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-sm focus:bg-white focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 transition-all focus:outline-none"
                           />
                         </div>
                         <div className="space-y-1">
                           <label className="text-xs font-display font-black uppercase tracking-wider text-slate-800">
-                            {isSlovenian ? "Starost (leta):" : "Age (years):"}
+                            {isSlovenian ? "Starost (leta):" : isIt ? "Età (anni):" : "Age (years):"}
                           </label>
                           <input
                             type="number"
                             value={formData.age}
                             onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-                            placeholder={isSlovenian ? "npr. 15" : "e.g. 15"}
+                            placeholder={isSlovenian ? "npr. 15" : isIt ? "es. 15" : "e.g. 15"}
                             min="1"
                             max="99"
                             className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-sm focus:bg-white focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 transition-all focus:outline-none"
@@ -1192,13 +1286,13 @@ export default function CalendarPage() {
 
                       <div className="space-y-1">
                         <label className="text-xs font-display font-black uppercase tracking-wider text-slate-800">
-                          {isSlovenian ? "Dodatne opombe / sporočilo:" : "Special notes / message:"}
+                          {isSlovenian ? "Dodatne opombe / sporočilo:" : isIt ? "Note aggiuntive / messaggio:" : "Special notes / message:"}
                         </label>
                         <textarea
                           rows={3}
                           value={formData.note}
                           onChange={(e) => setFormData({ ...formData, note: e.target.value })}
-                          placeholder={isSlovenian ? "Če imaš kakšno vprašanje ali posebne zahteve..." : "Any questions or notes..."}
+                          placeholder={isSlovenian ? "Če imaš kakšno vprašanje ali posebne zahteve..." : isIt ? "Se hai domande o richieste particolari..." : "Any questions or notes..."}
                           className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-sm focus:bg-white focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 transition-all focus:outline-none resize-none"
                         />
                       </div>
@@ -1207,7 +1301,9 @@ export default function CalendarPage() {
                       <p className="text-[10px] text-slate-600 font-bold leading-relaxed">
                         {isSlovenian 
                           ? "Z oddajo obrazca se strinjate, da Start Lab uporabi vaše podatke za namen koordinacije in izvedbe izbrane delavnice skladno s Pogoji uporabe."
-                          : "By submitting this form, you authorize Start Lab to hold and process your personal data for coordination and safe physical execution of this workshop series."}
+                          : isIt
+                            ? "Inviando questo modulo, autorizzi Start Lab a conservare e trattare i tuoi dati personali per il coordinamento e la corretta esecuzione di questa serie di workshop."
+                            : "By submitting this form, you authorize Start Lab to hold and process your personal data for coordination and safe physical execution of this workshop series."}
                       </p>
 
                       <div className="pt-2 flex gap-3">
@@ -1217,7 +1313,7 @@ export default function CalendarPage() {
                           className="flex-1 py-3.5 btn-secondary justify-center text-sm font-bold uppercase select-none"
                           disabled={isSubmitting}
                         >
-                          {isSlovenian ? "Prekliči" : "Cancel"}
+                          {isSlovenian ? "Prekliči" : isIt ? "Annulla" : "Cancel"}
                         </button>
                         <button
                           type="submit"
@@ -1225,8 +1321,8 @@ export default function CalendarPage() {
                           disabled={isSubmitting}
                         >
                           {isSubmitting 
-                            ? (isSlovenian ? "Prijava v teku..." : "Sending...") 
-                            : (isSlovenian ? "Oddaj prijavo" : "Submit reservation")}
+                            ? (isSlovenian ? "Prijava v teku..." : isIt ? "Invio in corso..." : "Sending...") 
+                            : (isSlovenian ? "Oddaj prijavo" : isIt ? "Invia iscrizione" : "Submit reservation")}
                         </button>
                       </div>
 
