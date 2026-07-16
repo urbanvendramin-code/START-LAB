@@ -6,7 +6,7 @@ export default function ProjectPage() {
   const { t } = useTranslation();
 
   return (
-    <div className="pt-[220px] md:pt-[275px] pb-12 md:pb-20 px-4 md:px-6 relative min-h-[80vh] flex flex-col items-center justify-center selections:bg-brand-red/20">
+    <div className="pt-8 sm:pt-12 md:pt-16 pb-12 md:pb-20 px-4 md:px-6 relative min-h-[80vh] flex flex-col items-center justify-center selections:bg-brand-red/20">
       <div className="max-w-4xl mx-auto w-full text-center space-y-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

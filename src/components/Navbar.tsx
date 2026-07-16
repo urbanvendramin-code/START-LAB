@@ -36,9 +36,9 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 w-full z-50 select-none shadow-md">
+    <>
       {/* Top Banner (Interreg Logo) - White Background */}
-      <div className="bg-white border-b border-slate-200/60 px-6 py-4 flex items-center justify-center">
+      <div className="bg-white border-b border-slate-200/60 px-4 sm:px-6 py-2 sm:py-3 flex items-center justify-center relative z-40 w-full">
         <div className="max-w-7xl mx-auto w-full flex justify-center">
           <Link 
             to="/" 
@@ -47,7 +47,7 @@ export default function Navbar() {
             <img 
               src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1780041788/start_mesmgf.png" 
               alt="Start Logo" 
-              className="h-[85px] md:h-[107px] w-auto object-contain opacity-95 hover:opacity-100 transition-opacity"
+              className="h-[50px] xs:h-[65px] sm:h-[80px] md:h-[107px] w-auto object-contain opacity-95 hover:opacity-100 transition-opacity"
               referrerPolicy="no-referrer"
             />
           </Link>
@@ -55,8 +55,8 @@ export default function Navbar() {
       </div>
 
       {/* Main Header (Start Lab Logo & Navigation) - Black Background */}
-      <div className="bg-slate-950 border-b border-slate-900 px-6">
-        <div className="max-w-7xl mx-auto min-h-20 lg:min-h-24 py-3 lg:py-2 flex items-center justify-between w-full">
+      <div className="bg-slate-950 border-b border-slate-900 px-4 sm:px-6 sticky top-0 z-50 shadow-md">
+        <div className="max-w-7xl mx-auto min-h-16 xs:min-h-20 lg:min-h-24 py-2.5 lg:py-2 flex items-center justify-between w-full">
           <Link 
             to="/" 
             className="flex items-center justify-center relative group py-1" 
@@ -69,7 +69,7 @@ export default function Navbar() {
             <img 
               src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1779890069/LOGO3_eswysi.png" 
               alt="Start Lab Logo" 
-              className="w-44 sm:w-48 md:w-52 lg:w-64 h-auto object-contain relative z-10"
+              className="w-36 xs:w-44 sm:w-48 md:w-52 lg:w-64 h-auto object-contain relative z-10"
               referrerPolicy="no-referrer"
             />
           </Link>
@@ -224,6 +224,6 @@ export default function Navbar() {
           />
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 }

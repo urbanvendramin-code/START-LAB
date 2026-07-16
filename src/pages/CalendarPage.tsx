@@ -307,7 +307,7 @@ export default function CalendarPage() {
       phone: '',
       age: '',
       note: '',
-      sessionSelection: (event.id.startsWith('graphene') || event.id.startsWith('printcut')) ? 'all' : 'single'
+      sessionSelection: 'all'
     });
     setSubmitStatus('idle');
     setIsModalOpen(true);
@@ -364,7 +364,7 @@ export default function CalendarPage() {
   };
 
   return (
-    <div className="pt-[220px] md:pt-[275px] pb-24 px-4 md:px-6 relative min-h-screen">
+    <div className="pt-8 sm:pt-12 md:pt-16 pb-24 px-4 md:px-6 relative min-h-screen">
       <div className="max-w-7xl mx-auto">
         
         {/* Hero Section */}
@@ -1131,39 +1131,6 @@ export default function CalendarPage() {
                           )}
                         </div>
                       </div>
-
-                      {/* Registration Scope Selector */}
-                      {(modalEvent?.id.startsWith('graphene') || modalEvent?.id.startsWith('printcut')) && (
-                        <div className="space-y-2 bg-slate-50 border border-slate-100 rounded-2xl p-4">
-                          <label className="text-xs font-display font-black uppercase tracking-wider text-slate-800 block">
-                            {isSlovenian ? "Obseg prijave:" : "Registration Scope:"}
-                          </label>
-                          <div className="grid grid-cols-2 gap-3">
-                            <button
-                              type="button"
-                              onClick={() => setFormData({ ...formData, sessionSelection: 'all' })}
-                              className={`px-3 py-2.5 rounded-xl border text-xs font-bold transition-all text-center flex flex-col justify-center items-center ${formData.sessionSelection === 'all' ? 'border-brand-red bg-brand-red/5 text-slate-900 ring-2 ring-brand-red/10' : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'}`}
-                            >
-                              <span>{isSlovenian ? "Celotna delavnica" : "Full Workshop Series"}</span>
-                              <span className="text-[9px] text-slate-500 font-normal mt-0.5">
-                                {modalEvent?.id.startsWith('printcut') 
-                                  ? (isSlovenian ? "Vseh 8 sklopov" : "All 8 parts") 
-                                  : (isSlovenian ? "Vseh 6 sklopov" : "All 6 parts")}
-                              </span>
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => setFormData({ ...formData, sessionSelection: 'single' })}
-                              className={`px-3 py-2.5 rounded-xl border text-xs font-bold transition-all text-center flex flex-col justify-center items-center ${formData.sessionSelection === 'single' ? 'border-brand-red bg-brand-red/5 text-slate-900 ring-2 ring-brand-red/10' : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'}`}
-                            >
-                              <span>{isSlovenian ? "Samo ta sklop" : "This Session Only"}</span>
-                              <span className="text-[9px] text-slate-500 font-normal mt-0.5">
-                                {format(selectedDate || modalEvent?.date || new Date(), 'd. MMMM', { locale: currentLocale })}
-                              </span>
-                            </button>
-                          </div>
-                        </div>
-                      )}
 
                       {/* Inputs */}
                       <div className="space-y-1">

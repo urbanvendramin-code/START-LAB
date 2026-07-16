@@ -41,7 +41,7 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative pt-[220px] md:pt-[275px] lg:pt-[300px] pb-16 md:pb-28 px-4 md:px-6 min-h-screen flex items-center overflow-hidden">
+      <section className="relative pt-6 sm:pt-12 md:pt-16 lg:pt-20 pb-16 md:pb-28 px-4 md:px-6 min-h-screen flex items-center overflow-hidden">
         {/* Modern Background with Photography */}
         <div className="absolute inset-0 z-0 opacity-40 mix-blend-multiply">
           <img 
@@ -51,7 +51,7 @@ export default function Home() {
           />
         </div>
         
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center relative z-10 w-full">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-10 lg:gap-12 items-center relative z-10 w-full">
           <motion.div 
             initial={{ x: -60, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
@@ -59,7 +59,7 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="lg:col-span-7"
           >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-display font-black mb-8 leading-[1.05] tracking-tight text-slate-950">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-display font-black mb-6 md:mb-8 leading-[1.05] tracking-tight text-slate-950">
               {t('hero.title_start')} <br />
               <span className="text-brand-red">
                 {t('hero.title_end_before_highlight')}
@@ -73,12 +73,12 @@ export default function Home() {
               </span>
             </h1>
             
-            <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-xl leading-relaxed font-medium">
+            <p className="text-base sm:text-lg md:text-xl text-slate-600 mb-8 md:mb-10 max-w-xl leading-relaxed font-medium">
               {t('hero.subtitle')}
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 mb-6">
-              <Link to="/delavnice" className="btn-primary shadow-lg">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8">
+              <Link to="/delavnice" className="btn-primary shadow-lg text-center flex items-center justify-center">
                 {t('hero.cta')} <ChevronRight size={22} className="stroke-[3]" />
               </Link>
               <button 
@@ -90,63 +90,109 @@ export default function Home() {
               </button>
             </div>
 
-            {/* Eye-catching first workshop quick link */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="mb-10 max-w-lg"
-            >
-              <Link 
-                to="/koledar" 
-                className="flex items-center gap-4 p-4 rounded-3xl border-2 border-brand-red bg-brand-red/5 hover:bg-brand-red/10 transition-all shadow-[0_8px_30px_rgb(239,68,68,0.12)] group relative overflow-hidden"
+            {/* Eye-catching workshop quick links */}
+            <div className="space-y-3 mb-8 max-w-lg">
+              {/* Graphene Workshop */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
               >
-                {/* Pulsing indicator dot */}
-                <span className="absolute top-3 right-3 flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-red opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-brand-red"></span>
-                </span>
-
-                <div className="w-12 h-12 bg-brand-red text-white rounded-2xl flex flex-col items-center justify-center font-display font-black tracking-tight shrink-0 shadow-md">
-                  <span className="text-sm leading-none">07</span>
-                  <span className="text-[9px] leading-none mt-0.5">SEP</span>
-                </div>
-
-                <div className="text-left flex-1 min-w-0">
-                  <span className="inline-block bg-brand-red text-white text-[9px] font-display font-black uppercase tracking-widest px-2.5 py-1 rounded-lg mb-1.5 leading-none">
-                    {isSlovenian ? 'PRVA DELAVNICA' : isItalian ? 'PRIMO WORKSHOP' : 'FIRST WORKSHOP'}
+                <Link 
+                  to="/koledar" 
+                  className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-3xl border-2 border-brand-red bg-brand-red/5 hover:bg-brand-red/10 transition-all shadow-[0_8px_30px_rgb(239,68,68,0.08)] group relative overflow-hidden"
+                >
+                  {/* Pulsing indicator dot */}
+                  <span className="absolute top-3 right-3 flex h-3 w-3">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-red opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-brand-red"></span>
                   </span>
-                  <h4 className="text-sm sm:text-base font-display font-black uppercase text-slate-950 group-hover:text-brand-red transition-colors leading-tight truncate">
-                    {isSlovenian 
-                      ? 'Delavnica izdelave grafenskega čipa' 
-                      : isItalian 
-                        ? 'Fabbricazione di chip di grafene' 
-                        : 'Graphene Chip Fabrication Workshop'}
-                  </h4>
-                  <p className="text-[11px] text-slate-600 font-bold leading-normal mt-0.5 flex items-center gap-1">
-                    {isSlovenian 
-                      ? 'Začetek 6-tedenskega programa. Prijavi se zdaj!' 
-                      : isItalian 
-                        ? 'Inizio del programma di 6 settimane. Iscriviti ora!' 
-                        : 'Start of 6-week program. Register now!'}
-                    <ArrowRight size={13} className="inline-block group-hover:translate-x-1 transition-transform stroke-[2.5] text-brand-red" />
-                  </p>
-                </div>
-              </Link>
-            </motion.div>
+
+                  <div className="w-12 h-12 bg-brand-red text-white rounded-2xl flex flex-col items-center justify-center font-display font-black tracking-tight shrink-0 shadow-md">
+                    <span className="text-sm leading-none">07</span>
+                    <span className="text-[9px] leading-none mt-0.5">SEP</span>
+                  </div>
+
+                  <div className="text-left flex-1 min-w-0">
+                    <span className="inline-block bg-brand-red text-white text-[9px] font-display font-black uppercase tracking-widest px-2 py-0.5 rounded-lg mb-1 leading-none">
+                      {isSlovenian ? 'PRVA DELAVNICA' : isItalian ? 'PRIMO WORKSHOP' : 'FIRST WORKSHOP'}
+                    </span>
+                    <h4 className="text-xs sm:text-base font-display font-black uppercase text-slate-950 group-hover:text-brand-red transition-colors leading-tight">
+                      {isSlovenian 
+                        ? 'Delavnica izdelave grafenskega čipa' 
+                        : isItalian 
+                          ? 'Fabbricazione di chip di grafene' 
+                          : 'Graphene Chip Fabrication Workshop'}
+                    </h4>
+                    <p className="text-[10px] sm:text-[11px] text-slate-600 font-bold leading-normal mt-0.5 flex items-center gap-1">
+                      {isSlovenian 
+                        ? 'Začetek 6-tedenskega programa. Prijavi se zdaj!' 
+                        : isItalian 
+                          ? 'Inizio del programma di 6 settimane. Iscriviti ora!' 
+                          : 'Start of 6-week program. Register now!'}
+                      <ArrowRight size={13} className="inline-block group-hover:translate-x-1 transition-transform stroke-[2.5] text-brand-red shrink-0" />
+                    </p>
+                  </div>
+                </Link>
+              </motion.div>
+
+              {/* Print & Cut Workshop */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                <Link 
+                  to="/koledar" 
+                  className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-3xl border-2 border-play-teal bg-play-teal/5 hover:bg-play-teal/10 transition-all shadow-[0_8px_30px_rgba(13,148,136,0.08)] group relative overflow-hidden"
+                >
+                  {/* Pulsing indicator dot */}
+                  <span className="absolute top-3 right-3 flex h-3 w-3">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-play-teal opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-play-teal"></span>
+                  </span>
+
+                  <div className="w-12 h-12 bg-play-teal text-white rounded-2xl flex flex-col items-center justify-center font-display font-black tracking-tight shrink-0 shadow-md">
+                    <span className="text-sm leading-none">08</span>
+                    <span className="text-[9px] leading-none mt-0.5">SEP</span>
+                  </div>
+
+                  <div className="text-left flex-1 min-w-0">
+                    <span className="inline-block bg-play-teal text-white text-[9px] font-display font-black uppercase tracking-widest px-2 py-0.5 rounded-lg mb-1 leading-none">
+                      {isSlovenian ? 'DRUGA DELAVNICA' : isItalian ? 'SECONDO WORKSHOP' : 'SECOND WORKSHOP'}
+                    </span>
+                    <h4 className="text-xs sm:text-base font-display font-black uppercase text-slate-950 group-hover:text-play-teal transition-colors leading-tight">
+                      {isSlovenian 
+                        ? 'Delavnica natisni in izreži' 
+                        : isItalian 
+                          ? 'Workshop Stampa e Taglia' 
+                          : 'Print & Cut Workshop'}
+                    </h4>
+                    <p className="text-[10px] sm:text-[11px] text-slate-600 font-bold leading-normal mt-0.5 flex items-center gap-1">
+                      {isSlovenian 
+                        ? 'Začetek 8-tedenskega programa. Prijavi se zdaj!' 
+                        : isItalian 
+                          ? 'Inizio del programma di 8 settimane. Iscriviti ora!' 
+                          : 'Start of 8-week program. Register now!'}
+                      <ArrowRight size={13} className="inline-block group-hover:translate-x-1 transition-transform stroke-[2.5] text-play-teal shrink-0" />
+                    </p>
+                  </div>
+                </Link>
+              </motion.div>
+            </div>
  
-            <div className="grid grid-cols-3 gap-4 md:gap-6">
-              <div className="bg-play-pink/10 border-2 border-play-pink/20 rounded-[1.8rem] p-4 text-center transform hover:scale-105 transition-all">
-                <div className="text-3.5xl font-display font-black text-play-pink shrink-0">15+</div>
-                <div className="text-[10px] md:text-xs uppercase tracking-wider text-slate-500 font-extrabold font-display leading-tight">{t('hero.stats.workshops')}</div>
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6">
+              <div className="bg-play-pink/10 border-2 border-play-pink/20 rounded-[1.5rem] sm:rounded-[1.8rem] p-2.5 sm:p-4 text-center transform hover:scale-105 transition-all">
+                <div className="text-2xl sm:text-3xl lg:text-3.5xl font-display font-black text-play-pink shrink-0">15+</div>
+                <div className="text-[9px] sm:text-[10px] md:text-xs uppercase tracking-wider text-slate-500 font-extrabold font-display leading-tight">{t('hero.stats.workshops')}</div>
               </div>
-              <div className="bg-play-teal/10 border-2 border-play-teal/20 rounded-[1.8rem] p-4 text-center transform hover:scale-105 transition-all">
-                <div className="text-3.5xl font-display font-black text-play-teal shrink-0">100%</div>
-                <div className="text-[10px] md:text-xs uppercase tracking-wider text-slate-500 font-extrabold font-display leading-tight">{t('hero.stats.practical')}</div>
+              <div className="bg-play-teal/10 border-2 border-play-teal/20 rounded-[1.5rem] sm:rounded-[1.8rem] p-2.5 sm:p-4 text-center transform hover:scale-105 transition-all">
+                <div className="text-2xl sm:text-3xl lg:text-3.5xl font-display font-black text-play-teal shrink-0">100%</div>
+                <div className="text-[9px] sm:text-[10px] md:text-xs uppercase tracking-wider text-slate-500 font-extrabold font-display leading-tight">{t('hero.stats.practical')}</div>
               </div>
-              <div className="bg-play-yellow/10 border-2 border-play-yellow/20 rounded-[1.8rem] p-4 text-center transform hover:scale-105 transition-all">
-                <div className="text-3.5xl font-display font-black text-play-yellow shrink-0">Top</div>
-                <div className="text-[10px] md:text-xs uppercase tracking-wider text-slate-500 font-extrabold font-display leading-tight">{t('hero.stats.equipment')}</div>
+              <div className="bg-play-yellow/10 border-2 border-play-yellow/20 rounded-[1.5rem] sm:rounded-[1.8rem] p-2.5 sm:p-4 text-center transform hover:scale-105 transition-all">
+                <div className="text-2xl sm:text-3xl lg:text-3.5xl font-display font-black text-play-yellow shrink-0">Top</div>
+                <div className="text-[9px] sm:text-[10px] md:text-xs uppercase tracking-wider text-slate-500 font-extrabold font-display leading-tight">{t('hero.stats.equipment')}</div>
               </div>
             </div>
           </motion.div>
@@ -174,7 +220,7 @@ export default function Home() {
                </div>
                
                {/* Cute sticker Badge */}
-               <div className="absolute -bottom-6 -right-4 bg-play-teal text-slate-950 font-display font-black text-sm uppercase px-5 py-3 rounded-2xl shadow-[0_8px_0_0_#028a67] border-2 border-slate-900 -rotate-3 hover:rotate-3 transition-transform duration-300">
+               <div className="absolute bottom-[-16px] right-[4px] sm:bottom-[-24px] sm:right-[-16px] bg-play-teal text-slate-950 font-display font-black text-xs sm:text-sm uppercase px-4 py-2.5 sm:px-5 sm:py-3 rounded-2xl shadow-[0_6px_0_0_#028a67] sm:shadow-[0_8px_0_0_#028a67] border-2 border-slate-900 -rotate-3 hover:rotate-3 transition-transform duration-300">
                   ⚡ {t('why.exploration.title')}
                </div>
             </div>
@@ -187,25 +233,25 @@ export default function Home() {
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12">
           <motion.div 
             whileHover={{ y: -5 }}
-            className="play-card p-8 md:p-12 bg-white relative overflow-hidden group border-2 border-slate-100"
+            className="play-card p-6 sm:p-8 md:p-12 bg-white relative overflow-hidden group border-2 border-slate-100"
           >
             <div className="absolute top-0 right-0 w-24 h-24 bg-play-blue/10 rounded-bl-[4rem] flex items-center justify-center text-play-blue group-hover:scale-110 transition-transform">
               <Boxes size={40} className="mr-[-10px] mt-[-10px]" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-display font-black mb-6 text-play-blue uppercase tracking-tight">{t('mission.title')}</h2>
-            <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-black mb-4 sm:mb-6 text-play-blue uppercase tracking-tight">{t('mission.title')}</h2>
+            <p className="text-sm sm:text-base md:text-lg text-slate-600 leading-relaxed font-medium">
               {t('mission.text')}
             </p>
           </motion.div>
           <motion.div 
             whileHover={{ y: -5 }}
-            className="play-card p-8 md:p-12 bg-white relative overflow-hidden group border-2 border-slate-100"
+            className="play-card p-6 sm:p-8 md:p-12 bg-white relative overflow-hidden group border-2 border-slate-100"
           >
             <div className="absolute top-0 right-0 w-24 h-24 bg-play-pink/10 rounded-bl-[4rem] flex items-center justify-center text-play-pink group-hover:scale-110 transition-transform">
               <Rocket size={40} className="mr-[-10px] mt-[-10px]" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-display font-black mb-6 text-play-pink uppercase tracking-tight">{t('vision.title')}</h2>
-            <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-black mb-4 sm:mb-6 text-play-pink uppercase tracking-tight">{t('vision.title')}</h2>
+            <p className="text-sm sm:text-base md:text-lg text-slate-600 leading-relaxed font-medium">
               {t('vision.text')}
             </p>
           </motion.div>
@@ -213,17 +259,17 @@ export default function Home() {
       </section>
 
       {/* Why Start Lab? Section */}
-      <section className="py-20 md:py-32 px-4 md:px-6 relative">
+      <section className="py-20 md:py-32 px-4 md:px-6 relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-12 gap-12 md:gap-16 items-center mb-20">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 md:gap-16 items-center mb-20">
             <div className="lg:col-span-7">
               <div className="inline-block bg-play-pink/15 text-play-pink font-display font-extrabold text-xs uppercase px-4 py-2 rounded-full mb-6">
                 Problem & Rešitev
               </div>
-              <h2 className="text-4xl md:text-6xl font-display font-black tracking-tight mb-8 leading-[1.05] text-slate-950">
+              <h2 className="text-3xl sm:text-4xl md:text-6xl font-display font-black tracking-tight mb-6 md:mb-8 leading-[1.05] text-slate-950">
                 {t('why.title_start')} <span className="text-brand-red inline-block">{t('why.title_brand')}</span>
               </h2>
-              <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-semibold mb-10">
+              <p className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed font-semibold mb-8 md:mb-10">
                 {t('why.subtitle_rest').split(',').map((part, index) => (
                   index === 0 ? (
                     <span key={index}>{part} <span className="text-brand-red font-black underline decoration-play-yellow decoration-4 underline-offset-4">{t('why.subtitle_highlight')}</span> </span>
@@ -232,38 +278,38 @@ export default function Home() {
               </p>
               
               <div className="space-y-6 md:space-y-8">
-                <div className="flex gap-6 items-start">
-                  <div className="w-14 h-14 bg-play-teal/15 border-2 border-play-teal/30 rounded-2xl flex items-center justify-center shrink-0 shadow-[0_4px_0_0_#0d948830]">
-                    <Boxes className="text-play-teal" size={26} />
+                <div className="flex gap-4 sm:gap-6 items-start">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-play-teal/15 border-2 border-play-teal/30 rounded-2xl flex items-center justify-center shrink-0 shadow-[0_4px_0_0_#0d948830]">
+                    <Boxes className="text-play-teal" size={24} />
                   </div>
                   <div>
-                    <h4 className="font-display font-extrabold uppercase mb-2 text-base md:text-lg text-slate-900">{t('why.exploration.title')}</h4>
-                    <p className="text-sm text-slate-500 leading-relaxed font-medium">{t('why.exploration.desc')}</p>
+                    <h4 className="font-display font-extrabold uppercase mb-1.5 sm:mb-2 text-sm sm:text-base md:text-lg text-slate-900">{t('why.exploration.title')}</h4>
+                    <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-medium">{t('why.exploration.desc')}</p>
                   </div>
                 </div>
-                <div className="flex gap-6 items-start">
-                  <div className="w-14 h-14 bg-play-purple/15 border-2 border-play-purple/30 rounded-2xl flex items-center justify-center shrink-0 shadow-[0_4px_0_0_#7c3aed30]">
-                    <Cpu className="text-play-purple" size={26} />
+                <div className="flex gap-4 sm:gap-6 items-start">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-play-purple/15 border-2 border-play-purple/30 rounded-2xl flex items-center justify-center shrink-0 shadow-[0_4px_0_0_#7c3aed30]">
+                    <Cpu className="text-play-purple" size={24} />
                   </div>
                   <div>
-                    <h4 className="font-display font-extrabold uppercase mb-2 text-base md:text-lg text-slate-900">{t('why.industry.title')}</h4>
-                    <p className="text-sm text-slate-500 leading-relaxed font-medium">{t('why.industry.desc')}</p>
+                    <h4 className="font-display font-extrabold uppercase mb-1.5 sm:mb-2 text-sm sm:text-base md:text-lg text-slate-900">{t('why.industry.title')}</h4>
+                    <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-medium">{t('why.industry.desc')}</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="relative mt-8 lg:mt-0 lg:col-span-5">
-              <div className="rounded-[2.5rem] overflow-hidden bg-slate-100 p-3 border-2 border-slate-900/10 shadow-[0_24px_50px_rgba(15,23,42,0.08)]">
+            <div className="relative mt-4 lg:mt-0 lg:col-span-5">
+              <div className="rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden bg-slate-100 p-2 sm:p-3 border-2 border-slate-900/10 shadow-[0_24px_50px_rgba(15,23,42,0.08)]">
                 <img 
                   src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80" 
                   alt="Students Working" 
-                  className="w-full h-full object-cover rounded-[2rem] aspect-square"
+                  className="w-full h-full object-cover rounded-[1.8rem] sm:rounded-[2rem] aspect-square"
                 />
               </div>
-              <div className="absolute top-4 -right-2 md:-top-6 md:-right-6 bg-white border-2 border-slate-950 p-5 rounded-2xl shadow-[0_8px_0_0_rgba(15,23,42,1)] animate-float font-display">
-                <div className="text-xs font-black uppercase tracking-wider text-brand-red mb-1">Hands-on</div>
-                <div className="text-[10px] text-slate-500 font-extrabold">100% PRAKSA</div>
+              <div className="absolute top-4 right-2 sm:-top-4 sm:-right-2 md:-top-6 md:-right-6 bg-white border-2 border-slate-950 p-4 sm:p-5 rounded-2xl shadow-[0_6px_0_0_rgba(15,23,42,1)] sm:shadow-[0_8px_0_0_rgba(15,23,42,1)] animate-float font-display">
+                <div className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-brand-red mb-1">Hands-on</div>
+                <div className="text-[9px] sm:text-[10px] text-slate-500 font-extrabold">100% PRAKSA</div>
               </div>
             </div>
           </div>
@@ -271,28 +317,28 @@ export default function Home() {
       </section>
 
       {/* Goals Section */}
-      <section className="py-20 px-4 md:px-6 relative">
+      <section className="py-20 px-4 md:px-6 relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-display font-black uppercase tracking-tight text-slate-950 mb-4">{t('goals.title')}</h2>
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-display font-black uppercase tracking-tight text-slate-950 mb-4">{t('goals.title')}</h2>
             <div className="w-24 h-2 bg-play-teal mx-auto rounded-full" />
           </div>
-          <div className="grid md:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
             {[
-              { goal: t('goals.goal1', { returnObjects: true }) as any, colorClass: "bg-play-pink/5 border-play-pink/25 text-play-pink shadow-[0_10px_0_0_#e11d4815] hover:bg-play-pink/10" },
-              { goal: t('goals.goal2', { returnObjects: true }) as any, colorClass: "bg-play-yellow/5 border-play-yellow/25 text-play-yellow shadow-[0_10px_0_0_#f59e0b15] hover:bg-play-yellow/10" },
-              { goal: t('goals.goal3', { returnObjects: true }) as any, colorClass: "bg-play-teal/5 border-play-teal/25 text-play-teal shadow-[0_10px_0_0_#0d948815] hover:bg-play-teal/10" },
-              { goal: t('goals.goal4', { returnObjects: true }) as any, colorClass: "bg-play-blue/5 border-play-blue/25 text-play-blue shadow-[0_10px_0_0_#2563eb15] hover:bg-play-blue/10" },
-              { goal: t('goals.goal5', { returnObjects: true }) as any, colorClass: "bg-play-purple/5 border-play-purple/25 text-play-purple shadow-[0_10px_0_0_#7c3aed15] hover:bg-play-purple/10" }
+              { goal: t('goals.goal1', { returnObjects: true }) as any, colorClass: "bg-play-pink/5 border-play-pink/25 text-play-pink shadow-[0_8px_0_0_#e11d4810] sm:shadow-[0_10px_0_0_#e11d4815] hover:bg-play-pink/10" },
+              { goal: t('goals.goal2', { returnObjects: true }) as any, colorClass: "bg-play-yellow/5 border-play-yellow/25 text-play-yellow shadow-[0_8px_0_0_#f59e0b10] sm:shadow-[0_10px_0_0_#f59e0b15] hover:bg-play-yellow/10" },
+              { goal: t('goals.goal3', { returnObjects: true }) as any, colorClass: "bg-play-teal/5 border-play-teal/25 text-play-teal shadow-[0_8px_0_0_#0d948810] sm:shadow-[0_10px_0_0_#0d948815] hover:bg-play-teal/10" },
+              { goal: t('goals.goal4', { returnObjects: true }) as any, colorClass: "bg-play-blue/5 border-play-blue/25 text-play-blue shadow-[0_8px_0_0_#2563eb10] sm:shadow-[0_10px_0_0_#2563eb15] hover:bg-play-blue/10" },
+              { goal: t('goals.goal5', { returnObjects: true }) as any, colorClass: "bg-play-purple/5 border-play-purple/25 text-play-purple shadow-[0_8px_0_0_#7c3aed10] sm:shadow-[0_10px_0_0_#7c3aed15] hover:bg-play-purple/10" }
             ].map((item, i) => (
               <motion.div 
                 whileHover={{ y: -6 }}
                 key={i} 
-                className={`border-2 rounded-[2rem] p-8 text-center bg-white transition-all ${item.colorClass}`}
+                className={`border-2 rounded-[1.8rem] sm:rounded-[2rem] p-5 sm:p-8 text-center bg-white transition-all ${item.colorClass}`}
               >
-                <div className="font-display font-black text-4xl mb-4 text-slate-900 leading-none">0{i+1}</div>
-                <h3 className="font-display font-black uppercase text-sm tracking-wider mb-4 leading-snug">{item.goal.t}</h3>
-                <p className="text-xs text-slate-600 leading-relaxed font-semibold">{item.goal.d}</p>
+                <div className="font-display font-black text-3xl sm:text-4xl mb-3 sm:mb-4 text-slate-900 leading-none">0{i+1}</div>
+                <h3 className="font-display font-black uppercase text-xs sm:text-sm tracking-wider mb-2.5 sm:mb-4 leading-snug">{item.goal.t}</h3>
+                <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed font-semibold">{item.goal.d}</p>
               </motion.div>
             ))}
           </div>

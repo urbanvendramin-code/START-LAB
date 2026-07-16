@@ -53,7 +53,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="pt-[220px] md:pt-[275px] pb-20 px-4 md:px-6 relative min-h-screen">
+    <div className="pt-8 sm:pt-12 md:pt-16 pb-20 px-4 md:px-6 relative min-h-screen">
       <div className="max-w-7xl mx-auto font-sans">
         <div className="mb-12">
           <h1 className="text-4xl md:text-7xl font-display font-black uppercase leading-[1.0] tracking-tight mb-4 text-slate-950">

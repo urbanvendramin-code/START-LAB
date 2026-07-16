@@ -135,7 +135,7 @@ export default function MentorPage() {
   };
 
   return (
-    <div className="pt-[220px] md:pt-[275px] pb-20 px-4 md:px-6 relative">
+    <div className="pt-8 sm:pt-12 md:pt-16 pb-20 px-4 md:px-6 relative">
       <div className="max-w-7xl mx-auto">
         
         {/* Mentor Content and Form Row */}
