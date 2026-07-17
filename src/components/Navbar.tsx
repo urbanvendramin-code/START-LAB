@@ -45,7 +45,7 @@ export default function Navbar() {
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             <img 
-              src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1780041788/start_mesmgf.png" 
+              src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1784276193/Adesivo_SPF_progetti_finanziati_START_bw_bkpo4y.png" 
               alt="Start Logo" 
               className="h-[50px] xs:h-[65px] sm:h-[80px] md:h-[107px] w-auto object-contain opacity-95 hover:opacity-100 transition-opacity"
               referrerPolicy="no-referrer"

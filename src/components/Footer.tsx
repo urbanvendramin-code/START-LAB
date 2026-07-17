@@ -9,7 +9,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
         <Link to="/" className="flex items-center gap-2 h-[120px]">
           <img 
-            src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1780041788/start_mesmgf.png" 
+            src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1784276193/Adesivo_SPF_progetti_finanziati_START_bw_bkpo4y.png" 
             alt="Start Lab Logo" 
             className="h-full w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
           />
@@ -29,12 +29,12 @@ export default function Footer() {
         <div className="grid md:grid-cols-2 gap-6 text-left bg-slate-50 p-6 rounded-2xl border border-slate-100 mb-6">
           <div>
             <p className="text-slate-600 font-medium">
-              Projekt financira Evropska unija iz Sklada za male projekte GO!2025 programa Interreg VI-A Italija-Slovenija 2021-2027, ki ga upravlja EZTS GO.
+              Projekt START financira Evropska unija iz Sklada za male projekte GO!2025 programa Interreg VI-A Italija-Slovenija 2021-2027, ki ga upravlja EZTS GO.
             </p>
           </div>
           <div>
             <p className="text-slate-600 font-medium">
-              Il progetto è finanziato dall’Unione europea nell’ambito del Fondo per piccoli progetti (Small Project Fund) GO! 2025 del Programma Interreg VI-A Italia-Slovenia 2021-2027, gestito dal GECT GO.
+              Il progetto START è finanziato dall’Unione europea nell’ambito del Fondo per piccoli progetti (Small Project Fund) GO! 2025 del Programma Interreg VI-A Italia-Slovenia 2021-2027, gestito dal GECT GO.
             </p>
           </div>
         </div>
