@@ -910,7 +910,8 @@ export default function PartnerPage() {
                    { key: 'item_ung', bg: "bg-play-pink/5 border-play-pink/15 hover:border-play-pink/35 text-play-pink hover:scale-[1.01]", badgeColor: "bg-play-pink/12 text-play-pink", href: "https://www-lfos.ung.si/" },
                    { key: 'item_ptp', bg: "bg-play-yellow/5 border-play-yellow/15 hover:border-play-yellow/35 text-play-yellow hover:scale-[1.01]", badgeColor: "bg-play-yellow/12 text-play-yellow", href: "https://popri.si/" },
                    { key: 'item_ehisa', bg: "bg-play-teal/5 border-play-teal/15 hover:border-play-teal/35 text-play-teal hover:scale-[1.01]", badgeColor: "bg-play-teal/12 text-play-teal", href: "https://www.e-hisa.si/" },
-                   { key: 'item_mic', bg: "bg-play-blue/5 border-play-blue/15 hover:border-play-blue/35 text-play-blue hover:scale-[1.01]", badgeColor: "bg-play-blue/12 text-play-blue", href: "https://mic.scng.si/domov/kontakti-mic/" }
+                   { key: 'item_mic', bg: "bg-play-blue/5 border-play-blue/15 hover:border-play-blue/35 text-play-blue hover:scale-[1.01]", badgeColor: "bg-play-blue/12 text-play-blue", href: "https://mic.scng.si/domov/kontakti-mic/" },
+                   { key: 'item_lung', bg: "bg-play-purple/5 border-play-purple/15 hover:border-play-purple/35 text-play-purple hover:scale-[1.01]", badgeColor: "bg-play-purple/12 text-play-purple", href: "https://www.lung.si/" }
                  ].map((item, idx) => {
                    const name = t(`partners.${item.key}.name`);
                    const fullName = t(`partners.${item.key}.fullName`);

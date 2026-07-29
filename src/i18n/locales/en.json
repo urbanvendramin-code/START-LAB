@@ -141,6 +141,12 @@
       "label": "Technical Partner",
       "desc": "IL MIC operates during school hours (until 3 PM), allowing Nova Gorica School Center school children to gain practical skills on custom hardware. Start Lab is open after 4 PM, offering a creative makerspace for self-directed research, prototyping, and design. They work together as formal and extracurricular upgrades."
     },
+    "item_lung": {
+      "name": "LUNG",
+      "fullName": "Ljudska univerza Nova Gorica",
+      "label": "Educational Partner",
+      "desc": "LUNG is an educational center for all generations. As an implementer of numerous projects, it brings free education, workshops, and various forms of support for the residents of our region to the local environment. Some of the content already offered within its projects will be further upgraded and adapted for execution at Start Lab, while also helping promote its program and activities."
+    },
     "for_companies": {
       "title": "For Companies",
       "desc": "We invite companies to co-create workshops, team-buildings and invest in the region's future personnel. Become part of the open developmental environment in Goriška.",

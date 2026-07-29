@@ -141,6 +141,12 @@
       "label": "Tehnični partner",
       "desc": "IL MIC deluje v času pouka (do 15. ure) in dijakom Šolskega centra Nova Gorica omogoča praktično delo ter razvoj tehničnih kompetenc. Start Lab je odprt po 16. uri ter nudi prostor za raziskovanje, prototipiranje in razvoj idej izven šolskega časa – za dijake, uporabnike IL MIC-a in osnovnošolce. Delujeta komplementarno: IL MIC v okviru formalnega izobraževanja, Start Lab kot popoldanska nadgradnja."
     },
+    "item_lung": {
+      "name": "LUNG",
+      "fullName": "Ljudska univerza Nova Gorica",
+      "label": "Izobraževalni partner",
+      "desc": "LUNG je izobraževalno središče za vse generacije. Kot izvajalka številnih projektov v lokalno okolje prinaša brezplačna izobraževanja, delavnice in različne oblike podpore za prebivalce naše regije. Nekatere vsebine, ki jih že ponuja v okviru svojih projektov, bo dodatno nadgradila in prilagodila za izvajanje v Start Labu ter dodatno skrbela za promocijo njegovega programa in aktivnosti."
+    },
     "for_companies": {
       "title": "Za podjetja",
       "desc": "Vabimo podjetja k soustvarjanju delavnic, team-buildingom in naložbi v prihodnje kadre regije. Postanite del odprtega razvojnega okolja na Goriškem.",
