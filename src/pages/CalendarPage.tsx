@@ -648,7 +648,7 @@ export default function CalendarPage() {
                                 )}
                                 {isPrintCut && (
                                   <span className="bg-amber-400 text-slate-950 text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
-                                    ⚡ {isSlovenian ? "Samo še 8 prostih mest!" : isIt ? "Solo 8 posti disponibili!" : "Only 8 spots left!"}
+                                    ⚡ {isSlovenian ? "Samo še 6 prostih mest!" : isIt ? "Solo 6 posti disponibili!" : "Only 6 spots left!"}
                                   </span>
                                 )}
                               </div>
@@ -985,10 +985,10 @@ export default function CalendarPage() {
                                 <AlertTriangle size={18} className="text-amber-600 shrink-0 stroke-[2.5]" />
                                 <span>
                                   {isSlovenian 
-                                    ? "Opomnik: Na voljo je samo še 8 prostih mest!" 
+                                    ? "Opomnik: Na voljo je samo še 6 prostih mest!" 
                                     : isIt 
-                                      ? "Opomnik: Solo 8 posti ancora disponibili!" 
-                                      : "Reminder: Only 8 spots remaining!"}
+                                      ? "Opomnik: Solo 6 posti ancora disponibili!" 
+                                      : "Reminder: Only 6 spots remaining!"}
                                 </span>
                               </div>
                             )}
@@ -1259,7 +1259,7 @@ export default function CalendarPage() {
                           )}
                           {modalEvent?.id.startsWith('printcut') && (
                             <span className="bg-amber-400 text-slate-950 font-display font-black text-[10px] uppercase px-2.5 py-0.5 rounded-full shadow-sm">
-                              ⚡ {isSlovenian ? "Samo še 8 prostih mest!" : isIt ? "Solo 8 posti disponibili!" : "Only 8 spots left!"}
+                              ⚡ {isSlovenian ? "Samo še 6 prostih mest!" : isIt ? "Solo 6 posti disponibili!" : "Only 6 spots left!"}
                             </span>
                           )}
                         </div>
