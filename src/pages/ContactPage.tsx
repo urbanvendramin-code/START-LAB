@@ -59,9 +59,18 @@ export default function ContactPage() {
           <h1 className="text-4xl md:text-7xl font-display font-black uppercase leading-[1.0] tracking-tight mb-4 text-slate-950">
             {t('contact.title_start_page', { defaultValue: 'Stopite v' })} <span className="text-brand-red inline-block">{t('contact.title_brand_page', { defaultValue: 'Stik' })}</span>
           </h1>
-          <p className="text-lg text-slate-600 font-semibold max-w-2xl leading-relaxed">
+          <p className="text-lg text-slate-600 font-semibold max-w-2xl leading-relaxed mb-6">
             {t('contact.subtitle_page', { defaultValue: 'Stopite v stik z nami za vsa vprašanja, informacije o vpisu ali morebitnih sodelovanjih.' })}
           </p>
+          <div>
+            <button 
+              id="contact-newsletter-cta-btn"
+              onClick={() => window.dispatchEvent(new CustomEvent('open-newsletter'))}
+              className="btn-secondary cursor-pointer inline-flex items-center justify-center gap-2 shadow-sm"
+            >
+              {t('nav.newsletter_btn')} <Mail size={20} className="stroke-[2.5]" />
+            </button>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-12 gap-12 items-start mt-12">
