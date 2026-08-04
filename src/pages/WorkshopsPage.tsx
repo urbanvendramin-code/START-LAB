@@ -94,13 +94,23 @@ export default function WorkshopsPage() {
                         <p className={`text-xs text-slate-600 font-semibold leading-relaxed mb-6 ${isSelected ? '' : 'line-clamp-2'}`}>
                           {translated.desc}
                         </p>
-                        <div className="flex items-center gap-5 text-[11px] font-display font-black uppercase tracking-wider text-slate-500">
+                        <div className="flex items-center gap-3 text-[11px] font-display font-black uppercase tracking-wider text-slate-500 flex-wrap">
                           <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-100 px-3 py-1.5 rounded-xl">
                             <Clock size={14} className="text-brand-red stroke-[2.5]" /> {t('workshops_page.duration')}
                           </div>
                           <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-100 px-3 py-1.5 rounded-xl">
                             <MapPin size={14} className="text-brand-red stroke-[2.5]" /> Solkan
                           </div>
+                          {workshop.id === 'graphene-transistor' && (
+                            <div className="bg-amber-400 text-slate-950 px-3 py-1.5 rounded-xl font-display font-black text-[10px] uppercase shadow-sm">
+                              ⚡ Samo še 4 prosta mesta!
+                            </div>
+                          )}
+                          {(workshop.id === '3d-print' || workshop.id === 'laser') && (
+                            <div className="bg-amber-400 text-slate-950 px-3 py-1.5 rounded-xl font-display font-black text-[10px] uppercase shadow-sm">
+                              ⚡ Samo še 8 prostih mest!
+                            </div>
+                          )}
                         </div>
                       </div>
                     </motion.div>

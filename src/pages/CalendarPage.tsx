@@ -629,15 +629,27 @@ export default function CalendarPage() {
                             </p>
 
                             <div className="bg-slate-50 border border-slate-200/60 rounded-2xl p-4 mb-6 space-y-3 text-xs font-semibold text-slate-700">
-                              <div className="flex items-center gap-2 text-brand-red font-bold">
-                                <Sparkles size={14} className="stroke-[2.5]" />
-                                <span>
-                                  {isSlovenian 
-                                    ? "Brezplačna udeležba • Število mest je omejeno!" 
-                                    : isIt
-                                      ? "Partecipazione gratuita • Posti strettamente limitati!"
-                                      : "Free of charge • Limited slots available!"}
-                                </span>
+                              <div className="flex items-center justify-between flex-wrap gap-2 text-brand-red font-bold">
+                                <div className="flex items-center gap-2">
+                                  <Sparkles size={14} className="stroke-[2.5]" />
+                                  <span>
+                                    {isSlovenian 
+                                      ? "Brezplačna udeležba • Število mest je omejeno!" 
+                                      : isIt
+                                        ? "Partecipazione gratuita • Posti strettamente limitati!"
+                                        : "Free of charge • Limited slots available!"}
+                                  </span>
+                                </div>
+                                {isGraphene && (
+                                  <span className="bg-amber-400 text-slate-950 text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
+                                    ⚡ {isSlovenian ? "Samo še 4 prosta mesta!" : isIt ? "Solo 4 posti disponibili!" : "Only 4 spots left!"}
+                                  </span>
+                                )}
+                                {isPrintCut && (
+                                  <span className="bg-amber-400 text-slate-950 text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
+                                    ⚡ {isSlovenian ? "Samo še 8 prostih mest!" : isIt ? "Solo 8 posti disponibili!" : "Only 8 spots left!"}
+                                  </span>
+                                )}
                               </div>
                               <div className="border-t border-slate-200/60 pt-2.5 space-y-1">
                                 {isGraphene ? (
@@ -954,6 +966,32 @@ export default function CalendarPage() {
                               </div>
                             )}
 
+                            {isGraphene && (
+                              <div className="mb-3.5 bg-amber-50 border-2 border-amber-400 text-amber-950 rounded-2xl p-3.5 flex items-center justify-center gap-2.5 text-xs font-display font-black uppercase tracking-wide shadow-sm">
+                                <AlertTriangle size={18} className="text-amber-600 shrink-0 stroke-[2.5]" />
+                                <span>
+                                  {isSlovenian 
+                                    ? "Opomnik: Na voljo so samo še 4 prosta mesta!" 
+                                    : isIt 
+                                      ? "Opomnik: Solo 4 posti ancora disponibili!" 
+                                      : "Reminder: Only 4 spots remaining!"}
+                                </span>
+                              </div>
+                            )}
+
+                            {isPrintCut && (
+                              <div className="mb-3.5 bg-amber-50 border-2 border-amber-400 text-amber-950 rounded-2xl p-3.5 flex items-center justify-center gap-2.5 text-xs font-display font-black uppercase tracking-wide shadow-sm">
+                                <AlertTriangle size={18} className="text-amber-600 shrink-0 stroke-[2.5]" />
+                                <span>
+                                  {isSlovenian 
+                                    ? "Opomnik: Na voljo je samo še 8 prostih mest!" 
+                                    : isIt 
+                                      ? "Opomnik: Solo 8 posti ancora disponibili!" 
+                                      : "Reminder: Only 8 spots remaining!"}
+                                </span>
+                              </div>
+                            )}
+
                             <button 
                               onClick={() => openRegisterModal(event)}
                               className="w-full py-4 btn-primary justify-center shadow-lg uppercase text-sm tracking-wider font-black select-none"
@@ -1198,9 +1236,21 @@ export default function CalendarPage() {
 
                       {/* Free & Limited slots alert + Mentors info */}
                       <div className="bg-brand-red/[0.03] border border-brand-red/10 rounded-2xl p-4 text-xs font-semibold text-slate-700 space-y-2">
-                        <div className="flex items-center gap-2 text-brand-red font-black uppercase tracking-wider text-[10px]">
-                          <Sparkles size={13} className="stroke-[3]" />
-                          <span>{isSlovenian ? "POMEMBNE INFORMACIJE" : isIt ? "INFORMAZIONI IMPORTANTI" : "IMPORTANT INFORMATION"}</span>
+                        <div className="flex items-center justify-between flex-wrap gap-2">
+                          <div className="flex items-center gap-2 text-brand-red font-black uppercase tracking-wider text-[10px]">
+                            <Sparkles size={13} className="stroke-[3]" />
+                            <span>{isSlovenian ? "POMEMBNE INFORMACIJE" : isIt ? "INFORMAZIONI IMPORTANTI" : "IMPORTANT INFORMATION"}</span>
+                          </div>
+                          {modalEvent?.id.startsWith('graphene') && (
+                            <span className="bg-amber-400 text-slate-950 font-display font-black text-[10px] uppercase px-2.5 py-0.5 rounded-full shadow-sm">
+                              ⚡ {isSlovenian ? "Samo še 4 prosta mesta!" : isIt ? "Solo 4 posti disponibili!" : "Only 4 spots left!"}
+                            </span>
+                          )}
+                          {modalEvent?.id.startsWith('printcut') && (
+                            <span className="bg-amber-400 text-slate-950 font-display font-black text-[10px] uppercase px-2.5 py-0.5 rounded-full shadow-sm">
+                              ⚡ {isSlovenian ? "Samo še 8 prostih mest!" : isIt ? "Solo 8 posti disponibili!" : "Only 8 spots left!"}
+                            </span>
+                          )}
                         </div>
                         <p className="text-slate-900 font-extrabold text-xs">
                           {isSlovenian 

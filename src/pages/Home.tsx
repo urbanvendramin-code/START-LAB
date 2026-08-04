@@ -114,9 +114,14 @@ export default function Home() {
                   </div>
 
                   <div className="text-left flex-1 min-w-0">
-                    <span className="inline-block bg-brand-red text-white text-[9px] font-display font-black uppercase tracking-widest px-2 py-0.5 rounded-lg mb-1 leading-none">
-                      {isSlovenian ? 'PRVA DELAVNICA' : isItalian ? 'PRIMO WORKSHOP' : 'FIRST WORKSHOP'}
-                    </span>
+                    <div className="flex flex-wrap items-center gap-1.5 mb-1">
+                      <span className="inline-block bg-brand-red text-white text-[9px] font-display font-black uppercase tracking-widest px-2 py-0.5 rounded-lg leading-none">
+                        {isSlovenian ? 'PRVA DELAVNICA' : isItalian ? 'PRIMO WORKSHOP' : 'FIRST WORKSHOP'}
+                      </span>
+                      <span className="inline-block bg-amber-400 text-slate-950 text-[9px] font-display font-black uppercase tracking-widest px-2 py-0.5 rounded-lg leading-none shadow-sm">
+                        ⚡ {isSlovenian ? 'Samo še 4 prosta mesta!' : isItalian ? 'Solo 4 posti disponibili!' : 'Only 4 spots left!'}
+                      </span>
+                    </div>
                     <h4 className="text-xs sm:text-base font-display font-black uppercase text-slate-950 group-hover:text-brand-red transition-colors leading-tight">
                       {isSlovenian 
                         ? 'Delavnica izdelave grafenskega čipa' 
@@ -158,9 +163,14 @@ export default function Home() {
                   </div>
 
                   <div className="text-left flex-1 min-w-0">
-                    <span className="inline-block bg-play-teal text-white text-[9px] font-display font-black uppercase tracking-widest px-2 py-0.5 rounded-lg mb-1 leading-none">
-                      {isSlovenian ? 'DRUGA DELAVNICA' : isItalian ? 'SECONDO WORKSHOP' : 'SECOND WORKSHOP'}
-                    </span>
+                    <div className="flex flex-wrap items-center gap-1.5 mb-1">
+                      <span className="inline-block bg-play-teal text-white text-[9px] font-display font-black uppercase tracking-widest px-2 py-0.5 rounded-lg leading-none">
+                        {isSlovenian ? 'DRUGA DELAVNICA' : isItalian ? 'SECONDO WORKSHOP' : 'SECOND WORKSHOP'}
+                      </span>
+                      <span className="inline-block bg-amber-400 text-slate-950 text-[9px] font-display font-black uppercase tracking-widest px-2 py-0.5 rounded-lg leading-none shadow-sm">
+                        ⚡ {isSlovenian ? 'Samo še 8 prostih mest!' : isItalian ? 'Solo 8 posti disponibili!' : 'Only 8 spots left!'}
+                      </span>
+                    </div>
                     <h4 className="text-xs sm:text-base font-display font-black uppercase text-slate-950 group-hover:text-play-teal transition-colors leading-tight">
                       {isSlovenian 
                         ? 'Delavnica natisni in izreži' 
