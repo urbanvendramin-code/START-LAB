@@ -29,7 +29,8 @@ import {
   Sparkles, 
   GraduationCap, 
   Briefcase,
-  AlertTriangle
+  AlertTriangle,
+  Lock
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useTranslation } from 'react-i18next';
@@ -641,8 +642,8 @@ export default function CalendarPage() {
                                   </span>
                                 </div>
                                 {isGraphene && (
-                                  <span className="bg-amber-400 text-slate-950 text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
-                                    ⚡ {isSlovenian ? "Samo še 4 prosta mesta!" : isIt ? "Solo 4 posti disponibili!" : "Only 4 spots left!"}
+                                  <span className="bg-rose-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
+                                    🔒 {isSlovenian ? "Prijave zaprte • Zapolnjena mesta" : isIt ? "Iscrizioni chiuse • Tutto esaurito" : "Registrations closed • Sold out"}
                                   </span>
                                 )}
                                 {isPrintCut && (
@@ -967,14 +968,14 @@ export default function CalendarPage() {
                             )}
 
                             {isGraphene && (
-                              <div className="mb-3.5 bg-amber-50 border-2 border-amber-400 text-amber-950 rounded-2xl p-3.5 flex items-center justify-center gap-2.5 text-xs font-display font-black uppercase tracking-wide shadow-sm">
-                                <AlertTriangle size={18} className="text-amber-600 shrink-0 stroke-[2.5]" />
+                              <div className="mb-3.5 bg-rose-50 border-2 border-rose-300 text-rose-950 rounded-2xl p-3.5 flex items-center justify-center gap-2.5 text-xs font-display font-black uppercase tracking-wide shadow-sm">
+                                <Lock size={18} className="text-rose-600 shrink-0 stroke-[2.5]" />
                                 <span>
                                   {isSlovenian 
-                                    ? "Opomnik: Na voljo so samo še 4 prosta mesta!" 
+                                    ? "Prijave so zaprte – vsa mesta so že zapolnjena!" 
                                     : isIt 
-                                      ? "Opomnik: Solo 4 posti ancora disponibili!" 
-                                      : "Reminder: Only 4 spots remaining!"}
+                                      ? "Iscrizioni chiuse – tutti i posti sono già esauriti!" 
+                                      : "Registrations closed – all spots are filled!"}
                                 </span>
                               </div>
                             )}
@@ -992,12 +993,22 @@ export default function CalendarPage() {
                               </div>
                             )}
 
-                            <button 
-                              onClick={() => openRegisterModal(event)}
-                              className="w-full py-4 btn-primary justify-center shadow-lg uppercase text-sm tracking-wider font-black select-none"
-                            >
-                              {isSlovenian ? "Prijavi se na delavnico" : isIt ? "Iscriviti al workshop" : "Register for workshop"} <Rocket size={18} className="stroke-[3]" />
-                            </button>
+                            {isGraphene ? (
+                              <button 
+                                disabled
+                                className="w-full py-4 bg-slate-200 text-slate-500 rounded-2xl font-display font-black uppercase text-sm tracking-wider select-none cursor-not-allowed flex items-center justify-center gap-2 border border-slate-300/80 shadow-inner"
+                              >
+                                <Lock size={18} className="stroke-[2.5]" />
+                                {isSlovenian ? "Prijave zaprte (Mesta zapolnjena)" : isIt ? "Iscrizioni chiuse (Posti esauriti)" : "Registrations closed (Sold out)"}
+                              </button>
+                            ) : (
+                              <button 
+                                onClick={() => openRegisterModal(event)}
+                                className="w-full py-4 btn-primary justify-center shadow-lg uppercase text-sm tracking-wider font-black select-none"
+                              >
+                                {isSlovenian ? "Prijavi se na delavnico" : isIt ? "Iscriviti al workshop" : "Register for workshop"} <Rocket size={18} className="stroke-[3]" />
+                              </button>
+                            )}
                           </motion.div>
                         );
                       })
@@ -1242,8 +1253,8 @@ export default function CalendarPage() {
                             <span>{isSlovenian ? "POMEMBNE INFORMACIJE" : isIt ? "INFORMAZIONI IMPORTANTI" : "IMPORTANT INFORMATION"}</span>
                           </div>
                           {modalEvent?.id.startsWith('graphene') && (
-                            <span className="bg-amber-400 text-slate-950 font-display font-black text-[10px] uppercase px-2.5 py-0.5 rounded-full shadow-sm">
-                              ⚡ {isSlovenian ? "Samo še 4 prosta mesta!" : isIt ? "Solo 4 posti disponibili!" : "Only 4 spots left!"}
+                            <span className="bg-rose-600 text-white font-display font-black text-[10px] uppercase px-2.5 py-0.5 rounded-full shadow-sm">
+                              🔒 {isSlovenian ? "Prijave zaprte • Zapolnjeno" : isIt ? "Iscrizioni chiuse • Tutto esaurito" : "Registrations closed • Sold out"}
                             </span>
                           )}
                           {modalEvent?.id.startsWith('printcut') && (
@@ -1365,15 +1376,25 @@ export default function CalendarPage() {
                         >
                           {isSlovenian ? "Prekliči" : isIt ? "Annulla" : "Cancel"}
                         </button>
-                        <button
-                          type="submit"
-                          className="flex-2 py-3.5 btn-primary justify-center text-sm font-black uppercase select-none bg-brand-red"
-                          disabled={isSubmitting}
-                        >
-                          {isSubmitting 
-                            ? (isSlovenian ? "Prijava v teku..." : isIt ? "Invio in corso..." : "Sending...") 
-                            : (isSlovenian ? "Oddaj prijavo" : isIt ? "Invia iscrizione" : "Submit reservation")}
-                        </button>
+                        {modalEvent?.id.startsWith('graphene') ? (
+                          <button
+                            type="button"
+                            disabled
+                            className="flex-2 py-3.5 bg-slate-200 text-slate-500 rounded-xl font-display font-black uppercase text-sm cursor-not-allowed flex items-center justify-center gap-2 border border-slate-300/70"
+                          >
+                            <Lock size={16} /> {isSlovenian ? "Prijave zaprte" : isIt ? "Iscrizioni chiuse" : "Registrations closed"}
+                          </button>
+                        ) : (
+                          <button
+                            type="submit"
+                            className="flex-2 py-3.5 btn-primary justify-center text-sm font-black uppercase select-none bg-brand-red"
+                            disabled={isSubmitting}
+                          >
+                            {isSubmitting 
+                              ? (isSlovenian ? "Prijava v teku..." : isIt ? "Invio in corso..." : "Sending...") 
+                              : (isSlovenian ? "Oddaj prijavo" : isIt ? "Invia iscrizione" : "Submit reservation")}
+                          </button>
+                        )}
                       </div>
 
                     </motion.form>

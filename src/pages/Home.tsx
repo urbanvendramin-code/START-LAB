@@ -118,8 +118,8 @@ export default function Home() {
                       <span className="inline-block bg-brand-red text-white text-[9px] font-display font-black uppercase tracking-widest px-2 py-0.5 rounded-lg leading-none">
                         {isSlovenian ? 'PRVA DELAVNICA' : isItalian ? 'PRIMO WORKSHOP' : 'FIRST WORKSHOP'}
                       </span>
-                      <span className="inline-block bg-amber-400 text-slate-950 text-[9px] font-display font-black uppercase tracking-widest px-2 py-0.5 rounded-lg leading-none shadow-sm">
-                        ⚡ {isSlovenian ? 'Samo še 4 prosta mesta!' : isItalian ? 'Solo 4 posti disponibili!' : 'Only 4 spots left!'}
+                      <span className="inline-block bg-rose-600 text-white text-[9px] font-display font-black uppercase tracking-widest px-2 py-0.5 rounded-lg leading-none shadow-sm">
+                        🔒 {isSlovenian ? 'Prijave zaprte • Zapolnjeno' : isItalian ? 'Iscrizioni chiuse • Tutto esaurito' : 'Registration closed • Sold out'}
                       </span>
                     </div>
                     <h4 className="text-xs sm:text-base font-display font-black uppercase text-slate-950 group-hover:text-brand-red transition-colors leading-tight">
