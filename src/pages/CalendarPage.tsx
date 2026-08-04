@@ -292,6 +292,7 @@ export default function CalendarPage() {
     age: '',
     referralSource: '',
     note: '',
+    subscribeToNewsletter: false,
     sessionSelection: 'all' // 'all' or 'single'
   });
   
@@ -346,6 +347,7 @@ export default function CalendarPage() {
       age: '',
       referralSource: '',
       note: '',
+      subscribeToNewsletter: false,
       sessionSelection: 'all'
     });
     setSubmitStatus('idle');
@@ -391,7 +393,8 @@ export default function CalendarPage() {
         workshopTitle,
         dateSelected: selectedTerm,
         referralSource: formData.referralSource,
-        note: formData.note
+        note: formData.note,
+        subscribeToNewsletter: formData.subscribeToNewsletter ? 'DA' : 'NE'
       },
       `Prijava na delavnico: ${workshopTitle} - ${formData.name}`,
       'workshop'
@@ -1379,6 +1382,25 @@ export default function CalendarPage() {
                           placeholder={isSlovenian ? "Če imaš kakšno vprašanje ali posebne zahteve..." : isIt ? "Se hai domande o richieste particolari..." : "Any questions or notes..."}
                           className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-sm focus:bg-white focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 transition-all focus:outline-none resize-none"
                         />
+                      </div>
+
+                      {/* Newsletter opt-in */}
+                      <div className="flex items-start gap-3 p-3 bg-slate-50 border border-slate-200/80 rounded-xl transition-all">
+                        <input 
+                          type="checkbox" 
+                          id="workshop-newsletter-optin"
+                          checked={formData.subscribeToNewsletter}
+                          onChange={(e) => setFormData({ ...formData, subscribeToNewsletter: e.target.checked })}
+                          disabled={isSubmitting}
+                          className="mt-0.5 w-4 h-4 rounded text-brand-red focus:ring-brand-red border-slate-300 cursor-pointer accent-brand-red shrink-0"
+                        />
+                        <label htmlFor="workshop-newsletter-optin" className="text-xs font-semibold text-slate-700 cursor-pointer select-none leading-snug">
+                          {isSlovenian 
+                            ? "Želim se prijaviti na e-novice »BODI NA TEKOČEM« (obveščanje o novih delavnicah in dogodkih)" 
+                            : isIt 
+                              ? "Desidero iscrivermi alla newsletter »RIMANI AGGIORNATO«" 
+                              : "I want to subscribe to the »STAY UP TO DATE« newsletter"}
+                        </label>
                       </div>
 
                       {/* Agreement Check text */}

@@ -155,9 +155,12 @@ function DeveloperCompanyCard({ company }: { company: DeveloperCompany; key?: an
 }
 
 export default function PartnerPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [activeTab, setActiveTab] = useState<'partners' | 'developers'>('developers');
   const contentRef = useRef<HTMLDivElement>(null);
+
+  const isSlovenian = i18n.language === 'sl';
+  const isIt = i18n.language === 'it';
 
   const handleTabClick = (tab: 'partners' | 'developers') => {
     setActiveTab(tab);
@@ -178,6 +181,7 @@ export default function PartnerPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [subscribeToNewsletter, setSubscribeToNewsletter] = useState(false);
 
   // Developer Form State
   const [devStatus, setDevStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -187,6 +191,7 @@ export default function PartnerPage() {
   const [devEmail, setDevEmail] = useState('');
   const [devExpertise, setDevExpertise] = useState('');
   const [devMessage, setDevMessage] = useState('');
+  const [devSubscribeToNewsletter, setDevSubscribeToNewsletter] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -215,7 +220,7 @@ export default function PartnerPage() {
 
     const result = await submitForm(
       '/api/contact/partner',
-      { company, name, email, message },
+      { company, name, email, message, subscribeToNewsletter: subscribeToNewsletter ? 'DA' : 'NE' },
       `Start Lab Partnerstvo - ${company}`,
       'partner'
     );
@@ -226,6 +231,7 @@ export default function PartnerPage() {
       setName('');
       setEmail('');
       setMessage('');
+      setSubscribeToNewsletter(false);
     } else {
       setStatus('error');
       setErrorMessage(result.error || 'Neznana napaka pri pošiljanju.');
@@ -239,7 +245,7 @@ export default function PartnerPage() {
 
     const result = await submitForm(
       '/api/contact/developer',
-      { devCompany, devName, devEmail, devExpertise, devMessage },
+      { devCompany, devName, devEmail, devExpertise, devMessage, subscribeToNewsletter: devSubscribeToNewsletter ? 'DA' : 'NE' },
       `Start Lab Razvijalec Talentov - ${devName}${devCompany ? ` (${devCompany})` : ''}`,
       'developer'
     );
@@ -251,6 +257,7 @@ export default function PartnerPage() {
       setDevEmail('');
       setDevExpertise('');
       setDevMessage('');
+      setDevSubscribeToNewsletter(false);
     } else {
       setDevStatus('error');
       setDevErrorMessage(result.error || 'Neznana napaka pri pošiljanju.');
@@ -563,6 +570,24 @@ export default function PartnerPage() {
                     />
                   </div>
 
+                  <div className="flex items-start gap-3 p-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl transition-all">
+                    <input 
+                      type="checkbox" 
+                      id="partner-newsletter-optin"
+                      checked={subscribeToNewsletter}
+                      onChange={(e) => setSubscribeToNewsletter(e.target.checked)}
+                      disabled={status === 'loading'}
+                      className="mt-0.5 w-4 h-4 rounded text-brand-red focus:ring-brand-red border-slate-300 cursor-pointer accent-brand-red shrink-0"
+                    />
+                    <label htmlFor="partner-newsletter-optin" className="text-xs font-semibold text-slate-700 cursor-pointer select-none leading-snug">
+                      {isSlovenian 
+                        ? 'Želim se prijaviti na e-novice »BODI NA TEKOČEM« (obveščanje o novih delavnicah in dogodkih)' 
+                        : isIt 
+                          ? 'Desidero iscrivermi alla newsletter »RIMANI AGGIORNATO«' 
+                          : 'I want to subscribe to the »STAY UP TO DATE« newsletter'}
+                    </label>
+                  </div>
+
                   <button 
                     type="submit" 
                     disabled={status === 'loading'}
@@ -862,6 +887,24 @@ export default function PartnerPage() {
                       className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium resize-none disabled:opacity-50" 
                       placeholder={t('partner_page.devs_message_placeholder')}
                     />
+                  </div>
+
+                  <div className="flex items-start gap-3 p-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl transition-all">
+                    <input 
+                      type="checkbox" 
+                      id="developer-newsletter-optin"
+                      checked={devSubscribeToNewsletter}
+                      onChange={(e) => setDevSubscribeToNewsletter(e.target.checked)}
+                      disabled={devStatus === 'loading'}
+                      className="mt-0.5 w-4 h-4 rounded text-brand-red focus:ring-brand-red border-slate-300 cursor-pointer accent-brand-red shrink-0"
+                    />
+                    <label htmlFor="developer-newsletter-optin" className="text-xs font-semibold text-slate-700 cursor-pointer select-none leading-snug">
+                      {isSlovenian 
+                        ? 'Želim se prijaviti na e-novice »BODI NA TEKOČEM« (obveščanje o novih delavnicah in dogodkih)' 
+                        : isIt 
+                          ? 'Desidero iscrivermi alla newsletter »RIMANI AGGIORNATO«' 
+                          : 'I want to subscribe to the »STAY UP TO DATE« newsletter'}
+                    </label>
                   </div>
 
                   <button 

@@ -90,7 +90,7 @@ function MentorCard({ mentor }: { mentor: Mentor; key?: any }) {
 }
 
 export default function MentorPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [mentorStatus, setMentorStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [mentorErrorMessage, setMentorErrorMessage] = useState('');
@@ -98,6 +98,10 @@ export default function MentorPage() {
   const [mentorEmail, setMentorEmail] = useState('');
   const [mentorArea, setMentorArea] = useState('');
   const [mentorMessage, setMentorMessage] = useState('');
+  const [mentorSubscribeToNewsletter, setMentorSubscribeToNewsletter] = useState(false);
+
+  const isSlovenian = i18n.language === 'sl';
+  const isIt = i18n.language === 'it';
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -117,7 +121,7 @@ export default function MentorPage() {
 
     const result = await submitForm(
       '/api/contact/mentor',
-      { mentorName, mentorEmail, mentorArea, mentorMessage },
+      { mentorName, mentorEmail, mentorArea, mentorMessage, subscribeToNewsletter: mentorSubscribeToNewsletter ? 'DA' : 'NE' },
       `Start Lab Mentorstvo - ${mentorName}`,
       'mentor'
     );
@@ -128,6 +132,7 @@ export default function MentorPage() {
       setMentorEmail('');
       setMentorArea('');
       setMentorMessage('');
+      setMentorSubscribeToNewsletter(false);
     } else {
       setMentorStatus('error');
       setMentorErrorMessage(result.error || 'Neznana napaka pri pošiljanju.');
@@ -341,6 +346,24 @@ export default function MentorPage() {
                     className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl p-3.5 outline-none focus:border-brand-red text-sm text-slate-800 font-medium resize-none disabled:opacity-50" 
                     placeholder={t('partner_page.mentors_message_placeholder')}
                   />
+                </div>
+
+                <div className="flex items-start gap-3 p-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl transition-all">
+                  <input 
+                    type="checkbox" 
+                    id="mentor-newsletter-optin"
+                    checked={mentorSubscribeToNewsletter}
+                    onChange={(e) => setMentorSubscribeToNewsletter(e.target.checked)}
+                    disabled={mentorStatus === 'loading'}
+                    className="mt-0.5 w-4 h-4 rounded text-brand-red focus:ring-brand-red border-slate-300 cursor-pointer accent-brand-red shrink-0"
+                  />
+                  <label htmlFor="mentor-newsletter-optin" className="text-xs font-semibold text-slate-700 cursor-pointer select-none leading-snug">
+                    {isSlovenian 
+                      ? 'Želim se prijaviti na e-novice »BODI NA TEKOČEM« (obveščanje o novih delavnicah in dogodkih)' 
+                      : isIt 
+                        ? 'Desidero iscrivermi alla newsletter »RIMANI AGGIORNATO«' 
+                        : 'I want to subscribe to the »STAY UP TO DATE« newsletter'}
+                  </label>
                 </div>
 
                 <button 

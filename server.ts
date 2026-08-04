@@ -240,13 +240,14 @@ async function startServer() {
   // API Call matching: Partner Form
   app.post("/api/contact/partner", async (req, res) => {
     try {
-      const { company, name, email, message } = req.body;
+      const { company, name, email, message, subscribeToNewsletter } = req.body;
       const subject = `Start Lab Partnerstvo - ${company}`;
       const html = `
         <h3>Spletni obrazec: Partnerstvo</h3>
         <p><strong>Ime organizacije:</strong> ${company}</p>
         <p><strong>Ime in priimek:</strong> ${name}</p>
         <p><strong>E-pošta:</strong> ${email}</p>
+        <p><strong>Prijava na novice (Bodi na tekočem):</strong> ${subscribeToNewsletter || 'NE'}</p>
         <p><strong>Sporočilo:</strong></p>
         <p style="white-space: pre-wrap;">${message || '/'}</p>
       `;
@@ -261,7 +262,7 @@ async function startServer() {
   // API Call matching: Developer Form
   app.post("/api/contact/developer", async (req, res) => {
     try {
-      const { devCompany, devName, devEmail, devExpertise, devMessage } = req.body;
+      const { devCompany, devName, devEmail, devExpertise, devMessage, subscribeToNewsletter } = req.body;
       const subject = `Start Lab Razvijalec Talentov - ${devName}${devCompany ? ` (${devCompany})` : ''}`;
       const html = `
         <h3>Spletni obrazec: Razvijalec Talentov</h3>
@@ -269,6 +270,7 @@ async function startServer() {
         <p><strong>Ime in priimek:</strong> ${devName}</p>
         <p><strong>E-pošta:</strong> ${devEmail}</p>
         ${devExpertise ? `<p><strong>Izbira/Strokovnost:</strong> ${devExpertise}</p>` : ''}
+        <p><strong>Prijava na novice (Bodi na tekočem):</strong> ${subscribeToNewsletter || 'NE'}</p>
         <p><strong>Sporočilo:</strong></p>
         <p style="white-space: pre-wrap;">${devMessage || '/'}</p>
       `;
@@ -283,13 +285,14 @@ async function startServer() {
   // API Call matching: Mentor Form
   app.post("/api/contact/mentor", async (req, res) => {
     try {
-      const { mentorName, mentorEmail, mentorArea, mentorMessage } = req.body;
+      const { mentorName, mentorEmail, mentorArea, mentorMessage, subscribeToNewsletter } = req.body;
       const subject = `Start Lab Mentorstvo - ${mentorName}`;
       const html = `
         <h3>Spletni obrazec: Mentorstvo</h3>
         <p><strong>Ime in priimek:</strong> ${mentorName}</p>
         <p><strong>E-pošta:</strong> ${mentorEmail}</p>
         <p><strong>Strokovano področje:</strong> ${mentorArea}</p>
+        <p><strong>Prijava na novice (Bodi na tekočem):</strong> ${subscribeToNewsletter || 'NE'}</p>
         <p><strong>Sporočilo:</strong></p>
         <p style="white-space: pre-wrap;">${mentorMessage || '/'}</p>
       `;
@@ -304,12 +307,13 @@ async function startServer() {
   // API Call matching: General Contact Form
   app.post("/api/contact/general", async (req, res) => {
     try {
-      const { name, email, message } = req.body;
+      const { name, email, message, subscribeToNewsletter } = req.body;
       const subject = `Start Lab - Sporočilo od ${name}`;
       const html = `
         <h3>Spletni obrazec: Splošni kontakt</h3>
         <p><strong>Ime in priimek:</strong> ${name}</p>
         <p><strong>E-pošta:</strong> ${email}</p>
+        <p><strong>Prijava na novice (Bodi na tekočem):</strong> ${subscribeToNewsletter || 'NE'}</p>
         <p><strong>Sporočilo:</strong></p>
         <p style="white-space: pre-wrap;">${message}</p>
       `;
@@ -342,7 +346,7 @@ async function startServer() {
   // API Call matching: Workshop Registration Form
   app.post("/api/workshop/register", async (req, res) => {
     try {
-      const { name, email, phone, age, workshopTitle, dateSelected, referralSource, note } = req.body;
+      const { name, email, phone, age, workshopTitle, dateSelected, referralSource, note, subscribeToNewsletter } = req.body;
       const subject = `Prijava na delavnico: ${workshopTitle} - ${name}`;
       const html = `
         <h3>Spletni obrazec: Prijava na delavnico</h3>
@@ -353,6 +357,7 @@ async function startServer() {
         <p><strong>Telefon:</strong> ${phone || '/'}</p>
         <p><strong>Starost:</strong> ${age || '/'}</p>
         ${referralSource ? `<p><strong>Izvedel/a za delavnico preko:</strong> ${referralSource}</p>` : ''}
+        <p><strong>Prijava na novice (Bodi na tekočem):</strong> ${subscribeToNewsletter || 'NE'}</p>
         <p><strong>Opombe / sporočilo:</strong></p>
         <p style="white-space: pre-wrap;">${note || '/'}</p>
       `;

@@ -11,12 +11,16 @@ import {
 } from 'lucide-react';
 
 export default function ContactPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [subscribeToNewsletter, setSubscribeToNewsletter] = useState(false);
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+
+  const isSlovenian = i18n.language === 'sl';
+  const isIt = i18n.language === 'it';
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -36,7 +40,7 @@ export default function ContactPage() {
 
     const result = await submitForm(
       '/api/contact/general',
-      { name, email, message },
+      { name, email, message, subscribeToNewsletter: subscribeToNewsletter ? 'DA' : 'NE' },
       `Start Lab - Sporočilo od ${name}`,
       'general'
     );
@@ -46,6 +50,7 @@ export default function ContactPage() {
       setName('');
       setEmail('');
       setMessage('');
+      setSubscribeToNewsletter(false);
     } else {
       setStatus('error');
       setErrorMessage(result.error || 'Neznana napaka pri pošiljanju.');
@@ -229,6 +234,23 @@ export default function ContactPage() {
                        className="w-full bg-slate-50/50 border-2 border-slate-100 rounded-2xl px-4 py-3.5 outline-none focus:border-brand-red text-slate-800 font-medium font-sans text-sm focus:bg-white transition-all resize-none disabled:opacity-50" 
                        placeholder={t('contact.form.placeholder_msg')} 
                      />
+                  </div>
+                  <div className="flex items-start gap-3 p-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl transition-all">
+                     <input 
+                       type="checkbox" 
+                       id="contact-newsletter-optin"
+                       checked={subscribeToNewsletter}
+                       onChange={(e) => setSubscribeToNewsletter(e.target.checked)}
+                       disabled={status === 'loading'}
+                       className="mt-0.5 w-4 h-4 rounded text-brand-red focus:ring-brand-red border-slate-300 cursor-pointer accent-brand-red shrink-0"
+                     />
+                     <label htmlFor="contact-newsletter-optin" className="text-xs font-semibold text-slate-700 cursor-pointer select-none leading-snug">
+                       {isSlovenian 
+                         ? 'Želim se prijaviti na e-novice »BODI NA TEKOČEM« (obveščanje o novih delavnicah in dogodkih)' 
+                         : isIt 
+                           ? 'Desidero iscrivermi alla newsletter »RIMANI AGGIORNATO«' 
+                           : 'I want to subscribe to the »STAY UP TO DATE« newsletter'}
+                     </label>
                   </div>
                   <button 
                     type="submit" 
