@@ -290,6 +290,7 @@ export default function CalendarPage() {
     email: '',
     phone: '',
     age: '',
+    referralSource: '',
     note: '',
     sessionSelection: 'all' // 'all' or 'single'
   });
@@ -343,6 +344,7 @@ export default function CalendarPage() {
       email: '',
       phone: '',
       age: '',
+      referralSource: '',
       note: '',
       sessionSelection: 'all'
     });
@@ -388,6 +390,7 @@ export default function CalendarPage() {
         age: formData.age,
         workshopTitle,
         dateSelected: selectedTerm,
+        referralSource: formData.referralSource,
         note: formData.note
       },
       `Prijava na delavnico: ${workshopTitle} - ${formData.name}`,
@@ -1344,6 +1347,26 @@ export default function CalendarPage() {
                           />
                         </div>
                       </div>
+
+                      {modalEvent?.id.startsWith('printcut') && (
+                        <div className="space-y-1">
+                          <label className="text-xs font-display font-black uppercase tracking-wider text-slate-800">
+                            {isSlovenian ? "Kje si izvedel/a za delavnico?" : isIt ? "Come sei venuto/a a conoscenza del workshop?" : "Where did you hear about the workshop?"}
+                          </label>
+                          <select
+                            value={formData.referralSource}
+                            onChange={(e) => setFormData({ ...formData, referralSource: e.target.value })}
+                            className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-sm focus:bg-white focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 transition-all focus:outline-none text-slate-800 cursor-pointer"
+                          >
+                            <option value="">{isSlovenian ? "-- Izberi možnost --" : isIt ? "-- Seleziona un'opzione --" : "-- Select an option --"}</option>
+                            <option value="Spletna stran Start Lab">{isSlovenian ? "Spletna stran Start Lab" : isIt ? "Sito web Start Lab" : "Start Lab Website"}</option>
+                            <option value="Socialna omrežja (FB, IG)">{isSlovenian ? "Socialna omrežja (FB, IG)" : isIt ? "Social media (FB, IG)" : "Social media (FB, IG)"}</option>
+                            <option value="Oglas">{isSlovenian ? "Oglas" : isIt ? "Annuncio pubblicitario" : "Advertisement"}</option>
+                            <option value="preko prejete epošte">{isSlovenian ? "preko prejete epošte" : isIt ? "tramite e-mail ricevuta" : "Via email"}</option>
+                            <option value="drugo">{isSlovenian ? "drugo" : isIt ? "altro" : "Other"}</option>
+                          </select>
+                        </div>
+                      )}
 
                       <div className="space-y-1">
                         <label className="text-xs font-display font-black uppercase tracking-wider text-slate-800">

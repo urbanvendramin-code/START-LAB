@@ -342,7 +342,7 @@ async function startServer() {
   // API Call matching: Workshop Registration Form
   app.post("/api/workshop/register", async (req, res) => {
     try {
-      const { name, email, phone, age, workshopTitle, dateSelected, note } = req.body;
+      const { name, email, phone, age, workshopTitle, dateSelected, referralSource, note } = req.body;
       const subject = `Prijava na delavnico: ${workshopTitle} - ${name}`;
       const html = `
         <h3>Spletni obrazec: Prijava na delavnico</h3>
@@ -352,6 +352,7 @@ async function startServer() {
         <p><strong>E-pošta:</strong> ${email}</p>
         <p><strong>Telefon:</strong> ${phone || '/'}</p>
         <p><strong>Starost:</strong> ${age || '/'}</p>
+        ${referralSource ? `<p><strong>Izvedel/a za delavnico preko:</strong> ${referralSource}</p>` : ''}
         <p><strong>Opombe / sporočilo:</strong></p>
         <p style="white-space: pre-wrap;">${note || '/'}</p>
       `;
