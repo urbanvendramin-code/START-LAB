@@ -168,7 +168,7 @@ export default function Home() {
                         {isSlovenian ? 'DRUGA DELAVNICA' : isItalian ? 'SECONDO WORKSHOP' : 'SECOND WORKSHOP'}
                       </span>
                       <span className="inline-block bg-amber-400 text-slate-950 text-[9px] font-display font-black uppercase tracking-widest px-2 py-0.5 rounded-lg leading-none shadow-sm">
-                        ⚡ {isSlovenian ? 'Samo še 6 prostih mest!' : isItalian ? 'Solo 6 posti disponibili!' : 'Only 6 spots left!'}
+                        ⚡ {isSlovenian ? 'Samo še 5 prostih mest!' : isItalian ? 'Solo 5 posti disponibili!' : 'Only 5 spots left!'}
                       </span>
                     </div>
                     <h4 className="text-xs sm:text-base font-display font-black uppercase text-slate-950 group-hover:text-play-teal transition-colors leading-tight">
