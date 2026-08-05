@@ -106,9 +106,9 @@ export default function WorkshopsPage() {
                               🔒 {t('workshops_page.closed', { defaultValue: 'Prijave zaprte • Zapolnjena mesta' })}
                             </div>
                           )}
-                          {(workshop.id === '3d-print' || workshop.id === 'laser') && (
+                          {(workshop.id === '3d-print-laser' || workshop.id === '3d-print' || workshop.id === 'laser') && (
                             <div className="bg-amber-400 text-slate-950 px-3 py-1.5 rounded-xl font-display font-black text-[10px] uppercase shadow-sm">
-                              ⚡ Samo še 5 prostih mest!
+                              ⚡ Samo še 1 prosto mesto!
                             </div>
                           )}
                         </div>

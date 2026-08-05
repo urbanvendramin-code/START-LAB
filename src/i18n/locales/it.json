@@ -197,8 +197,9 @@
       "solution": "Dall'Idea alla Soluzione"
     },
     "items": {
-      "3d-print": { "title": "Stampa 3D – dall'idea al prodotto", "desc": "Scopri il processo dalla modellazione 3D al prodotto finale utilizzando le stampanti 3D." },
-      "laser": { "title": "Taglio Laser – dal disegno al prodotto", "desc": "Impara a preparare piani di taglio laser e a creare prodotti unici." },
+      "3d-print-laser": { "title": "Stampa 3D e Taglio Laser – dall'idea al prodotto", "desc": "Scopri il processo dalla modellazione 3D e stampa 3D al taglio laser per creare prodotti unici." },
+      "3d-print": { "title": "Stampa 3D e Taglio Laser – dall'idea al prodotto", "desc": "Scopri il processo dalla modellazione 3D e stampa 3D al taglio laser per creare prodotti unici." },
+      "laser": { "title": "Stampa 3D e Taglio Laser – dall'idea al prodotto", "desc": "Scopri il processo dalla modellazione 3D e stampa 3D al taglio laser per creare prodotti unici." },
       "3d-pro": { "title": "Modellazione 3D Professionale", "desc": "Scopri strumenti avanzati per la modellazione 3D e il design ingegneristico." },
       "electronics-basic": { "title": "Basi di Elettronica – circuiti DC", "desc": "I partecipanti apprendono i componenti base e le leggi dell'elettricità e assemblano semplici circuiti." },
       "arduino-micro": { "title": "Microcontrollori e Programmazione (Arduino)", "desc": "I partecipanti creano un progetto interattivo con sensori e attuatori." },

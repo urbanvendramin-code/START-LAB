@@ -43,8 +43,7 @@ export const WORKSHOPS = [
   {
     section: "Digitalna proizvodnja & oblikovanje",
     items: [
-      { id: '3d-print', title: '3D tisk – od ideje do izdelka', description: 'Spoznajte postopek od 3D modeliranja do končnega izdelka s pomočjo 3D tiskalnikov.', icon: Boxes, image: 'https://res.cloudinary.com/dssxhjk8k/image/upload/v1779883771/hf_20260527_120549_96e1d060-bcc7-499f-ba63-bb4d713252b8_bvs5fx.png' },
-      { id: 'laser', title: 'Laserski razrez – od risbe do izdelka', description: 'Naučite se pripraviti načrte za laserski razrez in izdelati unikatne izdelke.', icon: Settings, image: 'https://res.cloudinary.com/dssxhjk8k/image/upload/v1779883684/hf_20260527_120433_b4e537ce-c22d-4d09-80d8-c47d52e8deef_mulnqz.png' },
+      { id: '3d-print-laser', title: '3D tisk in laserski razrez – od ideje do izdelka', description: 'Spoznajte postopek od 3D modeliranja in 3D tiska do laserskega razreza ter izdelajte unikatne izdelke.', icon: Boxes, image: 'https://res.cloudinary.com/dssxhjk8k/image/upload/v1779883771/hf_20260527_120549_96e1d060-bcc7-499f-ba63-bb4d713252b8_bvs5fx.png' },
       { id: '3d-pro', title: 'Profesionalno 3D modeliranje', description: 'Spoznajte napredna orodja za 3D modeliranje in inženirsko načrtovanje.', icon: Microscope, image: 'https://res.cloudinary.com/dssxhjk8k/image/upload/v1779883934/hf_20260527_121036_6dea0fac-1576-4185-ba4a-9cff1cbdb935_zk7urr.png' },
     ]
   },

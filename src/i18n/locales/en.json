@@ -197,8 +197,9 @@
       "solution": "From Idea to Solution"
     },
     "items": {
-      "3d-print": { "title": "3D Printing – from idea to product", "desc": "Learn the process from 3D modeling to the final product using 3D printers." },
-      "laser": { "title": "Laser Cutting – from drawing to product", "desc": "Learn how to prepare laser cutting plans and create unique products." },
+      "3d-print-laser": { "title": "3D Printing & Laser Cutting – from idea to product", "desc": "Learn the process from 3D modeling and 3D printing to laser cutting to create unique physical products." },
+      "3d-print": { "title": "3D Printing & Laser Cutting – from idea to product", "desc": "Learn the process from 3D modeling and 3D printing to laser cutting to create unique physical products." },
+      "laser": { "title": "3D Printing & Laser Cutting – from idea to product", "desc": "Learn the process from 3D modeling and 3D printing to laser cutting to create unique physical products." },
       "3d-pro": { "title": "Professional 3D Modeling", "desc": "Learn advanced tools for 3D modeling and engineering design." },
       "electronics-basic": { "title": "Electronics Basics – DC circuits", "desc": "Participants learn basic components and laws of electricity and assemble simple circuits." },
       "arduino-micro": { "title": "Microcontrollers and Programming (Arduino)", "desc": "Participants create an interactive project with sensors and actuators." },

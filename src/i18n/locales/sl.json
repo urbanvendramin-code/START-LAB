@@ -197,8 +197,9 @@
       "solution": "Od ideje do rešitve"
     },
     "items": {
-      "3d-print": { "title": "3D tisk – od ideje do izdelka", "desc": "Spoznajte postopek od 3D modeliranja do končnega izdelka s pomočjo 3D tiskalnikov." },
-      "laser": { "title": "Laserski razrez – od risbe do izdelka", "desc": "Naučite se pripraviti načrte za laserski razrez in izdelati unikatne izdelke." },
+      "3d-print-laser": { "title": "3D tisk in laserski razrez – od ideje do izdelka", "desc": "Spoznajte postopek od 3D modeliranja in 3D tiska do laserskega razreza ter izdelajte unikatne izdelke." },
+      "3d-print": { "title": "3D tisk in laserski razrez – od ideje do izdelka", "desc": "Spoznajte postopek od 3D modeliranja in 3D tiska do laserskega razreza ter izdelajte unikatne izdelke." },
+      "laser": { "title": "3D tisk in laserski razrez – od ideje do izdelka", "desc": "Spoznajte postopek od 3D modeliranja in 3D tiska do laserskega razreza ter izdelajte unikatne izdelke." },
       "3d-pro": { "title": "Profesionalno 3D modeliranje", "desc": "Spoznajte napredna orodja za 3D modeliranje in inženirsko načrtovanje." },
       "electronics-basic": { "title": "Osnove elektronike – DC vezja", "desc": "Udeleženci spoznajo osnovne komponente in zakonitosti elektrike ter sestavijo enostavna vezja." },
       "arduino-micro": { "title": "Mikrokrmilniki in programiranje (Arduino)", "desc": "Udeleženci ustvarijo interaktiven projekt s senzorji in aktuatorji." },
