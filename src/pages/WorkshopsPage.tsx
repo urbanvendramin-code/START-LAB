@@ -108,7 +108,7 @@ export default function WorkshopsPage() {
                           )}
                           {(workshop.id === '3d-print-laser' || workshop.id === '3d-print' || workshop.id === 'laser') && (
                             <div className="bg-amber-400 text-slate-950 px-3 py-1.5 rounded-xl font-display font-black text-[10px] uppercase shadow-sm">
-                              ⚡ Samo še 1 prosto mesto!
+                              ⚡ Samo še 2 prosti mesti!
                             </div>
                           )}
                         </div>

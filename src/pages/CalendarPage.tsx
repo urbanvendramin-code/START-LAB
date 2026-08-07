@@ -290,6 +290,7 @@ export default function CalendarPage() {
     email: '',
     phone: '',
     age: '',
+    participantLanguage: 'Slovenščina',
     referralSource: '',
     note: '',
     subscribeToNewsletter: false,
@@ -345,6 +346,7 @@ export default function CalendarPage() {
       email: '',
       phone: '',
       age: '',
+      participantLanguage: 'Slovenščina',
       referralSource: '',
       note: '',
       subscribeToNewsletter: false,
@@ -390,6 +392,7 @@ export default function CalendarPage() {
         email: formData.email,
         phone: formData.phone,
         age: formData.age,
+        participantLanguage: formData.participantLanguage,
         workshopTitle,
         dateSelected: selectedTerm,
         referralSource: formData.referralSource,
@@ -654,7 +657,7 @@ export default function CalendarPage() {
                                 )}
                                 {isPrintCut && (
                                   <span className="bg-amber-400 text-slate-950 text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
-                                    ⚡ {isSlovenian ? "Samo še 1 prosto mesto!" : isIt ? "Solo 1 posto disponibile!" : "Only 1 spot left!"}
+                                    ⚡ {isSlovenian ? "Samo še 2 prosti mesti!" : isIt ? "Solo 2 posti disponibili!" : "Only 2 spots left!"}
                                   </span>
                                 )}
                               </div>
@@ -991,10 +994,10 @@ export default function CalendarPage() {
                                 <AlertTriangle size={18} className="text-amber-600 shrink-0 stroke-[2.5]" />
                                 <span>
                                   {isSlovenian 
-                                    ? "Opomnik: Na voljo je samo še 1 prosto mesto!" 
+                                    ? "Opomnik: Na voljo sta samo še 2 prosti mesti!" 
                                     : isIt 
-                                      ? "Opomnik: Solo 1 posto ancora disponibile!" 
-                                      : "Reminder: Only 1 spot remaining!"}
+                                      ? "Opomnik: Solo 2 posti ancora disponibili!" 
+                                      : "Reminder: Only 2 spots remaining!"}
                                 </span>
                               </div>
                             )}
@@ -1265,7 +1268,7 @@ export default function CalendarPage() {
                           )}
                           {modalEvent?.id.startsWith('printcut') && (
                             <span className="bg-amber-400 text-slate-950 font-display font-black text-[10px] uppercase px-2.5 py-0.5 rounded-full shadow-sm">
-                              ⚡ {isSlovenian ? "Samo še 1 prosto mesto!" : isIt ? "Solo 1 posto disponibile!" : "Only 1 spot left!"}
+                              ⚡ {isSlovenian ? "Samo še 2 prosti mesti!" : isIt ? "Solo 2 posti disponibili!" : "Only 2 spots left!"}
                             </span>
                           )}
                         </div>
@@ -1348,6 +1351,36 @@ export default function CalendarPage() {
                             max="99"
                             className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-sm focus:bg-white focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 transition-all focus:outline-none"
                           />
+                        </div>
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-display font-black uppercase tracking-wider text-slate-800">
+                          {isSlovenian ? "Kateri jezik govori udeleženec?" : isIt ? "Quale lingua parla il partecipante?" : "Which language does the participant speak?"} <span className="text-brand-red">*</span>
+                        </label>
+                        <div className="grid grid-cols-2 gap-2.5">
+                          <button
+                            type="button"
+                            onClick={() => setFormData({ ...formData, participantLanguage: 'Slovenščina' })}
+                            className={`py-2.5 px-3 rounded-xl border text-xs font-bold transition-all text-center flex items-center justify-center gap-2 cursor-pointer ${
+                              formData.participantLanguage === 'Slovenščina'
+                                ? 'bg-brand-red text-white border-brand-red shadow-sm font-black'
+                                : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                            }`}
+                          >
+                            <span>🇸🇮</span> {isSlovenian ? "Slovenščina" : isIt ? "Sloveno" : "Slovenian"}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setFormData({ ...formData, participantLanguage: 'Italijanščina' })}
+                            className={`py-2.5 px-3 rounded-xl border text-xs font-bold transition-all text-center flex items-center justify-center gap-2 cursor-pointer ${
+                              formData.participantLanguage === 'Italijanščina'
+                                ? 'bg-brand-red text-white border-brand-red shadow-sm font-black'
+                                : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                            }`}
+                          >
+                            <span>🇮🇹</span> {isSlovenian ? "Italijanščina" : isIt ? "Italiano" : "Italian"}
+                          </button>
                         </div>
                       </div>
 
