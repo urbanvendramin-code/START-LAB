@@ -650,14 +650,9 @@ export default function CalendarPage() {
                                         : "Free of charge • Limited slots available!"}
                                   </span>
                                 </div>
-                                {isGraphene && (
+                                {(isGraphene || isPrintCut) && (
                                   <span className="bg-rose-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
                                     🔒 {isSlovenian ? "Prijave zaprte • Zapolnjena mesta" : isIt ? "Iscrizioni chiuse • Tutto esaurito" : "Registrations closed • Sold out"}
-                                  </span>
-                                )}
-                                {isPrintCut && (
-                                  <span className="bg-amber-400 text-slate-950 text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
-                                    ⚡ {isSlovenian ? "Samo še 2 prosti mesti!" : isIt ? "Solo 2 posti disponibili!" : "Only 2 spots left!"}
                                   </span>
                                 )}
                               </div>
@@ -976,7 +971,7 @@ export default function CalendarPage() {
                               </div>
                             )}
 
-                            {isGraphene && (
+                            {(isGraphene || isPrintCut) && (
                               <div className="mb-3.5 bg-rose-50 border-2 border-rose-300 text-rose-950 rounded-2xl p-3.5 flex items-center justify-center gap-2.5 text-xs font-display font-black uppercase tracking-wide shadow-sm">
                                 <Lock size={18} className="text-rose-600 shrink-0 stroke-[2.5]" />
                                 <span>
@@ -989,20 +984,7 @@ export default function CalendarPage() {
                               </div>
                             )}
 
-                            {isPrintCut && (
-                              <div className="mb-3.5 bg-amber-50 border-2 border-amber-400 text-amber-950 rounded-2xl p-3.5 flex items-center justify-center gap-2.5 text-xs font-display font-black uppercase tracking-wide shadow-sm">
-                                <AlertTriangle size={18} className="text-amber-600 shrink-0 stroke-[2.5]" />
-                                <span>
-                                  {isSlovenian 
-                                    ? "Opomnik: Na voljo sta samo še 2 prosti mesti!" 
-                                    : isIt 
-                                      ? "Opomnik: Solo 2 posti ancora disponibili!" 
-                                      : "Reminder: Only 2 spots remaining!"}
-                                </span>
-                              </div>
-                            )}
-
-                            {isGraphene ? (
+                            {(isGraphene || isPrintCut) ? (
                               <button 
                                 disabled
                                 className="w-full py-4 bg-slate-200 text-slate-500 rounded-2xl font-display font-black uppercase text-sm tracking-wider select-none cursor-not-allowed flex items-center justify-center gap-2 border border-slate-300/80 shadow-inner"
@@ -1261,14 +1243,9 @@ export default function CalendarPage() {
                             <Sparkles size={13} className="stroke-[3]" />
                             <span>{isSlovenian ? "POMEMBNE INFORMACIJE" : isIt ? "INFORMAZIONI IMPORTANTI" : "IMPORTANT INFORMATION"}</span>
                           </div>
-                          {modalEvent?.id.startsWith('graphene') && (
+                          {(modalEvent?.id.startsWith('graphene') || modalEvent?.id.startsWith('printcut')) && (
                             <span className="bg-rose-600 text-white font-display font-black text-[10px] uppercase px-2.5 py-0.5 rounded-full shadow-sm">
                               🔒 {isSlovenian ? "Prijave zaprte • Zapolnjeno" : isIt ? "Iscrizioni chiuse • Tutto esaurito" : "Registrations closed • Sold out"}
-                            </span>
-                          )}
-                          {modalEvent?.id.startsWith('printcut') && (
-                            <span className="bg-amber-400 text-slate-950 font-display font-black text-[10px] uppercase px-2.5 py-0.5 rounded-full shadow-sm">
-                              ⚡ {isSlovenian ? "Samo še 2 prosti mesti!" : isIt ? "Solo 2 posti disponibili!" : "Only 2 spots left!"}
                             </span>
                           )}
                         </div>
@@ -1454,7 +1431,7 @@ export default function CalendarPage() {
                         >
                           {isSlovenian ? "Prekliči" : isIt ? "Annulla" : "Cancel"}
                         </button>
-                        {modalEvent?.id.startsWith('graphene') ? (
+                        {(modalEvent?.id.startsWith('graphene') || modalEvent?.id.startsWith('printcut')) ? (
                           <button
                             type="button"
                             disabled
