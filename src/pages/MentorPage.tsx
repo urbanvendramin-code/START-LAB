@@ -17,6 +17,7 @@ interface Mentor {
   name: string;
   role: string;
   image?: string;
+  images?: string[];
   bg: string;
   badgeColor: string;
   desc: string;
@@ -25,6 +26,10 @@ interface Mentor {
 function MentorCard({ mentor }: { mentor: Mentor; key?: any }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const { t } = useTranslation();
+
+  const allImages = mentor.images && mentor.images.length > 0 ? mentor.images : mentor.image ? [mentor.image] : [];
+  const [activeImgIdx, setActiveImgIdx] = useState(0);
+  const currentImg = allImages[activeImgIdx];
 
   const paragraphs = mentor.desc.split('\n\n');
   const firstParagraph = paragraphs[0] || '';
@@ -35,17 +40,35 @@ function MentorCard({ mentor }: { mentor: Mentor; key?: any }) {
       whileHover={{ y: -4 }}
       className={`rounded-[2.5rem] border-2 bg-white p-6 md:p-10 transition-all flex flex-col md:flex-row gap-8 items-center md:items-start shadow-[0_12px_24px_rgba(15,23,42,0.02)] hover:shadow-xl hover:border-[#00a896]/20 ${mentor.bg}`}
     >
-      <div className="w-32 h-32 md:w-44 md:h-44 shrink-0 rounded-[2rem] overflow-hidden border-4 border-white shadow-md bg-slate-50 flex items-center justify-center">
-        {mentor.image ? (
-          <img 
-            src={mentor.image} 
-            alt={mentor.name} 
-            className="w-full h-full object-cover rounded-[2rem]"
-            referrerPolicy="no-referrer"
-          />
-        ) : (
-          <div className="w-full h-full bg-gradient-to-tr from-play-pink/20 to-play-purple/20 flex items-center justify-center text-play-pink font-display font-black text-3xl md:text-5xl select-none">
-            {mentor.name.split(' ').map(n => n[0]).join('')}
+      <div className="flex flex-col items-center gap-3 shrink-0">
+        <div className="w-32 h-32 md:w-44 md:h-44 rounded-[2rem] overflow-hidden border-4 border-white shadow-md bg-slate-50 flex items-center justify-center relative">
+          {currentImg ? (
+            <img 
+              src={currentImg} 
+              alt={mentor.name} 
+              className="w-full h-full object-cover rounded-[2rem] transition-all duration-300"
+              referrerPolicy="no-referrer"
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-tr from-play-pink/20 to-play-purple/20 flex items-center justify-center text-play-pink font-display font-black text-3xl md:text-5xl select-none">
+              {mentor.name.split(' ').map(n => n[0]).join('')}
+            </div>
+          )}
+        </div>
+        {allImages.length > 1 && (
+          <div className="flex items-center gap-2 mt-1">
+            {allImages.map((img, idx) => (
+              <button
+                key={idx}
+                onClick={() => setActiveImgIdx(idx)}
+                className={`w-10 h-10 rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${
+                  activeImgIdx === idx ? 'border-brand-red scale-105 shadow-sm' : 'border-slate-200 opacity-60 hover:opacity-100'
+                }`}
+                title={`Slika ${idx + 1}`}
+              >
+                <img src={img} alt="" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+              </button>
+            ))}
           </div>
         )}
       </div>
@@ -419,6 +442,18 @@ export default function MentorPage() {
                     bg: "bg-play-pink/5 border-play-pink/15 hover:border-play-pink/35 text-play-pink hover:scale-[1.01]", 
                     badgeColor: "bg-play-pink/12 text-play-pink",
                     desc: t('mentors.egon.desc') 
+                  },
+                  { 
+                    name: "Denis Lupo",
+                    role: t('mentors.denis.role'),
+                    image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1786434942/WhatsApp_Image_2026-08-11_at_09.45.07_xnf783.jpg",
+                    images: [
+                      "https://res.cloudinary.com/dssxhjk8k/image/upload/v1786434942/WhatsApp_Image_2026-08-11_at_09.45.07_xnf783.jpg",
+                      "https://res.cloudinary.com/dssxhjk8k/image/upload/v1786434942/WhatsApp_Image_2026-08-11_at_09.44.55_bms5en.jpg"
+                    ],
+                    bg: "bg-rose-500/5 border-rose-500/15 hover:border-rose-500/35 text-rose-600 hover:scale-[1.01]", 
+                    badgeColor: "bg-rose-500/12 text-rose-600",
+                    desc: t('mentors.denis.desc') 
                   },
                   { 
                     name: "Borut Fiorelli",
