@@ -370,6 +370,164 @@ async function startServer() {
     }
   });
 
+  // --- ANALYTICS STORAGE ENGINE ---
+  const analyticsFile = path.join(process.cwd(), "analytics.json");
+  interface SessionRecord {
+    sessionId: string;
+    ipHash: string;
+    firstSeen: number;
+    lastSeen: number;
+    durationSeconds: number;
+    pages: { [path: string]: number };
+    dateCreated: string;
+  }
+
+  let analyticsStore: { [sessionId: string]: SessionRecord } = {};
+
+  try {
+    if (fs.existsSync(analyticsFile)) {
+      const raw = fs.readFileSync(analyticsFile, "utf8");
+      analyticsStore = JSON.parse(raw);
+    }
+  } catch (err) {
+    console.warn("[Analytics] Could not load analytics.json, starting fresh.");
+    analyticsStore = {};
+  }
+
+  const saveAnalytics = () => {
+    try {
+      fs.writeFileSync(analyticsFile, JSON.stringify(analyticsStore, null, 2), "utf8");
+    } catch (err) {
+      console.error("[Analytics] Error saving analytics file:", err);
+    }
+  };
+
+  // API Analytics Track Endpoint
+  app.post("/api/analytics/track", (req, res) => {
+    try {
+      const { sessionId, path: reqPath, duration, eventType } = req.body;
+      if (!sessionId) {
+        return res.status(400).json({ error: "Missing sessionId" });
+      }
+
+      const clientIp = (req.headers["x-forwarded-for"] as string || req.socket.remoteAddress || "127.0.0.1").split(",")[0].trim();
+      const ipHash = Buffer.from(clientIp).toString("base64").substring(0, 10);
+      const now = Date.now();
+      const todayStr = new Date().toISOString().split("T")[0];
+
+      let record = analyticsStore[sessionId];
+      if (!record) {
+        record = {
+          sessionId,
+          ipHash,
+          firstSeen: now,
+          lastSeen: now,
+          durationSeconds: 0,
+          pages: {},
+          dateCreated: todayStr,
+        };
+        analyticsStore[sessionId] = record;
+      }
+
+      record.lastSeen = now;
+      if (typeof duration === "number" && duration > record.durationSeconds) {
+        record.durationSeconds = Math.min(duration, 86400); // cap max 24h single session safety
+      }
+
+      const normalizedPath = reqPath || "/";
+      if (eventType === "pageview" || !record.pages[normalizedPath]) {
+        record.pages[normalizedPath] = (record.pages[normalizedPath] || 0) + 1;
+      }
+
+      saveAnalytics();
+      res.json({ success: true });
+    } catch (err: any) {
+      console.error("[Analytics Track Error]", err);
+      res.status(500).json({ error: "Failed to log event" });
+    }
+  });
+
+  // API Analytics Stats Endpoint
+  app.get("/api/analytics/stats", (req, res) => {
+    try {
+      const records = Object.values(analyticsStore);
+      const totalVisitors = records.length;
+
+      let totalPageviews = 0;
+      let totalDurationSeconds = 0;
+      const pageCounts: { [p: string]: number } = {};
+      const dailyMap: { [date: string]: { visitors: Set<string>; pageviews: number; totalDuration: number } } = {};
+
+      const now = Date.now();
+      const twoMinutesAgo = now - 2 * 60 * 1000;
+      let activeVisitors = 0;
+
+      records.forEach((rec) => {
+        totalDurationSeconds += rec.durationSeconds || 0;
+        if (rec.lastSeen >= twoMinutesAgo) {
+          activeVisitors++;
+        }
+
+        const dateKey = rec.dateCreated || new Date(rec.firstSeen).toISOString().split("T")[0];
+        if (!dailyMap[dateKey]) {
+          dailyMap[dateKey] = { visitors: new Set(), pageviews: 0, totalDuration: 0 };
+        }
+        dailyMap[dateKey].visitors.add(rec.sessionId);
+        dailyMap[dateKey].totalDuration += rec.durationSeconds || 0;
+
+        Object.entries(rec.pages || {}).forEach(([p, count]) => {
+          totalPageviews += count;
+          pageCounts[p] = (pageCounts[p] || 0) + count;
+          dailyMap[dateKey].pageviews += count;
+        });
+      });
+
+      const avgDurationSeconds = totalVisitors > 0 ? Math.round(totalDurationSeconds / totalVisitors) : 0;
+
+      const topPages = Object.entries(pageCounts)
+        .map(([p, views]) => ({ path: p, views }))
+        .sort((a, b) => b.views - a.views)
+        .slice(0, 10);
+
+      // Past 14 days daily breakdown
+      const dailyBreakdown = [];
+      for (let i = 13; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        const dateStr = d.toISOString().split("T")[0];
+        const dayData = dailyMap[dateStr];
+        const dayVisitors = dayData ? dayData.visitors.size : 0;
+        const dayPageviews = dayData ? dayData.pageviews : 0;
+        const dayAvgDuration = dayVisitors > 0 && dayData ? Math.round(dayData.totalDuration / dayVisitors) : 0;
+
+        dailyBreakdown.push({
+          date: dateStr,
+          label: d.toLocaleDateString("sl-SI", { month: "short", day: "numeric" }),
+          visitors: dayVisitors,
+          pageviews: dayPageviews,
+          avgDurationSeconds: dayAvgDuration,
+        });
+      }
+
+      const gaId = process.env.VITE_GA_MEASUREMENT_ID || process.env.GA_MEASUREMENT_ID || "";
+
+      res.json({
+        totalVisitors,
+        totalPageviews,
+        avgDurationSeconds,
+        activeVisitors,
+        topPages,
+        dailyBreakdown,
+        gaMeasurementId: gaId ? gaId.replace(/^(.{3}).*(.{3})$/, "$1***$2") : null,
+        gaConfigured: Boolean(gaId && gaId.startsWith("G-")),
+      });
+    } catch (err: any) {
+      console.error("[Analytics Stats Error]", err);
+      res.status(500).json({ error: "Failed to fetch stats" });
+    }
+  });
+
+
   // Serve with Vite in dev, static built assets in production
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({

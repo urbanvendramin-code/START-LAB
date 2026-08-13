@@ -22,6 +22,7 @@ export default function Footer() {
         <div className="flex gap-8 text-[10px] font-black uppercase italic tracking-widest text-slate-400">
            <Link to="/zasebnost" className="hover:text-brand-red transition-colors">{t('footer.privacy')}</Link>
            <Link to="/pogoji-uporabe" className="hover:text-brand-red transition-colors">{t('footer.terms')}</Link>
+           <Link to="/analitika" className="hover:text-brand-red transition-colors">{t('footer.analytics', 'Analitika')}</Link>
         </div>
       </div>
 

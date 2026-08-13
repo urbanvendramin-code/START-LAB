@@ -14,9 +14,11 @@ import CalendarPage from './pages/CalendarPage';
 import ContactPage from './pages/ContactPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
+import AnalyticsPage from './pages/AnalyticsPage';
 import SEOManager from './components/SEOManager';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useAnalyticsTracker } from './utils/analytics';
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -35,11 +37,17 @@ function ScrollToTop() {
   return null;
 }
 
+function AnalyticsListener() {
+  useAnalyticsTracker();
+  return null;
+}
+
 export default function App() {
   return (
     <Router>
       <SEOManager />
       <ScrollToTop />
+      <AnalyticsListener />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
@@ -51,8 +59,10 @@ export default function App() {
           <Route path="kontakt" element={<ContactPage />} />
           <Route path="zasebnost" element={<PrivacyPage />} />
           <Route path="pogoji-uporabe" element={<TermsPage />} />
+          <Route path="analitika" element={<AnalyticsPage />} />
         </Route>
       </Routes>
     </Router>
   );
 }
+
