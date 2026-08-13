@@ -16,6 +16,7 @@ import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import AnalyticsPage from './pages/AnalyticsPage';
 import SEOManager from './components/SEOManager';
+import { Analytics } from '@vercel/analytics/react';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAnalyticsTracker } from './utils/analytics';
@@ -48,6 +49,7 @@ export default function App() {
       <SEOManager />
       <ScrollToTop />
       <AnalyticsListener />
+      <Analytics />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />

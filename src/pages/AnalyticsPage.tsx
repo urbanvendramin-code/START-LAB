@@ -285,6 +285,46 @@ export default function AnalyticsPage() {
             </div>
           </div>
 
+        {/* Integrations: Vercel Analytics & Google Analytics */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          
+          {/* Vercel Analytics Card */}
+          <div className="bg-white p-6 md:p-8 rounded-3xl border border-slate-200/80 shadow-sm flex flex-col justify-between space-y-4">
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-6 h-6 rounded-lg bg-black text-white flex items-center justify-center font-bold text-xs font-mono">
+                  ▲
+                </div>
+                <h3 className="font-display font-black uppercase text-slate-900 text-base">
+                  Vercel Analytics
+                </h3>
+              </div>
+
+              <div className="bg-slate-900 border border-slate-800 p-4 rounded-2xl text-slate-100 space-y-3">
+                <div className="flex items-center gap-2 font-bold text-xs text-emerald-400">
+                  <CheckCircle2 size={16} className="text-emerald-400 shrink-0" />
+                  <span>{isSl ? '@vercel/analytics PAKET NAMEŠČEN' : '@vercel/analytics INSTALLED'}</span>
+                </div>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  {isSl 
+                    ? 'Komponenta <Analytics /> iz paketa @vercel/analytics/react je dodana v glavno aplikacijo. Ob objavi na Vercel se podatki o obisku, edinstvenih obiskovalcih, lokaciji in hitrosti samodejno zbirajo v Vercel nadzorni plošči.' 
+                    : 'The <Analytics /> component from @vercel/analytics/react is integrated. When deployed to Vercel, visitor metrics, country breakdown, and web vitals will be tracked automatically in your Vercel Dashboard.'}
+                </p>
+                <div className="pt-2 border-t border-slate-800">
+                  <span className="text-[11px] font-mono text-slate-400">
+                    {isSl ? 'Dostop do analitike: Vercel Dashboard → vaša aplikacija → zavihek "Analytics"' : 'Access analytics: Vercel Dashboard → Your Project → "Analytics" tab'}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-2 text-[11px] text-slate-500 font-medium">
+              ⚡ {isSl 
+                ? 'Za aktivacijo v Vercelu odprite vaš projekt na vercel.com in v zavihku "Analytics" kliknite "Enable Analytics".' 
+                : 'To activate on Vercel, open your project on vercel.com and click "Enable Analytics" under the Analytics tab.'}
+            </div>
+          </div>
+
           {/* Google Analytics 4 Setup Status */}
           <div className="bg-white p-6 md:p-8 rounded-3xl border border-slate-200/80 shadow-sm flex flex-col justify-between space-y-4">
             <div>
@@ -328,12 +368,14 @@ export default function AnalyticsPage() {
               )}
             </div>
 
-            <div className="pt-4 border-t border-slate-100 text-[11px] text-slate-500 leading-relaxed font-medium">
+            <div className="pt-2 text-[11px] text-slate-500 leading-relaxed font-medium">
               💡 {isSl 
                 ? 'Sistem že samodejno zbira in shranjuje vašo lokalno analitiko v realnem času brez potrebe po zunanjih piškotkih.' 
                 : 'The built-in analytics engine is actively capturing first-party privacy-safe session duration and pageview metrics.'}
             </div>
           </div>
+
+        </div>
         </div>
 
       </div>
