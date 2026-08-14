@@ -78,7 +78,7 @@ const getLocalizedEvents = (lang: string): Event[] => {
       date: new Date(2026, 8, 17), // Sept 17
       time: '17:00 - 19:00',
       location: 'Startlab Solkan',
-      title: isSl ? 'Elektronski dirkač – Sklop 1' : isIt ? 'Bolide elettronico – Parte 1' : 'Electronic Racer – Part 1',
+      title: isSl ? 'Elektronski dirkač' : isIt ? 'Bolide elettronico' : 'Electronic Racer',
       description: isSl 
         ? "Sklop 1: Razstavljanje elektronskih naprav in odkrivanje delovanja. Kaj se skriva v računalniku, igrači ali gospodinjski napravi?"
         : isIt
@@ -182,7 +182,7 @@ const getLocalizedEvents = (lang: string): Event[] => {
       date: new Date(2026, 8, 7), // Sept 7
       time: '17:00 - 19:00',
       location: isSl ? 'Startlab Solkan' : 'Startlab Solkan',
-      title: isSl ? 'Grafenski čip – Sklop 1' : isIt ? 'Chip al grafene – Parte 1' : 'Graphene Chip – Part 1',
+      title: isSl ? 'Grafenski čip' : isIt ? 'Chip al grafene' : 'Graphene Chip',
       description: isSl 
         ? "Sklop 1: Izdelava grafena iz grafita in opazovanje pod optičnim mikroskopom. Spoznavanje materiala prihodnosti skozi prve fizikalne poskuse."
         : isIt
@@ -275,7 +275,7 @@ const getLocalizedEvents = (lang: string): Event[] => {
       date: new Date(2026, 8, 8), // Sept 8
       time: '17:00 - 19:00',
       location: 'Startlab Solkan',
-      title: isSl ? 'Natisni in izreži – Sklop 1' : isIt ? 'Stampa e Taglia – Parte 1' : 'Print & Cut – Part 1',
+      title: isSl ? 'Natisni in izreži' : isIt ? 'Stampa e Taglia' : 'Print & Cut',
       description: isSl 
         ? "Sklop 1: Uvod v 3D modeliranje z Onshape. Spoznaj osnove risanja v 3D in začni načrtovati svoj unikatni izdelek."
         : isIt
