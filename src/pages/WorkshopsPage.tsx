@@ -101,6 +101,11 @@ export default function WorkshopsPage() {
                           <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-100 px-3 py-1.5 rounded-xl">
                             <MapPin size={14} className="text-brand-red stroke-[2.5]" /> Solkan
                           </div>
+                          {workshop.id === 'electronics-racer' && (
+                            <div className="bg-emerald-600 text-white px-3 py-1.5 rounded-xl font-display font-black text-[10px] uppercase shadow-sm flex items-center gap-1.5">
+                              ⚡ {t('workshops_page.open', { defaultValue: 'Prijave odprte • 20 € (16 ur)' })}
+                            </div>
+                          )}
                           {(workshop.id === 'graphene-transistor' || workshop.id === '3d-print-laser' || workshop.id === '3d-print' || workshop.id === 'laser') && (
                             <div className="bg-rose-600 text-white px-3 py-1.5 rounded-xl font-display font-black text-[10px] uppercase shadow-sm flex items-center gap-1.5">
                               🔒 {t('workshops_page.closed', { defaultValue: 'Prijave zaprte • Zapolnjena mesta' })}

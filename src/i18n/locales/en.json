@@ -197,6 +197,7 @@
       "solution": "From Idea to Solution"
     },
     "items": {
+      "electronics-racer": { "title": "Discover the World of Electronics & Build Your First Racer!", "desc": "Disassemble electronic devices, learn the principles of circuits and components, and build your own working electronic race car to take home." },
       "3d-print-laser": { "title": "3D Printing & Laser Cutting – from idea to product", "desc": "Learn the process from 3D modeling and 3D printing to laser cutting to create unique physical products." },
       "3d-print": { "title": "3D Printing & Laser Cutting – from idea to product", "desc": "Learn the process from 3D modeling and 3D printing to laser cutting to create unique physical products." },
       "laser": { "title": "3D Printing & Laser Cutting – from idea to product", "desc": "Learn the process from 3D modeling and 3D printing to laser cutting to create unique physical products." },

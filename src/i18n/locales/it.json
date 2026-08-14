@@ -197,6 +197,7 @@
       "solution": "Dall'Idea alla Soluzione"
     },
     "items": {
+      "electronics-racer": { "title": "Scopri il Mondo dell'Elettronica e Costruisci il tuo Primo Bolide!", "desc": "Smonta dispositivi elettronici, scopri il funzionamento di componenti e circuiti e costruisci la tua auto da corsa elettronica funzionante da portare a casa." },
       "3d-print-laser": { "title": "Stampa 3D e Taglio Laser – dall'idea al prodotto", "desc": "Scopri il processo dalla modellazione 3D e stampa 3D al taglio laser per creare prodotti unici." },
       "3d-print": { "title": "Stampa 3D e Taglio Laser – dall'idea al prodotto", "desc": "Scopri il processo dalla modellazione 3D e stampa 3D al taglio laser per creare prodotti unici." },
       "laser": { "title": "Stampa 3D e Taglio Laser – dall'idea al prodotto", "desc": "Scopri il processo dalla modellazione 3D e stampa 3D al taglio laser per creare prodotti unici." },

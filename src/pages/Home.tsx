@@ -92,6 +92,55 @@ export default function Home() {
 
             {/* Eye-catching workshop quick links */}
             <div className="space-y-3 mb-8 max-w-lg">
+              {/* New Electronics & Racer Workshop */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+              >
+                <Link 
+                  to="/koledar" 
+                  className="flex items-center gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-3xl border-2 border-amber-500 bg-amber-500/10 hover:bg-amber-500/15 transition-all shadow-[0_8px_30px_rgba(245,158,11,0.12)] group relative overflow-hidden"
+                >
+                  {/* Pulsing indicator dot */}
+                  <span className="absolute top-3 right-3 flex h-3 w-3">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
+                  </span>
+
+                  <div className="w-12 h-12 bg-amber-500 text-white rounded-2xl flex flex-col items-center justify-center font-display font-black tracking-tight shrink-0 shadow-md">
+                    <span className="text-sm leading-none">17</span>
+                    <span className="text-[9px] leading-none mt-0.5">SEP</span>
+                  </div>
+
+                  <div className="text-left flex-1 min-w-0">
+                    <div className="flex flex-wrap items-center gap-1.5 mb-1">
+                      <span className="inline-block bg-amber-500 text-slate-950 text-[9px] font-display font-black uppercase tracking-widest px-2 py-0.5 rounded-lg leading-none">
+                        {isSlovenian ? 'NOVA DELAVNICA' : isItalian ? 'NUOVO WORKSHOP' : 'NEW WORKSHOP'}
+                      </span>
+                      <span className="inline-block bg-emerald-600 text-white text-[9px] font-display font-black uppercase tracking-widest px-2 py-0.5 rounded-lg leading-none shadow-sm">
+                        ⚡ {isSlovenian ? 'Prijave odprte • 20 mest' : isItalian ? 'Iscrizioni aperte • 20 posti' : 'Open for registration • 20 slots'}
+                      </span>
+                    </div>
+                    <h4 className="text-xs sm:text-base font-display font-black uppercase text-slate-950 group-hover:text-amber-600 transition-colors leading-tight">
+                      {isSlovenian 
+                        ? 'Spoznaj svet elektronike in izdelaj svojega prvega dirkača!' 
+                        : isItalian 
+                          ? "Scopri il mondo dell'elettronica e costruisci il tuo primo bolide!" 
+                          : 'Discover Electronics & Build Your First Racer!'}
+                    </h4>
+                    <p className="text-[10px] sm:text-[11px] text-slate-600 font-bold leading-normal mt-0.5 flex items-center gap-1">
+                      {isSlovenian 
+                        ? '8 x 2 uri • Cena: 20 € za celotno delavnico • Prijavi se zdaj!' 
+                        : isItalian 
+                          ? '8 x 2 ore • Prezzo: 20 € per l’intero workshop • Iscriviti ora!' 
+                          : '8 x 2 hours • Price: 20 € for full workshop • Register now!'}
+                      <ArrowRight size={13} className="inline-block group-hover:translate-x-1 transition-transform stroke-[2.5] text-amber-600 shrink-0" />
+                    </p>
+                  </div>
+                </Link>
+              </motion.div>
+
               {/* Graphene Workshop */}
               <motion.div
                 initial={{ opacity: 0, y: 15 }}

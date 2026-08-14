@@ -197,6 +197,7 @@
       "solution": "Od ideje do rešitve"
     },
     "items": {
+      "electronics-racer": { "title": "Spoznaj svet elektronike in izdelaj svojega prvega dirkača!", "desc": "Razstavi elektronske naprave, odkrij delovanje komponent in vezij ter sestavi svojega delujočega elektronskega dirkača, ki ga odneseš domov." },
       "3d-print-laser": { "title": "3D tisk in laserski razrez – od ideje do izdelka", "desc": "Spoznajte postopek od 3D modeliranja in 3D tiska do laserskega razreza ter izdelajte unikatne izdelke." },
       "3d-print": { "title": "3D tisk in laserski razrez – od ideje do izdelka", "desc": "Spoznajte postopek od 3D modeliranja in 3D tiska do laserskega razreza ter izdelajte unikatne izdelke." },
       "laser": { "title": "3D tisk in laserski razrez – od ideje do izdelka", "desc": "Spoznajte postopek od 3D modeliranja in 3D tiska do laserskega razreza ter izdelajte unikatne izdelke." },
