@@ -382,18 +382,29 @@ export default function Home() {
                 </div>
 
                 {/* Selected Room Metadata Panel */}
-                <div className="p-6 bg-slate-950 text-white border-t-2 border-slate-930 flex items-center gap-4 text-left">
-                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-display font-black text-white shrink-0 shadow-inner transition-colors duration-300 ${selectedRoom ? ROOMS.find(r => r.id === selectedRoom)?.color : 'bg-white/10'}`}>
-                    {selectedRoom ? selectedRoom : <Info className="text-slate-400" />}
+                <div className="p-6 bg-slate-950 text-white border-t-2 border-slate-930 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-left">
+                  <div className="flex items-center gap-4">
+                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-display font-black text-white shrink-0 shadow-inner transition-colors duration-300 ${selectedRoom ? ROOMS.find(r => r.id === selectedRoom)?.color : 'bg-white/10'}`}>
+                      {selectedRoom ? selectedRoom : <Info className="text-slate-400" />}
+                    </div>
+                    <div>
+                      <h4 className="text-[10px] font-display font-black uppercase tracking-widest text-slate-400">
+                        {selectedRoom ? t('equipment.rooms.selected_room_title') : t('equipment.rooms.interactive_hint')}
+                      </h4>
+                      <p className="text-sm sm:text-base font-display font-black uppercase text-white leading-tight mt-0.5">
+                        {selectedRoom ? t(`equipment.rooms.r${selectedRoom}`) : t('equipment.rooms.interactive_hint')}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="text-[10px] font-display font-black uppercase tracking-widest text-slate-400">
-                      {selectedRoom ? t('equipment.rooms.selected_room_title') : t('equipment.rooms.interactive_hint')}
-                    </h4>
-                    <p className="text-sm sm:text-base font-display font-black uppercase text-white leading-tight mt-0.5">
-                      {selectedRoom ? t(`equipment.rooms.r${selectedRoom}`) : t('equipment.rooms.interactive_hint')}
-                    </p>
-                  </div>
+                  {selectedRoom === 8 && (
+                    <Link
+                      to="/simulator-voznje"
+                      className="px-4 py-2 rounded-xl bg-brand-red hover:bg-brand-red/90 text-white text-xs font-display font-black uppercase tracking-wider transition-all self-start sm:self-center shrink-0 flex items-center gap-1.5 shadow-md shadow-brand-red/20"
+                    >
+                      <span>Ogled simulatorja</span>
+                      <ArrowRight size={14} className="stroke-[3]" />
+                    </Link>
+                  )}
                 </div>
               </motion.div>
             </div>

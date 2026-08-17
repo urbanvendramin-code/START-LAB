@@ -13,6 +13,9 @@ export default function SEOManager() {
     if (pathname.includes('/delavnice')) {
       titleKey = 'seo.workshops_title';
       descKey = 'seo.workshops_desc';
+    } else if (pathname.includes('/simulator')) {
+      titleKey = 'seo.simulator_title';
+      descKey = 'seo.simulator_desc';
     } else if (pathname.includes('/partner')) {
       titleKey = 'seo.partner_title';
       descKey = 'seo.partner_desc';

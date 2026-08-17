@@ -15,6 +15,7 @@ import ContactPage from './pages/ContactPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import AnalyticsPage from './pages/AnalyticsPage';
+import DrivingSimulatorPage from './pages/DrivingSimulatorPage';
 import SEOManager from './components/SEOManager';
 import { Analytics } from '@vercel/analytics/react';
 import { useEffect } from 'react';
@@ -55,6 +56,8 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="o-projektu" element={<ProjectPage />} />
           <Route path="delavnice" element={<WorkshopsPage />} />
+          <Route path="simulator-voznje" element={<DrivingSimulatorPage />} />
+          <Route path="simulator" element={<DrivingSimulatorPage />} />
           <Route path="partner" element={<PartnerPage />} />
           <Route path="mentorji" element={<MentorPage />} />
           <Route path="koledar" element={<CalendarPage />} />

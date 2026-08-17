@@ -23,6 +23,7 @@ export default function Navbar() {
   const navLinks = [
     { name: t('nav.oprojektu'), path: '/o-projektu' },
     { name: t('nav.delavnice'), path: '/delavnice' },
+    { name: t('nav.simulator', 'Simulator vožnje'), path: '/simulator-voznje' },
     { name: t('nav.koledar'), path: '/koledar' },
     { name: t('nav.partner'), path: '/partner' },
     { name: t('nav.mentors'), path: '/mentorji' },
@@ -75,14 +76,14 @@ export default function Navbar() {
           </Link>
           
           {/* Desktop Links with rounded background hover states */}
-          <div className="hidden lg:flex items-center gap-2 font-display font-medium text-sm tracking-wide text-slate-200">
+          <div className="hidden lg:flex items-center gap-1 xl:gap-2 font-display font-medium text-xs xl:text-sm tracking-wide text-slate-200">
             {navLinks.map((link) => {
               const isKoledar = link.path === '/koledar';
               return (
                 <Link 
                   key={link.name} 
                   to={link.path} 
-                  className={`px-4 py-2 rounded-xl transition-all duration-250 font-bold uppercase relative ${
+                  className={`px-2.5 xl:px-3.5 py-1.5 xl:py-2 rounded-xl transition-all duration-250 font-bold uppercase relative ${
                     isKoledar 
                       ? 'text-brand-red animate-pulse bg-brand-red/10 border border-brand-red/30 shadow-[0_0_12px_rgba(222,59,59,0.35)]' 
                       : 'text-slate-300 hover:text-white hover:bg-white/10'
