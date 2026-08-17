@@ -551,26 +551,42 @@ export default function CalendarPage() {
           <div className="play-card p-6 md:p-8 border-2 border-slate-950/10 bg-white shadow-xl relative flex flex-col justify-between">
             <div>
               {/* Calendar Header Navigation */}
-              <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center justify-between mb-4">
                 <h2 className="text-2xl md:text-3.5xl font-display font-black uppercase text-slate-950 select-none">
                   {format(currentMonth, dateFormat, { locale: currentLocale })}
                 </h2>
                 <div className="flex gap-2">
                   <button 
                     onClick={prevMonth}
-                    className="w-11 h-11 border-2 border-slate-200 hover:border-slate-900 rounded-full flex items-center justify-center hover:bg-slate-950 hover:text-white transition-all text-slate-800"
+                    className="w-11 h-11 border-2 border-slate-200 hover:border-slate-900 rounded-full flex items-center justify-center hover:bg-slate-950 hover:text-white transition-all text-slate-800 cursor-pointer"
                     title={isSlovenian ? "Prejšnji mesec" : isIt ? "Mese precedente" : "Previous month"}
                   >
                     <ChevronLeft size={20} className="stroke-[2.5]" />
                   </button>
                   <button 
                     onClick={nextMonth}
-                    className="w-11 h-11 border-2 border-slate-200 hover:border-slate-900 rounded-full flex items-center justify-center hover:bg-slate-950 hover:text-white transition-all text-slate-800"
+                    className="w-11 h-11 border-2 border-slate-200 hover:border-slate-900 rounded-full flex items-center justify-center hover:bg-slate-950 hover:text-white transition-all text-slate-800 cursor-pointer"
                     title={isSlovenian ? "Naslednji mesec" : isIt ? "Mese successivo" : "Next month"}
                   >
                     <ChevronRight size={20} className="stroke-[2.5]" />
                   </button>
                 </div>
+              </div>
+
+              {/* Legend of Workshops - Top of Calendar */}
+              <div className="mb-6 p-3 bg-slate-50 border border-slate-200/80 rounded-2xl flex flex-wrap gap-x-4 gap-y-2 items-center justify-start text-xs text-slate-700 font-bold select-none">
+                <span className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block shadow-sm" />
+                  {isSlovenian ? "Elektronika in dirkač" : isIt ? "Elettronica e bolide" : "Electronics & Racer"}
+                </span>
+                <span className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-brand-red inline-block shadow-sm" />
+                  {isSlovenian ? "Grafenski čip" : isIt ? "Serie chip al grafene" : "Graphene chip series"}
+                </span>
+                <span className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-play-teal inline-block shadow-sm" />
+                  {isSlovenian ? "Natisni in izreži" : isIt ? "Serie stampa e taglia" : "Print & Cut series"}
+                </span>
               </div>
 
               {/* Weekdays Row */}
@@ -641,22 +657,6 @@ export default function CalendarPage() {
                   );
                 })}
               </div>
-            </div>
-
-            {/* Quick Map & Directions Tip */}
-            <div className="mt-8 pt-4 border-t border-slate-200 flex flex-wrap gap-4 items-center justify-between text-xs text-slate-700 font-bold select-none">
-              <span className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block" />
-                {isSlovenian ? "Elektronika in dirkač" : isIt ? "Elettronica e bolide" : "Electronics & Racer"}
-              </span>
-              <span className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-brand-red inline-block" />
-                {isSlovenian ? "Grafenski čip" : isIt ? "Serie chip al grafene" : "Graphene chip series"}
-              </span>
-              <span className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-play-teal inline-block" />
-                {isSlovenian ? "Natisni in izreži" : isIt ? "Serie stampa e taglia" : "Print & Cut series"}
-              </span>
             </div>
           </div>
 
