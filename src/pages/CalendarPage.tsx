@@ -174,7 +174,7 @@ const getLocalizedEvents = (lang: string): Event[] => {
     description: item.description,
     ageGroup: ageText,
     mentors: isSl ? 'Start Lab ekipa' : isIt ? 'Team Start Lab' : 'Start Lab Team',
-    image: 'https://res.cloudinary.com/dssxhjk8k/image/upload/v1786692547/elektronika_hiap6z.jpg'
+    image: 'https://res.cloudinary.com/dssxhjk8k/image/upload/v1786955456/elektronika2_gqkovv.jpg'
   }));
 
   const rawGrapheneEvents = [
@@ -374,7 +374,7 @@ const getLocalizedEvents = (lang: string): Event[] => {
     image: 'https://res.cloudinary.com/dssxhjk8k/image/upload/v1784205182/Natisni_in_izrezi_el6yqu.jpg'
   }));
 
-  return [...grapheneEvents, ...printCutEvents];
+  return [...racerEvents, ...grapheneEvents, ...printCutEvents];
 };
 
 export default function CalendarPage() {
@@ -438,7 +438,7 @@ export default function CalendarPage() {
   const events = getLocalizedEvents(i18n.language);
   const selectedDayEvents = selectedDate 
     ? events.filter(event => isSameDay(event.date, selectedDate))
-    : events.filter(event => event.id === 'graphene-session-1' || event.id === 'printcut-session-1');
+    : events.filter(event => event.id === 'racer-session-1' || event.id === 'graphene-session-1' || event.id === 'printcut-session-1');
 
   const isSlovenian = i18n.language !== 'en' && i18n.language !== 'it';
   const isIt = i18n.language === 'it';
@@ -646,16 +646,16 @@ export default function CalendarPage() {
             {/* Quick Map & Directions Tip */}
             <div className="mt-8 pt-4 border-t border-slate-200 flex flex-wrap gap-4 items-center justify-between text-xs text-slate-700 font-bold select-none">
               <span className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block" />
+                {isSlovenian ? "Elektronika in dirkač" : isIt ? "Elettronica e bolide" : "Electronics & Racer"}
+              </span>
+              <span className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-brand-red inline-block" />
                 {isSlovenian ? "Grafenski čip" : isIt ? "Serie chip al grafene" : "Graphene chip series"}
               </span>
               <span className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-play-teal inline-block" />
                 {isSlovenian ? "Natisni in izreži" : isIt ? "Serie stampa e taglia" : "Print & Cut series"}
-              </span>
-              <span className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-slate-400 inline-block" />
-                {isSlovenian ? "Spremljevalne delavnice" : isIt ? "Altri workshop" : "Other workshops"}
               </span>
             </div>
           </div>
