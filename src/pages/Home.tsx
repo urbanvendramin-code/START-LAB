@@ -12,7 +12,9 @@ import {
   Boxes,
   ArrowRight,
   Info,
-  Mail
+  Mail,
+  Zap,
+  Calendar as CalendarIcon
 } from 'lucide-react';
 import { LAB_EQUIPMENT } from '../constants';
 import fablabSpaceImage from '../assets/images/fablab_space_1781078255061.png';
@@ -73,10 +75,72 @@ export default function Home() {
               </span>
             </h1>
             
-            <p className="text-base sm:text-lg md:text-xl text-slate-600 mb-8 md:mb-10 max-w-xl leading-relaxed font-medium">
+            <p className="text-base sm:text-lg md:text-xl text-slate-600 mb-6 md:mb-8 max-w-xl leading-relaxed font-medium">
               {t('hero.subtitle')}
             </p>
             
+            {/* Featured Active Workshop Card: Elektronski dirkač */}
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.15, duration: 0.5 }}
+              className="mb-8 p-3.5 sm:p-4 rounded-[1.8rem] sm:rounded-[2rem] bg-gradient-to-br from-amber-500/10 via-amber-500/5 to-white border-2 border-amber-500/30 shadow-lg shadow-amber-500/5 relative overflow-hidden group"
+            >
+              <div className="flex flex-col sm:flex-row gap-3.5 sm:gap-4 items-center">
+                <div className="w-full sm:w-36 h-28 sm:h-28 rounded-2xl overflow-hidden shrink-0 border-2 border-amber-300/60 shadow-sm relative">
+                  <img
+                    src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1786955456/elektronika2_gqkovv.jpg"
+                    alt="Elektronski dirkač"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <span className="absolute top-1.5 left-1.5 bg-emerald-600 text-white font-display font-black text-[9px] uppercase px-2 py-0.5 rounded-full shadow-sm">
+                    ⚡ {isSlovenian ? "Prijave odprte" : isItalian ? "Iscrizioni aperte" : "Open"}
+                  </span>
+                </div>
+
+                <div className="flex-1 text-left w-full">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-[10px] font-display font-black uppercase tracking-wider text-amber-700 bg-amber-200/70 px-2 py-0.5 rounded-full">
+                      {isSlovenian ? "Razpisana delavnica" : isItalian ? "Nuovo workshop" : "Featured Workshop"}
+                    </span>
+                    <span className="text-[11px] font-bold text-slate-500 flex items-center gap-1">
+                      <CalendarIcon size={12} className="text-amber-600 shrink-0" />
+                      {isSlovenian ? "Od 17. 9. 2026 (ob četrtkih)" : isItalian ? "Dal 17/09/2026 (ogni giovedì)" : "From Sept 17, 2026 (Thursdays)"}
+                    </span>
+                  </div>
+
+                  <h3 className="font-display font-black text-slate-950 text-sm sm:text-base leading-snug mb-1 group-hover:text-brand-red transition-colors">
+                    {isSlovenian 
+                      ? "Spoznaj svet elektronike in izdelaj svojega prvega dirkača!" 
+                      : isItalian 
+                        ? "Scopri il Mondo dell'Elettronica e Costruisci il tuo Primo Bolide!" 
+                        : "Discover the World of Electronics & Build Your First Racer!"}
+                  </h3>
+
+                  <p className="text-[11px] sm:text-xs text-slate-600 font-semibold line-clamp-2 mb-2 leading-relaxed">
+                    {isSlovenian
+                      ? "Razstavi naprave, spoznaj delovanje komponent in vezij ter sestavi svojega delujočega elektronskega dirkača (8 x 2 uri • 20 €)."
+                      : isItalian
+                        ? "Smonta dispositivi, scopri i circuiti e costruisci la tua auto da corsa elettronica da portare a casa (8 x 2 ore • 20 €)."
+                        : "Disassemble devices, explore circuits, and build your own working electronic race car (8 x 2 hours • 20 €)."}
+                  </p>
+
+                  <div className="flex items-center justify-between flex-wrap gap-2 pt-1 border-t border-amber-200/50">
+                    <span className="text-[11px] font-extrabold text-slate-700">
+                      📍 Start Lab, Solkan • <strong className="text-emerald-700 font-black">20 € (16 ur)</strong>
+                    </span>
+                    <Link
+                      to="/koledar"
+                      className="inline-flex items-center gap-1.5 text-xs font-display font-black uppercase text-brand-red hover:text-slate-950 transition-colors"
+                    >
+                      {isSlovenian ? "Prijavi se na delavnico" : isItalian ? "Iscriviti ora" : "Register now"} <ArrowRight size={14} className="stroke-[3]" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8">
               <Link to="/delavnice" className="btn-primary shadow-lg text-center flex items-center justify-center">
                 {t('hero.cta')} <ChevronRight size={22} className="stroke-[3]" />
