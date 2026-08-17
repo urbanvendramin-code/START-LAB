@@ -39,8 +39,8 @@ export default function Navbar() {
   return (
     <>
       {/* Top Banner (Interreg Logo) - White Background */}
-      <div className="bg-white border-b border-slate-200/60 px-4 sm:px-6 py-2 sm:py-3 flex items-center justify-center relative z-40 w-full">
-        <div className="max-w-7xl mx-auto w-full flex justify-center">
+      <div className="bg-white border-b border-slate-200/60 px-4 sm:px-6 lg:px-8 py-2 sm:py-3 flex items-center justify-center relative z-40 w-full">
+        <div className="max-w-[1600px] mx-auto w-full flex justify-center">
           <Link 
             to="/" 
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -56,11 +56,11 @@ export default function Navbar() {
       </div>
 
       {/* Main Header (Start Lab Logo & Navigation) - Black Background */}
-      <div className="bg-slate-950 border-b border-slate-900 px-4 sm:px-6 sticky top-0 z-50 shadow-md relative">
-        <div className="max-w-7xl mx-auto min-h-16 xs:min-h-20 lg:min-h-24 py-2.5 lg:py-2 flex items-center justify-between w-full">
+      <div className="bg-slate-950 border-b border-slate-900 px-4 sm:px-6 lg:px-8 sticky top-0 z-50 shadow-md relative">
+        <div className="max-w-[1600px] mx-auto min-h-16 xs:min-h-20 lg:min-h-22 py-2.5 lg:py-2 flex items-center justify-between w-full gap-2 xl:gap-6">
           <Link 
             to="/" 
-            className="flex items-center justify-center relative group py-1" 
+            className="flex items-center justify-center relative group py-1 shrink-0" 
             onClick={() => {
               setIsOpen(false);
               window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -70,20 +70,20 @@ export default function Navbar() {
             <img 
               src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1779890069/LOGO3_eswysi.png" 
               alt="Start Lab Logo" 
-              className="w-36 xs:w-44 sm:w-48 md:w-52 lg:w-64 h-auto object-contain relative z-10"
+              className="w-36 xs:w-44 sm:w-48 md:w-52 lg:w-44 xl:w-52 2xl:w-60 h-auto object-contain relative z-10"
               referrerPolicy="no-referrer"
             />
           </Link>
           
           {/* Desktop Links with rounded background hover states */}
-          <div className="hidden lg:flex items-center gap-1 xl:gap-2 font-display font-medium text-xs xl:text-sm tracking-wide text-slate-200">
+          <div className="hidden lg:flex items-center justify-center gap-1 xl:gap-1.5 2xl:gap-2.5 font-display font-medium tracking-wide text-slate-200 flex-nowrap">
             {navLinks.map((link) => {
               const isKoledar = link.path === '/koledar';
               return (
                 <Link 
                   key={link.name} 
                   to={link.path} 
-                  className={`px-2.5 xl:px-3.5 py-1.5 xl:py-2 rounded-xl transition-all duration-250 font-bold uppercase relative ${
+                  className={`whitespace-nowrap px-2.5 xl:px-3 2xl:px-3.5 py-1.5 xl:py-2 rounded-xl transition-all duration-200 font-bold uppercase text-[11px] xl:text-xs 2xl:text-sm relative shrink-0 ${
                     isKoledar 
                       ? 'text-brand-red animate-pulse bg-brand-red/10 border border-brand-red/30 shadow-[0_0_12px_rgba(222,59,59,0.35)]' 
                       : 'text-slate-300 hover:text-white hover:bg-white/10'
@@ -102,19 +102,19 @@ export default function Navbar() {
           </div>
    
           {/* Desktop Language & CTA */}
-          <div className="hidden lg:flex items-center gap-4">
-            <div className="flex gap-2 bg-slate-900/60 p-1.5 rounded-2xl border border-slate-800">
+          <div className="hidden lg:flex items-center gap-3 shrink-0">
+            <div className="flex gap-1.5 bg-slate-900/60 p-1.5 rounded-2xl border border-slate-800 shrink-0">
                {languages.map((lang) => (
                  <button 
                    key={lang.code}
                    onClick={() => i18n.changeLanguage(lang.code)}
-                   className={`text-xs font-bold transition-all px-3 py-1.5 rounded-xl flex items-center gap-2 ${i18n.language === lang.code ? 'bg-brand-red text-white shadow-md' : 'text-slate-300 hover:text-white hover:bg-white/10'}`}
+                   className={`whitespace-nowrap text-xs font-bold transition-all px-2.5 xl:px-3 py-1.5 rounded-xl flex items-center gap-1.5 cursor-pointer ${i18n.language === lang.code ? 'bg-brand-red text-white shadow-md font-black' : 'text-slate-300 hover:text-white hover:bg-white/10'}`}
                    title={lang.name}
                  >
                    <img 
                      src={lang.flagUrl} 
                      alt={`${lang.name} flag`} 
-                     className="w-4 h-3 object-cover rounded-sm border border-white/20" 
+                     className="w-4 h-3 object-cover rounded-sm border border-white/20 shrink-0" 
                      referrerPolicy="no-referrer"
                    />
                    {lang.name}
