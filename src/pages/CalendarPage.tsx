@@ -464,7 +464,7 @@ export default function CalendarPage() {
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email) return;
+    if (!formData.name || !formData.email || !formData.phone || !formData.age) return;
 
     if (formData.referralSource === 'drugo' && !formData.referralSourceOther.trim()) {
       return;
@@ -1587,10 +1587,11 @@ export default function CalendarPage() {
                       <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-1">
                           <label className="text-xs font-display font-black uppercase tracking-wider text-slate-800">
-                            {isSlovenian ? "Telefon:" : isIt ? "Telefono:" : "Phone:"}
+                            {isSlovenian ? "Telefon:" : isIt ? "Telefono:" : "Phone:"} <span className="text-brand-red">*</span>
                           </label>
                           <input
                             type="tel"
+                            required
                             value={formData.phone}
                             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                             placeholder={isSlovenian ? "040 123 456..." : isIt ? "040 123 456..." : "+386..."}
@@ -1599,10 +1600,11 @@ export default function CalendarPage() {
                         </div>
                         <div className="space-y-1">
                           <label className="text-xs font-display font-black uppercase tracking-wider text-slate-800">
-                            {isSlovenian ? "Starost (leta):" : isIt ? "Età (anni):" : "Age (years):"}
+                            {isSlovenian ? "Starost (leta):" : isIt ? "Età (anni):" : "Age (years):"} <span className="text-brand-red">*</span>
                           </label>
                           <input
                             type="number"
+                            required
                             value={formData.age}
                             onChange={(e) => setFormData({ ...formData, age: e.target.value })}
                             placeholder={isSlovenian ? "npr. 12" : isIt ? "es. 12" : "e.g. 12"}
@@ -1647,9 +1649,10 @@ export default function CalendarPage() {
                         <div className="space-y-2">
                           <div className="space-y-1">
                             <label className="text-xs font-display font-black uppercase tracking-wider text-slate-800">
-                              {isSlovenian ? "Kje si izvedel/a za delavnico?" : isIt ? "Come sei venuto/a a conoscenza del workshop?" : "Where did you hear about the workshop?"}
+                              {isSlovenian ? "Kje si izvedel/a za delavnico?" : isIt ? "Come sei venuto/a a conoscenza del workshop?" : "Where did you hear about the workshop?"} <span className="text-brand-red">*</span>
                             </label>
                             <select
+                              required
                               value={formData.referralSource}
                               onChange={(e) => setFormData({ 
                                 ...formData, 
