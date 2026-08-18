@@ -352,6 +352,10 @@
   "talent_developers": {
     "title": "Razvijalci talentov",
     "subtitle": "Razvijalci talentov so podjetja in posamezniki, ki želijo biti prepoznani med mladimi talenti, jim približati svoje dejavnosti in priložnosti ter graditi ugled s prispevanjem k razvoju prihodnjih strokovnjakov, inovacij in regije.",
+    "mapetrol": {
+      "role": "💎 Platinasti razvijalec talentov – Strateg",
+      "desc": "Mapetrol je slovensko podjetje s primorskimi koreninami in sedežem v Mariboru, ki razvija in proizvaja napredna maziva za avtomobilske, motociklistične, dirkaške in industrijske aplikacije. Podjetje povezuje lasten razvoj izdelkov, proizvodnjo, prepoznaven dizajn ter tesno sodelovanje z dirkači, s katerimi svoje rešitve preizkuša tudi v najzahtevnejših pogojih. Posebno mesto v njegovem razvoju ima tehnologija WS₂+, namenjena zmanjševanju trenja ter zaščiti motorjev pri ekstremnih temperaturah in obremenitvah, uporabljena tudi v specializiranih oljih za karting, drift, motokros in visokozmogljive motorje. Mapetrol svojo tehnično usmerjenost združuje z močnim poudarkom na oblikovanju – od razvoja embalaže in etiket do celovite predstavitve izdelkov – ter z mednarodnimi partnerstvi, med katerimi izstopa sodelovanje z znamko Sparco. Ker podjetje verjame, da se najboljše rešitve razvijejo tam, kjer se prepletajo znanje, izkušnje, drznost in resnične ekstremne preizkušnje, z veseljem podpira Start Lab projekt."
+    },
     "itech": {
       "role": "🥇 Zlati razvijalec talentov – Pospeševalec",
       "desc": "Instrumentation Technologies je Solkansko visoko-tehnološko podjetje, ki razvija instrumente za visoko hitrostni zajem in obdelavo signalov ter SDR rešitve z nizko latenco. Njihove instrumente uporabljajo vodilni raziskovalni inštituti in industrijske organizacije v tehnološko najzahtevnejših okoljih na svetu, kot so pospeševalniki delcev, nevtronska diagnostika, sistemi za razsoljevanje vode in kvantne tehnologije. Podjetje je bilo ustanovljeno leta 1998 in danes zaposluje približno 60 strokovnjakov. Združuje multidisciplinarno znanje s področij elektronike, FPGA razvoja, obdelave signalov in sistemske integracije."

@@ -657,6 +657,15 @@ export default function PartnerPage() {
                 <div className="grid grid-cols-1 gap-8 text-left">
                     {[
                       { 
+                        name: "Mapetrol",
+                        role: t('talent_developers.mapetrol.role'),
+                        image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1786990580/Mapetrol_R_ucpreo.png",
+                        bg: "bg-play-blue/5 border-play-blue/15 hover:border-play-blue/35 text-play-blue hover:scale-[1.01]", 
+                        badgeColor: "bg-play-blue/12 text-play-blue",
+                        desc: t('talent_developers.mapetrol.desc'),
+                        href: "https://www.mapetrol.eu/si/"
+                      },
+                      { 
                         name: "Shelly Group",
                         role: t('talent_developers.shelly.role'),
                         image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781073944/shelly_logo_blue_240x140_1_vglthl.png",

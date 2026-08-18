@@ -352,6 +352,10 @@
   "talent_developers": {
     "title": "Talent Developers",
     "subtitle": "Talent developers are companies and individuals who want to be recognized among young talents, introduce their activities and opportunities to them, and build their reputation by contributing to the development of future experts, innovation, and the region.",
+    "mapetrol": {
+      "role": "💎 Platinum Talent Developer – Strategist",
+      "desc": "Mapetrol is a Slovenian company with roots in the Littoral region and headquarters in Maribor, developing and manufacturing advanced lubricants for automotive, motorcycle, racing, and industrial applications. The company connects in-house product development, manufacturing, distinctive design, and close cooperation with racers, with whom solutions are tested under the most demanding conditions. A special place in its development is held by WS₂+ technology, dedicated to reducing friction and protecting engines under extreme temperatures and loads, also used in specialized oils for karting, drift, motocross, and high-performance engines. Mapetrol combines technical focus with a strong emphasis on design—from packaging and label development to comprehensive product presentation—and international partnerships, notably with the Sparco brand. Believing that the best solutions are created where knowledge, experience, boldness, and real-world extreme testing meet, Mapetrol proudly supports the Start Lab project."
+    },
     "itech": {
       "role": "🥇 Gold Talent Developer – Accelerator",
       "desc": "Instrumentation Technologies is a Solkan-based high-tech company that develops instruments for high-speed signal acquisition and processing, and low-latency SDR solutions. Their instruments are used by leading research institutes and industrial organizations in the most technologically demanding environments in the world, such as particle accelerators, neutron diagnostics, water desalination systems, and quantum technologies. Founded in 1998, the company currently employs around 60 experts, combining multidisciplinary knowledge in electronics, FPGA development, signal processing, and system integration."
