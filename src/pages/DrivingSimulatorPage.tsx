@@ -122,6 +122,32 @@ export default function DrivingSimulatorPage() {
           >
             {t('simulator_page.subtitle')}
           </motion.p>
+
+          {/* Mapetrol Partner Logo */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25 }}
+            className="mt-8 flex flex-col items-center justify-center gap-2"
+          >
+            <span className="text-xs font-display font-black uppercase tracking-widest text-slate-400">
+              {isSlovenian ? "V sodelovanju z" : isIt ? "In collaborazione con" : "In partnership with"}
+            </span>
+            <a 
+              href="https://www.mapetrol.eu/si/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="inline-flex items-center hover:opacity-80 transition-transform duration-200 hover:scale-105 py-1"
+              title="Mapetrol"
+            >
+              <img 
+                src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1786990580/Mapetrol_R_ucpreo.png" 
+                alt="Mapetrol Logo" 
+                className="h-20 sm:h-24 md:h-28 w-auto max-w-[340px] sm:max-w-[420px] object-contain brightness-0 contrast-200" 
+                referrerPolicy="no-referrer"
+              />
+            </a>
+          </motion.div>
         </div>
 
         {/* TOP VIDEO PRESENTATION - Clean looping video without text or black letterbox space */}
