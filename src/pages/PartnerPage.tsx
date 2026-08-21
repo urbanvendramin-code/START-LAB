@@ -30,6 +30,60 @@ interface DeveloperCompany {
   links?: { label: string; href: string }[];
 }
 
+interface CarouselPartner {
+  name: string;
+  logo: string;
+  href?: string;
+}
+
+const PARTNER_CAROUSEL_LOGOS: CarouselPartner[] = [
+  {
+    name: "Mapetrol",
+    logo: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1786990580/Mapetrol_R_ucpreo.png",
+    href: "https://www.mapetrol.eu/si/"
+  },
+  {
+    name: "Shelly Group",
+    logo: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781073944/shelly_logo_blue_240x140_1_vglthl.png",
+    href: "https://www.shelly.com/"
+  },
+  {
+    name: "Instrumentation Technologies",
+    logo: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1782203295/it_a7jglx.png",
+    href: "http://www.i-tech.si/"
+  },
+  {
+    name: "KA3",
+    logo: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781082903/KA3_vector_xmx4id.png",
+    href: "https://www.ka3.si/"
+  },
+  {
+    name: "SIQ Ljubljana",
+    logo: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1780579720/SIQ_logo_RGB_brez_www_ue0l5s.png",
+    href: "https://www.siq.si/"
+  },
+  {
+    name: "Gorenje",
+    logo: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781074497/gorenje_logo_k41vil.png",
+    href: "https://si.gorenje.com/"
+  },
+  {
+    name: "Hisense",
+    logo: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781074484/hisense_logo_positive_meoei1.png",
+    href: "https://si.hisense.com/"
+  },
+  {
+    name: "A2R",
+    logo: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781097985/a2r_logo_pcnykd.png",
+    href: "https://a2r.si"
+  },
+  {
+    name: "Amiteh / Rigol",
+    logo: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781532221/AMITEH-RIgol_15_LET_qzngpj.png",
+    href: "http://www.amiteh.com/"
+  }
+];
+
 function DeveloperCompanyCard({ company }: { company: DeveloperCompany; key?: any }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const { t } = useTranslation();
@@ -265,9 +319,57 @@ export default function PartnerPage() {
   };
 
   return (
-    <div className="pt-8 sm:pt-12 md:pt-16 pb-20 px-4 md:px-6 relative">
+    <div className="pt-4 sm:pt-8 md:pt-12 pb-20 px-4 md:px-6 relative">
       <div className="max-w-7xl mx-auto">
         
+        {/* Infinite Logo Carousel Ribbon / Pasica z logotipi partnerjev */}
+        <div className="mb-12 sm:mb-16">
+          <div className="text-center mb-4">
+            <span className="text-[11px] font-display font-black uppercase tracking-widest text-slate-400">
+              {isSlovenian ? "Naši partnerji in razvijalci talentov" : isIt ? "I nostri partner e sviluppatori di talenti" : "Our partners & talent developers"}
+            </span>
+          </div>
+
+          <div className="relative w-full overflow-hidden rounded-[2rem] bg-white border-2 border-slate-200/80 shadow-[0_8px_30px_rgba(15,23,42,0.03)] py-4 sm:py-5">
+            {/* Left & Right gradient fade masks */}
+            <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-28 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
+            <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-28 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
+            
+            <div className="animate-marquee items-center gap-8 sm:gap-14">
+              {/* Double list to create seamless infinite loop */}
+              {[...PARTNER_CAROUSEL_LOGOS, ...PARTNER_CAROUSEL_LOGOS].map((partner, index) => {
+                const content = (
+                  <div className="h-12 sm:h-14 md:h-16 w-32 sm:w-40 flex items-center justify-center px-3 group transition-transform duration-200 hover:scale-110">
+                    <img 
+                      src={partner.logo} 
+                      alt={partner.name}
+                      title={partner.name}
+                      className="max-h-full max-w-full object-contain grayscale opacity-75 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                );
+
+                return partner.href ? (
+                  <a 
+                    key={index} 
+                    href={partner.href} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="inline-flex items-center justify-center cursor-pointer"
+                  >
+                    {content}
+                  </a>
+                ) : (
+                  <div key={index} className="inline-flex items-center justify-center">
+                    {content}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
         {/* Elegant interactive 2-pillar community cards switcher conforming to visual/graphic rules */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-20 max-w-5xl mx-auto">
           {/* Card 1: Razvijalci Talentov */}

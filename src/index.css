@@ -50,3 +50,28 @@
 .wave-divider {
   @apply block w-full h-[60px] md:h-[100px] pointer-events-none;
 }
+
+/* Infinite Marquee Ticker Animation - Hardware Accelerated & 60fps Ultra Smooth */
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  animation: marquee 38s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
