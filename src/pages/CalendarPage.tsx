@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { 
   format, 
   addMonths, 
@@ -1726,13 +1727,27 @@ export default function CalendarPage() {
                       </div>
 
                       {/* Agreement Check text */}
-                      <p className="text-[10px] text-slate-600 font-bold leading-relaxed">
-                        {isSlovenian 
-                          ? "Z oddajo obrazca se strinjate, da Start Lab uporabi vaše podatke za namen koordinacije in izvedbe izbrane delavnice skladno s Pogoji uporabe."
-                          : isIt
-                            ? "Inviando questo modulo, autorizzi Start Lab a conservare e trattare i tuoi dati personali per il coordinamento e la corretta esecuzione di questa serie di workshop."
-                            : "By submitting this form, you authorize Start Lab to hold and process your personal data for coordination and safe physical execution of this workshop series."}
-                      </p>
+                      <div className="space-y-1.5 text-[10px] text-slate-600 font-bold leading-relaxed">
+                        <p>
+                          {isSlovenian 
+                            ? (
+                              <>
+                                Osebne podatke obdelujemo za namen izvedbe delavnic. Podrobnejše informacije o obdelavi osebnih podatkov so na voljo v <Link to="/zasebnost" target="_blank" className="text-brand-red underline hover:text-slate-950 font-black">Politiki zasebnosti na startlab.si</Link>.
+                              </>
+                            )
+                            : isIt
+                              ? (
+                                <>
+                                  I dati personali vengono trattati ai fini dello svolgimento dei workshop. Informazioni più dettagliate sul trattamento dei dati personali sono disponibili nella <Link to="/zasebnost" target="_blank" className="text-brand-red underline hover:text-slate-950 font-black">Politica sulla privacy su startlab.si</Link>.
+                                </>
+                              )
+                              : (
+                                <>
+                                  Personal data is processed for the purpose of conducting workshops. More detailed information on data processing is available in the <Link to="/zasebnost" target="_blank" className="text-brand-red underline hover:text-slate-950 font-black">Privacy Policy on startlab.si</Link>.
+                                </>
+                              )}
+                        </p>
+                      </div>
 
                       <div className="pt-2 flex gap-3">
                         <button
