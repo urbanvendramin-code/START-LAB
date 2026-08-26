@@ -1,0 +1,14 @@
+{
+  "sid_w1gf3imok_mt9ox6ir": {
+    "sessionId": "sid_w1gf3imok_mt9ox6ir",
+    "ipHash": "ODkuMjEyLj",
+    "firstSeen": 1787724352228,
+    "lastSeen": 1787724914357,
+    "durationSeconds": 562,
+    "pages": {
+      "/": 2,
+      "/simulator-voznje": 1
+    },
+    "dateCreated": "2026-08-26"
+  }
+}

@@ -456,40 +456,94 @@ export default function DrivingSimulatorPage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Package 1 */}
+            {/* Package 1 - Osnove varne vožnje za mlade v sodelovanju s Šolo vožnje Andrej */}
             <motion.div
               whileHover={{ y: -6 }}
-              className="p-8 rounded-[2.5rem] bg-white border-2 border-slate-100 shadow-sm hover:shadow-xl hover:border-play-blue/20 transition-all flex flex-col justify-between"
+              className="p-8 rounded-[2.5rem] bg-white border-2 border-slate-100 shadow-sm hover:shadow-xl hover:border-play-blue/30 transition-all flex flex-col justify-between"
             >
               <div>
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-play-blue bg-play-blue/10 px-3 py-1 rounded-full inline-block mb-4">
-                  {t('simulator_page.prog1_tag')}
-                </span>
+                <div className="flex items-center justify-between gap-3 mb-4">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-play-blue bg-play-blue/10 px-3 py-1 rounded-full inline-block">
+                    {t('simulator_page.prog1_tag')}
+                  </span>
+                  <img 
+                    src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1787724766/AndrejSV_logo_c3ncse.png" 
+                    alt="Šola vožnje Andrej" 
+                    className="h-9 w-auto max-w-[130px] object-contain"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+
                 <h3 className="text-xl font-display font-black uppercase text-slate-900 mb-3">
                   {t('simulator_page.prog1_title')}
                 </h3>
-                <p className="text-xs text-slate-600 font-semibold leading-relaxed mb-6">
-                  {t('simulator_page.prog1_desc')}
+
+                <p className="text-xs text-slate-700 font-medium leading-relaxed mb-4">
+                  {isSlovenian ? (
+                    <>
+                      <strong>Šola vožnje Andrej</strong> svojim bodočim kandidatom omogoča dodatno izkušnjo pri učenju vožnje – s pomočjo sodobnega simulatorja vožnje!
+                    </>
+                  ) : isIt ? (
+                    <>
+                      L'<strong>Autoscuola Andrej</strong> offre ai suoi futuri allievi un'esperienza di guida avanzata grazie a un simulatore professionale di ultima generazione!
+                    </>
+                  ) : (
+                    <>
+                      <strong>Driving School Andrej</strong> provides prospective driver candidates with advanced hands-on preparation through a modern driving simulator!
+                    </>
+                  )}
                 </p>
-                <ul className="space-y-2.5 text-xs text-slate-600 font-medium">
+
+                <p className="text-xs text-slate-600 font-semibold leading-relaxed mb-4">
+                  {isSlovenian 
+                    ? "Vadite reakcije, občutek za vožnjo in različne prometne situacije v varnem in nadzorovanem okolju."
+                    : isIt 
+                      ? "Allena riflessi, sensibilità di guida e svariate situazioni di traffico in un ambiente completamente sicuro e controllato."
+                      : "Practice reactions, vehicle feel, and diverse traffic scenarios in a safe and controlled environment."}
+                </p>
+
+                <div className="p-3 bg-play-blue/5 border border-play-blue/15 rounded-2xl mb-4">
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 size={16} className="text-play-blue shrink-0 mt-0.5" />
+                    <p className="text-xs font-bold text-slate-800 leading-snug">
+                      {isSlovenian 
+                        ? "Za bodoče voznike – več samozavesti in priprave na pravo vožnjo"
+                        : isIt 
+                          ? "Per i futuri guidatori – maggiore sicurezza e preparazione alla guida reale"
+                          : "For future drivers – greater confidence and real-world driving readiness"}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="p-3 bg-slate-900 text-white rounded-2xl mb-6">
+                  <p className="text-[10px] font-display font-black uppercase tracking-wider text-center text-amber-400 leading-snug">
+                    {isSlovenian
+                      ? "EDINSTVENA IZKUŠNJA IN VOŽNJA PRIHODNOSTI SE ZAČNE Z ŠOLO VOŽNJE ANDREJ"
+                      : isIt
+                        ? "UN'ESPERIENZA UNICA E LA GUIDA DEL FUTURO INIZIA CON L'AUTOSCUOLA ANDREJ"
+                        : "A UNIQUE EXPERIENCE AND THE FUTURE OF DRIVING STARTS WITH DRIVING SCHOOL ANDREJ"}
+                  </p>
+                </div>
+
+                <ul className="space-y-2 text-xs text-slate-600 font-medium">
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 size={16} className="text-play-blue shrink-0" />
-                    <span>Zaviranje v sili in reakcijski čas</span>
+                    <CheckCircle2 size={15} className="text-play-blue shrink-0" />
+                    <span>{isSlovenian ? "Zaviranje v sili in reakcijski čas" : isIt ? "Frenata d'emergenza e tempo di reazione" : "Emergency braking & reaction time"}</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 size={16} className="text-play-blue shrink-0" />
-                    <span>Predvidevanje nevarnih situacij</span>
+                    <CheckCircle2 size={15} className="text-play-blue shrink-0" />
+                    <span>{isSlovenian ? "Predvidevanje nevarnih prometnih situacij" : isIt ? "Previsione di situazioni di pericolo" : "Hazard anticipation in traffic"}</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 size={16} className="text-play-blue shrink-0" />
-                    <span>Spoznavanje obnašanja vozila</span>
+                    <CheckCircle2 size={15} className="text-play-blue shrink-0" />
+                    <span>{isSlovenian ? "Spoznavanje obnašanja in dinamike vozila" : isIt ? "Dinamica del veicolo e confidenza di guida" : "Vehicle dynamics & control"}</span>
                   </li>
                 </ul>
               </div>
               <a 
                 href="#povprasevanje" 
                 onClick={() => setFormData(prev => ({ ...prev, programType: 'Osnove varne vožnje za mlade' }))}
-                className="mt-8 w-full py-3 rounded-2xl bg-slate-100 hover:bg-play-blue hover:text-white text-slate-900 font-display font-black text-xs uppercase tracking-wider text-center transition-all"
+                className="mt-8 w-full py-3 rounded-2xl bg-slate-100 hover:bg-play-blue hover:text-white text-slate-900 font-display font-black text-xs uppercase tracking-wider text-center transition-all cursor-pointer"
               >
                 Izberi program
               </a>
