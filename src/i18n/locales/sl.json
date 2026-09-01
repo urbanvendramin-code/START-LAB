@@ -148,6 +148,12 @@
       "label": "Izobraževalni partner",
       "desc": "LUNG je izobraževalno središče za vse generacije. Kot izvajalka številnih projektov v lokalno okolje prinaša brezplačna izobraževanja, delavnice in različne oblike podpore za prebivalce naše regije. Nekatere vsebine, ki jih že ponuja v okviru svojih projektov, bo dodatno nadgradila in prilagodila za izvajanje v Start Labu ter dodatno skrbela za promocijo njegovega programa in aktivnosti."
     },
+    "item_spgz": {
+      "name": "SPGZ",
+      "fullName": "Severno Primorska gospodarska zbornica",
+      "label": "Gospodarski partner",
+      "desc": "Severno Primorska gospodarska zbornica povezuje gospodarstvo in izobraževanje ter spodbuja razvoj prihodnjih kadrov. S StartLab sodelujemo pri organizaciji dogodkov, povezovanju šol in podjetij ter iskanju mentorjev in partnerjev iz gospodarstva za izobraževalne in podjetniške projekte. Skupaj mladim približujemo poslovni svet in krepimo njihove kompetence za prihodnost."
+    },
     "for_companies": {
       "title": "Za podjetja",
       "desc": "Vabimo podjetja k soustvarjanju delavnic, team-buildingom in naložbi v prihodnje kadre regije. Postanite del odprtega razvojnega okolja na Goriškem.",

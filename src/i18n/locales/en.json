@@ -148,6 +148,12 @@
       "label": "Educational Partner",
       "desc": "LUNG is an educational center for all generations. As an implementer of numerous projects, it brings free education, workshops, and various forms of support for the residents of our region to the local environment. Some of the content already offered within its projects will be further upgraded and adapted for execution at Start Lab, while also helping promote its program and activities."
     },
+    "item_spgz": {
+      "name": "SPGZ",
+      "fullName": "Northern Primorska Chamber of Commerce and Industry",
+      "label": "Economic Partner",
+      "desc": "The Northern Primorska Chamber of Commerce and Industry connects business and education and fosters the development of future talent. We cooperate with StartLab in organizing events, linking schools and companies, and identifying mentors and business partners for educational and entrepreneurial projects. Together, we bring young people closer to the business world and strengthen their competencies for the future."
+    },
     "for_companies": {
       "title": "For Companies",
       "desc": "We invite companies to co-create workshops, team-buildings and invest in the region's future personnel. Become part of the open developmental environment in Goriška.",

@@ -148,6 +148,12 @@
       "label": "Partner Didattico",
       "desc": "LUNG è un centro educativo per tutte le generazioni. Come promotore di numerosi progetti, porta nell'ambiente locale formazione gratuita, workshop e varie forme di supporto per gli abitanti della nostra regione. Alcuni dei contenuti già offerti nell'ambito dei suoi progetti saranno ulteriormente potenziati e adattati per le attività in Start Lab, contribuendo anche alla promozione del suo programma e delle sue iniziative."
     },
+    "item_spgz": {
+      "name": "SPGZ",
+      "fullName": "Camera dell'Economia della Primorska Settentrionale",
+      "label": "Partner Economico",
+      "desc": "La Camera dell'Economia della Primorska Settentrionale collega l'economia e l'istruzione e promuove lo sviluppo dei talenti futuri. Collaboriamo con StartLab nell'organizzazione di eventi, nel collegamento tra scuole e imprese e nella ricerca di mentori e partner dal mondo economico per progetti educativi e imprenditoriali. Insieme avviciniamo i giovani al mondo del lavoro e rafforziamo le loro competenze per il futuro."
+    },
     "for_companies": {
       "title": "Per le Aziende",
       "desc": "Invitiamo le aziende a co-creare workshop, team-building e investire nel futuro personale della regione. Diventa parte dell'ambiente di sviluppo aperto della Goriška.",
