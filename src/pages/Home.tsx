@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -36,9 +36,20 @@ const ROOMS = [
 export default function Home() {
   const { t, i18n } = useTranslation();
   const [selectedRoom, setSelectedRoom] = useState<number | null>(1);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
 
   const isSlovenian = i18n.language === 'sl' || !['en', 'it'].includes(i18n.language);
   const isItalian = i18n.language === 'it';
+
+  useEffect(() => {
+    if (heroVideoRef.current) {
+      heroVideoRef.current.defaultMuted = true;
+      heroVideoRef.current.muted = true;
+      heroVideoRef.current.play().catch(() => {
+        // Autoplay may be restricted until interaction
+      });
+    }
+  }, []);
 
   return (
     <>
@@ -181,11 +192,13 @@ export default function Home() {
             <div className="relative rounded-[2.5rem] bg-slate-900 p-3 shadow-[0_24px_60px_rgba(255,51,68,0.15)] border-4 border-slate-950">
                <div className="relative aspect-video lg:aspect-square w-full rounded-[2rem] overflow-hidden bg-slate-950 flex items-center justify-center">
                   <video 
+                    ref={heroVideoRef}
                     autoPlay 
                     loop 
                     muted 
                     playsInline 
-                    key="hero-video"
+                    preload="auto"
+                    src="https://res.cloudinary.com/dssxhjk8k/video/upload/v1778066331/hf_20260505_123915_c55001c1-8db6-4d29-8c8c-65e52a4e894e_m3cfnk.mp4"
                     className="absolute inset-0 w-full h-full object-cover"
                   >
                     <source src="https://res.cloudinary.com/dssxhjk8k/video/upload/v1778066331/hf_20260505_123915_c55001c1-8db6-4d29-8c8c-65e52a4e894e_m3cfnk.mp4" type="video/mp4" />
