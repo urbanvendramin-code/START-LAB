@@ -81,6 +81,36 @@ const PARTNER_CAROUSEL_LOGOS: CarouselPartner[] = [
     name: "Amiteh / Rigol",
     logo: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781532221/AMITEH-RIgol_15_LET_qzngpj.png",
     href: "http://www.amiteh.com/"
+  },
+  {
+    name: "Univerza v Novi Gorici",
+    logo: "https://res.cloudinary.com/pithqpe2/image/upload/v1788246061/691a2fcb9ddde29f595659d7_LUNG_Logo.png",
+    href: "https://www-lfos.ung.si/"
+  },
+  {
+    name: "Primorski tehnološki park",
+    logo: "https://res.cloudinary.com/pithqpe2/image/upload/v1788246061/ptp.png",
+    href: "https://popri.si/"
+  },
+  {
+    name: "e-Hiša",
+    logo: "https://res.cloudinary.com/pithqpe2/image/upload/v1788246061/ehisa-logo_NG.png",
+    href: "https://www.e-hisa.si/"
+  },
+  {
+    name: "MIC Nova Gorica",
+    logo: "https://res.cloudinary.com/pithqpe2/image/upload/v1788246061/MIC-Color.png",
+    href: "https://mic.scng.si/domov/kontakti-mic/"
+  },
+  {
+    name: "Ljudska univerza Nova Gorica",
+    logo: "https://res.cloudinary.com/pithqpe2/image/upload/v1788246061/Safari.png",
+    href: "https://www.lung.si/"
+  },
+  {
+    name: "Severno Primorska gospodarska zbornica",
+    logo: "https://res.cloudinary.com/pithqpe2/image/upload/v1788243429/SP_CMYK.png",
+    href: "https://www.gzs.si/spgz"
   }
 ];
 
@@ -1061,12 +1091,49 @@ export default function PartnerPage() {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto text-left">
                  {[
-                   { key: 'item_ung', bg: "bg-play-pink/5 border-play-pink/15 hover:border-play-pink/35 text-play-pink hover:scale-[1.01]", badgeColor: "bg-play-pink/12 text-play-pink", href: "https://www-lfos.ung.si/" },
-                   { key: 'item_ptp', bg: "bg-play-yellow/5 border-play-yellow/15 hover:border-play-yellow/35 text-play-yellow hover:scale-[1.01]", badgeColor: "bg-play-yellow/12 text-play-yellow", href: "https://popri.si/" },
-                   { key: 'item_ehisa', bg: "bg-play-teal/5 border-play-teal/15 hover:border-play-teal/35 text-play-teal hover:scale-[1.01]", badgeColor: "bg-play-teal/12 text-play-teal", href: "https://www.e-hisa.si/" },
-                   { key: 'item_mic', bg: "bg-play-blue/5 border-play-blue/15 hover:border-play-blue/35 text-play-blue hover:scale-[1.01]", badgeColor: "bg-play-blue/12 text-play-blue", href: "https://mic.scng.si/domov/kontakti-mic/" },
-                   { key: 'item_lung', bg: "bg-play-purple/5 border-play-purple/15 hover:border-play-purple/35 text-play-purple hover:scale-[1.01]", badgeColor: "bg-play-purple/12 text-play-purple", href: "https://www.lung.si/" },
-                   { key: 'item_spgz', bg: "bg-brand-red/5 border-brand-red/15 hover:border-brand-red/35 text-brand-red hover:scale-[1.01]", badgeColor: "bg-brand-red/12 text-brand-red", href: "https://www.gzs.si/spgz" }
+                   { 
+                     key: 'item_ung', 
+                     bg: "bg-play-pink/5 border-play-pink/15 hover:border-play-pink/35 text-play-pink hover:scale-[1.01]", 
+                     badgeColor: "bg-play-pink/12 text-play-pink", 
+                     href: "https://www-lfos.ung.si/",
+                     logo: "https://res.cloudinary.com/pithqpe2/image/upload/v1788246061/691a2fcb9ddde29f595659d7_LUNG_Logo.png" 
+                   },
+                   { 
+                     key: 'item_ptp', 
+                     bg: "bg-play-yellow/5 border-play-yellow/15 hover:border-play-yellow/35 text-play-yellow hover:scale-[1.01]", 
+                     badgeColor: "bg-play-yellow/12 text-play-yellow", 
+                     href: "https://popri.si/",
+                     logo: "https://res.cloudinary.com/pithqpe2/image/upload/v1788246061/ptp.png" 
+                   },
+                   { 
+                     key: 'item_ehisa', 
+                     bg: "bg-play-teal/5 border-play-teal/15 hover:border-play-teal/35 text-play-teal hover:scale-[1.01]", 
+                     badgeColor: "bg-play-teal/12 text-play-teal", 
+                     href: "https://www.e-hisa.si/",
+                     logo: "https://res.cloudinary.com/pithqpe2/image/upload/v1788246061/ehisa-logo_NG.png" 
+                   },
+                   { 
+                     key: 'item_mic', 
+                     bg: "bg-play-blue/5 border-play-blue/15 hover:border-play-blue/35 text-play-blue hover:scale-[1.01]", 
+                     badgeColor: "bg-play-blue/12 text-play-blue", 
+                     href: "https://mic.scng.si/domov/kontakti-mic/",
+                     logo: "https://res.cloudinary.com/pithqpe2/image/upload/v1788246061/MIC-Color.png" 
+                   },
+                   { 
+                     key: 'item_lung', 
+                     bg: "bg-play-purple/5 border-play-purple/15 hover:border-play-purple/35 text-play-purple hover:scale-[1.01]", 
+                     badgeColor: "bg-play-purple/12 text-play-purple", 
+                     href: "https://www.lung.si/",
+                     logo: "https://res.cloudinary.com/pithqpe2/image/upload/v1788246061/Safari.png" 
+                   },
+                   { 
+                     key: 'item_spgz', 
+                     bg: "bg-brand-red/5 border-brand-red/15 hover:border-brand-red/35 text-brand-red hover:scale-[1.01]", 
+                     badgeColor: "bg-brand-red/12 text-brand-red", 
+                     href: "https://www.gzs.si/spgz",
+                     logo: "https://res.cloudinary.com/pithqpe2/image/upload/v1788243429/SP_CMYK.png",
+                     logoClassName: "scale-135 sm:scale-140" 
+                   }
                  ].map((item, idx) => {
                    const name = t(`partners.${item.key}.name`);
                    const fullName = t(`partners.${item.key}.fullName`);
@@ -1080,11 +1147,19 @@ export default function PartnerPage() {
                      <CardComponent 
                        whileHover={{ y: -6 }}
                        key={idx} 
-                       className={`rounded-[2.5rem] border-2 bg-white p-8 transition-all flex flex-col justify-between shadow-[0_12px_24px_rgba(15,23,42,0.02)] hover:shadow-xl hover:border-slate-950/20 ${item.bg}`}
+                       className={`rounded-[2.5rem] border-2 bg-white p-6 sm:p-8 transition-all flex flex-col sm:flex-row gap-6 items-center sm:items-start shadow-[0_12px_24px_rgba(15,23,42,0.02)] hover:shadow-xl hover:border-slate-950/20 ${item.bg}`}
                        {...customProps}
                      >
-                       <div>
-                         <div className="flex items-center gap-3 mb-4">
+                       <div className="w-28 h-28 sm:w-32 sm:h-32 shrink-0 rounded-[1.75rem] overflow-hidden border-4 border-white shadow-md bg-white flex items-center justify-center p-3">
+                         <img 
+                           src={item.logo} 
+                           alt={fullName} 
+                           className={`w-full h-full object-contain ${item.logoClassName || ''}`}
+                           referrerPolicy="no-referrer"
+                         />
+                       </div>
+                       <div className="flex-1 min-w-0 w-full text-left">
+                         <div className="flex items-center gap-3 mb-3 flex-wrap">
                            <span className={`px-4 py-1.5 rounded-full font-display font-black text-xs tracking-wider ${item.badgeColor}`}>
                              {name}
                            </span>
@@ -1092,10 +1167,10 @@ export default function PartnerPage() {
                              {label}
                            </span>
                          </div>
-                         <h3 className="text-lg md:text-xl font-display font-black text-slate-950 mb-3 leading-snug">
+                         <h3 className="text-lg md:text-xl font-display font-black text-slate-950 mb-2.5 leading-snug">
                            {fullName}
                          </h3>
-                         <p className="text-sm text-slate-600 font-semibold leading-relaxed font-sans">
+                         <p className="text-xs sm:text-sm text-slate-600 font-semibold leading-relaxed font-sans">
                            {desc}
                          </p>
                        </div>
