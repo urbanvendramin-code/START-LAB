@@ -198,10 +198,10 @@ export default function Home() {
                     muted 
                     playsInline 
                     preload="auto"
-                    src="https://res.cloudinary.com/dssxhjk8k/video/upload/v1778066331/hf_20260505_123915_c55001c1-8db6-4d29-8c8c-65e52a4e894e_m3cfnk.mp4"
+                    src="https://res.cloudinary.com/pithqpe2/video/upload/v1788247068/hf_20260505_123915_c55001c1-8db6-4d29-8c8c-65e52a4e894e_m3cfnk.mp4"
                     className="absolute inset-0 w-full h-full object-cover"
                   >
-                    <source src="https://res.cloudinary.com/dssxhjk8k/video/upload/v1778066331/hf_20260505_123915_c55001c1-8db6-4d29-8c8c-65e52a4e894e_m3cfnk.mp4" type="video/mp4" />
+                    <source src="https://res.cloudinary.com/pithqpe2/video/upload/v1788247068/hf_20260505_123915_c55001c1-8db6-4d29-8c8c-65e52a4e894e_m3cfnk.mp4" type="video/mp4" />
                   </video>
                </div>
                
