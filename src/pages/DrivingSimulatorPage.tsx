@@ -17,9 +17,9 @@ import {
   Zap
 } from 'lucide-react';
 
-const SIMULATOR_VIDEO_URL = "https://res.cloudinary.com/dssxhjk8k/video/upload/v1786954084/simulator2_hcbetm.mp4";
-const PHOTO_1 = "https://res.cloudinary.com/dssxhjk8k/image/upload/v1786954227/DSC_8096_snyavr.jpg";
-const PHOTO_2 = "https://res.cloudinary.com/dssxhjk8k/image/upload/v1786954232/DSC_8119_t53gs4.jpg";
+const SIMULATOR_VIDEO_URL = "https://res.cloudinary.com/pithqpe2/video/upload/v1788419446/simulator2.mp4";
+const PHOTO_1 = "https://res.cloudinary.com/pithqpe2/image/upload/v1788419812/DSC_8096.jpg";
+const PHOTO_2 = "https://res.cloudinary.com/pithqpe2/image/upload/v1788419817/DSC_8119.jpg";
 
 export default function DrivingSimulatorPage() {
   const { t, i18n } = useTranslation();
@@ -45,6 +45,8 @@ export default function DrivingSimulatorPage() {
 
   useEffect(() => {
     if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
       videoRef.current.play().catch(() => {});
     }
   }, []);
@@ -165,8 +167,11 @@ export default function DrivingSimulatorPage() {
               loop
               muted
               playsInline
+              preload="auto"
               className="w-full h-auto block rounded-2xl"
-            />
+            >
+              <source src={SIMULATOR_VIDEO_URL} type="video/mp4" />
+            </video>
           </div>
         </motion.div>
 
