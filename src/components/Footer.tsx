@@ -29,12 +29,12 @@ export default function Footer() {
         <div className="grid md:grid-cols-2 gap-6 text-left bg-slate-50 p-6 rounded-2xl border border-slate-100 mb-6">
           <div>
             <p className="text-slate-600 font-medium">
-              Projekt START financira Evropska unija iz Sklada za male projekte GO!2025 programa Interreg VI-A Italija-Slovenija 2021-2027, ki ga upravlja EZTS GO.
+              Projekt START sofinancira Evropska unija iz Sklada za male projekte GO!2025 programa Interreg VI-A Italija-Slovenija 2021-2027, ki ga upravlja EZTS GO.
             </p>
           </div>
           <div>
             <p className="text-slate-600 font-medium">
-              Il progetto START è finanziato dall’Unione europea nell’ambito del Fondo per piccoli progetti (Small Project Fund) GO! 2025 del Programma Interreg VI-A Italia-Slovenia 2021-2027, gestito dal GECT GO.
+              Il progetto START è co-finanziato dall’Unione europea nell’ambito del Fondo per piccoli progetti (Small Project Fund) GO! 2025 del Programma Interreg VI-A Italia-Slovenia 2021-2027, gestito dal GECT GO.
             </p>
           </div>
         </div>
