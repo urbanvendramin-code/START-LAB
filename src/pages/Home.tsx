@@ -101,7 +101,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-3.5 sm:gap-4 items-center">
                 <div className="w-full sm:w-36 h-28 sm:h-28 rounded-2xl overflow-hidden shrink-0 border-2 border-amber-300/60 shadow-sm relative">
                   <img
-                    src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1786955456/elektronika2_gqkovv.jpg"
+                    src="https://res.cloudinary.com/pithqpe2/image/upload/v1788420070/elektronika2.jpg"
                     alt="Elektronski dirkač"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />

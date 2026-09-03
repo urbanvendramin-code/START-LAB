@@ -175,7 +175,7 @@ const getLocalizedEvents = (lang: string): Event[] => {
     description: item.description,
     ageGroup: ageText,
     mentors: isSl ? 'Start Lab ekipa' : isIt ? 'Team Start Lab' : 'Start Lab Team',
-    image: 'https://res.cloudinary.com/dssxhjk8k/image/upload/v1786955456/elektronika2_gqkovv.jpg'
+    image: 'https://res.cloudinary.com/pithqpe2/image/upload/v1788420070/elektronika2.jpg'
   }));
 
   const rawGrapheneEvents = [
