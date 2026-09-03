@@ -373,7 +373,7 @@ export default function DrivingSimulatorPage() {
               <div className="lg:col-span-5 flex flex-col items-center gap-4">
                 <div className="w-48 h-48 sm:w-60 sm:h-60 rounded-[2.5rem] overflow-hidden border-4 border-slate-700 shadow-2xl bg-slate-800 relative group">
                   <img 
-                    src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1786434942/WhatsApp_Image_2026-08-11_at_09.45.07_xnf783.jpg" 
+                    src="https://res.cloudinary.com/pithqpe2/image/upload/v1788420590/WhatsApp_Image_2026-08-11_at_09.45.07.jpg" 
                     alt="Denis Lupo - Simulator Mentor" 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     referrerPolicy="no-referrer"
@@ -385,7 +385,7 @@ export default function DrivingSimulatorPage() {
 
                 <div className="flex gap-2">
                   <img 
-                    src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1786434942/WhatsApp_Image_2026-08-11_at_09.44.55_bms5en.jpg" 
+                    src="https://res.cloudinary.com/pithqpe2/image/upload/v1788420590/WhatsApp_Image_2026-08-11_at_09.44.55.jpg" 
                     alt="Denis Lupo na dirkališču" 
                     className="w-20 h-20 rounded-2xl object-cover border-2 border-slate-700 opacity-90 hover:opacity-100 transition-opacity"
                     referrerPolicy="no-referrer"

@@ -430,7 +430,7 @@ export default function MentorPage() {
                   { 
                     name: "Uroš Polanc",
                     role: t('mentors.uros.role'),
-                    image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1780571436/1563522851336_jmb4il.jpg",
+                    image: "https://res.cloudinary.com/pithqpe2/image/upload/v1788420589/1563522851336.jpg",
                     bg: "bg-play-teal/5 border-play-teal/15 hover:border-play-teal/35 text-play-teal hover:scale-[1.01]", 
                     badgeColor: "bg-play-teal/12 text-play-teal",
                     desc: t('mentors.uros.desc') 
@@ -438,7 +438,7 @@ export default function MentorPage() {
                   { 
                     name: "dr. Egon Pavlica",
                     role: t('mentors.egon.role'),
-                    image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781090371/image_1_gdzusa.png",
+                    image: "https://res.cloudinary.com/pithqpe2/image/upload/v1788420589/image_1.png",
                     bg: "bg-play-pink/5 border-play-pink/15 hover:border-play-pink/35 text-play-pink hover:scale-[1.01]", 
                     badgeColor: "bg-play-pink/12 text-play-pink",
                     desc: t('mentors.egon.desc') 
@@ -446,10 +446,10 @@ export default function MentorPage() {
                   { 
                     name: "Denis Lupo",
                     role: t('mentors.denis.role'),
-                    image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1786434942/WhatsApp_Image_2026-08-11_at_09.45.07_xnf783.jpg",
+                    image: "https://res.cloudinary.com/pithqpe2/image/upload/v1788420590/WhatsApp_Image_2026-08-11_at_09.45.07.jpg",
                     images: [
-                      "https://res.cloudinary.com/dssxhjk8k/image/upload/v1786434942/WhatsApp_Image_2026-08-11_at_09.45.07_xnf783.jpg",
-                      "https://res.cloudinary.com/dssxhjk8k/image/upload/v1786434942/WhatsApp_Image_2026-08-11_at_09.44.55_bms5en.jpg"
+                      "https://res.cloudinary.com/pithqpe2/image/upload/v1788420590/WhatsApp_Image_2026-08-11_at_09.45.07.jpg",
+                      "https://res.cloudinary.com/pithqpe2/image/upload/v1788420590/WhatsApp_Image_2026-08-11_at_09.44.55.jpg"
                     ],
                     bg: "bg-rose-500/5 border-rose-500/15 hover:border-rose-500/35 text-rose-600 hover:scale-[1.01]", 
                     badgeColor: "bg-rose-500/12 text-rose-600",
@@ -458,7 +458,7 @@ export default function MentorPage() {
                   { 
                     name: "Borut Fiorelli",
                     role: t('mentors.borut.role'),
-                    image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781090371/image_2_jtawyc.png",
+                    image: "https://res.cloudinary.com/pithqpe2/image/upload/v1788420590/image_2.png",
                     bg: "bg-play-blue/5 border-play-blue/15 hover:border-play-blue/35 text-play-blue hover:scale-[1.01]", 
                     badgeColor: "bg-play-blue/12 text-play-blue",
                     desc: t('mentors.borut.desc') 
@@ -466,7 +466,7 @@ export default function MentorPage() {
                   { 
                     name: "Kevin Peršolja",
                     role: t('mentors.kevin.role'),
-                    image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781244441/13356_ijcjad.jpg",
+                    image: "https://res.cloudinary.com/pithqpe2/image/upload/v1788420589/13356.jpg",
                     bg: "bg-play-purple/5 border-play-purple/15 hover:border-play-purple/35 text-play-purple hover:scale-[1.01]", 
                     badgeColor: "bg-play-purple/12 text-play-purple",
                     desc: t('mentors.kevin.desc') 
@@ -474,7 +474,7 @@ export default function MentorPage() {
                   { 
                     name: "Nik Tominec",
                     role: t('mentors.nik.role'),
-                    image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781182489/unnamed_fh0rtt.jpg",
+                    image: "https://res.cloudinary.com/pithqpe2/image/upload/v1788420783/13352.jpg",
                     bg: "bg-play-yellow/5 border-play-yellow/15 hover:border-play-yellow/35 text-play-yellow hover:scale-[1.01]", 
                     badgeColor: "bg-play-yellow/12 text-play-yellow",
                     desc: t('mentors.nik.desc') 
