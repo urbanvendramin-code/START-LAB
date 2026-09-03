@@ -1,4 +1,5 @@
 import { LucideIcon, Rocket, Cpu, Gamepad2, Settings, Users, Lightbulb, Zap, Microscope, Boxes, Gauge, GraduationCap, Building2, Calendar, Mail } from 'lucide-react';
+import person3dModelingImg from './assets/images/person_3d_modeling_1788421975098.jpg';
 
 export interface Category {
   id: string;
@@ -43,8 +44,8 @@ export const WORKSHOPS = [
   {
     section: "Digitalna proizvodnja & oblikovanje",
     items: [
-      { id: '3d-print-laser', title: '3D tisk in laserski razrez – od ideje do izdelka', description: 'Spoznajte postopek od 3D modeliranja in 3D tiska do laserskega razreza ter izdelajte unikatne izdelke.', icon: Boxes, image: 'https://res.cloudinary.com/dssxhjk8k/image/upload/v1779883771/hf_20260527_120549_96e1d060-bcc7-499f-ba63-bb4d713252b8_bvs5fx.png' },
-      { id: '3d-pro', title: 'Profesionalno 3D modeliranje', description: 'Spoznajte napredna orodja za 3D modeliranje in inženirsko načrtovanje.', icon: Microscope, image: 'https://res.cloudinary.com/dssxhjk8k/image/upload/v1779883934/hf_20260527_121036_6dea0fac-1576-4185-ba4a-9cff1cbdb935_zk7urr.png' },
+      { id: '3d-print-laser', title: '3D tisk in laserski razrez – od ideje do izdelka', description: 'Spoznajte postopek od 3D modeliranja in 3D tiska do laserskega razreza ter izdelajte unikatne izdelke.', icon: Boxes, image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80' },
+      { id: '3d-pro', title: 'Profesionalno 3D modeliranje', description: 'Spoznajte napredna orodja za 3D modeliranje in inženirsko načrtovanje.', icon: Microscope, image: person3dModelingImg },
     ]
   },
   {

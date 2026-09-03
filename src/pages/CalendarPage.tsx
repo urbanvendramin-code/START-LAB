@@ -268,7 +268,7 @@ const getLocalizedEvents = (lang: string): Event[] => {
     description: item.description,
     ageGroup: ageText,
     mentors: mentorsText,
-    image: 'https://res.cloudinary.com/dssxhjk8k/image/upload/v1784192548/grafenski_cip3_tucwpa.jpg'
+    image: 'https://images.unsplash.com/photo-1555680202-c86f0e12f086?auto=format&fit=crop&q=80'
   }));
 
   const rawPrintCutEvents = [
@@ -372,7 +372,7 @@ const getLocalizedEvents = (lang: string): Event[] => {
     description: item.description,
     ageGroup: ageText,
     mentors: 'Uroš Polanc',
-    image: 'https://res.cloudinary.com/dssxhjk8k/image/upload/v1784205182/Natisni_in_izrezi_el6yqu.jpg'
+    image: 'https://images.unsplash.com/photo-1581092162384-8987c1d64718?auto=format&fit=crop&q=80'
   }));
 
   return [...racerEvents, ...grapheneEvents, ...printCutEvents];
