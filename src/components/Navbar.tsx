@@ -46,7 +46,7 @@ export default function Navbar() {
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             <img 
-              src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1784276193/Adesivo_SPF_progetti_finanziati_START_bw_bkpo4y.png" 
+              src="https://res.cloudinary.com/pithqpe2/image/upload/v1788421079/Adesivo_SPF_progetti_finanziati_START_bw.png" 
               alt="Start Logo" 
               className="h-[50px] xs:h-[65px] sm:h-[80px] md:h-[107px] w-auto object-contain opacity-95 hover:opacity-100 transition-opacity"
               referrerPolicy="no-referrer"
@@ -68,7 +68,7 @@ export default function Navbar() {
           >
             <div className="absolute inset-0 bg-brand-red/10 rounded-full blur-xl scale-75 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
             <img 
-              src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1779890069/LOGO3_eswysi.png" 
+              src="https://res.cloudinary.com/pithqpe2/image/upload/v1788421405/LOGO2.png" 
               alt="Start Lab Logo" 
               className="w-36 xs:w-44 sm:w-48 md:w-52 lg:w-44 xl:w-52 2xl:w-60 h-auto object-contain relative z-10"
               referrerPolicy="no-referrer"

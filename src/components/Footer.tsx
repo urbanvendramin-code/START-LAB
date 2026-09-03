@@ -9,7 +9,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
         <Link to="/" className="flex items-center gap-2 h-[120px]">
           <img 
-            src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1784276193/Adesivo_SPF_progetti_finanziati_START_bw_bkpo4y.png" 
+            src="https://res.cloudinary.com/pithqpe2/image/upload/v1788421079/Adesivo_SPF_progetti_finanziati_START_bw.png" 
             alt="Start Lab Logo" 
             className="h-full w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
           />

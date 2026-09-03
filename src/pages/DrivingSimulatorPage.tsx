@@ -472,7 +472,7 @@ export default function DrivingSimulatorPage() {
                     {t('simulator_page.prog1_tag')}
                   </span>
                   <img 
-                    src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1787724766/AndrejSV_logo_c3ncse.png" 
+                    src="https://res.cloudinary.com/pithqpe2/image/upload/v1788421442/AndrejSV_logo.png" 
                     alt="Šola vožnje Andrej" 
                     className="h-9 w-auto max-w-[130px] object-contain"
                     referrerPolicy="no-referrer"
