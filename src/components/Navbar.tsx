@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Globe, Mail } from 'lucide-react';
+import { Menu, X, Globe, Mail, Facebook, Instagram, Music } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { useTranslation } from 'react-i18next';
@@ -101,8 +101,42 @@ export default function Navbar() {
             })}
           </div>
    
-          {/* Desktop Language & CTA */}
+          {/* Desktop Language & CTA & Social */}
           <div className="hidden lg:flex items-center gap-3 shrink-0">
+            {/* Desktop Social Links */}
+            <div className="flex items-center gap-1 bg-slate-900/60 p-1 rounded-2xl border border-slate-800">
+              <a
+                href="https://www.facebook.com/profile.php?id=61590652341384"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook Start Lab"
+                title="Facebook"
+                className="w-7 h-7 rounded-xl hover:bg-[#1877F2] text-slate-400 hover:text-white flex items-center justify-center transition-colors"
+              >
+                <Facebook size={14} className="stroke-[2.2]" />
+              </a>
+              <a
+                href="https://www.instagram.com/start_lab_goriska/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram @start_lab_goriska"
+                title="Instagram"
+                className="w-7 h-7 rounded-xl hover:bg-[#E4405F] text-slate-400 hover:text-white flex items-center justify-center transition-colors"
+              >
+                <Instagram size={14} className="stroke-[2.2]" />
+              </a>
+              <a
+                href="https://www.tiktok.com/@startlab56"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TikTok @startlab56"
+                title="TikTok"
+                className="w-7 h-7 rounded-xl hover:bg-white text-slate-400 hover:text-slate-950 flex items-center justify-center transition-colors"
+              >
+                <Music size={14} className="stroke-[2.2]" />
+              </a>
+            </div>
+
             <div className="flex gap-1.5 bg-slate-900/60 p-1.5 rounded-2xl border border-slate-800 shrink-0">
                {languages.map((lang) => (
                  <button 
@@ -193,6 +227,37 @@ export default function Navbar() {
                     {lang.name}
                   </button>
                 ))}
+              </div>
+
+              {/* Mobile Social Links */}
+              <div className="flex items-center justify-center gap-3 pt-2">
+                <a
+                  href="https://www.facebook.com/profile.php?id=61590652341384"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook Start Lab"
+                  className="w-10 h-10 rounded-xl bg-slate-900 hover:bg-[#1877F2] text-slate-300 hover:text-white flex items-center justify-center transition-colors border border-slate-800 shadow-sm"
+                >
+                  <Facebook size={18} className="stroke-[2.2]" />
+                </a>
+                <a
+                  href="https://www.instagram.com/start_lab_goriska/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram @start_lab_goriska"
+                  className="w-10 h-10 rounded-xl bg-slate-900 hover:bg-[#E4405F] text-slate-300 hover:text-white flex items-center justify-center transition-colors border border-slate-800 shadow-sm"
+                >
+                  <Instagram size={18} className="stroke-[2.2]" />
+                </a>
+                <a
+                  href="https://www.tiktok.com/@startlab56"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="TikTok @startlab56"
+                  className="w-10 h-10 rounded-xl bg-slate-900 hover:bg-white text-slate-300 hover:text-slate-950 flex items-center justify-center transition-colors border border-slate-800 shadow-sm"
+                >
+                  <Music size={18} className="stroke-[2.2]" />
+                </a>
               </div>
               <button
                 onClick={() => {

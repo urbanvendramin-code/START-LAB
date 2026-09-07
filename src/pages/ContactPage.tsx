@@ -7,7 +7,11 @@ import {
   MapPin, 
   CheckCircle2,
   AlertTriangle,
-  Loader2
+  Loader2,
+  Facebook,
+  Instagram,
+  Music,
+  ExternalLink
 } from 'lucide-react';
 
 export default function ContactPage() {
@@ -103,6 +107,77 @@ export default function ContactPage() {
                      <div className="font-display font-extrabold text-slate-800">{t('contact.city')}</div>
                   </div>
                </div>
+            </div>
+
+            {/* Družbena omrežja / Social Media */}
+            <div className="pt-2 space-y-3">
+              <h4 className="text-sm font-display font-black uppercase text-slate-900 tracking-wider">
+                {t('contact.social_title', { defaultValue: 'Družbena omrežja' })}
+              </h4>
+              <div className="space-y-2.5 max-w-sm">
+                <a
+                  href="https://www.facebook.com/profile.php?id=61590652341384"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook Start Lab"
+                  className="flex items-center justify-between p-3.5 rounded-2xl bg-white hover:bg-blue-50/40 border border-slate-200 hover:border-[#1877F2]/40 transition-all group shadow-sm hover:shadow"
+                >
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-10 h-10 rounded-xl bg-[#1877F2]/10 text-[#1877F2] group-hover:bg-[#1877F2] group-hover:text-white flex items-center justify-center transition-colors shrink-0 shadow-sm">
+                      <Facebook size={20} className="stroke-[2.2]" />
+                    </div>
+                    <div>
+                      <div className="text-[10px] uppercase font-bold font-display text-slate-400">Facebook</div>
+                      <div className="text-sm font-display font-extrabold text-slate-800 group-hover:text-[#1877F2] transition-colors">
+                        Start Lab
+                      </div>
+                    </div>
+                  </div>
+                  <ExternalLink size={16} className="text-slate-300 group-hover:text-[#1877F2] transition-colors" />
+                </a>
+
+                <a
+                  href="https://www.instagram.com/start_lab_goriska/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram @start_lab_goriska"
+                  className="flex items-center justify-between p-3.5 rounded-2xl bg-white hover:bg-pink-50/40 border border-slate-200 hover:border-[#E4405F]/40 transition-all group shadow-sm hover:shadow"
+                >
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-10 h-10 rounded-xl bg-[#E4405F]/10 text-[#E4405F] group-hover:bg-gradient-to-tr group-hover:from-[#f09433] group-hover:via-[#dc2743] group-hover:to-[#bc1888] group-hover:text-white flex items-center justify-center transition-colors shrink-0 shadow-sm">
+                      <Instagram size={20} className="stroke-[2.2]" />
+                    </div>
+                    <div>
+                      <div className="text-[10px] uppercase font-bold font-display text-slate-400">Instagram</div>
+                      <div className="text-sm font-display font-extrabold text-slate-800 group-hover:text-[#E4405F] transition-colors">
+                        @start_lab_goriska
+                      </div>
+                    </div>
+                  </div>
+                  <ExternalLink size={16} className="text-slate-300 group-hover:text-[#E4405F] transition-colors" />
+                </a>
+
+                <a
+                  href="https://www.tiktok.com/@startlab56"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="TikTok @startlab56"
+                  className="flex items-center justify-between p-3.5 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-900/40 transition-all group shadow-sm hover:shadow"
+                >
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-10 h-10 rounded-xl bg-slate-900/10 text-slate-900 group-hover:bg-slate-950 group-hover:text-white flex items-center justify-center transition-colors shrink-0 shadow-sm">
+                      <Music size={20} className="stroke-[2.2]" />
+                    </div>
+                    <div>
+                      <div className="text-[10px] uppercase font-bold font-display text-slate-400">TikTok</div>
+                      <div className="text-sm font-display font-extrabold text-slate-800 group-hover:text-slate-950 transition-colors">
+                        @startlab56
+                      </div>
+                    </div>
+                  </div>
+                  <ExternalLink size={16} className="text-slate-300 group-hover:text-slate-950 transition-colors" />
+                </a>
+              </div>
             </div>
           </div>
 

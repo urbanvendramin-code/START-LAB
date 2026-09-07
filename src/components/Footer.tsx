@@ -1,8 +1,33 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Facebook, Instagram, Music } from 'lucide-react';
 
 export default function Footer() {
   const { t } = useTranslation();
+
+  const socialLinks = [
+    {
+      name: 'Facebook',
+      url: 'https://www.facebook.com/profile.php?id=61590652341384',
+      icon: Facebook,
+      label: 'Start Lab Facebook',
+      hoverStyle: 'hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2]',
+    },
+    {
+      name: 'Instagram',
+      url: 'https://www.instagram.com/start_lab_goriska/',
+      icon: Instagram,
+      label: 'Start Lab Instagram',
+      hoverStyle: 'hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#dc2743] hover:to-[#bc1888] hover:text-white hover:border-[#dc2743]',
+    },
+    {
+      name: 'TikTok',
+      url: 'https://www.tiktok.com/@startlab56',
+      icon: Music,
+      label: 'Start Lab TikTok',
+      hoverStyle: 'hover:bg-slate-950 hover:text-white hover:border-slate-950',
+    },
+  ];
 
   return (
     <footer className="py-12 bg-white border-t border-slate-200 px-4 md:px-6 mt-auto">
@@ -15,7 +40,32 @@ export default function Footer() {
           />
         </Link>
         
-        <div className="text-xs text-slate-500 font-bold uppercase tracking-widest font-mono">
+        {/* Social media icons */}
+        <div className="flex flex-col items-center gap-2.5">
+          <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 font-mono">
+            {t('contact.social_title', 'Družbena omrežja')}
+          </span>
+          <div className="flex items-center gap-3">
+            {socialLinks.map((social) => {
+              const Icon = social.icon;
+              return (
+                <a
+                  key={social.name}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  title={social.name}
+                  className={`w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 text-slate-600 flex items-center justify-center transition-all duration-200 shadow-sm hover:scale-110 ${social.hoverStyle}`}
+                >
+                  <Icon size={18} className="stroke-[2.2]" />
+                </a>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="text-xs text-slate-500 font-bold uppercase tracking-widest font-mono text-center md:text-left">
           © {new Date().getFullYear()} START LAB. {t('footer.rights')}
         </div>
 
