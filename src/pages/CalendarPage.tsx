@@ -718,6 +718,11 @@ export default function CalendarPage() {
                                   ⚡ {isSlovenian ? "Prijave odprte" : isIt ? "Iscrizioni aperte" : "Open for registration"}
                                 </span>
                               )}
+                              {isGraphene && (
+                                <span className="bg-emerald-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-xl shadow-sm">
+                                  ⚡ {isSlovenian ? "Prijave odprte • Še 6 mest" : isIt ? "Iscrizioni aperte • 6 posti" : "Open • 6 spots"}
+                                </span>
+                              )}
                               {event.ageGroup && (
                                 <span className="px-2.5 py-1 rounded-xl text-[10px] font-display font-semibold bg-slate-100 text-slate-600 uppercase tracking-wider">
                                   {isSlovenian ? `Starost: ${event.ageGroup}` : isIt ? `Età: ${event.ageGroup}` : `Age: ${event.ageGroup}`}
@@ -783,7 +788,11 @@ export default function CalendarPage() {
                                   <span className="bg-emerald-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
                                     ⚡ {isSlovenian ? "20 prostih mest" : isIt ? "20 posti disponibili" : "20 spots available"}
                                   </span>
-                                ) : (isGraphene || isPrintCut) ? (
+                                ) : isGraphene ? (
+                                  <span className="bg-emerald-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
+                                    ⚡ {isSlovenian ? "Še 6 dodatnih prostih mest" : isIt ? "Ancora 6 posti liberi" : "6 additional spots left"}
+                                  </span>
+                                ) : isPrintCut ? (
                                   <span className="bg-rose-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
                                     🔒 {isSlovenian ? "Prijave zaprte • Zapolnjena mesta" : isIt ? "Iscrizioni chiuse • Tutto esaurito" : "Registrations closed • Sold out"}
                                   </span>
@@ -1002,6 +1011,15 @@ export default function CalendarPage() {
                                             </div>
 
                                             <div className="space-y-3">
+                                              <div className="border-l-2 border-brand-red pl-2.5">
+                                                <p className="font-bold text-slate-950">{isSlovenian ? "⚡ Prosta mesta in prijava" : isIt ? "⚡ Posti disponibili e iscrizione" : "⚡ Available spots & registration"}</p>
+                                                <div className="mt-1.5 text-[10px] text-slate-700 bg-slate-50 border border-slate-100 rounded-lg p-2.5 space-y-1">
+                                                  <p><strong>{isSlovenian ? "Razpoložljivost:" : isIt ? "Disponibilità:" : "Availability:"}</strong> <span className="text-emerald-700 font-extrabold">{isSlovenian ? "⚡ Odprtih še 6 dodatnih prostih mest!" : isIt ? "⚡ Ancora 6 posti aggiuntivi disponibili!" : "⚡ 6 additional spots opened!"}</span></p>
+                                                  <p><strong>{isSlovenian ? "Udeležba:" : isIt ? "Partecipazione:" : "Participation:"}</strong> <span className="text-brand-red font-bold">{isSlovenian ? "Brezplačna delavnica (omejeno število)" : isIt ? "Workshop gratuito (posti limitati)" : "Free of charge (limited slots)"}</span></p>
+                                                  <p><strong>{isSlovenian ? "Starost:" : isIt ? "Età:" : "Age:"}</strong> 10–15 let</p>
+                                                </div>
+                                              </div>
+
                                               <div className="border-l-2 border-brand-red pl-2.5">
                                                 <p className="font-bold text-slate-950">{isSlovenian ? "🔬 Vrhunsko mentorstvo" : isIt ? "🔬 Mentori accademici" : "🔬 Academic Mentors"}</p>
                                                 <div className="mt-1.5 text-[10px] text-slate-600 bg-slate-50 border border-slate-100 rounded-lg p-2 space-y-0.5">
@@ -1242,7 +1260,20 @@ export default function CalendarPage() {
                               </div>
                             )}
 
-                            {(isGraphene || isPrintCut) && (
+                            {isGraphene && (
+                              <div className="mb-3.5 bg-emerald-50 border-2 border-emerald-300 text-emerald-950 rounded-2xl p-3.5 flex items-center justify-center gap-2.5 text-xs font-display font-black uppercase tracking-wide shadow-sm">
+                                <Sparkles size={18} className="text-emerald-600 shrink-0 stroke-[2.5]" />
+                                <span>
+                                  {isSlovenian 
+                                    ? "⚡ Odprtih še 6 dodatnih prostih mest za prijavo!" 
+                                    : isIt 
+                                      ? "⚡ Aperti altri 6 posti aggiuntivi per l'iscrizione!" 
+                                      : "⚡ 6 additional spots opened for registration!"}
+                                </span>
+                              </div>
+                            )}
+
+                            {isPrintCut && (
                               <div className="mb-3.5 bg-rose-50 border-2 border-rose-300 text-rose-950 rounded-2xl p-3.5 flex items-center justify-center gap-2.5 text-xs font-display font-black uppercase tracking-wide shadow-sm">
                                 <Lock size={18} className="text-rose-600 shrink-0 stroke-[2.5]" />
                                 <span>
@@ -1255,7 +1286,7 @@ export default function CalendarPage() {
                               </div>
                             )}
 
-                            {(isGraphene || isPrintCut) ? (
+                            {isPrintCut ? (
                               <button 
                                 disabled
                                 className="w-full py-4 bg-slate-200 text-slate-500 rounded-2xl font-display font-black uppercase text-sm tracking-wider select-none cursor-not-allowed flex items-center justify-center gap-2 border border-slate-300/80 shadow-inner"
@@ -1518,7 +1549,11 @@ export default function CalendarPage() {
                             <span className="bg-emerald-600 text-white font-display font-black text-[10px] uppercase px-2.5 py-0.5 rounded-full shadow-sm">
                               ⚡ {isSlovenian ? "Prijave odprte • 20 mest" : isIt ? "Iscrizioni aperte • 20 posti" : "Open • 20 spots"}
                             </span>
-                          ) : (modalEvent?.id.startsWith('graphene') || modalEvent?.id.startsWith('printcut')) ? (
+                          ) : modalEvent?.id.startsWith('graphene') ? (
+                            <span className="bg-emerald-600 text-white font-display font-black text-[10px] uppercase px-2.5 py-0.5 rounded-full shadow-sm">
+                              ⚡ {isSlovenian ? "Prijave odprte • Še 6 mest" : isIt ? "Iscrizioni aperte • Ancora 6 posti" : "Open • 6 spots left"}
+                            </span>
+                          ) : modalEvent?.id.startsWith('printcut') ? (
                             <span className="bg-rose-600 text-white font-display font-black text-[10px] uppercase px-2.5 py-0.5 rounded-full shadow-sm">
                               🔒 {isSlovenian ? "Prijave zaprte • Zapolnjeno" : isIt ? "Iscrizioni chiuse • Tutto esaurito" : "Registrations closed • Sold out"}
                             </span>
@@ -1527,11 +1562,13 @@ export default function CalendarPage() {
                         <p className="text-slate-900 font-extrabold text-xs">
                           {modalEvent?.id.startsWith('racer')
                             ? (isSlovenian ? "✓ Cena: 20 € na osebo za celotno 16-urno delavnico (8 x 2 uri)" : isIt ? "✓ Prezzo: 20 € a persona per l'intero workshop di 16 ore (8 x 2 ore)" : "✓ Price: 20 € per person for full 16-hour workshop (8 x 2 hours)")
-                            : isSlovenian 
-                              ? "✓ Delavnice so brezplačne. Število mest je strogo omejeno!" 
-                              : isIt
-                                ? "✓ I workshop sono gratuiti. I posti sono strettamente limitati!"
-                                : "✓ Workshops are free of charge. Slots are strictly limited!"}
+                            : modalEvent?.id.startsWith('graphene')
+                              ? (isSlovenian ? "✓ Brezplačna delavnica • Na voljo še 6 dodatnih prostih mest!" : isIt ? "✓ Workshop gratuito • Disponibili altri 6 posti aggiuntivi!" : "✓ Free workshop • 6 additional spots available!")
+                              : isSlovenian 
+                                ? "✓ Delavnice so brezplačne. Število mest je strogo omejeno!" 
+                                : isIt
+                                  ? "✓ I workshop sono gratuiti. I posti sono strettamente limitati!"
+                                  : "✓ Workshops are free of charge. Slots are strictly limited!"}
                         </p>
                         <div className="border-t border-slate-200/50 pt-2 text-[11px] space-y-0.5 text-slate-600">
                           {modalEvent?.id.startsWith('racer') ? (
@@ -1646,7 +1683,7 @@ export default function CalendarPage() {
                         </div>
                       </div>
 
-                      {(modalEvent?.id.startsWith('racer') || modalEvent?.id.startsWith('printcut')) && (
+                      {(modalEvent?.id.startsWith('racer') || modalEvent?.id.startsWith('printcut') || modalEvent?.id.startsWith('graphene')) && (
                         <div className="space-y-2">
                           <div className="space-y-1">
                             <label className="text-xs font-display font-black uppercase tracking-wider text-slate-800">
@@ -1758,7 +1795,7 @@ export default function CalendarPage() {
                         >
                           {isSlovenian ? "Prekliči" : isIt ? "Annulla" : "Cancel"}
                         </button>
-                        {(modalEvent?.id.startsWith('graphene') || modalEvent?.id.startsWith('printcut')) ? (
+                        {modalEvent?.id.startsWith('printcut') ? (
                           <button
                             type="button"
                             disabled

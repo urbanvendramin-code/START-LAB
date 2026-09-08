@@ -73,6 +73,7 @@ export default function WorkshopsPage() {
                   const theme = colorThemes[idx % 4];
                   const isSelected = selectedWorkshop === workshop.id;
                   const isRacer = workshop.id === 'electronics-racer';
+                  const isGraphene = workshop.id === 'graphene-transistor';
 
                   return (
                     <motion.div 
@@ -83,12 +84,14 @@ export default function WorkshopsPage() {
                       className={`play-card overflow-hidden group cursor-pointer transition-all border-2 bg-white flex flex-col justify-between ${
                         isRacer 
                           ? 'border-amber-500/40 hover:border-amber-500 hover:shadow-xl ring-2 ring-amber-500/20' 
-                          : isSelected 
-                            ? `ring-4 ring-offset-2 ${theme.ring} border-slate-900` 
-                            : `border-slate-900/10 ${theme.border}`
+                          : isGraphene
+                            ? 'border-brand-red/40 hover:border-brand-red hover:shadow-xl ring-2 ring-brand-red/20'
+                            : isSelected 
+                              ? `ring-4 ring-offset-2 ${theme.ring} border-slate-900` 
+                              : `border-slate-900/10 ${theme.border}`
                       }`}
                       onClick={() => {
-                        if (isRacer) {
+                        if (isRacer || isGraphene) {
                           navigate('/koledar');
                         } else {
                           setSelectedWorkshop(selectedWorkshop === workshop.id ? null : workshop.id);
@@ -107,9 +110,11 @@ export default function WorkshopsPage() {
                             <div className={`w-11 h-11 rounded-2xl border-2 border-white shadow-md flex items-center justify-center transition-all ${
                               isRacer
                                 ? 'bg-amber-500 text-white shadow-lg group-hover:scale-110'
-                                : isSelected 
-                                  ? 'bg-slate-950 text-white hover:scale-110' 
-                                  : `${theme.bg} ${theme.text} backdrop-blur-md group-hover:bg-slate-950 group-hover:text-white`
+                                : isGraphene
+                                  ? 'bg-brand-red text-white shadow-lg group-hover:scale-110'
+                                  : isSelected 
+                                    ? 'bg-slate-950 text-white hover:scale-110' 
+                                    : `${theme.bg} ${theme.text} backdrop-blur-md group-hover:bg-slate-950 group-hover:text-white`
                             }`}>
                               <workshop.icon size={20} className="stroke-[2.5]" />
                             </div>
@@ -117,7 +122,7 @@ export default function WorkshopsPage() {
                         </div>
                         <div className="p-6 pb-2">
                           <h3 className="text-base md:text-lg font-display font-black uppercase mb-3 text-slate-950 leading-snug group-hover:text-brand-red transition-colors">{translated.title}</h3>
-                          <p className={`text-xs text-slate-600 font-semibold leading-relaxed mb-6 ${isRacer || isSelected ? '' : 'line-clamp-2'}`}>
+                          <p className={`text-xs text-slate-600 font-semibold leading-relaxed mb-6 ${isRacer || isGraphene || isSelected ? '' : 'line-clamp-2'}`}>
                             {translated.desc}
                           </p>
                         </div>
@@ -126,30 +131,37 @@ export default function WorkshopsPage() {
                       <div className="p-6 pt-0">
                         <div className="flex items-center gap-3 text-[11px] font-display font-black uppercase tracking-wider text-slate-500 flex-wrap">
                           <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-100 px-3 py-1.5 rounded-xl font-bold">
-                            <Clock size={14} className="text-brand-red stroke-[2.5]" /> {isRacer ? (isSlovenian ? "8 x 2 uri" : isItalian ? "8 x 2 ore" : "8 x 2 hours") : t('workshops_page.duration')}
+                            <Clock size={14} className="text-brand-red stroke-[2.5]" /> {isRacer ? (isSlovenian ? "8 x 2 uri" : isItalian ? "8 x 2 ore" : "8 x 2 hours") : isGraphene ? (isSlovenian ? "6 srečanj" : isItalian ? "6 sessioni" : "6 sessions") : t('workshops_page.duration')}
                           </div>
                           <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-100 px-3 py-1.5 rounded-xl font-bold">
-                            <MapPin size={14} className="text-brand-red stroke-[2.5]" /> Solkan
+                            <MapPin size={14} className="text-brand-red stroke-[2.5]" /> Solkan / LFOS
                           </div>
                           {isRacer && (
                             <div className="bg-emerald-600 text-white px-3 py-1.5 rounded-xl font-display font-black text-[10px] uppercase shadow-sm flex items-center gap-1.5">
                               ⚡ {t('workshops_page.open', { defaultValue: 'Prijave odprte • 20 € (16 ur)' })}
                             </div>
                           )}
-                          {(workshop.id === 'graphene-transistor' || workshop.id === '3d-print-laser' || workshop.id === '3d-print' || workshop.id === 'laser') && (
+                          {isGraphene && (
+                            <div className="bg-emerald-600 text-white px-3 py-1.5 rounded-xl font-display font-black text-[10px] uppercase shadow-sm flex items-center gap-1.5">
+                              ⚡ {isSlovenian ? "Prijave odprte • Še 6 mest" : isItalian ? "Iscrizioni aperte • Ancora 6 posti" : "Open • 6 spots"}
+                            </div>
+                          )}
+                          {(workshop.id === '3d-print-laser' || workshop.id === '3d-print' || workshop.id === 'laser') && (
                             <div className="bg-rose-600 text-white px-3 py-1.5 rounded-xl font-display font-black text-[10px] uppercase shadow-sm flex items-center gap-1.5">
                               🔒 {t('workshops_page.closed', { defaultValue: 'Prijave zaprte • Zapolnjena mesta' })}
                             </div>
                           )}
                         </div>
 
-                        {isRacer && (
+                        {(isRacer || isGraphene) && (
                           <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                            <span className="text-xs font-display font-black uppercase text-brand-red flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
+                            <span className={`text-xs font-display font-black uppercase flex items-center gap-1.5 group-hover:translate-x-1 transition-transform ${isRacer ? 'text-amber-600' : 'text-brand-red'}`}>
                               {isSlovenian ? "Odpri koledar in se prijavi" : isItalian ? "Apri il calendario e iscriviti" : "Open calendar & register"} <ArrowRight size={14} className="stroke-[3]" />
                             </span>
                             <span className="text-[11px] font-bold text-slate-500">
-                              {isSlovenian ? "17. 9. 2026" : isItalian ? "17/09/2026" : "Sept 17, 2026"}
+                              {isRacer 
+                                ? (isSlovenian ? "17. 9. 2026" : isItalian ? "17/09/2026" : "Sept 17, 2026")
+                                : (isSlovenian ? "7. 9. 2026" : isItalian ? "07/09/2026" : "Sept 7, 2026")}
                             </span>
                           </div>
                         )}

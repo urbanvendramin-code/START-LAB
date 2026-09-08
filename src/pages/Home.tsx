@@ -14,6 +14,7 @@ import {
   Info,
   Mail,
   Zap,
+  Sparkles,
   Calendar as CalendarIcon
 } from 'lucide-react';
 import { LAB_EQUIPMENT } from '../constants';
@@ -90,67 +91,139 @@ export default function Home() {
               {t('hero.subtitle')}
             </p>
             
-            {/* Featured Active Workshop Card: Elektronski dirkač */}
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.15, duration: 0.5 }}
-              className="mb-8 p-3.5 sm:p-4 rounded-[1.8rem] sm:rounded-[2rem] bg-gradient-to-br from-amber-500/10 via-amber-500/5 to-white border-2 border-amber-500/30 shadow-lg shadow-amber-500/5 relative overflow-hidden group"
-            >
-              <div className="flex flex-col sm:flex-row gap-3.5 sm:gap-4 items-center">
-                <div className="w-full sm:w-36 h-28 sm:h-28 rounded-2xl overflow-hidden shrink-0 border-2 border-amber-300/60 shadow-sm relative">
-                  <img
-                    src="https://res.cloudinary.com/pithqpe2/image/upload/v1788420070/elektronika2.jpg"
-                    alt="Elektronski dirkač"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <span className="absolute top-1.5 left-1.5 bg-emerald-600 text-white font-display font-black text-[9px] uppercase px-2 py-0.5 rounded-full shadow-sm">
-                    ⚡ {isSlovenian ? "Prijave odprte" : isItalian ? "Iscrizioni aperte" : "Open"}
-                  </span>
-                </div>
-
-                <div className="flex-1 text-left w-full">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-[10px] font-display font-black uppercase tracking-wider text-amber-700 bg-amber-200/70 px-2 py-0.5 rounded-full">
-                      {isSlovenian ? "Razpisana delavnica" : isItalian ? "Nuovo workshop" : "Featured Workshop"}
-                    </span>
-                    <span className="text-[11px] font-bold text-slate-500 flex items-center gap-1">
-                      <CalendarIcon size={12} className="text-amber-600 shrink-0" />
-                      {isSlovenian ? "Od 17. 9. 2026 (ob četrtkih)" : isItalian ? "Dal 17/09/2026 (ogni giovedì)" : "From Sept 17, 2026 (Thursdays)"}
-                    </span>
-                  </div>
-
-                  <h3 className="font-display font-black text-slate-950 text-sm sm:text-base leading-snug mb-1 group-hover:text-brand-red transition-colors">
-                    {isSlovenian 
-                      ? "Spoznaj svet elektronike in izdelaj svojega prvega dirkača!" 
-                      : isItalian 
-                        ? "Scopri il Mondo dell'Elettronica e Costruisci il tuo Primo Bolide!" 
-                        : "Discover the World of Electronics & Build Your First Racer!"}
-                  </h3>
-
-                  <p className="text-[11px] sm:text-xs text-slate-600 font-semibold line-clamp-2 mb-2 leading-relaxed">
-                    {isSlovenian
-                      ? "Razstavi naprave, spoznaj delovanje komponent in vezij ter sestavi svojega delujočega elektronskega dirkača (8 x 2 uri • 20 €)."
-                      : isItalian
-                        ? "Smonta dispositivi, scopri i circuiti e costruisci la tua auto da corsa elettronica da portare a casa (8 x 2 ore • 20 €)."
-                        : "Disassemble devices, explore circuits, and build your own working electronic race car (8 x 2 hours • 20 €)."}
-                  </p>
-
-                  <div className="flex items-center justify-between flex-wrap gap-2 pt-1 border-t border-amber-200/50">
-                    <span className="text-[11px] font-extrabold text-slate-700">
-                      📍 Start Lab, Solkan • <strong className="text-emerald-700 font-black">20 € (16 ur)</strong>
-                    </span>
-                    <Link
-                      to="/koledar"
-                      className="inline-flex items-center gap-1.5 text-xs font-display font-black uppercase text-brand-red hover:text-slate-950 transition-colors"
-                    >
-                      {isSlovenian ? "Prijavi se na delavnico" : isItalian ? "Iscriviti ora" : "Register now"} <ArrowRight size={14} className="stroke-[3]" />
-                    </Link>
-                  </div>
-                </div>
+            {/* Featured Active Workshops Container */}
+            <div className="mb-8 space-y-3.5">
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] font-display font-black uppercase tracking-wider text-slate-800 flex items-center gap-1.5 bg-slate-100 border border-slate-200/80 px-3 py-1 rounded-full shadow-xs">
+                  <Sparkles size={13} className="text-brand-red" />
+                  {isSlovenian ? "Aktualni razpisani delavnici z odprtimi prijavami" : isItalian ? "Workshop attuali con iscrizioni aperte" : "Featured workshops open for registration"}
+                </span>
               </div>
-            </motion.div>
+
+              {/* Card 1: Grafenski čip */}
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1, duration: 0.5 }}
+                className="p-3.5 sm:p-4 rounded-[1.8rem] sm:rounded-[2rem] bg-gradient-to-br from-brand-red/10 via-brand-red/5 to-white border-2 border-brand-red/30 shadow-lg shadow-brand-red/5 relative overflow-hidden group"
+              >
+                <div className="flex flex-col sm:flex-row gap-3.5 sm:gap-4 items-center">
+                  <div className="w-full sm:w-36 h-28 sm:h-28 rounded-2xl overflow-hidden shrink-0 border-2 border-brand-red/30 shadow-sm relative">
+                    <img
+                      src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80"
+                      alt="Grafenski čip"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <span className="absolute top-1.5 left-1.5 bg-emerald-600 text-white font-display font-black text-[9px] uppercase px-2 py-0.5 rounded-full shadow-sm">
+                      ⚡ {isSlovenian ? "Še 6 prostih mest" : isItalian ? "Ancora 6 posti" : "6 spots left"}
+                    </span>
+                  </div>
+
+                  <div className="flex-1 text-left w-full">
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      <span className="text-[10px] font-display font-black uppercase tracking-wider text-brand-red bg-brand-red/15 px-2 py-0.5 rounded-full">
+                        {isSlovenian ? "Nanotehnologija • UNG" : isItalian ? "Nanotecnologia • UNG" : "Nanotechnology • UNG"}
+                      </span>
+                      <span className="text-[11px] font-bold text-slate-500 flex items-center gap-1">
+                        <CalendarIcon size={12} className="text-brand-red shrink-0" />
+                        {isSlovenian ? "Od 7. 9. 2026 (ob ponedeljkih) • 17:00" : isItalian ? "Dal 07/09/2026 (ogni lunedì) • 17:00" : "From Sept 7, 2026 (Mondays) • 17:00"}
+                      </span>
+                    </div>
+
+                    <h3 className="font-display font-black text-slate-950 text-sm sm:text-base leading-snug mb-1 group-hover:text-brand-red transition-colors">
+                      {isSlovenian 
+                        ? "Odkrij material prihodnosti in izdelaj svoj prvi grafenski čip!" 
+                        : isItalian 
+                          ? "Scopri il materiale del futuro e costruisci il tuo chip al grafene!" 
+                          : "Discover the material of the future & build your first graphene chip!"}
+                    </h3>
+
+                    <p className="text-[11px] sm:text-xs text-slate-600 font-semibold line-clamp-2 mb-2 leading-relaxed">
+                      {isSlovenian
+                        ? "Vstopi v vlogo raziskovalca: izdelaj grafen iz grafita, načrtaj elektrode ter v sodelovanju z laboratorijem LFOS Univerze v Novi Gorici ustvari delujoči grafenski tranzistor."
+                        : isItalian
+                          ? "Diventa ricercatore: produci grafene dalla grafite, progetta elettrodi e realizza il tuo transistor al grafene con il laboratorio LFOS dell'Università di Nova Gorica."
+                          : "Step into research: fabricate graphene from graphite, design electrodes, and create a working graphene transistor with UNG LFOS laboratory."}
+                    </p>
+
+                    <div className="flex items-center justify-between flex-wrap gap-2 pt-1 border-t border-red-200/50">
+                      <span className="text-[11px] font-extrabold text-slate-700">
+                        📍 Start Lab / LFOS • <strong className="text-emerald-700 font-black">{isSlovenian ? "Brezplačno (6 sklopov)" : isItalian ? "Gratuito (6 sessioni)" : "Free (6 sessions)"}</strong>
+                      </span>
+                      <Link
+                        to="/koledar"
+                        className="inline-flex items-center gap-1.5 text-xs font-display font-black uppercase text-brand-red hover:text-slate-950 transition-colors"
+                      >
+                        {isSlovenian ? "Prijavi se na delavnico" : isItalian ? "Iscriviti ora" : "Register now"} <ArrowRight size={14} className="stroke-[3]" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Card 2: Elektronski dirkač */}
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.15, duration: 0.5 }}
+                className="p-3.5 sm:p-4 rounded-[1.8rem] sm:rounded-[2rem] bg-gradient-to-br from-amber-500/10 via-amber-500/5 to-white border-2 border-amber-500/30 shadow-lg shadow-amber-500/5 relative overflow-hidden group"
+              >
+                <div className="flex flex-col sm:flex-row gap-3.5 sm:gap-4 items-center">
+                  <div className="w-full sm:w-36 h-28 sm:h-28 rounded-2xl overflow-hidden shrink-0 border-2 border-amber-300/60 shadow-sm relative">
+                    <img
+                      src="https://res.cloudinary.com/pithqpe2/image/upload/v1788420070/elektronika2.jpg"
+                      alt="Elektronski dirkač"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <span className="absolute top-1.5 left-1.5 bg-emerald-600 text-white font-display font-black text-[9px] uppercase px-2 py-0.5 rounded-full shadow-sm">
+                      ⚡ {isSlovenian ? "Prijave odprte" : isItalian ? "Iscrizioni aperte" : "Open"}
+                    </span>
+                  </div>
+
+                  <div className="flex-1 text-left w-full">
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      <span className="text-[10px] font-display font-black uppercase tracking-wider text-amber-700 bg-amber-200/70 px-2 py-0.5 rounded-full">
+                        {isSlovenian ? "Razpisana delavnica" : isItalian ? "Nuovo workshop" : "Featured Workshop"}
+                      </span>
+                      <span className="text-[11px] font-bold text-slate-500 flex items-center gap-1">
+                        <CalendarIcon size={12} className="text-amber-600 shrink-0" />
+                        {isSlovenian ? "Od 17. 9. 2026 (ob četrtkih)" : isItalian ? "Dal 17/09/2026 (ogni giovedì)" : "From Sept 17, 2026 (Thursdays)"}
+                      </span>
+                    </div>
+
+                    <h3 className="font-display font-black text-slate-950 text-sm sm:text-base leading-snug mb-1 group-hover:text-brand-red transition-colors">
+                      {isSlovenian 
+                        ? "Spoznaj svet elektronike in izdelaj svojega prvega dirkača!" 
+                        : isItalian 
+                          ? "Scopri il Mondo dell'Elettronica e Costruisci il tuo Primo Bolide!" 
+                          : "Discover the World of Electronics & Build Your First Racer!"}
+                    </h3>
+
+                    <p className="text-[11px] sm:text-xs text-slate-600 font-semibold line-clamp-2 mb-2 leading-relaxed">
+                      {isSlovenian
+                        ? "Razstavi naprave, spoznaj delovanje komponent in vezij ter sestavi svojega delujočega elektronskega dirkača (8 x 2 uri • 20 €)."
+                        : isItalian
+                          ? "Smonta dispositivi, scopri i circuiti e costruisci la tua auto da corsa elettronica da portare a casa (8 x 2 ore • 20 €)."
+                          : "Disassemble devices, explore circuits, and build your own working electronic race car (8 x 2 hours • 20 €)."}
+                    </p>
+
+                    <div className="flex items-center justify-between flex-wrap gap-2 pt-1 border-t border-amber-200/50">
+                      <span className="text-[11px] font-extrabold text-slate-700">
+                        📍 Start Lab, Solkan • <strong className="text-emerald-700 font-black">20 € (16 ur)</strong>
+                      </span>
+                      <Link
+                        to="/koledar"
+                        className="inline-flex items-center gap-1.5 text-xs font-display font-black uppercase text-brand-red hover:text-slate-950 transition-colors"
+                      >
+                        {isSlovenian ? "Prijavi se na delavnico" : isItalian ? "Iscriviti ora" : "Register now"} <ArrowRight size={14} className="stroke-[3]" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8">
               <Link to="/delavnice" className="btn-primary shadow-lg text-center flex items-center justify-center">
