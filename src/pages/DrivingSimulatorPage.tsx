@@ -143,9 +143,9 @@ export default function DrivingSimulatorPage() {
               title="Mapetrol"
             >
               <img 
-                src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1786990580/Mapetrol_R_ucpreo.png" 
+                src="https://ik.imagekit.io/utigodgni/Mapetrol_R.svg" 
                 alt="Mapetrol Logo" 
-                className="h-20 sm:h-24 md:h-28 w-auto max-w-[340px] sm:max-w-[420px] object-contain brightness-0 contrast-200" 
+                className="h-16 sm:h-20 md:h-24 w-auto max-w-[320px] sm:max-w-[400px] object-contain" 
                 referrerPolicy="no-referrer"
               />
             </a>

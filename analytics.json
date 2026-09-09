@@ -10,5 +10,17 @@
       "/simulator-voznje": 1
     },
     "dateCreated": "2026-08-26"
+  },
+  "sid_wfz55wnm6_mttqlx5d": {
+    "sessionId": "sid_wfz55wnm6_mttqlx5d",
+    "ipHash": "ODkuMjEyLj",
+    "firstSeen": 1788936509727,
+    "lastSeen": 1788937603963,
+    "durationSeconds": 1094,
+    "pages": {
+      "/": 4,
+      "/partner": 1
+    },
+    "dateCreated": "2026-09-09"
   }
 }

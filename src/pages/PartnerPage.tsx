@@ -39,47 +39,47 @@ interface CarouselPartner {
 const PARTNER_CAROUSEL_LOGOS: CarouselPartner[] = [
   {
     name: "Mapetrol",
-    logo: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1786990580/Mapetrol_R_ucpreo.png",
+    logo: "https://ik.imagekit.io/utigodgni/Mapetrol_R.svg",
     href: "https://www.mapetrol.eu/si/"
   },
   {
     name: "Shelly Group",
-    logo: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781073944/shelly_logo_blue_240x140_1_vglthl.png",
+    logo: "https://ik.imagekit.io/utigodgni/shelly_logo_blue_240x140(1).png",
     href: "https://www.shelly.com/"
   },
   {
     name: "Instrumentation Technologies",
-    logo: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1782203295/it_a7jglx.png",
+    logo: "https://ik.imagekit.io/utigodgni/LOGO_whiteBG_iTech_MAIN.png",
     href: "http://www.i-tech.si/"
   },
   {
     name: "KA3",
-    logo: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781082903/KA3_vector_xmx4id.png",
+    logo: "https://ik.imagekit.io/utigodgni/KA3%20vector-1.png",
     href: "https://www.ka3.si/"
   },
   {
     name: "SIQ Ljubljana",
-    logo: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1780579720/SIQ_logo_RGB_brez_www_ue0l5s.png",
+    logo: "https://ik.imagekit.io/utigodgni/SIQ_logo_RGB_brez%20www(1).PnG",
     href: "https://www.siq.si/"
   },
   {
     name: "Gorenje",
-    logo: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781074497/gorenje_logo_k41vil.png",
+    logo: "https://ik.imagekit.io/utigodgni/gorenje_logotype_positive(1).jpg",
     href: "https://si.gorenje.com/"
   },
   {
     name: "Hisense",
-    logo: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781074484/hisense_logo_positive_meoei1.png",
+    logo: "https://ik.imagekit.io/utigodgni/hisense_logo_positive(1).png",
     href: "https://si.hisense.com/"
   },
   {
     name: "A2R",
-    logo: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781097985/a2r_logo_pcnykd.png",
+    logo: "https://ik.imagekit.io/utigodgni/a2r_logo-1.svg",
     href: "https://a2r.si"
   },
   {
     name: "Amiteh / Rigol",
-    logo: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781532221/AMITEH-RIgol_15_LET_qzngpj.png",
+    logo: "https://ik.imagekit.io/utigodgni/AMITEH-RIgol%2015%20LET-1.png",
     href: "http://www.amiteh.com/"
   },
   {
@@ -791,7 +791,7 @@ export default function PartnerPage() {
                       { 
                         name: "Mapetrol",
                         role: t('talent_developers.mapetrol.role'),
-                        image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1786990580/Mapetrol_R_ucpreo.png",
+                        image: "https://ik.imagekit.io/utigodgni/Mapetrol_R.svg",
                         bg: "bg-play-blue/5 border-play-blue/15 hover:border-play-blue/35 text-play-blue hover:scale-[1.01]", 
                         badgeColor: "bg-play-blue/12 text-play-blue",
                         desc: t('talent_developers.mapetrol.desc'),
@@ -800,7 +800,7 @@ export default function PartnerPage() {
                       { 
                         name: "Shelly Group",
                         role: t('talent_developers.shelly.role'),
-                        image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781073944/shelly_logo_blue_240x140_1_vglthl.png",
+                        image: "https://ik.imagekit.io/utigodgni/shelly_logo_blue_240x140(1).png",
                         bg: "bg-play-blue/5 border-play-blue/15 hover:border-play-blue/35 text-play-blue hover:scale-[1.01]", 
                         badgeColor: "bg-play-blue/12 text-play-blue",
                         desc: t('talent_developers.shelly.desc'),
@@ -809,7 +809,7 @@ export default function PartnerPage() {
                       { 
                         name: "Instrumentation Technologies d.o.o.",
                         role: t('talent_developers.itech.role'),
-                        image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1782203295/it_a7jglx.png",
+                        image: "https://ik.imagekit.io/utigodgni/LOGO_whiteBG_iTech_MAIN.png",
                         bg: "bg-play-purple/5 border-play-purple/15 hover:border-play-purple/35 text-play-purple hover:scale-[1.01]",
                         badgeColor: "bg-play-purple/12 text-play-purple",
                         desc: t('talent_developers.itech.desc'),
@@ -818,7 +818,7 @@ export default function PartnerPage() {
                       { 
                         name: "KA3 d.o.o.",
                         role: t('talent_developers.ka3.role'),
-                        image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781082903/KA3_vector_xmx4id.png",
+                        image: "https://ik.imagekit.io/utigodgni/KA3%20vector-1.png",
                         bg: "bg-play-yellow/5 border-play-yellow/15 hover:border-play-yellow/35 text-play-yellow hover:scale-[1.01]", 
                         badgeColor: "bg-play-yellow/12 text-play-yellow",
                         desc: t('talent_developers.ka3.desc'),
@@ -827,7 +827,7 @@ export default function PartnerPage() {
                       { 
                         name: "SIQ Ljubljana",
                         role: t('talent_developers.siq.role'),
-                        image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1780579720/SIQ_logo_RGB_brez_www_ue0l5s.png",
+                        image: "https://ik.imagekit.io/utigodgni/SIQ_logo_RGB_brez%20www(1).PnG",
                         bg: "bg-play-purple/5 border-play-purple/15 hover:border-play-purple/35 text-play-purple hover:scale-[1.01]", 
                         badgeColor: "bg-play-purple/12 text-play-purple",
                         desc: t('talent_developers.siq.desc'),
@@ -836,10 +836,10 @@ export default function PartnerPage() {
                       { 
                         name: "Gorenje GSI, d.o.o.",
                         role: t('talent_developers.gorenje_gsi.role'),
-                        image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781074497/gorenje_logo_k41vil.png",
+                        image: "https://ik.imagekit.io/utigodgni/gorenje_logotype_positive(1).jpg",
                         images: [
-                          "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781074497/gorenje_logo_k41vil.png",
-                          "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781074484/hisense_logo_positive_meoei1.png"
+                          "https://ik.imagekit.io/utigodgni/gorenje_logotype_positive(1).jpg",
+                          "https://ik.imagekit.io/utigodgni/hisense_logo_positive(1).png"
                         ],
                         bg: "bg-play-teal/5 border-play-teal/15 hover:border-play-teal/35 text-play-teal hover:scale-[1.01]", 
                         badgeColor: "bg-play-teal/12 text-play-teal",
@@ -852,7 +852,7 @@ export default function PartnerPage() {
                       { 
                         name: "A2R d.o.o.",
                         role: t('talent_developers.a2r.role'),
-                        image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781097985/a2r_logo_pcnykd.png",
+                        image: "https://ik.imagekit.io/utigodgni/a2r_logo-1.svg",
                         bg: "bg-play-pink/5 border-play-pink/15 hover:border-play-pink/35 text-play-pink hover:scale-[1.01]", 
                         badgeColor: "bg-play-pink/12 text-play-pink",
                         desc: t('talent_developers.a2r.desc'),
@@ -861,7 +861,7 @@ export default function PartnerPage() {
                       { 
                         name: "Amiteh, merilni sistemi, d.o.o.",
                         role: t('talent_developers.amiteh.role'),
-                        image: "https://res.cloudinary.com/dssxhjk8k/image/upload/v1781532221/AMITEH-RIgol_15_LET_qzngpj.png",
+                        image: "https://ik.imagekit.io/utigodgni/AMITEH-RIgol%2015%20LET-1.png",
                         bg: "bg-play-yellow/5 border-play-yellow/15 hover:border-play-yellow/35 text-play-yellow hover:scale-[1.01]", 
                         badgeColor: "bg-play-yellow/12 text-play-yellow",
                         desc: t('talent_developers.amiteh.desc'),
