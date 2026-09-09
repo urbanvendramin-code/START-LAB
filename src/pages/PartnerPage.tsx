@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import { submitForm } from '../utils/formSubmit';
+import gorenjeLogo from '../assets/images/gorenje_logo.png';
 import { 
   Handshake, 
   Target, 
@@ -64,7 +65,7 @@ const PARTNER_CAROUSEL_LOGOS: CarouselPartner[] = [
   },
   {
     name: "Gorenje",
-    logo: "https://ik.imagekit.io/utigodgni/gorenje_logotype_positive(1).jpg",
+    logo: gorenjeLogo,
     href: "https://si.gorenje.com/"
   },
   {
@@ -836,9 +837,9 @@ export default function PartnerPage() {
                       { 
                         name: "Gorenje GSI, d.o.o.",
                         role: t('talent_developers.gorenje_gsi.role'),
-                        image: "https://ik.imagekit.io/utigodgni/gorenje_logotype_positive(1).jpg",
+                        image: gorenjeLogo,
                         images: [
-                          "https://ik.imagekit.io/utigodgni/gorenje_logotype_positive(1).jpg",
+                          gorenjeLogo,
                           "https://ik.imagekit.io/utigodgni/hisense_logo_positive(1).png"
                         ],
                         bg: "bg-play-teal/5 border-play-teal/15 hover:border-play-teal/35 text-play-teal hover:scale-[1.01]", 

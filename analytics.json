@@ -15,11 +15,11 @@
     "sessionId": "sid_wfz55wnm6_mttqlx5d",
     "ipHash": "ODkuMjEyLj",
     "firstSeen": 1788936509727,
-    "lastSeen": 1788937603963,
-    "durationSeconds": 1094,
+    "lastSeen": 1788938298341,
+    "durationSeconds": 1788,
     "pages": {
-      "/": 4,
-      "/partner": 1
+      "/": 8,
+      "/partner": 3
     },
     "dateCreated": "2026-09-09"
   }
