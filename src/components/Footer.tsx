@@ -32,7 +32,7 @@ export default function Footer() {
   return (
     <footer className="py-12 bg-white border-t border-slate-200 px-4 md:px-6 mt-auto">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-        <Link to="/" className="flex items-center gap-2 h-[120px]">
+        <Link to="/" className="flex items-center gap-2 h-[156px]">
           <img 
             src="https://res.cloudinary.com/pithqpe2/image/upload/v1788421079/Adesivo_SPF_progetti_finanziati_START_bw.png" 
             alt="Start Lab Logo" 

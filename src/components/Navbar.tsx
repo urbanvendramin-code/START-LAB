@@ -70,7 +70,7 @@ export default function Navbar() {
             <img 
               src="https://res.cloudinary.com/pithqpe2/image/upload/v1788421405/LOGO2.png" 
               alt="Start Lab Logo" 
-              className="w-36 xs:w-44 sm:w-48 md:w-52 lg:w-44 xl:w-52 2xl:w-60 h-auto object-contain relative z-10"
+              className="w-[188px] xs:w-[228px] sm:w-[250px] md:w-[270px] lg:w-[228px] xl:w-[270px] 2xl:w-[312px] h-auto object-contain relative z-10"
               referrerPolicy="no-referrer"
             />
           </Link>
