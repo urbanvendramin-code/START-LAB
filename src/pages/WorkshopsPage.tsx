@@ -142,8 +142,8 @@ export default function WorkshopsPage() {
                             </div>
                           )}
                           {isGraphene && (
-                            <div className="bg-emerald-600 text-white px-3 py-1.5 rounded-xl font-display font-black text-[10px] uppercase shadow-sm flex items-center gap-1.5">
-                              ⚡ {isSlovenian ? "Prijave odprte • Še 6 mest" : isItalian ? "Iscrizioni aperte • Ancora 6 posti" : "Open • 6 spots"}
+                            <div className="bg-rose-600 text-white px-3 py-1.5 rounded-xl font-display font-black text-[10px] uppercase shadow-sm flex items-center gap-1.5">
+                              🔒 {isSlovenian ? "Prijave zaklenjene • Zapolnjena mesta" : isItalian ? "Iscrizioni chiuse • Posti esauriti" : "Registrations locked • Full"}
                             </div>
                           )}
                           {(workshop.id === '3d-print-laser' || workshop.id === '3d-print' || workshop.id === 'laser') && (
@@ -153,15 +153,23 @@ export default function WorkshopsPage() {
                           )}
                         </div>
 
-                        {(isRacer || isGraphene) && (
+                        {isRacer && (
                           <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                            <span className={`text-xs font-display font-black uppercase flex items-center gap-1.5 group-hover:translate-x-1 transition-transform ${isRacer ? 'text-amber-600' : 'text-brand-red'}`}>
+                            <span className="text-xs font-display font-black uppercase flex items-center gap-1.5 group-hover:translate-x-1 transition-transform text-amber-600">
                               {isSlovenian ? "Odpri koledar in se prijavi" : isItalian ? "Apri il calendario e iscriviti" : "Open calendar & register"} <ArrowRight size={14} className="stroke-[3]" />
                             </span>
                             <span className="text-[11px] font-bold text-slate-500">
-                              {isRacer 
-                                ? (isSlovenian ? "17. 9. 2026" : isItalian ? "17/09/2026" : "Sept 17, 2026")
-                                : (isSlovenian ? "7. 9. 2026" : isItalian ? "07/09/2026" : "Sept 7, 2026")}
+                              {isSlovenian ? "17. 9. 2026" : isItalian ? "17/09/2026" : "Sept 17, 2026"}
+                            </span>
+                          </div>
+                        )}
+                        {isGraphene && (
+                          <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <span className="text-xs font-display font-black uppercase flex items-center gap-1.5 text-rose-600">
+                              🔒 {isSlovenian ? "Prijave zaklenjene" : isItalian ? "Iscrizioni chiuse" : "Registrations locked"}
+                            </span>
+                            <span className="text-[11px] font-bold text-slate-500">
+                              {isSlovenian ? "7. 9. 2026" : isItalian ? "07/09/2026" : "Sept 7, 2026"}
                             </span>
                           </div>
                         )}
