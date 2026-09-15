@@ -116,7 +116,7 @@ export default function Home() {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <span className="absolute top-1.5 left-1.5 bg-amber-600 text-white font-display font-black text-[9px] uppercase px-2 py-0.5 rounded-full shadow-sm animate-pulse">
-                      ⚡ {isSlovenian ? "Samo še 2 prosti mesti!" : isItalian ? "Solo 2 posti rimasti!" : "Only 2 spots left!"}
+                      ⚡ {isSlovenian ? "Samo še 2 prosta mesta!" : isItalian ? "Solo 2 posti rimasti!" : "Only 2 spots left!"}
                     </span>
                   </div>
 
@@ -149,7 +149,7 @@ export default function Home() {
 
                     <div className="flex items-center justify-between flex-wrap gap-2 pt-1 border-t border-amber-200/50">
                       <span className="text-[11px] font-extrabold text-slate-700">
-                        📍 Start Lab, Solkan • <strong className="text-amber-700 font-black">{isSlovenian ? "Na voljo samo še 2 prosti mesti! (20 €)" : isItalian ? "Solo 2 posti rimasti! (20 €)" : "Only 2 spots left! (20 €)"}</strong>
+                        📍 Start Lab, Solkan • <strong className="text-amber-700 font-black">{isSlovenian ? "Na voljo samo še 2 prosta mesta! (20 €)" : isItalian ? "Solo 2 posti rimasti! (20 €)" : "Only 2 spots left! (20 €)"}</strong>
                       </span>
                       <Link
                         to="/koledar"
