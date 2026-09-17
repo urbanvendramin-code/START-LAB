@@ -138,7 +138,7 @@ export default function WorkshopsPage() {
                           </div>
                           {isRacer && (
                             <div className="bg-amber-600 text-white px-3 py-1.5 rounded-xl font-display font-black text-[10px] uppercase shadow-sm flex items-center gap-1.5 animate-pulse">
-                              ⚡ {isSlovenian ? "Na voljo samo še 2 prosta mesta! • 20 €" : isItalian ? "Solo 2 posti disponibili! • 20 €" : "Only 2 spots left! • 20 €"}
+                              ⚡ {isSlovenian ? "Na voljo samo še eno prosto mesto! • 20 €" : isItalian ? "Solo 1 posto disponibile! • 20 €" : "Only 1 spot left! • 20 €"}
                             </div>
                           )}
                           {isGraphene && (
