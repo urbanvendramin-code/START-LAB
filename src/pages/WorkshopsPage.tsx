@@ -137,8 +137,8 @@ export default function WorkshopsPage() {
                             <MapPin size={14} className="text-brand-red stroke-[2.5]" /> Solkan / LFOS
                           </div>
                           {isRacer && (
-                            <div className="bg-amber-600 text-white px-3 py-1.5 rounded-xl font-display font-black text-[10px] uppercase shadow-sm flex items-center gap-1.5 animate-pulse">
-                              ⚡ {isSlovenian ? "Na voljo samo še eno prosto mesto! • 20 €" : isItalian ? "Solo 1 posto disponibile! • 20 €" : "Only 1 spot left! • 20 €"}
+                            <div className="bg-rose-600 text-white px-3 py-1.5 rounded-xl font-display font-black text-[10px] uppercase shadow-sm flex items-center gap-1.5">
+                              🔒 {isSlovenian ? "Prijave zaklenjene • Zapolnjena mesta" : isItalian ? "Iscrizioni chiuse • Posti esauriti" : "Registrations locked • Full"}
                             </div>
                           )}
                           {isGraphene && (
@@ -155,8 +155,8 @@ export default function WorkshopsPage() {
 
                         {isRacer && (
                           <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                            <span className="text-xs font-display font-black uppercase flex items-center gap-1.5 group-hover:translate-x-1 transition-transform text-amber-600">
-                              {isSlovenian ? "Odpri koledar in se prijavi" : isItalian ? "Apri il calendario e iscriviti" : "Open calendar & register"} <ArrowRight size={14} className="stroke-[3]" />
+                            <span className="text-xs font-display font-black uppercase flex items-center gap-1.5 text-rose-600">
+                              🔒 {isSlovenian ? "Prijave zaklenjene" : isItalian ? "Iscrizioni chiuse" : "Registrations locked"}
                             </span>
                             <span className="text-[11px] font-bold text-slate-500">
                               {isSlovenian ? "17. 9. 2026" : isItalian ? "17/09/2026" : "Sept 17, 2026"}

@@ -446,7 +446,7 @@ export default function CalendarPage() {
   const isIt = i18n.language === 'it';
 
   const openRegisterModal = (event: Event) => {
-    if (event.id.startsWith('printcut') || event.id.startsWith('graphene')) {
+    if (event.id.startsWith('printcut') || event.id.startsWith('graphene') || event.id.startsWith('racer')) {
       return;
     }
     setModalEvent(event);
@@ -717,8 +717,8 @@ export default function CalendarPage() {
                                 {t('calendar_page.workshop')}
                               </span>
                               {isRacer && (
-                                <span className="bg-amber-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-xl shadow-sm animate-pulse">
-                                  ⚡ {isSlovenian ? "Na voljo samo še eno prosto mesto!" : isIt ? "Solo 1 posto rimasto!" : "Only 1 spot left!"}
+                                <span className="bg-rose-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-xl shadow-sm">
+                                  🔒 {isSlovenian ? "Prijave zaklenjene" : isIt ? "Iscrizioni chiuse" : "Registrations locked"}
                                 </span>
                               )}
                               {isGraphene && (
@@ -788,8 +788,8 @@ export default function CalendarPage() {
                                   </span>
                                 </div>
                                 {isRacer ? (
-                                  <span className="bg-amber-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm animate-pulse">
-                                    ⚡ {isSlovenian ? "Na voljo samo še eno prosto mesto!" : isIt ? "Solo 1 posto rimasto!" : "Only 1 spot left!"}
+                                  <span className="bg-rose-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
+                                    🔒 {isSlovenian ? "Prijave zaklenjene • Zapolnjena mesta" : isIt ? "Iscrizioni chiuse • Posti esauriti" : "Registrations locked • Sold out"}
                                   </span>
                                 ) : isGraphene ? (
                                   <span className="bg-rose-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
@@ -897,7 +897,7 @@ export default function CalendarPage() {
                                                   <p><strong>{isSlovenian ? "Trajanje:" : isIt ? "Durata:" : "Duration:"}</strong> 8 x 2 uri, 1x tedensko (ob četrtkih, 17:00 - 19:00)</p>
                                                   <p><strong>{isSlovenian ? "Prva delavnica:" : isIt ? "Prima data:" : "First session:"}</strong> {isSlovenian ? "Četrtek, 17. 9. 2026" : isIt ? "Giovedì, 17.9.2026" : "Thursday, September 17, 2026"}</p>
                                                   <p><strong>{isSlovenian ? "Maksimalno število mest:" : isIt ? "Posti massimi:" : "Max participants:"}</strong> 20 {isSlovenian ? "udeležencev" : isIt ? "partecipanti" : "participants"}</p>
-                                                  <p><strong>{isSlovenian ? "Razpoložljivost:" : isIt ? "Disponibilità:" : "Availability:"}</strong> <span className="text-amber-600 font-extrabold">{isSlovenian ? "⚡ Na voljo samo še eno prosto mesto!" : isIt ? "⚡ Solo 1 posto ancora disponibile!" : "⚡ Only 1 spot left available!"}</span></p>
+                                                  <p><strong>{isSlovenian ? "Razpoložljivost:" : isIt ? "Disponibilità:" : "Availability:"}</strong> <span className="text-rose-600 font-extrabold">{isSlovenian ? "🔒 Prijave so zaklenjene – vsa mesta so že zapolnjena!" : isIt ? "🔒 Iscrizioni chiuse – tutti i posti sono già esauriti!" : "🔒 Registrations locked – all spots are filled!"}</span></p>
                                                   <p><strong>{isSlovenian ? "Cena:" : isIt ? "Prezzo:" : "Price:"}</strong> <span className="text-emerald-700 font-extrabold">{isSlovenian ? "20 € na osebo za celotno 16-urno delavnico" : isIt ? "20 € a persona per l'intero workshop di 16 ore" : "20 € per person for the full 16-hour workshop"}</span></p>
                                                 </div>
                                               </div>
@@ -1265,14 +1265,14 @@ export default function CalendarPage() {
                             )}
 
                             {isRacer && (
-                              <div className="mb-3.5 bg-amber-50 border-2 border-amber-300 text-amber-950 rounded-2xl p-3.5 flex items-center justify-center gap-2.5 text-xs font-display font-black uppercase tracking-wide shadow-sm">
-                                <Sparkles size={18} className="text-amber-600 shrink-0 stroke-[2.5]" />
+                              <div className="mb-3.5 bg-rose-50 border-2 border-rose-300 text-rose-950 rounded-2xl p-3.5 flex items-center justify-center gap-2.5 text-xs font-display font-black uppercase tracking-wide shadow-sm">
+                                <Lock size={18} className="text-rose-600 shrink-0 stroke-[2.5]" />
                                 <span>
                                   {isSlovenian 
-                                    ? "⚡ Na voljo samo še eno prosto mesto!" 
+                                    ? "Prijave so zaklenjene – vsa mesta so že zapolnjena!" 
                                     : isIt 
-                                      ? "⚡ Solo 1 posto ancora disponibile!" 
-                                      : "⚡ Only 1 spot left available!"}
+                                      ? "Iscrizioni chiuse – tutti i posti sono già esauriti!" 
+                                      : "Registrations locked – all spots are filled!"}
                                 </span>
                               </div>
                             )}
@@ -1303,7 +1303,7 @@ export default function CalendarPage() {
                               </div>
                             )}
 
-                            {isPrintCut || isGraphene ? (
+                            {isPrintCut || isGraphene || isRacer ? (
                               <button 
                                 disabled
                                 className="w-full py-4 bg-slate-200 text-slate-500 rounded-2xl font-display font-black uppercase text-sm tracking-wider select-none cursor-not-allowed flex items-center justify-center gap-2 border border-slate-300/80 shadow-inner"
@@ -1563,8 +1563,8 @@ export default function CalendarPage() {
                             <span>{isSlovenian ? "POMEMBNE INFORMACIJE" : isIt ? "INFORMAZIONI IMPORTANTI" : "IMPORTANT INFORMATION"}</span>
                           </div>
                           {modalEvent?.id.startsWith('racer') ? (
-                            <span className="bg-amber-600 text-white font-display font-black text-[10px] uppercase px-2.5 py-0.5 rounded-full shadow-sm animate-pulse">
-                              ⚡ {isSlovenian ? "Samo še 1 prosto mesto!" : isIt ? "Solo 1 posto rimasto!" : "Only 1 spot left!"}
+                            <span className="bg-rose-600 text-white font-display font-black text-[10px] uppercase px-2.5 py-0.5 rounded-full shadow-sm">
+                              🔒 {isSlovenian ? "Prijave zaklenjene • Zapolnjeno" : isIt ? "Iscrizioni chiuse • Tutto esaurito" : "Registrations locked • Sold out"}
                             </span>
                           ) : modalEvent?.id.startsWith('graphene') ? (
                             <span className="bg-rose-600 text-white font-display font-black text-[10px] uppercase px-2.5 py-0.5 rounded-full shadow-sm">
@@ -1578,7 +1578,7 @@ export default function CalendarPage() {
                         </div>
                         <p className="text-slate-900 font-extrabold text-xs">
                           {modalEvent?.id.startsWith('racer')
-                            ? (isSlovenian ? "✓ Cena: 20 € na osebo za celotno 16-urno delavnico • Na voljo samo še eno prosto mesto!" : isIt ? "✓ Prezzo: 20 € a persona per l'intero workshop di 16 ore • Solo 1 posto ancora disponibile!" : "✓ Price: 20 € per person for full 16-hour workshop • Only 1 spot left available!")
+                            ? (isSlovenian ? "✓ Delavnica je polno zasedena – vsa mesta so že zapolnjena in prijave so zaklenjene." : isIt ? "✓ Workshop esaurito – le iscrizioni sono chiuse." : "✓ Workshop is full – registrations are locked.")
                             : modalEvent?.id.startsWith('graphene')
                               ? (isSlovenian ? "✓ Delavnica je polno zasedena – prijave so zaklenjene." : isIt ? "✓ Workshop esaurito – le iscrizioni sono chiuse." : "✓ Workshop is full – registrations are locked.")
                               : isSlovenian 
@@ -1812,7 +1812,7 @@ export default function CalendarPage() {
                         >
                           {isSlovenian ? "Prekliči" : isIt ? "Annulla" : "Cancel"}
                         </button>
-                        {modalEvent?.id.startsWith('printcut') || modalEvent?.id.startsWith('graphene') ? (
+                        {modalEvent?.id.startsWith('printcut') || modalEvent?.id.startsWith('graphene') || modalEvent?.id.startsWith('racer') ? (
                           <button
                             type="button"
                             disabled
