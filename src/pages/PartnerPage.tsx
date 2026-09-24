@@ -74,6 +74,11 @@ const PARTNER_CAROUSEL_LOGOS: CarouselPartner[] = [
     href: "https://si.hisense.com/"
   },
   {
+    name: "B.eng",
+    logo: "https://ik.imagekit.io/utigodgni/B.ENG-logo-def-Light.png",
+    href: "https://www.bengsrl.it/"
+  },
+  {
     name: "A2R",
     logo: "https://ik.imagekit.io/utigodgni/a2r_logo-1.svg",
     href: "https://a2r.si"
@@ -849,6 +854,15 @@ export default function PartnerPage() {
                           { label: "Gorenje", href: "https://si.gorenje.com/" },
                           { label: "Hisense", href: "https://si.hisense.com/" }
                         ]
+                      },
+                      { 
+                        name: "B.eng",
+                        role: t('talent_developers.beng.role'),
+                        image: "https://ik.imagekit.io/utigodgni/B.ENG-logo-def-Light.png",
+                        bg: "bg-play-blue/5 border-play-blue/15 hover:border-play-blue/35 text-play-blue hover:scale-[1.01]", 
+                        badgeColor: "bg-play-blue/12 text-play-blue",
+                        desc: t('talent_developers.beng.desc'),
+                        href: "https://www.bengsrl.it/"
                       },
                       { 
                         name: "A2R d.o.o.",
