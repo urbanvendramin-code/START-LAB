@@ -468,5 +468,17 @@
     "privacy_title": "Varstvo zasebnosti in osebnih podatkov | Start Lab",
     "terms_title": "Splošni pogoji uporabe spletnega mesta | Start Lab",
     "keywords": "Start Lab, Center znanosti, tehnične delavnice za otroke, simulator vožnje, sim racing, Denis Lupo, varna vožnja, Goriška, Nova Gorica, Solkan, STEM delavnice"
+  },
+  "calendar_page": {
+    "title_start": "Koledar",
+    "title_brand": "Dogodkov",
+    "workshop": "Delavnica",
+    "mon": "Pon",
+    "tue": "Tor",
+    "wed": "Sre",
+    "thu": "Čet",
+    "fri": "Pet",
+    "sat": "Sob",
+    "sun": "Ned"
   }
 }

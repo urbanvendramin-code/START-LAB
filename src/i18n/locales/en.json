@@ -468,5 +468,17 @@
     "privacy_title": "Privacy Policy & Personal Data Protection | Start Lab",
     "terms_title": "Terms of Service & Usage | Start Lab",
     "keywords": "Start Lab, Science Center, driving simulator, sim racing, Denis Lupo, safe driving for youth, Goriska, Nova Gorica, Solkan, STEM workshops"
+  },
+  "calendar_page": {
+    "title_start": "Event",
+    "title_brand": "Calendar",
+    "workshop": "Workshop",
+    "mon": "Mon",
+    "tue": "Tue",
+    "wed": "Wed",
+    "thu": "Thu",
+    "fri": "Fri",
+    "sat": "Sat",
+    "sun": "Sun"
   }
 }

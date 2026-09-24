@@ -31,7 +31,12 @@ import {
   GraduationCap, 
   Briefcase,
   AlertTriangle,
-  Lock
+  Lock,
+  List,
+  CalendarDays,
+  Filter,
+  ArrowRight,
+  RotateCcw
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useTranslation } from 'react-i18next';
@@ -43,7 +48,7 @@ interface Event {
   date: Date;
   time: string;
   location: string;
-  category: 'workshop' | 'event' | 'open-lab';
+  category: 'workshop' | 'event' | 'open-lab' | 'occupied';
   description: string;
   longDescription?: string;
   ageGroup?: string;
@@ -375,7 +380,56 @@ const getLocalizedEvents = (lang: string): Event[] => {
     image: 'https://images.unsplash.com/photo-1581092162384-8987c1d64718?auto=format&fit=crop&q=80'
   }));
 
-  return [...racerEvents, ...grapheneEvents, ...printCutEvents];
+  const rawOccupiedEvents = [
+    {
+      id: 'occupied-1',
+      date: new Date(2026, 9, 5), // Oct 5, 2026
+      time: '08:20 - 13:30',
+      location: 'Start Lab, Solkan',
+      title: isSl ? 'Start Lab zasedeno' : isIt ? 'Start Lab occupato' : 'Start Lab booked',
+      description: isSl 
+        ? "Prostori in oprema Start Laba so v tem terminu zasedeni za vnaprej dogovorjene dejavnosti."
+        : isIt
+          ? "I locali e le attrezzature di Start Lab sono occupati in questa fascia oraria per attività prestabilite."
+          : "Start Lab premises and equipment are booked during this time slot for scheduled activities."
+    },
+    {
+      id: 'occupied-2',
+      date: new Date(2026, 9, 6), // Oct 6, 2026
+      time: '08:20 - 13:30',
+      location: 'Start Lab, Solkan',
+      title: isSl ? 'Start Lab zasedeno' : isIt ? 'Start Lab occupato' : 'Start Lab booked',
+      description: isSl 
+        ? "Prostori in oprema Start Laba so v tem terminu zasedeni za vnaprej dogovorjene dejavnosti."
+        : isIt
+          ? "I locali e le attrezzature di Start Lab sono occupati in questa fascia oraria per attività prestabilite."
+          : "Start Lab premises and equipment are booked during this time slot for scheduled activities."
+    },
+    {
+      id: 'occupied-3',
+      date: new Date(2026, 9, 19), // Oct 19, 2026
+      time: '08:00 - 13:00',
+      location: 'Start Lab, Solkan',
+      title: isSl ? 'Start Lab zasedeno' : isIt ? 'Start Lab occupato' : 'Start Lab booked',
+      description: isSl 
+        ? "Prostori in oprema Start Laba so v tem terminu zasedeni za vnaprej dogovorjene dejavnosti."
+        : isIt
+          ? "I locali e le attrezzature di Start Lab sono occupati in questa fascia oraria per attività prestabilite."
+          : "Start Lab premises and equipment are booked during this time slot for scheduled activities."
+    }
+  ];
+
+  const occupiedEvents: Event[] = rawOccupiedEvents.map((item) => ({
+    id: item.id,
+    title: item.title,
+    date: item.date,
+    time: item.time,
+    location: item.location,
+    category: 'occupied',
+    description: item.description
+  }));
+
+  return [...occupiedEvents, ...racerEvents, ...grapheneEvents, ...printCutEvents];
 };
 
 export default function CalendarPage() {
@@ -407,6 +461,21 @@ export default function CalendarPage() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [submitErrorMessage, setSubmitErrorMessage] = useState('');
   const [showMoreDetails, setShowMoreDetails] = useState(false);
+  const [viewMode, setViewMode] = useState<'calendar' | 'list'>('calendar');
+  const [categoryFilter, setCategoryFilter] = useState<'all' | 'occupied' | 'racer' | 'graphene' | 'printcut'>('all');
+
+  const jumpToDate = (targetDate: Date) => {
+    setCurrentMonth(startOfMonth(targetDate));
+    setSelectedDate(targetDate);
+    setViewMode('calendar');
+    setShowMoreDetails(false);
+  };
+
+  const availableMonths = [
+    { date: new Date(2026, 8, 1), labelSl: 'September 2026', labelIt: 'Settembre 2026', labelEn: 'September 2026' },
+    { date: new Date(2026, 9, 1), labelSl: 'Oktober 2026', labelIt: 'Ottobre 2026', labelEn: 'October 2026' },
+    { date: new Date(2026, 10, 1), labelSl: 'November 2026', labelIt: 'Novembre 2026', labelEn: 'November 2026' },
+  ];
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -438,15 +507,55 @@ export default function CalendarPage() {
   });
 
   const events = getLocalizedEvents(i18n.language);
+
+  const filteredEvents = events.filter(event => {
+    if (categoryFilter === 'all') return true;
+    if (categoryFilter === 'occupied') return event.category === 'occupied' || event.id.startsWith('occupied');
+    if (categoryFilter === 'racer') return event.id.startsWith('racer');
+    if (categoryFilter === 'graphene') return event.id.startsWith('graphene');
+    if (categoryFilter === 'printcut') return event.id.startsWith('printcut');
+    return true;
+  });
+
   const selectedDayEvents = selectedDate 
     ? events.filter(event => isSameDay(event.date, selectedDate))
-    : events.filter(event => event.id === 'racer-session-1' || event.id === 'graphene-session-1' || event.id === 'printcut-session-1');
+    : events.filter(event => event.id === 'occupied-1' || event.id === 'racer-session-1' || event.id === 'graphene-session-1' || event.id === 'printcut-session-1');
 
   const isSlovenian = i18n.language !== 'en' && i18n.language !== 'it';
   const isIt = i18n.language === 'it';
 
+  const weekdayNames = isSlovenian
+    ? ['Pon', 'Tor', 'Sre', 'Čet', 'Pet', 'Sob', 'Ned']
+    : isIt
+      ? ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom']
+      : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+  const groupedEventsByMonth = [
+    {
+      monthDate: new Date(2026, 8, 1),
+      title: isSlovenian ? 'September 2026' : isIt ? 'Settembre 2026' : 'September 2026',
+      items: filteredEvents
+        .filter(e => isSameMonth(e.date, new Date(2026, 8, 1)))
+        .sort((a, b) => a.date.getTime() - b.date.getTime())
+    },
+    {
+      monthDate: new Date(2026, 9, 1),
+      title: isSlovenian ? 'Oktober 2026' : isIt ? 'Ottobre 2026' : 'October 2026',
+      items: filteredEvents
+        .filter(e => isSameMonth(e.date, new Date(2026, 9, 1)))
+        .sort((a, b) => a.date.getTime() - b.date.getTime())
+    },
+    {
+      monthDate: new Date(2026, 10, 1),
+      title: isSlovenian ? 'November 2026' : isIt ? 'Novembre 2026' : 'November 2026',
+      items: filteredEvents
+        .filter(e => isSameMonth(e.date, new Date(2026, 10, 1)))
+        .sort((a, b) => a.date.getTime() - b.date.getTime())
+    }
+  ].filter(group => group.items.length > 0);
+
   const openRegisterModal = (event: Event) => {
-    if (event.id.startsWith('printcut') || event.id.startsWith('graphene') || event.id.startsWith('racer')) {
+    if (event.id.startsWith('printcut') || event.id.startsWith('graphene') || event.id.startsWith('racer') || event.id.startsWith('occupied')) {
       return;
     }
     setModalEvent(event);
@@ -537,18 +646,18 @@ export default function CalendarPage() {
   };
 
   return (
-    <div className="pt-8 sm:pt-12 md:pt-16 pb-24 px-4 md:px-6 relative min-h-screen">
-      <div className="max-w-7xl mx-auto">
+    <div className="pt-6 sm:pt-12 md:pt-16 pb-20 sm:pb-24 px-2.5 sm:px-4 md:px-6 relative min-h-screen overflow-x-hidden">
+      <div className="max-w-7xl mx-auto w-full">
         
         {/* Hero Section */}
-        <div className="mb-14">
-          <span className="text-xs font-display font-black text-brand-red uppercase tracking-widest bg-brand-red/10 px-4 py-2 rounded-full mb-4 inline-block">
+        <div className="mb-8 sm:mb-12">
+          <span className="text-[11px] sm:text-xs font-display font-black text-brand-red uppercase tracking-widest bg-brand-red/10 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full mb-3 sm:mb-4 inline-block">
             {isSlovenian ? "RAZPISANI TERMINI IN REZERVACIJE" : isIt ? "SESSIONI DI WORKSHOP E PRENOTAZIONI" : "SCHEDULED SESSIONS & RESERVATIONS"}
           </span>
-          <h1 className="text-4xl md:text-7xl font-display font-black uppercase leading-[1.0] tracking-tight mb-4 text-slate-950">
-            {t('calendar_page.title_start')} <span className="text-brand-red inline-block">{t('calendar_page.title_brand')}</span>
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-display font-black uppercase leading-[1.05] tracking-tight mb-3 sm:mb-4 text-slate-950">
+            {isSlovenian ? "Koledar" : isIt ? "Calendario" : "Event"} <span className="text-brand-red inline-block">{isSlovenian ? "Dogodkov" : isIt ? "Eventi" : "Calendar"}</span>
           </h1>
-          <p className="text-lg text-slate-600 font-semibold max-w-2xl leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-slate-600 font-semibold max-w-2xl leading-relaxed">
             {isSlovenian 
               ? "Preglejte koledar naših tehnoloških delavnic in si zagotovite svoje mesto. Kliknite na označen datum za ogled podrobnosti in enostavno spletno prijavo."
               : isIt
@@ -557,147 +666,599 @@ export default function CalendarPage() {
           </p>
         </div>
 
-        {/* Dynamic Interactive Panel */}
-        <div className="grid lg:grid-cols-[1.2fr_1fr] gap-8 mb-16">
-          
-          {/* Calendar View Container */}
-          <div className="play-card p-6 md:p-8 border-2 border-slate-950/10 bg-white shadow-xl relative flex flex-col justify-between">
+        {/* Quick Highlights & Direct Information Cards */}
+        <div className="mb-6 sm:mb-8 grid md:grid-cols-2 gap-3 sm:gap-4">
+          {/* Card 1: Start Lab zasedenost */}
+          <div className="bg-rose-50/80 border-2 border-rose-200/90 rounded-2xl sm:rounded-3xl p-4 sm:p-5 md:p-6 flex flex-col justify-between shadow-xs">
             <div>
-              {/* Calendar Header Navigation */}
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-2xl md:text-3.5xl font-display font-black uppercase text-slate-950 select-none">
-                  {format(currentMonth, dateFormat, { locale: currentLocale })}
+              <div className="flex items-center gap-2 text-rose-800 font-display font-black text-xs uppercase tracking-wider mb-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-rose-600 animate-pulse" />
+                <span>{isSlovenian ? "Start Lab zasedeno – prihajajoči termini" : isIt ? "Start Lab occupato – prossime date" : "Start Lab booked – upcoming dates"}</span>
+              </div>
+              <p className="text-slate-700 text-xs sm:text-sm font-semibold leading-relaxed mb-3 sm:mb-4">
+                {isSlovenian 
+                  ? "Prostori in oprema Start Laba so v naslednjih terminih rezervirani za vnaprej dogovorjene dejavnosti:"
+                  : isIt 
+                    ? "I locali e le attrezzature di Start Lab sono occupati nelle seguenti fasce orarie per attività prestabilite:"
+                    : "Start Lab premises and equipment are booked during the following time slots for scheduled activities:"}
+              </p>
+              <div className="flex flex-wrap gap-2 mb-3">
+                <button
+                  type="button"
+                  onClick={() => jumpToDate(new Date(2026, 9, 5))}
+                  className="px-2.5 sm:px-3.5 py-1.5 sm:py-2 bg-white border-2 border-rose-300 hover:border-rose-600 hover:bg-rose-600 hover:text-white transition-all rounded-xl text-xs font-display font-black text-rose-950 flex items-center gap-1.5 sm:gap-2 cursor-pointer shadow-xs group"
+                >
+                  <CalendarIcon size={13} className="text-rose-600 group-hover:text-white" />
+                  <span>5. okt (08:20 – 13:30)</span>
+                  <ArrowRight size={11} className="opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-transform" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => jumpToDate(new Date(2026, 9, 6))}
+                  className="px-2.5 sm:px-3.5 py-1.5 sm:py-2 bg-white border-2 border-rose-300 hover:border-rose-600 hover:bg-rose-600 hover:text-white transition-all rounded-xl text-xs font-display font-black text-rose-950 flex items-center gap-1.5 sm:gap-2 cursor-pointer shadow-xs group"
+                >
+                  <CalendarIcon size={13} className="text-rose-600 group-hover:text-white" />
+                  <span>6. okt (08:20 – 13:30)</span>
+                  <ArrowRight size={11} className="opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-transform" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => jumpToDate(new Date(2026, 9, 19))}
+                  className="px-2.5 sm:px-3.5 py-1.5 sm:py-2 bg-white border-2 border-rose-300 hover:border-rose-600 hover:bg-rose-600 hover:text-white transition-all rounded-xl text-xs font-display font-black text-rose-950 flex items-center gap-1.5 sm:gap-2 cursor-pointer shadow-xs group"
+                >
+                  <CalendarIcon size={13} className="text-rose-600 group-hover:text-white" />
+                  <span>19. okt (08:00 – 13:00)</span>
+                  <ArrowRight size={11} className="opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-transform" />
+                </button>
+              </div>
+            </div>
+            <p className="text-[10px] sm:text-[11px] text-rose-800 font-bold mt-1">
+              {isSlovenian ? "👆 Kliknite na termin za takojšen ogled podrobnosti dneva na koledarju." : isIt ? "👆 Clicca sulla data per visualizzare subito i dettagli sul calendario." : "👆 Click a slot to inspect day details on the calendar."}
+            </p>
+          </div>
+
+          {/* Card 2: Status delavnic */}
+          <div className="bg-slate-50 border-2 border-slate-200/90 rounded-2xl sm:rounded-3xl p-4 sm:p-5 md:p-6 flex flex-col justify-between shadow-xs">
+            <div>
+              <div className="flex items-center gap-2 text-slate-700 font-display font-black text-xs uppercase tracking-wider mb-2">
+                <Lock size={14} className="text-slate-600 stroke-[2.5]" />
+                <span>{isSlovenian ? "Status prijav na jesenske delavnice" : isIt ? "Stato iscrizioni ai workshop autunnali" : "Autumn workshops registration status"}</span>
+              </div>
+              <p className="text-slate-600 text-xs sm:text-sm font-semibold leading-relaxed mb-3 sm:mb-4">
+                {isSlovenian 
+                  ? "Zaradi izjemnega odziva so vsa mesta za cikle Elektronika in dirkač, Grafenski čip ter Natisni in izreži že polno zasedena. Prijave so trenutno zaklenjene."
+                  : isIt 
+                    ? "A causa dell'alto interesse, tutti i posti disponibili per i cicli Elettronica e bolide, Chip al grafene e Stampa e taglia sono esauriti. Le iscrizioni sono chiuse."
+                    : "Due to high demand, all spots for Electronics & Racer, Graphene Chip, and Print & Cut cycles are filled. Registrations are locked."}
+              </p>
+              <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
+                <span className="w-2 h-2 rounded-full bg-slate-400 shrink-0" />
+                <span className="text-[11px] sm:text-xs">{isSlovenian ? "Novi cikli in delavnice bodo objavljeni v prihodnjih mesecih." : isIt ? "Nuovi cicli saranno pubblicati nei prossimi mesi." : "New cycles will be announced in upcoming months."}</span>
+              </div>
+            </div>
+            <div className="mt-4 pt-3 border-t border-slate-200/60 flex items-center justify-between">
+              <Link 
+                to="/kontakt"
+                className="inline-flex items-center gap-1.5 text-xs font-display font-black text-brand-red hover:underline uppercase"
+              >
+                <span>{isSlovenian ? "Vprašanja ali povpraševanja glede Start Laba →" : isIt ? "Contattaci per informazioni →" : "Inquiries & Contact →"}</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Navigation & Filter Bar */}
+        <div className="mb-5 sm:mb-6 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 sm:gap-4 bg-white p-2.5 sm:p-3.5 md:p-4 rounded-2xl sm:rounded-3xl border-2 border-slate-200/80 shadow-xs">
+          {/* Category Filters */}
+          <div className="flex items-center gap-1 sm:gap-1.5 overflow-x-auto pb-1.5 lg:pb-0 scrollbar-none -mx-1 px-1">
+            <button
+              type="button"
+              onClick={() => setCategoryFilter('all')}
+              className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-display font-black uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer shrink-0 ${
+                categoryFilter === 'all'
+                  ? 'bg-slate-950 text-white shadow-xs'
+                  : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+              }`}
+            >
+              {isSlovenian ? "Vsi termini" : isIt ? "Tutti i termini" : "All dates"} ({events.length})
+            </button>
+            <button
+              type="button"
+              onClick={() => setCategoryFilter('occupied')}
+              className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-display font-black uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 shrink-0 ${
+                categoryFilter === 'occupied'
+                  ? 'bg-rose-600 text-white shadow-xs'
+                  : 'bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-200/60'
+              }`}
+            >
+              <span className={`w-2 h-2 rounded-full ${categoryFilter === 'occupied' ? 'bg-white' : 'bg-rose-600'}`} />
+              {isSlovenian ? "Start Lab zasedeno" : isIt ? "Start Lab occupato" : "Start Lab booked"} (3)
+            </button>
+            <button
+              type="button"
+              onClick={() => setCategoryFilter('racer')}
+              className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-display font-black uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 shrink-0 ${
+                categoryFilter === 'racer'
+                  ? 'bg-amber-500 text-white shadow-xs'
+                  : 'bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200/60'
+              }`}
+            >
+              <span className={`w-2 h-2 rounded-full ${categoryFilter === 'racer' ? 'bg-white' : 'bg-amber-500'}`} />
+              {isSlovenian ? "Elektronika in dirkač" : isIt ? "Elettronica e bolide" : "Electronics & Racer"} (8)
+            </button>
+            <button
+              type="button"
+              onClick={() => setCategoryFilter('graphene')}
+              className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-display font-black uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 shrink-0 ${
+                categoryFilter === 'graphene'
+                  ? 'bg-brand-red text-white shadow-xs'
+                  : 'bg-red-50 hover:bg-red-100 text-brand-red border border-red-200/60'
+              }`}
+            >
+              <span className={`w-2 h-2 rounded-full ${categoryFilter === 'graphene' ? 'bg-white' : 'bg-brand-red'}`} />
+              {isSlovenian ? "Grafenski čip" : isIt ? "Chip al grafene" : "Graphene Chip"} (6)
+            </button>
+            <button
+              type="button"
+              onClick={() => setCategoryFilter('printcut')}
+              className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-display font-black uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 shrink-0 ${
+                categoryFilter === 'printcut'
+                  ? 'bg-play-teal text-white shadow-xs'
+                  : 'bg-teal-50 hover:bg-teal-100 text-play-teal border border-teal-200/60'
+              }`}
+            >
+              <span className={`w-2 h-2 rounded-full ${categoryFilter === 'printcut' ? 'bg-white' : 'bg-play-teal'}`} />
+              {isSlovenian ? "Natisni in izreži" : isIt ? "Stampa e taglia" : "Print & Cut"} (8)
+            </button>
+          </div>
+
+          {/* View Mode Toggle */}
+          <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl sm:rounded-2xl border border-slate-200 shrink-0 self-stretch sm:self-auto justify-between sm:justify-start">
+            <button
+              type="button"
+              onClick={() => setViewMode('calendar')}
+              className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-display font-black uppercase tracking-wider transition-all cursor-pointer ${
+                viewMode === 'calendar'
+                  ? 'bg-white text-slate-950 shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <CalendarDays size={14} className="stroke-[2.5]" />
+              <span>{isSlovenian ? "Mesečni koledar" : isIt ? "Koledar" : "Calendar view"}</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setViewMode('list')}
+              className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-display font-black uppercase tracking-wider transition-all cursor-pointer ${
+                viewMode === 'list'
+                  ? 'bg-white text-slate-950 shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <List size={14} className="stroke-[2.5]" />
+              <span>{isSlovenian ? "Seznam terminov" : isIt ? "Elenco date" : "List view"}</span>
+            </button>
+          </div>
+        </div>
+
+        {viewMode === 'list' ? (
+          /* Chronological List / Schedule View */
+          <div className="bg-white border-2 border-slate-200/80 rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 md:p-8 shadow-xl mb-16">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-3 sm:pb-4 mb-4 sm:mb-6 border-b border-slate-100 gap-3">
+              <div>
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-display font-black uppercase text-slate-950">
+                  {isSlovenian ? "Kronološki pregled vseh terminov" : isIt ? "Elenco cronologico delle date" : "Chronological schedule"}
                 </h2>
-                <div className="flex gap-2">
-                  <button 
-                    onClick={prevMonth}
-                    className="w-11 h-11 border-2 border-slate-200 hover:border-slate-900 rounded-full flex items-center justify-center hover:bg-slate-950 hover:text-white transition-all text-slate-800 cursor-pointer"
-                    title={isSlovenian ? "Prejšnji mesec" : isIt ? "Mese precedente" : "Previous month"}
-                  >
-                    <ChevronLeft size={20} className="stroke-[2.5]" />
-                  </button>
-                  <button 
-                    onClick={nextMonth}
-                    className="w-11 h-11 border-2 border-slate-200 hover:border-slate-900 rounded-full flex items-center justify-center hover:bg-slate-950 hover:text-white transition-all text-slate-800 cursor-pointer"
-                    title={isSlovenian ? "Naslednji mesec" : isIt ? "Mese successivo" : "Next month"}
-                  >
-                    <ChevronRight size={20} className="stroke-[2.5]" />
-                  </button>
-                </div>
+                <p className="text-xs md:text-sm text-slate-500 font-semibold mt-1">
+                  {isSlovenian 
+                    ? `Prikazanih ${filteredEvents.length} terminov razvrščenih po mesecih in dnevih.`
+                    : isIt 
+                      ? `Mostrate ${filteredEvents.length} date ordinate per mese e giorno.`
+                      : `Showing ${filteredEvents.length} scheduled dates by month.`}
+                </p>
               </div>
+              {categoryFilter !== 'all' && (
+                <button
+                  type="button"
+                  onClick={() => setCategoryFilter('all')}
+                  className="px-3 py-1.5 rounded-xl border border-slate-200 hover:border-slate-950 text-xs font-bold transition-all text-slate-600 hover:text-slate-950 bg-slate-50 hover:bg-slate-100 flex items-center gap-1.5 cursor-pointer"
+                >
+                  <RotateCcw size={12} />
+                  <span>{isSlovenian ? "Prikaži vse kategorije" : isIt ? "Mostra tutte le categorie" : "Show all categories"}</span>
+                </button>
+              )}
+            </div>
 
-              {/* Legend of Workshops - Top of Calendar */}
-              <div className="mb-6 p-3 bg-slate-50 border border-slate-200/80 rounded-2xl flex flex-wrap gap-x-4 gap-y-2 items-center justify-start text-xs text-slate-700 font-bold select-none">
-                <span className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block shadow-sm" />
-                  {isSlovenian ? "Elektronika in dirkač" : isIt ? "Elettronica e bolide" : "Electronics & Racer"}
-                </span>
-                <span className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-brand-red inline-block shadow-sm" />
-                  {isSlovenian ? "Grafenski čip" : isIt ? "Serie chip al grafene" : "Graphene chip series"}
-                </span>
-                <span className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-play-teal inline-block shadow-sm" />
-                  {isSlovenian ? "Natisni in izreži" : isIt ? "Serie stampa e taglia" : "Print & Cut series"}
-                </span>
-              </div>
+            {groupedEventsByMonth.length > 0 ? (
+              <div className="space-y-8">
+                {groupedEventsByMonth.map((group, gIdx) => (
+                  <div key={gIdx} className="space-y-3">
+                    <div className="flex items-center gap-3">
+                      <h3 className="text-lg md:text-xl font-display font-black uppercase text-slate-900 tracking-tight">
+                        {group.title}
+                      </h3>
+                      <span className="text-xs font-display font-black px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600">
+                        {group.items.length} {isSlovenian ? "terminov" : isIt ? "date" : "slots"}
+                      </span>
+                      <div className="flex-1 h-px bg-slate-200" />
+                    </div>
 
-              {/* Weekdays Row */}
-              <div className="grid grid-cols-7 gap-2 mb-4">
-                {[
-                  t('calendar_page.mon'), 
-                  t('calendar_page.tue'), 
-                  t('calendar_page.wed'), 
-                  t('calendar_page.thu'), 
-                  t('calendar_page.fri'), 
-                  t('calendar_page.sat'), 
-                  t('calendar_page.sun')
-                ].map(day => (
-                  <div key={day} className="text-center text-xs font-display font-black uppercase tracking-wider text-play-pink py-2 bg-play-pink/8 rounded-2xl select-none">
-                    {day}
+                    <div className="grid gap-3">
+                      {group.items.map((event) => {
+                        const isOccupied = event.category === 'occupied' || event.id.startsWith('occupied');
+                        const isRacer = event.id.startsWith('racer');
+                        const isGraphene = event.id.startsWith('graphene');
+                        const isPrintCut = event.id.startsWith('printcut');
+
+                        return (
+                          <div
+                            key={event.id}
+                            className={`p-4 md:p-5 rounded-2xl border-2 transition-all hover:shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-4 ${
+                              isOccupied 
+                                ? 'bg-rose-50/60 border-rose-200' 
+                                : isRacer
+                                  ? 'bg-amber-50/20 border-amber-200/80'
+                                  : isGraphene
+                                    ? 'bg-brand-red/[0.02] border-brand-red/20'
+                                    : 'bg-play-teal/[0.02] border-play-teal/20'
+                            }`}
+                          >
+                            {/* Left: Date badge */}
+                            <div className="flex items-center gap-3.5 shrink-0">
+                              <div className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl flex flex-col items-center justify-center font-display shadow-xs border ${
+                                isOccupied
+                                  ? 'bg-rose-600 text-white border-rose-700'
+                                  : isRacer
+                                    ? 'bg-amber-500 text-white border-amber-600'
+                                    : isGraphene
+                                      ? 'bg-brand-red text-white border-brand-red'
+                                      : 'bg-play-teal text-white border-play-teal'
+                              }`}>
+                                <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider opacity-90">
+                                  {format(event.date, 'MMM', { locale: currentLocale })}
+                                </span>
+                                <span className="text-xl md:text-2xl font-black leading-none">
+                                  {format(event.date, 'd')}
+                                </span>
+                              </div>
+                              <div>
+                                <p className="font-display font-black text-sm text-slate-900 capitalize">
+                                  {format(event.date, 'EEEE', { locale: currentLocale })}
+                                </p>
+                                <div className="flex items-center gap-1.5 text-xs text-slate-600 font-semibold mt-0.5">
+                                  <Clock size={13} className="text-brand-red stroke-[2.5]" />
+                                  <span>{event.time}</span>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Middle: Content */}
+                            <div className="flex-1 min-w-0 pr-2">
+                              <div className="flex items-center gap-2 mb-1 flex-wrap">
+                                <span className={`text-[10px] font-display font-black uppercase tracking-wider px-2 py-0.5 rounded-lg ${
+                                  isOccupied
+                                    ? 'bg-rose-100 text-rose-800'
+                                    : isRacer
+                                      ? 'bg-amber-100 text-amber-800'
+                                      : isGraphene
+                                        ? 'bg-brand-red/10 text-brand-red'
+                                        : 'bg-play-teal/15 text-play-teal'
+                                }`}>
+                                  {isOccupied 
+                                    ? (isSlovenian ? "Start Lab zasedeno" : isIt ? "Start Lab occupato" : "Start Lab booked")
+                                    : event.id.startsWith('racer')
+                                      ? (isSlovenian ? "Elektronika in dirkač" : isIt ? "Elettronica e bolide" : "Electronics & Racer")
+                                      : event.id.startsWith('graphene')
+                                        ? (isSlovenian ? "Grafenski čip" : isIt ? "Chip al grafene" : "Graphene Chip")
+                                        : (isSlovenian ? "Natisni in izreži" : isIt ? "Stampa e taglia" : "Print & Cut")}
+                                </span>
+                                <span className="text-xs text-slate-500 font-semibold flex items-center gap-1">
+                                  <MapPin size={12} className="text-slate-400" />
+                                  {event.location}
+                                </span>
+                              </div>
+                              <h4 className="font-display font-bold text-base text-slate-950 mb-1 leading-snug">
+                                {event.title}
+                              </h4>
+                              <p className="text-xs text-slate-600 font-normal line-clamp-2 leading-relaxed">
+                                {event.description}
+                              </p>
+                            </div>
+
+                            {/* Right: Status and action */}
+                            <div className="flex md:flex-col items-center md:items-end justify-between w-full md:w-auto gap-2 shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-slate-200/60">
+                              <span className={`px-2.5 py-1 rounded-xl text-[10px] font-display font-black uppercase tracking-wider flex items-center gap-1 shadow-xs ${
+                                isOccupied
+                                  ? 'bg-rose-600 text-white'
+                                  : 'bg-slate-200 text-slate-700'
+                              }`}>
+                                <Lock size={12} />
+                                <span>
+                                  {isOccupied
+                                    ? (isSlovenian ? "Zasedeno" : isIt ? "Occupato" : "Booked")
+                                    : (isSlovenian ? "Prijave zaprte" : isIt ? "Iscrizioni chiuse" : "Locked")}
+                                </span>
+                              </span>
+
+                              <button
+                                type="button"
+                                onClick={() => jumpToDate(event.date)}
+                                className="inline-flex items-center gap-1 text-xs font-display font-black uppercase text-brand-red hover:text-brand-red/80 hover:underline cursor-pointer"
+                              >
+                                <span>{isSlovenian ? "Odpri na koledarju" : isIt ? "Vedi sul calendario" : "View on calendar"}</span>
+                                <ArrowRight size={13} className="stroke-[2.5]" />
+                              </button>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
                 ))}
               </div>
-
-               {/* Days Grid */}
-              <div className="grid grid-cols-7 gap-2 md:gap-3">
-                {calendarDays.map((date, idx) => {
-                  const dayEvents = events.filter(event => isSameDay(event.date, date));
-                  const hasEvents = dayEvents.length > 0;
-                  const isSelected = selectedDate ? isSameDay(date, selectedDate) : false;
-                  const isCurrentMonth = isSameMonth(date, monthStart);
-                  
-                  // Check if this belongs to the racer, graphene or printcut workshop series
-                  const isRacerEvent = dayEvents.some(e => e.id.startsWith('racer'));
-                  const isGrapheneEvent = dayEvents.some(e => e.id.startsWith('graphene'));
-                  const isPrintCutEvent = dayEvents.some(e => e.id.startsWith('printcut'));
-
-                  return (
-                    <button
-                      key={idx}
-                      onClick={() => {
-                        if (selectedDate && isSameDay(date, selectedDate)) {
+            ) : (
+              <div className="text-center py-12 px-4">
+                <CalendarIcon className="text-slate-300 mx-auto mb-3" size={32} />
+                <p className="text-slate-600 font-semibold text-sm">
+                  {isSlovenian ? "Ni najdenih terminov za izbrani filter." : isIt ? "Nessun evento trovato per il filtro selezionato." : "No events found for selected filter."}
+                </p>
+              </div>
+            )}
+          </div>
+        ) : (
+          /* Calendar Grid + Sidebar Layout */
+          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-6 md:gap-8 mb-16">
+            
+            {/* Calendar View Container */}
+            <div className="play-card p-3 sm:p-5 md:p-8 border-2 border-slate-950/10 bg-white shadow-xl relative flex flex-col justify-between rounded-2xl sm:rounded-3xl">
+              <div>
+                {/* Month Jump Tabs */}
+                <div className="flex items-center gap-1.5 sm:gap-2 mb-3 sm:mb-4 overflow-x-auto pb-1 scrollbar-none -mx-0.5 px-0.5">
+                  <span className="text-[10px] sm:text-[11px] font-display font-black uppercase text-slate-400 mr-0.5 shrink-0">
+                    {isSlovenian ? "Hitri skok:" : isIt ? "Mese:" : "Month:"}
+                  </span>
+                  {availableMonths.map((m, idx) => {
+                    const isCurrent = isSameMonth(currentMonth, m.date);
+                    return (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => {
+                          setCurrentMonth(m.date);
                           setSelectedDate(null);
-                        } else {
-                          setSelectedDate(date);
-                        }
-                        setShowMoreDetails(false);
-                      }}
-                      className={`
-                        relative aspect-square p-2 rounded-2xl border-2 transition-all flex flex-col items-center justify-between text-center select-none cursor-pointer
-                        ${isCurrentMonth ? 'text-slate-900 font-bold' : 'text-slate-500 font-semibold'}
-                        ${isSelected 
-                          ? 'bg-slate-950 border-slate-950 text-white shadow-[0_6px_0_0_rgba(222,59,59,0.3)] -translate-y-1' 
-                          : 'bg-slate-50 border-slate-100 hover:border-brand-red/40 hover:bg-white'}
-                      `}
+                        }}
+                        className={`px-2.5 sm:px-3 py-1 rounded-xl text-[11px] sm:text-xs font-display font-black transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+                          isCurrent
+                            ? 'bg-slate-950 text-white shadow-xs'
+                            : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                        }`}
+                      >
+                        {isSlovenian ? m.labelSl : isIt ? m.labelIt : m.labelEn}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Calendar Header Navigation */}
+                <div className="flex items-center justify-between mb-3 sm:mb-4 gap-2">
+                  <h2 className="text-xl sm:text-2xl md:text-3.5xl font-display font-black uppercase text-slate-950 select-none truncate">
+                    {format(currentMonth, dateFormat, { locale: currentLocale })}
+                  </h2>
+                  <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                    <button 
+                      type="button"
+                      onClick={prevMonth}
+                      className="w-9 h-9 sm:w-11 sm:h-11 border-2 border-slate-200 hover:border-slate-900 rounded-full flex items-center justify-center hover:bg-slate-950 hover:text-white transition-all text-slate-800 cursor-pointer shadow-xs"
+                      title={isSlovenian ? "Prejšnji mesec" : isIt ? "Mese precedente" : "Previous month"}
                     >
-                      <span className="text-base md:text-lg font-display font-black">{format(date, 'd')}</span>
-                      
-                      {hasEvents && (
-                        <div className="flex gap-1 justify-center mt-auto w-full">
-                          {isRacerEvent ? (
-                            <span className={`w-2 h-2 rounded-full ${isSelected ? 'bg-amber-500 border border-white' : 'bg-amber-500 animate-pulse'}`} title={isSlovenian ? "Elektronika in dirkač" : isIt ? "Elettronica e bolide" : "Electronics & Racer"} />
-                          ) : isGrapheneEvent ? (
-                            <span className={`w-2 h-2 rounded-full ${isSelected ? 'bg-brand-red border border-white' : 'bg-brand-red animate-pulse'}`} title={isSlovenian ? "Grafenski čip" : isIt ? "Chip al grafene" : "Graphene Chip"} />
-                          ) : isPrintCutEvent ? (
-                            <span className={`w-2 h-2 rounded-full ${isSelected ? 'bg-play-teal border border-white' : 'bg-play-teal animate-pulse'}`} title={isSlovenian ? "Natisni in izreži" : isIt ? "Stampa e taglia" : "Print & Cut"} />
-                          ) : (
-                            <span className="w-2 h-2 rounded-full bg-slate-400" />
+                      <ChevronLeft size={18} className="stroke-[2.5]" />
+                    </button>
+                    <button 
+                      type="button"
+                      onClick={nextMonth}
+                      className="w-9 h-9 sm:w-11 sm:h-11 border-2 border-slate-200 hover:border-slate-900 rounded-full flex items-center justify-center hover:bg-slate-950 hover:text-white transition-all text-slate-800 cursor-pointer shadow-xs"
+                      title={isSlovenian ? "Naslednji mesec" : isIt ? "Mese successivo" : "Next month"}
+                    >
+                      <ChevronRight size={18} className="stroke-[2.5]" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Legend of Workshops - Top of Calendar with interactive filter */}
+                <div className="mb-4 sm:mb-6 p-2 sm:p-3 bg-slate-50 border border-slate-200/80 rounded-xl sm:rounded-2xl flex flex-wrap gap-x-2 sm:gap-x-4 gap-y-1.5 sm:gap-y-2 items-center justify-start text-[11px] sm:text-xs text-slate-700 font-bold select-none">
+                  <button
+                    type="button"
+                    onClick={() => setCategoryFilter(categoryFilter === 'occupied' ? 'all' : 'occupied')}
+                    className={`flex items-center gap-1 sm:gap-1.5 px-2 py-0.5 rounded-lg transition-all cursor-pointer ${categoryFilter === 'occupied' ? 'bg-rose-100 text-rose-900 ring-1 ring-rose-400' : 'hover:bg-slate-200/60'}`}
+                  >
+                    <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-rose-500 inline-block shadow-sm" />
+                    <span>{isSlovenian ? "Start Lab zasedeno" : isIt ? "Start Lab occupato" : "Start Lab booked"}</span>
+                    <span className="text-[10px] text-slate-500 font-normal">(3)</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setCategoryFilter(categoryFilter === 'racer' ? 'all' : 'racer')}
+                    className={`flex items-center gap-1 sm:gap-1.5 px-2 py-0.5 rounded-lg transition-all cursor-pointer ${categoryFilter === 'racer' ? 'bg-amber-100 text-amber-900 ring-1 ring-amber-400' : 'hover:bg-slate-200/60'}`}
+                  >
+                    <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-amber-500 inline-block shadow-sm" />
+                    <span>{isSlovenian ? "Elektronika in dirkač" : isIt ? "Elettronica e bolide" : "Electronics & Racer"}</span>
+                    <span className="text-[10px] text-slate-500 font-normal">(8)</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setCategoryFilter(categoryFilter === 'graphene' ? 'all' : 'graphene')}
+                    className={`flex items-center gap-1 sm:gap-1.5 px-2 py-0.5 rounded-lg transition-all cursor-pointer ${categoryFilter === 'graphene' ? 'bg-red-100 text-red-900 ring-1 ring-red-400' : 'hover:bg-slate-200/60'}`}
+                  >
+                    <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-brand-red inline-block shadow-sm" />
+                    <span>{isSlovenian ? "Grafenski čip" : isIt ? "Serie chip al grafene" : "Graphene chip series"}</span>
+                    <span className="text-[10px] text-slate-500 font-normal">(6)</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setCategoryFilter(categoryFilter === 'printcut' ? 'all' : 'printcut')}
+                    className={`flex items-center gap-1 sm:gap-1.5 px-2 py-0.5 rounded-lg transition-all cursor-pointer ${categoryFilter === 'printcut' ? 'bg-teal-100 text-teal-900 ring-1 ring-teal-400' : 'hover:bg-slate-200/60'}`}
+                  >
+                    <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-play-teal inline-block shadow-sm" />
+                    <span>{isSlovenian ? "Natisni in izreži" : isIt ? "Serie stampa e taglia" : "Print & Cut series"}</span>
+                    <span className="text-[10px] text-slate-500 font-normal">(8)</span>
+                  </button>
+                </div>
+
+                {/* Weekdays Row */}
+                <div className="grid grid-cols-7 gap-1 sm:gap-2 mb-2 sm:mb-4">
+                  {weekdayNames.map((day, idx) => (
+                    <div key={idx} className="text-center text-[10px] sm:text-xs font-display font-black uppercase tracking-tight text-play-pink py-1.5 sm:py-2 bg-play-pink/8 rounded-lg sm:rounded-xl select-none truncate px-0.5">
+                      {day}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Days Grid */}
+                <div className="grid grid-cols-7 gap-1 sm:gap-2 md:gap-3">
+                  {calendarDays.map((date, idx) => {
+                    const dayEvents = filteredEvents.filter(event => isSameDay(event.date, date));
+                    const hasEvents = dayEvents.length > 0;
+                    const isSelected = selectedDate ? isSameDay(date, selectedDate) : false;
+                    const isCurrentMonth = isSameMonth(date, monthStart);
+                    
+                    const isOccupiedEvent = dayEvents.some(e => e.id.startsWith('occupied'));
+                    const isRacerEvent = dayEvents.some(e => e.id.startsWith('racer'));
+                    const isGrapheneEvent = dayEvents.some(e => e.id.startsWith('graphene'));
+                    const isPrintCutEvent = dayEvents.some(e => e.id.startsWith('printcut'));
+
+                    return (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => {
+                          if (selectedDate && isSameDay(date, selectedDate)) {
+                            setSelectedDate(null);
+                          } else {
+                            setSelectedDate(date);
+                          }
+                          setShowMoreDetails(false);
+                        }}
+                        className={`
+                          relative min-h-[46px] sm:min-h-[64px] md:min-h-[82px] p-1 sm:p-1.5 md:p-2 rounded-xl sm:rounded-2xl border transition-all flex flex-col justify-between select-none cursor-pointer text-left
+                          ${!isCurrentMonth ? 'opacity-35 bg-slate-50/50 border-slate-100 text-slate-400' : 'text-slate-900'}
+                          ${isSelected 
+                            ? 'bg-slate-950 border-slate-950 text-white shadow-lg -translate-y-0.5 ring-2 ring-brand-red/50' 
+                            : hasEvents
+                              ? isOccupiedEvent
+                                ? 'bg-rose-50/70 border-rose-300 hover:border-rose-500 hover:bg-rose-100/60'
+                                : isRacerEvent
+                                  ? 'bg-amber-50/40 border-amber-300 hover:border-amber-500 hover:bg-amber-100/50'
+                                  : isGrapheneEvent
+                                    ? 'bg-brand-red/[0.04] border-brand-red/40 hover:border-brand-red hover:bg-brand-red/10'
+                                    : 'bg-play-teal/[0.04] border-play-teal/40 hover:border-play-teal hover:bg-play-teal/10'
+                              : 'bg-slate-50 border-slate-100 hover:border-slate-300 hover:bg-white'}
+                        `}
+                      >
+                        <div className="flex items-center justify-between w-full">
+                          <span className={`text-[11px] sm:text-sm md:text-base font-display font-black leading-none ${isSelected ? 'text-white' : ''}`}>
+                            {format(date, 'd')}
+                          </span>
+                          {hasEvents && (
+                            <span className={`text-[8px] sm:text-[9px] font-black px-1 py-0.2 rounded leading-none ${
+                              isSelected
+                                ? 'bg-white/20 text-white'
+                                : isOccupiedEvent
+                                  ? 'bg-rose-600 text-white'
+                                  : 'bg-slate-200 text-slate-700'
+                            }`}>
+                              {dayEvents.length > 1 ? `${dayEvents.length}x` : ''}
+                            </span>
                           )}
                         </div>
-                      )}
-                    </button>
-                  );
-                })}
+                        
+                        {hasEvents && (
+                          <div className="mt-0.5 sm:mt-1 space-y-1 w-full overflow-hidden">
+                            {/* Desktop micro-labels */}
+                            <div className="hidden md:flex flex-col gap-1 w-full">
+                              {isOccupiedEvent && (
+                                <span className="text-[9px] font-black uppercase tracking-tight px-1.5 py-0.5 rounded truncate block shadow-2xs bg-rose-600 text-white">
+                                  🔴 8:20 {isSlovenian ? "Zasedeno" : isIt ? "Occupato" : "Booked"}
+                                </span>
+                              )}
+                              {isRacerEvent && (
+                                <span className="text-[9px] font-black uppercase tracking-tight px-1.5 py-0.5 rounded truncate block shadow-2xs bg-amber-500 text-white">
+                                  🟡 17h Dirkač
+                                </span>
+                              )}
+                              {isGrapheneEvent && (
+                                <span className="text-[9px] font-black uppercase tracking-tight px-1.5 py-0.5 rounded truncate block shadow-2xs bg-brand-red text-white">
+                                  🔴 17h Čip
+                                </span>
+                              )}
+                              {isPrintCutEvent && (
+                                <span className="text-[9px] font-black uppercase tracking-tight px-1.5 py-0.5 rounded truncate block shadow-2xs bg-play-teal text-white">
+                                  🔵 17h Tisk
+                                </span>
+                              )}
+                            </div>
+
+                            {/* Mobile dots indicator */}
+                            <div className="flex md:hidden gap-1 items-center justify-center flex-wrap pt-0.5">
+                              {isOccupiedEvent && (
+                                <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-rose-600 border border-white shrink-0 shadow-2xs" />
+                              )}
+                              {isRacerEvent && (
+                                <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-500 border border-white shrink-0 shadow-2xs" />
+                              )}
+                              {isGrapheneEvent && (
+                                <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-brand-red border border-white shrink-0 shadow-2xs" />
+                              )}
+                              {isPrintCutEvent && (
+                                <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-play-teal border border-white shrink-0 shadow-2xs" />
+                              )}
+                            </div>
+                          </div>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Events Sidebar */}
-          <div className="flex flex-col justify-between">
-            <div className="play-card p-6 md:p-8 border-2 border-slate-950/10 bg-white shadow-xl relative min-h-[420px] flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
-                  <h3 className="text-xl md:text-2xl font-display font-black uppercase flex items-center gap-2.5 text-slate-950">
-                    <CalendarIcon className="text-brand-red stroke-[2.5]" size={22} />
-                    {selectedDate 
-                      ? format(selectedDate, 'd. MMMM yyyy', { locale: currentLocale }) 
-                      : (isSlovenian ? "Aktualne delavnice" : isIt ? "Workshop in evidenza" : "Featured Workshops")}
-                  </h3>
-                  {selectedDate && (
-                    <button
-                      onClick={() => setSelectedDate(null)}
-                      className="px-3 py-1.5 rounded-xl border border-slate-250 hover:border-slate-950 text-xs font-bold transition-all text-slate-600 hover:text-slate-950 bg-slate-50 hover:bg-slate-100"
-                    >
-                      {isSlovenian ? "Prikaži vse" : isIt ? "Mostra tutti" : "Show all"}
-                    </button>
-                  )}
-                </div>
+            {/* Events Sidebar */}
+            <div className="flex flex-col justify-between">
+              <div className="play-card p-4 sm:p-6 md:p-8 border-2 border-slate-950/10 bg-white shadow-xl relative min-h-[360px] md:min-h-[420px] flex flex-col justify-between rounded-2xl sm:rounded-3xl">
+                <div>
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-3 sm:pb-4 mb-4 sm:mb-6 gap-2">
+                    <div>
+                      <h3 className="text-lg sm:text-xl md:text-2xl font-display font-black uppercase flex items-center gap-2 text-slate-950">
+                        <CalendarIcon className="text-brand-red stroke-[2.5] shrink-0" size={20} />
+                        <span className="truncate">
+                          {selectedDate 
+                            ? format(selectedDate, 'd. MMMM yyyy', { locale: currentLocale }) 
+                            : (isSlovenian ? "Aktualne delavnice in termini" : isIt ? "Workshop in evidenza" : "Featured Sessions")}
+                        </span>
+                      </h3>
+                      <p className="text-xs text-slate-500 font-semibold mt-0.5 capitalize">
+                        {selectedDate 
+                          ? `${format(selectedDate, 'EEEE', { locale: currentLocale })} · ${selectedDayEvents.length} ${isSlovenian ? (selectedDayEvents.length === 1 ? 'termin' : selectedDayEvents.length === 2 ? 'termina' : 'termini') : isIt ? 'sessioni' : 'events'}`
+                          : (isSlovenian ? "Izberite kateri koli dan na koledarju" : isIt ? "Seleziona una data sul calendario" : "Select any date on calendar")}
+                      </p>
+                    </div>
+                    {selectedDate && (
+                      <button
+                        type="button"
+                        onClick={() => setSelectedDate(null)}
+                        className="px-2.5 sm:px-3 py-1.5 rounded-xl border border-slate-200 hover:border-slate-950 text-xs font-bold transition-all text-slate-600 hover:text-slate-950 bg-slate-50 hover:bg-slate-100 flex items-center gap-1 cursor-pointer shadow-xs shrink-0"
+                        title={isSlovenian ? "Ponastavi izbiro dneva" : isIt ? "Resetta selezione" : "Reset selection"}
+                      >
+                        <RotateCcw size={12} />
+                        <span className="hidden sm:inline">{isSlovenian ? "Ponastavi" : isIt ? "Resetta" : "Reset"}</span>
+                      </button>
+                    )}
+                  </div>
 
                 <div className="space-y-4">
                   <AnimatePresence mode="wait">
                     {selectedDayEvents.length > 0 ? (
                       selectedDayEvents.map((event) => {
+                        const isOccupied = event.id.startsWith('occupied') || event.category === 'occupied';
                         const isRacer = event.id.startsWith('racer');
                         const isGraphene = event.id.startsWith('graphene');
                         const isPrintCut = event.id.startsWith('printcut');
@@ -707,15 +1268,27 @@ export default function CalendarPage() {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
-                            className="text-left"
+                            className="text-left pb-6 mb-6 border-b border-slate-200/80 last:border-b-0 last:pb-0 last:mb-0"
                           >
                             <div className="flex flex-wrap items-center gap-2 mb-3">
-                              <span className={`
-                                px-2.5 py-1 rounded-xl text-[10px] font-display font-black uppercase tracking-wider
-                                ${isRacer ? 'bg-amber-500/15 text-amber-600' : isGraphene ? 'bg-brand-red/15 text-brand-red' : isPrintCut ? 'bg-play-teal/15 text-play-teal' : 'bg-slate-100 text-slate-600'}
-                              `}>
-                                {t('calendar_page.workshop')}
-                              </span>
+                              {isOccupied ? (
+                                <span className="bg-rose-100 text-rose-700 border border-rose-200/80 px-2.5 py-1 rounded-xl text-[10px] font-display font-black uppercase tracking-wider flex items-center gap-1.5">
+                                  <Lock size={12} className="stroke-[2.5]" />
+                                  {isSlovenian ? "Start Lab zasedeno" : isIt ? "Start Lab occupato" : "Start Lab booked"}
+                                </span>
+                              ) : (
+                                <span className={`
+                                  px-2.5 py-1 rounded-xl text-[10px] font-display font-black uppercase tracking-wider
+                                  ${isRacer ? 'bg-amber-500/15 text-amber-600' : isGraphene ? 'bg-brand-red/15 text-brand-red' : isPrintCut ? 'bg-play-teal/15 text-play-teal' : 'bg-slate-100 text-slate-600'}
+                                `}>
+                                  {t('calendar_page.workshop')}
+                                </span>
+                              )}
+                              {isOccupied && (
+                                <span className="bg-rose-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-xl shadow-sm">
+                                  🔒 {isSlovenian ? "Zaseden termin" : isIt ? "Slot occupato" : "Booked slot"}
+                                </span>
+                              )}
                               {isRacer && (
                                 <span className="bg-rose-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-xl shadow-sm">
                                   🔒 {isSlovenian ? "Prijave zaklenjene" : isIt ? "Iscrizioni chiuse" : "Registrations locked"}
@@ -724,6 +1297,11 @@ export default function CalendarPage() {
                               {isGraphene && (
                                 <span className="bg-rose-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-xl shadow-sm">
                                   🔒 {isSlovenian ? "Prijave zaklenjene" : isIt ? "Iscrizioni chiuse" : "Registrations locked"}
+                                </span>
+                              )}
+                              {isPrintCut && (
+                                <span className="bg-rose-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-xl shadow-sm">
+                                  🔒 {isSlovenian ? "Prijave zaprte" : isIt ? "Iscrizioni chiuse" : "Registrations closed"}
                                 </span>
                               )}
                               {event.ageGroup && (
@@ -754,13 +1332,15 @@ export default function CalendarPage() {
                                 <div>
                                   <p className="font-bold text-slate-800">{event.time}</p>
                                   <p className="text-[10px] text-slate-600 font-bold uppercase mt-0.5">
-                                    {isRacer
-                                      ? (isSlovenian ? "Enkrat tedensko, 8 tednov (ob četrtkih)" : isIt ? "Una volta alla settimana, 8 settimane (giovedì)" : "Once a week, 8 weeks (Thursdays)")
-                                      : isGraphene 
-                                        ? (isSlovenian ? "Enkrat tedensko, 6 tednov" : isIt ? "Una volta alla settimana, 6 settimane" : "Once a week, 6 weeks") 
-                                        : isPrintCut
-                                          ? (isSlovenian ? "Enkrat tedensko, 8 tednov" : isIt ? "Una volta alla settimana, 8 settimane" : "Once a week, 8 weeks")
-                                          : (isSlovenian ? "Enkratni termin" : isIt ? "Sessione singola" : "Single session")}
+                                    {isOccupied
+                                      ? (isSlovenian ? "Rezerviran termin v Start Labu" : isIt ? "Sessione prenotata presso Start Lab" : "Booked slot at Start Lab")
+                                      : isRacer
+                                        ? (isSlovenian ? "Enkrat tedensko, 8 tednov (ob četrtkih)" : isIt ? "Una volta alla settimana, 8 settimane (giovedì)" : "Once a week, 8 weeks (Thursdays)")
+                                        : isGraphene 
+                                          ? (isSlovenian ? "Enkrat tedensko, 6 tednov" : isIt ? "Una volta alla settimana, 6 settimane" : "Once a week, 6 weeks") 
+                                          : isPrintCut
+                                            ? (isSlovenian ? "Enkrat tedensko, 8 tednov" : isIt ? "Una volta alla settimana, 8 settimane" : "Once a week, 8 weeks")
+                                            : (isSlovenian ? "Enkratni termin" : isIt ? "Sessione singola" : "Single session")}
                                   </p>
                                 </div>
                               </div>
@@ -773,56 +1353,75 @@ export default function CalendarPage() {
                               </div>
                             </div>
                             
-                            <p className="text-slate-600 text-sm font-semibold leading-relaxed mb-6 bg-brand-red/[0.02] border-l-2 border-brand-red/40 pl-3 py-1">
+                            <p className={`text-slate-600 text-sm font-semibold leading-relaxed mb-6 pl-3 py-1.5 ${isOccupied ? 'bg-rose-50/50 border-l-2 border-rose-500 rounded-r-xl' : 'bg-brand-red/[0.02] border-l-2 border-brand-red/40'}`}>
                               {event.description}
                             </p>
 
-                            <div className="bg-slate-50 border border-slate-200/60 rounded-2xl p-4 mb-6 space-y-3 text-xs font-semibold text-slate-700">
-                              <div className="flex items-center justify-between flex-wrap gap-2 text-brand-red font-bold">
-                                <div className="flex items-center gap-2">
-                                  <Sparkles size={14} className="stroke-[2.5]" />
-                                  <span>
-                                    {isRacer
-                                      ? (isSlovenian ? "Cena: 20 € na osebo za celotno 16-urno delavnico" : isIt ? "Prezzo: 20 € a persona per l'intero workshop di 16 ore" : "Price: 20 € per person for full 16-hour workshop")
-                                      : (isSlovenian ? "Brezplačna udeležba • Število mest je omejeno!" : isIt ? "Partecipazione gratuita • Posti strettamente limitati!" : "Free of charge • Limited slots available!")}
-                                  </span>
+                            {isOccupied ? (
+                              <div className="bg-rose-50/60 border border-rose-200/80 rounded-2xl p-4 mb-6 space-y-2 text-xs font-semibold text-rose-950">
+                                <div className="flex items-center gap-2 font-display font-black uppercase tracking-wide text-rose-700">
+                                  <Lock size={14} className="stroke-[2.5]" />
+                                  <span>{isSlovenian ? "Prostori Start Laba niso na voljo" : isIt ? "Locali Start Lab non disponibili" : "Start Lab premises unavailable"}</span>
                                 </div>
-                                {isRacer ? (
-                                  <span className="bg-rose-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
-                                    🔒 {isSlovenian ? "Prijave zaklenjene • Zapolnjena mesta" : isIt ? "Iscrizioni chiuse • Posti esauriti" : "Registrations locked • Sold out"}
-                                  </span>
-                                ) : isGraphene ? (
-                                  <span className="bg-rose-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
-                                    🔒 {isSlovenian ? "Prijave zaklenjene • Zapolnjena mesta" : isIt ? "Iscrizioni chiuse • Posti esauriti" : "Registrations locked • Sold out"}
-                                  </span>
-                                ) : isPrintCut ? (
-                                  <span className="bg-rose-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
-                                    🔒 {isSlovenian ? "Prijave zaprte • Zapolnjena mesta" : isIt ? "Iscrizioni chiuse • Tutto esaurito" : "Registrations closed • Sold out"}
-                                  </span>
-                                ) : null}
+                                <p className="text-slate-600">
+                                  {isSlovenian 
+                                    ? "V tem času v laboratoriju potekajo vnaprej načrtovane dejavnosti ali rezervirane aktivnosti." 
+                                    : isIt 
+                                      ? "Durante questa fascia oraria nel laboratorio si svolgono attività pianificate o riservate." 
+                                      : "During this time slot, scheduled or reserved activities are taking place in the laboratory."}
+                                </p>
+                                <div className="border-t border-rose-200/60 pt-2 text-[11px] text-slate-700">
+                                  <strong>{isSlovenian ? "Lokacija:" : isIt ? "Luogo:" : "Location:"}</strong> Start Lab, Solkan
+                                </div>
                               </div>
-                              <div className="border-t border-slate-200/60 pt-2.5 space-y-1">
-                                {isRacer ? (
-                                  <>
-                                    <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Trajanje:" : isIt ? "Durata:" : "Duration:"}</span> 8 x 2 uri (1x tedensko, četrtek 17:00 - 19:00)</p>
-                                    <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Predznanje:" : isIt ? "Prerequisiti:" : "Prerequisites:"}</span> {isSlovenian ? "Ni potrebno – dovolj sta radovednost in želja po ustvarjanju!" : isIt ? "Non necessario – bastano curiosità e voglia di creare!" : "Not needed – curiosity is all you need!"}</p>
-                                    <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Lokacija:" : isIt ? "Luogo:" : "Location:"}</span> Start Lab, Solkan</p>
-                                  </>
-                                ) : isGraphene ? (
-                                  <>
-                                    <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Mentor:" : isIt ? "Mentore:" : "Mentor:"}</span> Prof. dr. Egon Pavlica (<a href="mailto:egon.pavlica@ung.si" className="text-brand-red hover:underline font-bold">egon.pavlica@ung.si</a>)</p>
-                                    <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Somentor:" : isIt ? "Co-mentore:" : "Co-mentor:"}</span> Dr. Vadym Tkachuk (<a href="mailto:vadym.tkachuk@ung.si" className="text-brand-red hover:underline font-bold">vadym.tkachuk@ung.si</a>)</p>
-                                  </>
-                                ) : isPrintCut ? (
-                                  <>
-                                    <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Mentor:" : isIt ? "Mentore:" : "Mentor:"}</span> Uroš Polanc (<a href="mailto:info@startlab.si" className="text-brand-red hover:underline font-bold">info@startlab.si</a>)</p>
-                                    <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Lokacija:" : isIt ? "Luogo:" : "Location:"}</span> Start Lab, Solkan</p>
-                                  </>
-                                ) : (
-                                  <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Mentor:" : isIt ? "Mentore:" : "Mentor:"}</span> Start Lab ekipa (<a href="mailto:info@startlab.si" className="text-brand-red hover:underline font-bold">info@startlab.si</a>)</p>
-                                )}
+                            ) : (
+                              <div className="bg-slate-50 border border-slate-200/60 rounded-2xl p-4 mb-6 space-y-3 text-xs font-semibold text-slate-700">
+                                <div className="flex items-center justify-between flex-wrap gap-2 text-brand-red font-bold">
+                                  <div className="flex items-center gap-2">
+                                    <Sparkles size={14} className="stroke-[2.5]" />
+                                    <span>
+                                      {isRacer
+                                        ? (isSlovenian ? "Cena: 20 € na osebo za celotno 16-urno delavnico" : isIt ? "Prezzo: 20 € a persona per l'intero workshop di 16 ore" : "Price: 20 € per person for full 16-hour workshop")
+                                        : (isSlovenian ? "Brezplačna udeležba • Število mest je omejeno!" : isIt ? "Partecipazione gratuita • Posti strettamente limitati!" : "Free of charge • Limited slots available!")}
+                                    </span>
+                                  </div>
+                                  {isRacer ? (
+                                    <span className="bg-rose-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
+                                      🔒 {isSlovenian ? "Prijave zaklenjene • Zapolnjena mesta" : isIt ? "Iscrizioni chiuse • Posti esauriti" : "Registrations locked • Sold out"}
+                                    </span>
+                                  ) : isGraphene ? (
+                                    <span className="bg-rose-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
+                                      🔒 {isSlovenian ? "Prijave zaklenjene • Zapolnjena mesta" : isIt ? "Iscrizioni chiuse • Posti esauriti" : "Registrations locked • Sold out"}
+                                    </span>
+                                  ) : isPrintCut ? (
+                                    <span className="bg-rose-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
+                                      🔒 {isSlovenian ? "Prijave zaprte • Zapolnjena mesta" : isIt ? "Iscrizioni chiuse • Tutto esaurito" : "Registrations closed • Sold out"}
+                                    </span>
+                                  ) : null}
+                                </div>
+                                <div className="border-t border-slate-200/60 pt-2.5 space-y-1">
+                                  {isRacer ? (
+                                    <>
+                                      <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Trajanje:" : isIt ? "Durata:" : "Duration:"}</span> 8 x 2 uri (1x tedensko, četrtek 17:00 - 19:00)</p>
+                                      <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Predznanje:" : isIt ? "Prerequisiti:" : "Prerequisites:"}</span> {isSlovenian ? "Ni potrebno – dovolj sta radovednost in želja po ustvarjanju!" : isIt ? "Non necessario – bastano curiosità e voglia di creare!" : "Not needed – curiosity is all you need!"}</p>
+                                      <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Lokacija:" : isIt ? "Luogo:" : "Location:"}</span> Start Lab, Solkan</p>
+                                    </>
+                                  ) : isGraphene ? (
+                                    <>
+                                      <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Mentor:" : isIt ? "Mentore:" : "Mentor:"}</span> Prof. dr. Egon Pavlica (<a href="mailto:egon.pavlica@ung.si" className="text-brand-red hover:underline font-bold">egon.pavlica@ung.si</a>)</p>
+                                      <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Somentor:" : isIt ? "Co-mentore:" : "Co-mentor:"}</span> Dr. Vadym Tkachuk (<a href="mailto:vadym.tkachuk@ung.si" className="text-brand-red hover:underline font-bold">vadym.tkachuk@ung.si</a>)</p>
+                                    </>
+                                  ) : isPrintCut ? (
+                                    <>
+                                      <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Mentor:" : isIt ? "Mentore:" : "Mentor:"}</span> Uroš Polanc (<a href="mailto:info@startlab.si" className="text-brand-red hover:underline font-bold">info@startlab.si</a>)</p>
+                                      <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Lokacija:" : isIt ? "Luogo:" : "Location:"}</span> Start Lab, Solkan</p>
+                                    </>
+                                  ) : (
+                                    <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Mentor:" : isIt ? "Mentore:" : "Mentor:"}</span> Start Lab ekipa (<a href="mailto:info@startlab.si" className="text-brand-red hover:underline font-bold">info@startlab.si</a>)</p>
+                                  )}
+                                </div>
                               </div>
-                            </div>
+                            )}
 
                             {/* Toggle More Details Button */}
                             {(isRacer || isGraphene || isPrintCut) && (
@@ -1303,7 +1902,12 @@ export default function CalendarPage() {
                               </div>
                             )}
 
-                            {isPrintCut || isGraphene || isRacer ? (
+                            {isOccupied ? (
+                              <div className="w-full py-3.5 bg-rose-100/70 border border-rose-300 text-rose-800 rounded-2xl font-display font-black uppercase text-xs tracking-wider select-none flex items-center justify-center gap-2 shadow-xs">
+                                <Lock size={16} className="text-rose-600 stroke-[2.5]" />
+                                {isSlovenian ? "Start Lab zasedeno" : isIt ? "Start Lab occupato" : "Start Lab booked"}
+                              </div>
+                            ) : isPrintCut || isGraphene || isRacer ? (
                               <button 
                                 disabled
                                 className="w-full py-4 bg-slate-200 text-slate-500 rounded-2xl font-display font-black uppercase text-sm tracking-wider select-none cursor-not-allowed flex items-center justify-center gap-2 border border-slate-300/80 shadow-inner"
@@ -1354,8 +1958,8 @@ export default function CalendarPage() {
               </div>
             </div>
           </div>
-
         </div>
+      )}
       </div>
 
       {/* Modern Slide-over / Modal for Registration with backdrop blur and kinetic animation */}

@@ -468,5 +468,17 @@
     "privacy_title": "Informativa sulla Privacy e Tutela dei Dati | Start Lab",
     "terms_title": "Condizioni d'Uso del Sito Web | Start Lab",
     "keywords": "Start Lab, Centro della scienza, simulatore di guida, sim racing, Denis Lupo, guida sicura ragazzi, Goriziano, Nova Gorica, Solkan, laboratori STEM"
+  },
+  "calendar_page": {
+    "title_start": "Calendario",
+    "title_brand": "Eventi",
+    "workshop": "Workshop",
+    "mon": "Lun",
+    "tue": "Mar",
+    "wed": "Mer",
+    "thu": "Gio",
+    "fri": "Ven",
+    "sat": "Sab",
+    "sun": "Dom"
   }
 }
