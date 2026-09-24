@@ -85,7 +85,7 @@ const PARTNER_CAROUSEL_LOGOS: CarouselPartner[] = [
   },
   {
     name: "Univerza v Novi Gorici",
-    logo: "https://res.cloudinary.com/pithqpe2/image/upload/v1788246061/691a2fcb9ddde29f595659d7_LUNG_Logo.png",
+    logo: "https://res.cloudinary.com/pithqpe2/image/upload/v1788246061/Safari.png",
     href: "https://www-lfos.ung.si/"
   },
   {
@@ -105,7 +105,7 @@ const PARTNER_CAROUSEL_LOGOS: CarouselPartner[] = [
   },
   {
     name: "Ljudska univerza Nova Gorica",
-    logo: "https://res.cloudinary.com/pithqpe2/image/upload/v1788246061/Safari.png",
+    logo: "https://res.cloudinary.com/pithqpe2/image/upload/v1788246061/691a2fcb9ddde29f595659d7_LUNG_Logo.png",
     href: "https://www.lung.si/"
   },
   {
@@ -1097,7 +1097,7 @@ export default function PartnerPage() {
                      bg: "bg-play-pink/5 border-play-pink/15 hover:border-play-pink/35 text-play-pink hover:scale-[1.01]", 
                      badgeColor: "bg-play-pink/12 text-play-pink", 
                      href: "https://www-lfos.ung.si/",
-                     logo: "https://res.cloudinary.com/pithqpe2/image/upload/v1788246061/691a2fcb9ddde29f595659d7_LUNG_Logo.png" 
+                     logo: "https://res.cloudinary.com/pithqpe2/image/upload/v1788246061/Safari.png" 
                    },
                    { 
                      key: 'item_ptp', 
@@ -1125,7 +1125,7 @@ export default function PartnerPage() {
                      bg: "bg-play-purple/5 border-play-purple/15 hover:border-play-purple/35 text-play-purple hover:scale-[1.01]", 
                      badgeColor: "bg-play-purple/12 text-play-purple", 
                      href: "https://www.lung.si/",
-                     logo: "https://res.cloudinary.com/pithqpe2/image/upload/v1788246061/Safari.png" 
+                     logo: "https://res.cloudinary.com/pithqpe2/image/upload/v1788246061/691a2fcb9ddde29f595659d7_LUNG_Logo.png" 
                    },
                    { 
                      key: 'item_spgz', 
