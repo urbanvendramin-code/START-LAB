@@ -419,6 +419,37 @@ const getLocalizedEvents = (lang: string): Event[] => {
     }
   ];
 
+  const rawMaliKemikEvents = [
+    { date: new Date(2026, 10, 4), sessionNum: 1 },  // 4. 11. 2026
+    { date: new Date(2026, 10, 11), sessionNum: 2 }, // 11. 11. 2026
+    { date: new Date(2026, 10, 25), sessionNum: 3 }, // 25. 11. 2026
+    { date: new Date(2026, 11, 2), sessionNum: 4 },  // 2. 12. 2026
+    { date: new Date(2026, 11, 9), sessionNum: 5 },  // 9. 12. 2026
+    { date: new Date(2026, 11, 16), sessionNum: 6 }, // 16. 12. 2026
+    { date: new Date(2026, 11, 23), sessionNum: 7 }, // 23. 12. 2026
+    { date: new Date(2027, 0, 6), sessionNum: 8 },   // 6. 1. 2027
+    { date: new Date(2027, 0, 13), sessionNum: 9 },  // 13. 1. 2027
+    { date: new Date(2027, 0, 27), sessionNum: 10 }  // 27. 1. 2027
+  ];
+
+  const maliKemikEvents: Event[] = rawMaliKemikEvents.map((item) => ({
+    id: `occupied-kemik-${item.sessionNum}`,
+    title: isSl 
+      ? `MALI KEMIK · ${item.sessionNum}. sklop – Zasedeno` 
+      : isIt 
+        ? `PICCOLO CHIMICO · ${item.sessionNum}a parte – Occupato` 
+        : `LITTLE CHEMIST · Session ${item.sessionNum} – Booked`,
+    date: item.date,
+    time: '17:00 - 18:30',
+    location: 'Start Lab, Solkan',
+    category: 'occupied' as const,
+    description: isSl
+      ? `Delavnica Mali kemik (${item.sessionNum}. sklop). Termin 17:00 – 18:30 je zaseden.`
+      : isIt
+        ? `Workshop Piccolo chimico (${item.sessionNum}a parte). Orario 17:00 – 18:30 occupato.`
+        : `Little Chemist workshop (session ${item.sessionNum}). Time slot 17:00 – 18:30 is booked.`
+  }));
+
   const occupiedEvents: Event[] = rawOccupiedEvents.map((item) => ({
     id: item.id,
     title: item.title,
@@ -429,7 +460,7 @@ const getLocalizedEvents = (lang: string): Event[] => {
     description: item.description
   }));
 
-  return [...occupiedEvents, ...racerEvents, ...grapheneEvents, ...printCutEvents];
+  return [...occupiedEvents, ...maliKemikEvents, ...racerEvents, ...grapheneEvents, ...printCutEvents];
 };
 
 export default function CalendarPage() {
@@ -462,7 +493,7 @@ export default function CalendarPage() {
   const [submitErrorMessage, setSubmitErrorMessage] = useState('');
   const [showMoreDetails, setShowMoreDetails] = useState(false);
   const [viewMode, setViewMode] = useState<'calendar' | 'list'>('calendar');
-  const [categoryFilter, setCategoryFilter] = useState<'all' | 'occupied' | 'racer' | 'graphene' | 'printcut'>('all');
+  const [categoryFilter, setCategoryFilter] = useState<'all' | 'kemik' | 'occupied' | 'racer' | 'graphene' | 'printcut'>('all');
 
   const jumpToDate = (targetDate: Date) => {
     setCurrentMonth(startOfMonth(targetDate));
@@ -475,6 +506,8 @@ export default function CalendarPage() {
     { date: new Date(2026, 8, 1), labelSl: 'September 2026', labelIt: 'Settembre 2026', labelEn: 'September 2026' },
     { date: new Date(2026, 9, 1), labelSl: 'Oktober 2026', labelIt: 'Ottobre 2026', labelEn: 'October 2026' },
     { date: new Date(2026, 10, 1), labelSl: 'November 2026', labelIt: 'Novembre 2026', labelEn: 'November 2026' },
+    { date: new Date(2026, 11, 1), labelSl: 'December 2026', labelIt: 'Dicembre 2026', labelEn: 'December 2026' },
+    { date: new Date(2027, 0, 1), labelSl: 'Januar 2027', labelIt: 'Gennaio 2027', labelEn: 'January 2027' },
   ];
 
   useEffect(() => {
@@ -508,9 +541,16 @@ export default function CalendarPage() {
 
   const events = getLocalizedEvents(i18n.language);
 
+  const kemikCount = events.filter(e => e.id.includes('kemik')).length;
+  const generalOccupiedCount = events.filter(e => (e.category === 'occupied' || e.id.startsWith('occupied')) && !e.id.includes('kemik')).length;
+  const racerCount = events.filter(e => e.id.startsWith('racer')).length;
+  const grapheneCount = events.filter(e => e.id.startsWith('graphene')).length;
+  const printcutCount = events.filter(e => e.id.startsWith('printcut')).length;
+
   const filteredEvents = events.filter(event => {
     if (categoryFilter === 'all') return true;
-    if (categoryFilter === 'occupied') return event.category === 'occupied' || event.id.startsWith('occupied');
+    if (categoryFilter === 'kemik') return event.id.includes('kemik');
+    if (categoryFilter === 'occupied') return (event.category === 'occupied' || event.id.startsWith('occupied')) && !event.id.includes('kemik');
     if (categoryFilter === 'racer') return event.id.startsWith('racer');
     if (categoryFilter === 'graphene') return event.id.startsWith('graphene');
     if (categoryFilter === 'printcut') return event.id.startsWith('printcut');
@@ -550,6 +590,20 @@ export default function CalendarPage() {
       title: isSlovenian ? 'November 2026' : isIt ? 'Novembre 2026' : 'November 2026',
       items: filteredEvents
         .filter(e => isSameMonth(e.date, new Date(2026, 10, 1)))
+        .sort((a, b) => a.date.getTime() - b.date.getTime())
+    },
+    {
+      monthDate: new Date(2026, 11, 1),
+      title: isSlovenian ? 'December 2026' : isIt ? 'Dicembre 2026' : 'December 2026',
+      items: filteredEvents
+        .filter(e => isSameMonth(e.date, new Date(2026, 11, 1)))
+        .sort((a, b) => a.date.getTime() - b.date.getTime())
+    },
+    {
+      monthDate: new Date(2027, 0, 1),
+      title: isSlovenian ? 'Januar 2027' : isIt ? 'Gennaio 2027' : 'January 2027',
+      items: filteredEvents
+        .filter(e => isSameMonth(e.date, new Date(2027, 0, 1)))
         .sort((a, b) => a.date.getTime() - b.date.getTime())
     }
   ].filter(group => group.items.length > 0);
@@ -666,87 +720,6 @@ export default function CalendarPage() {
           </p>
         </div>
 
-        {/* Quick Highlights & Direct Information Cards */}
-        <div className="mb-6 sm:mb-8 grid md:grid-cols-2 gap-3 sm:gap-4">
-          {/* Card 1: Start Lab zasedenost */}
-          <div className="bg-rose-50/80 border-2 border-rose-200/90 rounded-2xl sm:rounded-3xl p-4 sm:p-5 md:p-6 flex flex-col justify-between shadow-xs">
-            <div>
-              <div className="flex items-center gap-2 text-rose-800 font-display font-black text-xs uppercase tracking-wider mb-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-rose-600 animate-pulse" />
-                <span>{isSlovenian ? "Start Lab zasedeno – prihajajoči termini" : isIt ? "Start Lab occupato – prossime date" : "Start Lab booked – upcoming dates"}</span>
-              </div>
-              <p className="text-slate-700 text-xs sm:text-sm font-semibold leading-relaxed mb-3 sm:mb-4">
-                {isSlovenian 
-                  ? "Prostori in oprema Start Laba so v naslednjih terminih rezervirani za vnaprej dogovorjene dejavnosti:"
-                  : isIt 
-                    ? "I locali e le attrezzature di Start Lab sono occupati nelle seguenti fasce orarie per attività prestabilite:"
-                    : "Start Lab premises and equipment are booked during the following time slots for scheduled activities:"}
-              </p>
-              <div className="flex flex-wrap gap-2 mb-3">
-                <button
-                  type="button"
-                  onClick={() => jumpToDate(new Date(2026, 9, 5))}
-                  className="px-2.5 sm:px-3.5 py-1.5 sm:py-2 bg-white border-2 border-rose-300 hover:border-rose-600 hover:bg-rose-600 hover:text-white transition-all rounded-xl text-xs font-display font-black text-rose-950 flex items-center gap-1.5 sm:gap-2 cursor-pointer shadow-xs group"
-                >
-                  <CalendarIcon size={13} className="text-rose-600 group-hover:text-white" />
-                  <span>5. okt (08:20 – 13:30)</span>
-                  <ArrowRight size={11} className="opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-transform" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => jumpToDate(new Date(2026, 9, 6))}
-                  className="px-2.5 sm:px-3.5 py-1.5 sm:py-2 bg-white border-2 border-rose-300 hover:border-rose-600 hover:bg-rose-600 hover:text-white transition-all rounded-xl text-xs font-display font-black text-rose-950 flex items-center gap-1.5 sm:gap-2 cursor-pointer shadow-xs group"
-                >
-                  <CalendarIcon size={13} className="text-rose-600 group-hover:text-white" />
-                  <span>6. okt (08:20 – 13:30)</span>
-                  <ArrowRight size={11} className="opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-transform" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => jumpToDate(new Date(2026, 9, 19))}
-                  className="px-2.5 sm:px-3.5 py-1.5 sm:py-2 bg-white border-2 border-rose-300 hover:border-rose-600 hover:bg-rose-600 hover:text-white transition-all rounded-xl text-xs font-display font-black text-rose-950 flex items-center gap-1.5 sm:gap-2 cursor-pointer shadow-xs group"
-                >
-                  <CalendarIcon size={13} className="text-rose-600 group-hover:text-white" />
-                  <span>19. okt (08:00 – 13:00)</span>
-                  <ArrowRight size={11} className="opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-transform" />
-                </button>
-              </div>
-            </div>
-            <p className="text-[10px] sm:text-[11px] text-rose-800 font-bold mt-1">
-              {isSlovenian ? "👆 Kliknite na termin za takojšen ogled podrobnosti dneva na koledarju." : isIt ? "👆 Clicca sulla data per visualizzare subito i dettagli sul calendario." : "👆 Click a slot to inspect day details on the calendar."}
-            </p>
-          </div>
-
-          {/* Card 2: Status delavnic */}
-          <div className="bg-slate-50 border-2 border-slate-200/90 rounded-2xl sm:rounded-3xl p-4 sm:p-5 md:p-6 flex flex-col justify-between shadow-xs">
-            <div>
-              <div className="flex items-center gap-2 text-slate-700 font-display font-black text-xs uppercase tracking-wider mb-2">
-                <Lock size={14} className="text-slate-600 stroke-[2.5]" />
-                <span>{isSlovenian ? "Status prijav na jesenske delavnice" : isIt ? "Stato iscrizioni ai workshop autunnali" : "Autumn workshops registration status"}</span>
-              </div>
-              <p className="text-slate-600 text-xs sm:text-sm font-semibold leading-relaxed mb-3 sm:mb-4">
-                {isSlovenian 
-                  ? "Zaradi izjemnega odziva so vsa mesta za cikle Elektronika in dirkač, Grafenski čip ter Natisni in izreži že polno zasedena. Prijave so trenutno zaklenjene."
-                  : isIt 
-                    ? "A causa dell'alto interesse, tutti i posti disponibili per i cicli Elettronica e bolide, Chip al grafene e Stampa e taglia sono esauriti. Le iscrizioni sono chiuse."
-                    : "Due to high demand, all spots for Electronics & Racer, Graphene Chip, and Print & Cut cycles are filled. Registrations are locked."}
-              </p>
-              <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
-                <span className="w-2 h-2 rounded-full bg-slate-400 shrink-0" />
-                <span className="text-[11px] sm:text-xs">{isSlovenian ? "Novi cikli in delavnice bodo objavljeni v prihodnjih mesecih." : isIt ? "Nuovi cicli saranno pubblicati nei prossimi mesi." : "New cycles will be announced in upcoming months."}</span>
-              </div>
-            </div>
-            <div className="mt-4 pt-3 border-t border-slate-200/60 flex items-center justify-between">
-              <Link 
-                to="/kontakt"
-                className="inline-flex items-center gap-1.5 text-xs font-display font-black text-brand-red hover:underline uppercase"
-              >
-                <span>{isSlovenian ? "Vprašanja ali povpraševanja glede Start Laba →" : isIt ? "Contattaci per informazioni →" : "Inquiries & Contact →"}</span>
-              </Link>
-            </div>
-          </div>
-        </div>
-
         {/* Navigation & Filter Bar */}
         <div className="mb-5 sm:mb-6 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 sm:gap-4 bg-white p-2.5 sm:p-3.5 md:p-4 rounded-2xl sm:rounded-3xl border-2 border-slate-200/80 shadow-xs">
           {/* Category Filters */}
@@ -764,6 +737,18 @@ export default function CalendarPage() {
             </button>
             <button
               type="button"
+              onClick={() => setCategoryFilter('kemik')}
+              className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-display font-black uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 shrink-0 ${
+                categoryFilter === 'kemik'
+                  ? 'bg-rose-600 text-white shadow-xs'
+                  : 'bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-200/60'
+              }`}
+            >
+              <span className={`w-2 h-2 rounded-full ${categoryFilter === 'kemik' ? 'bg-white' : 'bg-rose-600'}`} />
+              {isSlovenian ? "Mali kemik (zasedeno)" : isIt ? "Piccolo chimico (occupato)" : "Little Chemist (booked)"} ({kemikCount})
+            </button>
+            <button
+              type="button"
               onClick={() => setCategoryFilter('occupied')}
               className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-display font-black uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 shrink-0 ${
                 categoryFilter === 'occupied'
@@ -772,7 +757,7 @@ export default function CalendarPage() {
               }`}
             >
               <span className={`w-2 h-2 rounded-full ${categoryFilter === 'occupied' ? 'bg-white' : 'bg-rose-600'}`} />
-              {isSlovenian ? "Start Lab zasedeno" : isIt ? "Start Lab occupato" : "Start Lab booked"} (3)
+              {isSlovenian ? "Start Lab zasedeno" : isIt ? "Start Lab occupato" : "Start Lab booked"} ({generalOccupiedCount})
             </button>
             <button
               type="button"
@@ -784,7 +769,7 @@ export default function CalendarPage() {
               }`}
             >
               <span className={`w-2 h-2 rounded-full ${categoryFilter === 'racer' ? 'bg-white' : 'bg-amber-500'}`} />
-              {isSlovenian ? "Elektronika in dirkač" : isIt ? "Elettronica e bolide" : "Electronics & Racer"} (8)
+              {isSlovenian ? "Elektronika in dirkač" : isIt ? "Elettronica e bolide" : "Electronics & Racer"} ({racerCount})
             </button>
             <button
               type="button"
@@ -796,7 +781,7 @@ export default function CalendarPage() {
               }`}
             >
               <span className={`w-2 h-2 rounded-full ${categoryFilter === 'graphene' ? 'bg-white' : 'bg-brand-red'}`} />
-              {isSlovenian ? "Grafenski čip" : isIt ? "Chip al grafene" : "Graphene Chip"} (6)
+              {isSlovenian ? "Grafenski čip" : isIt ? "Chip al grafene" : "Graphene Chip"} ({grapheneCount})
             </button>
             <button
               type="button"
@@ -808,7 +793,7 @@ export default function CalendarPage() {
               }`}
             >
               <span className={`w-2 h-2 rounded-full ${categoryFilter === 'printcut' ? 'bg-white' : 'bg-play-teal'}`} />
-              {isSlovenian ? "Natisni in izreži" : isIt ? "Stampa e taglia" : "Print & Cut"} (8)
+              {isSlovenian ? "Natisni in izreži" : isIt ? "Stampa e taglia" : "Print & Cut"} ({printcutCount})
             </button>
           </div>
 
@@ -885,6 +870,7 @@ export default function CalendarPage() {
 
                     <div className="grid gap-3">
                       {group.items.map((event) => {
+                        const isKemik = event.id.includes('kemik');
                         const isOccupied = event.category === 'occupied' || event.id.startsWith('occupied');
                         const isRacer = event.id.startsWith('racer');
                         const isGraphene = event.id.startsWith('graphene');
@@ -944,9 +930,11 @@ export default function CalendarPage() {
                                         ? 'bg-brand-red/10 text-brand-red'
                                         : 'bg-play-teal/15 text-play-teal'
                                 }`}>
-                                  {isOccupied 
-                                    ? (isSlovenian ? "Start Lab zasedeno" : isIt ? "Start Lab occupato" : "Start Lab booked")
-                                    : event.id.startsWith('racer')
+                                  {isKemik
+                                    ? (isSlovenian ? "Mali kemik · Zasedeno" : isIt ? "Piccolo chimico · Occupato" : "Little Chemist · Booked")
+                                    : isOccupied 
+                                      ? (isSlovenian ? "Start Lab zasedeno" : isIt ? "Start Lab occupato" : "Start Lab booked")
+                                      : event.id.startsWith('racer')
                                       ? (isSlovenian ? "Elektronika in dirkač" : isIt ? "Elettronica e bolide" : "Electronics & Racer")
                                       : event.id.startsWith('graphene')
                                         ? (isSlovenian ? "Grafenski čip" : isIt ? "Chip al grafene" : "Graphene Chip")
@@ -1068,12 +1056,21 @@ export default function CalendarPage() {
                 <div className="mb-4 sm:mb-6 p-2 sm:p-3 bg-slate-50 border border-slate-200/80 rounded-xl sm:rounded-2xl flex flex-wrap gap-x-2 sm:gap-x-4 gap-y-1.5 sm:gap-y-2 items-center justify-start text-[11px] sm:text-xs text-slate-700 font-bold select-none">
                   <button
                     type="button"
+                    onClick={() => setCategoryFilter(categoryFilter === 'kemik' ? 'all' : 'kemik')}
+                    className={`flex items-center gap-1 sm:gap-1.5 px-2 py-0.5 rounded-lg transition-all cursor-pointer ${categoryFilter === 'kemik' ? 'bg-rose-100 text-rose-900 ring-1 ring-rose-400' : 'hover:bg-slate-200/60'}`}
+                  >
+                    <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-rose-500 inline-block shadow-sm" />
+                    <span>{isSlovenian ? "Mali kemik (zasedeno)" : isIt ? "Piccolo chimico (occupato)" : "Little Chemist (booked)"}</span>
+                    <span className="text-[10px] text-slate-500 font-normal">({kemikCount})</span>
+                  </button>
+                  <button
+                    type="button"
                     onClick={() => setCategoryFilter(categoryFilter === 'occupied' ? 'all' : 'occupied')}
                     className={`flex items-center gap-1 sm:gap-1.5 px-2 py-0.5 rounded-lg transition-all cursor-pointer ${categoryFilter === 'occupied' ? 'bg-rose-100 text-rose-900 ring-1 ring-rose-400' : 'hover:bg-slate-200/60'}`}
                   >
                     <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-rose-500 inline-block shadow-sm" />
                     <span>{isSlovenian ? "Start Lab zasedeno" : isIt ? "Start Lab occupato" : "Start Lab booked"}</span>
-                    <span className="text-[10px] text-slate-500 font-normal">(3)</span>
+                    <span className="text-[10px] text-slate-500 font-normal">({generalOccupiedCount})</span>
                   </button>
                   <button
                     type="button"
@@ -1082,7 +1079,7 @@ export default function CalendarPage() {
                   >
                     <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-amber-500 inline-block shadow-sm" />
                     <span>{isSlovenian ? "Elektronika in dirkač" : isIt ? "Elettronica e bolide" : "Electronics & Racer"}</span>
-                    <span className="text-[10px] text-slate-500 font-normal">(8)</span>
+                    <span className="text-[10px] text-slate-500 font-normal">({racerCount})</span>
                   </button>
                   <button
                     type="button"
@@ -1091,7 +1088,7 @@ export default function CalendarPage() {
                   >
                     <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-brand-red inline-block shadow-sm" />
                     <span>{isSlovenian ? "Grafenski čip" : isIt ? "Serie chip al grafene" : "Graphene chip series"}</span>
-                    <span className="text-[10px] text-slate-500 font-normal">(6)</span>
+                    <span className="text-[10px] text-slate-500 font-normal">({grapheneCount})</span>
                   </button>
                   <button
                     type="button"
@@ -1100,7 +1097,7 @@ export default function CalendarPage() {
                   >
                     <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-play-teal inline-block shadow-sm" />
                     <span>{isSlovenian ? "Natisni in izreži" : isIt ? "Serie stampa e taglia" : "Print & Cut series"}</span>
-                    <span className="text-[10px] text-slate-500 font-normal">(8)</span>
+                    <span className="text-[10px] text-slate-500 font-normal">({printcutCount})</span>
                   </button>
                 </div>
 
@@ -1121,7 +1118,7 @@ export default function CalendarPage() {
                     const isSelected = selectedDate ? isSameDay(date, selectedDate) : false;
                     const isCurrentMonth = isSameMonth(date, monthStart);
                     
-                    const isOccupiedEvent = dayEvents.some(e => e.id.startsWith('occupied'));
+                    const isOccupiedEvent = dayEvents.some(e => e.category === 'occupied' || e.id.startsWith('occupied'));
                     const isRacerEvent = dayEvents.some(e => e.id.startsWith('racer'));
                     const isGrapheneEvent = dayEvents.some(e => e.id.startsWith('graphene'));
                     const isPrintCutEvent = dayEvents.some(e => e.id.startsWith('printcut'));
@@ -1175,26 +1172,50 @@ export default function CalendarPage() {
                           <div className="mt-0.5 sm:mt-1 space-y-1 w-full overflow-hidden">
                             {/* Desktop micro-labels */}
                             <div className="hidden md:flex flex-col gap-1 w-full">
-                              {isOccupiedEvent && (
-                                <span className="text-[9px] font-black uppercase tracking-tight px-1.5 py-0.5 rounded truncate block shadow-2xs bg-rose-600 text-white">
-                                  🔴 8:20 {isSlovenian ? "Zasedeno" : isIt ? "Occupato" : "Booked"}
-                                </span>
-                              )}
-                              {isRacerEvent && (
-                                <span className="text-[9px] font-black uppercase tracking-tight px-1.5 py-0.5 rounded truncate block shadow-2xs bg-amber-500 text-white">
-                                  🟡 17h Dirkač
-                                </span>
-                              )}
-                              {isGrapheneEvent && (
-                                <span className="text-[9px] font-black uppercase tracking-tight px-1.5 py-0.5 rounded truncate block shadow-2xs bg-brand-red text-white">
-                                  🔴 17h Čip
-                                </span>
-                              )}
-                              {isPrintCutEvent && (
-                                <span className="text-[9px] font-black uppercase tracking-tight px-1.5 py-0.5 rounded truncate block shadow-2xs bg-play-teal text-white">
-                                  🔵 17h Tisk
-                                </span>
-                              )}
+                              {dayEvents.map((ev) => {
+                                const isKemik = ev.id.includes('kemik');
+                                const isGeneralOccupied = (ev.category === 'occupied' || ev.id.startsWith('occupied')) && !isKemik;
+                                const isRacer = ev.id.startsWith('racer');
+                                const isGraphene = ev.id.startsWith('graphene');
+                                const isPrint = ev.id.startsWith('printcut');
+
+                                if (isKemik) {
+                                  return (
+                                    <span key={ev.id} className="text-[9px] font-black uppercase tracking-tight px-1.5 py-0.5 rounded truncate block shadow-2xs bg-rose-600 text-white" title={ev.title}>
+                                      🔴 17:00 Mali kemik
+                                    </span>
+                                  );
+                                }
+                                if (isGeneralOccupied) {
+                                  return (
+                                    <span key={ev.id} className="text-[9px] font-black uppercase tracking-tight px-1.5 py-0.5 rounded truncate block shadow-2xs bg-rose-600 text-white">
+                                      🔴 {ev.time} {isSlovenian ? "Zasedeno" : isIt ? "Occupato" : "Booked"}
+                                    </span>
+                                  );
+                                }
+                                if (isRacer) {
+                                  return (
+                                    <span key={ev.id} className="text-[9px] font-black uppercase tracking-tight px-1.5 py-0.5 rounded truncate block shadow-2xs bg-amber-500 text-white">
+                                      🟡 17h Dirkač
+                                    </span>
+                                  );
+                                }
+                                if (isGraphene) {
+                                  return (
+                                    <span key={ev.id} className="text-[9px] font-black uppercase tracking-tight px-1.5 py-0.5 rounded truncate block shadow-2xs bg-brand-red text-white">
+                                      🔴 17h Čip
+                                    </span>
+                                  );
+                                }
+                                if (isPrint) {
+                                  return (
+                                    <span key={ev.id} className="text-[9px] font-black uppercase tracking-tight px-1.5 py-0.5 rounded truncate block shadow-2xs bg-play-teal text-white">
+                                      🔵 17h Tisk
+                                    </span>
+                                  );
+                                }
+                                return null;
+                              })}
                             </div>
 
                             {/* Mobile dots indicator */}
@@ -1258,7 +1279,9 @@ export default function CalendarPage() {
                   <AnimatePresence mode="wait">
                     {selectedDayEvents.length > 0 ? (
                       selectedDayEvents.map((event) => {
-                        const isOccupied = event.id.startsWith('occupied') || event.category === 'occupied';
+                        const isKemik = event.id.includes('kemik');
+                        const isGeneralOccupied = (event.id.startsWith('occupied') || event.category === 'occupied') && !isKemik;
+                        const isOccupied = isKemik || isGeneralOccupied;
                         const isRacer = event.id.startsWith('racer');
                         const isGraphene = event.id.startsWith('graphene');
                         const isPrintCut = event.id.startsWith('printcut');
@@ -1271,7 +1294,12 @@ export default function CalendarPage() {
                             className="text-left pb-6 mb-6 border-b border-slate-200/80 last:border-b-0 last:pb-0 last:mb-0"
                           >
                             <div className="flex flex-wrap items-center gap-2 mb-3">
-                              {isOccupied ? (
+                              {isKemik ? (
+                                <span className="bg-rose-100 text-rose-700 border border-rose-200/80 px-2.5 py-1 rounded-xl text-[10px] font-display font-black uppercase tracking-wider flex items-center gap-1.5">
+                                  <Lock size={12} className="stroke-[2.5]" />
+                                  MALI KEMIK · {isSlovenian ? "Zasedeno" : isIt ? "Occupato" : "Booked"}
+                                </span>
+                              ) : isGeneralOccupied ? (
                                 <span className="bg-rose-100 text-rose-700 border border-rose-200/80 px-2.5 py-1 rounded-xl text-[10px] font-display font-black uppercase tracking-wider flex items-center gap-1.5">
                                   <Lock size={12} className="stroke-[2.5]" />
                                   {isSlovenian ? "Start Lab zasedeno" : isIt ? "Start Lab occupato" : "Start Lab booked"}
@@ -1332,8 +1360,10 @@ export default function CalendarPage() {
                                 <div>
                                   <p className="font-bold text-slate-800">{event.time}</p>
                                   <p className="text-[10px] text-slate-600 font-bold uppercase mt-0.5">
-                                    {isOccupied
-                                      ? (isSlovenian ? "Rezerviran termin v Start Labu" : isIt ? "Sessione prenotata presso Start Lab" : "Booked slot at Start Lab")
+                                    {isKemik
+                                      ? (isSlovenian ? "Delavnica Mali kemik · Termin je zaseden" : isIt ? "Piccolo chimico · Orario occupato" : "Little Chemist · Slot is booked")
+                                      : isOccupied
+                                        ? (isSlovenian ? "Rezerviran termin v Start Labu" : isIt ? "Sessione prenotata presso Start Lab" : "Booked slot at Start Lab")
                                       : isRacer
                                         ? (isSlovenian ? "Enkrat tedensko, 8 tednov (ob četrtkih)" : isIt ? "Una volta alla settimana, 8 settimane (giovedì)" : "Once a week, 8 weeks (Thursdays)")
                                         : isGraphene 
@@ -1361,7 +1391,7 @@ export default function CalendarPage() {
                               <div className="bg-rose-50/60 border border-rose-200/80 rounded-2xl p-4 mb-6 space-y-2 text-xs font-semibold text-rose-950">
                                 <div className="flex items-center gap-2 font-display font-black uppercase tracking-wide text-rose-700">
                                   <Lock size={14} className="stroke-[2.5]" />
-                                  <span>{isSlovenian ? "Prostori Start Laba niso na voljo" : isIt ? "Locali Start Lab non disponibili" : "Start Lab premises unavailable"}</span>
+                                  <span>{isSlovenian ? "Zasedeno" : isIt ? "Occupato" : "Booked"}</span>
                                 </div>
                                 <p className="text-slate-600">
                                   {isSlovenian 
@@ -1370,8 +1400,10 @@ export default function CalendarPage() {
                                       ? "Durante questa fascia oraria nel laboratorio si svolgono attività pianificate o riservate." 
                                       : "During this time slot, scheduled or reserved activities are taking place in the laboratory."}
                                 </p>
-                                <div className="border-t border-rose-200/60 pt-2 text-[11px] text-slate-700">
-                                  <strong>{isSlovenian ? "Lokacija:" : isIt ? "Luogo:" : "Location:"}</strong> Start Lab, Solkan
+                                <div className="border-t border-rose-200/60 pt-2 text-[11px] text-slate-700 space-y-1">
+                                  <p><strong>{isSlovenian ? "Urnik zasedenosti:" : isIt ? "Orario:" : "Schedule:"}</strong> {event.time}</p>
+                                  <p><strong>{isSlovenian ? "Lokacija:" : isIt ? "Luogo:" : "Location:"}</strong> Start Lab, Solkan</p>
+                                  <p><strong>{isSlovenian ? "Status:" : isIt ? "Stato:" : "Status:"}</strong> <span className="text-rose-600 font-extrabold">{isSlovenian ? "Zasedeno" : isIt ? "Occupato" : "Booked"}</span></p>
                                 </div>
                               </div>
                             ) : (
@@ -1905,7 +1937,7 @@ export default function CalendarPage() {
                             {isOccupied ? (
                               <div className="w-full py-3.5 bg-rose-100/70 border border-rose-300 text-rose-800 rounded-2xl font-display font-black uppercase text-xs tracking-wider select-none flex items-center justify-center gap-2 shadow-xs">
                                 <Lock size={16} className="text-rose-600 stroke-[2.5]" />
-                                {isSlovenian ? "Start Lab zasedeno" : isIt ? "Start Lab occupato" : "Start Lab booked"}
+                                {isSlovenian ? `Zasedeno (${event.time})` : isIt ? `Occupato (${event.time})` : `Booked (${event.time})`}
                               </div>
                             ) : isPrintCut || isGraphene || isRacer ? (
                               <button 
