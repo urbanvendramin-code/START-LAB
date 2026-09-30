@@ -89,6 +89,11 @@ const PARTNER_CAROUSEL_LOGOS: CarouselPartner[] = [
     href: "http://www.amiteh.com/"
   },
   {
+    name: "ETI Elektroelement",
+    logo: "https://ik.imagekit.io/utigodgni/ETI%20Logo%20CMYK.png",
+    href: "https://www.etigroup.eu/"
+  },
+  {
     name: "Univerza v Novi Gorici",
     logo: "https://res.cloudinary.com/pithqpe2/image/upload/v1788246061/Safari.png",
     href: "https://www-lfos.ung.si/"
@@ -884,6 +889,15 @@ export default function PartnerPage() {
                           { label: "Amiteh", href: "http://www.amiteh.com/" },
                           { label: "Rigol", href: "http://www.rigol.si/" }
                         ]
+                      },
+                      { 
+                        name: "ETI Elektroelement d.o.o.",
+                        role: t('talent_developers.eti.role'),
+                        image: "https://ik.imagekit.io/utigodgni/ETI%20Logo%20CMYK.png",
+                        bg: "bg-brand-red/5 border-brand-red/15 hover:border-brand-red/35 text-brand-red hover:scale-[1.01]", 
+                        badgeColor: "bg-brand-red/10 text-brand-red",
+                        desc: t('talent_developers.eti.desc'),
+                        href: "https://www.etigroup.eu/"
                       }
                     ].map((company, idx) => (
                       <DeveloperCompanyCard company={company} key={idx} />
