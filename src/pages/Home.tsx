@@ -13,7 +13,11 @@ import {
   ArrowRight,
   Info,
   Mail,
-  Zap
+  Zap,
+  Clock,
+  MapPin,
+  Calendar,
+  Sparkles
 } from 'lucide-react';
 import { LAB_EQUIPMENT } from '../constants';
 import fablabSpaceImage from '../assets/images/fablab_space_1781078255061.png';
@@ -71,6 +75,15 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="lg:col-span-7"
           >
+            <Link 
+              to="/koledar?workshop=arduino" 
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-800 text-[11px] sm:text-xs font-display font-black uppercase tracking-wider mb-5 transition-all group"
+            >
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>{isSlovenian ? "Novo: Delavnica Elektronika in Arduino · Odprte prijave" : isItalian ? "Nuovo: Workshop Elettronica e Arduino · Iscrizioni aperte" : "New: Electronics & Arduino Workshop · Open for registration"}</span>
+              <ChevronRight size={14} className="stroke-[3] group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+
             <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-display font-black mb-6 md:mb-8 leading-[1.05] tracking-tight text-slate-950">
               {t('hero.title_start')} <br />
               <span className="text-brand-red">
@@ -146,6 +159,158 @@ export default function Home() {
                <div className="absolute bottom-[-16px] right-[4px] sm:bottom-[-24px] sm:right-[-16px] bg-play-teal text-slate-950 font-display font-black text-xs sm:text-sm uppercase px-4 py-2.5 sm:px-5 sm:py-3 rounded-2xl shadow-[0_6px_0_0_#028a67] sm:shadow-[0_8px_0_0_#028a67] border-2 border-slate-900 -rotate-3 hover:rotate-3 transition-transform duration-300">
                   ⚡ {t('why.exploration.title')}
                </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Featured Workshop Section: ELEKTRONIKA IN ARDUINO */}
+      <section id="izpostavljena-delavnica" className="py-12 sm:py-16 md:py-20 px-4 md:px-6 relative bg-gradient-to-b from-slate-50/80 via-white to-slate-50/50">
+        <div className="max-w-7xl mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="play-card p-6 sm:p-10 md:p-14 bg-white border-4 border-slate-950 rounded-[2.5rem] shadow-[0_24px_60px_rgba(15,23,42,0.12)] relative overflow-hidden"
+          >
+            {/* Playful background glows */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
+            <div className="absolute bottom-0 left-0 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none -ml-20 -mb-20" />
+
+            <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
+              {/* Left Column: Info & Details */}
+              <div className="lg:col-span-7">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4">
+                  <span className="bg-emerald-600 text-white font-display font-black text-[11px] sm:text-xs uppercase px-4 py-1.5 rounded-full tracking-wider flex items-center gap-2 shadow-md shadow-emerald-600/20">
+                    <span className="w-2 h-2 rounded-full bg-white animate-ping" />
+                    {isSlovenian ? "NOVA JESENSKA DELAVNICA · ODPRTE PRIJAVE" : isItalian ? "NUOVO WORKSHOP · ISCRIZIONI APERTE" : "NEW WORKSHOP · REGISTRATION OPEN"}
+                  </span>
+                  <span className="bg-emerald-50 text-emerald-800 border border-emerald-200 font-display font-black text-xs uppercase px-3 py-1.5 rounded-full">
+                    💶 40 €
+                  </span>
+                  <span className="bg-slate-100 text-slate-700 border border-slate-200 font-display font-bold text-xs uppercase px-3 py-1.5 rounded-full">
+                    ⏱️ 8 srečanj × 2 uri
+                  </span>
+                </div>
+
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-display font-black uppercase text-slate-950 leading-[1.05] tracking-tight mb-4">
+                  ELEKTRONIKA IN <span className="text-emerald-600 inline-block">ARDUINO</span>
+                </h2>
+
+                <p className="text-base sm:text-lg md:text-xl text-slate-800 font-black leading-snug mb-4">
+                  {isSlovenian 
+                    ? "Kaj se zgodi, ko program zapusti zaslon in začne delovati v resničnem svetu? 🌍" 
+                    : isItalian 
+                      ? "Cosa succede quando il programma lascia lo schermo ed entra nel mondo reale? 🌍" 
+                      : "What happens when software leaves the screen and acts in the physical world? 🌍"}
+                </p>
+
+                <p className="text-sm sm:text-base text-slate-600 font-semibold leading-relaxed mb-6">
+                  {isSlovenian 
+                    ? "Na delavnici bomo spoznali svet mikrokrmilnika Arduino, elektronike in programiranja – predvsem skozi praktično ustvarjanje, preizkušanje in raziskovanje! Sestavljali bomo vezja na breadboardu, prižigali LED-diode, ustvarjali barve z RGB-diodami, krmilili elektromotorje, povezovali senzorje za svetlobo in temperaturo ter izdelali svoj samostojni projekt." 
+                    : isItalian 
+                      ? "Esploreremo il mondo di Arduino, dell'elettronica e della programmazione attraverso la sperimentazione pratica e la creazione di progetti interattivi su breadboard." 
+                      : "Discover the world of Arduino microcontrollers, electronics, and coding through practical tinkering, breadboard circuits, sensors, actuators, and an independent project."}
+                </p>
+
+                {/* Groups Selection Details */}
+                <div className="mb-6">
+                  <div className="text-xs font-display font-black uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
+                    <Users size={16} className="text-emerald-600" />
+                    <span>{isSlovenian ? "Izbiraj med dvema starostnima skupinama:" : isItalian ? "Scegli tra due gruppi di età:" : "Choose between two age groups:"}</span>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="p-4 rounded-2xl bg-emerald-50/70 border-2 border-emerald-500/30 hover:border-emerald-500 transition-all">
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <span className="w-3 h-3 rounded-full bg-emerald-500 shrink-0" />
+                        <h4 className="font-display font-black uppercase text-sm text-emerald-950">Skupina 9–14 let</h4>
+                      </div>
+                      <div className="text-xs font-bold text-slate-700 flex items-center gap-1.5 mb-1">
+                        <Calendar size={13} className="text-emerald-700 shrink-0" />
+                        <span>1. srečanje: Pon, 12. 10. 2026 (16:30–18:30)</span>
+                      </div>
+                      <div className="text-[11px] text-slate-500 font-semibold flex items-center gap-1.5">
+                        <MapPin size={12} className="text-slate-400 shrink-0" />
+                        <span>Start Lab Solkan · Največ 20 mest</span>
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-2xl bg-sky-50/70 border-2 border-sky-500/30 hover:border-sky-500 transition-all">
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <span className="w-3 h-3 rounded-full bg-sky-500 shrink-0" />
+                        <h4 className="font-display font-black uppercase text-sm text-sky-950">Skupina 15 let in več</h4>
+                      </div>
+                      <div className="text-xs font-bold text-slate-700 flex items-center gap-1.5 mb-1">
+                        <Calendar size={13} className="text-sky-700 shrink-0" />
+                        <span>1. srečanje: Sre, 14. 10. 2026 (17:00–19:00)</span>
+                      </div>
+                      <div className="text-[11px] text-slate-500 font-semibold flex items-center gap-1.5">
+                        <MapPin size={12} className="text-slate-400 shrink-0" />
+                        <span>Start Lab Solkan · Največ 20 mest</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Important Highlights Pills */}
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-8 text-xs font-bold text-slate-700">
+                  <span className="bg-amber-100/70 text-amber-950 border border-amber-300/60 px-3 py-1.5 rounded-xl flex items-center gap-1.5">
+                    💡 {isSlovenian ? "Predznanje ni potrebno – začnemo iz ničle!" : isItalian ? "Nessuna conoscenza previa richiesta!" : "No prior knowledge required!"}
+                  </span>
+                  <span className="bg-slate-100 text-slate-700 px-3 py-1.5 rounded-xl border border-slate-200">
+                    👥 {isSlovenian ? "Skupina je omejena na 20 mest" : isItalian ? "Max 20 partecipanti per gruppo" : "Limited to 20 seats per group"}
+                  </span>
+                </div>
+
+                {/* CTA Action Buttons */}
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+                  <Link 
+                    to="/koledar?workshop=arduino&register=true" 
+                    className="btn-primary justify-center shadow-lg text-center flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 border-slate-950"
+                  >
+                    <Rocket size={18} className="stroke-[2.5]" />
+                    <span>{isSlovenian ? "Prijavi se na delavnico" : isItalian ? "Iscriviti al workshop" : "Register now"}</span>
+                  </Link>
+
+                  <Link 
+                    to="/koledar?workshop=arduino" 
+                    className="btn-secondary justify-center text-center flex items-center gap-2"
+                  >
+                    <Calendar size={18} className="stroke-[2.5]" />
+                    <span>{isSlovenian ? "Ogled terminov v koledarju" : isItalian ? "Visualizza nel calendario" : "View dates in calendar"}</span>
+                    <ArrowRight size={16} className="stroke-[2.5]" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Right Column: Visual Showcase */}
+              <div className="lg:col-span-5 relative">
+                <div className="relative rounded-[2rem] overflow-hidden border-4 border-slate-950 shadow-[8px_8px_0_0_#0f172a] bg-slate-950 group">
+                  <img 
+                    src="https://ik.imagekit.io/utigodgni/elektronika_in_arduino2.png" 
+                    alt="Delavnica Elektronika in Arduino" 
+                    className="w-full h-auto aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
+                  
+                  {/* Floating badge top */}
+                  <div className="absolute top-4 left-4 bg-emerald-500 text-slate-950 font-display font-black text-xs uppercase px-3.5 py-1.5 rounded-xl shadow-md border-2 border-slate-950">
+                    ⚡ 100% PRAKSA
+                  </div>
+
+                  {/* Floating badge bottom */}
+                  <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl border-2 border-slate-950 text-slate-950">
+                    <div className="flex items-center justify-between text-xs font-display font-black uppercase">
+                      <span className="text-emerald-700">8 srečanj po 2 uri</span>
+                      <span className="bg-emerald-600 text-white px-2.5 py-0.5 rounded-lg">40 €</span>
+                    </div>
+                    <div className="text-[11px] text-slate-600 font-semibold mt-1">
+                      Solkan · Pričetek 12. & 14. oktober 2026
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>

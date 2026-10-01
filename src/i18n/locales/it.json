@@ -212,7 +212,7 @@
       "laser": { "title": "Stampa 3D e Taglio Laser – dall'idea al prodotto", "desc": "Scopri il processo dalla modellazione 3D e stampa 3D al taglio laser per creare prodotti unici." },
       "3d-pro": { "title": "Modellazione 3D Professionale", "desc": "Scopri strumenti avanzati per la modellazione 3D e il design ingegneristico." },
       "electronics-basic": { "title": "Basi di Elettronica – circuiti DC", "desc": "I partecipanti apprendono i componenti base e le leggi dell'elettricità e assemblano semplici circuiti." },
-      "arduino-micro": { "title": "Microcontrollori e Programmazione (Arduino)", "desc": "I partecipanti creano un progetto interattivo con sensori e attuatori." },
+      "arduino-micro": { "title": "Elettronica e Arduino", "desc": "Cosa succede quando il programma lascia lo schermo ed entra nel mondo reale? Scopri il mondo di Arduino, dell'elettronica e dei sensori con la pratica." },
       "smart-home": { "title": "Case Intelligenti", "desc": "Come funzionano nella pratica i dispositivi intelligenti e l'automazione." },
       "mobile-app": { "title": "Crea la Tua App Mobile", "desc": "Trasforma un'idea in una semplice applicazione mobile e testala." },
       "unreal-engine": { "title": "Sviluppo di Videogiochi (Unreal Engine)", "desc": "Crea un ambiente 3D di base e comprendi come vengono realizzati i giochi." },

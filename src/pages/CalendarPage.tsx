@@ -450,6 +450,107 @@ const getLocalizedEvents = (lang: string): Event[] => {
         : `Little Chemist workshop (session ${item.sessionNum}). Time slot 17:00 – 18:30 is booked.`
   }));
 
+  const arduinoSessionDescriptions = [
+    {
+      sl: "Sklop 1: Uvod v svet Arduina in elektronike. Spoznavanje osnovnih komponent in sestavljanje prvih vezij na breadboardu.",
+      it: "Parte 1: Introduzione ad Arduino e all'elettronica. Componenti di base e primi circuiti su breadboard.",
+      en: "Part 1: Intro to Arduino & electronics. Basic electronic components and first circuits on breadboard."
+    },
+    {
+      sl: "Sklop 2: Programiranje Arduina: prižiganje, utripanje in krmiljenje LED-diod skozi prve programske ukaze.",
+      it: "Parte 2: Programmazione di Arduino: accendere, far lampeggiare e controllare LED con le prime istruzioni.",
+      en: "Part 2: Coding Arduino: lighting up, blinking, and controlling LEDs through first lines of code."
+    },
+    {
+      sl: "Sklop 3: Ustvarjanje mavrice barv z RGB-diodo in programiranje barvnih prehodov 🌈.",
+      it: "Parte 3: Creare un arcobaleno di colori con LED RGB e transizioni cromatiche 🌈.",
+      en: "Part 3: Creating a rainbow of colors with RGB LEDs and coding dynamic color shifts 🌈."
+    },
+    {
+      sl: "Sklop 4: Upravljanje elektromotorja: vklop, nadzor hitrosti in spreminjanje smeri vrtenja.",
+      it: "Parte 4: Controllo di motori elettrici: avvio, modulazione di velocità e senso di rotazione.",
+      en: "Part 4: Electric motor control: switching on, speed regulation, and rotational direction."
+    },
+    {
+      sl: "Sklop 5: Merjenje svetlobe in temperature s fotoupori ter temperaturnimi senzorji 🌡️.",
+      it: "Parte 5: Misurazione di luce e temperatura con fotoresistenze e sensori termici 🌡️.",
+      en: "Part 5: Measuring light and temperature with photoresistors and thermal sensors 🌡️."
+    },
+    {
+      sl: "Sklop 6: Povezovanje naprednih senzorjev: branje signalov in inteligentno odzivanje na okolico.",
+      it: "Parte 6: Collegamento di sensori avanzati: lettura dati e risposta intelligente all'ambiente.",
+      en: "Part 6: Interfacing advanced sensors: data acquisition and intelligent environmental response."
+    },
+    {
+      sl: "Sklop 7: Iskanje in odpravljanje napak (debugging) ter načrtovanje samostojnega projekta.",
+      it: "Parte 7: Risoluzione dei problemi (debugging) e progettazione del proprio progetto autonomo.",
+      en: "Part 7: Circuit & code debugging, plus planning your own independent project."
+    },
+    {
+      sl: "Sklop 8: Izdelava, zaključek in predstavitev lastnega samostojnega projekta z Arduinom 🚀.",
+      it: "Parte 8: Realizzazione, test e presentazione del progetto finale con Arduino 🚀.",
+      en: "Part 8: Building, finishing, and demonstrating your custom Arduino project 🚀."
+    }
+  ];
+
+  const rawArduinoG1Dates = [
+    new Date(2026, 9, 12), // Oct 12
+    new Date(2026, 9, 19), // Oct 19
+    new Date(2026, 9, 26), // Oct 26
+    new Date(2026, 10, 2), // Nov 2
+    new Date(2026, 10, 9), // Nov 9
+    new Date(2026, 10, 16), // Nov 16
+    new Date(2026, 10, 23), // Nov 23
+    new Date(2026, 10, 30)  // Nov 30
+  ];
+
+  const arduinoG1Events: Event[] = rawArduinoG1Dates.map((date, idx) => ({
+    id: `arduino-g1-session-${idx + 1}`,
+    title: isSl 
+      ? `Elektronika in Arduino (9–14 let) – Sklop ${idx + 1}`
+      : isIt
+        ? `Elettronica e Arduino (9–14 anni) – Parte ${idx + 1}`
+        : `Electronics & Arduino (9–14 yrs) – Session ${idx + 1}`,
+    date,
+    time: '16:30 - 18:30',
+    location: 'Start Lab, Solkan',
+    category: 'workshop' as const,
+    description: isSl ? arduinoSessionDescriptions[idx].sl : isIt ? arduinoSessionDescriptions[idx].it : arduinoSessionDescriptions[idx].en,
+    ageGroup: isSl ? '9–14 let' : isIt ? '9–14 anni' : '9–14 years',
+    mentors: isSl ? 'Start Lab ekipa' : isIt ? 'Team Start Lab' : 'Start Lab Team',
+    image: 'https://ik.imagekit.io/utigodgni/elektronika_in_arduino2.png'
+  }));
+
+  const rawArduinoG2Dates = [
+    new Date(2026, 9, 14), // Oct 14
+    new Date(2026, 9, 21), // Oct 21
+    new Date(2026, 9, 28), // Oct 28
+    new Date(2026, 10, 4), // Nov 4
+    new Date(2026, 10, 11), // Nov 11
+    new Date(2026, 10, 18), // Nov 18
+    new Date(2026, 10, 25), // Nov 25
+    new Date(2026, 11, 2)  // Dec 2
+  ];
+
+  const arduinoG2Events: Event[] = rawArduinoG2Dates.map((date, idx) => ({
+    id: `arduino-g2-session-${idx + 1}`,
+    title: isSl 
+      ? `Elektronika in Arduino (15+ let) – Sklop ${idx + 1}`
+      : isIt
+        ? `Elettronica e Arduino (15+ anni) – Parte ${idx + 1}`
+        : `Electronics & Arduino (15+ yrs) – Session ${idx + 1}`,
+    date,
+    time: '17:00 - 19:00',
+    location: 'Start Lab, Solkan',
+    category: 'workshop' as const,
+    description: isSl ? arduinoSessionDescriptions[idx].sl : isIt ? arduinoSessionDescriptions[idx].it : arduinoSessionDescriptions[idx].en,
+    ageGroup: isSl ? '15 let in več' : isIt ? '15+ anni' : '15+ years',
+    mentors: isSl ? 'Start Lab ekipa' : isIt ? 'Team Start Lab' : 'Start Lab Team',
+    image: 'https://ik.imagekit.io/utigodgni/elektronika_in_arduino2.png'
+  }));
+
+  const arduinoEvents: Event[] = [...arduinoG1Events, ...arduinoG2Events];
+
   const occupiedEvents: Event[] = rawOccupiedEvents.map((item) => ({
     id: item.id,
     title: item.title,
@@ -460,7 +561,7 @@ const getLocalizedEvents = (lang: string): Event[] => {
     description: item.description
   }));
 
-  return [...occupiedEvents, ...maliKemikEvents, ...racerEvents, ...grapheneEvents, ...printCutEvents];
+  return [...arduinoEvents, ...occupiedEvents, ...maliKemikEvents, ...racerEvents, ...grapheneEvents, ...printCutEvents];
 };
 
 export default function CalendarPage() {
@@ -480,6 +581,7 @@ export default function CalendarPage() {
     email: '',
     phone: '',
     age: '',
+    selectedGroup: '', // '9-14' or '15+'
     participantLanguage: 'Slovenščina',
     referralSource: '',
     referralSourceOther: '',
@@ -493,7 +595,7 @@ export default function CalendarPage() {
   const [submitErrorMessage, setSubmitErrorMessage] = useState('');
   const [showMoreDetails, setShowMoreDetails] = useState(false);
   const [viewMode, setViewMode] = useState<'calendar' | 'list'>('calendar');
-  const [categoryFilter, setCategoryFilter] = useState<'all' | 'kemik' | 'occupied' | 'racer' | 'graphene' | 'printcut'>('all');
+  const [categoryFilter, setCategoryFilter] = useState<'all' | 'arduino' | 'kemik' | 'occupied' | 'racer' | 'graphene' | 'printcut'>('all');
 
   const jumpToDate = (targetDate: Date) => {
     setCurrentMonth(startOfMonth(targetDate));
@@ -541,6 +643,7 @@ export default function CalendarPage() {
 
   const events = getLocalizedEvents(i18n.language);
 
+  const arduinoCount = events.filter(e => e.id.startsWith('arduino')).length;
   const kemikCount = events.filter(e => e.id.includes('kemik')).length;
   const generalOccupiedCount = events.filter(e => (e.category === 'occupied' || e.id.startsWith('occupied')) && !e.id.includes('kemik')).length;
   const racerCount = events.filter(e => e.id.startsWith('racer')).length;
@@ -549,6 +652,7 @@ export default function CalendarPage() {
 
   const filteredEvents = events.filter(event => {
     if (categoryFilter === 'all') return true;
+    if (categoryFilter === 'arduino') return event.id.startsWith('arduino');
     if (categoryFilter === 'kemik') return event.id.includes('kemik');
     if (categoryFilter === 'occupied') return (event.category === 'occupied' || event.id.startsWith('occupied')) && !event.id.includes('kemik');
     if (categoryFilter === 'racer') return event.id.startsWith('racer');
@@ -559,7 +663,7 @@ export default function CalendarPage() {
 
   const selectedDayEvents = selectedDate 
     ? events.filter(event => isSameDay(event.date, selectedDate))
-    : events.filter(event => event.id === 'occupied-1' || event.id === 'racer-session-1' || event.id === 'graphene-session-1' || event.id === 'printcut-session-1');
+    : events.filter(event => event.id === 'arduino-g1-session-1' || event.id === 'arduino-g2-session-1' || event.id === 'occupied-1' || event.id === 'racer-session-1' || event.id === 'graphene-session-1' || event.id === 'printcut-session-1');
 
   const isSlovenian = i18n.language !== 'en' && i18n.language !== 'it';
   const isIt = i18n.language === 'it';
@@ -618,6 +722,7 @@ export default function CalendarPage() {
       email: '',
       phone: '',
       age: '',
+      selectedGroup: event.id.includes('g1') ? '9-14' : event.id.includes('g2') ? '15+' : '',
       participantLanguage: 'Slovenščina',
       referralSource: '',
       referralSourceOther: '',
@@ -626,12 +731,34 @@ export default function CalendarPage() {
       sessionSelection: 'all'
     });
     setSubmitStatus('idle');
+    setSubmitErrorMessage('');
     setIsModalOpen(true);
   };
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const workshopParam = params.get('workshop');
+    if (workshopParam === 'arduino') {
+      setCurrentMonth(new Date(2026, 9, 1));
+      setSelectedDate(new Date(2026, 9, 12));
+      setCategoryFilter('arduino');
+      if (params.get('register') === 'true') {
+        const arduinoEv = events.find(e => e.id.startsWith('arduino'));
+        if (arduinoEv) {
+          openRegisterModal(arduinoEv);
+        }
+      }
+    }
+  }, []);
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.phone || !formData.age) return;
+
+    if (modalEvent?.id.startsWith('arduino') && !formData.selectedGroup) {
+      setSubmitErrorMessage(isSlovenian ? "Prosimo, izberite skupino (9–14 let ali 15+ let)." : isIt ? "Si prega di selezionare il gruppo (9–14 anni o 15+ anni)." : "Please select a group (9–14 yrs or 15+ yrs).");
+      return;
+    }
 
     if (formData.referralSource === 'drugo' && !formData.referralSourceOther.trim()) {
       return;
@@ -641,7 +768,16 @@ export default function CalendarPage() {
     setSubmitStatus('idle');
 
     let selectedTerm = '';
-    if (formData.sessionSelection === 'all') {
+    if (modalEvent?.id.startsWith('arduino')) {
+      const groupStr = formData.selectedGroup === '9-14'
+        ? (isSlovenian ? 'Skupina 🟢 9–14 let (ponedeljki 16:30–18:30, začetek 12. 10. 2026)' : isIt ? 'Gruppo 🟢 9–14 anni (lunedì 16:30–18:30, inizio 12.10.2026)' : 'Group 🟢 9–14 yrs (Mondays 16:30–18:30, starts Oct 12, 2026)')
+        : (isSlovenian ? 'Skupina 🔵 15 let in več (srede 17:00–19:00, začetek 14. 10. 2026)' : isIt ? 'Gruppo 🔵 15+ anni (mercoledì 17:00–19:00, inizio 14.10.2026)' : 'Group 🔵 15+ yrs (Wednesdays 17:00–19:00, starts Oct 14, 2026)');
+      selectedTerm = isSlovenian 
+        ? `Celotna 8-tedenska delavnica - Elektronika in Arduino (40 €) – ${groupStr}`
+        : isIt
+          ? `Workshop completo di 8 settimane - Elettronica e Arduino (40 €) – ${groupStr}`
+          : `Full 8-week workshop - Electronics & Arduino (40 €) – ${groupStr}`;
+    } else if (formData.sessionSelection === 'all') {
       if (modalEvent?.id.startsWith('racer')) {
         selectedTerm = isSlovenian 
           ? 'Celotna 8-tedenska delavnica - Elektronika in dirkač (pričetek 17.9.2026 - 20 €)' 
@@ -678,6 +814,8 @@ export default function CalendarPage() {
         email: formData.email,
         phone: formData.phone,
         age: formData.age,
+        selectedGroup: formData.selectedGroup ? (formData.selectedGroup === '9-14' ? '9-14 let (ponedeljek 16:30-18:30)' : '15+ let (sreda 17:00-19:00)') : undefined,
+        workshopPrice: modalEvent?.id.startsWith('arduino') ? '40 €' : undefined,
         participantLanguage: formData.participantLanguage,
         workshopTitle,
         dateSelected: selectedTerm,
@@ -720,6 +858,112 @@ export default function CalendarPage() {
           </p>
         </div>
 
+        {/* Top Featured Workshop Card: ELEKTRONIKA IN ARDUINO */}
+        <div className="mb-6 sm:mb-8 p-5 sm:p-7 md:p-8 rounded-[2rem] bg-gradient-to-br from-emerald-950 via-slate-950 to-slate-900 text-white border-2 border-emerald-500/40 shadow-xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
+          
+          <div className="relative z-10 grid lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+            <div className="lg:col-span-7">
+              <div className="flex flex-wrap items-center gap-2 mb-3">
+                <span className="bg-emerald-500 text-slate-950 font-display font-black text-[10px] sm:text-xs uppercase px-3 py-1 rounded-full tracking-wider flex items-center gap-1.5 shadow-sm">
+                  <span className="w-2 h-2 rounded-full bg-slate-950 animate-ping" />
+                  {isSlovenian ? "NOVA DELAVNICA · PRIJAVE ODPRTE" : isIt ? "NUOVO WORKSHOP · ISCRIZIONI APERTE" : "NEW WORKSHOP · REGISTRATION OPEN"}
+                </span>
+                <span className="bg-white/10 text-emerald-300 border border-emerald-400/25 font-display font-black text-[10px] sm:text-xs uppercase px-2.5 py-1 rounded-full">
+                  💶 40 €
+                </span>
+                <span className="bg-white/10 text-slate-200 border border-white/10 font-display font-bold text-[10px] sm:text-xs uppercase px-2.5 py-1 rounded-full">
+                  ⏱️ 8 srečanj × 2 uri
+                </span>
+              </div>
+
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-black uppercase text-white mb-2 leading-tight tracking-tight">
+                ELEKTRONIKA IN ARDUINO
+              </h2>
+
+              <p className="text-xs sm:text-sm text-slate-300 font-semibold mb-4 leading-relaxed max-w-2xl">
+                {isSlovenian 
+                  ? "Kaj se zgodi, ko program zapusti zaslon in začne delovati v resničnem svetu? 🌍 Spoznajte svet Arduina, elektronike in senzorjev skozi praktično ustvarjanje na breadboardu, programiranje mikrokrmilnika ter samostojen projekt."
+                  : isIt
+                    ? "Cosa succede quando il programma lascia lo schermo ed entra nel mondo reale? Scopri il mondo di Arduino e dell'elettronica con la pratica."
+                    : "What happens when code leaves the screen and acts in the physical world? Explore Arduino microcontrollers, circuits, and sensors hands-on."}
+              </p>
+
+              {/* Two Groups Box */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-5">
+                <div className="p-3 rounded-2xl bg-white/5 border border-emerald-500/30 hover:bg-white/10 transition-colors">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0" />
+                    <span className="text-xs font-display font-black uppercase tracking-wider text-emerald-300">
+                      Skupina 9–14 let
+                    </span>
+                  </div>
+                  <div className="text-[11px] font-semibold text-slate-300">
+                    📅 Ponedeljki od 12. 10. 2026 (16:30 – 18:30)
+                  </div>
+                  <div className="text-[10px] text-slate-400 mt-0.5">
+                    📍 Start Lab Solkan · Največ 20 mest
+                  </div>
+                </div>
+
+                <div className="p-3 rounded-2xl bg-white/5 border border-sky-500/30 hover:bg-white/10 transition-colors">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0" />
+                    <span className="text-xs font-display font-black uppercase tracking-wider text-sky-300">
+                      Skupina 15 let in več
+                    </span>
+                  </div>
+                  <div className="text-[11px] font-semibold text-slate-300">
+                    📅 Srede od 14. 10. 2026 (17:00 – 19:00)
+                  </div>
+                  <div className="text-[10px] text-slate-400 mt-0.5">
+                    📍 Start Lab Solkan · Največ 20 mest
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    const arduinoEv = events.find(e => e.id.startsWith('arduino'));
+                    if (arduinoEv) openRegisterModal(arduinoEv);
+                  }}
+                  className="px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-display font-black uppercase text-xs tracking-wider transition-all shadow-lg hover:shadow-emerald-500/30 flex items-center gap-2 cursor-pointer"
+                >
+                  <Rocket size={16} className="stroke-[2.5]" />
+                  <span>{isSlovenian ? "Prijavi se na delavnico" : isIt ? "Iscriviti al workshop" : "Register for workshop"}</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    jumpToDate(new Date(2026, 9, 12));
+                    setCategoryFilter('arduino');
+                  }}
+                  className="px-4 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-display font-black uppercase text-xs tracking-wider transition-all flex items-center gap-2 cursor-pointer border border-white/15"
+                >
+                  <CalendarDays size={16} className="stroke-[2.5]" />
+                  <span>{isSlovenian ? "Prikaži termine v koledarju" : isIt ? "Mostra nel calendario" : "Show in calendar"}</span>
+                </button>
+              </div>
+            </div>
+
+            <div className="lg:col-span-5 relative">
+              <div className="relative rounded-2xl overflow-hidden border-2 border-emerald-500/40 shadow-2xl aspect-[4/3] group">
+                <img
+                  src="https://ik.imagekit.io/utigodgni/elektronika_in_arduino2.png"
+                  alt="Elektronika in Arduino"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute top-3 right-3 bg-slate-950/80 backdrop-blur-md text-emerald-400 border border-emerald-500/30 px-3 py-1.5 rounded-xl font-display font-black text-[10px] uppercase">
+                  💡 Predznanje ni potrebno
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Navigation & Filter Bar */}
         <div className="mb-5 sm:mb-6 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 sm:gap-4 bg-white p-2.5 sm:p-3.5 md:p-4 rounded-2xl sm:rounded-3xl border-2 border-slate-200/80 shadow-xs">
           {/* Category Filters */}
@@ -734,6 +978,18 @@ export default function CalendarPage() {
               }`}
             >
               {isSlovenian ? "Vsi termini" : isIt ? "Tutti i termini" : "All dates"} ({events.length})
+            </button>
+            <button
+              type="button"
+              onClick={() => setCategoryFilter('arduino')}
+              className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-display font-black uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 shrink-0 ${
+                categoryFilter === 'arduino'
+                  ? 'bg-emerald-600 text-white shadow-xs'
+                  : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60'
+              }`}
+            >
+              <span className={`w-2 h-2 rounded-full ${categoryFilter === 'arduino' ? 'bg-white' : 'bg-emerald-600'}`} />
+              {isSlovenian ? "Elektronika in Arduino" : isIt ? "Elettronica e Arduino" : "Electronics & Arduino"} ({arduinoCount})
             </button>
             <button
               type="button"
@@ -872,6 +1128,7 @@ export default function CalendarPage() {
                       {group.items.map((event) => {
                         const isKemik = event.id.includes('kemik');
                         const isOccupied = event.category === 'occupied' || event.id.startsWith('occupied');
+                        const isArduino = event.id.startsWith('arduino');
                         const isRacer = event.id.startsWith('racer');
                         const isGraphene = event.id.startsWith('graphene');
                         const isPrintCut = event.id.startsWith('printcut');
@@ -882,11 +1139,13 @@ export default function CalendarPage() {
                             className={`p-4 md:p-5 rounded-2xl border-2 transition-all hover:shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-4 ${
                               isOccupied 
                                 ? 'bg-rose-50/60 border-rose-200' 
-                                : isRacer
-                                  ? 'bg-amber-50/20 border-amber-200/80'
-                                  : isGraphene
-                                    ? 'bg-brand-red/[0.02] border-brand-red/20'
-                                    : 'bg-play-teal/[0.02] border-play-teal/20'
+                                : isArduino
+                                  ? 'bg-emerald-50/30 border-emerald-200/80 hover:border-emerald-400'
+                                  : isRacer
+                                    ? 'bg-amber-50/20 border-amber-200/80'
+                                    : isGraphene
+                                      ? 'bg-brand-red/[0.02] border-brand-red/20'
+                                      : 'bg-play-teal/[0.02] border-play-teal/20'
                             }`}
                           >
                             {/* Left: Date badge */}
@@ -894,11 +1153,13 @@ export default function CalendarPage() {
                               <div className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl flex flex-col items-center justify-center font-display shadow-xs border ${
                                 isOccupied
                                   ? 'bg-rose-600 text-white border-rose-700'
-                                  : isRacer
-                                    ? 'bg-amber-500 text-white border-amber-600'
-                                    : isGraphene
-                                      ? 'bg-brand-red text-white border-brand-red'
-                                      : 'bg-play-teal text-white border-play-teal'
+                                  : isArduino
+                                    ? 'bg-emerald-600 text-white border-emerald-700'
+                                    : isRacer
+                                      ? 'bg-amber-500 text-white border-amber-600'
+                                      : isGraphene
+                                        ? 'bg-brand-red text-white border-brand-red'
+                                        : 'bg-play-teal text-white border-play-teal'
                               }`}>
                                 <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider opacity-90">
                                   {format(event.date, 'MMM', { locale: currentLocale })}
@@ -924,21 +1185,25 @@ export default function CalendarPage() {
                                 <span className={`text-[10px] font-display font-black uppercase tracking-wider px-2 py-0.5 rounded-lg ${
                                   isOccupied
                                     ? 'bg-rose-100 text-rose-800'
-                                    : isRacer
-                                      ? 'bg-amber-100 text-amber-800'
-                                      : isGraphene
-                                        ? 'bg-brand-red/10 text-brand-red'
-                                        : 'bg-play-teal/15 text-play-teal'
+                                    : isArduino
+                                      ? 'bg-emerald-100 text-emerald-800 border border-emerald-200'
+                                      : isRacer
+                                        ? 'bg-amber-100 text-amber-800'
+                                        : isGraphene
+                                          ? 'bg-brand-red/10 text-brand-red'
+                                          : 'bg-play-teal/15 text-play-teal'
                                 }`}>
                                   {isKemik
                                     ? (isSlovenian ? "Mali kemik · Zasedeno" : isIt ? "Piccolo chimico · Occupato" : "Little Chemist · Booked")
                                     : isOccupied 
                                       ? (isSlovenian ? "Start Lab zasedeno" : isIt ? "Start Lab occupato" : "Start Lab booked")
-                                      : event.id.startsWith('racer')
-                                      ? (isSlovenian ? "Elektronika in dirkač" : isIt ? "Elettronica e bolide" : "Electronics & Racer")
-                                      : event.id.startsWith('graphene')
-                                        ? (isSlovenian ? "Grafenski čip" : isIt ? "Chip al grafene" : "Graphene Chip")
-                                        : (isSlovenian ? "Natisni in izreži" : isIt ? "Stampa e taglia" : "Print & Cut")}
+                                      : isArduino
+                                        ? (isSlovenian ? "Elektronika in Arduino" : isIt ? "Elettronica e Arduino" : "Electronics & Arduino")
+                                        : event.id.startsWith('racer')
+                                        ? (isSlovenian ? "Elektronika in dirkač" : isIt ? "Elettronica e bolide" : "Electronics & Racer")
+                                        : event.id.startsWith('graphene')
+                                          ? (isSlovenian ? "Grafenski čip" : isIt ? "Chip al grafene" : "Graphene Chip")
+                                          : (isSlovenian ? "Natisni in izreži" : isIt ? "Stampa e taglia" : "Print & Cut")}
                                 </span>
                                 <span className="text-xs text-slate-500 font-semibold flex items-center gap-1">
                                   <MapPin size={12} className="text-slate-400" />
@@ -958,24 +1223,40 @@ export default function CalendarPage() {
                               <span className={`px-2.5 py-1 rounded-xl text-[10px] font-display font-black uppercase tracking-wider flex items-center gap-1 shadow-xs ${
                                 isOccupied
                                   ? 'bg-rose-600 text-white'
-                                  : 'bg-slate-200 text-slate-700'
+                                  : isArduino
+                                    ? 'bg-emerald-600 text-white'
+                                    : 'bg-slate-200 text-slate-700'
                               }`}>
-                                <Lock size={12} />
+                                {isOccupied ? <Lock size={12} /> : isArduino ? <Sparkles size={12} className="stroke-[2.5]" /> : <Lock size={12} />}
                                 <span>
                                   {isOccupied
                                     ? (isSlovenian ? "Zasedeno" : isIt ? "Occupato" : "Booked")
-                                    : (isSlovenian ? "Prijave zaprte" : isIt ? "Iscrizioni chiuse" : "Locked")}
+                                    : isArduino
+                                      ? (isSlovenian ? "Prijave odprte (40 €)" : isIt ? "Iscrizioni aperte (40 €)" : "Open (40 €)")
+                                      : (isSlovenian ? "Prijave zaprte" : isIt ? "Iscrizioni chiuse" : "Locked")}
                                 </span>
                               </span>
 
-                              <button
-                                type="button"
-                                onClick={() => jumpToDate(event.date)}
-                                className="inline-flex items-center gap-1 text-xs font-display font-black uppercase text-brand-red hover:text-brand-red/80 hover:underline cursor-pointer"
-                              >
-                                <span>{isSlovenian ? "Odpri na koledarju" : isIt ? "Vedi sul calendario" : "View on calendar"}</span>
-                                <ArrowRight size={13} className="stroke-[2.5]" />
-                              </button>
+                              <div className="flex items-center gap-2">
+                                {isArduino && (
+                                  <button
+                                    type="button"
+                                    onClick={() => openRegisterModal(event)}
+                                    className="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-display font-black uppercase tracking-wider transition-all flex items-center gap-1 cursor-pointer shadow-xs"
+                                  >
+                                    <Rocket size={12} />
+                                    <span>{isSlovenian ? "Prijavi se" : isIt ? "Iscriviti" : "Register"}</span>
+                                  </button>
+                                )}
+                                <button
+                                  type="button"
+                                  onClick={() => jumpToDate(event.date)}
+                                  className="inline-flex items-center gap-1 text-xs font-display font-black uppercase text-brand-red hover:text-brand-red/80 hover:underline cursor-pointer"
+                                >
+                                  <span>{isSlovenian ? "Odpri na koledarju" : isIt ? "Vedi sul calendario" : "View on calendar"}</span>
+                                  <ArrowRight size={13} className="stroke-[2.5]" />
+                                </button>
+                              </div>
                             </div>
                           </div>
                         );
@@ -1056,6 +1337,15 @@ export default function CalendarPage() {
                 <div className="mb-4 sm:mb-6 p-2 sm:p-3 bg-slate-50 border border-slate-200/80 rounded-xl sm:rounded-2xl flex flex-wrap gap-x-2 sm:gap-x-4 gap-y-1.5 sm:gap-y-2 items-center justify-start text-[11px] sm:text-xs text-slate-700 font-bold select-none">
                   <button
                     type="button"
+                    onClick={() => setCategoryFilter(categoryFilter === 'arduino' ? 'all' : 'arduino')}
+                    className={`flex items-center gap-1 sm:gap-1.5 px-2 py-0.5 rounded-lg transition-all cursor-pointer ${categoryFilter === 'arduino' ? 'bg-emerald-100 text-emerald-900 ring-1 ring-emerald-400' : 'hover:bg-slate-200/60'}`}
+                  >
+                    <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-emerald-600 inline-block shadow-sm" />
+                    <span>{isSlovenian ? "Elektronika in Arduino" : isIt ? "Elettronica e Arduino" : "Electronics & Arduino"}</span>
+                    <span className="text-[10px] text-slate-500 font-normal">({arduinoCount})</span>
+                  </button>
+                  <button
+                    type="button"
                     onClick={() => setCategoryFilter(categoryFilter === 'kemik' ? 'all' : 'kemik')}
                     className={`flex items-center gap-1 sm:gap-1.5 px-2 py-0.5 rounded-lg transition-all cursor-pointer ${categoryFilter === 'kemik' ? 'bg-rose-100 text-rose-900 ring-1 ring-rose-400' : 'hover:bg-slate-200/60'}`}
                   >
@@ -1119,6 +1409,7 @@ export default function CalendarPage() {
                     const isCurrentMonth = isSameMonth(date, monthStart);
                     
                     const isOccupiedEvent = dayEvents.some(e => e.category === 'occupied' || e.id.startsWith('occupied'));
+                    const isArduinoEvent = dayEvents.some(e => e.id.startsWith('arduino'));
                     const isRacerEvent = dayEvents.some(e => e.id.startsWith('racer'));
                     const isGrapheneEvent = dayEvents.some(e => e.id.startsWith('graphene'));
                     const isPrintCutEvent = dayEvents.some(e => e.id.startsWith('printcut'));
@@ -1143,11 +1434,13 @@ export default function CalendarPage() {
                             : hasEvents
                               ? isOccupiedEvent
                                 ? 'bg-rose-50/70 border-rose-300 hover:border-rose-500 hover:bg-rose-100/60'
-                                : isRacerEvent
-                                  ? 'bg-amber-50/40 border-amber-300 hover:border-amber-500 hover:bg-amber-100/50'
-                                  : isGrapheneEvent
-                                    ? 'bg-brand-red/[0.04] border-brand-red/40 hover:border-brand-red hover:bg-brand-red/10'
-                                    : 'bg-play-teal/[0.04] border-play-teal/40 hover:border-play-teal hover:bg-play-teal/10'
+                                : isArduinoEvent
+                                  ? 'bg-emerald-50/40 border-emerald-300 hover:border-emerald-500 hover:bg-emerald-100/50'
+                                  : isRacerEvent
+                                    ? 'bg-amber-50/40 border-amber-300 hover:border-amber-500 hover:bg-amber-100/50'
+                                    : isGrapheneEvent
+                                      ? 'bg-brand-red/[0.04] border-brand-red/40 hover:border-brand-red hover:bg-brand-red/10'
+                                      : 'bg-play-teal/[0.04] border-play-teal/40 hover:border-play-teal hover:bg-play-teal/10'
                               : 'bg-slate-50 border-slate-100 hover:border-slate-300 hover:bg-white'}
                         `}
                       >
@@ -1161,7 +1454,9 @@ export default function CalendarPage() {
                                 ? 'bg-white/20 text-white'
                                 : isOccupiedEvent
                                   ? 'bg-rose-600 text-white'
-                                  : 'bg-slate-200 text-slate-700'
+                                  : isArduinoEvent
+                                    ? 'bg-emerald-600 text-white'
+                                    : 'bg-slate-200 text-slate-700'
                             }`}>
                               {dayEvents.length > 1 ? `${dayEvents.length}x` : ''}
                             </span>
@@ -1175,6 +1470,7 @@ export default function CalendarPage() {
                               {dayEvents.map((ev) => {
                                 const isKemik = ev.id.includes('kemik');
                                 const isGeneralOccupied = (ev.category === 'occupied' || ev.id.startsWith('occupied')) && !isKemik;
+                                const isArduino = ev.id.startsWith('arduino');
                                 const isRacer = ev.id.startsWith('racer');
                                 const isGraphene = ev.id.startsWith('graphene');
                                 const isPrint = ev.id.startsWith('printcut');
@@ -1190,6 +1486,14 @@ export default function CalendarPage() {
                                   return (
                                     <span key={ev.id} className="text-[9px] font-black uppercase tracking-tight px-1.5 py-0.5 rounded truncate block shadow-2xs bg-rose-600 text-white">
                                       🔴 {ev.time} {isSlovenian ? "Zasedeno" : isIt ? "Occupato" : "Booked"}
+                                    </span>
+                                  );
+                                }
+                                if (isArduino) {
+                                  const isG1 = ev.id.includes('g1');
+                                  return (
+                                    <span key={ev.id} className="text-[9px] font-black uppercase tracking-tight px-1.5 py-0.5 rounded truncate block shadow-2xs bg-emerald-600 text-white" title={ev.title}>
+                                      🟢 {isG1 ? '16:30 Arduino (9–14)' : '17:00 Arduino (15+)'}
                                     </span>
                                   );
                                 }
@@ -1222,6 +1526,9 @@ export default function CalendarPage() {
                             <div className="flex md:hidden gap-1 items-center justify-center flex-wrap pt-0.5">
                               {isOccupiedEvent && (
                                 <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-rose-600 border border-white shrink-0 shadow-2xs" />
+                              )}
+                              {isArduinoEvent && (
+                                <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-600 border border-white shrink-0 shadow-2xs" />
                               )}
                               {isRacerEvent && (
                                 <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-500 border border-white shrink-0 shadow-2xs" />
@@ -1282,6 +1589,7 @@ export default function CalendarPage() {
                         const isKemik = event.id.includes('kemik');
                         const isGeneralOccupied = (event.id.startsWith('occupied') || event.category === 'occupied') && !isKemik;
                         const isOccupied = isKemik || isGeneralOccupied;
+                        const isArduino = event.id.startsWith('arduino');
                         const isRacer = event.id.startsWith('racer');
                         const isGraphene = event.id.startsWith('graphene');
                         const isPrintCut = event.id.startsWith('printcut');
@@ -1307,14 +1615,19 @@ export default function CalendarPage() {
                               ) : (
                                 <span className={`
                                   px-2.5 py-1 rounded-xl text-[10px] font-display font-black uppercase tracking-wider
-                                  ${isRacer ? 'bg-amber-500/15 text-amber-600' : isGraphene ? 'bg-brand-red/15 text-brand-red' : isPrintCut ? 'bg-play-teal/15 text-play-teal' : 'bg-slate-100 text-slate-600'}
+                                  ${isArduino ? 'bg-emerald-600/15 text-emerald-700 font-bold border border-emerald-300/40' : isRacer ? 'bg-amber-500/15 text-amber-600' : isGraphene ? 'bg-brand-red/15 text-brand-red' : isPrintCut ? 'bg-play-teal/15 text-play-teal' : 'bg-slate-100 text-slate-600'}
                                 `}>
-                                  {t('calendar_page.workshop')}
+                                  {isArduino ? (isSlovenian ? "Elektronika in Arduino" : isIt ? "Elettronica e Arduino" : "Electronics & Arduino") : t('calendar_page.workshop')}
                                 </span>
                               )}
                               {isOccupied && (
                                 <span className="bg-rose-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-xl shadow-sm">
                                   🔒 {isSlovenian ? "Zaseden termin" : isIt ? "Slot occupato" : "Booked slot"}
+                                </span>
+                              )}
+                              {isArduino && (
+                                <span className="bg-emerald-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-xl shadow-sm flex items-center gap-1">
+                                  ✨ {isSlovenian ? "Prijave odprte • Pohitite!" : isIt ? "Iscrizioni aperte" : "Registrations open"}
                                 </span>
                               )}
                               {isRacer && (
@@ -1364,6 +1677,8 @@ export default function CalendarPage() {
                                       ? (isSlovenian ? "Delavnica Mali kemik · Termin je zaseden" : isIt ? "Piccolo chimico · Orario occupato" : "Little Chemist · Slot is booked")
                                       : isOccupied
                                         ? (isSlovenian ? "Rezerviran termin v Start Labu" : isIt ? "Sessione prenotata presso Start Lab" : "Booked slot at Start Lab")
+                                      : isArduino
+                                        ? (isSlovenian ? (event.id.includes('g1') ? "Ponedeljki 16:30–18:30 · 8 srečanj (9–14 let)" : "Srede 17:00–19:00 · 8 srečanj (15+ let)") : isIt ? (event.id.includes('g1') ? "Lunedì 16:30–18:30 · 8 sessioni (9–14 anni)" : "Mercoledì 17:00–19:00 · 8 sessioni (15+ anni)") : (event.id.includes('g1') ? "Mondays 16:30–18:30 · 8 sessions (9–14 yrs)" : "Wednesdays 17:00–19:00 · 8 sessions (15+ yrs)"))
                                       : isRacer
                                         ? (isSlovenian ? "Enkrat tedensko, 8 tednov (ob četrtkih)" : isIt ? "Una volta alla settimana, 8 settimane (giovedì)" : "Once a week, 8 weeks (Thursdays)")
                                         : isGraphene 
@@ -1412,12 +1727,18 @@ export default function CalendarPage() {
                                   <div className="flex items-center gap-2">
                                     <Sparkles size={14} className="stroke-[2.5]" />
                                     <span>
-                                      {isRacer
-                                        ? (isSlovenian ? "Cena: 20 € na osebo za celotno 16-urno delavnico" : isIt ? "Prezzo: 20 € a persona per l'intero workshop di 16 ore" : "Price: 20 € per person for full 16-hour workshop")
-                                        : (isSlovenian ? "Brezplačna udeležba • Število mest je omejeno!" : isIt ? "Partecipazione gratuita • Posti strettamente limitati!" : "Free of charge • Limited slots available!")}
+                                      {isArduino
+                                        ? (isSlovenian ? "Cena celotne delavnice: 40 € (8 srečanj × 2 uri)" : isIt ? "Prezzo intero workshop: 40 € (8 sessioni × 2 ore)" : "Full workshop price: 40 € (8 sessions × 2 hours)")
+                                        : isRacer
+                                          ? (isSlovenian ? "Cena: 20 € na osebo za celotno 16-urno delavnico" : isIt ? "Prezzo: 20 € a persona per l'intero workshop di 16 ore" : "Price: 20 € per person for full 16-hour workshop")
+                                          : (isSlovenian ? "Brezplačna udeležba • Število mest je omejeno!" : isIt ? "Partecipazione gratuita • Posti strettamente limitati!" : "Free of charge • Limited slots available!")}
                                     </span>
                                   </div>
-                                  {isRacer ? (
+                                  {isArduino ? (
+                                    <span className="bg-emerald-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
+                                      📲 {isSlovenian ? "Prijave odprte • Do 20 mest" : isIt ? "Iscrizioni aperte" : "Registrations open"}
+                                    </span>
+                                  ) : isRacer ? (
                                     <span className="bg-rose-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
                                       🔒 {isSlovenian ? "Prijave zaklenjene • Zapolnjena mesta" : isIt ? "Iscrizioni chiuse • Posti esauriti" : "Registrations locked • Sold out"}
                                     </span>
@@ -1432,7 +1753,17 @@ export default function CalendarPage() {
                                   ) : null}
                                 </div>
                                 <div className="border-t border-slate-200/60 pt-2.5 space-y-1">
-                                  {isRacer ? (
+                                  {isArduino ? (
+                                    <>
+                                      <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Skupina & Starost:" : isIt ? "Gruppo ed età:" : "Group & Age:"}</span> {event.ageGroup} ({event.id.includes('g1') ? (isSlovenian ? "ponedeljki 16:30–18:30" : "Mondays 16:30–18:30") : (isSlovenian ? "srede 17:00–19:00" : "Wednesdays 17:00–19:00")})</p>
+                                      <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Trajanje:" : isIt ? "Durata:" : "Duration:"}</span> 8 srečanj × 2 uri</p>
+                                      <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Cena:" : isIt ? "Prezzo:" : "Price:"}</span> <span className="text-emerald-700 font-extrabold">40 € {isSlovenian ? "za celotno delavnico" : "full workshop"}</span></p>
+                                      <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Omejitev:" : isIt ? "Posti:" : "Limit:"}</span> {isSlovenian ? "Skupina je omejena na največ 20 udeležencev!" : "Max 20 participants per group!"}</p>
+                                      <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Predznanje:" : isIt ? "Prerequisiti:" : "Prerequisites:"}</span> {isSlovenian ? "Ni potrebno! Začnemo čisto na začetku." : "No prior knowledge needed! We start from scratch."}</p>
+                                      <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Lokacija:" : isIt ? "Luogo:" : "Location:"}</span> {isSlovenian ? "prostori Start Laba v Solkanu" : "Start Lab premises in Solkan"}</p>
+                                      <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Mentor:" : isIt ? "Mentore:" : "Mentor:"}</span> Start Lab ekipa (<a href="mailto:info@startlab.si" className="text-brand-red hover:underline font-bold">info@startlab.si</a>)</p>
+                                    </>
+                                  ) : isRacer ? (
                                     <>
                                       <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Trajanje:" : isIt ? "Durata:" : "Duration:"}</span> 8 x 2 uri (1x tedensko, četrtek 17:00 - 19:00)</p>
                                       <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Predznanje:" : isIt ? "Prerequisiti:" : "Prerequisites:"}</span> {isSlovenian ? "Ni potrebno – dovolj sta radovednost in želja po ustvarjanju!" : isIt ? "Non necessario – bastano curiosità e voglia di creare!" : "Not needed – curiosity is all you need!"}</p>
@@ -1456,12 +1787,12 @@ export default function CalendarPage() {
                             )}
 
                             {/* Toggle More Details Button */}
-                            {(isRacer || isGraphene || isPrintCut) && (
+                            {(isArduino || isRacer || isGraphene || isPrintCut) && (
                               <div className="mb-6 border-t border-b border-slate-200/60 py-3">
                                 <button
                                   type="button"
                                   onClick={() => setShowMoreDetails(!showMoreDetails)}
-                                  className={`w-full flex items-center justify-between text-xs font-display font-black uppercase hover:opacity-80 transition-colors py-1 cursor-pointer select-none ${isRacer ? 'text-amber-600' : isGraphene ? 'text-brand-red' : 'text-play-teal'}`}
+                                  className={`w-full flex items-center justify-between text-xs font-display font-black uppercase hover:opacity-80 transition-colors py-1 cursor-pointer select-none ${isArduino ? 'text-emerald-700' : isRacer ? 'text-amber-600' : isGraphene ? 'text-brand-red' : 'text-play-teal'}`}
                                 >
                                   <span>{isSlovenian ? "Več o delavnici" : isIt ? "Più info sul workshop" : "More about the workshop"}</span>
                                   <span className="text-xs">{showMoreDetails ? "▲" : "▼"}</span>
@@ -1477,7 +1808,82 @@ export default function CalendarPage() {
                                       className="overflow-hidden"
                                     >
                                       <div className="pt-4 pb-2 space-y-4 text-left border-t border-slate-100 mt-3 text-slate-800 text-xs leading-relaxed font-semibold">
-                                        {isRacer ? (
+                                        {isArduino ? (
+                                          <>
+                                            <p className="font-extrabold text-sm text-slate-950 uppercase">
+                                              {isSlovenian 
+                                                ? "ELEKTRONIKA IN ARDUINO" 
+                                                : isIt 
+                                                  ? "ELETTRONICA E ARDUINO" 
+                                                  : "ELECTRONICS & ARDUINO"}
+                                            </p>
+                                            
+                                            <p className="text-emerald-700 font-bold">
+                                              {isSlovenian 
+                                                ? "Kaj se zgodi, ko program zapusti zaslon in začne delovati v resničnem svetu? 🌍" 
+                                                : isIt
+                                                  ? "Cosa succede quando il codice esce dallo schermo e inizia a funzionare nel mondo reale? 🌍"
+                                                  : "What happens when code leaves the screen and acts in the real world? 🌍"}
+                                            </p>
+
+                                            <div className="bg-slate-100 border border-slate-200 rounded-xl p-3 space-y-2">
+                                              <p className="text-[11px] text-slate-700 leading-normal">
+                                                {isSlovenian 
+                                                  ? "Kako s programom prižgemo lučko, spreminjamo barve, zaženemo motor ali izmerimo temperaturo? Na delavnici bomo spoznali svet Arduina, elektronike in programiranja – predvsem skozi praktično ustvarjanje, preizkušanje in raziskovanje."
+                                                  : isIt
+                                                    ? "Come accendere una luce, cambiare i colori, azionare un motore o misurare la temperatura col codice? Nel workshop scopriremo Arduino, l'elettronica e il coding attraverso la pratica."
+                                                    : "How do we code a light to turn on, shift colors, run a motor, or measure temperature? In this workshop we explore Arduino, electronics, and coding through practical creating and experimentation."}
+                                              </p>
+                                              <p className="text-[11px] text-emerald-800 leading-normal font-bold">
+                                                💡 {isSlovenian ? "Predznanje ni potrebno! Začnemo čisto na začetku." : isIt ? "Nessun prerequisito! Si parte da zero." : "No prior knowledge needed! We start from scratch."}
+                                              </p>
+                                            </div>
+
+                                            <div className="space-y-3">
+                                              <div className="border-l-2 border-emerald-600 pl-2.5">
+                                                <p className="font-bold text-slate-950">{isSlovenian ? "👥 IZBIRAJ MED DVEMA SKUPINAMA" : isIt ? "👥 SCEGLI TRA DUE GRUPPI" : "👥 CHOOSE BETWEEN TWO GROUPS"}</p>
+                                                <div className="mt-1.5 text-[10px] text-slate-700 bg-emerald-50/60 border border-emerald-200 rounded-lg p-2.5 space-y-2">
+                                                  <div className="pb-1.5 border-b border-emerald-200/60">
+                                                    <p className="font-extrabold text-emerald-900 text-xs">🟢 9–14 let</p>
+                                                    <p>📅 <strong>{isSlovenian ? "Prvo srečanje:" : "First session:"}</strong> {isSlovenian ? "Ponedeljek, 12. 10. 2026, 16:30–18:30" : "Monday, Oct 12, 2026, 16:30–18:30"}</p>
+                                                    <p>📍 <strong>{isSlovenian ? "Lokacija:" : "Location:"}</strong> {isSlovenian ? "prostori Start Laba v Solkanu" : "Start Lab premises, Solkan"}</p>
+                                                  </div>
+                                                  <div>
+                                                    <p className="font-extrabold text-blue-900 text-xs">🔵 15 let in več</p>
+                                                    <p>📅 <strong>{isSlovenian ? "Prvo srečanje:" : "First session:"}</strong> {isSlovenian ? "Sreda, 14. 10. 2026, 17:00–19:00" : "Wednesday, Oct 14, 2026, 17:00–19:00"}</p>
+                                                    <p>📍 <strong>{isSlovenian ? "Lokacija:" : "Location:"}</strong> {isSlovenian ? "prostori Start Laba v Solkanu" : "Start Lab premises, Solkan"}</p>
+                                                  </div>
+                                                </div>
+                                              </div>
+
+                                              <div className="border-l-2 border-emerald-600 pl-2.5">
+                                                <p className="font-bold text-slate-950">{isSlovenian ? "⚡ Ključne informacije" : isIt ? "⚡ Informazioni chiave" : "⚡ Key Details"}</p>
+                                                <div className="mt-1.5 text-[10px] text-slate-700 bg-slate-50 border border-slate-100 rounded-lg p-2.5 space-y-1">
+                                                  <p>⏱️ <strong>{isSlovenian ? "Trajanje:" : "Duration:"}</strong> 8 srečanj × 2 uri</p>
+                                                  <p>💶 <strong>{isSlovenian ? "Cena celotne delavnice:" : "Price:"}</strong> <span className="text-emerald-700 font-extrabold">40 €</span></p>
+                                                  <p>👥 <strong>{isSlovenian ? "Omejitev:" : "Limit:"}</strong> {isSlovenian ? "Skupina je omejena na največ 20 udeležencev!" : "Group limited to max 20 participants!"}</p>
+                                                  <p>📲 <strong>{isSlovenian ? "Status:" : "Status:"}</strong> <span className="text-emerald-700 font-extrabold">{isSlovenian ? "Prijave so odprte – pohitite, saj je število mest omejeno." : "Registrations open – limited spots available."}</span></p>
+                                                </div>
+                                              </div>
+                                            </div>
+
+                                            <div className="border-t border-slate-200 pt-3">
+                                              <p className="font-extrabold text-slate-950 mb-2">🔧 {isSlovenian ? "Kaj bomo počeli?" : isIt ? "Cosa faremo?" : "What will we do?"}</p>
+                                              <ul className="space-y-1.5 list-disc list-inside text-[11px] text-slate-700">
+                                                <li>{isSlovenian ? "spoznali osnovne elektronske komponente" : "learn basic electronic components"}</li>
+                                                <li>{isSlovenian ? "sestavljali vezja na breadboardu" : "assemble circuits on breadboard"}</li>
+                                                <li>{isSlovenian ? "programirali Arduino" : "program Arduino"}</li>
+                                                <li>{isSlovenian ? "prižigali in programirali LED-diode" : "light up and program LEDs"}</li>
+                                                <li>{isSlovenian ? "ustvarjali barve z RGB-diodo 🌈" : "create colors with RGB LEDs 🌈"}</li>
+                                                <li>{isSlovenian ? "upravljali elektromotor" : "control electric motors"}</li>
+                                                <li>{isSlovenian ? "merili svetlobo in temperaturo 🌡️" : "measure light and temperature 🌡️"}</li>
+                                                <li>{isSlovenian ? "povezovali senzorje in se odzivali na okolico" : "connect sensors and respond to the environment"}</li>
+                                                <li>{isSlovenian ? "iskali in odpravljali napake" : "debug circuits and software"}</li>
+                                                <li>{isSlovenian ? "na koncu izdelali svoj preprost samostojni projekt 🚀" : "build your own simple independent project 🚀"}</li>
+                                              </ul>
+                                            </div>
+                                          </>
+                                        ) : isRacer ? (
                                           <>
                                             <p className="font-extrabold text-sm text-slate-950">
                                               {isSlovenian 
@@ -1950,9 +2356,12 @@ export default function CalendarPage() {
                             ) : (
                               <button 
                                 onClick={() => openRegisterModal(event)}
-                                className="w-full py-4 btn-primary justify-center shadow-lg uppercase text-sm tracking-wider font-black select-none"
+                                className={`w-full py-4 btn-primary justify-center shadow-lg uppercase text-sm tracking-wider font-black select-none cursor-pointer flex items-center gap-2 ${
+                                  isArduino ? 'bg-emerald-600 hover:bg-emerald-700 border-emerald-600' : ''
+                                }`}
                               >
-                                {isSlovenian ? "Prijavi se na delavnico" : isIt ? "Iscriviti al workshop" : "Register for workshop"} <Rocket size={18} className="stroke-[3]" />
+                                <span>{isSlovenian ? (isArduino ? "Prijavi se na delavnico (40 €)" : "Prijavi se na delavnico") : isIt ? "Iscriviti al workshop" : "Register for workshop"}</span>
+                                <Rocket size={18} className="stroke-[3]" />
                               </button>
                             )}
                           </motion.div>
@@ -2176,19 +2585,29 @@ export default function CalendarPage() {
                         <div className="flex items-center gap-2">
                           <CalendarIcon size={14} className="text-brand-red shrink-0" />
                           <span>
-                            {isSlovenian ? "Izbrani termin:" : isIt ? "Data selezionata:" : "Selected Date:"}{' '}
+                            {isSlovenian ? "Izbrana delavnica:" : isIt ? "Workshop selezionato:" : "Selected workshop:"}{' '}
                             <strong className="text-slate-800">
-                              {format(selectedDate || modalEvent?.date || new Date(), 'd. MMMM yyyy', { locale: currentLocale })}
+                              {modalEvent.title}
                             </strong>
                           </span>
                         </div>
                         <div className="flex items-center gap-2">
                           <Clock size={14} className="text-brand-red shrink-0" />
                           <span>
-                            {isSlovenian ? "Čas srečanja:" : isIt ? "Ora dell'incontro:" : "Meeting hour:"}{' '}
-                            <strong className="text-slate-800">{modalEvent.time}</strong>
+                            {isSlovenian ? "Urnik srečanj:" : isIt ? "Orario:" : "Schedule:"}{' '}
+                            <strong className="text-slate-800">
+                              {modalEvent.id.startsWith('arduino')
+                                ? (formData.selectedGroup === '9-14' ? 'Ponedeljki 16:30 – 18:30 (začetek 12. 10. 2026)' : formData.selectedGroup === '15+' ? 'Srede 17:00 – 19:00 (začetek 14. 10. 2026)' : '8 srečanj × 2 uri')
+                                : modalEvent.time}
+                            </strong>
                           </span>
                         </div>
+                        {modalEvent.id.startsWith('arduino') && (
+                          <div className="flex items-center gap-2 text-emerald-800 font-bold bg-emerald-100/70 border border-emerald-300 p-2.5 rounded-xl text-xs">
+                            <span className="text-base">💶</span>
+                            <span>{isSlovenian ? "Cena celotne delavnice: 40 € (8 srečanj × 2 uri)" : "Price: 40 € for full workshop (8 sessions × 2 hrs)"}</span>
+                          </div>
+                        )}
                       </div>
 
                       {/* Free & Limited slots alert + Mentors info */}
@@ -2198,7 +2617,11 @@ export default function CalendarPage() {
                             <Sparkles size={13} className="stroke-[3]" />
                             <span>{isSlovenian ? "POMEMBNE INFORMACIJE" : isIt ? "INFORMAZIONI IMPORTANTI" : "IMPORTANT INFORMATION"}</span>
                           </div>
-                          {modalEvent?.id.startsWith('racer') ? (
+                          {modalEvent?.id.startsWith('arduino') ? (
+                            <span className="bg-emerald-600 text-white font-display font-black text-[10px] uppercase px-2.5 py-0.5 rounded-full shadow-sm flex items-center gap-1">
+                              ✨ {isSlovenian ? "Prijave odprte • Do 20 mest" : isIt ? "Iscrizioni aperte" : "Registrations open"}
+                            </span>
+                          ) : modalEvent?.id.startsWith('racer') ? (
                             <span className="bg-rose-600 text-white font-display font-black text-[10px] uppercase px-2.5 py-0.5 rounded-full shadow-sm">
                               🔒 {isSlovenian ? "Prijave zaklenjene • Zapolnjeno" : isIt ? "Iscrizioni chiuse • Tutto esaurito" : "Registrations locked • Sold out"}
                             </span>
@@ -2217,14 +2640,25 @@ export default function CalendarPage() {
                             ? (isSlovenian ? "✓ Delavnica je polno zasedena – vsa mesta so že zapolnjena in prijave so zaklenjene." : isIt ? "✓ Workshop esaurito – le iscrizioni sono chiuse." : "✓ Workshop is full – registrations are locked.")
                             : modalEvent?.id.startsWith('graphene')
                               ? (isSlovenian ? "✓ Delavnica je polno zasedena – prijave so zaklenjene." : isIt ? "✓ Workshop esaurito – le iscrizioni sono chiuse." : "✓ Workshop is full – registrations are locked.")
-                              : isSlovenian 
-                                ? "✓ Delavnice so brezplačne. Število mest je strogo omejeno!" 
-                                : isIt
-                                  ? "✓ I workshop sono gratuiti. I posti sono strettamente limitati!"
-                                  : "✓ Workshops are free of charge. Slots are strictly limited!"}
+                              : modalEvent?.id.startsWith('printcut')
+                                ? (isSlovenian ? "✓ Delavnica je polno zasedena – vsa mesta so že zapolnjena in prijave so zaprte." : isIt ? "✓ Workshop esaurito – le iscrizioni sono chiuse." : "✓ Workshop is full – registrations are closed.")
+                                : modalEvent?.id.startsWith('arduino')
+                                  ? (isSlovenian ? "✓ Prijave so odprte! Število mest je omejeno na največ 20 udeležencev na skupino." : isIt ? "✓ Iscrizioni aperte! Posti limitati a 20 partecipanti per gruppo." : "✓ Registrations are open! Limited to 20 participants per group.")
+                                  : isSlovenian 
+                                    ? "✓ Delavnice so brezplačne. Število mest je strogo omejeno!" 
+                                    : isIt
+                                      ? "✓ I workshop sono gratuiti. I posti sono strettamente limitati!"
+                                      : "✓ Workshops are free of charge. Slots are strictly limited!"}
                         </p>
                         <div className="border-t border-slate-200/50 pt-2 text-[11px] space-y-0.5 text-slate-600">
-                          {modalEvent?.id.startsWith('racer') ? (
+                          {modalEvent?.id.startsWith('arduino') ? (
+                            <>
+                              <p><strong>{isSlovenian ? "Cena:" : "Price:"}</strong> <span className="text-emerald-700 font-extrabold">40 € za celotno delavnico</span> (8 srečanj × 2 uri)</p>
+                              <p><strong>{isSlovenian ? "Lokacija:" : "Location:"}</strong> {isSlovenian ? "prostori Start Laba v Solkanu" : "Start Lab premises, Solkan"}</p>
+                              <p><strong>{isSlovenian ? "Skupini:" : "Groups:"}</strong> 🟢 9–14 let (pon. 16:30–18:30) | 🔵 15+ let (sre. 17:00–19:00)</p>
+                              <p><strong>{isSlovenian ? "Mentor:" : "Mentor:"}</strong> Start Lab ekipa (<a href="mailto:info@startlab.si" className="text-brand-red hover:underline font-bold">info@startlab.si</a>)</p>
+                            </>
+                          ) : modalEvent?.id.startsWith('racer') ? (
                             <>
                               <p><strong>{isSlovenian ? "Trajanje:" : isIt ? "Durata:" : "Duration:"}</strong> 8 x 2 uri (1x tedensko, ob četrtkih 17:00 - 19:00)</p>
                               <p><strong>{isSlovenian ? "Lokacija:" : isIt ? "Sede:" : "Location:"}</strong> Start Lab, Solkan</p>
@@ -2336,7 +2770,104 @@ export default function CalendarPage() {
                         </div>
                       </div>
 
-                      {(modalEvent?.id.startsWith('racer') || modalEvent?.id.startsWith('printcut') || modalEvent?.id.startsWith('graphene')) && (
+                      {modalEvent?.id.startsWith('arduino') && (
+                        <div className="space-y-2.5 p-4 bg-emerald-50/70 border-2 border-emerald-400 rounded-2xl shadow-xs">
+                          <div className="flex items-center justify-between">
+                            <label className="text-xs font-display font-black uppercase tracking-wider text-emerald-950 flex items-center gap-1.5">
+                              <Users size={15} className="text-emerald-700 stroke-[2.5]" />
+                              {isSlovenian ? "Izberi skupino:" : isIt ? "Scegli il gruppo:" : "Select group:"} <span className="text-brand-red">*</span>
+                            </label>
+                            <span className="text-[10px] font-black uppercase text-emerald-800 bg-emerald-200/80 px-2 py-0.5 rounded-full">
+                              {isSlovenian ? "Obvezna izbira" : isIt ? "Obbligatorio" : "Required"}
+                            </span>
+                          </div>
+
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                            {/* Option 9-14 */}
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setFormData({ ...formData, selectedGroup: '9-14' });
+                                setSubmitErrorMessage('');
+                              }}
+                              className={`p-3 rounded-xl border-2 text-left transition-all cursor-pointer relative flex flex-col justify-between ${
+                                formData.selectedGroup === '9-14'
+                                  ? 'bg-emerald-600 text-white border-emerald-700 shadow-md ring-2 ring-emerald-400/40'
+                                  : 'bg-white text-slate-800 border-emerald-200 hover:border-emerald-400 hover:bg-emerald-50/50'
+                              }`}
+                            >
+                              <div className="flex items-center justify-between mb-1">
+                                <span className={`text-xs font-display font-black uppercase tracking-wide flex items-center gap-1.5 ${
+                                  formData.selectedGroup === '9-14' ? 'text-white' : 'text-emerald-900'
+                                }`}>
+                                  <span>🟢</span> 9–14 let
+                                </span>
+                                {formData.selectedGroup === '9-14' && (
+                                  <CheckCircle2 size={16} className="text-white shrink-0 stroke-[3]" />
+                                )}
+                              </div>
+                              <p className={`text-[11px] font-semibold leading-snug ${
+                                formData.selectedGroup === '9-14' ? 'text-emerald-100' : 'text-slate-600'
+                              }`}>
+                                {isSlovenian 
+                                  ? "Ponedeljki, 16:30–18:30" 
+                                  : "Mondays, 16:30–18:30"}
+                              </p>
+                              <p className={`text-[10px] font-bold mt-1 ${
+                                formData.selectedGroup === '9-14' ? 'text-white' : 'text-emerald-700'
+                              }`}>
+                                {isSlovenian ? "Prvo srečanje: 12. 10. 2026" : "Starts: Oct 12, 2026"}
+                              </p>
+                            </button>
+
+                            {/* Option 15+ */}
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setFormData({ ...formData, selectedGroup: '15+' });
+                                setSubmitErrorMessage('');
+                              }}
+                              className={`p-3 rounded-xl border-2 text-left transition-all cursor-pointer relative flex flex-col justify-between ${
+                                formData.selectedGroup === '15+'
+                                  ? 'bg-blue-600 text-white border-blue-700 shadow-md ring-2 ring-blue-400/40'
+                                  : 'bg-white text-slate-800 border-blue-200 hover:border-blue-400 hover:bg-blue-50/50'
+                              }`}
+                            >
+                              <div className="flex items-center justify-between mb-1">
+                                <span className={`text-xs font-display font-black uppercase tracking-wide flex items-center gap-1.5 ${
+                                  formData.selectedGroup === '15+' ? 'text-white' : 'text-blue-900'
+                                }`}>
+                                  <span>🔵</span> 15 let in več
+                                </span>
+                                {formData.selectedGroup === '15+' && (
+                                  <CheckCircle2 size={16} className="text-white shrink-0 stroke-[3]" />
+                                )}
+                              </div>
+                              <p className={`text-[11px] font-semibold leading-snug ${
+                                formData.selectedGroup === '15+' ? 'text-blue-100' : 'text-slate-600'
+                              }`}>
+                                {isSlovenian 
+                                  ? "Srede, 17:00–19:00" 
+                                  : "Wednesdays, 17:00–19:00"}
+                              </p>
+                              <p className={`text-[10px] font-bold mt-1 ${
+                                formData.selectedGroup === '15+' ? 'text-white' : 'text-blue-700'
+                              }`}>
+                                {isSlovenian ? "Prvo srečanje: 14. 10. 2026" : "Starts: Oct 14, 2026"}
+                              </p>
+                            </button>
+                          </div>
+
+                          {!formData.selectedGroup && (
+                            <div className="bg-amber-100/80 border border-amber-300 rounded-xl p-2.5 text-xs text-amber-900 font-bold flex items-center gap-2">
+                              <AlertTriangle size={15} className="text-amber-600 shrink-0" />
+                              <span>{isSlovenian ? "Za nadaljevanje obvezno izberite skupino: 9–14 let ali 15+ let." : "Please select a group: 9–14 yrs or 15+ yrs."}</span>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {(modalEvent?.id.startsWith('arduino') || modalEvent?.id.startsWith('racer') || modalEvent?.id.startsWith('printcut') || modalEvent?.id.startsWith('graphene')) && (
                         <div className="space-y-2">
                           <div className="space-y-1">
                             <label className="text-xs font-display font-black uppercase tracking-wider text-slate-800">
@@ -2459,12 +2990,15 @@ export default function CalendarPage() {
                         ) : (
                           <button
                             type="submit"
-                            className="flex-2 py-3.5 btn-primary justify-center text-sm font-black uppercase select-none bg-brand-red"
+                            className={`flex-2 py-3.5 btn-primary justify-center text-sm font-black uppercase select-none cursor-pointer flex items-center gap-2 ${
+                              modalEvent?.id.startsWith('arduino') ? 'bg-emerald-600 hover:bg-emerald-700 border-emerald-600 text-white' : 'bg-brand-red'
+                            }`}
                             disabled={isSubmitting}
                           >
                             {isSubmitting 
                               ? (isSlovenian ? "Prijava v teku..." : isIt ? "Invio in corso..." : "Sending...") 
-                              : (isSlovenian ? "Oddaj prijavo" : isIt ? "Invia iscrizione" : "Submit reservation")}
+                              : (isSlovenian ? (modalEvent?.id.startsWith('arduino') ? "Oddaj prijavo (40 €)" : "Oddaj prijavo") : isIt ? "Invia iscrizione" : "Submit reservation")}
+                            <Rocket size={16} />
                           </button>
                         )}
                       </div>

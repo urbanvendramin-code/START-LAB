@@ -212,7 +212,7 @@
       "laser": { "title": "3D Printing & Laser Cutting – from idea to product", "desc": "Learn the process from 3D modeling and 3D printing to laser cutting to create unique physical products." },
       "3d-pro": { "title": "Professional 3D Modeling", "desc": "Learn advanced tools for 3D modeling and engineering design." },
       "electronics-basic": { "title": "Electronics Basics – DC circuits", "desc": "Participants learn basic components and laws of electricity and assemble simple circuits." },
-      "arduino-micro": { "title": "Microcontrollers and Programming (Arduino)", "desc": "Participants create an interactive project with sensors and actuators." },
+      "arduino-micro": { "title": "Electronics and Arduino", "desc": "What happens when code leaves the screen and acts in the real world? Discover the world of Arduino, electronics, and coding through hands-on tinkering." },
       "smart-home": { "title": "Smart Homes", "desc": "How smart devices and automation work in practice." },
       "mobile-app": { "title": "Create Your Own Mobile App", "desc": "Turn an idea into a simple mobile application and test it." },
       "unreal-engine": { "title": "Video Game Development (Unreal Engine)", "desc": "Create a basic 3D environment and understand how games are made." },
