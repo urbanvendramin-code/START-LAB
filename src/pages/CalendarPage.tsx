@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   format, 
@@ -16,6 +16,8 @@ import { sl, enGB as en, it } from 'date-fns/locale';
 import { 
   ChevronLeft, 
   ChevronRight, 
+  ChevronDown,
+  Check,
   Calendar as CalendarIcon, 
   Clock, 
   MapPin, 
@@ -567,9 +569,24 @@ const getLocalizedEvents = (lang: string): Event[] => {
 export default function CalendarPage() {
   const { t, i18n } = useTranslation();
   
-  // Set default month to September 2026 (the start of the workshop)
-  const [currentMonth, setCurrentMonth] = useState(new Date(2026, 8, 1));
+  // Automatically show the current month
+  const [currentMonth, setCurrentMonth] = useState<Date>(() => startOfMonth(new Date()));
   const [selectedDate, setSelectedDate] = useState<Date | null>(null); // Null by default to show workshops at once
+  
+  // Workshop Category Dropdown Filter State
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown on click outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
   
   // Registration Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -667,6 +684,95 @@ export default function CalendarPage() {
 
   const isSlovenian = i18n.language !== 'en' && i18n.language !== 'it';
   const isIt = i18n.language === 'it';
+
+  const workshopFilterOptions = [
+    {
+      id: 'all' as const,
+      labelSl: 'Vse delavnice in termini',
+      labelIt: 'Tutti i workshop e date',
+      labelEn: 'All workshops & dates',
+      count: events.length,
+      badgeSl: 'Vsi dogodki',
+      badgeIt: 'Tutti',
+      badgeEn: 'All',
+      colorDot: 'bg-slate-900',
+      badgeClass: 'bg-slate-100 text-slate-800'
+    },
+    {
+      id: 'arduino' as const,
+      labelSl: 'Elektronika in Arduino',
+      labelIt: 'Elettronica e Arduino',
+      labelEn: 'Electronics & Arduino',
+      count: arduinoCount,
+      badgeSl: 'Prijave odprte · 40 €',
+      badgeIt: 'Iscrizioni aperte · 40 €',
+      badgeEn: 'Open for registration · €40',
+      colorDot: 'bg-emerald-500 animate-pulse',
+      badgeClass: 'bg-emerald-100 text-emerald-800 font-bold'
+    },
+    {
+      id: 'kemik' as const,
+      labelSl: 'Mali kemik',
+      labelIt: 'Piccolo chimico',
+      labelEn: 'Little Chemist',
+      count: kemikCount,
+      badgeSl: 'Zasedeno',
+      badgeIt: 'Occupato',
+      badgeEn: 'Booked',
+      colorDot: 'bg-rose-500',
+      badgeClass: 'bg-rose-100 text-rose-800'
+    },
+    {
+      id: 'occupied' as const,
+      labelSl: 'Start Lab zasedeno',
+      labelIt: 'Start Lab occupato',
+      labelEn: 'Start Lab booked',
+      count: generalOccupiedCount,
+      badgeSl: 'Zasedeno',
+      badgeIt: 'Occupato',
+      badgeEn: 'Booked',
+      colorDot: 'bg-rose-500',
+      badgeClass: 'bg-rose-100 text-rose-800'
+    },
+    {
+      id: 'racer' as const,
+      labelSl: 'Elektronika in dirkač',
+      labelIt: 'Elettronica e bolide',
+      labelEn: 'Electronics & Racer',
+      count: racerCount,
+      badgeSl: 'Zasedeno',
+      badgeIt: 'Occupato',
+      badgeEn: 'Booked',
+      colorDot: 'bg-amber-500',
+      badgeClass: 'bg-amber-100 text-amber-800'
+    },
+    {
+      id: 'graphene' as const,
+      labelSl: 'Grafenski čip',
+      labelIt: 'Chip al grafene',
+      labelEn: 'Graphene Chip',
+      count: grapheneCount,
+      badgeSl: 'Zasedeno',
+      badgeIt: 'Occupato',
+      badgeEn: 'Booked',
+      colorDot: 'bg-brand-red',
+      badgeClass: 'bg-red-100 text-brand-red'
+    },
+    {
+      id: 'printcut' as const,
+      labelSl: 'Natisni in izreži',
+      labelIt: 'Stampa e taglia',
+      labelEn: 'Print & Cut',
+      count: printcutCount,
+      badgeSl: 'Zasedeno',
+      badgeIt: 'Occupato',
+      badgeEn: 'Booked',
+      colorDot: 'bg-play-teal',
+      badgeClass: 'bg-teal-100 text-teal-800'
+    }
+  ];
+
+  const activeOption = workshopFilterOptions.find(o => o.id === categoryFilter) || workshopFilterOptions[0];
 
   const weekdayNames = isSlovenian
     ? ['Pon', 'Tor', 'Sre', 'Čet', 'Pet', 'Sob', 'Ned']
@@ -965,92 +1071,128 @@ export default function CalendarPage() {
         </div>
 
         {/* Navigation & Filter Bar */}
-        <div className="mb-5 sm:mb-6 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 sm:gap-4 bg-white p-2.5 sm:p-3.5 md:p-4 rounded-2xl sm:rounded-3xl border-2 border-slate-200/80 shadow-xs">
-          {/* Category Filters */}
-          <div className="flex items-center gap-1 sm:gap-1.5 overflow-x-auto pb-1.5 lg:pb-0 scrollbar-none -mx-1 px-1">
-            <button
-              type="button"
-              onClick={() => setCategoryFilter('all')}
-              className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-display font-black uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer shrink-0 ${
-                categoryFilter === 'all'
-                  ? 'bg-slate-950 text-white shadow-xs'
-                  : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
-              }`}
-            >
-              {isSlovenian ? "Vsi termini" : isIt ? "Tutti i termini" : "All dates"} ({events.length})
-            </button>
-            <button
-              type="button"
-              onClick={() => setCategoryFilter('arduino')}
-              className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-display font-black uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 shrink-0 ${
-                categoryFilter === 'arduino'
-                  ? 'bg-emerald-600 text-white shadow-xs'
-                  : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60'
-              }`}
-            >
-              <span className={`w-2 h-2 rounded-full ${categoryFilter === 'arduino' ? 'bg-white' : 'bg-emerald-600'}`} />
-              {isSlovenian ? "Elektronika in Arduino" : isIt ? "Elettronica e Arduino" : "Electronics & Arduino"} ({arduinoCount})
-            </button>
-            <button
-              type="button"
-              onClick={() => setCategoryFilter('kemik')}
-              className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-display font-black uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 shrink-0 ${
-                categoryFilter === 'kemik'
-                  ? 'bg-rose-600 text-white shadow-xs'
-                  : 'bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-200/60'
-              }`}
-            >
-              <span className={`w-2 h-2 rounded-full ${categoryFilter === 'kemik' ? 'bg-white' : 'bg-rose-600'}`} />
-              {isSlovenian ? "Mali kemik (zasedeno)" : isIt ? "Piccolo chimico (occupato)" : "Little Chemist (booked)"} ({kemikCount})
-            </button>
-            <button
-              type="button"
-              onClick={() => setCategoryFilter('occupied')}
-              className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-display font-black uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 shrink-0 ${
-                categoryFilter === 'occupied'
-                  ? 'bg-rose-600 text-white shadow-xs'
-                  : 'bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-200/60'
-              }`}
-            >
-              <span className={`w-2 h-2 rounded-full ${categoryFilter === 'occupied' ? 'bg-white' : 'bg-rose-600'}`} />
-              {isSlovenian ? "Start Lab zasedeno" : isIt ? "Start Lab occupato" : "Start Lab booked"} ({generalOccupiedCount})
-            </button>
-            <button
-              type="button"
-              onClick={() => setCategoryFilter('racer')}
-              className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-display font-black uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 shrink-0 ${
-                categoryFilter === 'racer'
-                  ? 'bg-amber-500 text-white shadow-xs'
-                  : 'bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200/60'
-              }`}
-            >
-              <span className={`w-2 h-2 rounded-full ${categoryFilter === 'racer' ? 'bg-white' : 'bg-amber-500'}`} />
-              {isSlovenian ? "Elektronika in dirkač" : isIt ? "Elettronica e bolide" : "Electronics & Racer"} ({racerCount})
-            </button>
-            <button
-              type="button"
-              onClick={() => setCategoryFilter('graphene')}
-              className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-display font-black uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 shrink-0 ${
-                categoryFilter === 'graphene'
-                  ? 'bg-brand-red text-white shadow-xs'
-                  : 'bg-red-50 hover:bg-red-100 text-brand-red border border-red-200/60'
-              }`}
-            >
-              <span className={`w-2 h-2 rounded-full ${categoryFilter === 'graphene' ? 'bg-white' : 'bg-brand-red'}`} />
-              {isSlovenian ? "Grafenski čip" : isIt ? "Chip al grafene" : "Graphene Chip"} ({grapheneCount})
-            </button>
-            <button
-              type="button"
-              onClick={() => setCategoryFilter('printcut')}
-              className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-display font-black uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 shrink-0 ${
-                categoryFilter === 'printcut'
-                  ? 'bg-play-teal text-white shadow-xs'
-                  : 'bg-teal-50 hover:bg-teal-100 text-play-teal border border-teal-200/60'
-              }`}
-            >
-              <span className={`w-2 h-2 rounded-full ${categoryFilter === 'printcut' ? 'bg-white' : 'bg-play-teal'}`} />
-              {isSlovenian ? "Natisni in izreži" : isIt ? "Stampa e taglia" : "Print & Cut"} ({printcutCount})
-            </button>
+        <div className="mb-5 sm:mb-6 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 sm:gap-4 bg-white p-2.5 sm:p-3.5 md:p-4 rounded-2xl sm:rounded-3xl border-2 border-slate-200/80 shadow-xs relative z-30">
+          {/* Workshop Dropdown Selector */}
+          <div className="relative flex-1 max-w-xl" ref={dropdownRef}>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-display font-black uppercase text-slate-500 shrink-0 hidden sm:inline">
+                {isSlovenian ? "Izberi delavnico:" : isIt ? "Scegli workshop:" : "Filter workshop:"}
+              </span>
+
+              {/* Main Trigger Button */}
+              <button
+                type="button"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className={`w-full sm:w-auto flex-1 flex items-center justify-between gap-3 px-3.5 sm:px-4 py-2.5 rounded-xl sm:rounded-2xl border-2 transition-all cursor-pointer text-left shadow-xs ${
+                  isDropdownOpen
+                    ? 'border-slate-900 bg-slate-50 ring-2 ring-slate-900/10'
+                    : categoryFilter !== 'all'
+                      ? 'border-emerald-500 bg-emerald-50/40 hover:bg-emerald-50 text-slate-950'
+                      : 'border-slate-200 hover:border-slate-300 bg-white text-slate-900'
+                }`}
+                aria-expanded={isDropdownOpen}
+              >
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${activeOption.colorDot}`} />
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-0.5 sm:gap-2 truncate">
+                    <span className="font-display font-black text-xs sm:text-sm uppercase text-slate-900 truncate">
+                      {isSlovenian ? activeOption.labelSl : isIt ? activeOption.labelIt : activeOption.labelEn}
+                    </span>
+                    <span className="text-[10px] sm:text-xs font-bold text-slate-400">
+                      ({activeOption.count} {isSlovenian ? "terminov" : isIt ? "date" : "dates"})
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-1.5 shrink-0 text-slate-500">
+                  <span className={`hidden sm:inline-block text-[10px] font-display font-black uppercase px-2 py-0.5 rounded-md ${activeOption.badgeClass}`}>
+                    {isSlovenian ? activeOption.badgeSl : isIt ? activeOption.badgeIt : activeOption.badgeEn}
+                  </span>
+                  <ChevronDown 
+                    size={18} 
+                    className={`stroke-[2.5] transition-transform duration-200 ${isDropdownOpen ? 'rotate-180 text-slate-900' : ''}`} 
+                  />
+                </div>
+              </button>
+
+              {/* Quick Reset if filtered */}
+              {categoryFilter !== 'all' && (
+                <button
+                  type="button"
+                  onClick={() => setCategoryFilter('all')}
+                  className="px-2.5 py-2.5 rounded-xl border border-slate-200 hover:border-slate-300 bg-slate-100 hover:bg-slate-200 text-slate-600 transition-all cursor-pointer shrink-0 text-xs font-bold flex items-center gap-1"
+                  title={isSlovenian ? "Pokaži vse termine" : isIt ? "Mostra tutto" : "Show all"}
+                >
+                  <X size={16} className="stroke-[2.5]" />
+                  <span className="hidden lg:inline text-[11px] font-display font-black uppercase">{isSlovenian ? "Vse" : "All"}</span>
+                </button>
+              )}
+            </div>
+
+            {/* Dropdown Menu Popup */}
+            <AnimatePresence>
+              {isDropdownOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -6, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                  transition={{ duration: 0.15, ease: "easeOut" }}
+                  className="absolute left-0 right-0 top-full mt-2 bg-white rounded-2xl border-2 border-slate-950 shadow-2xl overflow-hidden z-50 divide-y divide-slate-100"
+                >
+                  <div className="p-2.5 bg-slate-50 border-b border-slate-100 text-[10px] font-display font-black uppercase tracking-wider text-slate-400 flex items-center justify-between">
+                    <span>{isSlovenian ? "Izberite delavnico za prikaz:" : isIt ? "Seleziona un workshop:" : "Select workshop to display:"}</span>
+                    <span>{events.length} {isSlovenian ? "terminov skupaj" : "total dates"}</span>
+                  </div>
+
+                  <div className="max-h-80 overflow-y-auto p-1.5 space-y-1">
+                    {workshopFilterOptions.map((option) => {
+                      const isSelected = categoryFilter === option.id;
+                      return (
+                        <button
+                          key={option.id}
+                          type="button"
+                          onClick={() => {
+                            setCategoryFilter(option.id);
+                            setIsDropdownOpen(false);
+                            if (option.id === 'arduino') {
+                              setCurrentMonth(new Date(2026, 9, 1));
+                            }
+                          }}
+                          className={`w-full flex items-center justify-between gap-3 p-2.5 sm:p-3 rounded-xl text-left transition-all cursor-pointer ${
+                            isSelected
+                              ? 'bg-slate-950 text-white shadow-sm'
+                              : 'hover:bg-slate-100 text-slate-800'
+                          }`}
+                        >
+                          <div className="flex items-center gap-2.5 min-w-0">
+                            <span className={`w-3 h-3 rounded-full shrink-0 ${option.colorDot}`} />
+                            <div className="truncate">
+                              <div className={`font-display font-black text-xs sm:text-sm uppercase leading-tight ${isSelected ? 'text-white' : 'text-slate-900'}`}>
+                                {isSlovenian ? option.labelSl : isIt ? option.labelIt : option.labelEn}
+                              </div>
+                              <div className={`text-[11px] font-semibold mt-0.5 ${isSelected ? 'text-slate-300' : 'text-slate-500'}`}>
+                                {option.count} {isSlovenian ? "terminov" : isIt ? "date" : "dates"}
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center gap-2 shrink-0">
+                            <span className={`text-[10px] font-display font-black uppercase px-2 py-0.5 rounded-md ${
+                              isSelected ? 'bg-white/20 text-white' : option.badgeClass
+                            }`}>
+                              {isSlovenian ? option.badgeSl : isIt ? option.badgeIt : option.badgeEn}
+                            </span>
+                            {isSelected && (
+                              <Check size={16} className="text-emerald-400 stroke-[3]" />
+                            )}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* View Mode Toggle */}
@@ -1284,8 +1426,25 @@ export default function CalendarPage() {
                 {/* Month Jump Tabs */}
                 <div className="flex items-center gap-1.5 sm:gap-2 mb-3 sm:mb-4 overflow-x-auto pb-1 scrollbar-none -mx-0.5 px-0.5">
                   <span className="text-[10px] sm:text-[11px] font-display font-black uppercase text-slate-400 mr-0.5 shrink-0">
-                    {isSlovenian ? "Hitri skok:" : isIt ? "Mese:" : "Month:"}
+                    {isSlovenian ? "Meseci:" : isIt ? "Mesi:" : "Months:"}
                   </span>
+
+                  {/* Current month quick jump button */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setCurrentMonth(startOfMonth(new Date()));
+                      setSelectedDate(null);
+                    }}
+                    className={`px-2.5 sm:px-3 py-1 rounded-xl text-[11px] sm:text-xs font-display font-black transition-all cursor-pointer whitespace-nowrap shrink-0 flex items-center gap-1 ${
+                      isSameMonth(currentMonth, new Date())
+                        ? 'bg-emerald-600 text-white shadow-xs'
+                        : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200'
+                    }`}
+                  >
+                    <span>⚡ {isSlovenian ? "Aktualni mesec" : isIt ? "Mese attuale" : "Current month"}</span>
+                  </button>
+
                   {availableMonths.map((m, idx) => {
                     const isCurrent = isSameMonth(currentMonth, m.date);
                     return (
