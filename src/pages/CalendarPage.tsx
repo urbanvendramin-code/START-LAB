@@ -523,35 +523,8 @@ const getLocalizedEvents = (lang: string): Event[] => {
     image: 'https://ik.imagekit.io/utigodgni/elektronika_in_arduino2.png'
   }));
 
-  const rawArduinoG2Dates = [
-    new Date(2026, 9, 14), // Oct 14
-    new Date(2026, 9, 21), // Oct 21
-    new Date(2026, 9, 28), // Oct 28
-    new Date(2026, 10, 4), // Nov 4
-    new Date(2026, 10, 11), // Nov 11
-    new Date(2026, 10, 18), // Nov 18
-    new Date(2026, 10, 25), // Nov 25
-    new Date(2026, 11, 2)  // Dec 2
-  ];
-
-  const arduinoG2Events: Event[] = rawArduinoG2Dates.map((date, idx) => ({
-    id: `arduino-g2-session-${idx + 1}`,
-    title: isSl 
-      ? `Elektronika in Arduino (15+ let) – Sklop ${idx + 1}`
-      : isIt
-        ? `Elettronica e Arduino (15+ anni) – Parte ${idx + 1}`
-        : `Electronics & Arduino (15+ yrs) – Session ${idx + 1}`,
-    date,
-    time: '17:00 - 19:00',
-    location: 'Start Lab, Solkan',
-    category: 'workshop' as const,
-    description: isSl ? arduinoSessionDescriptions[idx].sl : isIt ? arduinoSessionDescriptions[idx].it : arduinoSessionDescriptions[idx].en,
-    ageGroup: isSl ? '15 let in več' : isIt ? '15+ anni' : '15+ years',
-    mentors: isSl ? 'Start Lab ekipa' : isIt ? 'Team Start Lab' : 'Start Lab Team',
-    image: 'https://ik.imagekit.io/utigodgni/elektronika_in_arduino2.png'
-  }));
-
-  const arduinoEvents: Event[] = [...arduinoG1Events, ...arduinoG2Events];
+  // Vsi termini delavnice Elektronika in Arduino, ki padejo na sredo, so odstranjeni po navodilih uporabnika
+  const arduinoEvents: Event[] = arduinoG1Events.filter(e => e.date.getDay() !== 3);
 
   const occupiedEvents: Event[] = rawOccupiedEvents.map((item) => ({
     id: item.id,
@@ -680,7 +653,7 @@ export default function CalendarPage() {
 
   const selectedDayEvents = selectedDate 
     ? events.filter(event => isSameDay(event.date, selectedDate))
-    : events.filter(event => event.id === 'arduino-g1-session-1' || event.id === 'arduino-g2-session-1' || event.id === 'occupied-1' || event.id === 'racer-session-1' || event.id === 'graphene-session-1' || event.id === 'printcut-session-1');
+    : events.filter(event => event.id === 'arduino-g1-session-1' || event.id === 'occupied-1' || event.id === 'racer-session-1' || event.id === 'graphene-session-1' || event.id === 'printcut-session-1');
 
   const isSlovenian = i18n.language !== 'en' && i18n.language !== 'it';
   const isIt = i18n.language === 'it';
@@ -704,11 +677,11 @@ export default function CalendarPage() {
       labelIt: 'Elettronica e Arduino',
       labelEn: 'Electronics & Arduino',
       count: arduinoCount,
-      badgeSl: 'Prijave odprte · 40 €',
-      badgeIt: 'Iscrizioni aperte · 40 €',
-      badgeEn: 'Open for registration · €40',
-      colorDot: 'bg-emerald-500 animate-pulse',
-      badgeClass: 'bg-emerald-100 text-emerald-800 font-bold'
+      badgeSl: 'Prijave zaprte',
+      badgeIt: 'Iscrizioni chiuse',
+      badgeEn: 'Closed',
+      colorDot: 'bg-emerald-600',
+      badgeClass: 'bg-slate-100 text-slate-700 font-bold'
     },
     {
       id: 'kemik' as const,
@@ -819,7 +792,7 @@ export default function CalendarPage() {
   ].filter(group => group.items.length > 0);
 
   const openRegisterModal = (event: Event) => {
-    if (event.id.startsWith('printcut') || event.id.startsWith('graphene') || event.id.startsWith('racer') || event.id.startsWith('occupied')) {
+    if (event.id.startsWith('printcut') || event.id.startsWith('graphene') || event.id.startsWith('racer') || event.id.startsWith('occupied') || event.id.startsWith('arduino')) {
       return;
     }
     setModalEvent(event);
@@ -848,12 +821,6 @@ export default function CalendarPage() {
       setCurrentMonth(new Date(2026, 9, 1));
       setSelectedDate(new Date(2026, 9, 12));
       setCategoryFilter('arduino');
-      if (params.get('register') === 'true') {
-        const arduinoEv = events.find(e => e.id.startsWith('arduino'));
-        if (arduinoEv) {
-          openRegisterModal(arduinoEv);
-        }
-      }
     }
   }, []);
 
@@ -971,9 +938,9 @@ export default function CalendarPage() {
           <div className="relative z-10 grid lg:grid-cols-12 gap-6 lg:gap-8 items-center">
             <div className="lg:col-span-7">
               <div className="flex flex-wrap items-center gap-2 mb-3">
-                <span className="bg-emerald-500 text-slate-950 font-display font-black text-[10px] sm:text-xs uppercase px-3 py-1 rounded-full tracking-wider flex items-center gap-1.5 shadow-sm">
-                  <span className="w-2 h-2 rounded-full bg-slate-950 animate-ping" />
-                  {isSlovenian ? "NOVA DELAVNICA · PRIJAVE ODPRTE" : isIt ? "NUOVO WORKSHOP · ISCRIZIONI APERTE" : "NEW WORKSHOP · REGISTRATION OPEN"}
+                <span className="bg-slate-800 text-slate-300 border border-slate-700 font-display font-black text-[10px] sm:text-xs uppercase px-3 py-1 rounded-full tracking-wider flex items-center gap-1.5 shadow-sm">
+                  <Lock size={12} className="text-amber-400" />
+                  {isSlovenian ? "PRIJAVE ZAPRTE" : isIt ? "ISCRIZIONI CHIUSE" : "REGISTRATION CLOSED"}
                 </span>
                 <span className="bg-white/10 text-emerald-300 border border-emerald-400/25 font-display font-black text-[10px] sm:text-xs uppercase px-2.5 py-1 rounded-full">
                   💶 40 €
@@ -995,35 +962,25 @@ export default function CalendarPage() {
                     : "What happens when code leaves the screen and acts in the physical world? Explore Arduino microcontrollers, circuits, and sensors hands-on."}
               </p>
 
-              {/* Two Groups Box */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-5">
-                <div className="p-3 rounded-2xl bg-white/5 border border-emerald-500/30 hover:bg-white/10 transition-colors">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0" />
-                    <span className="text-xs font-display font-black uppercase tracking-wider text-emerald-300">
-                      Skupina 9–14 let
+              {/* Group Schedule */}
+              <div className="mb-5 max-w-md">
+                <div className="p-3.5 rounded-2xl bg-white/5 border border-emerald-500/30">
+                  <div className="flex items-center justify-between gap-2 mb-1">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0" />
+                      <span className="text-xs font-display font-black uppercase tracking-wider text-emerald-300">
+                        Skupina 9–14 let
+                      </span>
+                    </div>
+                    <span className="text-[10px] uppercase font-mono font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
+                      {isSlovenian ? "Prijave zaprte" : isIt ? "Chiuso" : "Closed"}
                     </span>
                   </div>
-                  <div className="text-[11px] font-semibold text-slate-300">
+                  <div className="text-xs font-semibold text-slate-300">
                     📅 Ponedeljki od 12. 10. 2026 (16:30 – 18:30)
                   </div>
-                  <div className="text-[10px] text-slate-400 mt-0.5">
-                    📍 Start Lab Solkan · Največ 20 mest
-                  </div>
-                </div>
-
-                <div className="p-3 rounded-2xl bg-white/5 border border-sky-500/30 hover:bg-white/10 transition-colors">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0" />
-                    <span className="text-xs font-display font-black uppercase tracking-wider text-sky-300">
-                      Skupina 15 let in več
-                    </span>
-                  </div>
-                  <div className="text-[11px] font-semibold text-slate-300">
-                    📅 Srede od 14. 10. 2026 (17:00 – 19:00)
-                  </div>
-                  <div className="text-[10px] text-slate-400 mt-0.5">
-                    📍 Start Lab Solkan · Največ 20 mest
+                  <div className="text-[11px] text-slate-400 mt-0.5">
+                    📍 Start Lab Solkan
                   </div>
                 </div>
               </div>
@@ -1032,14 +989,11 @@ export default function CalendarPage() {
               <div className="flex flex-wrap items-center gap-3">
                 <button
                   type="button"
-                  onClick={() => {
-                    const arduinoEv = events.find(e => e.id.startsWith('arduino'));
-                    if (arduinoEv) openRegisterModal(arduinoEv);
-                  }}
-                  className="px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-display font-black uppercase text-xs tracking-wider transition-all shadow-lg hover:shadow-emerald-500/30 flex items-center gap-2 cursor-pointer"
+                  disabled
+                  className="px-5 py-3 rounded-xl bg-slate-800 text-slate-400 font-display font-black uppercase text-xs tracking-wider flex items-center gap-2 cursor-not-allowed border border-slate-700 select-none"
                 >
-                  <Rocket size={16} className="stroke-[2.5]" />
-                  <span>{isSlovenian ? "Prijavi se na delavnico" : isIt ? "Iscriviti al workshop" : "Register for workshop"}</span>
+                  <Lock size={15} />
+                  <span>{isSlovenian ? "Prijave so zaprte" : isIt ? "Iscrizioni chiuse" : "Registration closed"}</span>
                 </button>
                 <button
                   type="button"
@@ -1365,31 +1319,17 @@ export default function CalendarPage() {
                               <span className={`px-2.5 py-1 rounded-xl text-[10px] font-display font-black uppercase tracking-wider flex items-center gap-1 shadow-xs ${
                                 isOccupied
                                   ? 'bg-rose-600 text-white'
-                                  : isArduino
-                                    ? 'bg-emerald-600 text-white'
-                                    : 'bg-slate-200 text-slate-700'
+                                  : 'bg-slate-200 text-slate-700'
                               }`}>
-                                {isOccupied ? <Lock size={12} /> : isArduino ? <Sparkles size={12} className="stroke-[2.5]" /> : <Lock size={12} />}
+                                <Lock size={12} />
                                 <span>
                                   {isOccupied
                                     ? (isSlovenian ? "Zasedeno" : isIt ? "Occupato" : "Booked")
-                                    : isArduino
-                                      ? (isSlovenian ? "Prijave odprte (40 €)" : isIt ? "Iscrizioni aperte (40 €)" : "Open (40 €)")
-                                      : (isSlovenian ? "Prijave zaprte" : isIt ? "Iscrizioni chiuse" : "Locked")}
+                                    : (isSlovenian ? "Prijave zaprte" : isIt ? "Iscrizioni chiuse" : "Closed")}
                                 </span>
                               </span>
 
                               <div className="flex items-center gap-2">
-                                {isArduino && (
-                                  <button
-                                    type="button"
-                                    onClick={() => openRegisterModal(event)}
-                                    className="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-display font-black uppercase tracking-wider transition-all flex items-center gap-1 cursor-pointer shadow-xs"
-                                  >
-                                    <Rocket size={12} />
-                                    <span>{isSlovenian ? "Prijavi se" : isIt ? "Iscriviti" : "Register"}</span>
-                                  </button>
-                                )}
                                 <button
                                   type="button"
                                   onClick={() => jumpToDate(event.date)}
@@ -2504,13 +2444,13 @@ export default function CalendarPage() {
                                 <Lock size={16} className="text-rose-600 stroke-[2.5]" />
                                 {isSlovenian ? `Zasedeno (${event.time})` : isIt ? `Occupato (${event.time})` : `Booked (${event.time})`}
                               </div>
-                            ) : isPrintCut || isGraphene || isRacer ? (
+                            ) : isPrintCut || isGraphene || isRacer || isArduino ? (
                               <button 
                                 disabled
                                 className="w-full py-4 bg-slate-200 text-slate-500 rounded-2xl font-display font-black uppercase text-sm tracking-wider select-none cursor-not-allowed flex items-center justify-center gap-2 border border-slate-300/80 shadow-inner"
                               >
                                 <Lock size={18} className="stroke-[2.5]" />
-                                {isSlovenian ? "Prijave zaklenjene (Mesta zapolnjena)" : isIt ? "Iscrizioni chiuse (Posti esauriti)" : "Registrations locked (Sold out)"}
+                                {isSlovenian ? "Prijave zaprte" : isIt ? "Iscrizioni chiuse" : "Registration closed"}
                               </button>
                             ) : (
                               <button 
