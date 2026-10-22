@@ -149,7 +149,7 @@ const getLocalizedEvents = (lang: string): Event[] => {
           : "Part 6: Building electronics, motor powertrain, and battery power circuit for the electronic racer."
     },
     {
-      date: new Date(2026, 9, 29), // Oct 29
+      date: new Date(2026, 10, 5), // Nov 5 (prestavljeno iz 29. 10. zaradi šolskih počitnic)
       time: '17:00 - 19:00',
       location: 'Startlab Solkan',
       title: isSl ? 'Elektronski dirkač – Sklop 7' : isIt ? 'Bolide elettronico – Parte 7' : 'Electronic Racer – Part 7',
@@ -160,7 +160,7 @@ const getLocalizedEvents = (lang: string): Event[] => {
           : "Part 7: Testing operations, troubleshooting issues, and optimizing racer speed and reliability."
     },
     {
-      date: new Date(2026, 10, 5), // Nov 5
+      date: new Date(2026, 10, 12), // Nov 12 (prestavljeno na 12. 11. kot prvi naslednji možen termin)
       time: '17:00 - 19:00',
       location: 'Startlab Solkan',
       title: isSl ? 'Elektronski dirkač – Sklop 8' : isIt ? 'Bolide elettronico – Parte 8' : 'Electronic Racer – Part 8',
@@ -357,7 +357,7 @@ const getLocalizedEvents = (lang: string): Event[] => {
           : "Part 7: Assembly and post-processing of the final product. Join 3D-printed and laser-cut parts into a functional design."
     },
     {
-      date: new Date(2026, 9, 27), // Oct 27
+      date: new Date(2026, 10, 3), // Nov 3 (prestavljeno iz 27. 10. zaradi šolskih počitnic)
       time: '17:00 - 19:00',
       location: 'Startlab Solkan',
       title: isSl ? 'Natisni in izreži – Sklop 8' : isIt ? 'Stampa e Taglia – Parte 8' : 'Print & Cut – Part 8',
@@ -498,12 +498,13 @@ const getLocalizedEvents = (lang: string): Event[] => {
   const rawArduinoG1Dates = [
     new Date(2026, 9, 12), // Oct 12
     new Date(2026, 9, 19), // Oct 19
-    new Date(2026, 9, 26), // Oct 26
+    // Oct 26 odstranjen zaradi šolskih počitnic, termini prestavljeni za en teden naprej
     new Date(2026, 10, 2), // Nov 2
     new Date(2026, 10, 9), // Nov 9
     new Date(2026, 10, 16), // Nov 16
     new Date(2026, 10, 23), // Nov 23
-    new Date(2026, 10, 30)  // Nov 30
+    new Date(2026, 10, 30), // Nov 30
+    new Date(2026, 11, 7)  // Dec 7
   ];
 
   const arduinoG1Events: Event[] = rawArduinoG1Dates.map((date, idx) => ({
@@ -929,99 +930,6 @@ export default function CalendarPage() {
                 ? "Consulta il calendario dei nostri workshop tecnologici e assicurati il tuo posto. Clicca sulla data evidenziata per visualizzare i dettagli e registrarti online."
                 : "Browse our calendar of high-tech workshops and reserve your spot. Click on highlighted dates to view descriptions and submit your registration."}
           </p>
-        </div>
-
-        {/* Top Featured Workshop Card: ELEKTRONIKA IN ARDUINO */}
-        <div className="mb-6 sm:mb-8 p-5 sm:p-7 md:p-8 rounded-[2rem] bg-gradient-to-br from-emerald-950 via-slate-950 to-slate-900 text-white border-2 border-emerald-500/40 shadow-xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
-          
-          <div className="relative z-10 grid lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-            <div className="lg:col-span-7">
-              <div className="flex flex-wrap items-center gap-2 mb-3">
-                <span className="bg-slate-800 text-slate-300 border border-slate-700 font-display font-black text-[10px] sm:text-xs uppercase px-3 py-1 rounded-full tracking-wider flex items-center gap-1.5 shadow-sm">
-                  <Lock size={12} className="text-amber-400" />
-                  {isSlovenian ? "PRIJAVE ZAPRTE" : isIt ? "ISCRIZIONI CHIUSE" : "REGISTRATION CLOSED"}
-                </span>
-                <span className="bg-white/10 text-emerald-300 border border-emerald-400/25 font-display font-black text-[10px] sm:text-xs uppercase px-2.5 py-1 rounded-full">
-                  💶 40 €
-                </span>
-                <span className="bg-white/10 text-slate-200 border border-white/10 font-display font-bold text-[10px] sm:text-xs uppercase px-2.5 py-1 rounded-full">
-                  ⏱️ 8 srečanj × 2 uri
-                </span>
-              </div>
-
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-black uppercase text-white mb-2 leading-tight tracking-tight">
-                ELEKTRONIKA IN ARDUINO
-              </h2>
-
-              <p className="text-xs sm:text-sm text-slate-300 font-semibold mb-4 leading-relaxed max-w-2xl">
-                {isSlovenian 
-                  ? "Kaj se zgodi, ko program zapusti zaslon in začne delovati v resničnem svetu? 🌍 Spoznajte svet Arduina, elektronike in senzorjev skozi praktično ustvarjanje na breadboardu, programiranje mikrokrmilnika ter samostojen projekt."
-                  : isIt
-                    ? "Cosa succede quando il programma lascia lo schermo ed entra nel mondo reale? Scopri il mondo di Arduino e dell'elettronica con la pratica."
-                    : "What happens when code leaves the screen and acts in the physical world? Explore Arduino microcontrollers, circuits, and sensors hands-on."}
-              </p>
-
-              {/* Group Schedule */}
-              <div className="mb-5 max-w-md">
-                <div className="p-3.5 rounded-2xl bg-white/5 border border-emerald-500/30">
-                  <div className="flex items-center justify-between gap-2 mb-1">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0" />
-                      <span className="text-xs font-display font-black uppercase tracking-wider text-emerald-300">
-                        Skupina 9–14 let
-                      </span>
-                    </div>
-                    <span className="text-[10px] uppercase font-mono font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
-                      {isSlovenian ? "Prijave zaprte" : isIt ? "Chiuso" : "Closed"}
-                    </span>
-                  </div>
-                  <div className="text-xs font-semibold text-slate-300">
-                    📅 Ponedeljki od 12. 10. 2026 (16:30 – 18:30)
-                  </div>
-                  <div className="text-[11px] text-slate-400 mt-0.5">
-                    📍 Start Lab Solkan
-                  </div>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3">
-                <button
-                  type="button"
-                  disabled
-                  className="px-5 py-3 rounded-xl bg-slate-800 text-slate-400 font-display font-black uppercase text-xs tracking-wider flex items-center gap-2 cursor-not-allowed border border-slate-700 select-none"
-                >
-                  <Lock size={15} />
-                  <span>{isSlovenian ? "Prijave so zaprte" : isIt ? "Iscrizioni chiuse" : "Registration closed"}</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    jumpToDate(new Date(2026, 9, 12));
-                    setCategoryFilter('arduino');
-                  }}
-                  className="px-4 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-display font-black uppercase text-xs tracking-wider transition-all flex items-center gap-2 cursor-pointer border border-white/15"
-                >
-                  <CalendarDays size={16} className="stroke-[2.5]" />
-                  <span>{isSlovenian ? "Prikaži termine v koledarju" : isIt ? "Mostra nel calendario" : "Show in calendar"}</span>
-                </button>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5 relative">
-              <div className="relative rounded-2xl overflow-hidden border-2 border-emerald-500/40 shadow-2xl aspect-[4/3] group">
-                <img
-                  src="https://ik.imagekit.io/utigodgni/elektronika_in_arduino2.png"
-                  alt="Elektronika in Arduino"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-3 right-3 bg-slate-950/80 backdrop-blur-md text-emerald-400 border border-emerald-500/30 px-3 py-1.5 rounded-xl font-display font-black text-[10px] uppercase">
-                  💡 Predznanje ni potrebno
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Navigation & Filter Bar */}
@@ -1725,8 +1633,8 @@ export default function CalendarPage() {
                                 </span>
                               )}
                               {isArduino && (
-                                <span className="bg-emerald-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-xl shadow-sm flex items-center gap-1">
-                                  ✨ {isSlovenian ? "Prijave odprte • Pohitite!" : isIt ? "Iscrizioni aperte" : "Registrations open"}
+                                <span className="bg-slate-800 text-slate-300 text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-xl shadow-sm flex items-center gap-1 border border-slate-700">
+                                  🔒 {isSlovenian ? "Prijave zaprte" : isIt ? "Iscrizioni chiuse" : "Registrations closed"}
                                 </span>
                               )}
                               {isRacer && (
@@ -1834,8 +1742,8 @@ export default function CalendarPage() {
                                     </span>
                                   </div>
                                   {isArduino ? (
-                                    <span className="bg-emerald-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
-                                      📲 {isSlovenian ? "Prijave odprte • Do 20 mest" : isIt ? "Iscrizioni aperte" : "Registrations open"}
+                                    <span className="bg-slate-800 text-slate-300 text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm border border-slate-700">
+                                      🔒 {isSlovenian ? "Prijave zaprte" : isIt ? "Iscrizioni chiuse" : "Registrations closed"}
                                     </span>
                                   ) : isRacer ? (
                                     <span className="bg-rose-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
@@ -1940,16 +1848,11 @@ export default function CalendarPage() {
 
                                             <div className="space-y-3">
                                               <div className="border-l-2 border-emerald-600 pl-2.5">
-                                                <p className="font-bold text-slate-950">{isSlovenian ? "👥 IZBIRAJ MED DVEMA SKUPINAMA" : isIt ? "👥 SCEGLI TRA DUE GRUPPI" : "👥 CHOOSE BETWEEN TWO GROUPS"}</p>
+                                                <p className="font-bold text-slate-950">{isSlovenian ? "👥 INFORMACIJE O SKUPINI" : isIt ? "👥 INFORMAZIONI SUL GRUPPO" : "👥 GROUP INFORMATION"}</p>
                                                 <div className="mt-1.5 text-[10px] text-slate-700 bg-emerald-50/60 border border-emerald-200 rounded-lg p-2.5 space-y-2">
-                                                  <div className="pb-1.5 border-b border-emerald-200/60">
-                                                    <p className="font-extrabold text-emerald-900 text-xs">🟢 9–14 let</p>
-                                                    <p>📅 <strong>{isSlovenian ? "Prvo srečanje:" : "First session:"}</strong> {isSlovenian ? "Ponedeljek, 12. 10. 2026, 16:30–18:30" : "Monday, Oct 12, 2026, 16:30–18:30"}</p>
-                                                    <p>📍 <strong>{isSlovenian ? "Lokacija:" : "Location:"}</strong> {isSlovenian ? "prostori Start Laba v Solkanu" : "Start Lab premises, Solkan"}</p>
-                                                  </div>
                                                   <div>
-                                                    <p className="font-extrabold text-blue-900 text-xs">🔵 15 let in več</p>
-                                                    <p>📅 <strong>{isSlovenian ? "Prvo srečanje:" : "First session:"}</strong> {isSlovenian ? "Sreda, 14. 10. 2026, 17:00–19:00" : "Wednesday, Oct 14, 2026, 17:00–19:00"}</p>
+                                                    <p className="font-extrabold text-emerald-900 text-xs">🟢 9–14 let</p>
+                                                    <p>📅 <strong>{isSlovenian ? "Termin:" : "Schedule:"}</strong> {isSlovenian ? "Ponedeljki, 16:30–18:30" : "Mondays, 16:30–18:30"}</p>
                                                     <p>📍 <strong>{isSlovenian ? "Lokacija:" : "Location:"}</strong> {isSlovenian ? "prostori Start Laba v Solkanu" : "Start Lab premises, Solkan"}</p>
                                                   </div>
                                                 </div>
@@ -1961,7 +1864,7 @@ export default function CalendarPage() {
                                                   <p>⏱️ <strong>{isSlovenian ? "Trajanje:" : "Duration:"}</strong> 8 srečanj × 2 uri</p>
                                                   <p>💶 <strong>{isSlovenian ? "Cena celotne delavnice:" : "Price:"}</strong> <span className="text-emerald-700 font-extrabold">40 €</span></p>
                                                   <p>👥 <strong>{isSlovenian ? "Omejitev:" : "Limit:"}</strong> {isSlovenian ? "Skupina je omejena na največ 20 udeležencev!" : "Group limited to max 20 participants!"}</p>
-                                                  <p>📲 <strong>{isSlovenian ? "Status:" : "Status:"}</strong> <span className="text-emerald-700 font-extrabold">{isSlovenian ? "Prijave so odprte – pohitite, saj je število mest omejeno." : "Registrations open – limited spots available."}</span></p>
+                                                  <p>📲 <strong>{isSlovenian ? "Status:" : "Status:"}</strong> <span className="text-slate-600 font-extrabold">{isSlovenian ? "Prijave so zaprte." : "Registrations closed."}</span></p>
                                                 </div>
                                               </div>
                                             </div>
