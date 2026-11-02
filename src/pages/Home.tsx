@@ -75,6 +75,21 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="lg:col-span-7"
           >
+            {/* Top Announcement Pill for Smart Home Workshop */}
+            <Link 
+              to="/koledar?workshop=smarthome"
+              className="inline-flex items-center gap-2.5 px-4 py-2 sm:px-5 sm:py-2.5 mb-5 sm:mb-6 rounded-full bg-cyan-500/10 hover:bg-cyan-500/20 text-slate-900 border-2 border-cyan-500/30 font-display font-black text-[11px] sm:text-xs uppercase tracking-wider transition-all transform hover:scale-[1.02] shadow-sm group"
+            >
+              <span className="flex h-2.5 w-2.5 relative">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500" />
+              </span>
+              <span className="text-cyan-900 font-black">
+                {isSlovenian ? "⚡ NOVO • Brezplačna delavnica za otroke (10–15 let): Postani izumitelj pametnega doma! 🤖" : isItalian ? "⚡ NUOVO • Workshop gratuito (10–15 anni): Diventa l'inventore della smart home! 🤖" : "⚡ NEW • Free workshop for kids (10–15 yrs): Become a smart home inventor! 🤖"}
+              </span>
+              <ArrowRight size={14} className="stroke-[3] text-cyan-700 group-hover:translate-x-1 transition-transform" />
+            </Link>
+
             <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-display font-black mb-6 md:mb-8 leading-[1.05] tracking-tight text-slate-950">
               {t('hero.title_start')} <br />
               <span className="text-brand-red">
@@ -150,6 +165,168 @@ export default function Home() {
                <div className="absolute bottom-[-16px] right-[4px] sm:bottom-[-24px] sm:right-[-16px] bg-play-teal text-slate-950 font-display font-black text-xs sm:text-sm uppercase px-4 py-2.5 sm:px-5 sm:py-3 rounded-2xl shadow-[0_6px_0_0_#028a67] sm:shadow-[0_8px_0_0_#028a67] border-2 border-slate-900 -rotate-3 hover:rotate-3 transition-transform duration-300">
                   ⚡ {t('why.exploration.title')}
                </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Featured Workshop Banner: Pametni dom */}
+      <section className="px-4 md:px-6 -mt-6 sm:-mt-8 mb-12 sm:mb-16 relative z-20">
+        <div className="max-w-7xl mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="rounded-[2.5rem] bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 text-white p-6 sm:p-8 md:p-12 border-4 border-slate-950 shadow-[0_20px_50px_rgba(6,182,212,0.15)] relative overflow-hidden"
+          >
+            {/* Background glowing accents */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+            
+            <div className="relative z-10 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              <div className="lg:col-span-7">
+                <div className="flex items-center gap-2.5 flex-wrap mb-4">
+                  <span className="bg-emerald-500 text-slate-950 font-display font-black text-[11px] sm:text-xs uppercase px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm animate-pulse">
+                    🟢 {isSlovenian ? "Prijave odprte" : isItalian ? "Iscrizioni aperte" : "Registrations open"}
+                  </span>
+                  <span className="bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-display font-black text-[11px] sm:text-xs uppercase px-3.5 py-1.5 rounded-full">
+                    🎉 {isSlovenian ? "Popolnoma brezplačna delavnica" : isItalian ? "Completamente gratuita" : "100% Free workshop"}
+                  </span>
+                  <span className="bg-white/10 text-slate-300 font-display font-bold text-[11px] sm:text-xs uppercase px-3 py-1.5 rounded-full">
+                    Shelly IoT
+                  </span>
+                </div>
+
+                <h2 className="text-2xl sm:text-4xl md:text-5xl font-display font-black uppercase tracking-tight text-white mb-4 leading-tight">
+                  {isSlovenian 
+                    ? "Postani izumitelj pametnega doma! 🤖" 
+                    : isItalian 
+                      ? "Diventa l'inventore della smart home! 🤖" 
+                      : "Become a smart home inventor! 🤖"}
+                </h2>
+
+                <p className="text-sm sm:text-base md:text-lg text-slate-300 font-medium leading-relaxed mb-6">
+                  {isSlovenian 
+                    ? "Kaj če bi tvoje luči lahko spreminjale barvo s pritiskom na gumb, se samodejno vklopile, ko vstopiš v sobo, ali se odzvale ob odprtju vrat? Vabimo te na BREZPLAČNO delavnico PAMETNI DOM za otroke od 10 do 15 let s tehnologijo Shelly v Start Labu Solkan."
+                    : isItalian
+                      ? "E se le tue luci potessero cambiare colore premendo un tasto, accendersi quando entri o reagire all'apertura di una porta? Ti invitiamo al workshop GRATUITO per ragazzi 10–15 anni con tecnologia Shelly."
+                      : "What if your lights changed color at a button press, turned on when you walked in, or reacted when a door opened? Join our FREE smart home workshop for kids 10–15 with Shelly IoT tech."}
+                </p>
+
+                {/* Key activities grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-6 text-xs font-semibold text-slate-200">
+                  <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl p-2.5">
+                    <span className="text-lg">💡</span>
+                    <span>{isSlovenian ? "Raziskovanje pametnih naprav" : "Exploring smart devices"}</span>
+                  </div>
+                  <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl p-2.5">
+                    <span className="text-lg">🎮</span>
+                    <span>{isSlovenian ? "Senzorji in interaktivni izzivi" : "Sensors & interactive challenges"}</span>
+                  </div>
+                  <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl p-2.5">
+                    <span className="text-lg">🌈</span>
+                    <span>{isSlovenian ? "Upravljanje pametnih barvnih luči" : "Controlling smart RGB lights"}</span>
+                  </div>
+                  <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl p-2.5">
+                    <span className="text-lg">🤖</span>
+                    <span>{isSlovenian ? "Izdelava lastnih rešitev za dom" : "Building custom home solutions"}</span>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-3">
+                  <Link 
+                    to="/koledar?workshop=smarthome" 
+                    className="px-6 py-3.5 rounded-2xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-display font-black text-xs sm:text-sm uppercase tracking-wider transition-all transform hover:scale-105 shadow-lg shadow-cyan-400/20 flex items-center gap-2"
+                  >
+                    <span>{isSlovenian ? "Prijavi se na delavnico" : isItalian ? "Iscriviti al workshop" : "Register for workshop"}</span>
+                    <ArrowRight size={16} className="stroke-[3]" />
+                  </Link>
+                  <a 
+                    href="mailto:info@startlab.si" 
+                    className="px-5 py-3.5 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-display font-black text-xs sm:text-sm uppercase tracking-wider transition-all border border-white/15 flex items-center gap-2"
+                  >
+                    <Mail size={16} />
+                    <span>info@startlab.si</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Right column: Image & Schedule Card */}
+              <div className="lg:col-span-5 space-y-4">
+                {/* Official Cover Image */}
+                <div className="relative rounded-3xl overflow-hidden border-2 border-cyan-500/40 shadow-2xl group aspect-[16/10] bg-slate-950">
+                  <img
+                    src="https://ik.imagekit.io/utigodgni/Pametni%20dom.png"
+                    alt="Postani izumitelj pametnega doma"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-3 right-3 bg-slate-950/80 backdrop-blur-md text-cyan-300 border border-cyan-500/30 px-3 py-1.5 rounded-xl font-display font-black text-[10px] uppercase shadow-md flex items-center gap-1.5">
+                    <span>🤖</span>
+                    <span>Shelly IoT</span>
+                  </div>
+                  <div className="absolute bottom-3 left-3 bg-emerald-500 text-slate-950 px-3 py-1 rounded-xl font-display font-black text-[10px] uppercase shadow-lg">
+                    {isSlovenian ? "Brezplačno • 10–15 let" : isItalian ? "Gratuito • 10–15 anni" : "Free • Ages 10–15"}
+                  </div>
+                </div>
+
+                <div className="bg-slate-900/90 border-2 border-cyan-500/30 rounded-3xl p-5 sm:p-6 shadow-2xl backdrop-blur-md">
+                  <div className="flex items-center justify-between pb-3 mb-4 border-b border-white/10">
+                    <div className="flex items-center gap-2">
+                      <Calendar size={18} className="text-cyan-400" />
+                      <span className="font-display font-black uppercase text-xs tracking-wider text-slate-200">
+                        {isSlovenian ? "Datumi srečanj (4 x 2 uri)" : "Session Dates (4 x 2 hrs)"}
+                      </span>
+                    </div>
+                    <span className="text-[10px] font-bold text-cyan-300 bg-cyan-950/60 border border-cyan-500/30 px-2 py-0.5 rounded-full">
+                      16:30 – 18:30
+                    </span>
+                  </div>
+
+                  <div className="space-y-2.5 font-mono text-xs">
+                    <div className="flex items-center justify-between bg-white/5 border border-white/10 rounded-xl p-3 hover:bg-white/10 transition-colors">
+                      <div className="flex items-center gap-2.5">
+                        <span className="w-6 h-6 rounded-lg bg-cyan-500 text-slate-950 font-display font-black text-xs flex items-center justify-center">1</span>
+                        <span className="text-slate-100 font-bold">{isSlovenian ? "Torek, 10. 11. 2026" : "Tuesday, Nov 10, 2026"}</span>
+                      </div>
+                      <span className="text-cyan-300 font-semibold text-[11px]">16:30</span>
+                    </div>
+
+                    <div className="flex items-center justify-between bg-white/5 border border-white/10 rounded-xl p-3 hover:bg-white/10 transition-colors">
+                      <div className="flex items-center gap-2.5">
+                        <span className="w-6 h-6 rounded-lg bg-cyan-500 text-slate-950 font-display font-black text-xs flex items-center justify-center">2</span>
+                        <span className="text-slate-100 font-bold">{isSlovenian ? "Sreda, 18. 11. 2026" : "Wednesday, Nov 18, 2026"}</span>
+                      </div>
+                      <span className="text-cyan-300 font-semibold text-[11px]">16:30</span>
+                    </div>
+
+                    <div className="flex items-center justify-between bg-white/5 border border-white/10 rounded-xl p-3 hover:bg-white/10 transition-colors">
+                      <div className="flex items-center gap-2.5">
+                        <span className="w-6 h-6 rounded-lg bg-cyan-500 text-slate-950 font-display font-black text-xs flex items-center justify-center">3</span>
+                        <span className="text-slate-100 font-bold">{isSlovenian ? "Torek, 24. 11. 2026" : "Tuesday, Nov 24, 2026"}</span>
+                      </div>
+                      <span className="text-cyan-300 font-semibold text-[11px]">16:30</span>
+                    </div>
+
+                    <div className="flex items-center justify-between bg-white/5 border border-white/10 rounded-xl p-3 hover:bg-white/10 transition-colors">
+                      <div className="flex items-center gap-2.5">
+                        <span className="w-6 h-6 rounded-lg bg-cyan-500 text-slate-950 font-display font-black text-xs flex items-center justify-center">4</span>
+                        <span className="text-slate-100 font-bold">{isSlovenian ? "Torek, 1. 12. 2026" : "Tuesday, Dec 1, 2026"}</span>
+                      </div>
+                      <span className="text-cyan-300 font-semibold text-[11px]">16:30</span>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-400 font-semibold">
+                    <span className="flex items-center gap-1 text-slate-300">
+                      <MapPin size={13} className="text-cyan-400" /> Start Lab Solkan
+                    </span>
+                    <span className="text-emerald-400 font-bold">
+                      {isSlovenian ? "Brez predznanja • 10–15 let" : "No prerequisites • 10–15 yrs"}
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>

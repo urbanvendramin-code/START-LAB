@@ -214,7 +214,7 @@
       "3d-pro": { "title": "Professional 3D Modeling", "desc": "Learn advanced tools for 3D modeling and engineering design." },
       "electronics-basic": { "title": "Electronics Basics – DC circuits", "desc": "Participants learn basic components and laws of electricity and assemble simple circuits." },
       "arduino-micro": { "title": "Electronics and Arduino", "desc": "What happens when code leaves the screen and acts in the real world? Discover the world of Arduino, electronics, and coding through hands-on tinkering." },
-      "smart-home": { "title": "Smart Homes", "desc": "How smart devices and automation work in practice." },
+      "smart-home": { "title": "Become a Smart Home Inventor! 🤖", "desc": "What if your lights changed color at a button press or turned on when entering? Explore the world of smart IoT devices, sensors, and Shelly automation. Ages 10–15. Free!" },
       "mobile-app": { "title": "Create Your Own Mobile App", "desc": "Turn an idea into a simple mobile application and test it." },
       "unreal-engine": { "title": "Video Game Development (Unreal Engine)", "desc": "Create a basic 3D environment and understand how games are made." },
       "vr-worlds": { "title": "VR – Virtual Reality", "desc": "Experience virtual environments and interactive worlds." },

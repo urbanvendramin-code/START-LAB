@@ -72,6 +72,7 @@ export default function WorkshopsPage() {
                   ];
                   const theme = colorThemes[idx % 4];
                   const isSelected = selectedWorkshop === workshop.id;
+                  const isSmartHome = workshop.id === 'smart-home';
                   const isRacer = workshop.id === 'electronics-racer';
                   const isGraphene = workshop.id === 'graphene-transistor';
                   const isArduino = workshop.id === 'arduino-micro';
@@ -83,18 +84,22 @@ export default function WorkshopsPage() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: (sIdx * 0.1) + (idx * 0.05) }}
                       className={`play-card overflow-hidden group cursor-pointer transition-all border-2 bg-white flex flex-col justify-between ${
-                        isArduino
-                          ? 'border-emerald-500 hover:border-emerald-600 hover:shadow-xl ring-2 ring-emerald-500/20'
-                          : isRacer 
-                            ? 'border-amber-500/40 hover:border-amber-500 hover:shadow-xl ring-2 ring-amber-500/20' 
-                            : isGraphene
-                              ? 'border-brand-red/40 hover:border-brand-red hover:shadow-xl ring-2 ring-brand-red/20'
-                              : isSelected 
-                                ? `ring-4 ring-offset-2 ${theme.ring} border-slate-900` 
-                                : `border-slate-900/10 ${theme.border}`
+                        isSmartHome
+                          ? 'border-cyan-500 hover:border-cyan-600 hover:shadow-xl ring-2 ring-cyan-500/20'
+                          : isArduino
+                            ? 'border-slate-300 hover:border-slate-400'
+                            : isRacer 
+                              ? 'border-amber-500/40 hover:border-amber-500 hover:shadow-xl ring-2 ring-amber-500/20' 
+                              : isGraphene
+                                ? 'border-brand-red/40 hover:border-brand-red hover:shadow-xl ring-2 ring-brand-red/20'
+                                : isSelected 
+                                  ? `ring-4 ring-offset-2 ${theme.ring} border-slate-900` 
+                                  : `border-slate-900/10 ${theme.border}`
                       }`}
                       onClick={() => {
-                        if (isArduino || isRacer || isGraphene) {
+                        if (isSmartHome) {
+                          navigate('/koledar?workshop=smarthome');
+                        } else if (isArduino || isRacer || isGraphene) {
                           navigate('/koledar');
                         } else {
                           setSelectedWorkshop(selectedWorkshop === workshop.id ? null : workshop.id);
@@ -111,15 +116,17 @@ export default function WorkshopsPage() {
                           />
                           <div className="absolute bottom-3 right-5 flex items-end">
                             <div className={`w-11 h-11 rounded-2xl border-2 border-white shadow-md flex items-center justify-center transition-all ${
-                              isArduino
-                                ? 'bg-emerald-600 text-white shadow-lg group-hover:scale-110'
-                                : isRacer
-                                  ? 'bg-amber-500 text-white shadow-lg group-hover:scale-110'
-                                  : isGraphene
-                                    ? 'bg-brand-red text-white shadow-lg group-hover:scale-110'
-                                    : isSelected 
-                                      ? 'bg-slate-950 text-white hover:scale-110' 
-                                      : `${theme.bg} ${theme.text} backdrop-blur-md group-hover:bg-slate-950 group-hover:text-white`
+                              isSmartHome
+                                ? 'bg-cyan-600 text-white shadow-lg group-hover:scale-110'
+                                : isArduino
+                                  ? 'bg-slate-700 text-white shadow-md group-hover:scale-110'
+                                  : isRacer
+                                    ? 'bg-amber-500 text-white shadow-lg group-hover:scale-110'
+                                    : isGraphene
+                                      ? 'bg-brand-red text-white shadow-lg group-hover:scale-110'
+                                      : isSelected 
+                                        ? 'bg-slate-950 text-white hover:scale-110' 
+                                        : `${theme.bg} ${theme.text} backdrop-blur-md group-hover:bg-slate-950 group-hover:text-white`
                             }`}>
                               <workshop.icon size={20} className="stroke-[2.5]" />
                             </div>
@@ -127,7 +134,7 @@ export default function WorkshopsPage() {
                         </div>
                         <div className="p-6 pb-2">
                           <h3 className="text-base md:text-lg font-display font-black uppercase mb-3 text-slate-950 leading-snug group-hover:text-brand-red transition-colors">{translated.title}</h3>
-                          <p className={`text-xs text-slate-600 font-semibold leading-relaxed mb-6 ${isArduino || isRacer || isGraphene || isSelected ? '' : 'line-clamp-2'}`}>
+                          <p className={`text-xs text-slate-600 font-semibold leading-relaxed mb-6 ${isSmartHome || isArduino || isRacer || isGraphene || isSelected ? '' : 'line-clamp-2'}`}>
                             {translated.desc}
                           </p>
                         </div>
@@ -136,14 +143,19 @@ export default function WorkshopsPage() {
                       <div className="p-6 pt-0">
                         <div className="flex items-center gap-3 text-[11px] font-display font-black uppercase tracking-wider text-slate-500 flex-wrap">
                           <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-100 px-3 py-1.5 rounded-xl font-bold">
-                            <Clock size={14} className="text-brand-red stroke-[2.5]" /> {isArduino ? (isSlovenian ? "8 srečanj × 2 uri" : isItalian ? "8 sessioni × 2 ore" : "8 sessions × 2 hours") : isRacer ? (isSlovenian ? "8 x 2 uri" : isItalian ? "8 x 2 ore" : "8 x 2 hours") : isGraphene ? (isSlovenian ? "6 srečanj" : isItalian ? "6 sessioni" : "6 sessions") : t('workshops_page.duration')}
+                            <Clock size={14} className="text-brand-red stroke-[2.5]" /> {isSmartHome ? (isSlovenian ? "4 srečanja × 2 uri (16:30)" : isItalian ? "4 sessioni × 2 ore (16:30)" : "4 sessions × 2 hours (16:30)") : isArduino ? (isSlovenian ? "8 srečanj × 2 uri" : isItalian ? "8 sessioni × 2 ore" : "8 sessions × 2 hours") : isRacer ? (isSlovenian ? "8 x 2 uri" : isItalian ? "8 x 2 ore" : "8 x 2 hours") : isGraphene ? (isSlovenian ? "6 srečanj" : isItalian ? "6 sessioni" : "6 sessions") : t('workshops_page.duration')}
                           </div>
                           <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-100 px-3 py-1.5 rounded-xl font-bold">
                             <MapPin size={14} className="text-brand-red stroke-[2.5]" /> Solkan / Start Lab
                           </div>
+                          {isSmartHome && (
+                            <div className="bg-cyan-600 text-white px-3 py-1.5 rounded-xl font-display font-black text-[10px] uppercase shadow-sm flex items-center gap-1.5 animate-pulse">
+                              🟢 {isSlovenian ? "Prijave odprte • Brezplačno" : isItalian ? "Iscrizioni aperte • Gratuito" : "Registration open • Free"}
+                            </div>
+                          )}
                           {isArduino && (
-                            <div className="bg-emerald-600 text-white px-3 py-1.5 rounded-xl font-display font-black text-[10px] uppercase shadow-sm flex items-center gap-1.5 animate-pulse">
-                              🟢 {isSlovenian ? "Prijave odprte • 40 €" : isItalian ? "Iscrizioni aperte • 40 €" : "Registration open • €40"}
+                            <div className="bg-slate-700 text-white px-3 py-1.5 rounded-xl font-display font-black text-[10px] uppercase shadow-sm flex items-center gap-1.5">
+                              🔒 {isSlovenian ? "Prijave zaprte" : isItalian ? "Iscrizioni chiuse" : "Registration closed"}
                             </div>
                           )}
                           {isRacer && (
@@ -163,13 +175,23 @@ export default function WorkshopsPage() {
                           )}
                         </div>
 
-                        {isArduino && (
-                          <div className="mt-4 pt-3 border-t border-emerald-100 flex items-center justify-between">
-                            <span className="text-xs font-display font-black uppercase flex items-center gap-1.5 text-emerald-700">
+                        {isSmartHome && (
+                          <div className="mt-4 pt-3 border-t border-cyan-100 flex items-center justify-between">
+                            <span className="text-xs font-display font-black uppercase flex items-center gap-1.5 text-cyan-700">
                               🚀 {isSlovenian ? "Prijavi se v koledarju" : isItalian ? "Iscriviti nel calendario" : "Register in calendar"}
                             </span>
                             <span className="text-[11px] font-bold text-slate-500">
-                              {isSlovenian ? "12. 10. & 14. 10. 2026" : isItalian ? "12/10 & 14/10/2026" : "Oct 12 & 14, 2026"}
+                              {isSlovenian ? "10. 11. – 1. 12. 2026" : isItalian ? "10/11 – 01/12/2026" : "Nov 10 – Dec 1, 2026"}
+                            </span>
+                          </div>
+                        )}
+                        {isArduino && (
+                          <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <span className="text-xs font-display font-black uppercase flex items-center gap-1.5 text-slate-500">
+                              🔒 {isSlovenian ? "Prijave zaprte" : isItalian ? "Iscrizioni chiuse" : "Registrations closed"}
+                            </span>
+                            <span className="text-[11px] font-bold text-slate-500">
+                              {isSlovenian ? "8 srečanj" : isItalian ? "8 sessioni" : "8 sessions"}
                             </span>
                           </div>
                         )}
