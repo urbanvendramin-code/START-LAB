@@ -253,7 +253,8 @@ export default function PatentsPage() {
         : 'Safety engineering system discharging static electricity safely before entering sensitive semiconductor, cleanroom, or explosive environments.',
       category: isSlovenian ? 'Industrijska varnost' : isIt ? 'Sicurezza industriale' : 'Industrial Safety',
       badge: isSlovenian ? 'Laboratorijski izum' : 'Laboratory Invention',
-      icon: Zap
+      icon: Zap,
+      videoId: 'video-static'
     },
     {
       title: isSlovenian ? 'Univerzalni številčnik za obešalnike oblek' : isIt ? 'Numeratore universale per grucce' : 'Universal Coat Hanger Number Indicator',
@@ -439,14 +440,15 @@ export default function PatentsPage() {
     },
     {
       id: 'video-static',
-      title: isSlovenian ? 'Odvod statične elektrike – Laboratorijski preizkus' : 'Static Electricity Discharge – Lab Verification',
+      title: isSlovenian ? 'Odvod statične elektrike od ljudi – Varnostni pas' : 'Static Electricity Discharge – Safety Belt',
       duration: '01:55',
       year: '2001',
-      patent: 'Arhivski izum',
+      patent: 'Laboratorijski izum',
       image: heroImg,
+      videoUrl: 'https://ik.imagekit.io/utigodgni/Odvod%20stati%C4%8Dne%20elektrike%20od%20ljudi%20-%20varnostni%20pas.mp4',
       desc: isSlovenian
-        ? 'Praktični preizkus prototipa za varno razelektritev človeškega telesa pred vstopom v eksplozijsko in elektrostatično ogrožena območja.'
-        : 'Engineering prototype test demonstrating personal electrostatic discharge for sensitive cleanrooms and explosive environments.'
+        ? 'Arhivski videoposnetek in laboratorijski preizkus delovanja varnostnega pasu za zanesljiv odvod statične elektrike od ljudi.'
+        : 'Archival video demonstrating personal electrostatic discharge safety belt for sensitive cleanrooms and explosive environments.'
     }
   ];
 
@@ -1451,6 +1453,19 @@ export default function PatentsPage() {
                     <p className="text-xs sm:text-sm text-slate-300 font-normal leading-relaxed">
                       {inv.desc}
                     </p>
+
+                    {inv.videoId && (
+                      <div className="pt-2">
+                        <button
+                          type="button"
+                          onClick={() => setActiveVideoModal(inv.videoId!)}
+                          className="w-full py-2.5 rounded-xl bg-[#53B8FF]/15 hover:bg-[#53B8FF] text-[#53B8FF] hover:text-[#080B10] border border-[#53B8FF]/30 font-display font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm group/btn"
+                        >
+                          <Play size={14} className="fill-current" />
+                          <span>Predvajaj video posnetek</span>
+                        </button>
+                      </div>
+                    )}
                   </div>
 
                   <div className="pt-6 border-t border-slate-800/80 mt-6 flex items-center justify-between text-xs text-slate-500 font-mono">
