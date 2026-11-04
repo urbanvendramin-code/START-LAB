@@ -78,6 +78,8 @@ export default function PatentsPage() {
   const [activeStep, setActiveStep] = useState<number>(0);
   const [isVideoPlaying, setIsVideoPlaying] = useState<Record<string, boolean>>({});
   const [activeVideoModal, setActiveVideoModal] = useState<string | null>(null);
+  const [vitaViewMode, setVitaViewMode] = useState<'video' | 'drawing'>('video');
+  const [parkingViewMode, setParkingViewMode] = useState<'video' | 'photo'>('video');
 
   const timelineMilestones: Milestone[] = [
     {
@@ -418,6 +420,7 @@ export default function PatentsPage() {
       year: '1993',
       patent: 'US5051109A',
       image: vitaImg,
+      videoUrl: 'https://ik.imagekit.io/utigodgni/Igla%20VITA1.mp4',
       desc: isSlovenian
         ? 'Arhivski posnetek in tehnični prikaz delovanja varnostnega mehanizma igle VITA, ki preprečuje nevarne vbode z avtomatskim zaklepom tulca.'
         : 'Archival footage and mechanical demonstration of the VITA safety needle assembly preventing needlestick injuries.'
@@ -429,6 +432,7 @@ export default function PatentsPage() {
       year: '1999',
       patent: 'Nova Gorica 1999',
       image: parkingImg,
+      videoUrl: 'https://ik.imagekit.io/utigodgni/Parkirni%20avtomat1.mp4',
       desc: isSlovenian
         ? 'Prikaz prvega solarno napajanega univerzalnega parkomata v Novi Gorici leta 1999 ter plačevanja s kovanci in čip karticami.'
         : 'Historical broadcast showing the first solar-powered universal parking kiosk commissioned in Nova Gorica in 1999.'
@@ -856,20 +860,89 @@ export default function PatentsPage() {
           {/* 1. INJEKCIJSKA IGLA VITA */}
           {/* --------------------------------------------------------------------- */}
           <div id="izum-vita" className="scroll-mt-28 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-            {/* Visual Column */}
+            {/* Visual & Video Column */}
             <div className="lg:col-span-6 relative">
-              <div className="rounded-3xl overflow-hidden border-2 border-slate-800 bg-[#151B24] shadow-2xl relative group">
-                <img 
-                  src={vitaImg} 
-                  alt="Injekcijska igla VITA - US5051109A" 
-                  className="w-full h-auto aspect-video sm:aspect-[16/10] object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute top-4 left-4 bg-[#080B10]/90 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-[#53B8FF]/40 text-[#53B8FF] font-mono text-xs font-bold">
-                  US PATENT US5051109A
+              <div className="rounded-3xl overflow-hidden border-2 border-[#53B8FF]/40 bg-[#151B24] shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative group">
+                
+                {/* Header Switcher: Video / Drawing */}
+                <div className="p-3 bg-[#0E131C] border-b border-slate-800 flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-1.5 bg-[#151B24] p-1 rounded-xl border border-slate-800">
+                    <button
+                      type="button"
+                      onClick={() => setVitaViewMode('video')}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
+                        vitaViewMode === 'video'
+                          ? 'bg-[#53B8FF] text-[#080B10] shadow-sm'
+                          : 'text-slate-400 hover:text-white'
+                      }`}
+                    >
+                      <Play size={13} className={vitaViewMode === 'video' ? 'fill-[#080B10]' : ''} />
+                      <span>Video posnetek</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setVitaViewMode('drawing')}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
+                        vitaViewMode === 'drawing'
+                          ? 'bg-[#53B8FF] text-[#080B10] shadow-sm'
+                          : 'text-slate-400 hover:text-white'
+                      }`}
+                    >
+                      <FileText size={13} />
+                      <span>Patentna skica</span>
+                    </button>
+                  </div>
+
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-mono text-[11px] font-bold">
+                    <Award size={13} />
+                    <span>EUREKA 1993</span>
+                  </span>
                 </div>
-                <div className="absolute bottom-4 right-4 bg-emerald-500/20 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-emerald-500/40 text-emerald-300 font-mono text-xs font-bold flex items-center gap-1.5">
-                  <Award size={14} />
-                  <span>EUREKA 1993 Bruselj</span>
+
+                {/* Media Container */}
+                <div className="relative aspect-video sm:aspect-[16/10] bg-black overflow-hidden flex items-center justify-center">
+                  {vitaViewMode === 'video' ? (
+                    <video 
+                      src="https://ik.imagekit.io/utigodgni/Igla%20VITA1.mp4"
+                      poster={vitaImg}
+                      controls
+                      playsInline
+                      preload="metadata"
+                      className="w-full h-full object-contain bg-black"
+                    >
+                      Vaš brskalnik ne podpira predvajanja videa.
+                    </video>
+                  ) : (
+                    <div className="relative w-full h-full group/draw">
+                      <img 
+                        src={vitaImg} 
+                        alt="Injekcijska igla VITA - US5051109A" 
+                        className="w-full h-full object-cover group-hover/draw:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#080B10]/80 via-transparent to-transparent pointer-events-none" />
+                      <div className="absolute bottom-4 left-4 bg-[#080B10]/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700 text-xs font-mono text-slate-300">
+                        Tehnična skica patenta US 5,051,109 A
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Bottom Bar Info */}
+                <div className="p-3.5 bg-[#0E131C] border-t border-slate-800 flex items-center justify-between text-xs font-mono text-slate-400">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-pulse" />
+                    <span className="text-white font-bold">Igla VITA1.mp4</span>
+                    <span className="text-slate-500 hidden sm:inline">· Izvirni video arhiv</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setActiveVideoModal('video-vita')}
+                    className="hover:text-[#53B8FF] transition-colors flex items-center gap-1.5 cursor-pointer text-slate-300 hover:underline"
+                    title="Odpri v velikem predvajalniku"
+                  >
+                    <Maximize2 size={13} />
+                    <span className="text-[11px] font-sans font-bold uppercase tracking-wider">Celozaslonski način</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -902,16 +975,28 @@ export default function PatentsPage() {
                 </div>
               </div>
 
-              <div className="pt-2 flex flex-wrap items-center gap-4">
+              <div className="pt-2 flex flex-wrap items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setVitaViewMode('video');
+                    setActiveVideoModal('video-vita');
+                  }}
+                  className="px-6 py-3 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(83,184,255,0.3)]"
+                >
+                  <Play size={16} className="fill-[#080B10]" />
+                  <span>Predvajaj video posnetek</span>
+                </button>
+
                 <button
                   type="button"
                   onClick={() => {
                     const rec = patentRegistry.find(p => p.id === 'us5051109a');
                     if (rec) setSelectedPatent(rec);
                   }}
-                  className="px-6 py-3 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-md"
+                  className="px-5 py-3 rounded-xl bg-[#151B24] hover:bg-slate-800 text-slate-200 hover:text-white border border-slate-700 text-xs font-display font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer"
                 >
-                  <FileText size={16} />
+                  <FileText size={16} className="text-[#53B8FF]" />
                   <span>Ogled patenta US5051109A</span>
                 </button>
 
@@ -970,31 +1055,116 @@ export default function PatentsPage() {
                 </div>
               </div>
 
-              <div className="pt-2">
+              <div className="pt-2 flex flex-wrap items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setParkingViewMode('video');
+                    setActiveVideoModal('video-parking');
+                  }}
+                  className="px-6 py-3 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(83,184,255,0.3)]"
+                >
+                  <Play size={16} className="fill-[#080B10]" />
+                  <span>Predvajaj video posnetek</span>
+                </button>
+
                 <button
                   type="button"
                   onClick={() => {
                     const rec = patentRegistry.find(p => p.id === 'parking-meter');
                     if (rec) setSelectedPatent(rec);
                   }}
-                  className="px-6 py-3 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-md"
+                  className="px-5 py-3 rounded-xl bg-[#151B24] hover:bg-slate-800 text-slate-200 hover:text-white border border-slate-700 text-xs font-display font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer"
                 >
-                  <FileText size={16} />
-                  <span>Tehnične specifikacije parkomata</span>
+                  <FileText size={16} className="text-[#53B8FF]" />
+                  <span>Tehnične specifikacije</span>
                 </button>
               </div>
             </div>
 
-            {/* Visual Column */}
+            {/* Visual & Video Column */}
             <div className="lg:col-span-6 relative order-1 lg:order-2">
-              <div className="rounded-3xl overflow-hidden border-2 border-slate-800 bg-[#151B24] shadow-2xl relative group">
-                <img 
-                  src={parkingImg} 
-                  alt="Parkirni avtomat Nova Gorica 1999" 
-                  className="w-full h-auto aspect-video sm:aspect-[16/10] object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute top-4 left-4 bg-[#080B10]/90 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-[#53B8FF]/40 text-[#53B8FF] font-mono text-xs font-bold">
-                  NOVA GORICA · 1999
+              <div className="rounded-3xl overflow-hidden border-2 border-[#53B8FF]/40 bg-[#151B24] shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative group">
+                
+                {/* Header Switcher: Video / Photo */}
+                <div className="p-3 bg-[#0E131C] border-b border-slate-800 flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-1.5 bg-[#151B24] p-1 rounded-xl border border-slate-800">
+                    <button
+                      type="button"
+                      onClick={() => setParkingViewMode('video')}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
+                        parkingViewMode === 'video'
+                          ? 'bg-[#53B8FF] text-[#080B10] shadow-sm'
+                          : 'text-slate-400 hover:text-white'
+                      }`}
+                    >
+                      <Play size={13} className={parkingViewMode === 'video' ? 'fill-[#080B10]' : ''} />
+                      <span>Video posnetek</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setParkingViewMode('photo')}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
+                        parkingViewMode === 'photo'
+                          ? 'bg-[#53B8FF] text-[#080B10] shadow-sm'
+                          : 'text-slate-400 hover:text-white'
+                      }`}
+                    >
+                      <FileText size={13} />
+                      <span>Fotografija</span>
+                    </button>
+                  </div>
+
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#53B8FF]/10 border border-[#53B8FF]/30 text-[#53B8FF] font-mono text-[11px] font-bold">
+                    <MapPin size={13} />
+                    <span>Nova Gorica 1999</span>
+                  </span>
+                </div>
+
+                {/* Media Container */}
+                <div className="relative aspect-video sm:aspect-[16/10] bg-black overflow-hidden flex items-center justify-center">
+                  {parkingViewMode === 'video' ? (
+                    <video 
+                      src="https://ik.imagekit.io/utigodgni/Parkirni%20avtomat1.mp4"
+                      poster={parkingImg}
+                      controls
+                      playsInline
+                      preload="metadata"
+                      className="w-full h-full object-contain bg-black"
+                    >
+                      Vaš brskalnik ne podpira predvajanja videa.
+                    </video>
+                  ) : (
+                    <div className="relative w-full h-full group/draw">
+                      <img 
+                        src={parkingImg} 
+                        alt="Parkirni avtomat Nova Gorica 1999" 
+                        className="w-full h-full object-cover group-hover/draw:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#080B10]/80 via-transparent to-transparent pointer-events-none" />
+                      <div className="absolute bottom-4 left-4 bg-[#080B10]/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700 text-xs font-mono text-slate-300">
+                        Prva uvedba parkirnega avtomata v Novi Gorici
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Bottom Bar Info */}
+                <div className="p-3.5 bg-[#0E131C] border-t border-slate-800 flex items-center justify-between text-xs font-mono text-slate-400">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-pulse" />
+                    <span className="text-white font-bold">Parkirni avtomat1.mp4</span>
+                    <span className="text-slate-500 hidden sm:inline">· Arhivski posnetek</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setActiveVideoModal('video-parking')}
+                    className="hover:text-[#53B8FF] transition-colors flex items-center gap-1.5 cursor-pointer text-slate-300 hover:underline"
+                    title="Odpri v velikem predvajalniku"
+                  >
+                    <Maximize2 size={13} />
+                    <span className="text-[11px] font-sans font-bold uppercase tracking-wider">Celozaslonski način</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -1554,11 +1724,39 @@ export default function PatentsPage() {
                 </div>
               </div>
 
-              <div className="pt-2">
+              <div className="pt-2 flex flex-col sm:flex-row gap-3">
+                {selectedPatent.id === 'us5051109a' && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedPatent(null);
+                      setVitaViewMode('video');
+                      setActiveVideoModal('video-vita');
+                    }}
+                    className="flex-1 py-3 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                  >
+                    <Play size={15} className="fill-[#080B10]" />
+                    <span>Predvajaj video posnetek</span>
+                  </button>
+                )}
+                {selectedPatent.id === 'parking-meter' && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedPatent(null);
+                      setParkingViewMode('video');
+                      setActiveVideoModal('video-parking');
+                    }}
+                    className="flex-1 py-3 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                  >
+                    <Play size={15} className="fill-[#080B10]" />
+                    <span>Predvajaj video posnetek</span>
+                  </button>
+                )}
                 <button
                   type="button"
                   onClick={() => setSelectedPatent(null)}
-                  className="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-display font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer"
+                  className="flex-1 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-display font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer"
                 >
                   Zapri pregled dokumenta
                 </button>
@@ -1578,11 +1776,12 @@ export default function PatentsPage() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-[#151B24] border-2 border-slate-800 rounded-3xl max-w-3xl w-full p-6 relative shadow-2xl space-y-4"
+              className="bg-[#151B24] border-2 border-[#53B8FF]/40 rounded-3xl max-w-4xl w-full p-6 relative shadow-2xl space-y-4"
             >
               <div className="flex items-center justify-between pb-2 border-b border-slate-800">
-                <span className="text-xs font-mono text-[#53B8FF] uppercase">
-                  ARHIVSKI POSNETEK · START LAB ZAPUŠČINA
+                <span className="text-xs font-mono text-[#53B8FF] uppercase flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-pulse" />
+                  <span>ARHIVSKI POSNETEK · START LAB ZAPUŠČINA</span>
                 </span>
                 <button
                   type="button"
@@ -1593,41 +1792,62 @@ export default function PatentsPage() {
                 </button>
               </div>
 
-              {/* Simulated Interactive Video Screen with archival presentation */}
-              <div className="relative aspect-video rounded-2xl overflow-hidden bg-black flex flex-col justify-between p-6 border border-slate-800">
-                <div className="flex items-center justify-between text-xs font-mono text-slate-400">
-                  <span className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" />
-                    <span>PREDVAJANJE ARHIVSKEGA POSNETKA</span>
-                  </span>
-                  <span>TC: 01:24 / 02:45</span>
-                </div>
+              {/* Video Player */}
+              {(() => {
+                const vid = videoArchives.find(v => v.id === activeVideoModal);
+                return (
+                  <div className="space-y-4">
+                    <div className="relative aspect-video rounded-2xl overflow-hidden bg-black flex items-center justify-center border border-slate-800 shadow-inner">
+                      {vid?.videoUrl ? (
+                        <video
+                          src={vid.videoUrl}
+                          poster={vid.image}
+                          controls
+                          autoPlay
+                          playsInline
+                          preload="auto"
+                          className="w-full h-full object-contain bg-black"
+                        >
+                          Vaš brskalnik ne podpira predvajanja videa.
+                        </video>
+                      ) : (
+                        <div className="text-center space-y-2 py-8 px-4">
+                          <div className="w-16 h-16 rounded-full bg-[#53B8FF]/20 text-[#53B8FF] mx-auto flex items-center justify-center animate-pulse">
+                            <Activity size={32} />
+                          </div>
+                          <h4 className="font-display font-black text-lg text-white uppercase">
+                            {vid?.title}
+                          </h4>
+                          <p className="text-xs text-slate-400 max-w-md mx-auto">
+                            Arhivska demonstracija delovanja z izvirnimi komentarji in tehničnimi diagrami izumitelja Tasa Lazovskega.
+                          </p>
+                        </div>
+                      )}
+                    </div>
 
-                <div className="text-center space-y-2 py-8">
-                  <div className="w-16 h-16 rounded-full bg-[#53B8FF]/20 text-[#53B8FF] mx-auto flex items-center justify-center animate-pulse">
-                    <Activity size={32} />
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
+                      <div>
+                        <h4 className="font-display font-black text-base uppercase text-white">
+                          {vid?.title}
+                        </h4>
+                        <p className="text-xs text-slate-400 mt-0.5 max-w-2xl">
+                          {vid?.desc}
+                        </p>
+                      </div>
+                      <div className="shrink-0 flex items-center gap-2 font-mono text-xs text-[#53B8FF]">
+                        <span className="px-3 py-1 rounded-lg bg-[#53B8FF]/10 border border-[#53B8FF]/30">
+                          {vid?.patent}
+                        </span>
+                        <span className="px-3 py-1 rounded-lg bg-slate-800 text-slate-300">
+                          {vid?.duration}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                  <h4 className="font-display font-black text-lg text-white uppercase">
-                    {videoArchives.find(v => v.id === activeVideoModal)?.title}
-                  </h4>
-                  <p className="text-xs text-slate-400 max-w-md mx-auto">
-                    Arhivska demonstracija delovanja z izvirnimi komentarji in tehničnimi diagrami izumitelja Tasa Lazovskega.
-                  </p>
-                </div>
+                );
+              })()}
 
-                {/* Video scrubber bar */}
-                <div className="space-y-2">
-                  <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                    <div className="w-1/2 h-full bg-[#53B8FF] rounded-full" />
-                  </div>
-                  <div className="flex items-center justify-between text-xs font-mono text-slate-400">
-                    <span>01:24</span>
-                    <span>HD 1080p ARCHIVE</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex justify-end pt-2">
+              <div className="flex justify-end pt-2 border-t border-slate-800/80">
                 <button
                   type="button"
                   onClick={() => setActiveVideoModal(null)}

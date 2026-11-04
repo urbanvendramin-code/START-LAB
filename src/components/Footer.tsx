@@ -69,7 +69,8 @@ export default function Footer() {
           © {new Date().getFullYear()} START LAB. {t('footer.rights')}
         </div>
 
-        <div className="flex gap-8 text-[10px] font-black uppercase italic tracking-widest text-slate-400">
+        <div className="flex gap-6 sm:gap-8 text-[10px] font-black uppercase italic tracking-widest text-slate-400">
+           <Link to="/patenti" className="hover:text-brand-red transition-colors">{t('nav.patenti', 'Patenti')}</Link>
            <Link to="/zasebnost" className="hover:text-brand-red transition-colors">{t('footer.privacy')}</Link>
            <Link to="/pogoji-uporabe" className="hover:text-brand-red transition-colors">{t('footer.terms')}</Link>
         </div>
