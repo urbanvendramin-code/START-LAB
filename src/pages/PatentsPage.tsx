@@ -40,6 +40,7 @@ import vitaImg from '../assets/images/vita_safety_needle_1791534656205.jpg';
 import parkingImg from '../assets/images/parking_meter_terminal_1791534686654.jpg';
 const cardImg = 'https://ik.imagekit.io/utigodgni/Untitled-1.png';
 import gasTimerImg from '../assets/images/gas_stove_timer_1791534741337.jpg';
+import InventorAnimatedBackground from '../components/InventorAnimatedBackground';
 
 interface Milestone {
   year: string;
@@ -495,14 +496,9 @@ export default function PatentsPage() {
   return (
     <div className="bg-[#080B10] text-[#F0EDE5] min-h-screen selection:bg-[#53B8FF]/30 selection:text-white font-sans relative overflow-x-hidden">
       
-      {/* Subtle Cinematic Grid & Noise Background */}
-      <div 
-        className="fixed inset-0 pointer-events-none z-0 opacity-15"
-        style={{
-          backgroundImage: `radial-gradient(circle at 50% 50%, rgba(83, 184, 255, 0.08) 0%, transparent 60%), linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)`,
-          backgroundSize: '100% 100%, 48px 48px, 48px 48px'
-        }}
-      />
+      {/* Technical Animated Inventor Background */}
+      <InventorAnimatedBackground />
+
 
       {/* ========================================================================= */}
       {/* SECTION A: CINEMATIC HERO */}
