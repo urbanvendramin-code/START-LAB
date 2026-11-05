@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { 
@@ -17,32 +17,174 @@ import {
   Clock,
   MapPin,
   Calendar,
-  Sparkles
+  Sparkles,
+  Maximize2,
+  ZoomIn,
+  ZoomOut,
+  X,
+  Wrench,
+  Monitor,
+  Glasses,
+  Award,
+  Building,
+  Atom,
+  Presentation,
+  Car,
+  Printer,
+  CircuitBoard,
+  Coffee
 } from 'lucide-react';
 import { LAB_EQUIPMENT } from '../constants';
 import fablabSpaceImage from '../assets/images/fablab_space_1781078255061.png';
+import centerTlorisImg from '../assets/images/center_tloris_1793884126169.jpg';
 
-const ROOMS = [
-  { id: 1, key: 'r1', x: 19.8, y: 15.3, color: 'bg-rose-500', ringColor: 'ring-rose-400' },
-  { id: 2, key: 'r2', x: 25.4, y: 40.2, color: 'bg-emerald-500', ringColor: 'ring-emerald-400' },
-  { id: 3, key: 'r3', x: 44.4, y: 27.5, color: 'bg-blue-500', ringColor: 'ring-blue-400' },
-  { id: 4, key: 'r4', x: 42.7, y: 12.0, color: 'bg-purple-500', ringColor: 'ring-purple-400' },
-  { id: 5, key: 'r5', x: 74.6, y: 12.3, color: 'bg-amber-500', ringColor: 'ring-amber-400' },
-  { id: 6, key: 'r6', x: 61.8, y: 32.7, color: 'bg-indigo-500', ringColor: 'ring-indigo-400' },
-  { id: 7, key: 'r7', x: 79.8, y: 46.9, color: 'bg-orange-500', ringColor: 'ring-orange-400' },
-  { id: 8, key: 'r8', x: 69.1, y: 69.8, color: 'bg-teal-500', ringColor: 'ring-teal-400' },
-  { id: 9, key: 'r9', x: 38.3, y: 65.3, color: 'bg-cyan-500', ringColor: 'ring-cyan-400' },
-  { id: 10, key: 'r10', x: 49.8, y: 65.3, color: 'bg-violet-500', ringColor: 'ring-violet-400' },
-  { id: 11, key: 'r11', x: 14.5, y: 70.4, color: 'bg-fuchsia-500', ringColor: 'ring-fuchsia-400' },
+interface RoomConfig {
+  id: number;
+  key: string;
+  x: number;
+  y: number;
+  color: string;
+  ringColor: string;
+  icon: React.ComponentType<{ className?: string; size?: number }>;
+  link?: string;
+  linkLabel?: { sl: string; en: string; it: string };
+}
+
+const ROOMS: RoomConfig[] = [
+  { 
+    id: 1, 
+    key: 'r1', 
+    x: 20.0, 
+    y: 32.0, 
+    color: 'bg-rose-500', 
+    ringColor: 'ring-rose-400',
+    icon: Wrench,
+    link: '/urnik-delavnic',
+    linkLabel: { sl: 'Delavnice', en: 'Workshops', it: 'Laboratori' }
+  },
+  { 
+    id: 2, 
+    key: 'r2', 
+    x: 72.0, 
+    y: 37.0, 
+    color: 'bg-emerald-500', 
+    ringColor: 'ring-emerald-400',
+    icon: Monitor,
+    link: '/urnik-delavnic',
+    linkLabel: { sl: 'Tečaji robotike', en: 'Robotics courses', it: 'Corsi robotica' }
+  },
+  { 
+    id: 3, 
+    key: 'r3', 
+    x: 17.5, 
+    y: 56.5, 
+    color: 'bg-blue-500', 
+    ringColor: 'ring-blue-400',
+    icon: Glasses,
+    link: '/urnik-delavnic',
+    linkLabel: { sl: 'VR doživetje', en: 'VR Experience', it: 'Esperienza VR' }
+  },
+  { 
+    id: 4, 
+    key: 'r4', 
+    x: 83.0, 
+    y: 51.0, 
+    color: 'bg-purple-500', 
+    ringColor: 'ring-purple-400',
+    icon: Award,
+    link: '/patenti',
+    linkLabel: { sl: 'Ogled patentov', en: 'View Patents', it: 'Guarda i brevetti' }
+  },
+  { 
+    id: 5, 
+    key: 'r5', 
+    x: 46.5, 
+    y: 45.0, 
+    color: 'bg-amber-500', 
+    ringColor: 'ring-amber-400',
+    icon: Building,
+    link: '/razvijalci-talentov',
+    linkLabel: { sl: 'Partnerji & podjetja', en: 'Partners & Companies', it: 'Partner & Aziende' }
+  },
+  { 
+    id: 6, 
+    key: 'r6', 
+    x: 41.0, 
+    y: 79.0, 
+    color: 'bg-indigo-500', 
+    ringColor: 'ring-indigo-400',
+    icon: Atom,
+    link: '/urnik-delavnic',
+    linkLabel: { sl: 'Fizikalni poizkusi', en: 'Physics lab', it: 'Esperimenti fisica' }
+  },
+  { 
+    id: 7, 
+    key: 'r7', 
+    x: 58.0, 
+    y: 69.0, 
+    color: 'bg-orange-500', 
+    ringColor: 'ring-orange-400',
+    icon: Presentation,
+    link: '/urnik-delavnic',
+    linkLabel: { sl: 'Predavanja & dogodki', en: 'Lectures & Events', it: 'Conferenze & Eventi' }
+  },
+  { 
+    id: 8, 
+    key: 'r8', 
+    x: 32.5, 
+    y: 67.5, 
+    color: 'bg-teal-500', 
+    ringColor: 'ring-teal-400',
+    icon: Car,
+    link: '/simulator-voznje',
+    linkLabel: { sl: 'Ogled simulatorja', en: 'View Simulator', it: 'Vedi Simulatore' }
+  },
+  { 
+    id: 9, 
+    key: 'r9', 
+    x: 41.0, 
+    y: 18.0, 
+    color: 'bg-cyan-500', 
+    ringColor: 'ring-cyan-400',
+    icon: Printer,
+    link: '/urnik-delavnic',
+    linkLabel: { sl: 'Delavnice 3D tiska', en: '3D Print Workshops', it: 'Laboratori stampa 3D' }
+  },
+  { 
+    id: 10, 
+    key: 'r10', 
+    x: 62.0, 
+    y: 26.0, 
+    color: 'bg-violet-500', 
+    ringColor: 'ring-violet-400',
+    icon: CircuitBoard,
+    link: '/urnik-delavnic',
+    linkLabel: { sl: 'Elektro delavnice', en: 'Electronics workshops', it: 'Laboratori elettronica' }
+  },
+  { 
+    id: 11, 
+    key: 'r11', 
+    x: 66.0, 
+    y: 83.0, 
+    color: 'bg-fuchsia-500', 
+    ringColor: 'ring-fuchsia-400',
+    icon: Coffee,
+    link: undefined,
+    linkLabel: undefined
+  },
 ];
 
 export default function Home() {
   const { t, i18n } = useTranslation();
   const [selectedRoom, setSelectedRoom] = useState<number | null>(1);
+  const [hoveredRoom, setHoveredRoom] = useState<number | null>(null);
+  const [isFloorplanModalOpen, setIsFloorplanModalOpen] = useState(false);
+  const [modalZoom, setModalZoom] = useState(1);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
 
   const isSlovenian = i18n.language === 'sl' || !['en', 'it'].includes(i18n.language);
   const isItalian = i18n.language === 'it';
+
 
   useEffect(() => {
     if (heroVideoRef.current) {
@@ -498,28 +640,36 @@ export default function Home() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
                 {ROOMS.map((room) => {
                   const isSelected = selectedRoom === room.id;
+                  const IconComp = room.icon;
                   return (
                     <motion.button 
                       key={room.id}
                       type="button"
                       onClick={() => setSelectedRoom(room.id)}
+                      onMouseEnter={() => setHoveredRoom(room.id)}
+                      onMouseLeave={() => setHoveredRoom(null)}
                       whileHover={{ x: 4, scale: 1.01 }}
-                      className={`flex items-center gap-3 p-2.5 rounded-xl border text-left transition-all duration-200 cursor-pointer w-full focus:outline-none ${
+                      className={`flex items-center gap-3 p-3 rounded-2xl border text-left transition-all duration-200 cursor-pointer w-full focus:outline-none ${
                         isSelected 
-                          ? `bg-slate-900 border-slate-900 text-white shadow-md` 
-                          : `border-slate-100 bg-slate-50/50 hover:bg-slate-50 hover:border-slate-300 text-slate-800`
+                          ? `bg-slate-900 border-slate-900 text-white shadow-lg ring-2 ring-slate-900/20` 
+                          : `border-slate-200/80 bg-slate-50/60 hover:bg-white hover:border-slate-300 text-slate-800 hover:shadow-sm`
                       }`}
                     >
-                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 font-display font-black text-sm transition-colors duration-300 ${
-                        isSelected ? `${room.color} text-white` : 'bg-slate-200/60 text-slate-700'
+                      <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 font-display font-black text-xs transition-transform duration-300 ${
+                        isSelected ? `${room.color} text-white scale-110 shadow-sm` : 'bg-slate-200 text-slate-700'
                       }`}>
                         {room.id}
                       </div>
-                      <span className={`text-xs sm:text-sm font-bold leading-tight transition-colors duration-300 ${
-                        isSelected ? 'text-white' : 'text-slate-800'
-                      }`}>
-                        {t(`equipment.rooms.${room.key}`)}
-                      </span>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-1.5">
+                          <IconComp className={`w-3.5 h-3.5 shrink-0 ${isSelected ? 'text-white' : 'text-slate-500'}`} />
+                          <span className={`text-xs sm:text-sm font-bold truncate leading-tight transition-colors duration-200 ${
+                            isSelected ? 'text-white' : 'text-slate-900'
+                          }`}>
+                            {t(`equipment.rooms.${room.key}`)}
+                          </span>
+                        </div>
+                      </div>
                     </motion.button>
                   );
                 })}
@@ -538,73 +688,296 @@ export default function Home() {
                 transition={{ duration: 0.6 }}
                 className="relative rounded-[2.5rem] overflow-hidden border-4 border-slate-950 shadow-[8px_8px_0_0_rgba(15,23,42,0.9)] bg-white flex flex-col"
               >
-                {/* Interactive Map Wrapper */}
-                <div className="relative w-full aspect-[4/3] bg-slate-100 overflow-hidden select-none">
+                {/* Interactive Map Header Badge & Controls */}
+                <div className="relative w-full aspect-[4/3] bg-slate-900 overflow-hidden select-none group/plan">
+                  {/* High-Resolution 3D Isometric Center Floor Plan */}
                   <img 
-                    src="https://res.cloudinary.com/dssxhjk8k/image/upload/v1781530014/ChatGPT_Image_15._jun._2026_13_30_20_cmqupt.png" 
-                    alt="Interaktivni tloris Centra znanosti in tehnologije" 
-                    className="absolute inset-0 w-full h-full object-cover animate-fade-in"
-                    referrerPolicy="no-referrer"
+                    src={centerTlorisImg} 
+                    alt="Interaktivni 3D tloris Centra znanosti in tehnologije" 
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover/plan:scale-[1.02]"
                   />
+
+                  {/* Blueprint Ambient Grid Overlay */}
+                  <div 
+                    className="absolute inset-0 pointer-events-none opacity-20 mix-blend-overlay"
+                    style={{
+                      backgroundImage: `linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)`,
+                      backgroundSize: '24px 24px'
+                    }}
+                  />
+
+                  {/* Top Bar Badges */}
+                  <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-20">
+                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-950/80 backdrop-blur-md border border-white/20 text-white text-[11px] font-mono tracking-wider shadow-md">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                      <span className="font-bold">350 m² START LAB</span>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => setIsFloorplanModalOpen(true)}
+                      className="pointer-events-auto flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-950/85 hover:bg-slate-900 text-white text-[11px] font-bold border border-white/20 backdrop-blur-md shadow-md transition-all hover:scale-105 active:scale-95 cursor-pointer"
+                      title={t('equipment.rooms.fullscreen')}
+                    >
+                      <Maximize2 size={13} className="text-[#53B8FF]" />
+                      <span className="hidden sm:inline">{t('equipment.rooms.fullscreen')}</span>
+                    </button>
+                  </div>
                   
                   {/* Interactive Hotspots Overlay */}
                   <div className="absolute inset-0 z-10">
                     {ROOMS.map((room) => {
                       const isActive = selectedRoom === room.id;
+                      const isHovered = hoveredRoom === room.id;
+                      const roomName = t(`equipment.rooms.${room.key}`);
+
+                      return (
+                        <div
+                          key={room.id}
+                          style={{ left: `${room.x}%`, top: `${room.y}%` }}
+                          className="absolute -translate-x-1/2 -translate-y-1/2 z-20"
+                        >
+                          <button
+                            type="button"
+                            onClick={() => setSelectedRoom(room.id)}
+                            onMouseEnter={() => setHoveredRoom(room.id)}
+                            onMouseLeave={() => setHoveredRoom(null)}
+                            className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all duration-300 group focus:outline-none cursor-pointer"
+                            title={roomName}
+                          >
+                            {/* Inner pulse effect when active or hovered */}
+                            {(isActive || isHovered) && (
+                              <span className={`absolute inset-0 rounded-full animate-ping opacity-80 ${room.color} duration-1000`} />
+                            )}
+                            
+                            {/* Ring Border & Solid Dot */}
+                            <span className={`absolute inset-0 rounded-full border-2 border-white shadow-[0_4px_12px_rgba(0,0,0,0.5)] transition-all duration-300 flex items-center justify-center ${
+                              isActive 
+                                ? `${room.color} scale-125 ring-4 ring-white/50 z-30` 
+                                : isHovered
+                                  ? `${room.color} scale-110 shadow-lg`
+                                  : 'bg-slate-950/85 hover:scale-110'
+                            }`}>
+                              <span className="text-[11px] font-black font-mono text-white leading-none">
+                                {room.id}
+                              </span>
+                            </span>
+                          </button>
+
+                          {/* Hover Tooltip */}
+                          <AnimatePresence>
+                            {(isHovered || isActive) && (
+                              <motion.div
+                                initial={{ opacity: 0, y: 6, scale: 0.9 }}
+                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                exit={{ opacity: 0, y: 4, scale: 0.9 }}
+                                transition={{ duration: 0.15 }}
+                                className={`absolute left-1/2 -translate-x-1/2 bottom-full mb-2 pointer-events-none whitespace-nowrap z-40 hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-bold shadow-xl border ${
+                                  isActive 
+                                    ? 'bg-slate-950 text-white border-white/20' 
+                                    : 'bg-slate-900/95 text-slate-100 border-white/10'
+                                }`}
+                              >
+                                <span className={`w-2 h-2 rounded-full ${room.color}`} />
+                                <span>{roomName}</span>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Hint overlay at bottom */}
+                  <div className="absolute bottom-2 left-3 text-[10px] text-white/80 font-mono bg-slate-950/60 backdrop-blur-sm px-2.5 py-1 rounded-md pointer-events-none">
+                    {t('equipment.rooms.interactive_hint')}
+                  </div>
+                </div>
+
+                {/* Selected Room Metadata Panel */}
+                {(() => {
+                  const activeRoom = ROOMS.find(r => r.id === selectedRoom) || ROOMS[0];
+                  const ActiveIcon = activeRoom.icon;
+                  const currentLang = (i18n.language === 'en' ? 'en' : i18n.language === 'it' ? 'it' : 'sl') as 'sl' | 'en' | 'it';
+                  const actionLabel = activeRoom.linkLabel ? activeRoom.linkLabel[currentLang] : null;
+
+                  return (
+                    <div className="p-6 bg-slate-950 text-white border-t-2 border-slate-900 flex flex-col gap-4 text-left">
+                      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+                        <div className="flex items-start gap-4">
+                          <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-display font-black text-white shrink-0 shadow-lg transition-colors duration-300 ${activeRoom.color}`}>
+                            <ActiveIcon className="w-6 h-6 text-white" />
+                          </div>
+                          <div>
+                            <div className="flex items-center gap-2">
+                              <span className="text-[10px] font-display font-black uppercase tracking-widest text-[#53B8FF]">
+                                {t('equipment.rooms.selected_room_title')} {activeRoom.id}
+                              </span>
+                              <span className="w-1.5 h-1.5 rounded-full bg-slate-600" />
+                              <span className="text-[10px] font-mono text-slate-400">START LAB 350 m²</span>
+                            </div>
+                            <h4 className="text-base sm:text-lg font-display font-black uppercase text-white leading-tight mt-0.5">
+                              {t(`equipment.rooms.${activeRoom.key}`)}
+                            </h4>
+                            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mt-2 font-medium">
+                              {t(`equipment.rooms.${activeRoom.key}_desc`)}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2 self-start sm:self-center shrink-0">
+                          {activeRoom.link && actionLabel && (
+                            <Link
+                              to={activeRoom.link}
+                              className="px-4 py-2.5 rounded-xl bg-brand-red hover:bg-brand-red/90 text-white text-xs font-display font-black uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-md shadow-brand-red/20 active:scale-95"
+                            >
+                              <span>{actionLabel}</span>
+                              <ArrowRight size={14} className="stroke-[3]" />
+                            </Link>
+                          )}
+                          <button
+                            type="button"
+                            onClick={() => setIsFloorplanModalOpen(true)}
+                            className="p-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-all active:scale-95 cursor-pointer"
+                            title={t('equipment.rooms.fullscreen')}
+                          >
+                            <Maximize2 size={16} />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })()}
+              </motion.div>
+            </div>
+          </div>
+        </div>
+
+        {/* Fullscreen Interactive Floor Plan Modal */}
+        <AnimatePresence>
+          {isFloorplanModalOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md flex flex-col p-4 sm:p-6"
+            >
+              {/* Modal Header */}
+              <div className="flex items-center justify-between pb-4 border-b border-white/10 text-white">
+                <div className="flex items-center gap-3">
+                  <div className="w-3 h-3 rounded-full bg-emerald-400 animate-pulse" />
+                  <div>
+                    <h3 className="text-base sm:text-lg font-display font-black uppercase">
+                      {t('equipment.title')} – 350 m² Tloris
+                    </h3>
+                    <p className="text-xs text-slate-400 font-mono">
+                      {t('equipment.rooms.explore_map')}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <div className="hidden sm:flex items-center bg-white/10 rounded-xl p-1 gap-1">
+                    <button
+                      type="button"
+                      onClick={() => setModalZoom(z => Math.max(1, z - 0.25))}
+                      className="p-2 rounded-lg hover:bg-white/10 text-slate-300 hover:text-white transition-colors"
+                      title={t('equipment.rooms.zoom_out')}
+                    >
+                      <ZoomOut size={16} />
+                    </button>
+                    <span className="text-xs font-mono px-2 text-slate-300">
+                      {Math.round(modalZoom * 100)}%
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setModalZoom(z => Math.min(2, z + 0.25))}
+                      className="p-2 rounded-lg hover:bg-white/10 text-slate-300 hover:text-white transition-colors"
+                      title={t('equipment.rooms.zoom_in')}
+                    >
+                      <ZoomIn size={16} />
+                    </button>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsFloorplanModalOpen(false);
+                      setModalZoom(1);
+                    }}
+                    className="p-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+                    title={t('equipment.rooms.close')}
+                  >
+                    <X size={20} />
+                  </button>
+                </div>
+              </div>
+
+              {/* Modal Body / Pan & Zoom Viewport */}
+              <div className="flex-1 relative overflow-auto my-4 flex items-center justify-center rounded-2xl bg-slate-900 border border-white/10">
+                <div 
+                  className="relative transition-transform duration-200 origin-center max-w-5xl w-full aspect-[4/3]"
+                  style={{ transform: `scale(${modalZoom})` }}
+                >
+                  <img 
+                    src={centerTlorisImg} 
+                    alt="Center znanosti in tehnologije" 
+                    className="w-full h-full object-cover rounded-xl"
+                  />
+
+                  {/* Hotspots in Modal */}
+                  <div className="absolute inset-0">
+                    {ROOMS.map((room) => {
+                      const isActive = selectedRoom === room.id;
+                      const roomName = t(`equipment.rooms.${room.key}`);
+
                       return (
                         <button
                           key={room.id}
                           type="button"
                           onClick={() => setSelectedRoom(room.id)}
                           style={{ left: `${room.x}%`, top: `${room.y}%` }}
-                          className="absolute -translate-x-1/2 -translate-y-1/2 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-all duration-300 group z-20 focus:outline-none cursor-pointer"
-                          title={t(`equipment.rooms.${room.key}`)}
+                          className={`absolute -translate-x-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-300 z-30 group cursor-pointer ${
+                            isActive ? `${room.color} scale-125 ring-4 ring-white` : 'bg-slate-950/85 hover:scale-110'
+                          } border-2 border-white shadow-2xl`}
+                          title={roomName}
                         >
-                          {/* Inner pulse effect */}
-                          <span className={`absolute inset-0 rounded-full animate-ping opacity-75 ${room.color} duration-1000`} />
-                          
-                          {/* Ring Border & Solid Dot */}
-                          <span className={`absolute inset-0 rounded-full border-[2px] border-white shadow-[0_2px_8px_rgba(0,0,0,0.3)] transition-all duration-300 ${isActive ? `${room.color} scale-125` : 'bg-slate-950/70 group-hover:bg-slate-950 group-hover:scale-110 scale-100'}`}>
-                            {/* Visual representation of number inside */}
-                            <span className="absolute inset-0 flex items-center justify-center text-[10px] font-black font-mono text-white">
-                              {room.id}
-                            </span>
+                          <span className="text-xs sm:text-sm font-black font-mono text-white">
+                            {room.id}
                           </span>
                         </button>
                       );
                     })}
                   </div>
                 </div>
+              </div>
 
-                {/* Selected Room Metadata Panel */}
-                <div className="p-6 bg-slate-950 text-white border-t-2 border-slate-930 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-left">
-                  <div className="flex items-center gap-4">
-                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-display font-black text-white shrink-0 shadow-inner transition-colors duration-300 ${selectedRoom ? ROOMS.find(r => r.id === selectedRoom)?.color : 'bg-white/10'}`}>
-                      {selectedRoom ? selectedRoom : <Info className="text-slate-400" />}
-                    </div>
-                    <div>
-                      <h4 className="text-[10px] font-display font-black uppercase tracking-widest text-slate-400">
-                        {selectedRoom ? t('equipment.rooms.selected_room_title') : t('equipment.rooms.interactive_hint')}
-                      </h4>
-                      <p className="text-sm sm:text-base font-display font-black uppercase text-white leading-tight mt-0.5">
-                        {selectedRoom ? t(`equipment.rooms.r${selectedRoom}`) : t('equipment.rooms.interactive_hint')}
-                      </p>
-                    </div>
-                  </div>
-                  {selectedRoom === 8 && (
-                    <Link
-                      to="/simulator-voznje"
-                      className="px-4 py-2 rounded-xl bg-brand-red hover:bg-brand-red/90 text-white text-xs font-display font-black uppercase tracking-wider transition-all self-start sm:self-center shrink-0 flex items-center gap-1.5 shadow-md shadow-brand-red/20"
+              {/* Modal Footer Room Selector Ribbon */}
+              <div className="pt-3 border-t border-white/10 flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+                {ROOMS.map((room) => {
+                  const isSelected = selectedRoom === room.id;
+                  return (
+                    <button
+                      key={room.id}
+                      type="button"
+                      onClick={() => setSelectedRoom(room.id)}
+                      className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer shrink-0 ${
+                        isSelected 
+                          ? `${room.color} text-white shadow-md scale-105` 
+                          : 'bg-white/5 hover:bg-white/10 text-slate-300'
+                      }`}
                     >
-                      <span>Ogled simulatorja</span>
-                      <ArrowRight size={14} className="stroke-[3]" />
-                    </Link>
-                  )}
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </div>
+                      <span className="w-5 h-5 rounded-md bg-black/20 flex items-center justify-center font-mono text-[10px]">
+                        {room.id}
+                      </span>
+                      <span>{t(`equipment.rooms.${room.key}`)}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </section>
     </>
   );
