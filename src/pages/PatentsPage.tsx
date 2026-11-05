@@ -38,7 +38,7 @@ import {
 import heroImg from '../assets/images/tase_lazovski_hero_1791534632699.jpg';
 import vitaImg from '../assets/images/vita_safety_needle_1791534656205.jpg';
 import parkingImg from '../assets/images/parking_meter_terminal_1791534686654.jpg';
-import cardImg from '../assets/images/telephone_chip_card_1791534712292.jpg';
+const cardImg = 'https://ik.imagekit.io/utigodgni/Untitled-1.png';
 import gasTimerImg from '../assets/images/gas_stove_timer_1791534741337.jpg';
 
 interface Milestone {
@@ -80,6 +80,46 @@ export default function PatentsPage() {
   const [activeVideoModal, setActiveVideoModal] = useState<string | null>(null);
   const [vitaViewMode, setVitaViewMode] = useState<'video' | 'drawing'>('video');
   const [parkingViewMode, setParkingViewMode] = useState<'video' | 'photo'>('video');
+  const [activeGasImgIdx, setActiveGasImgIdx] = useState<number>(0);
+  const [enlargedGasImg, setEnlargedGasImg] = useState<string | null>(null);
+  const [activeVitaImgIdx, setActiveVitaImgIdx] = useState<number>(0);
+  const [enlargedVitaImg, setEnlargedVitaImg] = useState<string | null>(null);
+
+  const vitaImages = [
+    {
+      url: vitaImg,
+      title: isSlovenian ? 'Patentna skica US 5,051,109 A' : 'Patent Drawing US 5,051,109 A',
+      subtitle: isSlovenian ? 'Izvirna shema varnostnega injekcijskega sklopa' : 'Original safety needle assembly schematic',
+    },
+    {
+      url: 'https://ik.imagekit.io/utigodgni/INJEKCIJSKA%20IGLA%20VITA.1png.png',
+      title: isSlovenian ? 'Konstrukcijski načrt VITA 1' : 'VITA Blueprint 1',
+      subtitle: isSlovenian ? 'Detajl cilindričnega tulca in zaklepa' : 'Cylindrical sheath & locking detent detail',
+    },
+    {
+      url: 'https://ik.imagekit.io/utigodgni/INJEKCIJSKA%20IGLA%20VITA2.png',
+      title: isSlovenian ? 'Konstrukcijski načrt VITA 2' : 'VITA Blueprint 2',
+      subtitle: isSlovenian ? 'Vzmetni mehanizem in varnostni zatič' : 'Spring mechanism & safety catch detail',
+    },
+  ];
+
+  const gasTimerImages = [
+    {
+      url: 'https://ik.imagekit.io/utigodgni/1.png',
+      title: isSlovenian ? 'Tehnični načrt 1' : 'Technical Diagram 1',
+      subtitle: isSlovenian ? 'Elektromehanski časovni mehanizem' : 'Electromechanical timer mechanism',
+    },
+    {
+      url: 'https://ik.imagekit.io/utigodgni/2.png',
+      title: isSlovenian ? 'Tehnični načrt 2' : 'Technical Diagram 2',
+      subtitle: isSlovenian ? 'Detajl zapornega ventila in vzmetnega sklopa' : 'Cutoff valve and spring assembly detail',
+    },
+    {
+      url: 'https://ik.imagekit.io/utigodgni/3.png',
+      title: isSlovenian ? 'Tehnični načrt 3' : 'Technical Diagram 3',
+      subtitle: isSlovenian ? 'Prikaz namestitve in povezave na gorilnik' : 'Installation layout and burner connection',
+    },
+  ];
 
   const timelineMilestones: Milestone[] = [
     {
@@ -488,29 +528,104 @@ export default function PatentsPage() {
               </span>
             </div>
 
-            {/* Main Headline */}
-            <div>
-              <motion.h1 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.15 }}
-                className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.2rem] font-display font-black tracking-tight uppercase leading-[0.98] text-[#F0EDE5]"
+            {/* Main Headline & Inventor Profile Portal */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8 pt-2">
+              
+              {/* Creative Animated Profile Portal */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                className="relative shrink-0 group"
               >
-                TASE <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#53B8FF] via-[#A8DCFF] to-white">
-                  LAZOVSKI
-                </span>
-              </motion.h1>
+                {/* Floating physics wrapper */}
+                <motion.div
+                  animate={{ y: [-4, 4, -4] }}
+                  transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+                  className="relative cursor-pointer"
+                  onClick={() => {
+                    const el = document.getElementById('zgodba');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  title="Tase Lazovski – Klikni za ogled zgodbe"
+                >
+                  {/* Ambient Electric-Blue Aura */}
+                  <div className="absolute -inset-4 bg-[#53B8FF]/25 rounded-full blur-2xl group-hover:bg-[#53B8FF]/45 transition-all duration-700 pointer-events-none" />
 
-              {/* Theme Subtitle */}
-              <motion.p 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-xl sm:text-2xl md:text-3xl font-display font-medium text-[#53B8FF] tracking-wide mt-4 italic"
-              >
-                “Ideje, ki postanejo del sveta.”
-              </motion.p>
+                  {/* Outer Technical Orbital Ring (Clockwise) */}
+                  <div className="absolute -inset-4 rounded-full border border-dashed border-[#53B8FF]/40 animate-[spin_24s_linear_infinite] pointer-events-none" />
+                  
+                  {/* Inner Precision Ticks Ring (Counter-clockwise) */}
+                  <div className="absolute -inset-2 rounded-full border border-[#53B8FF]/30 border-t-transparent border-b-transparent animate-[spin_14s_linear_infinite_reverse] pointer-events-none" />
+
+                  {/* High-tech Corner Coordinate Accents */}
+                  <span className="absolute -top-1 -left-1 w-2.5 h-2.5 border-t-2 border-l-2 border-[#53B8FF] z-20 pointer-events-none" />
+                  <span className="absolute -top-1 -right-1 w-2.5 h-2.5 border-t-2 border-r-2 border-[#53B8FF] z-20 pointer-events-none" />
+                  <span className="absolute -bottom-1 -left-1 w-2.5 h-2.5 border-b-2 border-l-2 border-[#53B8FF] z-20 pointer-events-none" />
+                  <span className="absolute -bottom-1 -right-1 w-2.5 h-2.5 border-b-2 border-r-2 border-[#53B8FF] z-20 pointer-events-none" />
+
+                  {/* Portrait Frame */}
+                  <div className="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 xl:w-44 xl:h-44 rounded-full overflow-hidden border-2 border-[#53B8FF]/80 bg-[#0E131C] relative shadow-[0_0_35px_rgba(83,184,255,0.35)] group-hover:shadow-[0_0_55px_rgba(83,184,255,0.6)] group-hover:border-[#53B8FF] transition-all duration-500">
+                    <img 
+                      src="https://ik.imagekit.io/utigodgni/profilna.png" 
+                      alt="Tase Lazovski - Inovator in izumitelj" 
+                      className="w-full h-full object-cover object-top group-hover:scale-108 transition-transform duration-700 filter brightness-105 contrast-105"
+                    />
+
+                    {/* Animated Holographic Scanline Overlay */}
+                    <motion.div 
+                      animate={{ y: ['-100%', '200%'] }}
+                      transition={{ duration: 3.2, repeat: Infinity, ease: 'linear' }}
+                      className="absolute inset-x-0 h-10 bg-gradient-to-b from-transparent via-[#53B8FF]/25 to-transparent pointer-events-none"
+                    />
+
+                    {/* Subtle Glass Vignette */}
+                    <div className="absolute inset-0 rounded-full ring-1 ring-inset ring-white/20 pointer-events-none" />
+                  </div>
+
+                  {/* Micro Inventor Badge */}
+                  <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 z-20 whitespace-nowrap">
+                    <div className="px-3 py-1 rounded-full bg-[#080B10]/95 border border-[#53B8FF]/70 text-[#53B8FF] text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-widest shadow-xl flex items-center gap-1.5 backdrop-blur-md group-hover:bg-[#53B8FF] group-hover:text-[#080B10] transition-colors duration-300">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#53B8FF] group-hover:bg-[#080B10] animate-ping" />
+                      <span>IZUMITELJ</span>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+
+              {/* Title & Subtitle */}
+              <div>
+                <motion.h1 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.15 }}
+                  className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.75rem] xl:text-[5.2rem] font-display font-black tracking-tight uppercase leading-[0.96] text-[#F0EDE5]"
+                >
+                  <span className="inline-flex items-center gap-3 sm:gap-4 flex-wrap">
+                    <span>TASE</span>
+                    <span 
+                      className="text-xs sm:text-base md:text-lg lg:text-xl font-mono font-bold text-[#53B8FF] tracking-wider px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-xl bg-[#151B24]/90 border border-[#53B8FF]/40 shadow-sm align-middle normal-case"
+                      title="Letnica rojstva: 1949"
+                    >
+                      * 1949
+                    </span>
+                  </span>
+                  <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#53B8FF] via-[#A8DCFF] to-white">
+                    LAZOVSKI
+                  </span>
+                </motion.h1>
+
+                {/* Theme Subtitle */}
+                <motion.p 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                  className="text-xl sm:text-2xl md:text-3xl font-display font-medium text-[#53B8FF] tracking-wide mt-3 sm:mt-4 italic"
+                >
+                  “Ideje, ki postanejo del sveta.”
+                </motion.p>
+              </div>
             </div>
 
             {/* Editorial Overview */}
@@ -752,10 +867,20 @@ export default function PatentsPage() {
           </div>
 
           {/* Interactive Horizontal / Responsive Timeline */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             
-            {/* Timeline Pills Selector */}
-            <div className="flex items-center gap-3 overflow-x-auto pb-4 scrollbar-none -mx-2 px-2">
+            {/* Timeline Progress Track for Desktop */}
+            <div className="hidden md:block relative px-4">
+              <div className="h-1 bg-slate-800 rounded-full w-full relative overflow-hidden">
+                <div 
+                  className="h-full bg-gradient-to-r from-[#53B8FF] to-[#A8DCFF] rounded-full transition-all duration-500 shadow-[0_0_12px_rgba(83,184,255,0.6)]"
+                  style={{ width: `${((activeTimelineIdx + 1) / timelineMilestones.length) * 100}%` }}
+                />
+              </div>
+            </div>
+
+            {/* Timeline Milestones Grid: Fully visible on all screen sizes, no horizontal scroll or cutoffs */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5 sm:gap-3 w-full">
               {timelineMilestones.map((m, idx) => {
                 const isActive = activeTimelineIdx === idx;
                 return (
@@ -763,17 +888,17 @@ export default function PatentsPage() {
                     key={idx}
                     type="button"
                     onClick={() => setActiveTimelineIdx(idx)}
-                    className={`px-5 py-3.5 rounded-2xl border transition-all duration-300 text-left shrink-0 cursor-pointer flex flex-col gap-1 ${
+                    className={`p-3.5 sm:p-4 rounded-2xl border transition-all duration-300 text-left cursor-pointer flex flex-col justify-between gap-2.5 relative group ${
                       isActive
-                        ? 'bg-[#151B24] border-[#53B8FF] shadow-[0_0_20px_rgba(83,184,255,0.25)] text-white'
-                        : 'bg-[#0E131C] border-slate-800 hover:border-slate-700 text-slate-400'
+                        ? 'bg-[#151B24] border-[#53B8FF] shadow-[0_0_25px_rgba(83,184,255,0.25)] text-white scale-[1.02] z-10'
+                        : 'bg-[#0E131C] border-slate-800 hover:border-slate-700 hover:bg-[#121822] text-slate-400'
                     }`}
                   >
-                    <div className="flex items-center gap-2">
-                      <span className={`w-2 h-2 rounded-full ${isActive ? 'bg-[#53B8FF]' : 'bg-slate-600'}`} />
-                      <span className="font-mono font-bold text-sm text-[#53B8FF]">{m.year}</span>
+                    <div className="flex items-center justify-between w-full">
+                      <span className="font-mono font-bold text-sm sm:text-base text-[#53B8FF] tracking-tight">{m.year}</span>
+                      <span className={`w-2.5 h-2.5 rounded-full transition-all ${isActive ? 'bg-[#53B8FF] ring-4 ring-[#53B8FF]/20' : 'bg-slate-700 group-hover:bg-slate-500'}`} />
                     </div>
-                    <span className="font-display font-bold text-xs uppercase whitespace-nowrap text-white">
+                    <span className="font-display font-bold text-xs uppercase leading-snug text-white line-clamp-2">
                       {m.title}
                     </span>
                   </button>
@@ -891,7 +1016,7 @@ export default function PatentsPage() {
                       }`}
                     >
                       <FileText size={13} />
-                      <span>Patentna skica</span>
+                      <span>Patentne skice (3)</span>
                     </button>
                   </div>
 
@@ -915,37 +1040,102 @@ export default function PatentsPage() {
                       Vaš brskalnik ne podpira predvajanja videa.
                     </video>
                   ) : (
-                    <div className="relative w-full h-full group/draw">
+                    <div className="relative w-full h-full bg-[#0A0E15] flex items-center justify-center p-3 sm:p-5 group/draw">
                       <img 
-                        src={vitaImg} 
-                        alt="Injekcijska igla VITA - US5051109A" 
-                        className="w-full h-full object-cover group-hover/draw:scale-105 transition-transform duration-700"
+                        src={vitaImages[activeVitaImgIdx].url} 
+                        alt={vitaImages[activeVitaImgIdx].title} 
+                        className="w-full h-full object-contain group-hover/draw:scale-105 transition-transform duration-500 filter drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)]"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#080B10]/80 via-transparent to-transparent pointer-events-none" />
-                      <div className="absolute bottom-4 left-4 bg-[#080B10]/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700 text-xs font-mono text-slate-300">
-                        Tehnična skica patenta US 5,051,109 A
+
+                      {/* Navigation arrows */}
+                      <button
+                        type="button"
+                        onClick={() => setActiveVitaImgIdx((prev) => (prev === 0 ? vitaImages.length - 1 : prev - 1))}
+                        className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-900/85 hover:bg-[#53B8FF] text-white hover:text-[#080B10] border border-slate-700 hover:border-[#53B8FF] flex items-center justify-center transition-all opacity-85 hover:opacity-100 cursor-pointer shadow-lg z-10"
+                        title="Prejšnja skica"
+                      >
+                        <ChevronRight size={18} className="rotate-180 stroke-[2.5]" />
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => setActiveVitaImgIdx((prev) => (prev === vitaImages.length - 1 ? 0 : prev + 1))}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-900/85 hover:bg-[#53B8FF] text-white hover:text-[#080B10] border border-slate-700 hover:border-[#53B8FF] flex items-center justify-center transition-all opacity-85 hover:opacity-100 cursor-pointer shadow-lg z-10"
+                        title="Naslednja skica"
+                      >
+                        <ChevronRight size={18} className="stroke-[2.5]" />
+                      </button>
+
+                      <div className="absolute top-4 left-4 pointer-events-none bg-[#080B10]/90 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-[#53B8FF]/40 text-[#53B8FF] font-mono text-xs font-bold z-10">
+                        US PATENT US5051109A
                       </div>
+
+                      <button
+                        type="button"
+                        onClick={() => setEnlargedVitaImg(vitaImages[activeVitaImgIdx].url)}
+                        className="absolute bottom-4 right-4 bg-[#080B10]/90 hover:bg-[#53B8FF] text-slate-300 hover:text-[#080B10] backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700 hover:border-[#53B8FF] text-xs font-mono font-bold transition-colors flex items-center gap-1.5 cursor-pointer shadow-md z-10"
+                        title="Povečaj sliko"
+                      >
+                        <Maximize2 size={13} />
+                        <span className="hidden sm:inline">Povečaj</span>
+                      </button>
                     </div>
                   )}
                 </div>
 
-                {/* Bottom Bar Info */}
-                <div className="p-3.5 bg-[#0E131C] border-t border-slate-800 flex items-center justify-between text-xs font-mono text-slate-400">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-pulse" />
-                    <span className="text-white font-bold">Igla VITA1.mp4</span>
-                    <span className="text-slate-500 hidden sm:inline">· Izvirni video arhiv</span>
+                {/* Bottom Bar: When Video vs When Drawing */}
+                {vitaViewMode === 'video' ? (
+                  <div className="p-3.5 bg-[#0E131C] border-t border-slate-800 flex items-center justify-between text-xs font-mono text-slate-400">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-pulse" />
+                      <span className="text-white font-bold">Igla VITA1.mp4</span>
+                      <span className="text-slate-500 hidden sm:inline">· Izvirni video arhiv</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setActiveVideoModal('video-vita')}
+                      className="hover:text-[#53B8FF] transition-colors flex items-center gap-1.5 cursor-pointer text-slate-300 hover:underline"
+                      title="Odpri v velikem predvajalniku"
+                    >
+                      <Maximize2 size={13} />
+                      <span className="text-[11px] font-sans font-bold uppercase tracking-wider">Celozaslonski način</span>
+                    </button>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => setActiveVideoModal('video-vita')}
-                    className="hover:text-[#53B8FF] transition-colors flex items-center gap-1.5 cursor-pointer text-slate-300 hover:underline"
-                    title="Odpri v velikem predvajalniku"
-                  >
-                    <Maximize2 size={13} />
-                    <span className="text-[11px] font-sans font-bold uppercase tracking-wider">Celozaslonski način</span>
-                  </button>
-                </div>
+                ) : (
+                  <div className="p-3 bg-[#0E131C] border-t border-slate-800 grid grid-cols-3 gap-2.5">
+                    {vitaImages.map((img, idx) => {
+                      const isSelected = activeVitaImgIdx === idx;
+                      return (
+                        <button
+                          key={idx}
+                          type="button"
+                          onClick={() => setActiveVitaImgIdx(idx)}
+                          className={`rounded-xl overflow-hidden border-2 transition-all p-1.5 bg-[#080B10] flex items-center gap-2 cursor-pointer text-left ${
+                            isSelected
+                              ? 'border-[#53B8FF] shadow-[0_0_15px_rgba(83,184,255,0.3)] bg-[#151B24]'
+                              : 'border-slate-800 hover:border-slate-700 opacity-70 hover:opacity-100'
+                          }`}
+                        >
+                          <div className="w-12 h-10 rounded-lg overflow-hidden bg-black shrink-0 flex items-center justify-center">
+                            <img 
+                              src={img.url} 
+                              alt={`Predogled ${idx + 1}`} 
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                          <div className="overflow-hidden hidden sm:block">
+                            <div className={`text-[10px] font-mono font-bold truncate ${isSelected ? 'text-[#53B8FF]' : 'text-slate-300'}`}>
+                              Skica 0{idx + 1}
+                            </div>
+                            <div className="text-[9px] text-slate-500 font-sans truncate">
+                              {img.title}
+                            </div>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
             </div>
 
@@ -1178,14 +1368,25 @@ export default function PatentsPage() {
           <div id="izum-kartica" className="scroll-mt-28 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             {/* Visual Column */}
             <div className="lg:col-span-6 relative">
-              <div className="rounded-3xl overflow-hidden border-2 border-slate-800 bg-[#151B24] shadow-2xl relative group">
-                <img 
-                  src={cardImg} 
-                  alt="Telefonska čip kartica Iskra Terminali 1995" 
-                  className="w-full h-auto aspect-video sm:aspect-[16/10] object-cover group-hover:scale-105 transition-transform duration-700"
-                />
+              <div className="rounded-3xl overflow-hidden border-2 border-[#53B8FF]/40 bg-[#151B24] shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative group">
+                <div className="relative aspect-video sm:aspect-[16/10] bg-[#0A0E15] overflow-hidden flex items-center justify-center p-3 sm:p-5">
+                  <img 
+                    src={cardImg} 
+                    alt="Telefonska čip kartica Iskra Terminali 1995" 
+                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 filter drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#080B10]/50 via-transparent to-transparent pointer-events-none" />
+                </div>
                 <div className="absolute top-4 left-4 bg-[#080B10]/90 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-[#53B8FF]/40 text-[#53B8FF] font-mono text-xs font-bold">
                   14. JUNIJ 1995 · SLOVENIJA
+                </div>
+                <div className="p-3.5 bg-[#0E131C] border-t border-slate-800 flex items-center justify-between text-xs font-mono text-slate-400">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-pulse" />
+                    <span className="text-white font-bold">Iskra Terminali & Impulz</span>
+                    <span className="text-slate-500 hidden sm:inline">· Elektronska čip kartica</span>
+                  </div>
+                  <span className="text-[11px] text-slate-400">Arhivska fotografija</span>
                 </div>
               </div>
             </div>
@@ -1289,17 +1490,101 @@ export default function PatentsPage() {
               </div>
             </div>
 
-            {/* Visual Column */}
+            {/* Visual Column: Interactive 3-Image Showcase */}
             <div className="lg:col-span-6 relative order-1 lg:order-2">
-              <div className="rounded-3xl overflow-hidden border-2 border-slate-800 bg-[#151B24] shadow-2xl relative group">
-                <img 
-                  src={gasTimerImg} 
-                  alt="Časovnik za plinske štedilnike Tase Lazovski & Emil Benko" 
-                  className="w-full h-auto aspect-video sm:aspect-[16/10] object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute top-4 left-4 bg-[#080B10]/90 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-[#53B8FF]/40 text-[#53B8FF] font-mono text-xs font-bold">
-                  T. LAZOVSKI & E. BENKO
+              <div className="rounded-3xl overflow-hidden border-2 border-[#53B8FF]/40 bg-[#151B24] shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative group">
+                
+                {/* Header Info Bar */}
+                <div className="p-3 bg-[#0E131C] border-b border-slate-800 flex items-center justify-between text-xs font-mono">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-pulse" />
+                    <span className="text-white font-bold">{gasTimerImages[activeGasImgIdx].title}</span>
+                    <span className="text-slate-500 hidden sm:inline">· {gasTimerImages[activeGasImgIdx].subtitle}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-[#53B8FF]">
+                    <span className="px-2 py-0.5 rounded-md bg-[#53B8FF]/10 border border-[#53B8FF]/30">
+                      0{activeGasImgIdx + 1} / 03
+                    </span>
+                  </div>
                 </div>
+
+                {/* Main Image Frame with Previous/Next Arrows */}
+                <div className="relative aspect-video sm:aspect-[16/10] bg-[#0A0E15] overflow-hidden flex items-center justify-center p-3 sm:p-5 group/img">
+                  <img 
+                    src={gasTimerImages[activeGasImgIdx].url} 
+                    alt={`Časovnik za plinske štedilnike - Slika ${activeGasImgIdx + 1}`} 
+                    className="w-full h-full object-contain group-hover/img:scale-105 transition-transform duration-500 filter drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)]"
+                  />
+
+                  {/* Left / Right Nav Arrows */}
+                  <button
+                    type="button"
+                    onClick={() => setActiveGasImgIdx((prev) => (prev === 0 ? gasTimerImages.length - 1 : prev - 1))}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-900/85 hover:bg-[#53B8FF] text-white hover:text-[#080B10] border border-slate-700 hover:border-[#53B8FF] flex items-center justify-center transition-all opacity-85 hover:opacity-100 cursor-pointer shadow-lg z-10"
+                    title="Prejšnja slika"
+                  >
+                    <ChevronRight size={18} className="rotate-180 stroke-[2.5]" />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setActiveGasImgIdx((prev) => (prev === gasTimerImages.length - 1 ? 0 : prev + 1))}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-900/85 hover:bg-[#53B8FF] text-white hover:text-[#080B10] border border-slate-700 hover:border-[#53B8FF] flex items-center justify-center transition-all opacity-85 hover:opacity-100 cursor-pointer shadow-lg z-10"
+                    title="Naslednja slika"
+                  >
+                    <ChevronRight size={18} className="stroke-[2.5]" />
+                  </button>
+
+                  <div className="absolute top-4 left-4 pointer-events-none bg-[#080B10]/90 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-[#53B8FF]/40 text-[#53B8FF] font-mono text-xs font-bold">
+                    T. LAZOVSKI & E. BENKO
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setEnlargedGasImg(gasTimerImages[activeGasImgIdx].url)}
+                    className="absolute bottom-4 right-4 bg-[#080B10]/90 hover:bg-[#53B8FF] text-slate-300 hover:text-[#080B10] backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700 hover:border-[#53B8FF] text-xs font-mono font-bold transition-colors flex items-center gap-1.5 cursor-pointer shadow-md z-10"
+                    title="Povečaj sliko"
+                  >
+                    <Maximize2 size={13} />
+                    <span className="hidden sm:inline">Povečaj</span>
+                  </button>
+                </div>
+
+                {/* Thumbnail Strip with 3 Images */}
+                <div className="p-3 bg-[#0E131C] border-t border-slate-800 grid grid-cols-3 gap-2.5">
+                  {gasTimerImages.map((img, idx) => {
+                    const isSelected = activeGasImgIdx === idx;
+                    return (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => setActiveGasImgIdx(idx)}
+                        className={`rounded-xl overflow-hidden border-2 transition-all p-1.5 bg-[#080B10] flex items-center gap-2 cursor-pointer text-left ${
+                          isSelected
+                            ? 'border-[#53B8FF] shadow-[0_0_15px_rgba(83,184,255,0.3)] bg-[#151B24]'
+                            : 'border-slate-800 hover:border-slate-700 opacity-70 hover:opacity-100'
+                        }`}
+                      >
+                        <div className="w-12 h-10 rounded-lg overflow-hidden bg-black shrink-0 flex items-center justify-center">
+                          <img 
+                            src={img.url} 
+                            alt={`Predogled ${idx + 1}`} 
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
+                        <div className="overflow-hidden hidden sm:block">
+                          <div className={`text-[10px] font-mono font-bold truncate ${isSelected ? 'text-[#53B8FF]' : 'text-slate-300'}`}>
+                            Slika 0{idx + 1}
+                          </div>
+                          <div className="text-[9px] text-slate-500 font-sans truncate">
+                            {img.title}
+                          </div>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+
               </div>
             </div>
           </div>
@@ -1869,6 +2154,102 @@ export default function PatentsPage() {
                   className="px-6 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-display font-bold uppercase cursor-pointer"
                 >
                   Zapri predvajalnik
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* GAS TIMER LIGHTBOX MODAL */}
+      <AnimatePresence>
+        {enlargedGasImg && (
+          <div 
+            onClick={() => setEnlargedGasImg(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8 bg-black/95 backdrop-blur-md cursor-zoom-out"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-5xl w-full max-h-[90vh] bg-[#151B24] border border-[#53B8FF]/40 rounded-3xl overflow-hidden p-4 sm:p-6 flex flex-col justify-between shadow-2xl cursor-default"
+            >
+              <div className="flex items-center justify-between pb-3 border-b border-slate-800 text-xs font-mono text-slate-400">
+                <span className="text-[#53B8FF] font-bold">TEHNIČNA DOKUMENTACIJA · ČASOVNIK ZA PLIN</span>
+                <button
+                  type="button"
+                  onClick={() => setEnlargedGasImg(null)}
+                  className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center cursor-pointer transition-colors"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              <div className="relative flex-1 flex items-center justify-center overflow-hidden py-4">
+                <img 
+                  src={enlargedGasImg} 
+                  alt="Tehnični načrt povečano" 
+                  className="max-h-[70vh] w-auto max-w-full object-contain filter drop-shadow-2xl"
+                />
+              </div>
+
+              <div className="pt-3 border-t border-slate-800 flex items-center justify-between text-xs font-mono text-slate-400">
+                <span>Tase Lazovski & Emil Benko</span>
+                <button
+                  type="button"
+                  onClick={() => setEnlargedGasImg(null)}
+                  className="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-xs font-display font-bold uppercase cursor-pointer"
+                >
+                  Zapri
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* VITA NEEDLE LIGHTBOX MODAL */}
+      <AnimatePresence>
+        {enlargedVitaImg && (
+          <div 
+            onClick={() => setEnlargedVitaImg(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8 bg-black/95 backdrop-blur-md cursor-zoom-out"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-5xl w-full max-h-[90vh] bg-[#151B24] border border-[#53B8FF]/40 rounded-3xl overflow-hidden p-4 sm:p-6 flex flex-col justify-between shadow-2xl cursor-default"
+            >
+              <div className="flex items-center justify-between pb-3 border-b border-slate-800 text-xs font-mono text-slate-400">
+                <span className="text-[#53B8FF] font-bold">PATENT US 5,051,109 A · INJEKCIJSKA IGLA VITA</span>
+                <button
+                  type="button"
+                  onClick={() => setEnlargedVitaImg(null)}
+                  className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center cursor-pointer transition-colors"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              <div className="relative flex-1 flex items-center justify-center overflow-hidden py-4">
+                <img 
+                  src={enlargedVitaImg} 
+                  alt="Injekcijska igla VITA načrt povečano" 
+                  className="max-h-[70vh] w-auto max-w-full object-contain filter drop-shadow-2xl"
+                />
+              </div>
+
+              <div className="pt-3 border-t border-slate-800 flex items-center justify-between text-xs font-mono text-slate-400">
+                <span>Tase Lazovski · EUREKA Bruselj 1993</span>
+                <button
+                  type="button"
+                  onClick={() => setEnlargedVitaImg(null)}
+                  className="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-xs font-display font-bold uppercase cursor-pointer"
+                >
+                  Zapri
                 </button>
               </div>
             </motion.div>
