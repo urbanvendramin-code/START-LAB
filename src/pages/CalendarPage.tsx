@@ -2775,29 +2775,23 @@ export default function CalendarPage() {
 
                           <p className="text-xs text-slate-700 font-semibold leading-relaxed mb-6">
                             {isSlovenian 
-                              ? "Ker spletna stran deluje na GitHub Pages (brez lastnega strežnika), se sporočila pošiljajo preko storitve FormSubmit.co. Za začetek prejemanja morate potrditi vaš e-poštni naslov."
-                              : "Since the site runs on GitHub Pages (without a backend server), form submissions use FormSubmit.co. You must activate your email to start receiving messages."}
+                              ? "Sporočila se varno pošiljajo preko storitve Web3Forms direktno na info@startlab.si."
+                              : "Form submissions are securely sent via Web3Forms directly to info@startlab.si."}
                           </p>
 
                           <div className="space-y-4 mb-6">
                             <div className="flex gap-3">
                               <span className="w-5 h-5 shrink-0 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold font-display">1</span>
                               <p className="text-[11px] text-slate-600 font-bold leading-normal">
-                                {isSlovenian ? "Odprite poštni predal info@startlab.si." : "Open your inbox at info@startlab.si."}
+                                {isSlovenian ? "Preverite vpisane podatke in telefonsko številko." : "Verify your contact info and phone number."}
                               </p>
                             </div>
                             <div className="flex gap-3">
                               <span className="w-5 h-5 shrink-0 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold font-display">2</span>
                               <p className="text-[11px] text-slate-600 font-bold leading-normal">
                                 {isSlovenian 
-                                  ? "Poiščite potrditveni mail od FormSubmit.co z zadevo \"Action Required: Activate ...\"."
-                                  : "Find the confirmation mail from FormSubmit.co with subject \"Action Required: Activate ...\""}
-                              </p>
-                            </div>
-                            <div className="flex gap-3">
-                              <span className="w-5 h-5 shrink-0 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold font-display">3</span>
-                              <p className="text-[11px] text-slate-600 font-bold leading-normal">
-                                {isSlovenian ? "Kliknite na gumb \"Activate Form\" v mailu." : "Click on the \"Activate Form\" button in the email."}
+                                  ? "V primeru vprašanj nas kontaktirajte na info@startlab.si."
+                                  : "Contact us directly at info@startlab.si if needed."}
                               </p>
                             </div>
                           </div>

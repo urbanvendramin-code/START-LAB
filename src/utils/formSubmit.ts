@@ -1,59 +1,44 @@
 /**
- * Unified form submission utility.
+ * Unified form submission utility powered by Web3Forms.
  * 
- * First tries to submit to the local Express backend endpoint.
- * If that fails (e.g., when hosted as a static site on GitHub Pages),
- * it seamlessly falls back to submitting directly from the client's browser
- * to FormSubmit.co, ensuring email delivery to info@startlab.si.
+ * Directly submits form inquiries from the client's browser to Web3Forms
+ * using the configured access key (d98ecf8a-06bf-4653-84ff-10be7613bf16).
+ * 
+ * Web3Forms routes all emails directly to the inbox that was registered 
+ * when creating the access key (info@startlab.si).
  */
+
+export const WEB3FORMS_ACCESS_KEY = 
+  (typeof import.meta !== "undefined" && import.meta.env?.VITE_WEB3FORMS_ACCESS_KEY) || 
+  "d98ecf8a-06bf-4653-84ff-10be7613bf16";
+
+export const WEB3FORMS_API_URL = "https://api.web3forms.com/submit";
+
 export async function submitForm(
   endpoint: string,
   data: Record<string, any>,
   formSubmitSubject: string,
   formType?: string
 ): Promise<{ success: boolean; error?: string }> {
-  // 1. Try sending to local Express backend API
+  // 1. Primary: Direct Client-Side Web3Forms Submission
+  // Web3Forms delivers messages to the email bound to the access key (info@startlab.si).
   try {
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    });
+    const replyEmail = data.email || data.contactEmail || data.mail || undefined;
+    const senderName = data.name || data.fullName || data.contactPerson || data.organizacija || undefined;
 
-    if (response.ok) {
-      const contentType = response.headers.get("content-type");
-      if (contentType && contentType.includes("application/json")) {
-        const result = await response.json();
-        if (result && typeof result === "object") {
-          // If server successfully handled or returned simulated success
-          if (result.success) {
-            return { success: true };
-          } else {
-            // Server returned error, let's try direct client-side fallback
-            console.warn("Express backend returned success=false, trying direct FormSubmit fallback...", result.error);
-          }
-        }
-      } else {
-        console.warn("Express backend returned non-JSON response, trying direct FormSubmit fallback...");
-      }
-    } else {
-      console.warn(`Express backend returned status ${response.status}, trying direct FormSubmit fallback...`);
-    }
-  } catch (backendError) {
-    console.warn(`Local backend submission to ${endpoint} failed (expected on GitHub Pages). Falling back to direct client-side FormSubmit:`, backendError);
-  }
-
-  // 2. Client-side FormSubmit Fallback
-  // This executes when the Express server is not available (e.g. deployed to static GitHub Pages)
-  try {
-    // Map fields cleanly
     const payload: Record<string, any> = {
-      _subject: formSubmitSubject,
-      _template: "table", // Nice tables in FormSubmit emails
+      access_key: WEB3FORMS_ACCESS_KEY,
+      subject: formSubmitSubject,
+      from_name: senderName ? `${senderName} via Start Lab` : "Start Lab Obrazec",
+      botcheck: "", // Honeypot spam protection
       ...data
     };
 
-    const response = await fetch("https://formsubmit.co/ajax/info@startlab.si", {
+    if (replyEmail) {
+      payload.replyto = replyEmail;
+    }
+
+    const response = await fetch(WEB3FORMS_API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -62,89 +47,105 @@ export async function submitForm(
       body: JSON.stringify(payload)
     });
 
-    if (response.ok) {
-      const result = await response.json();
-      if (result && (result.success === "false" || result.success === false)) {
-        let errMsg = result.message || "FormSubmit rejected submission";
-        if (errMsg.toLowerCase().includes("activate") || errMsg.toLowerCase().includes("confirm")) {
-          errMsg = "Aktivacija e-pošte je potrebna: Na naslov info@startlab.si je bil poslan aktivacijski mail s strani FormSubmit.co. Prosimo, odprite vaš poštni predal in potrdite aktivacijo, da bo obrazec začel delovati.";
-        }
-        return { success: false, error: errMsg };
+    const result = await response.json().catch(() => null);
+
+    if (response.ok && result && (result.success === true || result.success === "true")) {
+      console.log("[Client Web3forms Success] Form successfully delivered via Web3forms.");
+
+      // Asynchronously notify local backend if available (for server logging/analytics), without blocking user UI
+      if (endpoint) {
+        fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...data, _web3formsDispatched: true })
+        }).catch(() => {});
       }
-      console.log("[Client FormSubmit Success] Successfully dispatched form directly from browser.");
+
       return { success: true };
     } else {
-      let errMsg = `FormSubmit HTTP error: ${response.status}`;
+      const errMsg = result?.message || `Web3forms napaka: status ${response.status}`;
+      console.warn("[Web3forms AJAX Warning] Response was not success:", errMsg);
+
+      // If AJAX fetch is restricted or adblocker blocks cross-origin fetch, use HTML form POST fallback
       try {
-        const errorJson = await response.json();
-        if (errorJson && errorJson.message) {
-          errMsg = errorJson.message;
-          if (errMsg.toLowerCase().includes("activate") || errMsg.toLowerCase().includes("confirm")) {
-            errMsg = "Aktivacija e-pošte je potrebna: Na naslov info@startlab.si je bil poslan aktivacijski mail s strani FormSubmit.co. Prosimo, odprite vaš poštni predal in potrdite aktivacijo, da bo obrazec začel delovati.";
-          }
-        }
-      } catch (e) {
-        // failed to parse JSON, use status code
+        submitViaWeb3formsHTML(data, formSubmitSubject, formType);
+        return { success: true };
+      } catch (htmlErr) {
+        return { success: false, error: errMsg };
       }
-      
-      // Try HTML Form submit if we got an error response
-      console.warn("AJAX FormSubmit returned error status. Triggering robust HTML Form submit fallback...");
-      submitViaFormSubmitHTML(data, formSubmitSubject, formType);
-      return { success: true };
     }
   } catch (fallbackError: any) {
-    console.error("Direct client-side FormSubmit fallback failed as well, trying robust HTML form submit navigation...", fallbackError);
+    console.warn("Direct Web3forms AJAX fetch error (e.g. adblocker). Triggering HTML form POST fallback...", fallbackError);
     try {
-      submitViaFormSubmitHTML(data, formSubmitSubject, formType);
+      submitViaWeb3formsHTML(data, formSubmitSubject, formType);
       return { success: true };
     } catch (htmlSubmitError: any) {
-      console.error("Absolute failure: Both AJAX and HTML form submissions failed.", htmlSubmitError);
-      return { success: false, error: fallbackError.message || "Failed to submit form" };
+      console.error("Both AJAX and HTML form submissions failed:", htmlSubmitError);
+      return { 
+        success: false, 
+        error: fallbackError.message || "Napaka pri oddaji obrazca preko Web3forms" 
+      };
     }
   }
 }
 
 /**
- * Standard, foolproof HTML form POST submission.
- * This can never be blocked by ad-blockers, tracking protection, or CORS.
+ * Standard HTML form POST submission to Web3Forms.
+ * Foolproof fallback that works even if client adblockers block AJAX fetch requests.
  */
-export function submitViaFormSubmitHTML(data: Record<string, any>, subject: string, formType?: string) {
+export function submitViaWeb3formsHTML(data: Record<string, any>, subject: string, formType?: string) {
   const form = document.createElement("form");
   form.method = "POST";
-  form.action = "https://formsubmit.co/info@startlab.si";
+  form.action = WEB3FORMS_API_URL;
   form.style.display = "none";
+
+  // Access Key
+  const accessKeyInput = document.createElement("input");
+  accessKeyInput.type = "hidden";
+  accessKeyInput.name = "access_key";
+  accessKeyInput.value = WEB3FORMS_ACCESS_KEY;
+  form.appendChild(accessKeyInput);
 
   // Subject line
   const subjectInput = document.createElement("input");
   subjectInput.type = "hidden";
-  subjectInput.name = "_subject";
+  subjectInput.name = "subject";
   subjectInput.value = subject;
   form.appendChild(subjectInput);
 
-  // Layout template
-  const templateInput = document.createElement("input");
-  templateInput.type = "hidden";
-  templateInput.name = "_template";
-  templateInput.value = "table";
-  form.appendChild(templateInput);
+  // From Name
+  const fromNameInput = document.createElement("input");
+  fromNameInput.type = "hidden";
+  fromNameInput.name = "from_name";
+  fromNameInput.value = "Start Lab Spletna Stran";
+  form.appendChild(fromNameInput);
 
-  // Redirect URL after submission to redirect the user back to the current page
-  const nextInput = document.createElement("input");
-  nextInput.type = "hidden";
-  nextInput.name = "_next";
-  
+  // Honeypot spam prevention
+  const botcheckInput = document.createElement("input");
+  botcheckInput.type = "checkbox";
+  botcheckInput.name = "botcheck";
+  botcheckInput.style.display = "none";
+  form.appendChild(botcheckInput);
+
+  // Redirect URL after submission to return user back to current page
   const currentUrl = new URL(window.location.href);
   currentUrl.searchParams.set("submit_status", formType ? `success_${formType}` : "success");
-  nextInput.value = currentUrl.toString();
-  form.appendChild(nextInput);
+  
+  const redirectInput = document.createElement("input");
+  redirectInput.type = "hidden";
+  redirectInput.name = "redirect";
+  redirectInput.value = currentUrl.toString();
+  form.appendChild(redirectInput);
 
   // Form fields
   Object.entries(data).forEach(([key, val]) => {
-    const input = document.createElement("input");
-    input.type = "hidden";
-    input.name = key;
-    input.value = typeof val === "object" ? JSON.stringify(val) : String(val);
-    form.appendChild(input);
+    if (val !== undefined && val !== null) {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = key;
+      input.value = typeof val === "object" ? JSON.stringify(val) : String(val);
+      form.appendChild(input);
+    }
   });
 
   document.body.appendChild(form);
@@ -152,3 +153,5 @@ export function submitViaFormSubmitHTML(data: Record<string, any>, subject: stri
   document.body.removeChild(form);
 }
 
+// Backward-compatibility alias
+export const submitViaFormSubmitHTML = submitViaWeb3formsHTML;

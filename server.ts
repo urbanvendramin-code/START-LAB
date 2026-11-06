@@ -122,17 +122,20 @@ async function startServer() {
 
       const success = await new Promise<boolean>((resolve) => {
         const postData = JSON.stringify({
+          access_key: process.env.WEB3FORMS_ACCESS_KEY || "d98ecf8a-06bf-4653-84ff-10be7613bf16",
           name: senderName || "Spletni Obiskovalec",
           email: senderEmail || toEmail,
-          _subject: subject,
+          replyto: senderEmail || undefined,
+          subject: subject,
           message: plainTextContent,
-          _honey: "", // Honeypot to prevent spam bots
+          from_name: senderName ? `${senderName} via Start Lab` : "Start Lab",
+          botcheck: "",
         });
 
         const options = {
-          hostname: "formsubmit.co",
+          hostname: "api.web3forms.com",
           port: 443,
-          path: `/ajax/${toEmail}`,
+          path: "/submit",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -150,18 +153,18 @@ async function startServer() {
             try {
               const parsed = JSON.parse(data);
               if (parsed.success === "true" || parsed.success === true || res.statusCode === 200) {
-                console.log("[HTTPS Fallback Success] Successfully dispatched via FormSubmit to info@startlab.si");
+                console.log("[HTTPS Fallback Success] Successfully dispatched via Web3forms to info@startlab.si");
                 resolve(true);
               } else {
-                console.error("[HTTPS Fallback Failure] FormSubmit returned error status:", parsed);
+                console.error("[HTTPS Fallback Failure] Web3forms returned error status:", parsed);
                 resolve(false);
               }
             } catch (e) {
               if (res.statusCode === 200) {
-                console.log("[HTTPS Fallback Success] Dispatched with generic HTTP 200 via FormSubmit.");
+                console.log("[HTTPS Fallback Success] Dispatched with generic HTTP 200 via Web3forms.");
                 resolve(true);
               } else {
-                console.error("[HTTPS Fallback Failure] Failed to parse FormSubmit response:", data);
+                console.error("[HTTPS Fallback Failure] Failed to parse Web3forms response:", data);
                 resolve(false);
               }
             }
@@ -169,13 +172,13 @@ async function startServer() {
         });
 
         req.on("error", (error) => {
-          console.error("[HTTPS Fallback Request Error] Connection failed to FormSubmit:", error);
+          console.error("[HTTPS Fallback Request Error] Connection failed to Web3forms:", error);
           resolve(false);
         });
 
         // Set request timeout to prevent hanging the server
-        req.setTimeout(3000, () => {
-          console.error("[HTTPS Fallback Timeout] FormSubmit request timed out.");
+        req.setTimeout(4000, () => {
+          console.error("[HTTPS Fallback Timeout] Web3forms request timed out.");
           req.destroy();
           resolve(false);
         });
@@ -187,7 +190,7 @@ async function startServer() {
       if (success) {
         return { success: true };
       } else {
-        // Ultimate local simulation fallback if internet connectivity to formsubmit has issue or blocked
+        // Ultimate local simulation fallback if internet connectivity to web3forms has issue or blocked
         console.warn("Both SMTP and HTTPS fallbacks failed. Running absolute developer terminal simulation.");
         console.log(`--- EMERGENCY SIMULATED EMAIL SUBMISSION TO info@startlab.si ---`);
         console.log(`Subject: ${subject}`);

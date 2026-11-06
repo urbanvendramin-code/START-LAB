@@ -215,7 +215,7 @@ export default function ContactPage() {
                      </div>
 
                      <p className="text-sm text-slate-700 font-semibold leading-relaxed mb-6">
-                       Ker je spletna stran naložena na GitHub Pages (brez lastnega strežnika), se sporočila pošiljajo preko varne storitve <strong>FormSubmit.co</strong> direktno iz brskalnika. Za začetek prejemanja morate potrditi vaš e-poštni naslov.
+                       Sporočila se varno pošiljajo preko storitve <strong>Web3Forms</strong> direktno na <strong>info@startlab.si</strong>.
                      </p>
 
                      <div className="space-y-4 mb-8">
@@ -228,7 +228,7 @@ export default function ContactPage() {
                        <div className="flex gap-3">
                          <span className="w-6 h-6 shrink-0 rounded-full bg-amber-500 text-white flex items-center justify-center text-xs font-bold font-display">2</span>
                          <p className="text-xs text-slate-600 font-bold leading-normal">
-                           Poiščite sporočilo od pošiljatelja <strong>FormSubmit.co</strong> z zadevo <em>"Action Required: Activate ..."</em>.
+                           V primeru vprašanj se lahko obrnete neposredno na <strong>info@startlab.si</strong>.
                          </p>
                        </div>
                        <div className="flex gap-3">
