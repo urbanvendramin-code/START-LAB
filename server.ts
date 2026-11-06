@@ -68,25 +68,84 @@ async function startServer() {
       .replace(/\n{3,}/g, '\n\n');
   };
 
-  // Helper function to send email via SMTP or fallback to a secure HTTPS post delivery
-  const sendEmail = async (subject: string, htmlContent: string, senderEmail?: string, senderName?: string, toEmail: string = "info@startlab.si") => {
-    const smtpHost = process.env.SMTP_HOST;
-    const smtpPort = process.env.SMTP_PORT;
-    const smtpUser = process.env.SMTP_USER;
+  // --- PERSISTENT INQUIRY STORAGE ---
+  const inquiriesFile = path.join(process.cwd(), "inquiries.json");
+  interface InquiryRecord {
+    id: string;
+    timestamp: number;
+    date: string;
+    formType: string;
+    subject: string;
+    senderName?: string;
+    senderEmail?: string;
+    phone?: string;
+    content: string;
+    emailDelivered: boolean;
+    messageId?: string;
+    error?: string;
+  }
+
+  const saveInquiry = (record: Omit<InquiryRecord, "id" | "timestamp" | "date">) => {
+    try {
+      let list: InquiryRecord[] = [];
+      if (fs.existsSync(inquiriesFile)) {
+        try {
+          list = JSON.parse(fs.readFileSync(inquiriesFile, "utf8"));
+          if (!Array.isArray(list)) list = [];
+        } catch {
+          list = [];
+        }
+      }
+      const newEntry: InquiryRecord = {
+        id: `inq_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+        timestamp: Date.now(),
+        date: new Date().toISOString(),
+        ...record
+      };
+      list.unshift(newEntry);
+      // Keep up to 200 recent records
+      if (list.length > 200) list = list.slice(0, 200);
+      fs.writeFileSync(inquiriesFile, JSON.stringify(list, null, 2), "utf8");
+      console.log(`[Inquiry Saved] ${newEntry.id} - ${newEntry.subject} (Delivered: ${newEntry.emailDelivered})`);
+      return newEntry;
+    } catch (saveErr) {
+      console.error("[Inquiry Storage Error]", saveErr);
+      return null;
+    }
+  };
+
+  // Helper function to send email via verified SMTP with persistent fallback
+  const sendEmail = async (
+    subject: string, 
+    htmlContent: string, 
+    senderEmail?: string, 
+    senderName?: string, 
+    targetTo?: string,
+    formType: string = "contact",
+    phone?: string
+  ): Promise<{ success: boolean; error?: string; messageId?: string }> => {
+    const smtpHost = process.env.SMTP_HOST || "eh3.neoserv.si";
+    const smtpPort = process.env.SMTP_PORT || "587";
+    const smtpUser = process.env.SMTP_USER || "info@startlab.si";
     const smtpPass = process.env.SMTP_PASS;
 
-    let smtpSent = false;
-    let smtpError: any = null;
+    const plainTextContent = stripHtml(htmlContent);
 
+    // Primary recipients: Always deliver to info@startlab.si AND urban.vendramin@gmail.com
+    const recipients = targetTo 
+      ? [targetTo, "urban.vendramin@gmail.com"] 
+      : ["info@startlab.si", "urban.vendramin@gmail.com"];
+
+    // 1. Try sending via Neoserv SMTP
     if (smtpHost && smtpUser && smtpPass) {
       try {
-        const isSecure = process.env.SMTP_SECURE !== "false";
-        console.log(`[SMTP Initiating] Host: ${smtpHost}, Port: ${smtpPort}, User: ${smtpUser}, Secure: ${isSecure}`);
-        
+        const isSecure = process.env.SMTP_SECURE === "true" || smtpPort === "465";
+        console.log(`[SMTP Sending] Host: ${smtpHost}:${smtpPort}, User: ${smtpUser}, Secure: ${isSecure}, To: ${recipients.join(', ')}`);
+
         const transporter = nodemailer.createTransport({
           host: smtpHost,
-          port: parseInt(smtpPort || "465"),
-          secure: isSecure, // defaults to true
+          port: parseInt(smtpPort),
+          secure: isSecure,
           auth: {
             user: smtpUser,
             pass: smtpPass,
@@ -94,123 +153,88 @@ async function startServer() {
           tls: {
             rejectUnauthorized: false
           },
-          connectionTimeout: 2000, // 2 seconds
-          greetingTimeout: 2000,   // 2 seconds
-          socketTimeout: 3000      // 3 seconds
+          connectionTimeout: 10000, // 10 seconds
+          greetingTimeout: 10000,   // 10 seconds
+          socketTimeout: 15000      // 15 seconds
         });
 
         const info = await transporter.sendMail({
-          from: `"Start Lab Website" <${smtpUser}>`,
-          to: toEmail,
+          from: `"Start Lab Spletna Stran" <${smtpUser}>`,
+          to: recipients,
+          replyTo: senderEmail ? `"${senderName || 'Pošiljatelj'}" <${senderEmail}>` : smtpUser,
           subject: subject,
+          text: plainTextContent,
           html: htmlContent,
-        });
-        console.log(`[Direct Email Sent] To: ${toEmail} | MessageId: ${info.messageId} | Subject: ${subject}`);
-        smtpSent = true;
-        return { success: true };
-      } catch (error: any) {
-        smtpError = error;
-        console.error("SMTP direct send failed. Trying HTTPS delivery fallback... Error was:", error);
-      }
-    }
-
-    // SMTP either wasn't configured or failed to connect/send (standard for Cloud Run sandboxes blocking raw ports).
-    // Let's use standard HTTPS outbound API sending as a guaranteed fallback!
-    if (!smtpSent) {
-      console.log(`[HTTPS Delivery fallback initiated] sending to ${toEmail}...`);
-      const plainTextContent = stripHtml(htmlContent);
-
-      const success = await new Promise<boolean>((resolve) => {
-        const postData = JSON.stringify({
-          name: senderName || "Spletni Obiskovalec",
-          email: senderEmail || toEmail,
-          _subject: subject,
-          message: plainTextContent,
-          _honey: "", // Honeypot to prevent spam bots
-        });
-
-        const options = {
-          hostname: "formsubmit.co",
-          port: 443,
-          path: `/ajax/${toEmail}`,
-          method: "POST",
           headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-            "Content-Length": Buffer.byteLength(postData),
-          },
+            'X-Mailer': 'StartLab-Website-Engine',
+            'X-Priority': '1'
+          }
+        });
+
+        console.log(`[Direct Email Sent] MessageId: ${info.messageId} | Subject: ${subject} | Response: ${info.response}`);
+
+        // Save inquiry to persistent storage with success state
+        saveInquiry({
+          formType,
+          subject,
+          senderName,
+          senderEmail,
+          phone,
+          content: plainTextContent,
+          emailDelivered: true,
+          messageId: info.messageId
+        });
+
+        return { success: true, messageId: info.messageId };
+      } catch (error: any) {
+        console.error("[SMTP Send Failed]", error);
+        
+        // Save inquiry locally so message is NEVER lost
+        saveInquiry({
+          formType,
+          subject,
+          senderName,
+          senderEmail,
+          phone,
+          content: plainTextContent,
+          emailDelivered: false,
+          error: error.message || "SMTP error"
+        });
+
+        return { 
+          success: false, 
+          error: `E-pošte ni bilo mogoče oddati preko SMTP: ${error.message || 'Neznana napaka'}. Sporočilo je bilo varno shranjeno v sistemu.` 
         };
-
-        const req = https.request(options, (res) => {
-          let data = "";
-          res.on("data", (chunk) => {
-            data += chunk;
-          });
-          res.on("end", () => {
-            try {
-              const parsed = JSON.parse(data);
-              if (parsed.success === "true" || parsed.success === true || res.statusCode === 200) {
-                console.log("[HTTPS Fallback Success] Successfully dispatched via FormSubmit to info@startlab.si");
-                resolve(true);
-              } else {
-                console.error("[HTTPS Fallback Failure] FormSubmit returned error status:", parsed);
-                resolve(false);
-              }
-            } catch (e) {
-              if (res.statusCode === 200) {
-                console.log("[HTTPS Fallback Success] Dispatched with generic HTTP 200 via FormSubmit.");
-                resolve(true);
-              } else {
-                console.error("[HTTPS Fallback Failure] Failed to parse FormSubmit response:", data);
-                resolve(false);
-              }
-            }
-          });
-        });
-
-        req.on("error", (error) => {
-          console.error("[HTTPS Fallback Request Error] Connection failed to FormSubmit:", error);
-          resolve(false);
-        });
-
-        // Set request timeout to prevent hanging the server
-        req.setTimeout(3000, () => {
-          console.error("[HTTPS Fallback Timeout] FormSubmit request timed out.");
-          req.destroy();
-          resolve(false);
-        });
-
-        req.write(postData);
-        req.end();
-      });
-
-      if (success) {
-        return { success: true };
-      } else {
-        // Ultimate local simulation fallback if internet connectivity to formsubmit has issue or blocked
-        console.warn("Both SMTP and HTTPS fallbacks failed. Running absolute developer terminal simulation.");
-        console.log(`--- EMERGENCY SIMULATED EMAIL SUBMISSION TO info@startlab.si ---`);
-        console.log(`Subject: ${subject}`);
-        console.log(`Content:\n${plainTextContent}`);
-        console.log(`-----------------------------------------------------------------`);
-        return { success: true, simulated: true, error: smtpError?.message || "All mail carrier routes failed" };
       }
+    } else {
+      console.warn("[SMTP Warning] No SMTP password available. Storing inquiry in database.");
+      saveInquiry({
+        formType,
+        subject,
+        senderName,
+        senderEmail,
+        phone,
+        content: plainTextContent,
+        emailDelivered: false,
+        error: "No SMTP credentials"
+      });
+      return { success: true, messageId: "saved_locally" };
     }
   };
 
   // Run instant connection check on server startup to verify credentials & port settings
   const checkSmtpConnection = () => {
-    const smtpHost = process.env.SMTP_HOST;
-    const smtpPort = process.env.SMTP_PORT;
-    const smtpUser = process.env.SMTP_USER;
+    const smtpHost = process.env.SMTP_HOST || "eh3.neoserv.si";
+    const smtpPort = process.env.SMTP_PORT || "587";
+    const smtpUser = process.env.SMTP_USER || "info@startlab.si";
     const smtpPass = process.env.SMTP_PASS;
 
     if (smtpHost && smtpUser && smtpPass) {
-      const isSecure = process.env.SMTP_SECURE !== "false";
+      const isSecure = process.env.SMTP_SECURE === "true" || smtpPort === "465";
       console.log(`[SMTP Connection Diagnostic] Verifying connection to ${smtpHost}:${smtpPort} as ${smtpUser} ...`);
       const transporter = nodemailer.createTransport({
         host: smtpHost,
-        port: parseInt(smtpPort || "465"),
+        port: parseInt(smtpPort),
         secure: isSecure,
         auth: {
           user: smtpUser,
@@ -219,15 +243,15 @@ async function startServer() {
         tls: {
           rejectUnauthorized: false
         },
-        connectionTimeout: 2000, // 2 seconds
-        greetingTimeout: 2000,   // 2 seconds
-        socketTimeout: 3000      // 3 seconds
+        connectionTimeout: 5000,
+        greetingTimeout: 5000,
+        socketTimeout: 5000
       });
       transporter.verify((error) => {
         if (error) {
           console.error(`[SMTP Startup Diagnostic] ❌ Verification failed for ${smtpHost}:${smtpPort}!`, error);
         } else {
-          console.log(`[SMTP Startup Diagnostic]  Verification verified successfully! SMTP server is ready.`);
+          console.log(`[SMTP Startup Diagnostic] ✅ Verification verified successfully! SMTP server is ready for info@startlab.si.`);
         }
       });
     } else {
@@ -236,6 +260,7 @@ async function startServer() {
   };
 
   checkSmtpConnection();
+
 
   // API Call matching: Partner Form
   app.post("/api/contact/partner", async (req, res) => {
@@ -251,8 +276,8 @@ async function startServer() {
         <p><strong>Sporočilo:</strong></p>
         <p style="white-space: pre-wrap;">${message || '/'}</p>
       `;
-      const result = await sendEmail(subject, html, email, name || company);
-      res.json({ success: result.success, error: result.error });
+      const result = await sendEmail(subject, html, email, name || company, "info@startlab.si", "partner");
+      res.json({ success: result.success, error: result.error, messageId: result.messageId });
     } catch (err: any) {
       console.error("[PARTNER ENDPOINT ERROR]", err);
       res.status(500).json({ success: false, error: err.message || "Unknown error occurred" });
@@ -274,8 +299,8 @@ async function startServer() {
         <p><strong>Sporočilo:</strong></p>
         <p style="white-space: pre-wrap;">${devMessage || '/'}</p>
       `;
-      const result = await sendEmail(subject, html, devEmail, devName);
-      res.json({ success: result.success, error: result.error });
+      const result = await sendEmail(subject, html, devEmail, devName, "info@startlab.si", "developer");
+      res.json({ success: result.success, error: result.error, messageId: result.messageId });
     } catch (err: any) {
       console.error("[DEVELOPER ENDPOINT ERROR]", err);
       res.status(500).json({ success: false, error: err.message || "Unknown error occurred" });
@@ -296,8 +321,8 @@ async function startServer() {
         <p><strong>Sporočilo:</strong></p>
         <p style="white-space: pre-wrap;">${mentorMessage || '/'}</p>
       `;
-      const result = await sendEmail(subject, html, mentorEmail, mentorName);
-      res.json({ success: result.success, error: result.error });
+      const result = await sendEmail(subject, html, mentorEmail, mentorName, "info@startlab.si", "mentor");
+      res.json({ success: result.success, error: result.error, messageId: result.messageId });
     } catch (err: any) {
       console.error("[MENTOR ENDPOINT ERROR]", err);
       res.status(500).json({ success: false, error: err.message || "Unknown error occurred" });
@@ -317,10 +342,33 @@ async function startServer() {
         <p><strong>Sporočilo:</strong></p>
         <p style="white-space: pre-wrap;">${message}</p>
       `;
-      const result = await sendEmail(subject, html, email, name);
-      res.json({ success: result.success, error: result.error });
+      const result = await sendEmail(subject, html, email, name, "info@startlab.si", "general");
+      res.json({ success: result.success, error: result.error, messageId: result.messageId });
     } catch (err: any) {
       console.error("[GENERAL CONTACT ENDPOINT ERROR]", err);
+      res.status(500).json({ success: false, error: err.message || "Unknown error occurred" });
+    }
+  });
+
+  // API Call matching: Driving Simulator Booking Form
+  app.post("/api/contact/simulator", async (req, res) => {
+    try {
+      const { ime, email, telefon, program, sporocilo, newsletter } = req.body;
+      const subject = `Start Lab Simulator Vožnje - ${ime || 'Zainteresirani'} (${program || 'Program'})`;
+      const html = `
+        <h3>Spletni obrazec: Simulator varne in zabavne vožnje</h3>
+        <p><strong>Ime in priimek:</strong> ${ime}</p>
+        <p><strong>E-pošta:</strong> ${email}</p>
+        <p><strong>Telefon:</strong> ${telefon || '/'}</p>
+        <p><strong>Izbrani program / vozilo:</strong> ${program || '/'}</p>
+        <p><strong>Prijava na novice (Bodi na tekočem):</strong> ${newsletter || 'NE'}</p>
+        <p><strong>Sporočilo / opombe:</strong></p>
+        <p style="white-space: pre-wrap;">${sporocilo || '/'}</p>
+      `;
+      const result = await sendEmail(subject, html, email, ime, "info@startlab.si", "simulator", telefon);
+      res.json({ success: result.success, error: result.error, messageId: result.messageId });
+    } catch (err: any) {
+      console.error("[SIMULATOR ENDPOINT ERROR]", err);
       res.status(500).json({ success: false, error: err.message || "Unknown error occurred" });
     }
   });
@@ -335,8 +383,8 @@ async function startServer() {
         <p>Prejeta je bila nova prijava na e-novosti Start Lab.</p>
         <p><strong>E-pošta:</strong> ${email}</p>
       `;
-      const result = await sendEmail(subject, html, email, "Naročnik na novice");
-      res.json({ success: result.success, error: result.error });
+      const result = await sendEmail(subject, html, email, "Naročnik na novice", "info@startlab.si", "newsletter");
+      res.json({ success: result.success, error: result.error, messageId: result.messageId });
     } catch (err: any) {
       console.error("[NEWSLETTER ENDPOINT ERROR]", err);
       res.status(500).json({ success: false, error: err.message || "Unknown error occurred" });
@@ -362,11 +410,45 @@ async function startServer() {
         <p><strong>Opombe / sporočilo:</strong></p>
         <p style="white-space: pre-wrap;">${note || '/'}</p>
       `;
-      const result = await sendEmail(subject, html, email, name, "info@startlab.si");
-      res.json({ success: result.success, error: result.error });
+      const result = await sendEmail(subject, html, email, name, "info@startlab.si", "workshop", phone);
+      res.json({ success: result.success, error: result.error, messageId: result.messageId });
     } catch (err: any) {
       console.error("[WORKSHOP REGISTRATION ENDPOINT ERROR]", err);
       res.status(500).json({ success: false, error: err.message || "Unknown error occurred" });
+    }
+  });
+
+  // Diagnostic Endpoint: Live Test Email
+  app.get("/api/contact/test-email", async (req, res) => {
+    try {
+      const result = await sendEmail(
+        "Start Lab Diagnostični Preizkus: Delovanje SMTP e-pošte",
+        `<h3>Preizkus e-poštnega sistema Start Lab</h3>
+         <p>To je avtomatsko diagnostično sporočilo, ki potrjuje, da povezava z Neoserv SMTP strežnikom (eh3.neoserv.si:587) deluje brezhibno.</p>
+         <p>Čas pošiljanja: <strong>${new Date().toLocaleString('sl-SI')}</strong></p>`,
+        "info@startlab.si",
+        "Start Lab Diagnostika",
+        "info@startlab.si",
+        "diagnostic"
+      );
+      res.json({ success: result.success, messageId: result.messageId, error: result.error, timestamp: new Date().toISOString() });
+    } catch (err: any) {
+      res.status(500).json({ success: false, error: err.message });
+    }
+  });
+
+  // Storage Inspection Endpoint: List recent inquiries
+  app.get("/api/contact/inquiries", (req, res) => {
+    try {
+      if (fs.existsSync(inquiriesFile)) {
+        const raw = fs.readFileSync(inquiriesFile, "utf8");
+        const list = JSON.parse(raw);
+        res.json({ success: true, count: list.length, inquiries: list });
+      } else {
+        res.json({ success: true, count: 0, inquiries: [] });
+      }
+    } catch (err: any) {
+      res.status(500).json({ success: false, error: err.message });
     }
   });
 

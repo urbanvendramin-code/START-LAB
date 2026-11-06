@@ -1,0 +1,64 @@
+[
+  {
+    "id": "inq_1793949317352_cj6rp",
+    "timestamp": 1793949317352,
+    "date": "2026-11-06T07:15:17.352Z",
+    "formType": "mentor",
+    "subject": "Start Lab Mentorstvo - Dr. Maja Zupan",
+    "senderName": "Dr. Maja Zupan",
+    "senderEmail": "maja.zupan@uni.si",
+    "content": "=== Spletni obrazec: Mentorstvo ===\n\n        \nIme in priimek: Dr. Maja Zupan\n\n        \nE-pošta: maja.zupan@uni.si\n\n        \nStrokovano področje: Elektronika in vgradni sistemi\n\n        \nPrijava na novice (Bodi na tekočem): DA\n\n        \nSporočilo:\n\n        \nZ veseljem bi vodila mentorske delavnice ob vikendih.",
+    "emailDelivered": true,
+    "messageId": "<a7c947e4-d549-d34c-a5f7-5a953438f695@startlab.si>"
+  },
+  {
+    "id": "inq_1793949313081_t3c9e",
+    "timestamp": 1793949313081,
+    "date": "2026-11-06T07:15:13.081Z",
+    "formType": "partner",
+    "subject": "Start Lab Partnerstvo - Tehnološko podjetje d.o.o.",
+    "senderName": "Janez Kranjc",
+    "senderEmail": "janez.kranjc@podjetje.si",
+    "content": "=== Spletni obrazec: Partnerstvo ===\n\n        \nIme organizacije: Tehnološko podjetje d.o.o.\n\n        \nIme in priimek: Janez Kranjc\n\n        \nE-pošta: janez.kranjc@podjetje.si\n\n        \nPrijava na novice (Bodi na tekočem): DA\n\n        \nSporočilo:\n\n        \nŽelimo sodelovati pri tehničnih delavnicah za mlade.",
+    "emailDelivered": true,
+    "messageId": "<eed0a73f-41cb-d4c3-1899-a8b3b5899e60@startlab.si>"
+  },
+  {
+    "id": "inq_1793949308556_bxuko",
+    "timestamp": 1793949308556,
+    "date": "2026-11-06T07:15:08.556Z",
+    "formType": "workshop",
+    "subject": "Prijava na delavnico: Uvod v 3D tisk in modeliranje - Ana Vidmar",
+    "senderName": "Ana Vidmar",
+    "senderEmail": "ana.vidmar@gmail.com",
+    "phone": "051 987 654",
+    "content": "=== Spletni obrazec: Prijava na delavnico ===\n\n        \nDelavnica: Uvod v 3D tisk in modeliranje\n\n        \nIzbrani termin: 15. november 2026\n\n        \nIme in priimek: Ana Vidmar\n\n        \nE-pošta: ana.vidmar@gmail.com\n\n        \nTelefon: 051 987 654\n\n        \nStarost: 12\n\n        \nJezik udeleženca: Slovenščina\n\n        \nIzvedel/a za delavnico preko: Priporočilo prijatelja\n\n        \nPrijava na novice (Bodi na tekočem): DA\n\n        \nOpombe / sporočilo:\n\n        \nOtrok že ima osnovno znanje računalništva.",
+    "emailDelivered": true,
+    "messageId": "<b37f6fa3-e7fa-02f5-eb23-45b02f8e1641@startlab.si>"
+  },
+  {
+    "id": "inq_1793949301952_7elvx",
+    "timestamp": 1793949301952,
+    "date": "2026-11-06T07:15:01.952Z",
+    "formType": "simulator",
+    "subject": "Start Lab Simulator Vožnje - Luka Novak (Trening varne vožnje za mlade voznike)",
+    "senderName": "Luka Novak",
+    "senderEmail": "luka.novak@gmail.com",
+    "phone": "041 123 456",
+    "content": "=== Spletni obrazec: Simulator varne in zabavne vožnje ===\n\n        \nIme in priimek: Luka Novak\n\n        \nE-pošta: luka.novak@gmail.com\n\n        \nTelefon: 041 123 456\n\n        \nIzbrani program / vozilo: Trening varne vožnje za mlade voznike\n\n        \nPrijava na novice (Bodi na tekočem): DA\n\n        \nSporočilo / opombe:\n\n        \nRad bi rezerviral 2 uri na Sparco simulatorju.",
+    "emailDelivered": true,
+    "messageId": "<6b196d26-119d-63ef-efce-28a6a7ba6cfe@startlab.si>"
+  },
+  {
+    "id": "inq_1793949297440_23h5h",
+    "timestamp": 1793949297440,
+    "date": "2026-11-06T07:14:57.440Z",
+    "formType": "general",
+    "subject": "Start Lab - Sporočilo od Matej Kovač",
+    "senderName": "Matej Kovač",
+    "senderEmail": "matej.kovac@gmail.com",
+    "content": "=== Spletni obrazec: Splošni kontakt ===\n\n        \nIme in priimek: Matej Kovač\n\n        \nE-pošta: matej.kovac@gmail.com\n\n        \nPrijava na novice (Bodi na tekočem): DA\n\n        \nSporočilo:\n\n        \nZanima me vpis otroka v vaš center robotike.",
+    "emailDelivered": true,
+    "messageId": "<05efd299-8797-7a79-2704-84311c1ce3fe@startlab.si>"
+  }
+]
