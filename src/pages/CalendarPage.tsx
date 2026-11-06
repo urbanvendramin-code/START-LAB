@@ -2834,24 +2834,12 @@ export default function CalendarPage() {
                               <strong>Diagnostic Error:</strong> {submitErrorMessage}
                             </div>
                           )}
-                          <div className="flex flex-col gap-3">
-                            <button
-                              onClick={() => setSubmitStatus('idle')}
-                              className="w-full py-4 btn-primary select-none bg-brand-red text-white justify-center cursor-pointer"
-                            >
-                              {isSlovenian ? "Poskusi znova" : "Retry submission"}
-                            </button>
-                            <a
-                              href={`mailto:info@startlab.si?subject=${encodeURIComponent(
-                                `Prijava na delavnico: ${modalEvent?.title || 'Delavnica'} - ${formData.name}`
-                              )}&body=${encodeURIComponent(
-                                `Ime in priimek: ${formData.name}\nE-pošta: ${formData.email}\nTelefon: ${formData.phone}\nStarost: ${formData.age}\nTermin: ${modalEvent?.title}\nOpombe: ${formData.note || '/'}`
-                              )}`}
-                              className="w-full py-3.5 btn-secondary select-none justify-center text-xs font-bold text-slate-700 border-2 border-slate-300 hover:border-slate-400 text-center"
-                            >
-                              ✉️ {isSlovenian ? "Pošlji neposredno na info@startlab.si" : "Send directly via email"}
-                            </a>
-                          </div>
+                          <button
+                            onClick={() => setSubmitStatus('idle')}
+                            className="w-full py-4 btn-primary select-none bg-brand-red text-white justify-center"
+                          >
+                            {isSlovenian ? "Poskusi znova" : "Retry submission"}
+                          </button>
                         </>
                       )}
                     </motion.div>
