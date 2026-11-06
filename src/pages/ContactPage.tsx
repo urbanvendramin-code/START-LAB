@@ -261,12 +261,20 @@ export default function ContactPage() {
                      <div className="bg-red-50 text-red-700 p-4 rounded-2xl text-xs font-mono break-all max-w-md mx-auto text-left mb-8 border border-red-100">
                        <strong>Diagnostic Error:</strong> {errorMessage}
                      </div>
-                     <button 
-                       onClick={() => setStatus('idle')}
-                       className="btn-primary py-3 px-8 shadow-md"
-                     >
-                       Poskusi ponovno
-                     </button>
+                     <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                       <button 
+                         onClick={() => setStatus('idle')}
+                         className="btn-primary py-3 px-8 shadow-md cursor-pointer"
+                       >
+                         Poskusi ponovno
+                       </button>
+                       <a 
+                         href={`mailto:info@startlab.si?subject=${encodeURIComponent(`Sporočilo od ${name || 'obiskovalca'}`)}&body=${encodeURIComponent(`Ime: ${name}\nE-pošta: ${email}\nSporočilo:\n${message}`)}`}
+                         className="btn-secondary py-3 px-6 shadow-md text-xs font-bold inline-flex items-center justify-center gap-2 cursor-pointer"
+                       >
+                         <Mail size={16} /> Pošlji preko e-pošte
+                       </a>
+                     </div>
                    </>
                  )}
                </div>

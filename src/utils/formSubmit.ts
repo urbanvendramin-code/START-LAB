@@ -1,8 +1,9 @@
 /**
  * Unified form submission utility.
  * 
- * Submits form data to the Express backend API with direct Neoserv SMTP delivery
- * to info@startlab.si and persistent database storage.
+ * Submits form data to the Express backend API / Vercel Serverless Function
+ * with direct Neoserv SMTP delivery to info@startlab.si (and urban.vendramin@gmail.com)
+ * and persistent storage.
  */
 export async function submitForm(
   endpoint: string,
@@ -10,11 +11,16 @@ export async function submitForm(
   formSubmitSubject: string,
   formType?: string
 ): Promise<{ success: boolean; error?: string }> {
-  // 1. Send to Express backend API
+  // Ensure endpoints start with /api/
+  const cleanEndpoint = endpoint.startsWith("/api") ? endpoint : `/api${endpoint.startsWith("/") ? "" : "/"}${endpoint}`;
+
   try {
-    const response = await fetch(endpoint, {
+    const response = await fetch(cleanEndpoint, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
       body: JSON.stringify(data)
     });
 
@@ -43,7 +49,7 @@ export async function submitForm(
       return { success: false, error: errMsg };
     }
   } catch (networkError: any) {
-    console.error(`Povezava s strežnikom na ${endpoint} ni uspela:`, networkError);
+    console.error(`Povezava s strežnikom na ${cleanEndpoint} ni uspela:`, networkError);
     return {
       success: false,
       error: "Povezava s strežnikom ni uspela. Prosimo preverite internetno povezavo ali nas neposredno kontaktirajte na info@startlab.si."
@@ -51,4 +57,13 @@ export async function submitForm(
   }
 }
 
-
+/**
+ * Builds a convenient mailto URL with pre-filled subject and body as guaranteed fallback
+ */
+export function buildMailtoUrl(to: string, subject: string, data: Record<string, any>): string {
+  const lines = Object.entries(data)
+    .filter(([_, v]) => v !== undefined && v !== null && v !== "")
+    .map(([k, v]) => `${k}: ${v}`);
+  const body = lines.join("\n");
+  return `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
