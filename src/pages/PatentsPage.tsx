@@ -26,7 +26,6 @@ import {
   X, 
   Info,
   Sliders,
-  Zap,
   Activity,
   CreditCard,
   Flame,
@@ -36,9 +35,10 @@ import {
 } from 'lucide-react';
 
 import heroImg from '../assets/images/tase_lazovski_hero_1791534632699.jpg';
-import vitaImg from '../assets/images/vita_safety_needle_1791534656205.jpg';
-import parkingImg from '../assets/images/parking_meter_terminal_1791534686654.jpg';
+const vitaImg = 'https://ik.imagekit.io/utigodgni/INJEKCIJSKA%20IGLA%20VITA.1png.png?updatedAt=1793864287793';
+const parkingImg = 'https://ik.imagekit.io/utigodgni/PARKIRNI%20AVTOMAT.png?updatedAt=1793864318348';
 const cardImg = 'https://ik.imagekit.io/utigodgni/Untitled-1.png';
+const cardImg2 = 'https://ik.imagekit.io/utigodgni/TELEFONSKA%20%C4%8CIP%20KARTICA.png';
 import gasTimerImg from '../assets/images/gas_stove_timer_1791534741337.jpg';
 import InventorAnimatedBackground from '../components/InventorAnimatedBackground';
 
@@ -59,12 +59,17 @@ interface PatentRecord {
   category: string;
   jurisdiction: string;
   inventors: string[];
+  manufacturer?: string;
+  coordination?: string;
   filingDate: string;
   grantDate?: string;
   status: string;
   recognition?: string;
   abstract: string;
+  abstractLabel?: string;
   keyFeatures: string[];
+  pdfUrl?: string;
+  videoId?: string;
 }
 
 export default function PatentsPage() {
@@ -85,17 +90,26 @@ export default function PatentsPage() {
   const [enlargedGasImg, setEnlargedGasImg] = useState<string | null>(null);
   const [activeVitaImgIdx, setActiveVitaImgIdx] = useState<number>(0);
   const [enlargedVitaImg, setEnlargedVitaImg] = useState<string | null>(null);
+  const [activeCardImgIdx, setActiveCardImgIdx] = useState<number>(0);
+
+  const cardImages = [
+    {
+      url: cardImg,
+      title: isSlovenian ? 'Telefonska kartica (1995)' : 'Telephone Smart Card (1995)',
+      subtitle: isSlovenian ? 'Originalna čip kartica Iskra Terminali & Impulz' : 'Original smart card Iskra Terminali & Impulz',
+    },
+    {
+      url: cardImg2,
+      title: isSlovenian ? 'Telefonska čip kartica – tehnični prikaz' : 'Telephone Chip Card – Technical Display',
+      subtitle: isSlovenian ? 'Arhivska fotografija kontaktnih kartic z mikrokrmilnikom' : 'Archival photo of contact microcontroller smart cards',
+    },
+  ];
 
   const vitaImages = [
     {
       url: vitaImg,
-      title: isSlovenian ? 'Patentna skica US 5,051,109 A' : 'Patent Drawing US 5,051,109 A',
-      subtitle: isSlovenian ? 'Izvirna shema varnostnega injekcijskega sklopa' : 'Original safety needle assembly schematic',
-    },
-    {
-      url: 'https://ik.imagekit.io/utigodgni/INJEKCIJSKA%20IGLA%20VITA.1png.png',
       title: isSlovenian ? 'Konstrukcijski načrt VITA 1' : 'VITA Blueprint 1',
-      subtitle: isSlovenian ? 'Detajl cilindričnega tulca in zaklepa' : 'Cylindrical sheath & locking detent detail',
+      subtitle: isSlovenian ? 'Izvirna shema cilindričnega tulca in zaklepa' : 'Original cylindrical sheath & locking detent schematic',
     },
     {
       url: 'https://ik.imagekit.io/utigodgni/INJEKCIJSKA%20IGLA%20VITA2.png',
@@ -151,12 +165,12 @@ export default function PatentsPage() {
     {
       year: '1993',
       exactDate: isSlovenian ? 'November 1993' : isIt ? 'Novembre 1993' : 'November 1993',
-      title: isSlovenian ? 'EUREKA Bruselj – Bronasta medalja' : isIt ? 'EUREKA Bruxelles – Medaglia di bronzo' : 'EUREKA Brussels – Bronze Medal',
+      title: isSlovenian ? 'EUREKA Bruselj – Zlata medalja (Médaille d’Or)' : isIt ? 'EUREKA Bruxelles – Medaglia d’oro (Médaille d’Or)' : 'EUREKA Brussels – Gold Medal (Médaille d’Or)',
       desc: isSlovenian
-        ? 'Svetovna razstava inovacij in novih tehnologij v Bruslju podeli bronasto medaljo za inovacijo VITA.'
+        ? 'Svetovna razstava inovacij in novih tehnologij v Bruslju podeli zlato medaljo (médaille d’or) za inovacijo VITA.'
         : isIt
-          ? 'Il Salone Mondiale dell’Innovazione di Bruxelles conferisce la medaglia di bronzo a VITA.'
-          : 'World Exhibition of Innovation in Brussels awards the Bronze Medal for the VITA invention.',
+          ? 'Il Salone Mondiale dell’Innovazione di Bruxelles conferisce la medaglia d’oro (médaille d’or) a VITA.'
+          : 'World Exhibition of Innovation in Brussels awards the Gold Medal (Médaille d’Or) for the VITA invention.',
       tag: 'EUREKA 1993',
       anchorId: 'izum-vita'
     },
@@ -196,6 +210,18 @@ export default function PatentsPage() {
           : 'Development and patent protection of electromechanical safety timer for gas stoves with Emil Benko.',
       tag: 'Varnostni inženiring',
       anchorId: 'izum-plin'
+    },
+    {
+      year: '2005+',
+      exactDate: 'EP 2805592 · US 959672',
+      title: isSlovenian ? 'Odvod statične elektrike od ljudi' : isIt ? 'Scarica elettrostatica controllata' : 'Controlled Static Electricity Discharge',
+      desc: isSlovenian
+        ? 'Patentirana tehnologija nebolečega kontroliranega odvoda statičnega naboja (150–250 ms) za avtomobile (Atemm H-ESD) ter delovne prostore in periferne naprave (Atemm GREEN POINT).'
+        : isIt
+          ? 'Tecnologia brevettata per la scarica indolore delle cariche elettrostatiche in 150-250 ms (Atemm H-ESD e GREEN POINT).'
+          : 'Patented technology for painless controlled static discharge within 150–250 ms in vehicles (Atemm H-ESD) and workstations/keyboards (Atemm GREEN POINT).',
+      tag: 'EP 2805592 · US 959672',
+      anchorId: 'izum-static'
     }
   ];
 
@@ -210,7 +236,7 @@ export default function PatentsPage() {
       filingDate: '12. december 1990',
       grantDate: '24. september 1991',
       status: isSlovenian ? 'Zgodovinski patent (podeljen)' : 'Historical Patent (Granted)',
-      recognition: 'EUREKA Bruselj 1993 – Médaille de Bronze',
+      recognition: 'EUREKA Bruselj 1993 – Médaille d’Or',
       abstract: isSlovenian
         ? 'Zaščitni sklop za podkožne injekcijske igle, ki z integriranim cilindričnim tulcem in nepovratnim zaklepnim mehanizmom po uporabi popolnoma zapre konico igle ter preprečuje nevarne naključne vbode medicinskega osebja.'
         : 'A protective safety assembly for hypodermic needles that permanently locks a shielding sheath over the needle tip following injection to prevent accidental needle-stick contamination.',
@@ -218,7 +244,7 @@ export default function PatentsPage() {
         isSlovenian ? 'Avtomatski nepovratni zaklep zaščitnega pokrovčka' : 'Automatic irreversible sleeve locking',
         isSlovenian ? 'Zaščita zdravstvenih delavcev pred okužbami (HIV, hepatitis)' : 'Healthcare worker protection against bloodborne pathogens',
         isSlovenian ? 'Enoročno aktiviranje brez spreminjanja kliničnega postopka' : 'One-handed activation mechanism',
-        isSlovenian ? 'Mednarodno priznanje EUREKA 1993 v Bruslju' : 'EUREKA 1993 Brussels Bronze Medal distinction'
+        isSlovenian ? 'Mednarodno priznanje EUREKA 1993 v Bruslju (Médaille d’Or)' : 'EUREKA 1993 Brussels Gold Medal distinction (Médaille d’Or)'
       ]
     },
     {
@@ -227,19 +253,20 @@ export default function PatentsPage() {
       title: isSlovenian ? 'Elektronska telefonska kartica s čipom in procesni sistem' : 'Electronic Telephone Smart Chip Card System',
       category: isSlovenian ? 'Telekomunikacije & elektronika' : isIt ? 'Telecomunicazioni' : 'Telecommunications & Electronics',
       jurisdiction: 'Slovenija / Iskra Terminali & Impulz',
-      inventors: ['Tase Lazovski', 'sodelavci Iskra Terminali & Impulz'],
+      inventors: ['Tase Lazovski (z vidika marketinga)', 'Iskra Terminali Kranj & Impulz d.o.o. Nova Gorica'],
       filingDate: '1994',
       grantDate: '14. junij 1995 (uradna vpeljava)',
       status: isSlovenian ? 'Arhivska implementacija' : 'Archival Implementation',
       recognition: isSlovenian ? 'Nacionalni prehod z žetonov na elektronske kartice' : 'National transition from tokens to smart cards',
       abstract: isSlovenian
-        ? 'Sistem elektronskih kontaktnih kartic z mikrokrmilnikom za javno telefonijo, ki je nadomestil mehanske žetone ter omogočil zanesljivo beleženje impulzov in preprečevanje zlorab.'
-        : 'Smart chip phone card system replacing metal tokens across Slovenia, enabling secure transaction accounting and tamper-proof telecommunication access.',
+        ? 'Sistem elektronskih kontaktnih kartic z mikrokrmilnikom za javno telefonijo, ki je nadomestil mehanske žetone in magnetne kartice ter omogočil zanesljivo beleženje impulzov in preprečevanje zlorab.'
+        : 'Smart chip phone card system replacing mechanical tokens and magnetic cards across Slovenia, enabling secure transaction accounting and tamper-proof telecommunication access.',
       keyFeatures: [
         isSlovenian ? 'Vgrajen varnostni mikrokrmilnik z zanesljivim bralnim vmesnikom' : 'Integrated microcontroller with secure contact pads',
         isSlovenian ? 'Prehod javne telefonije v digitalno dobo (14. junij 1995)' : 'Modernization of public payphones across Slovenia',
         isSlovenian ? 'Optimizacija transakcij in odprava mehanskih okvar žetonov' : 'Elimination of mechanical coin jam failures',
-        isSlovenian ? 'Partnersko sodelovanje z Iskra Terminali in Impulz' : 'Engineered in partnership with Iskra Terminali & Impulz'
+        isSlovenian ? 'Realizacijo uvedbe čip kartic za potrebe javnih telefonskih govorilnic so omogočili Iskra Terminali Kranj in Impulz d.o.o. Nova Gorica.' : 'Implementation enabled by Iskra Terminali Kranj and Impulz d.o.o. Nova Gorica.',
+        isSlovenian ? 'Tase Lazovski je izumitelj pri čip kartici z vidika marketinga.' : 'Tase Lazovski is the inventor of the chip card from a marketing perspective.'
       ]
     },
     {
@@ -248,11 +275,14 @@ export default function PatentsPage() {
       title: isSlovenian ? 'Univerzalni avtomatizirani parkirni terminal' : 'Universal Automated Parking Meter Terminal',
       category: isSlovenian ? 'Urbana avtomatizacija' : isIt ? 'Automazione urbana' : 'Urban Automation',
       jurisdiction: 'Slovenija (Nova Gorica 1999)',
-      inventors: ['Tase Lazovski'],
+      inventors: ['Impulz Nova Gorica', 'LF3M Kranj'],
+      manufacturer: 'Impulz Nova Gorica in LF3M Kranj',
+      coordination: 'Tase Lazovski',
       filingDate: '1998',
-      grantDate: '1999 (komunalna uvedba)',
+      grantDate: '1999',
       status: isSlovenian ? 'Arhivski model' : 'Archival Production',
       recognition: isSlovenian ? 'Prvi sodobni parkomati v Novi Gorici' : 'First modern pay-and-display meters in Nova Gorica',
+      abstractLabel: isSlovenian ? 'Izvleček tehnične rešitve' : isIt ? 'Sintesi della soluzione tecnica' : 'Technical Solution Summary',
       abstract: isSlovenian
         ? 'Robustni zunanji avtomat za plačevanje parkirnine z možnostjo sprejemanja kovancev in pametnih kartic, fotovoltaičnim solarnim modulom ter protivandalskim jeklenim ohišjem.'
         : 'Solar-powered, vandalism-resistant urban parking terminal supporting both coin validation and electronic chip cards for municipal smart city parking.',
@@ -278,25 +308,48 @@ export default function PatentsPage() {
         ? 'Mehanski in elektromehanski varnostni ventil s časovnikom za plinske kuhalnike, ki po poteku nastavljenega časa avtomatsko in zanesljivo prekine dovod plina, če uporabnik pozabi ugasniti gorilnik.'
         : 'A mechanical and electromechanical timer-controlled shutoff valve for gas ranges that automatically cuts off gas flow upon time expiration, preventing uncontrolled gas buildup.',
       keyFeatures: [
-        isSlovenian ? 'Nastavljiv časovnik z zanesljivo mehansko prekinitvijo plina' : 'Adjustable timer dial with positive mechanical shutoff',
-        isSlovenian ? 'Preprečevanje zastrupitev z ogljikovim monoksidom in eksplozij' : 'Explosion and carbon monoxide hazard prevention',
+        isSlovenian ? 'Nastavljiv časovnik z zanesljivo elektronsko in mehansko prekinitvijo plina' : 'Adjustable timer dial with positive electronic and mechanical shutoff',
+        isSlovenian ? 'Preprečevanje vžigov in posredno eksplozij' : 'Prevention of ignition hazards and secondary explosions',
         isSlovenian ? 'Enostavna integracija med plinsko jeklenko/mrežo in gorilnik' : 'Universal retrofit between supply line and burners',
         isSlovenian ? 'So-avtorstvo z Emilom Benkom' : 'Co-invented with engineer Emil Benko'
       ]
+    },
+    {
+      id: 'esd-static',
+      number: 'EP 2805592 · US 959672',
+      title: isSlovenian ? 'Odvod statične elektrike od ljudi (Atemm H-ESD & GREEN POINT)' : 'Controlled Electrostatic Discharge from Humans (Atemm H-ESD & GREEN POINT)',
+      category: isSlovenian ? 'Elektrostatika & industrijska varnost' : isIt ? 'Elettrostatica & sicurezza industriale' : 'Electrostatics & Industrial Safety',
+      jurisdiction: 'Evropa (EPO) & ZDA (USPTO) / Mednarodno',
+      inventors: ['Tase Lazovski', 'Emil Benko', 'Angelo Porcaro'],
+      filingDate: 'Patentna prijava EP & US',
+      grantDate: 'Podeljena patenta EP 2805592 in US 959672',
+      status: isSlovenian ? 'Podeljen mednarodni patent (EP / US)' : 'Granted International Patent (EP / US)',
+      recognition: 'Izdelki Atemm GREEN POINT in Atemm H-ESD',
+      abstract: isSlovenian
+        ? 'Patentirana rešitev nebolečega kontroliranega odvoda statičnega naboja od ljudi v času med 150 in 250 ms. Preprečuje instantne razelektritve (do 25 kV), bolečine, preskoke isker, nevarnost požara ali eksplozije ter negativne vplive na zdravje in psiho. Uporablja se na avtomobilih (varnostni pas Atemm H-ESD), stavbnem pohištvu, delovnih površinah ter računalniških perifernih napravah (tipkovnice in miške Atemm GREEN POINT) z možnostjo prilagoditve za EX prostore.'
+        : 'Patented system for painless, controlled electrostatic discharge from humans within 150 to 250 ms. Prevents painful instant shocks (up to 25 kV), spark jumps, fire and explosion hazards, and adverse psycho-physical stress. Implemented in automobile seatbelts (Atemm H-ESD), machinery, architectural furniture, work surfaces, and computer peripherals (keyboards and mice Atemm GREEN POINT), with custom adaptability for hazardous EX zones.',
+      keyFeatures: [
+        isSlovenian ? 'Kontroliran in neboleč odvod statičnega naboja v času 150–250 ms (brez bolečega šoka)' : 'Painless controlled electrostatic discharge within 150–250 ms',
+        isSlovenian ? 'Preprečevanje preskoka iskre in nevarnosti požara ali eksplozije pri napetostih do 25 kV' : 'Eliminates spark jumps and explosion risks from static charges up to 25 kV',
+        isSlovenian ? 'Atemm H-ESD unikatna rešitev s prevodnim šivom na varnostnem pasu vozil (kontroliran odvod z dotikom do 7 cm²)' : 'Atemm H-ESD unique solution with conductive thread on automotive seatbelts (discharge with touch up to 7 cm²)',
+        isSlovenian ? 'Atemm GREEN POINT integracija za delovna mesta in stavbno pohištvo' : 'Atemm GREEN POINT integration for workstations and architectural furniture',
+        isSlovenian ? 'Možnost prilagoditve časa odvoda posebnim industrijskim zahtevam (EX prostori)' : 'Adjustable discharge timing tailored for hazardous explosive EX zones',
+        isSlovenian ? 'Izumitelji: Tase Lazovski, Emil Benko, Angelo Porcaro' : 'Inventors: Tase Lazovski, Emil Benko, Angelo Porcaro'
+      ],
+      pdfUrl: '/assets/aistudio/ODVOD_STATI_NE_ELEKTRIKE_OD_LJUDI_e6afeecb.pdf',
+      videoId: 'video-static'
     }
   ];
 
-  const additionalInventions = [
-    {
-      title: isSlovenian ? 'Odvod statične elektrike od ljudi' : isIt ? 'Scarica elettrostatica personale' : 'Human Body Static Electricity Discharge',
-      desc: isSlovenian
-        ? 'Inženirska rešitev za zanesljiv odvod elektrostatičnega naboja pred vstopom v občutljiva elektronska, laboratorijska ali eksplozivno ogrožena okolja.'
-        : 'Safety engineering system discharging static electricity safely before entering sensitive semiconductor, cleanroom, or explosive environments.',
-      category: isSlovenian ? 'Industrijska varnost' : isIt ? 'Sicurezza industriale' : 'Industrial Safety',
-      badge: isSlovenian ? 'Laboratorijski izum' : 'Laboratory Invention',
-      icon: Zap,
-      videoId: 'video-static'
-    },
+  const additionalInventions: {
+    title: string;
+    desc: string;
+    category: string;
+    badge: string;
+    icon: any;
+    videoId?: string;
+    pdfUrl?: string;
+  }[] = [
     {
       title: isSlovenian ? 'Univerzalni številčnik za obešalnike oblek' : isIt ? 'Numeratore universale per grucce' : 'Universal Coat Hanger Number Indicator',
       desc: isSlovenian
@@ -469,7 +522,7 @@ export default function PatentsPage() {
     },
     {
       id: 'video-parking',
-      title: isSlovenian ? 'Parkirni avtomat Nova Gorica – Komunalna uvedba' : 'Nova Gorica Parking Terminal – Field Commissioning',
+      title: isSlovenian ? 'Parkirni avtomat Nova Gorica' : 'Nova Gorica Parking Terminal',
       duration: '03:10',
       year: '1999',
       patent: 'Nova Gorica 1999',
@@ -481,15 +534,15 @@ export default function PatentsPage() {
     },
     {
       id: 'video-static',
-      title: isSlovenian ? 'Odvod statične elektrike od ljudi – Varnostni pas' : 'Static Electricity Discharge – Safety Belt',
+      title: isSlovenian ? 'Odvod statične elektrike od ljudi (Atemm H-ESD)' : 'Static Electricity Discharge – Safety Belt (Atemm)',
       duration: '01:55',
-      year: '2001',
-      patent: 'Laboratorijski izum',
+      year: 'EP / US',
+      patent: 'EP 2805592 · US 959672',
       image: heroImg,
       videoUrl: 'https://ik.imagekit.io/utigodgni/Odvod%20stati%C4%8Dne%20elektrike%20od%20ljudi%20-%20varnostni%20pas.mp4',
       desc: isSlovenian
-        ? 'Arhivski videoposnetek in laboratorijski preizkus delovanja varnostnega pasu za zanesljiv odvod statične elektrike od ljudi.'
-        : 'Archival video demonstrating personal electrostatic discharge safety belt for sensitive cleanrooms and explosive environments.'
+        ? 'Arhivski videoposnetek in laboratorijski prikaz patentirane rešitve Atemm H-ESD za kontroliran, neboleč odvod statičnega naboja od ljudi v 150–250 ms.'
+        : 'Archival video demonstration of patented Atemm H-ESD system for controlled painless human electrostatic discharge within 150–250 ms.'
     }
   ];
 
@@ -546,37 +599,34 @@ export default function PatentsPage() {
                   title="Tase Lazovski – Klikni za ogled zgodbe"
                 >
                   {/* Ambient Electric-Blue Aura */}
-                  <div className="absolute -inset-4 bg-[#53B8FF]/25 rounded-full blur-2xl group-hover:bg-[#53B8FF]/45 transition-all duration-700 pointer-events-none" />
+                  <div className="absolute -inset-3 bg-[#53B8FF]/25 rounded-3xl blur-2xl group-hover:bg-[#53B8FF]/45 transition-all duration-700 pointer-events-none" />
 
-                  {/* Outer Technical Orbital Ring (Clockwise) */}
-                  <div className="absolute -inset-4 rounded-full border border-dashed border-[#53B8FF]/40 animate-[spin_24s_linear_infinite] pointer-events-none" />
-                  
-                  {/* Inner Precision Ticks Ring (Counter-clockwise) */}
-                  <div className="absolute -inset-2 rounded-full border border-[#53B8FF]/30 border-t-transparent border-b-transparent animate-[spin_14s_linear_infinite_reverse] pointer-events-none" />
+                  {/* Outer Technical Frame Ticks */}
+                  <div className="absolute -inset-2 rounded-3xl border border-dashed border-[#53B8FF]/30 pointer-events-none" />
 
                   {/* High-tech Corner Coordinate Accents */}
-                  <span className="absolute -top-1 -left-1 w-2.5 h-2.5 border-t-2 border-l-2 border-[#53B8FF] z-20 pointer-events-none" />
-                  <span className="absolute -top-1 -right-1 w-2.5 h-2.5 border-t-2 border-r-2 border-[#53B8FF] z-20 pointer-events-none" />
-                  <span className="absolute -bottom-1 -left-1 w-2.5 h-2.5 border-b-2 border-l-2 border-[#53B8FF] z-20 pointer-events-none" />
-                  <span className="absolute -bottom-1 -right-1 w-2.5 h-2.5 border-b-2 border-r-2 border-[#53B8FF] z-20 pointer-events-none" />
+                  <span className="absolute -top-1.5 -left-1.5 w-3 h-3 border-t-2 border-l-2 border-[#53B8FF] z-20 pointer-events-none" />
+                  <span className="absolute -top-1.5 -right-1.5 w-3 h-3 border-t-2 border-r-2 border-[#53B8FF] z-20 pointer-events-none" />
+                  <span className="absolute -bottom-1.5 -left-1.5 w-3 h-3 border-b-2 border-l-2 border-[#53B8FF] z-20 pointer-events-none" />
+                  <span className="absolute -bottom-1.5 -right-1.5 w-3 h-3 border-b-2 border-r-2 border-[#53B8FF] z-20 pointer-events-none" />
 
-                  {/* Portrait Frame */}
-                  <div className="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 xl:w-44 xl:h-44 rounded-full overflow-hidden border-2 border-[#53B8FF]/80 bg-[#0E131C] relative shadow-[0_0_35px_rgba(83,184,255,0.35)] group-hover:shadow-[0_0_55px_rgba(83,184,255,0.6)] group-hover:border-[#53B8FF] transition-all duration-500">
+                  {/* Square Portrait Frame (Uncropped) */}
+                  <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-44 md:h-44 xl:w-48 xl:h-48 aspect-square rounded-2xl overflow-hidden border-2 border-[#53B8FF]/80 bg-[#0E131C] relative shadow-[0_0_35px_rgba(83,184,255,0.35)] group-hover:shadow-[0_0_55px_rgba(83,184,255,0.6)] group-hover:border-[#53B8FF] transition-all duration-500 flex items-center justify-center p-1.5">
                     <img 
-                      src="https://ik.imagekit.io/utigodgni/profilna.png" 
+                      src="https://ik.imagekit.io/utigodgni/IMG_3769.png" 
                       alt="Tase Lazovski - Inovator in izumitelj" 
-                      className="w-full h-full object-cover object-top group-hover:scale-108 transition-transform duration-700 filter brightness-105 contrast-105"
+                      className="w-full h-full object-contain rounded-xl group-hover:scale-105 transition-transform duration-700 filter brightness-105 contrast-105"
                     />
 
                     {/* Animated Holographic Scanline Overlay */}
                     <motion.div 
                       animate={{ y: ['-100%', '200%'] }}
                       transition={{ duration: 3.2, repeat: Infinity, ease: 'linear' }}
-                      className="absolute inset-x-0 h-10 bg-gradient-to-b from-transparent via-[#53B8FF]/25 to-transparent pointer-events-none"
+                      className="absolute inset-x-0 h-10 bg-gradient-to-b from-transparent via-[#53B8FF]/20 to-transparent pointer-events-none"
                     />
 
                     {/* Subtle Glass Vignette */}
-                    <div className="absolute inset-0 rounded-full ring-1 ring-inset ring-white/20 pointer-events-none" />
+                    <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10 pointer-events-none" />
                   </div>
 
                   {/* Micro Inventor Badge */}
@@ -774,15 +824,19 @@ export default function PatentsPage() {
               </p>
 
               <p>
-                Tase Lazovski sodi med slovenske inženirje in izumitelje, katerih delo je neposredno zaznamovalo vsakdan tisočih ljudi. Njegov pristop ni bil teoretičen, temveč globoko praktičen: prepoznati pereč problem, zasnovati mehansko ali elektronsko rešitev, jo zaščititi s strogimi patentnimi postopki in jo pripeljati do industrijske proizvodnje.
+                Tase Lazovski sodi med slovenske izumitelje, katerih delo je neposredno zaznamovalo vsakdan tisočih ljudi. Njegov pristop ni bil teoretičen, temveč globoko praktičen: prepoznati pereč problem, zasnovati mehansko ali elektronsko rešitev, jo zaščititi s strogimi patentnimi postopki in jo pripeljati do industrijske proizvodnje.
               </p>
 
               <p>
-                Ko je svet v zgodnjih devetdesetih letih pretresla epidemija nalezljivih bolezni, prenesenih s krvjo, je Lazovski zasnoval zaščitni mehanizem za podkožne igle <strong>VITA</strong>. Patent je bil prepoznan na najvišji mednarodni ravni in potrjen z ameriškim patentom <strong>US5051109A</strong> ter z bronasto medaljo na svetovni razstavi inovacij <strong>EUREKA 1993 v Bruslju</strong>.
+                Ko je svet v zgodnjih devetdesetih letih pretresla epidemija nalezljivih bolezni, prenesenih s krvjo, je Lazovski zasnoval zaščitni mehanizem za podkožne igle <strong>VITA</strong>. Patent je bil prepoznan na najvišji mednarodni ravni in potrjen z ameriškim patentom <strong>US5051109A</strong> ter z zlato medaljo (médaille d’or) na svetovni razstavi inovacij <strong>EUREKA 1993 v Bruslju</strong>.
               </p>
 
               <p>
-                Ob prehodu v digitalno dobo je sodeloval pri projektu, ki je spremenil telekomunikacije v Sloveniji: <strong>14. junija 1995</strong> so bile uradno vpeljane prve telefonske kartice z mikročipom v sodelovanju z <strong>Iskra Terminali</strong> in podjetjem <strong>Impulz</strong>. Nekaj let kasneje, leta 1999, pa je v Novi Gorici postavil temelje prvega sodobnega univerzalnega parkirnega avtomata z avtonomnim fotovoltaičnim napajanjem.
+                Ob prehodu v digitalno dobo je sodeloval pri projektu, ki je spremenil telekomunikacije v Sloveniji: <strong>14. junija 1995</strong> so bile uradno vpeljane prve telefonske kartice z mikročipom v sodelovanju z <strong>Iskra Terminali</strong> in podjetjem <strong>Impulz</strong>. Nekaj let kasneje, leta 1999, pa je v Novi Gorici postavil temelje prvega sodobnega univerzalnega parkirnega avtomata z možnostjo plačila s telefonsko čip kartico, bančno kartico in gsm telefonom.
+              </p>
+
+              <p className="text-slate-400 italic text-sm">
+                V tej predstavitvi je predstavljeno le del svetovnih patentov Taseta Lazovskega.
               </p>
             </div>
 
@@ -809,7 +863,7 @@ export default function PatentsPage() {
                   <li className="flex items-start gap-3">
                     <CheckCircle2 size={18} className="text-[#53B8FF] shrink-0 mt-0.5" />
                     <div>
-                      <strong className="text-white">EUREKA Bruselj 1993:</strong> Médaille de Bronze (Salon International des Inventions).
+                      <strong className="text-white">EUREKA Bruselj 1993:</strong> Médaille d’Or (Salon International des Inventions).
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
@@ -1012,7 +1066,7 @@ export default function PatentsPage() {
                       }`}
                     >
                       <FileText size={13} />
-                      <span>Patentne skice (3)</span>
+                      <span>Patentne skice ({vitaImages.length})</span>
                     </button>
                   </div>
 
@@ -1159,7 +1213,7 @@ export default function PatentsPage() {
               <div className="p-4 rounded-2xl bg-[#151B24] border border-slate-800 space-y-2">
                 <div className="text-xs font-mono font-bold text-[#53B8FF] uppercase">Patent & Priznanje:</div>
                 <div className="text-xs sm:text-sm text-slate-300">
-                  Patent <strong>US 5,051,109 A</strong> (podeljen 24. 9. 1991) ter prestižna <strong>bronasta medalja</strong> na svetovnem salonu inovacij <strong>EUREKA 1993 v Bruslju</strong>.
+                  Patent <strong>US 5,051,109 A</strong> (podeljen 24. 9. 1991) ter prestižna <strong>zlata medalja (médaille d’or)</strong> na svetovnem salonu inovacij <strong>EUREKA 1993 v Bruslju</strong>.
                 </div>
               </div>
 
@@ -1365,24 +1419,94 @@ export default function PatentsPage() {
             {/* Visual Column */}
             <div className="lg:col-span-6 relative">
               <div className="rounded-3xl overflow-hidden border-2 border-[#53B8FF]/40 bg-[#151B24] shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative group">
-                <div className="relative aspect-video sm:aspect-[16/10] bg-[#0A0E15] overflow-hidden flex items-center justify-center p-3 sm:p-5">
-                  <img 
-                    src={cardImg} 
-                    alt="Telefonska čip kartica Iskra Terminali 1995" 
-                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 filter drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#080B10]/50 via-transparent to-transparent pointer-events-none" />
-                </div>
-                <div className="absolute top-4 left-4 bg-[#080B10]/90 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-[#53B8FF]/40 text-[#53B8FF] font-mono text-xs font-bold">
-                  14. JUNIJ 1995 · SLOVENIJA
-                </div>
-                <div className="p-3.5 bg-[#0E131C] border-t border-slate-800 flex items-center justify-between text-xs font-mono text-slate-400">
+                
+                {/* Header Info Bar */}
+                <div className="p-3 bg-[#0E131C] border-b border-slate-800 flex items-center justify-between text-xs font-mono">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-pulse" />
-                    <span className="text-white font-bold">Iskra Terminali & Impulz</span>
-                    <span className="text-slate-500 hidden sm:inline">· Elektronska čip kartica</span>
+                    <span className="text-white font-bold">14. JUNIJ 1995 · SLOVENIJA</span>
+                    <span className="text-slate-500 hidden sm:inline">· Iskra Terminali & Impulz</span>
                   </div>
-                  <span className="text-[11px] text-slate-400">Arhivska fotografija</span>
+                  <span className="px-2 py-0.5 rounded-md bg-[#53B8FF]/10 border border-[#53B8FF]/30 text-[#53B8FF]">
+                    Fotografiji ({cardImages.length})
+                  </span>
+                </div>
+
+                <div className="relative aspect-video sm:aspect-[16/10] bg-[#0A0E15] overflow-hidden flex items-center justify-center p-3 sm:p-5 group/draw">
+                  <img 
+                    src={cardImages[activeCardImgIdx].url} 
+                    alt={cardImages[activeCardImgIdx].title} 
+                    className="w-full h-full object-contain group-hover/draw:scale-105 transition-transform duration-700 filter drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#080B10]/40 via-transparent to-transparent pointer-events-none" />
+
+                  {/* Navigation arrows */}
+                  <button
+                    type="button"
+                    onClick={() => setActiveCardImgIdx((prev) => (prev === 0 ? cardImages.length - 1 : prev - 1))}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-900/85 hover:bg-[#53B8FF] text-white hover:text-[#080B10] border border-slate-700 hover:border-[#53B8FF] flex items-center justify-center transition-all opacity-85 hover:opacity-100 cursor-pointer shadow-lg z-10"
+                    title="Prejšnja fotografija"
+                  >
+                    <ChevronRight size={18} className="rotate-180 stroke-[2.5]" />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setActiveCardImgIdx((prev) => (prev === cardImages.length - 1 ? 0 : prev + 1))}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-900/85 hover:bg-[#53B8FF] text-white hover:text-[#080B10] border border-slate-700 hover:border-[#53B8FF] flex items-center justify-center transition-all opacity-85 hover:opacity-100 cursor-pointer shadow-lg z-10"
+                    title="Naslednja fotografija"
+                  >
+                    <ChevronRight size={18} className="stroke-[2.5]" />
+                  </button>
+
+                  <div className="absolute top-4 left-4 pointer-events-none bg-[#080B10]/90 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-[#53B8FF]/40 text-[#53B8FF] font-mono text-xs font-bold z-10">
+                    {cardImages[activeCardImgIdx].title}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setEnlargedGasImg(cardImages[activeCardImgIdx].url)}
+                    className="absolute bottom-4 right-4 bg-[#080B10]/90 hover:bg-[#53B8FF] text-slate-300 hover:text-[#080B10] backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700 hover:border-[#53B8FF] text-xs font-mono font-bold transition-colors flex items-center gap-1.5 cursor-pointer shadow-md z-10"
+                    title="Povečaj"
+                  >
+                    <Maximize2 size={13} />
+                    <span className="hidden sm:inline">Povečaj</span>
+                  </button>
+                </div>
+
+                {/* Thumbnail Strip with 2 Images */}
+                <div className="p-3 bg-[#0E131C] border-t border-slate-800 grid grid-cols-2 gap-2.5">
+                  {cardImages.map((img, idx) => {
+                    const isSelected = activeCardImgIdx === idx;
+                    return (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => setActiveCardImgIdx(idx)}
+                        className={`rounded-xl overflow-hidden border-2 transition-all p-1.5 bg-[#080B10] flex items-center gap-2 cursor-pointer text-left ${
+                          isSelected
+                            ? 'border-[#53B8FF] shadow-[0_0_15px_rgba(83,184,255,0.3)] bg-[#151B24]'
+                            : 'border-slate-800 hover:border-slate-700 opacity-70 hover:opacity-100'
+                        }`}
+                      >
+                        <div className="w-12 h-10 rounded-lg overflow-hidden bg-black shrink-0 flex items-center justify-center p-0.5">
+                          <img 
+                            src={img.url} 
+                            alt={`Predogled ${idx + 1}`} 
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
+                        <div className="overflow-hidden">
+                          <div className={`text-[10px] font-mono font-bold truncate ${isSelected ? 'text-[#53B8FF]' : 'text-slate-300'}`}>
+                            Fotografija 0{idx + 1}
+                          </div>
+                          <div className="text-[9px] text-slate-500 font-sans truncate">
+                            {img.title}
+                          </div>
+                        </div>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -1401,7 +1525,7 @@ export default function PatentsPage() {
 
               <div className="space-y-4 text-slate-300 text-sm sm:text-base leading-relaxed">
                 <p>
-                  <strong>Prehod z žetonov:</strong> Do sredine devetdesetih let so javne govorilnice delovale na težke kovinske žetone in kovance. Zastoji mehanizmov in kraje so povzročali ogromne stroške vzdrževanja telekomunikacijskega omrežja.
+                  <strong>Prehod z žetonov:</strong> Do sredine devetdesetih let so javne govorilnice delovale na težke kovinske žetone in kovance. Ogromne škode ter veliko vzdrževanja telekomunikacijskega omrežja.
                 </p>
                 <p>
                   <strong>Zgodovinski 14. junij 1995:</strong> V sodelovanju z gigantom <strong>Iskra Terminali</strong> in podjetjem <strong>Impulz</strong> je bil zagnan nacionalni sistem elektronskih telefonskih kartic z vgrajenim kontaktnim čipom.
@@ -1411,9 +1535,13 @@ export default function PatentsPage() {
                 </p>
               </div>
 
-              <div className="p-4 rounded-2xl bg-[#151B24] border border-slate-800 space-y-1 text-xs">
-                <div className="font-mono text-[#53B8FF] uppercase font-bold">Ključni partnerji projekta:</div>
-                <div className="text-slate-300">Iskra Terminali · Impulz · Tase Lazovski (razvoj in implementacija)</div>
+              <div className="p-4 rounded-2xl bg-[#151B24] border border-slate-800 space-y-2 text-xs">
+                <div className="text-slate-300 leading-relaxed">
+                  Realizacijo uvedbe čip kartic za potrebe javnih telefonskih govorilnic so omogočili <strong>Iskra Terminali Kranj</strong> in <strong>Impulz d.o.o. Nova Gorica</strong>.
+                </div>
+                <div className="text-[#53B8FF] font-semibold">
+                  Tase Lazovski je izumitelj pri čip kartici z vidika marketinga.
+                </div>
               </div>
 
               <div className="pt-2">
@@ -1450,13 +1578,13 @@ export default function PatentsPage() {
 
               <div className="space-y-4 text-slate-300 text-sm sm:text-base leading-relaxed">
                 <p>
-                  <strong>Gospodinjska nevarnost:</strong> Pozabljen prižgan plinski gorilnik je med najpogostejšimi vzroki kuhinjskih požarov, uhajanja plina in eksplozij, zlasti pri starejših ali raztresenih uporabnikih.
+                  <strong>Gospodinjska nevarnost:</strong> Pozabljen prižgan plinski gorilnik je med najpogostejšimi vzroki kuhinjskih požarov in eksplozij, zlasti pri starejših ali raztresenih uporabnikih.
                 </p>
                 <p>
-                  <strong>Sodelovanje Tasa Lazovskega in Emila Benka:</strong> Izumitelja sta razvila elektromehanski varnostni ventil s časovnikom. Pred prižigom uporabnik nastavi želeni čas delovanja. Ko čas poteče, ventil avtomatsko in hipoma nepredušno zapre dovod plina do gorilnika.
+                  <strong>Sodelovanje Taseta Lazovskega:</strong> Razvil je elektromehanski varnostni ventil s časovnikom. Pred prižigom uporabnik nastavi želeni čas delovanja. Ko čas poteče, ventil avtomatsko in hipoma nepredušno zapre dovod plina do gorilnika.
                 </p>
                 <p>
-                  Inovacija deluje samostojno brez zapletene elektronike ali zunanjega napajanja, kar zagotavlja visoko varnostno zanesljivost.
+                  Inovacija deluje samostojno, kar zagotavlja visoko varnostno zanesljivost.
                 </p>
               </div>
 
@@ -1581,6 +1709,135 @@ export default function PatentsPage() {
                   })}
                 </div>
 
+              </div>
+            </div>
+          </div>
+
+          {/* --------------------------------------------------------------------- */}
+          {/* 5. ODVOD STATIČNE ELEKTRIKE OD LJUDI */}
+          {/* --------------------------------------------------------------------- */}
+          <div id="izum-static" className="scroll-mt-28 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+            {/* Narrative Column */}
+            <div className="lg:col-span-6 space-y-6 order-2 lg:order-1">
+              <div className="flex items-center gap-2 font-mono text-xs text-[#53B8FF] tracking-widest uppercase">
+                <span>ELEKTROSTATIKA & VARNOST 05</span>
+                <span>·</span>
+                <span>T. LAZOVSKI, E. BENKO, A. PORCARO</span>
+              </div>
+
+              <h3 className="text-3xl sm:text-4xl md:text-5xl font-display font-black uppercase text-white leading-[1.05]">
+                ODVOD STATIČNE <span className="text-[#53B8FF]">ELEKTRIKE OD LJUDI</span>
+              </h3>
+
+              <div className="space-y-4 text-slate-300 text-sm sm:text-base leading-relaxed">
+                <p>
+                  <strong>Problem statične elektrike:</strong> V določenih atmosferskih pogojih ter ob uporabi sodobnih materialov pri oblačilih, obutvi in opremi se na človeškem telesu lahko nakopiči elektrostatični naboj s potencialom tudi do <strong>25.000 V (25 kV)</strong>. Ob dotiku ozemljenega predmeta pride do hipne razelektritve, bolečega šoka, preskoka iskre in nevarnosti vžiga ali eksplozije, poleg tega pa ima tak naboj negativen vpliv na zdravje in počutje.
+                </p>
+                <p>
+                  <strong>Patentirana rešitev (EP 2805592 / US 959672):</strong> Izumitelji <strong>Tase Lazovski</strong>, <strong>Emil Benko</strong> in <strong>Angelo Porcaro</strong> so razvili in patentirali mehanizem za neboleč, kontroliran odvod statičnega naboja v točno odmerjenem času med <strong>150 in 250 ms</strong> (s prilagoditvijo tudi za EX prostore).
+                </p>
+                <p>
+                  Inovativne rešitve so uveljavljene v komercialnih izdelkih <strong>Atemm H-ESD</strong> (integracija v varnostni pas vozil z prevodnim šivom) in je unikatna rešitev, saj omogoča kontroliran odvod statične elektrike z dotikom osebe na prevodni material do maksimalno 7 cm² površine, ter <strong>Atemm GREEN POINT</strong> (delovna mesta in stavbno pohištvo).
+                </p>
+              </div>
+
+              {/* Stats badges */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+                <div className="p-3.5 rounded-xl bg-[#151B24] border border-slate-800">
+                  <div className="text-[10px] font-mono text-[#53B8FF] uppercase">Čas odvoda</div>
+                  <div className="font-bold text-white text-xs mt-1">150 – 250 ms (neboleče)</div>
+                </div>
+                <div className="p-3.5 rounded-xl bg-[#151B24] border border-slate-800">
+                  <div className="text-[10px] font-mono text-[#53B8FF] uppercase">Napetostni razpon</div>
+                  <div className="font-bold text-white text-xs mt-1">Do 25 kV zaščita</div>
+                </div>
+                <div className="p-3.5 rounded-xl bg-[#151B24] border border-slate-800 col-span-2 sm:col-span-1">
+                  <div className="text-[10px] font-mono text-[#53B8FF] uppercase">Patenta</div>
+                  <div className="font-bold text-white text-xs mt-1 truncate">EP 2805592 · US 959672</div>
+                </div>
+              </div>
+
+              {/* Action buttons */}
+              <div className="pt-2 flex flex-wrap items-center gap-3">
+                <a
+                  href="/assets/aistudio/ODVOD_STATI_NE_ELEKTRIKE_OD_LJUDI_e6afeecb.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-md"
+                >
+                  <FileText size={16} />
+                  <span>Odpri patentni dokument (PDF)</span>
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setActiveVideoModal('video-static')}
+                  className="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 font-display font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-sm"
+                >
+                  <Play size={16} className="text-[#53B8FF]" />
+                  <span>Predvajaj video posnetek</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const rec = patentRegistry.find(p => p.id === 'esd-static');
+                    if (rec) setSelectedPatent(rec);
+                  }}
+                  className="px-5 py-3 rounded-xl bg-[#151B24] hover:bg-slate-800 text-slate-300 border border-slate-800 font-display font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer"
+                >
+                  <Info size={16} className="text-[#53B8FF]" />
+                  <span>Specifikacije izuma</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Visual Column: Technical Schematic Blueprint */}
+            <div className="lg:col-span-6 relative order-1 lg:order-2">
+              <div className="rounded-3xl overflow-hidden border-2 border-[#53B8FF]/40 bg-[#151B24] shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative group">
+                <div className="p-3 bg-[#0E131C] border-b border-slate-800 flex items-center justify-between text-xs font-mono">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-pulse" />
+                    <span className="text-white font-bold">Uradna patentna dokumentacija</span>
+                    <span className="text-slate-500 hidden sm:inline">· Atemm H-ESD & GREEN POINT</span>
+                  </div>
+                  <span className="px-2 py-0.5 rounded-md bg-[#53B8FF]/10 border border-[#53B8FF]/30 text-[#53B8FF]">
+                    EP 2805592 · US 959672
+                  </span>
+                </div>
+
+                <div className="relative aspect-[3/4] sm:aspect-[4/5] bg-white overflow-hidden flex items-center justify-center p-3 group/img">
+                  <img 
+                    src="/assets/odvod_staticne_elektrike_shema.png" 
+                    alt="Odvod statične elektrike od ljudi patentna shema Atemm" 
+                    className="w-full h-full object-contain filter drop-shadow-[0_10px_25px_rgba(0,0,0,0.3)] transition-transform duration-500 group-hover/img:scale-[1.02]"
+                  />
+
+                  <div className="absolute top-4 left-4 pointer-events-none bg-[#080B10]/90 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-[#53B8FF]/40 text-[#53B8FF] font-mono text-xs font-bold">
+                    T. LAZOVSKI, E. BENKO, A. PORCARO
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setEnlargedGasImg('/assets/odvod_staticne_elektrike_shema.png')}
+                    className="absolute bottom-4 right-4 bg-[#080B10]/90 hover:bg-[#53B8FF] text-slate-300 hover:text-[#080B10] backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700 hover:border-[#53B8FF] text-xs font-mono font-bold transition-colors flex items-center gap-1.5 cursor-pointer shadow-md z-10"
+                    title="Povečaj načrt"
+                  >
+                    <Maximize2 size={13} />
+                    <span className="hidden sm:inline">Povečaj načrt</span>
+                  </button>
+                </div>
+
+                <div className="p-3.5 bg-[#0E131C] border-t border-slate-800 flex items-center justify-between text-xs font-mono text-slate-400">
+                  <span className="truncate">Vgradnja v varnostni pas vozil & računalniško opremo</span>
+                  <a
+                    href="/assets/aistudio/ODVOD_STATI_NE_ELEKTRIKE_OD_LJUDI_e6afeecb.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#53B8FF] hover:underline flex items-center gap-1 shrink-0 ml-2"
+                  >
+                    <span>Celoten PDF</span>
+                    <ExternalLink size={12} />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -1747,6 +2004,19 @@ export default function PatentsPage() {
                         </button>
                       </div>
                     )}
+                    {inv.pdfUrl && (
+                      <div className="pt-2">
+                        <a
+                          href={inv.pdfUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full py-2.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 font-display font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+                        >
+                          <FileText size={14} className="text-[#53B8FF]" />
+                          <span>Odpri patentni dokument (PDF)</span>
+                        </a>
+                      </div>
+                    )}
                   </div>
 
                   <div className="pt-6 border-t border-slate-800/80 mt-6 flex items-center justify-between text-xs text-slate-500 font-mono">
@@ -1814,7 +2084,14 @@ export default function PatentsPage() {
 
                 <div className="flex items-center gap-4 shrink-0">
                   <div className="hidden sm:block text-right text-xs font-mono text-slate-400">
-                    <div>Izumitelj: {patent.inventors.join(', ')}</div>
+                    {patent.manufacturer ? (
+                      <>
+                        <div>Proizvajalec: {patent.manufacturer}</div>
+                        {patent.coordination && <div className="text-slate-400">Koordinacija: {patent.coordination}</div>}
+                      </>
+                    ) : (
+                      <div>Izumitelj: {patent.inventors.join(', ')}</div>
+                    )}
                     <div className="text-slate-500">{patent.grantDate}</div>
                   </div>
 
@@ -1991,7 +2268,9 @@ export default function PatentsPage() {
               )}
 
               <div className="space-y-3">
-                <h4 className="text-xs font-mono uppercase tracking-wider text-[#53B8FF] font-bold">Izvleček izuma (Abstract)</h4>
+                <h4 className="text-xs font-mono uppercase tracking-wider text-[#53B8FF] font-bold">
+                  {selectedPatent.abstractLabel || (isSlovenian ? 'Izvleček izuma (Abstract)' : isIt ? 'Sintesi del brevetto (Abstract)' : 'Patent Abstract')}
+                </h4>
                 <p className="text-sm text-slate-300 leading-relaxed font-normal">
                   {selectedPatent.abstract}
                 </p>
@@ -2009,10 +2288,63 @@ export default function PatentsPage() {
                 </ul>
               </div>
 
-              <div className="grid grid-cols-2 gap-3 pt-2 text-xs font-mono text-slate-400 border-t border-slate-800">
-                <div>
-                  <span className="text-slate-500 block">Izumitelji:</span>
-                  <span className="text-white font-bold">{selectedPatent.inventors.join(', ')}</span>
+              {selectedPatent.id === 'esd-static' && (
+                <div className="rounded-2xl border border-slate-800 bg-[#0a0f16] p-4 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-mono font-bold text-[#53B8FF] uppercase tracking-wider flex items-center gap-1.5">
+                      <Layers size={14} />
+                      Uradni patentni načrt in shema (Atemm H-ESD / GREEN POINT)
+                    </span>
+                    <a
+                      href={selectedPatent.pdfUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-mono text-slate-400 hover:text-[#53B8FF] flex items-center gap-1 transition-colors"
+                    >
+                      <span>Odpri PDF</span>
+                      <ExternalLink size={12} />
+                    </a>
+                  </div>
+                  <div className="max-h-64 overflow-y-auto rounded-xl border border-slate-800 bg-white/5 p-1">
+                    <img 
+                      src="/assets/odvod_staticne_elektrike_shema.png" 
+                      alt="Odvod statične elektrike od ljudi patentna shema Atemm" 
+                      className="w-full h-auto object-contain rounded-lg"
+                    />
+                  </div>
+                </div>
+              )}
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs font-mono text-slate-400 border-t border-slate-800">
+                <div className={selectedPatent.id === 'chip-card' ? 'sm:col-span-2' : ''}>
+                  {selectedPatent.manufacturer ? (
+                    <div className="space-y-1.5">
+                      <div>
+                        <span className="text-slate-500 block">Proizvajalec:</span>
+                        <span className="text-white font-bold">{selectedPatent.manufacturer}</span>
+                      </div>
+                      {selectedPatent.coordination && (
+                        <div>
+                          <span className="text-slate-500 block">Koordinacija:</span>
+                          <span className="text-white font-bold">{selectedPatent.coordination}</span>
+                        </div>
+                      )}
+                    </div>
+                  ) : selectedPatent.id === 'chip-card' ? (
+                    <div className="space-y-1.5">
+                      <div className="text-slate-300 leading-relaxed font-sans text-xs">
+                        Realizacijo uvedbe čip kartic za potrebe javnih telefonskih govorilnic so omogočili <strong className="text-white">Iskra Terminali Kranj</strong> in <strong className="text-white">Impulz d.o.o. Nova Gorica</strong>.
+                      </div>
+                      <div className="text-[#53B8FF] font-semibold font-sans text-xs">
+                        Tase Lazovski je izumitelj pri čip kartici z vidika marketinga.
+                      </div>
+                    </div>
+                  ) : (
+                    <div>
+                      <span className="text-slate-500 block">Izumitelji:</span>
+                      <span className="text-white font-bold">{selectedPatent.inventors.join(', ')}</span>
+                    </div>
+                  )}
                 </div>
                 <div>
                   <span className="text-slate-500 block">Status:</span>
@@ -2049,12 +2381,36 @@ export default function PatentsPage() {
                     <span>Predvajaj video posnetek</span>
                   </button>
                 )}
+                {selectedPatent.id === 'esd-static' && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedPatent(null);
+                      setActiveVideoModal('video-static');
+                    }}
+                    className="flex-1 py-3 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                  >
+                    <Play size={15} className="fill-[#080B10]" />
+                    <span>Predvajaj video posnetek</span>
+                  </button>
+                )}
+                {selectedPatent.pdfUrl && (
+                  <a
+                    href={selectedPatent.pdfUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 py-3 rounded-xl bg-[#53B8FF]/15 border border-[#53B8FF]/40 hover:bg-[#53B8FF]/25 text-[#53B8FF] font-display font-black text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    <FileText size={15} />
+                    <span>Odpri patentni PDF</span>
+                  </a>
+                )}
                 <button
                   type="button"
                   onClick={() => setSelectedPatent(null)}
                   className="flex-1 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-display font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer"
                 >
-                  Zapri pregled dokumenta
+                  Zapri pregled
                 </button>
               </div>
             </motion.div>
@@ -2172,7 +2528,13 @@ export default function PatentsPage() {
               className="relative max-w-5xl w-full max-h-[90vh] bg-[#151B24] border border-[#53B8FF]/40 rounded-3xl overflow-hidden p-4 sm:p-6 flex flex-col justify-between shadow-2xl cursor-default"
             >
               <div className="flex items-center justify-between pb-3 border-b border-slate-800 text-xs font-mono text-slate-400">
-                <span className="text-[#53B8FF] font-bold">TEHNIČNA DOKUMENTACIJA · ČASOVNIK ZA PLIN</span>
+                <span className="text-[#53B8FF] font-bold">
+                  {enlargedGasImg?.includes('staticne')
+                    ? 'TEHNIČNA DOKUMENTACIJA · ODVOD STATIČNE ELEKTRIKE OD LJUDI'
+                    : enlargedGasImg?.includes('KARTICA') || enlargedGasImg?.includes('Untitled-1')
+                    ? 'ARHIVSKA FOTOGRAFIJA · TELEFONSKA ČIP KARTICA'
+                    : 'TEHNIČNA DOKUMENTACIJA · ČASOVNIK ZA PLIN'}
+                </span>
                 <button
                   type="button"
                   onClick={() => setEnlargedGasImg(null)}
@@ -2191,7 +2553,13 @@ export default function PatentsPage() {
               </div>
 
               <div className="pt-3 border-t border-slate-800 flex items-center justify-between text-xs font-mono text-slate-400">
-                <span>Tase Lazovski & Emil Benko</span>
+                <span>
+                  {enlargedGasImg?.includes('staticne')
+                    ? 'Tase Lazovski, Emil Benko, Angelo Porcaro'
+                    : enlargedGasImg?.includes('KARTICA') || enlargedGasImg?.includes('Untitled-1')
+                    ? 'Iskra Terminali · Impulz · Tase Lazovski'
+                    : 'Tase Lazovski & Emil Benko'}
+                </span>
                 <button
                   type="button"
                   onClick={() => setEnlargedGasImg(null)}
