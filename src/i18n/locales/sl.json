@@ -173,6 +173,12 @@
       "label": "Gospodarski partner",
       "desc": "Severno Primorska gospodarska zbornica povezuje gospodarstvo in izobraževanje ter spodbuja razvoj prihodnjih kadrov. S StartLab sodelujemo pri organizaciji dogodkov, povezovanju šol in podjetij ter iskanju mentorjev in partnerjev iz gospodarstva za izobraževalne in podjetniške projekte. Skupaj mladim približujemo poslovni svet in krepimo njihove kompetence za prihodnost."
     },
+    "item_ooz": {
+      "name": "OOZ Ajdovščina",
+      "fullName": "Območna obrtno-podjetniška zbornica Ajdovščina",
+      "label": "Obrtno-podjetniški partner",
+      "desc": "Območna obrtno-podjetniška zbornica Ajdovščina podpira Start LAB, ker verjamemo, da sta razvijanje tehničnih znanj in spodbujanje ustvarjalnosti mladih ključna za prihodnost podjetništva in obrtništva. Start LAB mladim omogoča pridobivanje praktičnih izkušenj, razvijanje inovativnosti in spoznavanje sodobnih tehnologij. V zbornici prepoznavamo priložnosti za sodelovanje, povezovanje izobraževanja z gospodarstvom ter spodbujanje zanimanja za tehnične poklice, ki jih naše gospodarstvo vse bolj potrebuje."
+    },
     "for_companies": {
       "title": "Za podjetja",
       "desc": "Vabimo podjetja k soustvarjanju delavnic, team-buildingom in naložbi v prihodnje kadre regije. Postanite del odprtega razvojnega okolja na Goriškem.",

@@ -173,6 +173,12 @@
       "label": "Partner Economico",
       "desc": "La Camera dell'Economia della Primorska Settentrionale collega l'economia e l'istruzione e promuove lo sviluppo dei talenti futuri. Collaboriamo con StartLab nell'organizzazione di eventi, nel collegamento tra scuole e imprese e nella ricerca di mentori e partner dal mondo economico per progetti educativi e imprenditoriali. Insieme avviciniamo i giovani al mondo del lavoro e rafforziamo le loro competenze per il futuro."
     },
+    "item_ooz": {
+      "name": "OOZ Ajdovščina",
+      "fullName": "Camera dell'Artigianato e dell'Imprenditoria di Ajdovščina",
+      "label": "Partner Imprenditoriale",
+      "desc": "La Camera dell'Artigianato e dell'Imprenditoria di Ajdovščina sostiene Start LAB, credendo che lo sviluppo delle competenze tecniche e la promozione della creatività dei giovani siano essenziali per il futuro dell'imprenditoria e dell'artigianato. Start LAB offre ai giovani l'opportunità di acquisire esperienza pratica, sviluppare l'innovazione e scoprire le tecnologie moderne. Nella camera riconosciamo opportunità di collaborazione, collegando l'istruzione con l'economia e promuovendo l'interesse per le professioni tecniche sempre più richieste."
+    },
     "for_companies": {
       "title": "Per le Aziende",
       "desc": "Invitiamo le aziende a co-creare workshop, team-building e investire nel futuro personale della regione. Diventa parte dell'ambiente di sviluppo aperto della Goriška.",

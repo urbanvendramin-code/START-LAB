@@ -122,6 +122,11 @@ const PARTNER_CAROUSEL_LOGOS: CarouselPartner[] = [
     name: "Severno Primorska gospodarska zbornica",
     logo: "https://res.cloudinary.com/pithqpe2/image/upload/v1788243429/SP_CMYK.png",
     href: "https://www.gzs.si/spgz"
+  },
+  {
+    name: "Območna obrtno-podjetniška zbornica Ajdovščina",
+    logo: "https://ik.imagekit.io/utigodgni/BARVNI%20POKONCNI%20copy.jpg",
+    href: "https://www.ooz-ajdovscina.si/"
   }
 ];
 
@@ -1150,6 +1155,13 @@ export default function PartnerPage() {
                      href: "https://www.gzs.si/spgz",
                      logo: "https://res.cloudinary.com/pithqpe2/image/upload/v1788243429/SP_CMYK.png",
                      logoClassName: "scale-135 sm:scale-140" 
+                   },
+                   { 
+                     key: 'item_ooz', 
+                     bg: "bg-play-blue/5 border-play-blue/15 hover:border-play-blue/35 text-play-blue hover:scale-[1.01]", 
+                     badgeColor: "bg-play-blue/12 text-play-blue", 
+                     href: "https://www.ooz-ajdovscina.si/",
+                     logo: "https://ik.imagekit.io/utigodgni/BARVNI%20POKONCNI%20copy.jpg"
                    }
                  ].map((item, idx) => {
                    const name = t(`partners.${item.key}.name`);
