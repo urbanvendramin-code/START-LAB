@@ -179,7 +179,7 @@ export default function PatentsPage() {
       exactDate: isSlovenian ? '14. junij 1995' : isIt ? '14 giugno 1995' : '14 June 1995',
       title: isSlovenian ? 'Telefonske čip kartice v Sloveniji' : isIt ? 'Schede telefoniche con chip' : 'Telephone chip cards in Slovenia',
       desc: isSlovenian
-        ? 'Uradni zagon sistema telefonskih kartic z vgrajenim čipom. Tehnološki preskok s kovancev in žetonov na elektronske kartice z Iskra Terminali in Impulz.'
+        ? 'Uradni zagon sistema telefonskih kartic z vgrajenim čipom. Tehnološki preskok z žetonov na elektronske kartice z Iskra Terminali in Impulz.'
         : isIt
           ? 'Lancio ufficiale delle schede telefoniche con microchip, superando i gettoni metallici in partnership con Iskra Terminali e Impulz.'
           : 'Official rollout of smart telephone chip cards in Slovenia, replacing tokens with electronic microchips with Iskra Terminali and Impulz.',
@@ -238,7 +238,7 @@ export default function PatentsPage() {
       status: isSlovenian ? 'Zgodovinski patent (podeljen)' : 'Historical Patent (Granted)',
       recognition: 'EUREKA Bruselj 1993 – Médaille d’Or',
       abstract: isSlovenian
-        ? 'Zaščitni sklop za podkožne injekcijske igle, ki z integriranim cilindričnim tulcem in nepovratnim zaklepnim mehanizmom po uporabi popolnoma zapre konico igle ter preprečuje nevarne naključne vbode medicinskega osebja.'
+        ? 'Zaščitni tulec za injekcijske igle, ki po iniciranju prepreči nehote vbode medicinskega osebja.'
         : 'A protective safety assembly for hypodermic needles that permanently locks a shielding sheath over the needle tip following injection to prevent accidental needle-stick contamination.',
       keyFeatures: [
         isSlovenian ? 'Avtomatski nepovratni zaklep zaščitnega pokrovčka' : 'Automatic irreversible sleeve locking',
@@ -326,14 +326,14 @@ export default function PatentsPage() {
       status: isSlovenian ? 'Podeljen mednarodni patent (EP / US)' : 'Granted International Patent (EP / US)',
       recognition: 'Izdelki Atemm GREEN POINT in Atemm H-ESD',
       abstract: isSlovenian
-        ? 'Patentirana rešitev nebolečega kontroliranega odvoda statičnega naboja od ljudi v času med 150 in 250 ms. Preprečuje instantne razelektritve (do 25 kV), bolečine, preskoke isker, nevarnost požara ali eksplozije ter negativne vplive na zdravje in psiho. Uporablja se na avtomobilih (varnostni pas Atemm H-ESD), stavbnem pohištvu, delovnih površinah ter računalniških perifernih napravah (tipkovnice in miške Atemm GREEN POINT) z možnostjo prilagoditve za EX prostore.'
+        ? 'Patentirana rešitev nebolečega kontroliranega odvoda statičnega naboja od ljudi v času med 150 in 250 ms. Preprečuje instantne razelektritve (do 25 kV), bolečine, preskoke isker, nevarnost požara ali eksplozije ter negativne vplive na zdravje in psiho. Uporablja se na avtomobilih (varnostni pas Atemm H-ESD), stavbnem pohištvu, delovnih površinah ter računalniških perifernih napravah (tipkovnice in miške Atemm GREEN POINT) z možnostjo prilagoditve za X cone.'
         : 'Patented system for painless, controlled electrostatic discharge from humans within 150 to 250 ms. Prevents painful instant shocks (up to 25 kV), spark jumps, fire and explosion hazards, and adverse psycho-physical stress. Implemented in automobile seatbelts (Atemm H-ESD), machinery, architectural furniture, work surfaces, and computer peripherals (keyboards and mice Atemm GREEN POINT), with custom adaptability for hazardous EX zones.',
       keyFeatures: [
         isSlovenian ? 'Kontroliran in neboleč odvod statičnega naboja v času 150–250 ms (brez bolečega šoka)' : 'Painless controlled electrostatic discharge within 150–250 ms',
         isSlovenian ? 'Preprečevanje preskoka iskre in nevarnosti požara ali eksplozije pri napetostih do 25 kV' : 'Eliminates spark jumps and explosion risks from static charges up to 25 kV',
         isSlovenian ? 'Atemm H-ESD unikatna rešitev s prevodnim šivom na varnostnem pasu vozil (kontroliran odvod z dotikom do 7 cm²)' : 'Atemm H-ESD unique solution with conductive thread on automotive seatbelts (discharge with touch up to 7 cm²)',
         isSlovenian ? 'Atemm GREEN POINT integracija za delovna mesta in stavbno pohištvo' : 'Atemm GREEN POINT integration for workstations and architectural furniture',
-        isSlovenian ? 'Možnost prilagoditve časa odvoda posebnim industrijskim zahtevam (EX prostori)' : 'Adjustable discharge timing tailored for hazardous explosive EX zones',
+        isSlovenian ? 'Možnost prilagoditve časa odvoda posebnim industrijskim zahtevam (X cone)' : 'Adjustable discharge timing tailored for hazardous explosive EX zones',
         isSlovenian ? 'Izumitelji: Tase Lazovski, Emil Benko, Angelo Porcaro' : 'Inventors: Tase Lazovski, Emil Benko, Angelo Porcaro'
       ],
       pdfUrl: '/assets/aistudio/ODVOD_STATI_NE_ELEKTRIKE_OD_LJUDI_e6afeecb.pdf',
@@ -349,11 +349,12 @@ export default function PatentsPage() {
     icon: any;
     videoId?: string;
     pdfUrl?: string;
+    authors?: string;
   }[] = [
     {
       title: isSlovenian ? 'Univerzalni številčnik za obešalnike oblek' : isIt ? 'Numeratore universale per grucce' : 'Universal Coat Hanger Number Indicator',
       desc: isSlovenian
-        ? 'Praktična mehanska rešitev za označevanje in organizacijo oblačil v večjih garderobah, čistilnicah in industrijskih tekstilnih obratih.'
+        ? 'Praktična mehanska rešitev za vse vrste obešalnikov, ki omogoča, da so številke artiklov vidne.'
         : 'Smart mechanical numbering and tracking indexer for garment hangers in institutional wardrobes and textile processing facilities.',
       category: isSlovenian ? 'Uporabno oblikovanje' : isIt ? 'Design applicato' : 'Applied Utility',
       badge: isSlovenian ? 'Model / Patent' : 'Utility Model',
@@ -362,7 +363,7 @@ export default function PatentsPage() {
     {
       title: isSlovenian ? 'Smučarska palica brez metlice' : isIt ? 'Bastoncino da sci senza rotella' : 'Aerodynamic Basketless Ski Pole',
       desc: isSlovenian
-        ? 'Aerodinamična in biomehansko optimizirana konstrukcija smučarske palice, ki zmanjšuje upor zraka in nevarnost zatikanja v tekmovalnih pogojih.'
+        ? 'Aerodinamična optimizirana konstrukcija smučarske palice, ki zmanjšuje upor zraka in nudi zdrs ob količkih, kar omogoča hitrejši čas smučarja.'
         : 'Aerodynamically profiled ski pole innovation eliminating bulky snow baskets for reduced drag in alpine speed disciplines.',
       category: isSlovenian ? 'Športni inženiring' : isIt ? 'Ingegneria sportiva' : 'Sports Engineering',
       badge: isSlovenian ? 'Športna inovacija' : 'Sports Innovation',
@@ -375,12 +376,17 @@ export default function PatentsPage() {
         : 'Early architectural and process framework for secure online digital payments, chip card authorization, and verified transaction settlement.',
       category: isSlovenian ? 'Digitalne tehnologije' : isIt ? 'Tecnologia digitale' : 'Digital Technologies',
       badge: isSlovenian ? 'Procesni model' : 'Process Framework',
-      icon: CreditCard
+      icon: CreditCard,
+      authors: isSlovenian
+        ? 'Avtor patenta: Jože Vilfan · Soavtor: Tase Lazovski'
+        : isIt
+        ? 'Autore del brevetto: Jože Vilfan · Coautore: Tase Lazovski'
+        : 'Patent Author: Jože Vilfan · Co-author: Tase Lazovski'
     },
     {
       title: isSlovenian ? 'Ključ z označevanjem statusa zaklenjeno/odklenjeno' : isIt ? 'Chiave con indicatore di stato' : 'Key with Locked/Unlocked Status Indicator',
       desc: isSlovenian
-        ? 'Inovativni mehanski pomnilnik v glavi ključa, ki ob obratu v ključavnici spremeni barvni indikator ter uporabniku odpravi dvom, ali so vrata zaklenjena.'
+        ? 'Inovativna mehanska rešitev v glavi ključa, ki ob zaprtju s premikom mehanizma v smeri ključavnice, nam pokaže odprto ali zaprto.'
         : 'Mechanical memory indicator embedded in the key head that changes color upon lock rotation, ending uncertainty about door status.',
       category: isSlovenian ? 'Mehanika & varnost' : isIt ? 'Meccanica' : 'Mechanical Utility',
       badge: isSlovenian ? 'Mehanska inovacija' : 'Mechanical Patent',
@@ -393,28 +399,28 @@ export default function PatentsPage() {
       title: isSlovenian ? 'Mehanizem varnostne igle VITA' : 'VITA Safety Needle Mechanism',
       patent: 'US Patent 5,051,109 A',
       desc: isSlovenian 
-        ? 'Prebojni patent Tasa Lazovskega temelji na preprostem, a zanesljivem mehanizmu, ki medicinskemu osebju omogoča običajno vbrizgavanje, takoj po njem pa z eno roko sproži zaščitni tulec, ki nepovratno blokira ostro konico igle.'
+        ? 'Prebojni patent Taseta Lazovskega temelji na preprostem, a zanesljivem mehanizmu, ki medicinskemu osebju omogoča običajno vbrizgavanje, takoj po njem pa z roko sproži zaščitni tulec, ki nepovratno blokira ostro konico igle.'
         : 'Tase Lazovski’s breakthrough patent allows normal clinical operation while integrating an instant locking sheath that irreversibly shields the sharp needle tip.',
       steps: [
         {
           num: '01',
           name: isSlovenian ? 'Priprava & vbrizgavanje' : 'Clinical Preparation & Injection',
-          detail: isSlovenian ? 'Igla deluje kot običajna medicinska brizga; zaščitni tulec je v začetnem položaju pritrjen na telo brizge in ne ovira preglednosti vboda.' : 'Needle operates normally; protective sheath rests retracted without obstructing needle visualization.'
+          detail: isSlovenian ? 'Igla deluje kot običajna medicinska; zaščitni tulec je v začetnem položaju pritrjen na telo brizge in ne ovira preglednosti vboda.' : 'Needle operates normally; protective sheath rests retracted without obstructing needle visualization.'
         },
         {
           num: '02',
           name: isSlovenian ? 'Sprostitev zaklepa' : 'Lock Release Trigger',
-          detail: isSlovenian ? 'Zdravstveni delavec z eno roko (s pritiskom na drsnik ali bat) premakne varnostni zatič iz začetnega utora.' : 'Healthcare worker slides safety catch out of primary detent with single-hand motion.'
+          detail: isSlovenian ? 'Zdravstveni delavec z roko premakne varnostni tulec iz začetnega položaja.' : 'Healthcare worker slides safety catch out of primary detent with single-hand motion.'
         },
         {
           num: '03',
           name: isSlovenian ? 'Aksialni premik tulca' : 'Axial Sheath Extension',
-          detail: isSlovenian ? 'Notranja vzmet ali voden aksialni potisk potisne cilindrični zaščitni plašč naprej čez celotno dolžino kovinske igle.' : 'Internal spring or positive slide drives protective sleeve forward over the full metal cannula.'
+          detail: isSlovenian ? 'Zaščitni tulec se po končanem vbrizganju s prstom zadrži, samo iglo pa vlečemo iz telesa, na kar se notranji del tulca zatakne na vrh konice igle.' : 'Internal spring or positive slide drives protective sleeve forward over the full metal cannula.'
         },
         {
           num: '04',
-          name: isSlovenian ? 'Trajni nepovratni zaklep' : 'Irreversible Safety Locking',
-          detail: isSlovenian ? 'Končni varnostni zobci zaskočijo v zarezni obroč. Igla je fizično zapečatena; naključen vbod ali ponovna uporaba sta nemogoča.' : 'Terminal locking tabs snap into locking groove. Needle is physically sealed, eliminating needle-stick risk.'
+          name: isSlovenian ? 'Trajna blokada zaščitnega tulca' : 'Irreversible Safety Locking',
+          detail: isSlovenian ? 'S tem dosežemo, da se injekcijska igla zapiči v telo tulca in prepreči kakeršenjkoli negativen poseg na medicinsko osebje.' : 'Terminal locking tabs snap into locking groove. Needle is physically sealed, eliminating needle-stick risk.'
         }
       ]
     },
@@ -422,7 +428,7 @@ export default function PatentsPage() {
       title: isSlovenian ? 'Univerzalni parkirni terminal Nova Gorica 1999' : 'Nova Gorica 1999 Universal Parking Terminal',
       patent: isSlovenian ? 'Komunalna tehnologija 1999' : 'Municipal Technology 1999',
       desc: isSlovenian
-        ? 'Leta 1999 je Nova Gorica med prvimi uvedla samostojne, energetsko neodvisne parkomate. Inovacija je združila fotovoltaiko, prepoznavanje kovancev in čip kartice.'
+        ? 'Leta 1999 je Nova Gorica med prvimi uvedla samostojne, energetsko neodvisne parkomate. Inovacija je združila fotovoltaiko, prepoznavanje kovancev, čip kartic, bančnih kartic in GSM telefonov.'
         : 'In 1999, Nova Gorica was among the pioneers implementing autonomous solar-powered parking kiosks supporting coin and smart chip card operations.',
       steps: [
         {
@@ -433,7 +439,7 @@ export default function PatentsPage() {
         {
           num: '02',
           name: isSlovenian ? 'Validacija plačila' : 'Dual Payment Validation',
-          detail: isSlovenian ? 'Avtomat sprejme kovance z optičnim in induktivnim merjenjem premera/teže ali odšteje znesek z vstavljene kartice.' : 'Unit validates coins via optical/inductive sensors or reads stored-value electronic chip cards.'
+          detail: isSlovenian ? 'Avtomat sprejme kovance z optičnim in induktivnim merjenjem premera/teže ali odšteje znesek z vstavljenih plačilnih kartic.' : 'Unit validates coins via optical/inductive sensors or reads stored-value electronic chip cards.'
         },
         {
           num: '03',
@@ -482,28 +488,7 @@ export default function PatentsPage() {
       desc: isSlovenian
         ? 'V sodelovanju z Emilom Benkom razviti varnostni mehanizem naslavlja enega najpogostejših vzrokov gospodinjskih nesreč: pozabljen prižgan plinski gorilnik.'
         : 'Developed with engineer Emil Benko, this safety mechanism addresses home hazards by automatically severing gas flow when burners are left unattended.',
-      steps: [
-        {
-          num: '01',
-          name: isSlovenian ? 'Nastavitev časa prižiga' : 'User Time Dial Selection',
-          detail: isSlovenian ? 'Uporabnik pred kuhanjem zasuče mehanski gumb (npr. 15, 30 ali 60 minut). Mehanizem napne vzmetni ventil in odpre dovod plina.' : 'User turns dial (15, 30, or 60 min). Mechanical movement primes the safety spring and opens main valve.'
-        },
-        {
-          num: '02',
-          name: isSlovenian ? 'Nadzorovano izgorevanje' : 'Regulated Operation',
-          detail: isSlovenian ? 'Gorilnik deluje povsem normalno. Mehanski urni mehanizem zanesljivo odšteva preostali čas brez potrebe po električni vtičnici.' : 'Burner operates normally while mechanical escapement accurately counts down without mains electricity.'
-        },
-        {
-          num: '03',
-          name: isSlovenian ? 'Avtomatski izklop ob izteku' : 'Automatic Positive Shutoff',
-          detail: isSlovenian ? 'Ko čas poteče, vzvod sprosti zaporni konus. Močna vzmet v manj kot 0,2 sekunde nepredušno zapre dovod plina.' : 'Upon timer expiration, spring snaps shutoff cone into valve seat in under 0.2 seconds.'
-        },
-        {
-          num: '04',
-          name: isSlovenian ? 'Integracija s termočlenom' : 'Thermocouple Flame Sensing',
-          detail: isSlovenian ? 'Dodatna varovalka zazna ugasnitev plamena (prepih, preliv tekočine) in ventil zapre tudi pred iztekom časa.' : 'Integrated flame failure sensor cuts supply if draft or boil-over extinguishes flame before time expires.'
-        }
-      ]
+      steps: []
     }
   };
 
@@ -828,11 +813,11 @@ export default function PatentsPage() {
               </p>
 
               <p>
-                Ko je svet v zgodnjih devetdesetih letih pretresla epidemija nalezljivih bolezni, prenesenih s krvjo, je Lazovski zasnoval zaščitni mehanizem za podkožne igle <strong>VITA</strong>. Patent je bil prepoznan na najvišji mednarodni ravni in potrjen z ameriškim patentom <strong>US5051109A</strong> ter z zlato medaljo (médaille d’or) na svetovni razstavi inovacij <strong>EUREKA 1993 v Bruslju</strong>.
+                Ko je svet v zgodnjih devetdesetih letih pretresla epidemija nalezljivih bolezni, prenesenih s krvjo, je Lazovski zasnoval mehanizem inekcijske igle <strong>VITA</strong>. Patent je bil prepoznan na najvišji mednarodni ravni in potrjen z ameriškim patentom <strong>US5051109A</strong> ter z zlato medaljo (médaille d’or) na svetovni razstavi inovacij <strong>EUREKA 1993 v Bruslju</strong>.
               </p>
 
               <p>
-                Ob prehodu v digitalno dobo je sodeloval pri projektu, ki je spremenil telekomunikacije v Sloveniji: <strong>14. junija 1995</strong> so bile uradno vpeljane prve telefonske kartice z mikročipom v sodelovanju z <strong>Iskra Terminali</strong> in podjetjem <strong>Impulz</strong>. Nekaj let kasneje, leta 1999, pa je v Novi Gorici postavil temelje prvega sodobnega univerzalnega parkirnega avtomata z možnostjo plačila s telefonsko čip kartico, bančno kartico in gsm telefonom.
+                Ob prehodu v digitalno dobo je sodeloval pri projektu, ki je spremenil telekomunikacije v Sloveniji: <strong>14. junija 1995</strong> so bile uradno vpeljane prve telefonske kartice z mikročipom v sodelovanju z <strong>Iskra Terminali</strong> in podjetjem <strong>Impulz</strong>. Nekaj let kasneje, leta 1999, pa je v Novi Gorici postavil temelje prvega sodobnega univerzalnega parkirnega avtomata z možnostjo plačila s kovanci, telefonsko čip kartico, bančno kartico in gsm telefonom.
               </p>
 
               <p className="text-slate-400 italic text-sm">
@@ -1203,7 +1188,7 @@ export default function PatentsPage() {
 
               <div className="space-y-4 text-slate-300 text-sm sm:text-base leading-relaxed">
                 <p>
-                  <strong>Problem:</strong> V zdravstvu so naključni vbodi z rabljenimi iglami predstavljali smrtonosno tveganje za prenos virusov HIV, hepatitisa B in C. Medicinske sestre in zdravniki so se pri ponovnem nameščanju pokrovčkov pogosto nevede zabodli.
+                  <strong>Problem:</strong> V zdravstvu so naključni vbodi z rabljenimi iglami predstavljali smrtonosno tveganje za prenos virusov HIV, hepatitisa B in C. Medicinske sestre in zdravniki so se pri ponovnem rokovanju z rabljeno iglo pogosto nevede zabodli.
                 </p>
                 <p>
                   <strong>Rešitev Tasa Lazovskega:</strong> Vzmetni cilindrični zaščitni mehanizem, ki se po vbrizgavanju z enostavnim enoročnim potiskom premakne prek konice igle in nepovratno zaklene. Mehanizem popolnoma onemogoča ponovni stik z ostro konico.
@@ -1276,13 +1261,13 @@ export default function PatentsPage() {
 
               <div className="space-y-4 text-slate-300 text-sm sm:text-base leading-relaxed">
                 <p>
-                  <strong>Zgodba:</strong> Konec devetdesetih let so mesta iskala zanesljive, energetsko varčne načine urejanja mirujočega prometa. Tradicionalni parkomati so zahtevali drago polaganje električnega omrežja in so se pogosto kvarili ob vnosu različnih kovancev.
+                  <strong>Zgodba:</strong> Konec devetdesetih let so mesta iskala zanesljive, energetsko varčne načine urejanja mirujočega prometa. Tradicionalni parkomati so zahtevali drago polaganje električnega omrežja in so se pogosto kvarili ob vnosu različnih žetonov.
                 </p>
                 <p>
-                  <strong>Izum Tasa Lazovskega:</strong> Avtomatizirani parkirni terminal s strešnim fotovoltaičnim modulom, ki je omogočal popolno energetsko avtonomnost. Opremljen je bil z elektronskim prepoznavanjem kovancev ter čitalnikom naprednih pametnih kartic.
+                  <strong>Izum Taseta Lazovskega:</strong> Avtomatizirani parkirni terminal s strešnim fotovoltaičnim modulom, ki je omogočal popolno energetsko avtonomnost. Opremljen je bil z elektronskim prepoznavanjem kovancev ter čitalnikom naprednih pametnih kartic.
                 </p>
                 <p>
-                  Leta <strong>1999</strong> so bili prvi takšni avtomati vpeljani v <strong>Novi Gorici</strong>, kar je pomenilo pionirski korak k digitaliziranemu upravljanju mestnih površin.
+                  Leta <strong>1999</strong> so bili prvi takšni avtomati vpeljani v <strong>Novi Gorici</strong> (ko sosednje države kot so; Italija, Avstrija, Madžarska, Nemčija, Hrvaška tega še niso imele), kar je pomenilo pionirski korak k digitaliziranemu upravljanju mestnih površin.
                 </p>
               </div>
 
@@ -1525,10 +1510,10 @@ export default function PatentsPage() {
 
               <div className="space-y-4 text-slate-300 text-sm sm:text-base leading-relaxed">
                 <p>
-                  <strong>Prehod z žetonov:</strong> Do sredine devetdesetih let so javne govorilnice delovale na težke kovinske žetone in kovance. Ogromne škode ter veliko vzdrževanja telekomunikacijskega omrežja.
+                  <strong>Prehod z žetonov:</strong> Do sredine devetdesetih let so javne govorilnice delovale na težke kovinske žetone, kar je privedlo do veliko škode ter in vzdrževanja telekomunikacijskega omrežja.
                 </p>
                 <p>
-                  <strong>Zgodovinski 14. junij 1995:</strong> V sodelovanju z gigantom <strong>Iskra Terminali</strong> in podjetjem <strong>Impulz</strong> je bil zagnan nacionalni sistem elektronskih telefonskih kartic z vgrajenim kontaktnim čipom.
+                  <strong>Zgodovinski 14. junij 1995:</strong> V sodelovanju s podjetjem <strong>Iskra Terminali</strong> in podjetjem <strong>Impulz</strong> je bil zagnan nacionalni sistem elektronskih telefonskih kartic z vgrajenim kontaktnim čipom.
                 </p>
                 <p>
                   Kartica je omogočala zanesljivo elektronsko odštevanje impulzov, preprečevala ponarejanje in postavila temelj za digitalno plačevanje v Sloveniji.
@@ -1734,7 +1719,7 @@ export default function PatentsPage() {
                   <strong>Problem statične elektrike:</strong> V določenih atmosferskih pogojih ter ob uporabi sodobnih materialov pri oblačilih, obutvi in opremi se na človeškem telesu lahko nakopiči elektrostatični naboj s potencialom tudi do <strong>25.000 V (25 kV)</strong>. Ob dotiku ozemljenega predmeta pride do hipne razelektritve, bolečega šoka, preskoka iskre in nevarnosti vžiga ali eksplozije, poleg tega pa ima tak naboj negativen vpliv na zdravje in počutje.
                 </p>
                 <p>
-                  <strong>Patentirana rešitev (EP 2805592 / US 959672):</strong> Izumitelji <strong>Tase Lazovski</strong>, <strong>Emil Benko</strong> in <strong>Angelo Porcaro</strong> so razvili in patentirali mehanizem za neboleč, kontroliran odvod statičnega naboja v točno odmerjenem času med <strong>150 in 250 ms</strong> (s prilagoditvijo tudi za EX prostore).
+                  <strong>Patentirana rešitev (EP 2805592 / US 959672):</strong> Izumitelji <strong>Tase Lazovski</strong>, <strong>Emil Benko</strong> in <strong>Angelo Porcaro</strong> so razvili in patentirali mehanizem za neboleč, kontroliran odvod statičnega naboja v času med <strong>150 in 250 ms</strong> (s prilagoditvijo tudi za X cone).
                 </p>
                 <p>
                   Inovativne rešitve so uveljavljene v komercialnih izdelkih <strong>Atemm H-ESD</strong> (integracija v varnostni pas vozil z prevodnim šivom) in je unikatna rešitev, saj omogoča kontroliran odvod statične elektrike z dotikom osebe na prevodni material do maksimalno 7 cm² površine, ter <strong>Atemm GREEN POINT</strong> (delovna mesta in stavbno pohištvo).
@@ -1894,7 +1879,7 @@ export default function PatentsPage() {
             const data = explainerData[activeExplainerTab];
             return (
               <div className="p-6 sm:p-10 rounded-3xl bg-[#151B24] border border-slate-800 shadow-2xl">
-                <div className="max-w-3xl mb-8">
+                <div className={`max-w-3xl ${data.steps.length > 0 ? 'mb-8' : ''}`}>
                   <div className="inline-block px-3 py-1 rounded-full bg-[#53B8FF]/15 text-[#53B8FF] font-mono text-xs mb-2">
                     {data.patent}
                   </div>
@@ -1907,35 +1892,37 @@ export default function PatentsPage() {
                 </div>
 
                 {/* Steps Grid */}
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {data.steps.map((st, i) => {
-                    const isSelected = activeStep === i;
-                    return (
-                      <div
-                        key={i}
-                        onClick={() => setActiveStep(i)}
-                        className={`p-5 rounded-2xl border transition-all cursor-pointer ${
-                          isSelected
-                            ? 'bg-[#0E131C] border-[#53B8FF] shadow-[0_0_15px_rgba(83,184,255,0.2)]'
-                            : 'bg-[#0E131C]/60 border-slate-800/80 hover:border-slate-700'
-                        }`}
-                      >
-                        <div className="flex items-center justify-between mb-3">
-                          <span className={`font-mono text-xl font-bold ${isSelected ? 'text-[#53B8FF]' : 'text-slate-500'}`}>
-                            {st.num}
-                          </span>
-                          {isSelected && <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-ping" />}
+                {data.steps.length > 0 && (
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {data.steps.map((st, i) => {
+                      const isSelected = activeStep === i;
+                      return (
+                        <div
+                          key={i}
+                          onClick={() => setActiveStep(i)}
+                          className={`p-5 rounded-2xl border transition-all cursor-pointer ${
+                            isSelected
+                              ? 'bg-[#0E131C] border-[#53B8FF] shadow-[0_0_15px_rgba(83,184,255,0.2)]'
+                              : 'bg-[#0E131C]/60 border-slate-800/80 hover:border-slate-700'
+                          }`}
+                        >
+                          <div className="flex items-center justify-between mb-3">
+                            <span className={`font-mono text-xl font-bold ${isSelected ? 'text-[#53B8FF]' : 'text-slate-500'}`}>
+                              {st.num}
+                            </span>
+                            {isSelected && <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-ping" />}
+                          </div>
+                          <h4 className="font-display font-black text-sm uppercase text-white mb-2 leading-snug">
+                            {st.name}
+                          </h4>
+                          <p className="text-xs text-slate-400 leading-relaxed">
+                            {st.detail}
+                          </p>
                         </div>
-                        <h4 className="font-display font-black text-sm uppercase text-white mb-2 leading-snug">
-                          {st.name}
-                        </h4>
-                        <p className="text-xs text-slate-400 leading-relaxed">
-                          {st.detail}
-                        </p>
-                      </div>
-                    );
-                  })}
-                </div>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
             );
           })()}
@@ -1991,6 +1978,15 @@ export default function PatentsPage() {
                     <p className="text-xs sm:text-sm text-slate-300 font-normal leading-relaxed">
                       {inv.desc}
                     </p>
+
+                    {inv.authors && (
+                      <div className="pt-1">
+                        <div className="px-3 py-2 rounded-xl bg-[#080B10] border border-slate-800 text-xs font-mono text-slate-300 flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#53B8FF] shrink-0" />
+                          <span className="font-semibold text-slate-200">{inv.authors}</span>
+                        </div>
+                      </div>
+                    )}
 
                     {inv.videoId && (
                       <div className="pt-2">
@@ -2206,7 +2202,7 @@ export default function PatentsPage() {
           </h2>
 
           <p className="text-base sm:text-xl text-slate-300 leading-relaxed font-normal max-w-2xl mx-auto">
-            Zapuščina inovacij Tasa Lazovskega dokazuje, da lahko iz radovednosti, vztrajnosti in tehničnega znanja zrastejo rešitve, ki spremenijo svet. Prav to poslanstvo uresničujemo v <strong>START LABU</strong>: mladim odpiramo vrata v svet tehnologije, elektronike in praktičnega ustvarjanja.
+            Zapuščina inovacij Taseta Lazovskega dokazuje, da lahko iz radovednosti, vztrajnosti in tehničnega znanja zrastejo rešitve, ki spremenijo svet. Prav to poslanstvo uresničujemo v <strong>START LABU</strong>: mladim odpiramo vrata v svet tehnologije, elektronike in praktičnega ustvarjanja.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
