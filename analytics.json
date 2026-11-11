@@ -33,5 +33,16 @@
       "/": 1
     },
     "dateCreated": "2026-11-06"
+  },
+  "sid_zvdg8sipx_mwbx86zo": {
+    "sessionId": "sid_zvdg8sipx_mwbx86zo",
+    "ipHash": "ODkuMjEyLj",
+    "firstSeen": 1794389882511,
+    "lastSeen": 1794390077162,
+    "durationSeconds": 494,
+    "pages": {
+      "/patenti": 1
+    },
+    "dateCreated": "2026-11-11"
   }
 }

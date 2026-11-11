@@ -201,7 +201,7 @@ export default function PatentsPage() {
                     const el = document.getElementById('zgodba');
                     if (el) el.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  title="Tase Lazovski – Klikni za ogled zgodbe"
+                  title={isSlovenian ? "Tase Lazovski – Klikni za ogled zgodbe" : isIt ? "Tase Lazovski – Clicca per vedere la storia" : "Tase Lazovski – Click to view story"}
                 >
                   {/* Ambient Electric-Blue Aura */}
                   <div className="absolute -inset-3 bg-[#53B8FF]/25 rounded-3xl blur-2xl group-hover:bg-[#53B8FF]/45 transition-all duration-700 pointer-events-none" />
@@ -219,7 +219,7 @@ export default function PatentsPage() {
                   <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-44 md:h-44 xl:w-48 xl:h-48 aspect-square rounded-2xl overflow-hidden border-2 border-[#53B8FF]/80 bg-[#0E131C] relative shadow-[0_0_35px_rgba(83,184,255,0.35)] group-hover:shadow-[0_0_55px_rgba(83,184,255,0.6)] group-hover:border-[#53B8FF] transition-all duration-500 flex items-center justify-center p-1.5">
                     <img 
                       src="https://ik.imagekit.io/utigodgni/IMG_3769.png" 
-                      alt="Tase Lazovski - Inovator in izumitelj" 
+                      alt={isSlovenian ? "Tase Lazovski - Inovator in izumitelj" : isIt ? "Tase Lazovski - Innovatore e inventore" : "Tase Lazovski - Innovator and inventor"} 
                       className="w-full h-full object-contain rounded-xl group-hover:scale-105 transition-transform duration-700 filter brightness-105 contrast-105"
                     />
 
@@ -256,7 +256,7 @@ export default function PatentsPage() {
                     <span>TASE</span>
                     <span 
                       className="text-xs sm:text-base md:text-lg lg:text-xl font-mono font-bold text-[#53B8FF] tracking-wider px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-xl bg-[#151B24]/90 border border-[#53B8FF]/40 shadow-sm align-middle normal-case"
-                      title="Letnica rojstva: 1949"
+                      title={isSlovenian ? "Letnica rojstva: 1949" : isIt ? "Anno di nascita: 1949" : "Year of birth: 1949"}
                     >
                       * 1949
                     </span>
@@ -429,7 +429,7 @@ export default function PatentsPage() {
               </p>
 
               <p>
-                Ko je svet v zgodnjih devetdesetih letih pretresla epidemija nalezljivih bolezni, prenesenih s krvjo, je Lazovski zasnoval mehanizem inekcijske igle <strong>VITA</strong>. Patent je bil prepoznan na najvišji mednarodni ravni in potrjen z ameriškim patentom <strong>US5051109A</strong> ter z zlato medaljo (médaille d’or) na svetovni razstavi inovacij <strong>EUREKA 1993 v Bruslju</strong>.
+                {ui.story.p2}
               </p>
 
               <p>
@@ -458,31 +458,31 @@ export default function PatentsPage() {
                   <li className="flex items-start gap-3">
                     <CheckCircle2 size={18} className="text-[#53B8FF] shrink-0 mt-0.5" />
                     <div>
-                      <strong className="text-white">USPTO (ZDA):</strong> {ui.story.awardsUspto}
+                      <strong className="text-white">{isSlovenian ? "USPTO (ZDA):" : isIt ? "USPTO (USA):" : "USPTO (USA):"}</strong> {ui.story.awardsUspto}
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 size={18} className="text-[#53B8FF] shrink-0 mt-0.5" />
                     <div>
-                      <strong className="text-white">EUREKA Bruselj 1993:</strong> {ui.story.awardsEureka}
+                      <strong className="text-white">{isSlovenian ? "EUREKA Bruselj 1993:" : isIt ? "EUREKA Bruxelles 1993:" : "EUREKA Brussels 1993:"}</strong> {ui.story.awardsEureka}
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 size={18} className="text-[#53B8FF] shrink-0 mt-0.5" />
                     <div>
-                      <strong className="text-white">Iskra Terminali & Impulz:</strong> {ui.story.awardsIskra}
+                      <strong className="text-white">{isSlovenian ? "Iskra Terminali & Impulz:" : isIt ? "Iskra Terminali & Impulz:" : "Iskra Terminali & Impulz:"}</strong> {ui.story.awardsIskra}
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 size={18} className="text-[#53B8FF] shrink-0 mt-0.5" />
                     <div>
-                      <strong className="text-white">Mestna občina Nova Gorica:</strong> {ui.story.awardsNg}
+                      <strong className="text-white">{isSlovenian ? "Mestna občina Nova Gorica:" : isIt ? "Comune di Nova Gorica:" : "Municipality of Nova Gorica:"}</strong> {ui.story.awardsNg}
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 size={18} className="text-[#53B8FF] shrink-0 mt-0.5" />
                     <div>
-                      <strong className="text-white">Sodelovanje z Emilom Benkom:</strong> {ui.story.awardsAtemm}
+                      <strong className="text-white">{isSlovenian ? "Sodelovanje z Emilom Benkom:" : isIt ? "Collaborazione con Emil Benko:" : "Collaboration with Emil Benko:"}</strong> {ui.story.awardsAtemm}
                     </div>
                   </li>
                 </ul>
@@ -688,7 +688,7 @@ export default function PatentsPage() {
                       preload="metadata"
                       className="w-full h-full object-contain bg-black"
                     >
-                      Vaš brskalnik ne podpira predvajanja videa.
+                      {isSlovenian ? "Vaš brskalnik ne podpira predvajanja videa." : isIt ? "Il tuo browser non supporta la riproduzione video." : "Your browser does not support the video tag."}
                     </video>
                   ) : (
                     <div className="relative w-full h-full bg-[#0A0E15] flex items-center justify-center p-3 sm:p-5 group/draw">
@@ -728,7 +728,7 @@ export default function PatentsPage() {
                         title={isSlovenian ? "Povečaj sliko" : isIt ? "Ingrandisci immagine" : "Enlarge image"}
                       >
                         <Maximize2 size={13} />
-                        <span className="hidden sm:inline">Povečaj</span>
+                        <span className="hidden sm:inline">{ui.featured.gas.zoom}</span>
                       </button>
                     </div>
                   )}
@@ -749,7 +749,7 @@ export default function PatentsPage() {
                       title={isSlovenian ? "Odpri v velikem predvajalniku" : isIt ? "Apri nel player a schermo intero" : "Open in fullscreen player"}
                     >
                       <Maximize2 size={13} />
-                      <span className="text-[11px] font-sans font-bold uppercase tracking-wider">Celozaslonski način</span>
+                      <span className="text-[11px] font-sans font-bold uppercase tracking-wider">{isSlovenian ? "Celozaslonski način" : isIt ? "Schermo intero" : "Fullscreen mode"}</span>
                     </button>
                   </div>
                 ) : (
@@ -770,7 +770,7 @@ export default function PatentsPage() {
                           <div className="w-12 h-10 rounded-lg overflow-hidden bg-black shrink-0 flex items-center justify-center">
                             <img 
                               src={img.url} 
-                              alt={`Predogled ${idx + 1}`} 
+                              alt={isSlovenian ? `Predogled ${idx + 1}` : isIt ? `Anteprima ${idx + 1}` : `Preview ${idx + 1}`} 
                               className="w-full h-full object-contain"
                             />
                           </div>
@@ -795,7 +795,7 @@ export default function PatentsPage() {
               <div className="flex items-center gap-2 font-mono text-xs text-[#53B8FF] tracking-widest uppercase">
                 <span>{ui.featured.vita.tag}</span>
                 <span>·</span>
-                <span>ZDA & EUREKA</span>
+                <span>{isSlovenian ? "ZDA & EUREKA" : isIt ? "USA & EUREKA" : "USA & EUREKA"}</span>
               </div>
 
               <h3 className="text-3xl sm:text-4xl md:text-5xl font-display font-black uppercase text-white leading-[1.05]">
@@ -975,13 +975,13 @@ export default function PatentsPage() {
                       preload="metadata"
                       className="w-full h-full object-contain bg-black"
                     >
-                      Vaš brskalnik ne podpira predvajanja videa.
+                      {isSlovenian ? "Vaš brskalnik ne podpira predvajanja videa." : isIt ? "Il tuo browser non supporta la riproduzione video." : "Your browser does not support the video tag."}
                     </video>
                   ) : (
                     <div className="relative w-full h-full group/draw">
                       <img 
                         src={parkingImg} 
-                        alt="Parkirni avtomat Nova Gorica 1999" 
+                        alt={isSlovenian ? "Parkirni avtomat Nova Gorica 1999" : isIt ? "Parcometro Nova Gorica 1999" : "Parking terminal Nova Gorica 1999"} 
                         className="w-full h-full object-cover group-hover/draw:scale-105 transition-transform duration-700"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#080B10]/80 via-transparent to-transparent pointer-events-none" />
@@ -1006,7 +1006,7 @@ export default function PatentsPage() {
                     title={isSlovenian ? "Odpri v velikem predvajalniku" : isIt ? "Apri nel player a schermo intero" : "Open in fullscreen player"}
                   >
                     <Maximize2 size={13} />
-                    <span className="text-[11px] font-sans font-bold uppercase tracking-wider">Celozaslonski način</span>
+                    <span className="text-[11px] font-sans font-bold uppercase tracking-wider">{isSlovenian ? "Celozaslonski način" : isIt ? "Schermo intero" : "Fullscreen mode"}</span>
                   </button>
                 </div>
               </div>
@@ -1046,7 +1046,7 @@ export default function PatentsPage() {
                     type="button"
                     onClick={() => setActiveCardImgIdx((prev) => (prev === 0 ? cardImages.length - 1 : prev - 1))}
                     className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-900/85 hover:bg-[#53B8FF] text-white hover:text-[#080B10] border border-slate-700 hover:border-[#53B8FF] flex items-center justify-center transition-all opacity-85 hover:opacity-100 cursor-pointer shadow-lg z-10"
-                    title="Prejšnja fotografija"
+                    title={isSlovenian ? "Prejšnja fotografija" : isIt ? "Fotografia precedente" : "Previous photo"}
                   >
                     <ChevronRight size={18} className="rotate-180 stroke-[2.5]" />
                   </button>
@@ -1055,7 +1055,7 @@ export default function PatentsPage() {
                     type="button"
                     onClick={() => setActiveCardImgIdx((prev) => (prev === cardImages.length - 1 ? 0 : prev + 1))}
                     className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-900/85 hover:bg-[#53B8FF] text-white hover:text-[#080B10] border border-slate-700 hover:border-[#53B8FF] flex items-center justify-center transition-all opacity-85 hover:opacity-100 cursor-pointer shadow-lg z-10"
-                    title="Naslednja fotografija"
+                    title={isSlovenian ? "Naslednja fotografija" : isIt ? "Fotografia successiva" : "Next photo"}
                   >
                     <ChevronRight size={18} className="stroke-[2.5]" />
                   </button>
@@ -1068,10 +1068,10 @@ export default function PatentsPage() {
                     type="button"
                     onClick={() => setEnlargedGasImg(cardImages[activeCardImgIdx].url)}
                     className="absolute bottom-4 right-4 bg-[#080B10]/90 hover:bg-[#53B8FF] text-slate-300 hover:text-[#080B10] backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700 hover:border-[#53B8FF] text-xs font-mono font-bold transition-colors flex items-center gap-1.5 cursor-pointer shadow-md z-10"
-                    title="Povečaj"
+                    title={isSlovenian ? "Povečaj" : isIt ? "Ingrandisci" : "Enlarge"}
                   >
                     <Maximize2 size={13} />
-                    <span className="hidden sm:inline">Povečaj</span>
+                    <span className="hidden sm:inline">{ui.featured.gas.zoom}</span>
                   </button>
                 </div>
 
@@ -1093,7 +1093,7 @@ export default function PatentsPage() {
                         <div className="w-12 h-10 rounded-lg overflow-hidden bg-black shrink-0 flex items-center justify-center p-0.5">
                           <img 
                             src={img.url} 
-                            alt={`Predogled ${idx + 1}`} 
+                            alt={isSlovenian ? `Predogled ${idx + 1}` : isIt ? `Anteprima ${idx + 1}` : `Preview ${idx + 1}`} 
                             className="w-full h-full object-contain"
                           />
                         </div>
@@ -1237,7 +1237,7 @@ export default function PatentsPage() {
                 <div className="relative aspect-video sm:aspect-[16/10] bg-[#0A0E15] overflow-hidden flex items-center justify-center p-3 sm:p-5 group/img">
                   <img 
                     src={gasTimerImages[activeGasImgIdx].url} 
-                    alt={`Časovnik za plinske štedilnike - Slika ${activeGasImgIdx + 1}`} 
+                    alt={isSlovenian ? `Časovnik za plinske štedilnike - Slika ${activeGasImgIdx + 1}` : isIt ? `Timer fornelli a gas - Immagine ${activeGasImgIdx + 1}` : `Gas stove timer - Image ${activeGasImgIdx + 1}`} 
                     className="w-full h-full object-contain group-hover/img:scale-105 transition-transform duration-500 filter drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)]"
                   />
 
@@ -1246,7 +1246,7 @@ export default function PatentsPage() {
                     type="button"
                     onClick={() => setActiveGasImgIdx((prev) => (prev === 0 ? gasTimerImages.length - 1 : prev - 1))}
                     className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-900/85 hover:bg-[#53B8FF] text-white hover:text-[#080B10] border border-slate-700 hover:border-[#53B8FF] flex items-center justify-center transition-all opacity-85 hover:opacity-100 cursor-pointer shadow-lg z-10"
-                    title="Prejšnja slika"
+                    title={isSlovenian ? "Prejšnja slika" : isIt ? "Immagine precedente" : "Previous image"}
                   >
                     <ChevronRight size={18} className="rotate-180 stroke-[2.5]" />
                   </button>
@@ -1255,7 +1255,7 @@ export default function PatentsPage() {
                     type="button"
                     onClick={() => setActiveGasImgIdx((prev) => (prev === gasTimerImages.length - 1 ? 0 : prev + 1))}
                     className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-900/85 hover:bg-[#53B8FF] text-white hover:text-[#080B10] border border-slate-700 hover:border-[#53B8FF] flex items-center justify-center transition-all opacity-85 hover:opacity-100 cursor-pointer shadow-lg z-10"
-                    title="Naslednja slika"
+                    title={isSlovenian ? "Naslednja slika" : isIt ? "Immagine successiva" : "Next image"}
                   >
                     <ChevronRight size={18} className="stroke-[2.5]" />
                   </button>
@@ -1271,7 +1271,7 @@ export default function PatentsPage() {
                     title={isSlovenian ? "Povečaj sliko" : isIt ? "Ingrandisci immagine" : "Enlarge image"}
                   >
                     <Maximize2 size={13} />
-                    <span className="hidden sm:inline">Povečaj</span>
+                    <span className="hidden sm:inline">{ui.featured.gas.zoom}</span>
                   </button>
                 </div>
 
@@ -1293,7 +1293,7 @@ export default function PatentsPage() {
                         <div className="w-12 h-10 rounded-lg overflow-hidden bg-black shrink-0 flex items-center justify-center">
                           <img 
                             src={img.url} 
-                            alt={`Predogled ${idx + 1}`} 
+                            alt={isSlovenian ? `Predogled ${idx + 1}` : isIt ? `Anteprima ${idx + 1}` : `Preview ${idx + 1}`} 
                             className="w-full h-full object-contain"
                           />
                         </div>
@@ -1408,7 +1408,7 @@ export default function PatentsPage() {
                 <div className="relative aspect-[3/4] sm:aspect-[4/5] bg-white overflow-hidden flex items-center justify-center p-3 group/img">
                   <img 
                     src="/assets/odvod_staticne_elektrike_shema.png" 
-                    alt="Odvod statične elektrike od ljudi patentna shema Atemm" 
+                    alt={isSlovenian ? "Odvod statične elektrike od ljudi patentna shema Atemm" : isIt ? "Schema di scarica elettrostatica Atemm" : "Atemm electrostatic discharge patent schematic"} 
                     className="w-full h-full object-contain filter drop-shadow-[0_10px_25px_rgba(0,0,0,0.3)] transition-transform duration-500 group-hover/img:scale-[1.02]"
                   />
 
@@ -1420,10 +1420,10 @@ export default function PatentsPage() {
                     type="button"
                     onClick={() => setEnlargedGasImg('/assets/odvod_staticne_elektrike_shema.png')}
                     className="absolute bottom-4 right-4 bg-[#080B10]/90 hover:bg-[#53B8FF] text-slate-300 hover:text-[#080B10] backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700 hover:border-[#53B8FF] text-xs font-mono font-bold transition-colors flex items-center gap-1.5 cursor-pointer shadow-md z-10"
-                    title="Povečaj načrt"
+                    title={isSlovenian ? "Povečaj načrt" : isIt ? "Ingrandisci schema" : "Enlarge blueprint"}
                   >
                     <Maximize2 size={13} />
-                    <span className="hidden sm:inline">Povečaj načrt</span>
+                    <span className="hidden sm:inline">{isSlovenian ? "Povečaj načrt" : isIt ? "Ingrandisci schema" : "Zoom blueprint"}</span>
                   </button>
                 </div>
 
@@ -1702,7 +1702,7 @@ export default function PatentsPage() {
                         {patent.coordination && <div className="text-slate-400">{isSlovenian ? 'Koordinacija' : isIt ? 'Coordinamento' : 'Coordination'}: {patent.coordination}</div>}
                       </>
                     ) : (
-                      <div>Izumitelj: {patent.inventors.join(', ')}</div>
+                      <div>{isSlovenian ? "Izumitelj" : isIt ? "Inventore" : "Inventor"}: {patent.inventors.join(', ')}</div>
                     )}
                     <div className="text-slate-500">{patent.grantDate}</div>
                   </div>
@@ -1761,7 +1761,7 @@ export default function PatentsPage() {
                         type="button"
                         onClick={() => setActiveVideoModal(vid.id)}
                         className="w-14 h-14 rounded-full bg-[#53B8FF] hover:bg-white text-[#080B10] flex items-center justify-center transition-all duration-300 shadow-xl cursor-pointer group-hover:scale-110"
-                        title="Predvajaj posnetek"
+                        title={isSlovenian ? "Predvajaj posnetek" : isIt ? "Riproduci video" : "Play video"}
                       >
                         <Play size={22} className="ml-1 fill-[#080B10]" />
                       </button>
@@ -1913,14 +1913,14 @@ export default function PatentsPage() {
                       rel="noopener noreferrer"
                       className="text-xs font-mono text-slate-400 hover:text-[#53B8FF] flex items-center gap-1 transition-colors"
                     >
-                      <span>Odpri PDF</span>
+                      <span>{isSlovenian ? "Odpri PDF" : isIt ? "Apri PDF" : "Open PDF"}</span>
                       <ExternalLink size={12} />
                     </a>
                   </div>
                   <div className="max-h-64 overflow-y-auto rounded-xl border border-slate-800 bg-white/5 p-1">
                     <img 
                       src="/assets/odvod_staticne_elektrike_shema.png" 
-                      alt="Odvod statične elektrike od ljudi patentna shema Atemm" 
+                      alt={isSlovenian ? "Odvod statične elektrike od ljudi patentna shema Atemm" : isIt ? "Schema di scarica elettrostatica Atemm" : "Atemm electrostatic discharge patent schematic"} 
                       className="w-full h-auto object-contain rounded-lg"
                     />
                   </div>
@@ -1945,10 +1945,10 @@ export default function PatentsPage() {
                   ) : selectedPatent.id === 'chip-card' ? (
                     <div className="space-y-1.5">
                       <div className="text-slate-300 leading-relaxed font-sans text-xs">
-                        Realizacijo uvedbe čip kartic za potrebe javnih telefonskih govorilnic so omogočili <strong className="text-white">Iskra Terminali Kranj</strong> in <strong className="text-white">Impulz d.o.o. Nova Gorica</strong>.
+                        {ui.featured.card.attribution1}
                       </div>
                       <div className="text-[#53B8FF] font-semibold font-sans text-xs">
-                        Tase Lazovski je izumitelj pri čip kartici z vidika marketinga.
+                        {ui.featured.card.attribution2}
                       </div>
                     </div>
                   ) : (
@@ -2072,7 +2072,7 @@ export default function PatentsPage() {
                           preload="auto"
                           className="w-full h-full object-contain bg-black"
                         >
-                          Vaš brskalnik ne podpira predvajanja videa.
+                          {isSlovenian ? "Vaš brskalnik ne podpira predvajanja videa." : isIt ? "Il tuo browser non supporta la riproduzione video." : "Your browser does not support the video tag."}
                         </video>
                       ) : (
                         <div className="text-center space-y-2 py-8 px-4">
@@ -2159,7 +2159,7 @@ export default function PatentsPage() {
               <div className="relative flex-1 flex items-center justify-center overflow-hidden py-4">
                 <img 
                   src={enlargedGasImg} 
-                  alt="Tehnični načrt povečano" 
+                  alt={isSlovenian ? "Tehnični načrt povečano" : isIt ? "Schema tecnico ingrandito" : "Technical blueprint enlarged"} 
                   className="max-h-[70vh] w-auto max-w-full object-contain filter drop-shadow-2xl"
                 />
               </div>
@@ -2213,13 +2213,13 @@ export default function PatentsPage() {
               <div className="relative flex-1 flex items-center justify-center overflow-hidden py-4">
                 <img 
                   src={enlargedVitaImg} 
-                  alt="Injekcijska igla VITA načrt povečano" 
+                  alt={isSlovenian ? "Injekcijska igla VITA načrt povečano" : isIt ? "Disegno dell'ago VITA ingrandito" : "VITA safety needle blueprint enlarged"} 
                   className="max-h-[70vh] w-auto max-w-full object-contain filter drop-shadow-2xl"
                 />
               </div>
 
               <div className="pt-3 border-t border-slate-800 flex items-center justify-between text-xs font-mono text-slate-400">
-                <span>Tase Lazovski · EUREKA Bruselj 1993</span>
+                <span>{isSlovenian ? "Tase Lazovski · EUREKA Bruselj 1993" : isIt ? "Tase Lazovski · EUREKA Bruxelles 1993" : "Tase Lazovski · EUREKA Brussels 1993"}</span>
                 <button
                   type="button"
                   onClick={() => setEnlargedVitaImg(null)}
