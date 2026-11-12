@@ -39,7 +39,9 @@ const vitaImg = 'https://ik.imagekit.io/utigodgni/INJEKCIJSKA%20IGLA%20VITA.1png
 const parkingImg = 'https://ik.imagekit.io/utigodgni/PARKIRNI%20AVTOMAT.png?updatedAt=1793864318348';
 const cardImg = 'https://ik.imagekit.io/utigodgni/Untitled-1.png';
 const cardImg2 = 'https://ik.imagekit.io/utigodgni/TELEFONSKA%20%C4%8CIP%20KARTICA.png';
-import gasTimerImg from '../assets/images/gas_stove_timer_1791534741337.jpg';
+const gasImg1 = 'https://ik.imagekit.io/utigodgni/1.png?updatedAt=1793864188308';
+const gasImg2 = 'https://ik.imagekit.io/utigodgni/2.png?updatedAt=1793864186731';
+const gasImg3 = 'https://ik.imagekit.io/utigodgni/3.png?updatedAt=1793864186425';
 import InventorAnimatedBackground from '../components/InventorAnimatedBackground';
 
 import {
@@ -129,17 +131,17 @@ export default function PatentsPage() {
 
   const gasTimerImages = [
     {
-      url: gasTimerImg,
+      url: gasImg1,
       title: galleryItems.gas[0].title,
       subtitle: galleryItems.gas[0].subtitle,
     },
     {
-      url: heroImg,
+      url: gasImg2,
       title: galleryItems.gas[1].title,
       subtitle: galleryItems.gas[1].subtitle,
     },
     {
-      url: parkingImg,
+      url: gasImg3,
       title: galleryItems.gas[2].title,
       subtitle: galleryItems.gas[2].subtitle,
     }
@@ -2145,7 +2147,7 @@ export default function PatentsPage() {
                     ? (isSlovenian ? 'TEHNIČNA DOKUMENTACIJA · ODVOD STATIČNE ELEKTRIKE OD LJUDI' : isIt ? 'DOCUMENTAZIONE TECNICA · SCARICA ELETTROSTATICA DA PERSONE' : 'TECHNICAL BLUEPRINT · CONTROLLED STATIC ELECTRICITY DISCHARGE')
                     : enlargedGasImg?.includes('KARTICA') || enlargedGasImg?.includes('Untitled-1')
                     ? (isSlovenian ? 'ARHIVSKA FOTOGRAFIJA · TELEFONSKA ČIP KARTICA' : isIt ? 'FOTOGRAFIA D\'ARCHIVIO · SCHEDA TELEFONICA CON CHIP' : 'ARCHIVAL PHOTOGRAPH · SMART TELEPHONE CHIP CARD')
-                    : (isSlovenian ? 'TEHNIČNA DOKUMENTACIJA · ČASOVNIK ZA PLIN' : isIt ? 'DOCUMENTAZIONE TECNICA · TIMER PER GAS' : 'TECHNICAL BLUEPRINT · GAS STOVE SAFETY TIMER')}
+                    : (isSlovenian ? 'PLINSKI ŠTEDILNIK & VARNOSTNI ČASOVNIK' : isIt ? 'CUCINA A GAS & TIMER DI SICUREZZA' : 'GAS STOVE & SAFETY TIMER')}
                 </span>
                 <button
                   type="button"
@@ -2159,7 +2161,7 @@ export default function PatentsPage() {
               <div className="relative flex-1 flex items-center justify-center overflow-hidden py-4">
                 <img 
                   src={enlargedGasImg} 
-                  alt={isSlovenian ? "Tehnični načrt povečano" : isIt ? "Schema tecnico ingrandito" : "Technical blueprint enlarged"} 
+                  alt={isSlovenian ? "Plinski štedilnik ali načrt povečano" : isIt ? "Cucina a gas o schema ingrandito" : "Gas stove or blueprint enlarged"} 
                   className="max-h-[70vh] w-auto max-w-full object-contain filter drop-shadow-2xl"
                 />
               </div>
@@ -2177,7 +2179,7 @@ export default function PatentsPage() {
                   onClick={() => setEnlargedGasImg(null)}
                   className="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-xs font-display font-bold uppercase cursor-pointer"
                 >
-                  Zapri
+                  {ui.modal.closeBtn}
                 </button>
               </div>
             </motion.div>

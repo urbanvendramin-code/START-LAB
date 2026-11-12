@@ -87,16 +87,16 @@ export function getGalleryItems(lang: Lang) {
     ],
     gas: [
       {
-        title: lang === 'sl' ? 'Tehnični načrt 1' : lang === 'it' ? 'Schema tecnico 1' : 'Technical Diagram 1',
-        subtitle: lang === 'sl' ? 'Elektromehanski časovni mehanizem' : lang === 'it' ? 'Meccanismo temporizzatore elettromeccanico' : 'Electromechanical timer mechanism'
+        title: lang === 'sl' ? 'Plinski štedilnik' : lang === 'it' ? 'Cucina a gas' : 'Gas Stove Range',
+        subtitle: lang === 'sl' ? 'Plinski štedilnik z vgrajenim varnostnim časovnikom' : lang === 'it' ? 'Cucina a gas con timer di sicurezza integrato' : 'Gas stove with integrated safety timer dial'
       },
       {
-        title: lang === 'sl' ? 'Tehnični načrt 2' : lang === 'it' ? 'Schema tecnico 2' : 'Technical Diagram 2',
-        subtitle: lang === 'sl' ? 'Detajl zapornega ventila in vzmetnega sklopa' : lang === 'it' ? 'Dettaglio della valvola di arresto e gruppo a molla' : 'Cutoff valve and spring assembly detail'
+        title: lang === 'sl' ? 'Tehnični načrt' : lang === 'it' ? 'Schema tecnico' : 'Technical Blueprint',
+        subtitle: lang === 'sl' ? 'Razrez zapornega ventila in urnega mehanizma' : lang === 'it' ? 'Sezione della valvola di arresto e timer' : 'Shutoff valve and clockwork mechanism cutaway'
       },
       {
-        title: lang === 'sl' ? 'Tehnični načrt 3' : lang === 'it' ? 'Schema tecnico 3' : 'Technical Diagram 3',
-        subtitle: lang === 'sl' ? 'Prikaz namestitve in povezave na gorilnik' : lang === 'it' ? 'Layout di installazione e collegamento al bruciatore' : 'Installation layout and burner connection'
+        title: lang === 'sl' ? 'Gorilnik in ventil' : lang === 'it' ? 'Bruciatore e valvola' : 'Burner & Valve',
+        subtitle: lang === 'sl' ? 'Integracija termočlena in zapornega mehanizma' : lang === 'it' ? 'Integrazione termocoppia e valvola di sicurezza' : 'Thermocouple integration and shutoff assembly'
       }
     ]
   };

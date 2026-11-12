@@ -44,5 +44,16 @@
       "/patenti": 1
     },
     "dateCreated": "2026-11-11"
+  },
+  "sid_9z7cxe964_mwdbtb9a": {
+    "sessionId": "sid_9z7cxe964_mwdbtb9a",
+    "ipHash": "ODkuMjEyLj",
+    "firstSeen": 1794474694409,
+    "lastSeen": 1794474816268,
+    "durationSeconds": 267,
+    "pages": {
+      "/patenti": 1
+    },
+    "dateCreated": "2026-11-12"
   }
 }
