@@ -109,7 +109,7 @@ export function getTimelineEvents(lang: Lang): Milestone[] {
       exactDate: lang === 'sl' ? '12. december 1990' : lang === 'it' ? '12 dicembre 1990' : 'December 12, 1990',
       title: lang === 'sl' ? 'Prijava patenta za iglo VITA' : lang === 'it' ? 'Deposito brevetto ago VITA' : 'VITA needle patent filed',
       desc: lang === 'sl'
-        ? 'Prijava revolucionarnega patenta za zaščitni mehanizem podkožnih igel pri Uradu ZDA za patente in blagovne znamke (USPTO).'
+        ? 'Prijava revolucionarnega patenta za zaščitni mehanizem inekcijskih igel pri Uradu ZDA za patente in blagovne znamke (USPTO).'
         : lang === 'it'
           ? 'Deposito del brevetto rivoluzionario per il meccanismo di protezione degli aghi ipodermici presso l\'Ufficio Brevetti USA (USPTO).'
           : 'Filing of the groundbreaking patent application for a protective hypodermic needle assembly at the USPTO.',
