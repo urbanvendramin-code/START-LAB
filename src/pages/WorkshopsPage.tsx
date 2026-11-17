@@ -84,11 +84,9 @@ export default function WorkshopsPage() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: (sIdx * 0.1) + (idx * 0.05) }}
                       className={`play-card overflow-hidden group cursor-pointer transition-all border-2 bg-white flex flex-col justify-between ${
-                        isSmartHome
-                          ? 'border-cyan-500 hover:border-cyan-600 hover:shadow-xl ring-2 ring-cyan-500/20'
-                          : isArduino
-                            ? 'border-slate-300 hover:border-slate-400'
-                            : isRacer 
+                        isSmartHome || isArduino
+                          ? 'border-slate-300 hover:border-slate-400'
+                          : isRacer 
                               ? 'border-amber-500/40 hover:border-amber-500 hover:shadow-xl ring-2 ring-amber-500/20' 
                               : isGraphene
                                 ? 'border-brand-red/40 hover:border-brand-red hover:shadow-xl ring-2 ring-brand-red/20'
@@ -116,11 +114,9 @@ export default function WorkshopsPage() {
                           />
                           <div className="absolute bottom-3 right-5 flex items-end">
                             <div className={`w-11 h-11 rounded-2xl border-2 border-white shadow-md flex items-center justify-center transition-all ${
-                              isSmartHome
-                                ? 'bg-cyan-600 text-white shadow-lg group-hover:scale-110'
-                                : isArduino
-                                  ? 'bg-slate-700 text-white shadow-md group-hover:scale-110'
-                                  : isRacer
+                              isSmartHome || isArduino
+                                ? 'bg-slate-700 text-white shadow-md group-hover:scale-110'
+                                : isRacer
                                     ? 'bg-amber-500 text-white shadow-lg group-hover:scale-110'
                                     : isGraphene
                                       ? 'bg-brand-red text-white shadow-lg group-hover:scale-110'
@@ -149,8 +145,8 @@ export default function WorkshopsPage() {
                             <MapPin size={14} className="text-brand-red stroke-[2.5]" /> Solkan / Start Lab
                           </div>
                           {isSmartHome && (
-                            <div className="bg-cyan-600 text-white px-3 py-1.5 rounded-xl font-display font-black text-[10px] uppercase shadow-sm flex items-center gap-1.5 animate-pulse">
-                              🟢 {isSlovenian ? "Prijave odprte • Brezplačno" : isItalian ? "Iscrizioni aperte • Gratuito" : "Registration open • Free"}
+                            <div className="bg-slate-700 text-white px-3 py-1.5 rounded-xl font-display font-black text-[10px] uppercase shadow-sm flex items-center gap-1.5">
+                              🔒 {isSlovenian ? "Prijave zaprte" : isItalian ? "Iscrizioni chiuse" : "Registration closed"}
                             </div>
                           )}
                           {isArduino && (
@@ -176,9 +172,9 @@ export default function WorkshopsPage() {
                         </div>
 
                         {isSmartHome && (
-                          <div className="mt-4 pt-3 border-t border-cyan-100 flex items-center justify-between">
-                            <span className="text-xs font-display font-black uppercase flex items-center gap-1.5 text-cyan-700">
-                              🚀 {isSlovenian ? "Prijavi se v koledarju" : isItalian ? "Iscriviti nel calendario" : "Register in calendar"}
+                          <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <span className="text-xs font-display font-black uppercase flex items-center gap-1.5 text-slate-500">
+                              🔒 {isSlovenian ? "Prijave zaprte" : isItalian ? "Iscrizioni chiuse" : "Registrations closed"}
                             </span>
                             <span className="text-[11px] font-bold text-slate-500">
                               {isSlovenian ? "10. 11. – 1. 12. 2026" : isItalian ? "10/11 – 01/12/2026" : "Nov 10 – Dec 1, 2026"}

@@ -785,11 +785,11 @@ export default function CalendarPage() {
       labelIt: 'Smart Home (Shelly)',
       labelEn: 'Smart Home (Shelly)',
       count: smartHomeCount,
-      badgeSl: '🟢 Prijave odprte',
-      badgeIt: '🟢 Aperto',
-      badgeEn: '🟢 Open',
+      badgeSl: 'Prijave zaprte',
+      badgeIt: 'Iscrizioni chiuse',
+      badgeEn: 'Closed',
       colorDot: 'bg-cyan-500',
-      badgeClass: 'bg-cyan-100 text-cyan-800 font-extrabold'
+      badgeClass: 'bg-slate-100 text-slate-700 font-bold'
     },
     {
       id: 'arduino' as const,
@@ -912,7 +912,7 @@ export default function CalendarPage() {
   ].filter(group => group.items.length > 0);
 
   const openRegisterModal = (event: Event) => {
-    if (event.id.startsWith('printcut') || event.id.startsWith('graphene') || event.id.startsWith('racer') || event.id.startsWith('occupied') || event.id.startsWith('arduino')) {
+    if (event.id.startsWith('smart-home') || event.id.startsWith('printcut') || event.id.startsWith('graphene') || event.id.startsWith('racer') || event.id.startsWith('occupied') || event.id.startsWith('arduino')) {
       return;
     }
     setModalEvent(event);
@@ -1366,29 +1366,18 @@ export default function CalendarPage() {
 
                             {/* Right: Status and action */}
                             <div className="flex md:flex-col items-center md:items-end justify-between w-full md:w-auto gap-2 shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-slate-200/60">
-                              {isSmartHome ? (
-                                <button
-                                  type="button"
-                                  onClick={() => openRegisterModal(event)}
-                                  className="px-3.5 py-1.5 rounded-xl bg-cyan-600 hover:bg-cyan-700 text-white text-[11px] font-display font-black uppercase tracking-wider flex items-center gap-1.5 shadow-sm cursor-pointer animate-pulse"
-                                >
-                                  <Rocket size={13} />
-                                  <span>{isSlovenian ? "Prijava (Brezplačno)" : isIt ? "Iscriviti (Gratis)" : "Register (Free)"}</span>
-                                </button>
-                              ) : (
-                                <span className={`px-2.5 py-1 rounded-xl text-[10px] font-display font-black uppercase tracking-wider flex items-center gap-1 shadow-xs ${
-                                  isOccupied
-                                    ? 'bg-rose-600 text-white'
-                                    : 'bg-slate-200 text-slate-700'
-                                }`}>
-                                  <Lock size={12} />
-                                  <span>
-                                    {isOccupied
-                                      ? (isSlovenian ? "Zasedeno" : isIt ? "Occupato" : "Booked")
-                                      : (isSlovenian ? "Prijave zaprte" : isIt ? "Iscrizioni chiuse" : "Closed")}
-                                  </span>
+                              <span className={`px-2.5 py-1 rounded-xl text-[10px] font-display font-black uppercase tracking-wider flex items-center gap-1 shadow-xs ${
+                                isOccupied
+                                  ? 'bg-rose-600 text-white'
+                                  : 'bg-slate-200 text-slate-700'
+                              }`}>
+                                <Lock size={12} />
+                                <span>
+                                  {isOccupied
+                                    ? (isSlovenian ? "Zasedeno" : isIt ? "Occupato" : "Booked")
+                                    : (isSlovenian ? "Prijave zaprte" : isIt ? "Iscrizioni chiuse" : "Closed")}
                                 </span>
-                              )}
+                              </span>
 
                               <div className="flex items-center gap-2">
                                 <button
@@ -1502,7 +1491,6 @@ export default function CalendarPage() {
                   >
                     <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-cyan-500 inline-block shadow-sm" />
                     <span>{isSlovenian ? "Pametni dom (Shelly)" : "Smart Home (Shelly)"}</span>
-                    <span className="text-[9px] font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.2 rounded-md">🟢 {isSlovenian ? "Odprto" : "Open"}</span>
                     <span className="text-[10px] text-slate-500 font-normal">({smartHomeCount})</span>
                   </button>
                   <button
@@ -1809,8 +1797,8 @@ export default function CalendarPage() {
                                 </span>
                               )}
                               {isSmartHome && (
-                                <span className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-xl shadow-sm flex items-center gap-1">
-                                  🟢 {isSlovenian ? "Prijave odprte • Brezplačno" : isIt ? "Iscrizioni aperte • Gratuito" : "Registrations open • Free"}
+                                <span className="bg-slate-800 text-slate-300 text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-xl shadow-sm flex items-center gap-1 border border-slate-700">
+                                  🔒 {isSlovenian ? "Prijave zaprte" : isIt ? "Iscrizioni chiuse" : "Registrations closed"}
                                 </span>
                               )}
                               {isOccupied && (
@@ -1934,8 +1922,8 @@ export default function CalendarPage() {
                                     </span>
                                   </div>
                                   {isSmartHome ? (
-                                    <span className="bg-cyan-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm animate-pulse">
-                                      🟢 {isSlovenian ? "Prijave odprte • Brezplačno" : isIt ? "Iscrizioni aperte • Gratuito" : "Registrations open • Free"}
+                                    <span className="bg-slate-800 text-slate-300 text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm border border-slate-700">
+                                      🔒 {isSlovenian ? "Prijave zaprte" : isIt ? "Iscrizioni chiuse" : "Registrations closed"}
                                     </span>
                                   ) : isArduino ? (
                                     <span className="bg-slate-800 text-slate-300 text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm border border-slate-700">
@@ -2069,7 +2057,7 @@ export default function CalendarPage() {
                                                   <p>💶 <strong>{isSlovenian ? "Cena:" : "Price:"}</strong> <span className="text-emerald-700 font-extrabold">{isSlovenian ? "Brezplačno (0 €)" : "Free (0 €)"}</span></p>
                                                   <p>👥 <strong>{isSlovenian ? "Starost:" : "Age:"}</strong> 10–15 let</p>
                                                   <p>📍 <strong>{isSlovenian ? "Lokacija:" : "Location:"}</strong> Start Lab Solkan</p>
-                                                  <p>📲 <strong>{isSlovenian ? "Status:" : "Status:"}</strong> <span className="text-emerald-700 font-extrabold">{isSlovenian ? "Prijave so odprte!" : "Registrations open!"}</span></p>
+                                                  <p>📲 <strong>{isSlovenian ? "Status:" : "Status:"}</strong> <span className="text-slate-600 font-extrabold">{isSlovenian ? "Prijave so zaprte." : isIt ? "Iscrizioni chiuse." : "Registrations closed."}</span></p>
                                                 </div>
                                               </div>
                                             </div>
@@ -2616,7 +2604,7 @@ export default function CalendarPage() {
                                 <Lock size={16} className="text-rose-600 stroke-[2.5]" />
                                 {isSlovenian ? `Zasedeno (${event.time})` : isIt ? `Occupato (${event.time})` : `Booked (${event.time})`}
                               </div>
-                            ) : isPrintCut || isGraphene || isRacer || isArduino ? (
+                            ) : isPrintCut || isGraphene || isRacer || isArduino || isSmartHome ? (
                               <button 
                                 disabled
                                 className="w-full py-4 bg-slate-200 text-slate-500 rounded-2xl font-display font-black uppercase text-sm tracking-wider select-none cursor-not-allowed flex items-center justify-center gap-2 border border-slate-300/80 shadow-inner"
@@ -2891,8 +2879,8 @@ export default function CalendarPage() {
                             <span>{isSlovenian ? "POMEMBNE INFORMACIJE" : isIt ? "INFORMAZIONI IMPORTANTI" : "IMPORTANT INFORMATION"}</span>
                           </div>
                           {modalEvent?.id.startsWith('smart-home') ? (
-                            <span className="bg-cyan-600 text-white font-display font-black text-[10px] uppercase px-2.5 py-0.5 rounded-full shadow-sm flex items-center gap-1 animate-pulse">
-                              🟢 {isSlovenian ? "Prijave odprte • Brezplačno" : isIt ? "Iscrizioni aperte • Gratuito" : "Registrations open • Free"}
+                            <span className="bg-slate-800 text-slate-300 font-display font-black text-[10px] uppercase px-2.5 py-0.5 rounded-full shadow-sm flex items-center gap-1">
+                              🔒 {isSlovenian ? "Prijave zaprte" : isIt ? "Iscrizioni chiuse" : "Registrations closed"}
                             </span>
                           ) : modalEvent?.id.startsWith('arduino') ? (
                             <span className="bg-slate-800 text-slate-300 font-display font-black text-[10px] uppercase px-2.5 py-0.5 rounded-full shadow-sm flex items-center gap-1">
@@ -2914,7 +2902,7 @@ export default function CalendarPage() {
                         </div>
                         <p className="text-slate-900 font-extrabold text-xs">
                           {modalEvent?.id.startsWith('smart-home')
-                            ? (isSlovenian ? "✓ Prijave so odprte! Delavnica je brezplačna za otroke od 10 do 15 let." : isIt ? "✓ Iscrizioni aperte! Il workshop è gratuito per ragazzi 10–15 anni." : "✓ Registrations open! The workshop is free for ages 10–15.")
+                            ? (isSlovenian ? "✓ Prijave za to delavnico so zaprte." : isIt ? "✓ Le iscrizioni per questo workshop sono chiuse." : "✓ Registrations for this workshop are closed.")
                             : modalEvent?.id.startsWith('racer')
                             ? (isSlovenian ? "✓ Delavnica je polno zasedena – vsa mesta so že zapolnjena in prijave so zaklenjene." : isIt ? "✓ Workshop esaurito – le iscrizioni sono chiuse." : "✓ Workshop is full – registrations are locked.")
                             : modalEvent?.id.startsWith('graphene')
