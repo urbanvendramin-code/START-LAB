@@ -206,23 +206,21 @@ export default function PatentsPage() {
                   title={isSlovenian ? "Tase Lazovski – Klikni za ogled zgodbe" : isIt ? "Tase Lazovski – Clicca per vedere la storia" : "Tase Lazovski – Click to view story"}
                 >
                   {/* Ambient Electric-Blue Aura */}
-                  <div className="absolute -inset-3 bg-[#53B8FF]/25 rounded-3xl blur-2xl group-hover:bg-[#53B8FF]/45 transition-all duration-700 pointer-events-none" />
+                  <div className="absolute -inset-3 bg-[#53B8FF]/25 rounded-full blur-2xl group-hover:bg-[#53B8FF]/45 transition-all duration-700 pointer-events-none" />
 
-                  {/* Outer Technical Frame Ticks */}
-                  <div className="absolute -inset-2 rounded-3xl border border-dashed border-[#53B8FF]/30 pointer-events-none" />
+                  {/* Outer Circular Technical Ring */}
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
+                    className="absolute -inset-2 rounded-full border border-dashed border-[#53B8FF]/40 pointer-events-none"
+                  />
 
-                  {/* High-tech Corner Coordinate Accents */}
-                  <span className="absolute -top-1.5 -left-1.5 w-3 h-3 border-t-2 border-l-2 border-[#53B8FF] z-20 pointer-events-none" />
-                  <span className="absolute -top-1.5 -right-1.5 w-3 h-3 border-t-2 border-r-2 border-[#53B8FF] z-20 pointer-events-none" />
-                  <span className="absolute -bottom-1.5 -left-1.5 w-3 h-3 border-b-2 border-l-2 border-[#53B8FF] z-20 pointer-events-none" />
-                  <span className="absolute -bottom-1.5 -right-1.5 w-3 h-3 border-b-2 border-r-2 border-[#53B8FF] z-20 pointer-events-none" />
-
-                  {/* Square Portrait Frame (Uncropped) */}
-                  <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-44 md:h-44 xl:w-48 xl:h-48 aspect-square rounded-2xl overflow-hidden border-2 border-[#53B8FF]/80 bg-[#0E131C] relative shadow-[0_0_35px_rgba(83,184,255,0.35)] group-hover:shadow-[0_0_55px_rgba(83,184,255,0.6)] group-hover:border-[#53B8FF] transition-all duration-500 flex items-center justify-center p-1.5">
+                  {/* Circular Portrait Frame */}
+                  <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-44 md:h-44 xl:w-48 xl:h-48 aspect-square rounded-full overflow-hidden border-2 border-[#53B8FF]/80 bg-gradient-to-b from-[#162030] to-[#0E131C] relative shadow-[0_0_35px_rgba(83,184,255,0.35)] group-hover:shadow-[0_0_55px_rgba(83,184,255,0.6)] group-hover:border-[#53B8FF] transition-all duration-500 flex items-center justify-center">
                     <img 
-                      src="https://ik.imagekit.io/utigodgni/IMG_3769.png" 
+                      src="https://ik.imagekit.io/utigodgni/profilna.png?updatedAt=1793864333798" 
                       alt={isSlovenian ? "Tase Lazovski - Inovator in izumitelj" : isIt ? "Tase Lazovski - Innovatore e inventore" : "Tase Lazovski - Innovator and inventor"} 
-                      className="w-full h-full object-contain rounded-xl group-hover:scale-105 transition-transform duration-700 filter brightness-105 contrast-105"
+                      className="w-full h-full object-cover object-top rounded-full group-hover:scale-105 transition-transform duration-700 filter brightness-105 contrast-105"
                     />
 
                     {/* Animated Holographic Scanline Overlay */}
@@ -233,7 +231,7 @@ export default function PatentsPage() {
                     />
 
                     {/* Subtle Glass Vignette */}
-                    <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10 pointer-events-none" />
+                    <div className="absolute inset-0 rounded-full ring-1 ring-inset ring-white/10 pointer-events-none" />
                   </div>
 
                   {/* Micro Inventor Badge */}
