@@ -144,7 +144,7 @@ export default function PatentsPage() {
   const [enlargedGasImg, setEnlargedGasImg] = useState<string | null>(null);
 
   return (
-    <div className="bg-[#080B10] text-[#F0EDE5] min-h-screen selection:bg-[#53B8FF]/30 selection:text-white font-sans relative overflow-x-hidden">
+    <div className="bg-[#080B10] text-[#F0EDE5] min-h-screen selection:bg-[#53B8FF]/30 selection:text-white font-sans relative overflow-x-clip">
       
       {/* Technical Animated Inventor Background */}
       <InventorAnimatedBackground />
@@ -160,19 +160,19 @@ export default function PatentsPage() {
           style={{ background: 'radial-gradient(ellipse at center, rgba(83,184,255,0.12) 0%, transparent 70%)' }}
         />
         
-        <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           
           {/* Hero Left Content */}
           <motion.div 
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-7 space-y-6 sm:space-y-8"
+            className="lg:col-span-7 min-w-0 space-y-6 sm:space-y-8"
           >
             {/* Museum Exhibit Label */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-[#53B8FF]/30 bg-[#151B24]/95 shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-pulse" />
-              <span className="text-[11px] sm:text-xs font-mono font-bold tracking-[0.2em] text-[#53B8FF] uppercase">
+            <div className="inline-flex max-w-full items-center gap-2 sm:gap-2.5 px-3 sm:px-4 py-2 rounded-full border border-[#53B8FF]/30 bg-[#151B24]/95 shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-pulse shrink-0" />
+              <span className="text-[10px] sm:text-xs font-mono font-bold tracking-[0.12em] sm:tracking-[0.2em] text-[#53B8FF] uppercase break-words">
                 {isSlovenian ? 'START LAB · ZAPUŠČINA INOVACIJ' : isIt ? 'START LAB · EREDITÀ DI INNOVAZIONI' : 'START LAB · INNOVATION LEGACY'}
               </span>
             </div>
@@ -218,24 +218,24 @@ export default function PatentsPage() {
                   </div>
 
                   {/* Micro Inventor Badge */}
-                  <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 z-20 whitespace-nowrap">
-                    <div className="px-3 py-1 rounded-full bg-[#080B10]/95 border border-[#53B8FF]/70 text-[#53B8FF] text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-widest shadow-xl flex items-center gap-1.5 group-hover:bg-[#53B8FF] group-hover:text-[#080B10] transition-colors duration-300">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#53B8FF] group-hover:bg-[#080B10] animate-ping" />
-                      <span>{ui.hero.role}</span>
+                  <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 z-20 max-w-[calc(100vw-2.5rem)] sm:whitespace-nowrap">
+                    <div className="px-3 py-1 rounded-full bg-[#080B10]/95 border border-[#53B8FF]/70 text-[#53B8FF] text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-widest shadow-xl flex items-center justify-center gap-1.5 text-center group-hover:bg-[#53B8FF] group-hover:text-[#080B10] transition-colors duration-300">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#53B8FF] group-hover:bg-[#080B10] animate-ping shrink-0" />
+                      <span className="break-words">{ui.hero.role}</span>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Title & Subtitle */}
-              <div>
+              <div className="min-w-0 w-full sm:w-auto">
                 <motion.h1 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.15 }}
-                  className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.75rem] xl:text-[5.2rem] font-display font-black tracking-tight uppercase leading-[0.96] text-[#F0EDE5]"
+                  className="text-[2.15rem] sm:text-5xl md:text-6xl lg:text-[4.75rem] xl:text-[5.2rem] font-display font-black tracking-tight uppercase leading-[0.98] text-[#F0EDE5] break-words"
                 >
-                  <span className="inline-flex items-center gap-3 sm:gap-4 flex-wrap">
+                  <span className="inline-flex items-center gap-2.5 sm:gap-4 flex-wrap">
                     <span>TASE</span>
                     <span 
                       className="text-xs sm:text-base md:text-lg lg:text-xl font-mono font-bold text-[#53B8FF] tracking-wider px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-xl bg-[#151B24]/90 border border-[#53B8FF]/40 shadow-sm align-middle normal-case"
@@ -255,7 +255,7 @@ export default function PatentsPage() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.8, delay: 0.3 }}
-                  className="text-xl sm:text-2xl md:text-3xl font-display font-medium text-[#53B8FF] tracking-wide mt-3 sm:mt-4 italic"
+                  className="text-lg sm:text-2xl md:text-3xl font-display font-medium text-[#53B8FF] tracking-wide mt-3 sm:mt-4 italic break-words"
                 >
                   {ui.hero.slogan}
                 </motion.p>
@@ -277,23 +277,23 @@ export default function PatentsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2"
+              className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 pt-2"
             >
-              <div className="p-3 rounded-2xl bg-[#151B24]/90 border border-slate-800">
-                <div className="text-[10px] font-mono text-[#53B8FF] uppercase tracking-wider">{ui.hero.metrics.patentUs}</div>
-                <div className="text-sm sm:text-base font-bold text-white font-mono mt-0.5">US5051109A</div>
+              <div className="p-3 rounded-2xl bg-[#151B24]/90 border border-slate-800 min-w-0">
+                <div className="text-[10px] font-mono text-[#53B8FF] uppercase tracking-wider break-words">{ui.hero.metrics.patentUs}</div>
+                <div className="text-xs sm:text-base font-bold text-white font-mono mt-0.5 break-words">US5051109A</div>
               </div>
-              <div className="p-3 rounded-2xl bg-[#151B24]/90 border border-slate-800">
-                <div className="text-[10px] font-mono text-[#53B8FF] uppercase tracking-wider">{ui.hero.metrics.brussels}</div>
-                <div className="text-sm sm:text-base font-bold text-white font-mono mt-0.5">EUREKA Medaille</div>
+              <div className="p-3 rounded-2xl bg-[#151B24]/90 border border-slate-800 min-w-0">
+                <div className="text-[10px] font-mono text-[#53B8FF] uppercase tracking-wider break-words">{ui.hero.metrics.brussels}</div>
+                <div className="text-xs sm:text-base font-bold text-white font-mono mt-0.5 break-words">EUREKA Medaille</div>
               </div>
-              <div className="p-3 rounded-2xl bg-[#151B24]/90 border border-slate-800">
-                <div className="text-[10px] font-mono text-[#53B8FF] uppercase tracking-wider">{ui.hero.metrics.cardsDate}</div>
-                <div className="text-sm sm:text-base font-bold text-white font-mono mt-0.5">{ui.hero.metrics.cards}</div>
+              <div className="p-3 rounded-2xl bg-[#151B24]/90 border border-slate-800 min-w-0">
+                <div className="text-[10px] font-mono text-[#53B8FF] uppercase tracking-wider break-words">{ui.hero.metrics.cardsDate}</div>
+                <div className="text-xs sm:text-base font-bold text-white font-mono mt-0.5 break-words">{ui.hero.metrics.cards}</div>
               </div>
-              <div className="p-3 rounded-2xl bg-[#151B24]/90 border border-slate-800">
-                <div className="text-[10px] font-mono text-[#53B8FF] uppercase tracking-wider">{ui.hero.metrics.parkingDate}</div>
-                <div className="text-sm sm:text-base font-bold text-white font-mono mt-0.5">{ui.hero.metrics.parking}</div>
+              <div className="p-3 rounded-2xl bg-[#151B24]/90 border border-slate-800 min-w-0">
+                <div className="text-[10px] font-mono text-[#53B8FF] uppercase tracking-wider break-words">{ui.hero.metrics.parkingDate}</div>
+                <div className="text-xs sm:text-base font-bold text-white font-mono mt-0.5 break-words">{ui.hero.metrics.parking}</div>
               </div>
             </motion.div>
 
@@ -302,29 +302,29 @@ export default function PatentsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex flex-wrap items-center gap-4 pt-2"
+              className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 pt-2"
             >
               <a 
                 href="#izumi"
-                className="px-8 py-4 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs sm:text-sm uppercase tracking-widest transition-all duration-300 shadow-[0_0_30px_rgba(83,184,255,0.4)] flex items-center gap-3 cursor-pointer group"
+                className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs sm:text-sm uppercase tracking-widest transition-all duration-300 shadow-[0_0_30px_rgba(83,184,255,0.4)] flex items-center justify-center gap-3 cursor-pointer group text-center"
               >
                 <span>{ui.hero.ctaExplore}</span>
-                <ChevronRight size={18} className="stroke-[3] group-hover:translate-x-1 transition-transform" />
+                <ChevronRight size={18} className="stroke-[3] group-hover:translate-x-1 transition-transform shrink-0" />
               </a>
 
               <a 
                 href="#casovnica"
-                className="px-6 py-4 rounded-xl bg-[#151B24] hover:bg-slate-800 text-[#F0EDE5] border border-slate-700/80 font-display font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 flex items-center gap-2 cursor-pointer"
+                className="px-5 sm:px-6 py-3.5 sm:py-4 rounded-xl bg-[#151B24] hover:bg-slate-800 text-[#F0EDE5] border border-slate-700/80 font-display font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer text-center"
               >
-                <Clock size={16} className="text-[#53B8FF]" />
+                <Clock size={16} className="text-[#53B8FF] shrink-0" />
                 <span>{ui.hero.ctaTimeline}</span>
               </a>
 
               <a 
                 href="#patenti"
-                className="px-6 py-4 rounded-xl bg-transparent hover:bg-white/5 text-slate-300 hover:text-white border border-slate-800 font-display font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 flex items-center gap-2 cursor-pointer"
+                className="px-5 sm:px-6 py-3.5 sm:py-4 rounded-xl bg-transparent hover:bg-white/5 text-slate-300 hover:text-white border border-slate-800 font-display font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer text-center"
               >
-                <FileText size={16} className="text-[#53B8FF]" />
+                <FileText size={16} className="text-[#53B8FF] shrink-0" />
                 <span>{ui.hero.ctaRegistry}</span>
               </a>
             </motion.div>
@@ -335,9 +335,9 @@ export default function PatentsPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-            className="lg:col-span-5 relative"
+            className="lg:col-span-5 min-w-0 relative"
           >
-            <div className="relative rounded-[2.2rem] overflow-hidden border-2 border-slate-800/80 bg-[#151B24] shadow-[0_25px_60px_rgba(0,0,0,0.8)] group">
+            <div className="relative rounded-[1.75rem] sm:rounded-[2.2rem] overflow-hidden border-2 border-slate-800/80 bg-[#151B24] shadow-[0_25px_60px_rgba(0,0,0,0.8)] group">
               
               {/* Image Frame */}
               <div className="aspect-[4/3] sm:aspect-[16/11] relative overflow-hidden">
@@ -355,8 +355,8 @@ export default function PatentsPage() {
               </div>
 
               {/* Museum placard overlay */}
-              <div className="p-5 sm:p-6 bg-[#0E131C]/95 border-t border-slate-800 flex flex-col gap-2">
-                <div className="flex items-center justify-between">
+              <div className="p-4 sm:p-6 bg-[#0E131C]/95 border-t border-slate-800 flex flex-col gap-2">
+                <div className="flex flex-wrap items-center justify-between gap-1.5">
                   <span className="text-[10px] font-mono font-bold tracking-widest text-[#53B8FF] uppercase">
                     {ui.hero.placardRef}
                   </span>
@@ -364,7 +364,7 @@ export default function PatentsPage() {
                     {ui.hero.placardRegion}
                   </span>
                 </div>
-                <h3 className="font-display font-black text-sm sm:text-base uppercase text-white tracking-wide">
+                <h3 className="font-display font-black text-sm sm:text-base uppercase text-white tracking-wide break-words">
                   {ui.hero.placardTitle}
                 </h3>
                 <p className="text-xs text-slate-400 leading-relaxed">
@@ -373,9 +373,9 @@ export default function PatentsPage() {
               </div>
 
               {/* Corner badge */}
-              <div className="absolute top-4 right-4 bg-[#080B10]/90 border border-[#53B8FF]/40 text-[#53B8FF] px-3 py-1.5 rounded-xl font-mono text-[10px] uppercase font-bold flex items-center gap-1.5 shadow-lg">
-                <Sparkles size={12} />
-                <span>{ui.hero.placardBadge}</span>
+              <div className="absolute top-3 right-3 sm:top-4 sm:right-4 max-w-[calc(100%-1.5rem)] bg-[#080B10]/90 border border-[#53B8FF]/40 text-[#53B8FF] px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl font-mono text-[10px] uppercase font-bold flex items-center gap-1.5 shadow-lg">
+                <Sparkles size={12} className="shrink-0" />
+                <span className="break-words">{ui.hero.placardBadge}</span>
               </div>
             </div>
           </motion.div>
@@ -389,11 +389,11 @@ export default function PatentsPage() {
         <div className="max-w-7xl mx-auto">
           
           {/* Section Header */}
-          <div className="max-w-3xl mb-16">
-            <span className="text-xs font-mono font-bold tracking-[0.2em] text-[#53B8FF] uppercase block mb-3">
+          <div className="max-w-3xl mb-12 sm:mb-16">
+            <span className="text-xs font-mono font-bold tracking-[0.15em] sm:tracking-[0.2em] text-[#53B8FF] uppercase block mb-3">
               {ui.story.tag}
             </span>
-            <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-black uppercase text-white tracking-tight leading-[1.05]">
+            <h2 className="text-[1.7rem] sm:text-5xl md:text-6xl font-display font-black uppercase text-white tracking-tight leading-[1.08] break-words [overflow-wrap:anywhere]">
               {ui.story.titlePart1} <br />
               <span className="text-[#53B8FF]">{ui.story.titlePart2}</span>
             </h2>
@@ -404,8 +404,8 @@ export default function PatentsPage() {
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
             
             {/* Story text */}
-            <div className="lg:col-span-7 space-y-6 text-slate-300 text-base sm:text-lg leading-relaxed font-normal">
-              <p className="text-xl sm:text-2xl font-serif italic text-white/95 leading-snug border-l-4 border-[#53B8FF] pl-6 py-1">
+            <div className="lg:col-span-7 min-w-0 space-y-6 text-slate-300 text-base sm:text-lg leading-relaxed font-normal">
+              <p className="text-lg sm:text-2xl font-serif italic text-white/95 leading-snug border-l-4 border-[#53B8FF] pl-4 sm:pl-6 py-1">
                 {ui.story.quote}
               </p>
 
@@ -427,8 +427,8 @@ export default function PatentsPage() {
             </div>
 
             {/* Archival exhibit box */}
-            <div className="lg:col-span-5 space-y-6">
-              <div className="p-6 sm:p-8 rounded-3xl bg-[#151B24] border border-slate-800 shadow-xl space-y-6">
+            <div className="lg:col-span-5 min-w-0 space-y-6">
+              <div className="p-5 sm:p-8 rounded-3xl bg-[#151B24] border border-slate-800 shadow-xl space-y-6">
                 <div className="flex items-center gap-3 border-b border-slate-800 pb-4">
                   <div className="w-10 h-10 rounded-xl bg-[#53B8FF]/10 text-[#53B8FF] flex items-center justify-center">
                     <Award size={22} className="stroke-[2.2]" />
@@ -488,12 +488,12 @@ export default function PatentsPage() {
         <div className="max-w-7xl mx-auto">
           
           {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-            <div>
-              <span className="text-xs font-mono font-bold tracking-[0.2em] text-[#53B8FF] uppercase block mb-3">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
+            <div className="min-w-0">
+              <span className="text-xs font-mono font-bold tracking-[0.15em] sm:tracking-[0.2em] text-[#53B8FF] uppercase block mb-3">
                 {ui.timeline.tag}
               </span>
-              <h2 className="text-3xl sm:text-5xl font-display font-black uppercase text-white tracking-tight">
+              <h2 className="text-[1.7rem] sm:text-5xl font-display font-black uppercase text-white tracking-tight break-words [overflow-wrap:anywhere]">
                 {ui.timeline.title}
               </h2>
             </div>
@@ -524,17 +524,17 @@ export default function PatentsPage() {
                     key={idx}
                     type="button"
                     onClick={() => setActiveTimelineIdx(idx)}
-                    className={`p-3.5 sm:p-4 rounded-2xl border transition-all duration-300 text-left cursor-pointer flex flex-col justify-between gap-2.5 relative group ${
+                    className={`min-w-0 p-3 sm:p-4 rounded-2xl border transition-all duration-300 text-left cursor-pointer flex flex-col justify-between gap-2 relative group ${
                       isActive
-                        ? 'bg-[#151B24] border-[#53B8FF] shadow-[0_0_25px_rgba(83,184,255,0.25)] text-white scale-[1.02] z-10'
+                        ? 'bg-[#151B24] border-[#53B8FF] shadow-[0_0_25px_rgba(83,184,255,0.25)] text-white sm:scale-[1.02] z-10'
                         : 'bg-[#0E131C] border-slate-800 hover:border-slate-700 hover:bg-[#121822] text-slate-400'
                     }`}
                   >
-                    <div className="flex items-center justify-between w-full">
+                    <div className="flex items-center justify-between w-full gap-1">
                       <span className="font-mono font-bold text-sm sm:text-base text-[#53B8FF] tracking-tight">{m.year}</span>
-                      <span className={`w-2.5 h-2.5 rounded-full transition-all ${isActive ? 'bg-[#53B8FF] ring-4 ring-[#53B8FF]/20' : 'bg-slate-700 group-hover:bg-slate-500'}`} />
+                      <span className={`w-2.5 h-2.5 rounded-full shrink-0 transition-all ${isActive ? 'bg-[#53B8FF] ring-4 ring-[#53B8FF]/20' : 'bg-slate-700 group-hover:bg-slate-500'}`} />
                     </div>
-                    <span className="font-display font-bold text-xs uppercase leading-snug text-white line-clamp-2">
+                    <span className="font-display font-bold text-[11px] sm:text-xs uppercase leading-snug text-white break-words">
                       {m.title}
                     </span>
                   </button>
@@ -551,29 +551,29 @@ export default function PatentsPage() {
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="p-6 sm:p-10 rounded-3xl bg-[#151B24] border-2 border-[#53B8FF]/40 shadow-2xl relative overflow-hidden"
+                  className="p-5 sm:p-10 rounded-3xl bg-[#151B24] border-2 border-[#53B8FF]/40 shadow-2xl relative overflow-hidden"
                 >
                   <div
                     className="absolute top-0 right-0 w-80 h-80 rounded-full pointer-events-none -mr-20 -mt-20"
                     style={{ background: 'radial-gradient(circle, rgba(83,184,255,0.12) 0%, transparent 70%)' }}
                   />
                   
-                  <div className="grid md:grid-cols-12 gap-8 items-center relative z-10">
-                    <div className="md:col-span-8 space-y-4">
-                      <div className="flex flex-wrap items-center gap-3">
-                        <span className="px-3.5 py-1 rounded-full bg-[#53B8FF]/20 text-[#53B8FF] border border-[#53B8FF]/40 font-mono text-xs font-bold">
+                  <div className="grid md:grid-cols-12 gap-6 sm:gap-8 items-center relative z-10">
+                    <div className="md:col-span-8 min-w-0 space-y-4">
+                      <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                        <span className="px-3 py-1 rounded-full bg-[#53B8FF]/20 text-[#53B8FF] border border-[#53B8FF]/40 font-mono text-[11px] sm:text-xs font-bold">
                           {current.exactDate}
                         </span>
-                        <span className="px-3 py-1 rounded-full bg-white/10 text-slate-300 font-mono text-xs">
+                        <span className="px-3 py-1 rounded-full bg-white/10 text-slate-300 font-mono text-[11px] sm:text-xs break-words">
                           {current.tag}
                         </span>
                       </div>
 
-                      <h3 className="text-2xl sm:text-4xl font-display font-black uppercase text-white leading-tight">
+                      <h3 className="text-xl sm:text-4xl font-display font-black uppercase text-white leading-tight break-words [overflow-wrap:anywhere]">
                         {current.title}
                       </h3>
 
-                      <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl">
+                      <p className="text-sm sm:text-lg text-slate-300 leading-relaxed max-w-2xl">
                         {current.desc}
                       </p>
 
@@ -583,15 +583,15 @@ export default function PatentsPage() {
                           className="inline-flex items-center gap-2 text-xs sm:text-sm font-display font-bold text-[#53B8FF] hover:text-white uppercase tracking-wider group"
                         >
                           <span>{ui.timeline.jumpBtn}</span>
-                          <ArrowRight size={16} className="group-hover:translate-x-1.5 transition-transform" />
+                          <ArrowRight size={16} className="group-hover:translate-x-1.5 transition-transform shrink-0" />
                         </a>
                       </div>
                     </div>
 
                     <div className="md:col-span-4 flex justify-center md:justify-end">
-                      <div className="w-36 h-36 rounded-full border-4 border-[#53B8FF]/30 flex flex-col items-center justify-center bg-[#080B10] shadow-[0_0_40px_rgba(83,184,255,0.2)]">
-                        <span className="text-xs font-mono text-[#53B8FF] uppercase">{isSlovenian ? 'LETO' : isIt ? 'ANNO' : 'YEAR'}</span>
-                        <span className="text-3xl font-display font-black text-white">{current.year}</span>
+                      <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-full border-4 border-[#53B8FF]/30 flex flex-col items-center justify-center bg-[#080B10] shadow-[0_0_40px_rgba(83,184,255,0.2)]">
+                        <span className="text-[11px] sm:text-xs font-mono text-[#53B8FF] uppercase">{isSlovenian ? 'LETO' : isIt ? 'ANNO' : 'YEAR'}</span>
+                        <span className="text-2xl sm:text-3xl font-display font-black text-white">{current.year}</span>
                       </div>
                     </div>
                   </div>
@@ -606,18 +606,18 @@ export default function PatentsPage() {
       {/* ========================================================================= */}
       {/* SECTION D: FEATURED INVENTIONS (4 DISTINCT FEATURES) */}
       {/* ========================================================================= */}
-      <section id="izumi" className="py-24 px-4 sm:px-6 lg:px-12 border-t border-slate-900 bg-[#0A0E15] relative z-10 space-y-32">
-        <div className="max-w-7xl mx-auto">
+      <section id="izumi" className="py-20 sm:py-24 px-4 sm:px-6 lg:px-12 border-t border-slate-900 bg-[#0A0E15] relative z-10 space-y-24 sm:space-y-32">
+        <div className="max-w-7xl mx-auto space-y-20 sm:space-y-32">
 
           {/* Section Introduction */}
-          <div className="text-center max-w-3xl mx-auto mb-24">
-            <span className="text-xs font-mono font-bold tracking-[0.2em] text-[#53B8FF] uppercase block mb-3">
+          <div className="text-center max-w-3xl mx-auto">
+            <span className="text-xs font-mono font-bold tracking-[0.15em] sm:tracking-[0.2em] text-[#53B8FF] uppercase block mb-3">
               {ui.featured.tag}
             </span>
-            <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-black uppercase text-white tracking-tight">
+            <h2 className="text-[1.7rem] sm:text-5xl md:text-6xl font-display font-black uppercase text-white tracking-tight break-words [overflow-wrap:anywhere]">
               {ui.featured.title}
             </h2>
-            <p className="text-slate-400 text-base sm:text-lg mt-4 leading-relaxed font-normal">
+            <p className="text-slate-400 text-sm sm:text-lg mt-4 leading-relaxed font-normal">
               {ui.featured.desc}
             </p>
           </div>
@@ -625,18 +625,18 @@ export default function PatentsPage() {
           {/* --------------------------------------------------------------------- */}
           {/* 1. INJEKCIJSKA IGLA VITA */}
           {/* --------------------------------------------------------------------- */}
-          <div id="izum-vita" className="scroll-mt-28 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          <div id="izum-vita" className="scroll-mt-28 grid lg:grid-cols-12 gap-8 lg:gap-16 items-center">
             {/* Visual & Video Column */}
-            <div className="lg:col-span-6 relative">
+            <div className="lg:col-span-6 min-w-0 relative">
               <div className="rounded-3xl overflow-hidden border-2 border-[#53B8FF]/40 bg-[#151B24] shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative group">
                 
                 {/* Header Switcher: Video / Drawing */}
-                <div className="p-3 bg-[#0E131C] border-b border-slate-800 flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-1.5 bg-[#151B24] p-1 rounded-xl border border-slate-800">
+                <div className="p-2.5 sm:p-3 bg-[#0E131C] border-b border-slate-800 flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex flex-wrap items-center gap-1 sm:gap-1.5 bg-[#151B24] p-1 rounded-xl border border-slate-800 max-w-full">
                     <button
                       type="button"
                       onClick={() => setVitaViewMode('video')}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
+                      className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
                         vitaViewMode === 'video'
                           ? 'bg-[#53B8FF] text-[#080B10] shadow-sm'
                           : 'text-slate-400 hover:text-white'
@@ -648,7 +648,7 @@ export default function PatentsPage() {
                     <button
                       type="button"
                       onClick={() => setVitaViewMode('drawing')}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
+                      className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
                         vitaViewMode === 'drawing'
                           ? 'bg-[#53B8FF] text-[#080B10] shadow-sm'
                           : 'text-slate-400 hover:text-white'
@@ -659,7 +659,7 @@ export default function PatentsPage() {
                     </button>
                   </div>
 
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-mono text-[11px] font-bold">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-mono text-[10px] sm:text-[11px] font-bold shrink-0">
                     <Award size={13} />
                     <span>EUREKA 1993</span>
                   </span>
@@ -733,14 +733,14 @@ export default function PatentsPage() {
                         <ChevronRight size={18} className="stroke-[2.5]" />
                       </button>
 
-                      <div className="absolute top-4 left-4 pointer-events-none bg-[#080B10]/90 px-3.5 py-1.5 rounded-xl border border-[#53B8FF]/40 text-[#53B8FF] font-mono text-xs font-bold z-10">
+                      <div className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 max-w-[calc(100%-1.25rem)] pointer-events-none bg-[#080B10]/90 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-xl border border-[#53B8FF]/40 text-[#53B8FF] font-mono text-[10px] sm:text-xs font-bold z-10 break-words">
                         US PATENT US5051109A
                       </div>
 
                       <button
                         type="button"
                         onClick={() => setEnlargedVitaImg(vitaImages[activeVitaImgIdx].url)}
-                        className="absolute bottom-4 right-4 bg-[#080B10]/90 hover:bg-[#53B8FF] text-slate-300 hover:text-[#080B10] px-3 py-1.5 rounded-xl border border-slate-700 hover:border-[#53B8FF] text-xs font-mono font-bold transition-colors flex items-center gap-1.5 cursor-pointer shadow-md z-10"
+                        className="absolute bottom-2.5 right-2.5 sm:bottom-4 sm:right-4 bg-[#080B10]/90 hover:bg-[#53B8FF] text-slate-300 hover:text-[#080B10] px-2.5 sm:px-3 py-1.5 rounded-xl border border-slate-700 hover:border-[#53B8FF] text-xs font-mono font-bold transition-colors flex items-center gap-1.5 cursor-pointer shadow-md z-10"
                         title={isSlovenian ? "Povečaj sliko" : isIt ? "Ingrandisci immagine" : "Enlarge image"}
                       >
                         <Maximize2 size={13} />
@@ -752,16 +752,16 @@ export default function PatentsPage() {
 
                 {/* Bottom Bar: When Video vs When Drawing */}
                 {vitaViewMode === 'video' ? (
-                  <div className="p-3.5 bg-[#0E131C] border-t border-slate-800 flex items-center justify-between text-xs font-mono text-slate-400">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-pulse" />
-                      <span className="text-white font-bold">Igla VITA1.mp4</span>
+                  <div className="p-3 sm:p-3.5 bg-[#0E131C] border-t border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-slate-400">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-pulse shrink-0" />
+                      <span className="text-white font-bold break-all">Igla VITA1.mp4</span>
                       <span className="text-slate-500 hidden sm:inline">· {isSlovenian ? 'Izvirni video arhiv' : isIt ? 'Archivio video originale' : 'Original video archive'}</span>
                     </div>
                     <button
                       type="button"
                       onClick={() => setActiveVideoModal('video-vita')}
-                      className="hover:text-[#53B8FF] transition-colors flex items-center gap-1.5 cursor-pointer text-slate-300 hover:underline"
+                      className="hover:text-[#53B8FF] transition-colors flex items-center gap-1.5 cursor-pointer text-slate-300 hover:underline shrink-0"
                       title={isSlovenian ? "Odpri v velikem predvajalniku" : isIt ? "Apri nel player a schermo intero" : "Open in fullscreen player"}
                     >
                       <Maximize2 size={13} />
@@ -769,7 +769,7 @@ export default function PatentsPage() {
                     </button>
                   </div>
                 ) : (
-                  <div className="p-3 bg-[#0E131C] border-t border-slate-800 grid grid-cols-3 gap-2.5">
+                  <div className="p-2.5 sm:p-3 bg-[#0E131C] border-t border-slate-800 grid grid-cols-2 gap-2.5">
                     {vitaImages.map((img, idx) => {
                       const isSelected = activeVitaImgIdx === idx;
                       return (
@@ -777,13 +777,13 @@ export default function PatentsPage() {
                           key={idx}
                           type="button"
                           onClick={() => setActiveVitaImgIdx(idx)}
-                          className={`rounded-xl overflow-hidden border-2 transition-all p-1.5 bg-[#080B10] flex items-center gap-2 cursor-pointer text-left ${
+                          className={`min-w-0 rounded-xl overflow-hidden border-2 transition-all p-1.5 bg-[#080B10] flex items-center gap-2 cursor-pointer text-left ${
                             isSelected
                               ? 'border-[#53B8FF] shadow-[0_0_15px_rgba(83,184,255,0.3)] bg-[#151B24]'
                               : 'border-slate-800 hover:border-slate-700 opacity-70 hover:opacity-100'
                           }`}
                         >
-                          <div className="w-12 h-10 rounded-lg overflow-hidden bg-black shrink-0 flex items-center justify-center">
+                          <div className="w-10 h-9 sm:w-12 sm:h-10 rounded-lg overflow-hidden bg-black shrink-0 flex items-center justify-center">
                             <img 
                               src={img.url} 
                               alt={isSlovenian ? `Predogled ${idx + 1}` : isIt ? `Anteprima ${idx + 1}` : `Preview ${idx + 1}`} 
@@ -792,11 +792,11 @@ export default function PatentsPage() {
                               className="w-full h-full object-contain"
                             />
                           </div>
-                          <div className="overflow-hidden hidden sm:block">
-                            <div className={`text-[10px] font-mono font-bold truncate ${isSelected ? 'text-[#53B8FF]' : 'text-slate-300'}`}>
+                          <div className="min-w-0">
+                            <div className={`text-[10px] font-mono font-bold break-words ${isSelected ? 'text-[#53B8FF]' : 'text-slate-300'}`}>
                               {isSlovenian ? 'Skica' : isIt ? 'Bozzetto' : 'Drawing'} 0{idx + 1}
                             </div>
-                            <div className="text-[9px] text-slate-500 font-sans truncate">
+                            <div className="text-[9px] text-slate-400 font-sans leading-tight break-words line-clamp-2 sm:line-clamp-none">
                               {img.title}
                             </div>
                           </div>
@@ -809,14 +809,14 @@ export default function PatentsPage() {
             </div>
 
             {/* Narrative Column */}
-            <div className="lg:col-span-6 space-y-6">
-              <div className="flex items-center gap-2 font-mono text-xs text-[#53B8FF] tracking-widest uppercase">
+            <div className="lg:col-span-6 min-w-0 space-y-6">
+              <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-[#53B8FF] tracking-widest uppercase">
                 <span>{ui.featured.vita.tag}</span>
                 <span>·</span>
                 <span>{isSlovenian ? "ZDA & EUREKA" : isIt ? "USA & EUREKA" : "USA & EUREKA"}</span>
               </div>
 
-              <h3 className="text-3xl sm:text-4xl md:text-5xl font-display font-black uppercase text-white leading-[1.05]">
+              <h3 className="text-[1.65rem] sm:text-4xl md:text-5xl font-display font-black uppercase text-white leading-[1.08] break-words [overflow-wrap:anywhere]">
                 {ui.featured.vita.title}
               </h3>
 
@@ -831,21 +831,21 @@ export default function PatentsPage() {
 
               <div className="p-4 rounded-2xl bg-[#151B24] border border-slate-800 space-y-2">
                 <div className="text-xs font-mono font-bold text-[#53B8FF] uppercase">{ui.featured.vita.patentLabel}</div>
-                <div className="text-xs sm:text-sm text-slate-300">
+                <div className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                   {ui.featured.vita.patentText}
                 </div>
               </div>
 
-              <div className="pt-2 flex flex-wrap items-center gap-3">
+              <div className="pt-2 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3">
                 <button
                   type="button"
                   onClick={() => {
                     setVitaViewMode('video');
                     setActiveVideoModal('video-vita');
                   }}
-                  className="px-6 py-3 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(83,184,255,0.3)]"
+                  className="px-5 sm:px-6 py-3 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(83,184,255,0.3)] text-center"
                 >
-                  <Play size={16} className="fill-[#080B10]" />
+                  <Play size={16} className="fill-[#080B10] shrink-0" />
                   <span>{isSlovenian ? 'Predvajaj video posnetek' : isIt ? 'Riproduci video' : 'Play video footage'}</span>
                 </button>
 
@@ -855,9 +855,9 @@ export default function PatentsPage() {
                     const rec = patentRegistry.find(p => p.id === 'us5051109a');
                     if (rec) setSelectedPatent(rec);
                   }}
-                  className="px-5 py-3 rounded-xl bg-[#151B24] hover:bg-slate-800 text-slate-200 hover:text-white border border-slate-700 text-xs font-display font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer"
+                  className="px-5 py-3 rounded-xl bg-[#151B24] hover:bg-slate-800 text-slate-200 hover:text-white border border-slate-700 text-xs font-display font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer text-center"
                 >
-                  <FileText size={16} className="text-[#53B8FF]" />
+                  <FileText size={16} className="text-[#53B8FF] shrink-0" />
                   <span>{ui.featured.vita.btnRegistry}</span>
                 </button>
 
@@ -868,9 +868,9 @@ export default function PatentsPage() {
                     const el = document.getElementById('tehnicna-razlaga');
                     if (el) el.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="px-5 py-3 rounded-xl bg-[#151B24] hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 text-xs font-display font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer"
+                  className="px-5 py-3 rounded-xl bg-[#151B24] hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 text-xs font-display font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer text-center"
                 >
-                  <Eye size={16} className="text-[#53B8FF]" />
+                  <Eye size={16} className="text-[#53B8FF] shrink-0" />
                   <span>{isSlovenian ? 'Kako deluje mehanizem' : isIt ? 'Come funziona il meccanismo' : 'How the mechanism works'}</span>
                 </button>
               </div>
@@ -880,16 +880,16 @@ export default function PatentsPage() {
           {/* --------------------------------------------------------------------- */}
           {/* 2. PARKIRNI AVTOMAT NOVA GORICA */}
           {/* --------------------------------------------------------------------- */}
-          <div id="izum-parkirni" className="scroll-mt-28 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          <div id="izum-parkirni" className="scroll-mt-28 grid lg:grid-cols-12 gap-8 lg:gap-16 items-center">
             {/* Narrative Column */}
-            <div className="lg:col-span-6 space-y-6 order-2 lg:order-1">
-              <div className="flex items-center gap-2 font-mono text-xs text-[#53B8FF] tracking-widest uppercase">
+            <div className="lg:col-span-6 min-w-0 space-y-6 order-2 lg:order-1">
+              <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-[#53B8FF] tracking-widest uppercase">
                 <span>{ui.featured.parking.tag}</span>
                 <span>·</span>
                 <span>NOVA GORICA 1999</span>
               </div>
 
-              <h3 className="text-3xl sm:text-4xl md:text-5xl font-display font-black uppercase text-white leading-[1.05]">
+              <h3 className="text-[1.65rem] sm:text-4xl md:text-5xl font-display font-black uppercase text-white leading-[1.08] break-words [overflow-wrap:anywhere]">
                 {ui.featured.parking.title}
               </h3>
 
@@ -906,26 +906,26 @@ export default function PatentsPage() {
               </div>
 
               <div className="grid grid-cols-2 gap-3 pt-2">
-                <div className="p-3.5 rounded-xl bg-[#151B24] border border-slate-800">
-                  <div className="text-[10px] font-mono text-[#53B8FF] uppercase">{ui.featured.parking.powerLabel}</div>
-                  <div className="font-bold text-white text-xs mt-1">{ui.featured.parking.powerVal}</div>
+                <div className="p-3.5 rounded-xl bg-[#151B24] border border-slate-800 min-w-0">
+                  <div className="text-[10px] font-mono text-[#53B8FF] uppercase break-words">{ui.featured.parking.powerLabel}</div>
+                  <div className="font-bold text-white text-xs mt-1 break-words">{ui.featured.parking.powerVal}</div>
                 </div>
-                <div className="p-3.5 rounded-xl bg-[#151B24] border border-slate-800">
-                  <div className="text-[10px] font-mono text-[#53B8FF] uppercase">{ui.featured.parking.payLabel}</div>
-                  <div className="font-bold text-white text-xs mt-1">{ui.featured.parking.payVal}</div>
+                <div className="p-3.5 rounded-xl bg-[#151B24] border border-slate-800 min-w-0">
+                  <div className="text-[10px] font-mono text-[#53B8FF] uppercase break-words">{ui.featured.parking.payLabel}</div>
+                  <div className="font-bold text-white text-xs mt-1 break-words">{ui.featured.parking.payVal}</div>
                 </div>
               </div>
 
-              <div className="pt-2 flex flex-wrap items-center gap-3">
+              <div className="pt-2 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3">
                 <button
                   type="button"
                   onClick={() => {
                     setParkingViewMode('video');
                     setActiveVideoModal('video-parking');
                   }}
-                  className="px-6 py-3 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(83,184,255,0.3)]"
+                  className="px-5 sm:px-6 py-3 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(83,184,255,0.3)] text-center"
                 >
-                  <Play size={16} className="fill-[#080B10]" />
+                  <Play size={16} className="fill-[#080B10] shrink-0" />
                   <span>{isSlovenian ? 'Predvajaj video posnetek' : isIt ? 'Riproduci video' : 'Play video footage'}</span>
                 </button>
 
@@ -935,25 +935,25 @@ export default function PatentsPage() {
                     const rec = patentRegistry.find(p => p.id === 'parking-meter');
                     if (rec) setSelectedPatent(rec);
                   }}
-                  className="px-5 py-3 rounded-xl bg-[#151B24] hover:bg-slate-800 text-slate-200 hover:text-white border border-slate-700 text-xs font-display font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer"
+                  className="px-5 py-3 rounded-xl bg-[#151B24] hover:bg-slate-800 text-slate-200 hover:text-white border border-slate-700 text-xs font-display font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer text-center"
                 >
-                  <FileText size={16} className="text-[#53B8FF]" />
+                  <FileText size={16} className="text-[#53B8FF] shrink-0" />
                   <span>{isSlovenian ? 'Tehnične specifikacije' : isIt ? 'Specifiche tecniche' : 'Technical specifications'}</span>
                 </button>
               </div>
             </div>
 
             {/* Visual & Video Column */}
-            <div className="lg:col-span-6 relative order-1 lg:order-2">
+            <div className="lg:col-span-6 min-w-0 relative order-1 lg:order-2">
               <div className="rounded-3xl overflow-hidden border-2 border-[#53B8FF]/40 bg-[#151B24] shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative group">
                 
                 {/* Header Switcher: Video / Photo */}
-                <div className="p-3 bg-[#0E131C] border-b border-slate-800 flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-1.5 bg-[#151B24] p-1 rounded-xl border border-slate-800">
+                <div className="p-2.5 sm:p-3 bg-[#0E131C] border-b border-slate-800 flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex flex-wrap items-center gap-1 sm:gap-1.5 bg-[#151B24] p-1 rounded-xl border border-slate-800 max-w-full">
                     <button
                       type="button"
                       onClick={() => setParkingViewMode('video')}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
+                      className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
                         parkingViewMode === 'video'
                           ? 'bg-[#53B8FF] text-[#080B10] shadow-sm'
                           : 'text-slate-400 hover:text-white'
@@ -965,7 +965,7 @@ export default function PatentsPage() {
                     <button
                       type="button"
                       onClick={() => setParkingViewMode('photo')}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
+                      className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
                         parkingViewMode === 'photo'
                           ? 'bg-[#53B8FF] text-[#080B10] shadow-sm'
                           : 'text-slate-400 hover:text-white'
@@ -976,7 +976,7 @@ export default function PatentsPage() {
                     </button>
                   </div>
 
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#53B8FF]/10 border border-[#53B8FF]/30 text-[#53B8FF] font-mono text-[11px] font-bold">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#53B8FF]/10 border border-[#53B8FF]/30 text-[#53B8FF] font-mono text-[10px] sm:text-[11px] font-bold shrink-0">
                     <MapPin size={13} />
                     <span>Nova Gorica 1999</span>
                   </span>
@@ -1011,11 +1011,11 @@ export default function PatentsPage() {
                           decoding="async"
                           className="w-full h-full object-cover opacity-85 group-hover/vid:opacity-95 group-hover/vid:scale-[1.02] transition-all duration-300"
                         />
-                        <div className="absolute inset-0 bg-black/35 group-hover/vid:bg-black/25 transition-colors flex flex-col items-center justify-center gap-3">
+                        <div className="absolute inset-0 bg-black/35 group-hover/vid:bg-black/25 transition-colors flex flex-col items-center justify-center gap-3 px-4">
                           <div className="w-16 h-16 rounded-full bg-[#53B8FF] group-hover/vid:bg-white text-[#080B10] flex items-center justify-center shadow-[0_0_30px_rgba(83,184,255,0.5)] group-hover/vid:scale-110 transition-all duration-300">
                             <Play size={26} className="ml-1 fill-[#080B10]" />
                           </div>
-                          <span className="px-3 py-1 rounded-full bg-[#080B10]/90 border border-[#53B8FF]/40 text-[#53B8FF] font-mono text-[11px] font-bold uppercase tracking-wider">
+                          <span className="px-3 py-1 rounded-full bg-[#080B10]/90 border border-[#53B8FF]/40 text-[#53B8FF] font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-center">
                             {isSlovenian ? 'Klikni za predvajanje videa' : isIt ? 'Clicca per riprodurre il video' : 'Click to play video'}
                           </span>
                         </div>
@@ -1031,7 +1031,7 @@ export default function PatentsPage() {
                         className="w-full h-full object-cover group-hover/draw:scale-105 transition-transform duration-700"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#080B10]/80 via-transparent to-transparent pointer-events-none" />
-                      <div className="absolute bottom-4 left-4 bg-[#080B10]/90 px-3 py-1.5 rounded-xl border border-slate-700 text-xs font-mono text-slate-300">
+                      <div className="absolute bottom-2.5 left-2.5 right-2.5 sm:right-auto sm:bottom-4 sm:left-4 bg-[#080B10]/90 px-3 py-1.5 rounded-xl border border-slate-700 text-[10px] sm:text-xs font-mono text-slate-300 break-words">
                         {isSlovenian ? 'Prva uvedba parkirnega avtomata v Novi Gorici' : isIt ? 'Prima installazione di parcometri a Nova Gorica' : 'First deployment of parking kiosks in Nova Gorica'}
                       </div>
                     </div>
@@ -1039,16 +1039,16 @@ export default function PatentsPage() {
                 </div>
 
                 {/* Bottom Bar Info */}
-                <div className="p-3.5 bg-[#0E131C] border-t border-slate-800 flex items-center justify-between text-xs font-mono text-slate-400">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-pulse" />
-                    <span className="text-white font-bold">Parkirni avtomat1.mp4</span>
+                <div className="p-3 sm:p-3.5 bg-[#0E131C] border-t border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-slate-400">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-pulse shrink-0" />
+                    <span className="text-white font-bold break-all">Parkirni avtomat1.mp4</span>
                     <span className="text-slate-500 hidden sm:inline">· {isSlovenian ? 'Arhivski posnetek' : isIt ? 'Filmato d\'archivio' : 'Archival footage'}</span>
                   </div>
                   <button
                     type="button"
                     onClick={() => setActiveVideoModal('video-parking')}
-                    className="hover:text-[#53B8FF] transition-colors flex items-center gap-1.5 cursor-pointer text-slate-300 hover:underline"
+                    className="hover:text-[#53B8FF] transition-colors flex items-center gap-1.5 cursor-pointer text-slate-300 hover:underline shrink-0"
                     title={isSlovenian ? "Odpri v velikem predvajalniku" : isIt ? "Apri nel player a schermo intero" : "Open in fullscreen player"}
                   >
                     <Maximize2 size={13} />
@@ -1062,19 +1062,19 @@ export default function PatentsPage() {
           {/* --------------------------------------------------------------------- */}
           {/* 3. TELEFONSKA ČIP KARTICA */}
           {/* --------------------------------------------------------------------- */}
-          <div id="izum-kartica" className="scroll-mt-28 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          <div id="izum-kartica" className="scroll-mt-28 grid lg:grid-cols-12 gap-8 lg:gap-16 items-center">
             {/* Visual Column */}
-            <div className="lg:col-span-6 relative">
+            <div className="lg:col-span-6 min-w-0 relative">
               <div className="rounded-3xl overflow-hidden border-2 border-[#53B8FF]/40 bg-[#151B24] shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative group">
                 
                 {/* Header Info Bar */}
-                <div className="p-3 bg-[#0E131C] border-b border-slate-800 flex items-center justify-between text-xs font-mono">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-pulse" />
-                    <span className="text-white font-bold">{isSlovenian ? '14. JUNIJ 1995 · SLOVENIJA' : isIt ? '14 GIUGNO 1995 · SLOVENIA' : '14 JUNE 1995 · SLOVENIA'}</span>
+                <div className="p-2.5 sm:p-3 bg-[#0E131C] border-b border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-pulse shrink-0" />
+                    <span className="text-white font-bold break-words">{isSlovenian ? '14. JUNIJ 1995 · SLOVENIJA' : isIt ? '14 GIUGNO 1995 · SLOVENIA' : '14 JUNE 1995 · SLOVENIA'}</span>
                     <span className="text-slate-500 hidden sm:inline">· Iskra Terminali & Impulz</span>
                   </div>
-                  <span className="px-2 py-0.5 rounded-md bg-[#53B8FF]/10 border border-[#53B8FF]/30 text-[#53B8FF]">
+                  <span className="px-2 py-0.5 rounded-md bg-[#53B8FF]/10 border border-[#53B8FF]/30 text-[#53B8FF] shrink-0">
                     {isSlovenian ? 'Fotografiji' : isIt ? 'Fotografie' : 'Photographs'} ({cardImages.length})
                   </span>
                 </div>
@@ -1108,14 +1108,14 @@ export default function PatentsPage() {
                     <ChevronRight size={18} className="stroke-[2.5]" />
                   </button>
 
-                  <div className="absolute top-4 left-4 pointer-events-none bg-[#080B10]/90 px-3.5 py-1.5 rounded-xl border border-[#53B8FF]/40 text-[#53B8FF] font-mono text-xs font-bold z-10">
+                  <div className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 max-w-[calc(100%-1.25rem)] pointer-events-none bg-[#080B10]/90 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-xl border border-[#53B8FF]/40 text-[#53B8FF] font-mono text-[10px] sm:text-xs font-bold z-10 break-words">
                     {cardImages[activeCardImgIdx].title}
                   </div>
 
                   <button
                     type="button"
                     onClick={() => setEnlargedGasImg(cardImages[activeCardImgIdx].url)}
-                    className="absolute bottom-4 right-4 bg-[#080B10]/90 hover:bg-[#53B8FF] text-slate-300 hover:text-[#080B10] px-3 py-1.5 rounded-xl border border-slate-700 hover:border-[#53B8FF] text-xs font-mono font-bold transition-colors flex items-center gap-1.5 cursor-pointer shadow-md z-10"
+                    className="absolute bottom-2.5 right-2.5 sm:bottom-4 sm:right-4 bg-[#080B10]/90 hover:bg-[#53B8FF] text-slate-300 hover:text-[#080B10] px-2.5 sm:px-3 py-1.5 rounded-xl border border-slate-700 hover:border-[#53B8FF] text-xs font-mono font-bold transition-colors flex items-center gap-1.5 cursor-pointer shadow-md z-10"
                     title={isSlovenian ? "Povečaj" : isIt ? "Ingrandisci" : "Enlarge"}
                   >
                     <Maximize2 size={13} />
@@ -1124,7 +1124,7 @@ export default function PatentsPage() {
                 </div>
 
                 {/* Thumbnail Strip with 2 Images */}
-                <div className="p-3 bg-[#0E131C] border-t border-slate-800 grid grid-cols-2 gap-2.5">
+                <div className="p-2.5 sm:p-3 bg-[#0E131C] border-t border-slate-800 grid grid-cols-2 gap-2.5">
                   {cardImages.map((img, idx) => {
                     const isSelected = activeCardImgIdx === idx;
                     return (
@@ -1132,13 +1132,13 @@ export default function PatentsPage() {
                         key={idx}
                         type="button"
                         onClick={() => setActiveCardImgIdx(idx)}
-                        className={`rounded-xl overflow-hidden border-2 transition-all p-1.5 bg-[#080B10] flex items-center gap-2 cursor-pointer text-left ${
+                        className={`min-w-0 rounded-xl overflow-hidden border-2 transition-all p-1.5 bg-[#080B10] flex items-center gap-2 cursor-pointer text-left ${
                           isSelected
                             ? 'border-[#53B8FF] shadow-[0_0_15px_rgba(83,184,255,0.3)] bg-[#151B24]'
                             : 'border-slate-800 hover:border-slate-700 opacity-70 hover:opacity-100'
                         }`}
                       >
-                        <div className="w-12 h-10 rounded-lg overflow-hidden bg-black shrink-0 flex items-center justify-center p-0.5">
+                        <div className="w-10 h-9 sm:w-12 sm:h-10 rounded-lg overflow-hidden bg-black shrink-0 flex items-center justify-center p-0.5">
                           <img 
                             src={img.url} 
                             alt={isSlovenian ? `Predogled ${idx + 1}` : isIt ? `Anteprima ${idx + 1}` : `Preview ${idx + 1}`} 
@@ -1147,11 +1147,11 @@ export default function PatentsPage() {
                             className="w-full h-full object-contain"
                           />
                         </div>
-                        <div className="overflow-hidden">
-                          <div className={`text-[10px] font-mono font-bold truncate ${isSelected ? 'text-[#53B8FF]' : 'text-slate-300'}`}>
+                        <div className="min-w-0">
+                          <div className={`text-[10px] font-mono font-bold break-words ${isSelected ? 'text-[#53B8FF]' : 'text-slate-300'}`}>
                             {isSlovenian ? 'Fotografija' : isIt ? 'Fotografia' : 'Photo'} 0{idx + 1}
                           </div>
-                          <div className="text-[9px] text-slate-500 font-sans truncate">
+                          <div className="text-[9px] text-slate-400 font-sans leading-tight break-words line-clamp-2 sm:line-clamp-none">
                             {img.title}
                           </div>
                         </div>
@@ -1163,14 +1163,14 @@ export default function PatentsPage() {
             </div>
 
             {/* Narrative Column */}
-            <div className="lg:col-span-6 space-y-6">
-              <div className="flex items-center gap-2 font-mono text-xs text-[#53B8FF] tracking-widest uppercase">
+            <div className="lg:col-span-6 min-w-0 space-y-6">
+              <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-[#53B8FF] tracking-widest uppercase">
                 <span>{ui.featured.card.tag}</span>
                 <span>·</span>
                 <span>ISKRA TERMINALI & IMPULZ</span>
               </div>
 
-              <h3 className="text-3xl sm:text-4xl md:text-5xl font-display font-black uppercase text-white leading-[1.05]">
+              <h3 className="text-[1.65rem] sm:text-4xl md:text-5xl font-display font-black uppercase text-white leading-[1.08] break-words [overflow-wrap:anywhere]">
                 {ui.featured.card.title}
               </h3>
 
@@ -1195,16 +1195,16 @@ export default function PatentsPage() {
                 </div>
               </div>
 
-              <div className="pt-2">
+              <div className="pt-2 flex flex-col sm:flex-row sm:flex-wrap">
                 <button
                   type="button"
                   onClick={() => {
                     const rec = patentRegistry.find(p => p.id === 'chip-card');
                     if (rec) setSelectedPatent(rec);
                   }}
-                  className="px-6 py-3 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-md"
+                  className="px-5 sm:px-6 py-3 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md text-center"
                 >
-                  <FileText size={16} />
+                  <FileText size={16} className="shrink-0" />
                   <span>{isSlovenian ? 'Podrobnosti sistema čip kartice' : isIt ? 'Dettagli del sistema carta chip' : 'Chip card system details'}</span>
                 </button>
               </div>
@@ -1214,16 +1214,16 @@ export default function PatentsPage() {
           {/* --------------------------------------------------------------------- */}
           {/* 4. ČASOVNIK ZA PLINSKE ŠTEDILNIKE */}
           {/* --------------------------------------------------------------------- */}
-          <div id="izum-plin" className="scroll-mt-28 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          <div id="izum-plin" className="scroll-mt-28 grid lg:grid-cols-12 gap-8 lg:gap-16 items-center">
             {/* Narrative Column */}
-            <div className="lg:col-span-6 space-y-6 order-2 lg:order-1">
-              <div className="flex items-center gap-2 font-mono text-xs text-[#53B8FF] tracking-widest uppercase">
+            <div className="lg:col-span-6 min-w-0 space-y-6 order-2 lg:order-1">
+              <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-[#53B8FF] tracking-widest uppercase">
                 <span>{ui.featured.gas.tag}</span>
                 <span>·</span>
                 <span>T. LAZOVSKI & E. BENKO</span>
               </div>
 
-              <h3 className="text-3xl sm:text-4xl md:text-5xl font-display font-black uppercase text-white leading-[1.05]">
+              <h3 className="text-[1.65rem] sm:text-4xl md:text-5xl font-display font-black uppercase text-white leading-[1.08] break-words [overflow-wrap:anywhere]">
                 {ui.featured.gas.title}
               </h3>
 
@@ -1240,43 +1240,43 @@ export default function PatentsPage() {
               </div>
 
               <div className="grid grid-cols-2 gap-3 pt-2">
-                <div className="p-3.5 rounded-xl bg-[#151B24] border border-slate-800">
-                  <div className="text-[10px] font-mono text-[#53B8FF] uppercase">{isSlovenian ? 'Avtorja izuma' : isIt ? 'Autori dell\'invenzione' : 'Invention Authors'}</div>
-                  <div className="font-bold text-white text-xs mt-1">Tase Lazovski & Emil Benko</div>
+                <div className="p-3.5 rounded-xl bg-[#151B24] border border-slate-800 min-w-0">
+                  <div className="text-[10px] font-mono text-[#53B8FF] uppercase break-words">{isSlovenian ? 'Avtorja izuma' : isIt ? 'Autori dell\'invenzione' : 'Invention Authors'}</div>
+                  <div className="font-bold text-white text-xs mt-1 break-words">Tase Lazovski & Emil Benko</div>
                 </div>
-                <div className="p-3.5 rounded-xl bg-[#151B24] border border-slate-800">
-                  <div className="text-[10px] font-mono text-[#53B8FF] uppercase">{isSlovenian ? 'Varnostni odziv' : isIt ? 'Risposta di sicurezza' : 'Safety response'}</div>
-                  <div className="font-bold text-white text-xs mt-1">{isSlovenian ? '< 0.2 s zapora plina' : isIt ? '< 0.2 s arresto gas' : '< 0.2 s gas shutoff'}</div>
+                <div className="p-3.5 rounded-xl bg-[#151B24] border border-slate-800 min-w-0">
+                  <div className="text-[10px] font-mono text-[#53B8FF] uppercase break-words">{isSlovenian ? 'Varnostni odziv' : isIt ? 'Risposta di sicurezza' : 'Safety response'}</div>
+                  <div className="font-bold text-white text-xs mt-1 break-words">{isSlovenian ? '< 0.2 s zapora plina' : isIt ? '< 0.2 s arresto gas' : '< 0.2 s gas shutoff'}</div>
                 </div>
               </div>
 
-              <div className="pt-2">
+              <div className="pt-2 flex flex-col sm:flex-row sm:flex-wrap">
                 <button
                   type="button"
                   onClick={() => {
                     const rec = patentRegistry.find(p => p.id === 'gas-timer');
                     if (rec) setSelectedPatent(rec);
                   }}
-                  className="px-6 py-3 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-md"
+                  className="px-5 sm:px-6 py-3 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md text-center"
                 >
-                  <FileText size={16} />
+                  <FileText size={16} className="shrink-0" />
                   <span>{ui.featured.gas.docTitle}</span>
                 </button>
               </div>
             </div>
 
             {/* Visual Column: Interactive 3-Image Showcase */}
-            <div className="lg:col-span-6 relative order-1 lg:order-2">
+            <div className="lg:col-span-6 min-w-0 relative order-1 lg:order-2">
               <div className="rounded-3xl overflow-hidden border-2 border-[#53B8FF]/40 bg-[#151B24] shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative group">
                 
                 {/* Header Info Bar */}
-                <div className="p-3 bg-[#0E131C] border-b border-slate-800 flex items-center justify-between text-xs font-mono">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-pulse" />
-                    <span className="text-white font-bold">{gasTimerImages[activeGasImgIdx].title}</span>
+                <div className="p-2.5 sm:p-3 bg-[#0E131C] border-b border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-pulse shrink-0" />
+                    <span className="text-white font-bold break-words">{gasTimerImages[activeGasImgIdx].title}</span>
                     <span className="text-slate-500 hidden sm:inline">· {gasTimerImages[activeGasImgIdx].subtitle}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-[#53B8FF]">
+                  <div className="flex items-center gap-2 text-[#53B8FF] shrink-0">
                     <span className="px-2 py-0.5 rounded-md bg-[#53B8FF]/10 border border-[#53B8FF]/30">
                       0{activeGasImgIdx + 1} / 03
                     </span>
@@ -1312,14 +1312,14 @@ export default function PatentsPage() {
                     <ChevronRight size={18} className="stroke-[2.5]" />
                   </button>
 
-                  <div className="absolute top-4 left-4 pointer-events-none bg-[#080B10]/90 px-3.5 py-1.5 rounded-xl border border-[#53B8FF]/40 text-[#53B8FF] font-mono text-xs font-bold">
+                  <div className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 max-w-[calc(100%-1.25rem)] pointer-events-none bg-[#080B10]/90 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-xl border border-[#53B8FF]/40 text-[#53B8FF] font-mono text-[10px] sm:text-xs font-bold break-words">
                     T. LAZOVSKI & E. BENKO
                   </div>
 
                   <button
                     type="button"
                     onClick={() => setEnlargedGasImg(gasTimerImages[activeGasImgIdx].url)}
-                    className="absolute bottom-4 right-4 bg-[#080B10]/90 hover:bg-[#53B8FF] text-slate-300 hover:text-[#080B10] px-3 py-1.5 rounded-xl border border-slate-700 hover:border-[#53B8FF] text-xs font-mono font-bold transition-colors flex items-center gap-1.5 cursor-pointer shadow-md z-10"
+                    className="absolute bottom-2.5 right-2.5 sm:bottom-4 sm:right-4 bg-[#080B10]/90 hover:bg-[#53B8FF] text-slate-300 hover:text-[#080B10] px-2.5 sm:px-3 py-1.5 rounded-xl border border-slate-700 hover:border-[#53B8FF] text-xs font-mono font-bold transition-colors flex items-center gap-1.5 cursor-pointer shadow-md z-10"
                     title={isSlovenian ? "Povečaj sliko" : isIt ? "Ingrandisci immagine" : "Enlarge image"}
                   >
                     <Maximize2 size={13} />
@@ -1328,7 +1328,7 @@ export default function PatentsPage() {
                 </div>
 
                 {/* Thumbnail Strip with 3 Images */}
-                <div className="p-3 bg-[#0E131C] border-t border-slate-800 grid grid-cols-3 gap-2.5">
+                <div className="p-2.5 sm:p-3 bg-[#0E131C] border-t border-slate-800 grid grid-cols-3 gap-2">
                   {gasTimerImages.map((img, idx) => {
                     const isSelected = activeGasImgIdx === idx;
                     return (
@@ -1336,13 +1336,13 @@ export default function PatentsPage() {
                         key={idx}
                         type="button"
                         onClick={() => setActiveGasImgIdx(idx)}
-                        className={`rounded-xl overflow-hidden border-2 transition-all p-1.5 bg-[#080B10] flex items-center gap-2 cursor-pointer text-left ${
+                        className={`min-w-0 rounded-xl overflow-hidden border-2 transition-all p-1.5 bg-[#080B10] flex flex-col sm:flex-row items-center gap-1.5 sm:gap-2 cursor-pointer text-center sm:text-left ${
                           isSelected
                             ? 'border-[#53B8FF] shadow-[0_0_15px_rgba(83,184,255,0.3)] bg-[#151B24]'
                             : 'border-slate-800 hover:border-slate-700 opacity-70 hover:opacity-100'
                         }`}
                       >
-                        <div className="w-12 h-10 rounded-lg overflow-hidden bg-black shrink-0 flex items-center justify-center">
+                        <div className="w-full sm:w-12 h-9 sm:h-10 rounded-lg overflow-hidden bg-black shrink-0 flex items-center justify-center">
                           <img 
                             src={img.url} 
                             alt={isSlovenian ? `Predogled ${idx + 1}` : isIt ? `Anteprima ${idx + 1}` : `Preview ${idx + 1}`} 
@@ -1351,11 +1351,11 @@ export default function PatentsPage() {
                             className="w-full h-full object-contain"
                           />
                         </div>
-                        <div className="overflow-hidden hidden sm:block">
-                          <div className={`text-[10px] font-mono font-bold truncate ${isSelected ? 'text-[#53B8FF]' : 'text-slate-300'}`}>
+                        <div className="min-w-0 w-full">
+                          <div className={`text-[10px] font-mono font-bold break-words ${isSelected ? 'text-[#53B8FF]' : 'text-slate-300'}`}>
                             {isSlovenian ? 'Slika' : isIt ? 'Immagine' : 'Image'} 0{idx + 1}
                           </div>
-                          <div className="text-[9px] text-slate-500 font-sans truncate">
+                          <div className="hidden sm:block text-[9px] text-slate-400 font-sans leading-tight break-words line-clamp-1">
                             {img.title}
                           </div>
                         </div>
@@ -1371,16 +1371,16 @@ export default function PatentsPage() {
           {/* --------------------------------------------------------------------- */}
           {/* 5. ODVOD STATIČNE ELEKTRIKE OD LJUDI */}
           {/* --------------------------------------------------------------------- */}
-          <div id="izum-static" className="scroll-mt-28 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          <div id="izum-static" className="scroll-mt-28 grid lg:grid-cols-12 gap-8 lg:gap-16 items-center">
             {/* Narrative Column */}
-            <div className="lg:col-span-6 space-y-6 order-2 lg:order-1">
-              <div className="flex items-center gap-2 font-mono text-xs text-[#53B8FF] tracking-widest uppercase">
+            <div className="lg:col-span-6 min-w-0 space-y-6 order-2 lg:order-1">
+              <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-[#53B8FF] tracking-widest uppercase">
                 <span>{isSlovenian ? 'ELEKTROSTATIKA & VARNOST 05' : isIt ? 'ELETTROSTATICA & SICUREZZA 05' : 'ELECTROSTATICS & SAFETY 05'}</span>
                 <span>·</span>
                 <span>T. LAZOVSKI, E. BENKO, A. PORCARO</span>
               </div>
 
-              <h3 className="text-3xl sm:text-4xl md:text-5xl font-display font-black uppercase text-white leading-[1.05]">
+              <h3 className="text-[1.65rem] sm:text-4xl md:text-5xl font-display font-black uppercase text-white leading-[1.08] break-words [overflow-wrap:anywhere]">
                 {ui.featured.staticEsd.title}
               </h3>
 
@@ -1398,37 +1398,37 @@ export default function PatentsPage() {
 
               {/* Stats badges */}
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
-                <div className="p-3.5 rounded-xl bg-[#151B24] border border-slate-800">
-                  <div className="text-[10px] font-mono text-[#53B8FF] uppercase">{ui.featured.staticEsd.stats.time}</div>
-                  <div className="font-bold text-white text-xs mt-1">{isSlovenian ? '150 – 250 ms (neboleče)' : isIt ? '150 – 250 ms (indolore)' : '150 – 250 ms (painless)'}</div>
+                <div className="p-3.5 rounded-xl bg-[#151B24] border border-slate-800 min-w-0">
+                  <div className="text-[10px] font-mono text-[#53B8FF] uppercase break-words">{ui.featured.staticEsd.stats.time}</div>
+                  <div className="font-bold text-white text-xs mt-1 break-words">{isSlovenian ? '150 – 250 ms (neboleče)' : isIt ? '150 – 250 ms (indolore)' : '150 – 250 ms (painless)'}</div>
                 </div>
-                <div className="p-3.5 rounded-xl bg-[#151B24] border border-slate-800">
-                  <div className="text-[10px] font-mono text-[#53B8FF] uppercase">{ui.featured.staticEsd.stats.voltage}</div>
-                  <div className="font-bold text-white text-xs mt-1">{ui.featured.staticEsd.stats.voltageVal}</div>
+                <div className="p-3.5 rounded-xl bg-[#151B24] border border-slate-800 min-w-0">
+                  <div className="text-[10px] font-mono text-[#53B8FF] uppercase break-words">{ui.featured.staticEsd.stats.voltage}</div>
+                  <div className="font-bold text-white text-xs mt-1 break-words">{ui.featured.staticEsd.stats.voltageVal}</div>
                 </div>
-                <div className="p-3.5 rounded-xl bg-[#151B24] border border-slate-800 col-span-2 sm:col-span-1">
-                  <div className="text-[10px] font-mono text-[#53B8FF] uppercase">{isSlovenian ? 'Patenta' : isIt ? 'Brevetti' : 'Patents'}</div>
-                  <div className="font-bold text-white text-xs mt-1 truncate">EP 2805592 · US 959672</div>
+                <div className="p-3.5 rounded-xl bg-[#151B24] border border-slate-800 col-span-2 sm:col-span-1 min-w-0">
+                  <div className="text-[10px] font-mono text-[#53B8FF] uppercase break-words">{isSlovenian ? 'Patenta' : isIt ? 'Brevetti' : 'Patents'}</div>
+                  <div className="font-bold text-white text-xs mt-1 break-words">EP 2805592 · US 959672</div>
                 </div>
               </div>
 
               {/* Action buttons */}
-              <div className="pt-2 flex flex-wrap items-center gap-3">
+              <div className="pt-2 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3">
                 <a
                   href="/assets/aistudio/ODVOD_STATI_NE_ELEKTRIKE_OD_LJUDI_e6afeecb.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-md"
+                  className="px-5 sm:px-6 py-3 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md text-center"
                 >
-                  <FileText size={16} />
+                  <FileText size={16} className="shrink-0" />
                   <span>{isSlovenian ? 'Odpri patentni dokument (PDF)' : isIt ? 'Apri documento brevettuale (PDF)' : 'Open patent document (PDF)'}</span>
                 </a>
                 <button
                   type="button"
                   onClick={() => setActiveVideoModal('video-static')}
-                  className="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 font-display font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-sm"
+                  className="px-5 sm:px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 font-display font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm text-center"
                 >
-                  <Play size={16} className="text-[#53B8FF]" />
+                  <Play size={16} className="text-[#53B8FF] shrink-0" />
                   <span>{isSlovenian ? 'Predvajaj video posnetek' : isIt ? 'Riproduci video' : 'Play video footage'}</span>
                 </button>
                 <button
@@ -1437,24 +1437,24 @@ export default function PatentsPage() {
                     const rec = patentRegistry.find(p => p.id === 'esd-static');
                     if (rec) setSelectedPatent(rec);
                   }}
-                  className="px-5 py-3 rounded-xl bg-[#151B24] hover:bg-slate-800 text-slate-300 border border-slate-800 font-display font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer"
+                  className="px-5 py-3 rounded-xl bg-[#151B24] hover:bg-slate-800 text-slate-300 border border-slate-800 font-display font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer text-center"
                 >
-                  <Info size={16} className="text-[#53B8FF]" />
+                  <Info size={16} className="text-[#53B8FF] shrink-0" />
                   <span>{isSlovenian ? 'Specifikacije izuma' : isIt ? 'Specifiche dell\'invenzione' : 'Invention specifications'}</span>
                 </button>
               </div>
             </div>
 
             {/* Visual Column: Technical Schematic Blueprint */}
-            <div className="lg:col-span-6 relative order-1 lg:order-2">
+            <div className="lg:col-span-6 min-w-0 relative order-1 lg:order-2">
               <div className="rounded-3xl overflow-hidden border-2 border-[#53B8FF]/40 bg-[#151B24] shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative group">
-                <div className="p-3 bg-[#0E131C] border-b border-slate-800 flex items-center justify-between text-xs font-mono">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-pulse" />
-                    <span className="text-white font-bold">{isSlovenian ? 'Uradna patentna dokumentacija' : isIt ? 'Documentazione brevettuale ufficiale' : 'Official patent documentation'}</span>
+                <div className="p-2.5 sm:p-3 bg-[#0E131C] border-b border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-pulse shrink-0" />
+                    <span className="text-white font-bold break-words">{isSlovenian ? 'Uradna patentna dokumentacija' : isIt ? 'Documentazione brevettuale ufficiale' : 'Official patent documentation'}</span>
                     <span className="text-slate-500 hidden sm:inline">· Atemm H-ESD & GREEN POINT</span>
                   </div>
-                  <span className="px-2 py-0.5 rounded-md bg-[#53B8FF]/10 border border-[#53B8FF]/30 text-[#53B8FF]">
+                  <span className="px-2 py-0.5 rounded-md bg-[#53B8FF]/10 border border-[#53B8FF]/30 text-[#53B8FF] shrink-0">
                     EP 2805592 · US 959672
                   </span>
                 </div>
@@ -1468,14 +1468,14 @@ export default function PatentsPage() {
                     className="w-full h-full object-contain transition-transform duration-500 group-hover/img:scale-[1.02]"
                   />
 
-                  <div className="absolute top-4 left-4 pointer-events-none bg-[#080B10]/90 px-3.5 py-1.5 rounded-xl border border-[#53B8FF]/40 text-[#53B8FF] font-mono text-xs font-bold">
+                  <div className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 max-w-[calc(100%-1.25rem)] pointer-events-none bg-[#080B10]/90 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-xl border border-[#53B8FF]/40 text-[#53B8FF] font-mono text-[10px] sm:text-xs font-bold break-words">
                     T. LAZOVSKI, E. BENKO, A. PORCARO
                   </div>
 
                   <button
                     type="button"
                     onClick={() => setEnlargedGasImg(staticEsdImg)}
-                    className="absolute bottom-4 right-4 bg-[#080B10]/90 hover:bg-[#53B8FF] text-slate-300 hover:text-[#080B10] px-3 py-1.5 rounded-xl border border-slate-700 hover:border-[#53B8FF] text-xs font-mono font-bold transition-colors flex items-center gap-1.5 cursor-pointer shadow-md z-10"
+                    className="absolute bottom-2.5 right-2.5 sm:bottom-4 sm:right-4 bg-[#080B10]/90 hover:bg-[#53B8FF] text-slate-300 hover:text-[#080B10] px-2.5 sm:px-3 py-1.5 rounded-xl border border-slate-700 hover:border-[#53B8FF] text-xs font-mono font-bold transition-colors flex items-center gap-1.5 cursor-pointer shadow-md z-10"
                     title={isSlovenian ? "Povečaj načrt" : isIt ? "Ingrandisci schema" : "Enlarge blueprint"}
                   >
                     <Maximize2 size={13} />
@@ -1483,13 +1483,13 @@ export default function PatentsPage() {
                   </button>
                 </div>
 
-                <div className="p-3.5 bg-[#0E131C] border-t border-slate-800 flex items-center justify-between text-xs font-mono text-slate-400">
-                  <span className="truncate">{isSlovenian ? 'Vgradnja v varnostni pas vozil & računalniško opremo' : isIt ? 'Integrazione nella cintura di sicurezza di veicoli & apparecchiature informatiche' : 'Integration into vehicle seatbelts & computer equipment'}</span>
+                <div className="p-3 sm:p-3.5 bg-[#0E131C] border-t border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-slate-400">
+                  <span className="min-w-0 break-words leading-relaxed">{isSlovenian ? 'Vgradnja v varnostni pas vozil & računalniško opremo' : isIt ? 'Integrazione nella cintura di sicurezza di veicoli & apparecchiature informatiche' : 'Integration into vehicle seatbelts & computer equipment'}</span>
                   <a
                     href="/assets/aistudio/ODVOD_STATI_NE_ELEKTRIKE_OD_LJUDI_e6afeecb.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#53B8FF] hover:underline flex items-center gap-1 shrink-0 ml-2"
+                    className="text-[#53B8FF] hover:underline flex items-center gap-1 shrink-0"
                   >
                     <span>{isSlovenian ? 'Celoten PDF' : isIt ? 'PDF completo' : 'Full PDF'}</span>
                     <ExternalLink size={12} />
@@ -1505,14 +1505,14 @@ export default function PatentsPage() {
       {/* ========================================================================= */}
       {/* SECTION E: HOW IT WORKS (INTERACTIVE TECHNICAL EXPLAINER) */}
       {/* ========================================================================= */}
-      <section id="tehnicna-razlaga" className="py-24 px-4 sm:px-6 lg:px-12 border-t border-slate-900 bg-[#080B10] relative z-10 [content-visibility:auto] [contain-intrinsic-size:1px_650px]">
+      <section id="tehnicna-razlaga" className="py-20 sm:py-24 px-4 sm:px-6 lg:px-12 border-t border-slate-900 bg-[#080B10] relative z-10 [content-visibility:auto] [contain-intrinsic-size:1px_650px]">
         <div className="max-w-7xl mx-auto">
           
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-mono font-bold tracking-[0.2em] text-[#53B8FF] uppercase block mb-3">
+          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+            <span className="text-xs font-mono font-bold tracking-[0.15em] sm:tracking-[0.2em] text-[#53B8FF] uppercase block mb-3">
               {ui.explainer.tag}
             </span>
-            <h2 className="text-3xl sm:text-5xl font-display font-black uppercase text-white tracking-tight">
+            <h2 className="text-[1.7rem] sm:text-5xl font-display font-black uppercase text-white tracking-tight break-words [overflow-wrap:anywhere]">
               {ui.explainer.title}
             </h2>
             <p className="text-slate-400 text-sm sm:text-base mt-3 leading-relaxed">
@@ -1521,7 +1521,7 @@ export default function PatentsPage() {
           </div>
 
           {/* Technology Switcher Tabs */}
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10 sm:mb-12">
             {[
               { id: 'vita' as const, label: ui.explainer.tabs.vita },
               { id: 'parking' as const, label: ui.explainer.tabs.parking },
@@ -1535,7 +1535,7 @@ export default function PatentsPage() {
                   setActiveExplainerTab(tab.id);
                   setActiveStep(0);
                 }}
-                className={`px-5 py-3 rounded-2xl font-display font-bold text-xs sm:text-sm uppercase tracking-wider transition-all cursor-pointer ${
+                className={`px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-2xl font-display font-bold text-xs sm:text-sm uppercase tracking-wider transition-all cursor-pointer ${
                   activeExplainerTab === tab.id
                     ? 'bg-[#53B8FF] text-[#080B10] shadow-[0_0_20px_rgba(83,184,255,0.3)]'
                     : 'bg-[#151B24] text-slate-400 hover:text-white border border-slate-800'
@@ -1550,12 +1550,12 @@ export default function PatentsPage() {
           {(() => {
             const data = explainerData[activeExplainerTab];
             return (
-              <div className="p-6 sm:p-10 rounded-3xl bg-[#151B24] border border-slate-800 shadow-2xl">
+              <div className="p-5 sm:p-10 rounded-3xl bg-[#151B24] border border-slate-800 shadow-2xl">
                 <div className={`max-w-3xl ${data.steps.length > 0 ? 'mb-8' : ''}`}>
-                  <div className="inline-block px-3 py-1 rounded-full bg-[#53B8FF]/15 text-[#53B8FF] font-mono text-xs mb-2">
+                  <div className="inline-block max-w-full px-3 py-1 rounded-full bg-[#53B8FF]/15 text-[#53B8FF] font-mono text-[11px] sm:text-xs mb-2 break-words">
                     {data.patent}
                   </div>
-                  <h3 className="text-2xl sm:text-3xl font-display font-black uppercase text-white">
+                  <h3 className="text-xl sm:text-3xl font-display font-black uppercase text-white break-words [overflow-wrap:anywhere]">
                     {data.title}
                   </h3>
                   <p className="text-slate-300 text-sm sm:text-base mt-2 leading-relaxed">
@@ -1572,7 +1572,7 @@ export default function PatentsPage() {
                         <div
                           key={i}
                           onClick={() => setActiveStep(i)}
-                          className={`p-5 rounded-2xl border transition-all cursor-pointer ${
+                          className={`min-w-0 p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer ${
                             isSelected
                               ? 'bg-[#0E131C] border-[#53B8FF] shadow-[0_0_15px_rgba(83,184,255,0.2)]'
                               : 'bg-[#0E131C]/60 border-slate-800/80 hover:border-slate-700'
@@ -1584,7 +1584,7 @@ export default function PatentsPage() {
                             </span>
                             {isSelected && <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-ping" />}
                           </div>
-                          <h4 className="font-display font-black text-sm uppercase text-white mb-2 leading-snug">
+                          <h4 className="font-display font-black text-sm uppercase text-white mb-2 leading-snug break-words">
                             {st.name}
                           </h4>
                           <p className="text-xs text-slate-400 leading-relaxed">
@@ -1605,14 +1605,14 @@ export default function PatentsPage() {
       {/* ========================================================================= */}
       {/* SECTION F: ADDITIONAL INVENTIONS (ARCHIVE SECTION) */}
       {/* ========================================================================= */}
-      <section id="ostali-izumi" className="py-24 px-4 sm:px-6 lg:px-12 border-t border-slate-900 bg-[#0A0E15] relative z-10 [content-visibility:auto] [contain-intrinsic-size:1px_700px]">
+      <section id="ostali-izumi" className="py-20 sm:py-24 px-4 sm:px-6 lg:px-12 border-t border-slate-900 bg-[#0A0E15] relative z-10 [content-visibility:auto] [contain-intrinsic-size:1px_700px]">
         <div className="max-w-7xl mx-auto">
           
-          <div className="max-w-3xl mb-16">
-            <span className="text-xs font-mono font-bold tracking-[0.2em] text-[#53B8FF] uppercase block mb-3">
+          <div className="max-w-3xl mb-12 sm:mb-16">
+            <span className="text-xs font-mono font-bold tracking-[0.15em] sm:tracking-[0.2em] text-[#53B8FF] uppercase block mb-3">
               {ui.additional.tag}
             </span>
-            <h2 className="text-3xl sm:text-5xl font-display font-black uppercase text-white tracking-tight">
+            <h2 className="text-[1.7rem] sm:text-5xl font-display font-black uppercase text-white tracking-tight break-words [overflow-wrap:anywhere]">
               {ui.additional.title}
             </h2>
             <p className="text-slate-400 text-sm sm:text-base mt-3 leading-relaxed">
@@ -1627,23 +1627,23 @@ export default function PatentsPage() {
               return (
                 <div 
                   key={idx}
-                  className="p-6 rounded-3xl bg-[#151B24] border border-slate-800 hover:border-[#53B8FF]/40 transition-all duration-300 flex flex-col justify-between group"
+                  className="min-w-0 p-5 sm:p-6 rounded-3xl bg-[#151B24] border border-slate-800 hover:border-[#53B8FF]/40 transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-2xl bg-[#53B8FF]/10 text-[#53B8FF] flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <div className="w-12 h-12 rounded-2xl bg-[#53B8FF]/10 text-[#53B8FF] flex items-center justify-center group-hover:scale-110 transition-transform shrink-0">
                         <Icon size={24} className="stroke-[2.2]" />
                       </div>
-                      <span className="text-[10px] font-mono uppercase px-2.5 py-1 rounded-md bg-[#080B10] border border-slate-800 text-slate-400">
+                      <span className="text-[10px] font-mono uppercase px-2.5 py-1 rounded-md bg-[#080B10] border border-slate-800 text-slate-400 break-words">
                         {inv.badge}
                       </span>
                     </div>
 
-                    <div className="text-[11px] font-mono text-[#53B8FF] uppercase tracking-wider">
+                    <div className="text-[11px] font-mono text-[#53B8FF] uppercase tracking-wider break-words">
                       {inv.category}
                     </div>
 
-                    <h3 className="font-display font-black text-lg uppercase text-white leading-snug">
+                    <h3 className="font-display font-black text-lg uppercase text-white leading-snug break-words">
                       {inv.title}
                     </h3>
 
@@ -1653,9 +1653,9 @@ export default function PatentsPage() {
 
                     {inv.authors && (
                       <div className="pt-1">
-                        <div className="px-3 py-2 rounded-xl bg-[#080B10] border border-slate-800 text-xs font-mono text-slate-300 flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#53B8FF] shrink-0" />
-                          <span className="font-semibold text-slate-200">{inv.authors}</span>
+                        <div className="px-3 py-2 rounded-xl bg-[#080B10] border border-slate-800 text-xs font-mono text-slate-300 flex items-start gap-2">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#53B8FF] shrink-0 mt-1.5" />
+                          <span className="font-semibold text-slate-200 break-words">{inv.authors}</span>
                         </div>
                       </div>
                     )}
@@ -1665,9 +1665,9 @@ export default function PatentsPage() {
                         <button
                           type="button"
                           onClick={() => setActiveVideoModal(inv.videoId!)}
-                          className="w-full py-2.5 rounded-xl bg-[#53B8FF]/15 hover:bg-[#53B8FF] text-[#53B8FF] hover:text-[#080B10] border border-[#53B8FF]/30 font-display font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm group/btn"
+                          className="w-full py-2.5 px-3 rounded-xl bg-[#53B8FF]/15 hover:bg-[#53B8FF] text-[#53B8FF] hover:text-[#080B10] border border-[#53B8FF]/30 font-display font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm group/btn text-center"
                         >
-                          <Play size={14} className="fill-current" />
+                          <Play size={14} className="fill-current shrink-0" />
                           <span>{isSlovenian ? 'Predvajaj video posnetek' : isIt ? 'Riproduci video' : 'Play video footage'}</span>
                         </button>
                       </div>
@@ -1678,16 +1678,16 @@ export default function PatentsPage() {
                           href={inv.pdfUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-full py-2.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 font-display font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+                          className="w-full py-2.5 px-3 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 font-display font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm text-center"
                         >
-                          <FileText size={14} className="text-[#53B8FF]" />
+                          <FileText size={14} className="text-[#53B8FF] shrink-0" />
                           <span>{isSlovenian ? 'Odpri patentni dokument (PDF)' : isIt ? 'Apri documento brevettuale (PDF)' : 'Open patent document (PDF)'}</span>
                         </a>
                       </div>
                     )}
                   </div>
 
-                  <div className="pt-6 border-t border-slate-800/80 mt-6 flex items-center justify-between text-xs text-slate-500 font-mono">
+                  <div className="pt-5 sm:pt-6 border-t border-slate-800/80 mt-6 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500 font-mono">
                     <span>{isSlovenian ? 'Arhivski vir Start Lab' : isIt ? 'Fonte d\'archivio Start Lab' : 'Start Lab archival source'}</span>
                     <span className="text-[#53B8FF]">{isSlovenian ? 'Dokumentirano' : isIt ? 'Documentato' : 'Documented'}</span>
                   </div>
@@ -1702,15 +1702,15 @@ export default function PatentsPage() {
       {/* ========================================================================= */}
       {/* SECTION G: PATENTS AND RECOGNITION (REGISTRY MODAL TRIGGER) */}
       {/* ========================================================================= */}
-      <section id="patenti" className="py-24 px-4 sm:px-6 lg:px-12 border-t border-slate-900 bg-[#080B10] relative z-10 [content-visibility:auto] [contain-intrinsic-size:1px_850px]">
+      <section id="patenti" className="py-20 sm:py-24 px-4 sm:px-6 lg:px-12 border-t border-slate-900 bg-[#080B10] relative z-10 [content-visibility:auto] [contain-intrinsic-size:1px_850px]">
         <div className="max-w-7xl mx-auto">
           
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-            <div>
-              <span className="text-xs font-mono font-bold tracking-[0.2em] text-[#53B8FF] uppercase block mb-3">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
+            <div className="min-w-0">
+              <span className="text-xs font-mono font-bold tracking-[0.15em] sm:tracking-[0.2em] text-[#53B8FF] uppercase block mb-3">
                 {ui.registry.tag}
               </span>
-              <h2 className="text-3xl sm:text-5xl font-display font-black uppercase text-white tracking-tight">
+              <h2 className="text-[1.7rem] sm:text-5xl font-display font-black uppercase text-white tracking-tight break-words [overflow-wrap:anywhere]">
                 {ui.registry.title}
               </h2>
             </div>
@@ -1724,41 +1724,41 @@ export default function PatentsPage() {
             {patentRegistry.map((patent) => (
               <div 
                 key={patent.id}
-                className="p-6 sm:p-7 rounded-2xl bg-[#151B24] border border-slate-800 hover:border-slate-700 transition-all flex flex-col lg:flex-row lg:items-center justify-between gap-6"
+                className="p-5 sm:p-7 rounded-2xl bg-[#151B24] border border-slate-800 hover:border-slate-700 transition-all flex flex-col lg:flex-row lg:items-center justify-between gap-5 sm:gap-6"
               >
-                <div className="space-y-2 lg:max-w-2xl">
+                <div className="space-y-2 lg:max-w-2xl min-w-0">
                   <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                    <span className="px-3 py-1 rounded-lg bg-[#53B8FF]/15 text-[#53B8FF] font-mono text-xs font-bold">
+                    <span className="px-2.5 sm:px-3 py-1 rounded-lg bg-[#53B8FF]/15 text-[#53B8FF] font-mono text-xs font-bold break-words">
                       {patent.number}
                     </span>
-                    <span className="text-xs text-slate-400 font-mono">
+                    <span className="text-xs text-slate-400 font-mono break-words">
                       {patent.jurisdiction}
                     </span>
                     {patent.recognition && (
-                      <span className="px-2.5 py-0.5 rounded-md bg-amber-500/15 border border-amber-500/30 text-amber-300 font-mono text-[11px] font-bold">
+                      <span className="px-2.5 py-0.5 rounded-md bg-amber-500/15 border border-amber-500/30 text-amber-300 font-mono text-[11px] font-bold break-words">
                         ★ {patent.recognition}
                       </span>
                     )}
                   </div>
 
-                  <h3 className="font-display font-black text-lg sm:text-xl uppercase text-white leading-tight">
+                  <h3 className="font-display font-black text-base sm:text-xl uppercase text-white leading-tight break-words">
                     {patent.title}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-slate-300 line-clamp-2 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-300 sm:line-clamp-2 leading-relaxed">
                     {patent.abstract}
                   </p>
                 </div>
 
-                <div className="flex items-center gap-4 shrink-0">
-                  <div className="hidden sm:block text-right text-xs font-mono text-slate-400">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between lg:justify-end gap-3 sm:gap-4 shrink-0">
+                  <div className="text-left sm:text-right text-xs font-mono text-slate-400 space-y-0.5">
                     {patent.manufacturer ? (
                       <>
-                        <div>{isSlovenian ? 'Proizvajalec' : isIt ? 'Produttore' : 'Manufacturer'}: {patent.manufacturer}</div>
-                        {patent.coordination && <div className="text-slate-400">{isSlovenian ? 'Koordinacija' : isIt ? 'Coordinamento' : 'Coordination'}: {patent.coordination}</div>}
+                        <div className="break-words">{isSlovenian ? 'Proizvajalec' : isIt ? 'Produttore' : 'Manufacturer'}: {patent.manufacturer}</div>
+                        {patent.coordination && <div className="text-slate-400 break-words">{isSlovenian ? 'Koordinacija' : isIt ? 'Coordinamento' : 'Coordination'}: {patent.coordination}</div>}
                       </>
                     ) : (
-                      <div>{isSlovenian ? "Izumitelj" : isIt ? "Inventore" : "Inventor"}: {patent.inventors.join(', ')}</div>
+                      <div className="break-words">{isSlovenian ? "Izumitelj" : isIt ? "Inventore" : "Inventor"}: {patent.inventors.join(', ')}</div>
                     )}
                     <div className="text-slate-500">{patent.grantDate}</div>
                   </div>
@@ -1766,9 +1766,9 @@ export default function PatentsPage() {
                   <button
                     type="button"
                     onClick={() => setSelectedPatent(patent)}
-                    className="px-5 py-3 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-md"
+                    className="w-full sm:w-auto px-5 py-3 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md"
                   >
-                    <BookOpen size={15} />
+                    <BookOpen size={15} className="shrink-0" />
                     <span>{ui.registry.btnDetails}</span>
                   </button>
                 </div>
@@ -1782,14 +1782,14 @@ export default function PatentsPage() {
       {/* ========================================================================= */}
       {/* SECTION H: VIDEO ARCHIVE */}
       {/* ========================================================================= */}
-      <section id="video-arhiv" className="py-24 px-4 sm:px-6 lg:px-12 border-t border-slate-900 bg-[#0A0E15] relative z-10 [content-visibility:auto] [contain-intrinsic-size:1px_600px]">
+      <section id="video-arhiv" className="py-20 sm:py-24 px-4 sm:px-6 lg:px-12 border-t border-slate-900 bg-[#0A0E15] relative z-10 [content-visibility:auto] [contain-intrinsic-size:1px_600px]">
         <div className="max-w-7xl mx-auto">
           
-          <div className="max-w-3xl mb-16">
-            <span className="text-xs font-mono font-bold tracking-[0.2em] text-[#53B8FF] uppercase block mb-3">
+          <div className="max-w-3xl mb-12 sm:mb-16">
+            <span className="text-xs font-mono font-bold tracking-[0.15em] sm:tracking-[0.2em] text-[#53B8FF] uppercase block mb-3">
               {ui.video.tag}
             </span>
-            <h2 className="text-3xl sm:text-5xl font-display font-black uppercase text-white tracking-tight">
+            <h2 className="text-[1.7rem] sm:text-5xl font-display font-black uppercase text-white tracking-tight break-words [overflow-wrap:anywhere]">
               {ui.video.title}
             </h2>
             <p className="text-slate-400 text-sm sm:text-base mt-3 leading-relaxed">
@@ -1798,11 +1798,11 @@ export default function PatentsPage() {
           </div>
 
           {/* Videos Grid */}
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
             {videoArchives.map((vid) => (
               <div 
                 key={vid.id}
-                className="rounded-3xl overflow-hidden bg-[#151B24] border border-slate-800 flex flex-col justify-between group"
+                className="min-w-0 rounded-3xl overflow-hidden bg-[#151B24] border border-slate-800 flex flex-col justify-between group"
               >
                 <div>
                   {/* Thumbnail frame with play trigger */}
@@ -1825,17 +1825,17 @@ export default function PatentsPage() {
                       </button>
                     </div>
 
-                    <div className="absolute bottom-3 left-3 bg-[#080B10]/90 px-2.5 py-1 rounded-md text-[10px] font-mono text-[#53B8FF]">
+                    <div className="absolute bottom-2.5 left-2.5 max-w-[calc(100%-5.5rem)] bg-[#080B10]/90 px-2.5 py-1 rounded-md text-[10px] font-mono text-[#53B8FF] truncate">
                       {vid.year} · {vid.patent}
                     </div>
 
-                    <div className="absolute bottom-3 right-3 bg-[#080B10]/90 px-2.5 py-1 rounded-md text-[10px] font-mono text-slate-300">
+                    <div className="absolute bottom-2.5 right-2.5 bg-[#080B10]/90 px-2.5 py-1 rounded-md text-[10px] font-mono text-slate-300">
                       {vid.duration}
                     </div>
                   </div>
 
-                  <div className="p-6 space-y-2">
-                    <h4 className="font-display font-black text-base uppercase text-white leading-snug">
+                  <div className="p-5 sm:p-6 space-y-2">
+                    <h4 className="font-display font-black text-base uppercase text-white leading-snug break-words">
                       {vid.title}
                     </h4>
                     <p className="text-xs text-slate-400 leading-relaxed">
@@ -1844,13 +1844,13 @@ export default function PatentsPage() {
                   </div>
                 </div>
 
-                <div className="p-6 pt-0">
+                <div className="p-5 sm:p-6 pt-0">
                   <button
                     type="button"
                     onClick={() => setActiveVideoModal(vid.id)}
                     className="w-full py-2.5 rounded-xl border border-slate-700 hover:border-[#53B8FF] text-xs font-display font-bold uppercase tracking-wider text-slate-300 hover:text-white transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
-                    <Play size={14} />
+                    <Play size={14} className="shrink-0" />
                     <span>{ui.video.playBtn}</span>
                   </button>
                 </div>
@@ -1864,14 +1864,14 @@ export default function PatentsPage() {
       {/* ========================================================================= */}
       {/* SECTION I: FINAL CTA & LEGACY CONNECTION */}
       {/* ========================================================================= */}
-      <section className="py-28 px-4 sm:px-6 lg:px-12 border-t border-slate-900 bg-gradient-to-b from-[#080B10] via-[#0D121B] to-[#080B10] relative z-10 text-center">
-        <div className="max-w-4xl mx-auto space-y-8">
+      <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-12 border-t border-slate-900 bg-gradient-to-b from-[#080B10] via-[#0D121B] to-[#080B10] relative z-10 text-center">
+        <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8">
           
-          <span className="text-xs font-mono font-bold tracking-[0.25em] text-[#53B8FF] uppercase">
+          <span className="text-xs font-mono font-bold tracking-[0.15em] sm:tracking-[0.25em] text-[#53B8FF] uppercase block">
             {isSlovenian ? 'POVEZAVA Z MISIJO START LABA' : isIt ? 'COLLEGAMENTO CON LA MISSIONE DI START LAB' : 'CONNECTION TO THE START LAB MISSION'}
           </span>
 
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-black uppercase text-white tracking-tight leading-[1.05]">
+          <h2 className="text-[1.7rem] sm:text-5xl md:text-6xl font-display font-black uppercase text-white tracking-tight leading-[1.08] break-words [overflow-wrap:anywhere]">
             {ui.cta.heading}
           </h2>
 
@@ -1882,15 +1882,15 @@ export default function PatentsPage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <Link
               to="/delavnice"
-              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs sm:text-sm uppercase tracking-widest transition-all shadow-[0_0_25px_rgba(83,184,255,0.4)] flex items-center justify-center gap-3"
+              className="w-full sm:w-auto px-6 sm:px-8 py-4 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs sm:text-sm uppercase tracking-widest transition-all shadow-[0_0_25px_rgba(83,184,255,0.4)] flex items-center justify-center gap-3 text-center"
             >
               <span>{ui.cta.btnWorkshops}</span>
-              <ChevronRight size={18} className="stroke-[3]" />
+              <ChevronRight size={18} className="stroke-[3] shrink-0" />
             </Link>
 
             <Link
               to="/"
-              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#151B24] hover:bg-slate-800 text-white border border-slate-700 font-display font-bold text-xs sm:text-sm uppercase tracking-wider transition-all flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-6 sm:px-8 py-4 rounded-xl bg-[#151B24] hover:bg-slate-800 text-white border border-slate-700 font-display font-bold text-xs sm:text-sm uppercase tracking-wider transition-all flex items-center justify-center gap-2 text-center"
             >
               <span>{ui.cta.btnHome}</span>
             </Link>
@@ -1903,37 +1903,37 @@ export default function PatentsPage() {
       {/* ========================================================================= */}
       <AnimatePresence>
         {selectedPatent && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-[#151B24] border-2 border-[#53B8FF]/40 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 relative shadow-2xl space-y-6 text-slate-200"
+              className="bg-[#151B24] border-2 border-[#53B8FF]/40 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-4 sm:p-8 relative shadow-2xl space-y-5 sm:space-y-6 text-slate-200"
             >
               <button
                 type="button"
                 onClick={() => setSelectedPatent(null)}
-                className="absolute top-5 right-5 w-10 h-10 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
+                className="absolute top-4 right-4 sm:top-5 sm:right-5 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition-colors cursor-pointer z-10"
               >
                 <X size={20} />
               </button>
 
-              <div className="space-y-2">
-                <span className="px-3 py-1 rounded-full bg-[#53B8FF]/20 text-[#53B8FF] font-mono text-xs font-bold inline-block">
+              <div className="space-y-2 pr-11 sm:pr-12 min-w-0">
+                <span className="px-3 py-1 rounded-full bg-[#53B8FF]/20 text-[#53B8FF] font-mono text-xs font-bold inline-block max-w-full break-words">
                   {selectedPatent.number}
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-display font-black uppercase text-white leading-tight">
+                <h3 className="text-xl sm:text-3xl font-display font-black uppercase text-white leading-tight break-words [overflow-wrap:anywhere]">
                   {selectedPatent.title}
                 </h3>
-                <p className="text-xs font-mono text-slate-400">
+                <p className="text-xs font-mono text-slate-400 break-words">
                   {selectedPatent.category} · {selectedPatent.jurisdiction}
                 </p>
               </div>
 
               {selectedPatent.recognition && (
-                <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold flex items-center gap-2">
-                  <Award size={18} />
-                  <span>{selectedPatent.recognition}</span>
+                <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold flex items-start sm:items-center gap-2">
+                  <Award size={18} className="shrink-0 mt-0.5 sm:mt-0" />
+                  <span className="break-words">{selectedPatent.recognition}</span>
                 </div>
               )}
 
@@ -1952,24 +1952,24 @@ export default function PatentsPage() {
                   {selectedPatent.keyFeatures.map((kf, idx) => (
                     <li key={idx} className="flex items-start gap-2.5">
                       <CheckCircle2 size={16} className="text-[#53B8FF] shrink-0 mt-0.5" />
-                      <span>{kf}</span>
+                      <span className="break-words">{kf}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
               {selectedPatent.id === 'esd-static' && (
-                <div className="rounded-2xl border border-slate-800 bg-[#0a0f16] p-4 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono font-bold text-[#53B8FF] uppercase tracking-wider flex items-center gap-1.5">
-                      <Layers size={14} />
-                      {isSlovenian ? 'Uradni patentni načrt in shema (Atemm H-ESD / GREEN POINT)' : isIt ? 'Schema e progetto brevettuale ufficiale (Atemm H-ESD / GREEN POINT)' : 'Official patent schematic (Atemm H-ESD / GREEN POINT)'}
+                <div className="rounded-2xl border border-slate-800 bg-[#0a0f16] p-3.5 sm:p-4 space-y-3">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <span className="text-xs font-mono font-bold text-[#53B8FF] uppercase tracking-wider flex items-start sm:items-center gap-1.5 min-w-0">
+                      <Layers size={14} className="shrink-0 mt-0.5 sm:mt-0" />
+                      <span className="break-words">{isSlovenian ? 'Uradni patentni načrt in shema (Atemm H-ESD / GREEN POINT)' : isIt ? 'Schema e progetto brevettuale ufficiale (Atemm H-ESD / GREEN POINT)' : 'Official patent schematic (Atemm H-ESD / GREEN POINT)'}</span>
                     </span>
                     <a
                       href={selectedPatent.pdfUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs font-mono text-slate-400 hover:text-[#53B8FF] flex items-center gap-1 transition-colors"
+                      className="text-xs font-mono text-slate-400 hover:text-[#53B8FF] flex items-center gap-1 transition-colors shrink-0"
                     >
                       <span>{isSlovenian ? "Odpri PDF" : isIt ? "Apri PDF" : "Open PDF"}</span>
                       <ExternalLink size={12} />
@@ -2095,22 +2095,22 @@ export default function PatentsPage() {
       {/* ========================================================================= */}
       <AnimatePresence>
         {activeVideoModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-md">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-md">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-[#151B24] border-2 border-[#53B8FF]/40 rounded-3xl max-w-4xl w-full p-6 relative shadow-2xl space-y-4"
+              className="bg-[#151B24] border-2 border-[#53B8FF]/40 rounded-3xl max-w-4xl w-full max-h-[92vh] overflow-y-auto p-4 sm:p-6 relative shadow-2xl space-y-4"
             >
-              <div className="flex items-center justify-between pb-2 border-b border-slate-800">
-                <span className="text-xs font-mono text-[#53B8FF] uppercase flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-pulse" />
-                  <span>{isSlovenian ? 'ARHIVSKI POSNETEK · START LAB ZAPUŠČINA' : isIt ? 'FILMATO D\'ARCHIVIO · EREDITÀ START LAB' : 'ARCHIVAL RECORDING · START LAB LEGACY'}</span>
+              <div className="flex items-center justify-between gap-2 pb-2 border-b border-slate-800">
+                <span className="text-[11px] sm:text-xs font-mono text-[#53B8FF] uppercase flex items-center gap-2 min-w-0">
+                  <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-pulse shrink-0" />
+                  <span className="break-words">{isSlovenian ? 'ARHIVSKI POSNETEK · START LAB ZAPUŠČINA' : isIt ? 'FILMATO D\'ARCHIVIO · EREDITÀ START LAB' : 'ARCHIVAL RECORDING · START LAB LEGACY'}</span>
                 </span>
                 <button
                   type="button"
                   onClick={() => setActiveVideoModal(null)}
-                  className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center transition-colors cursor-pointer"
+                  className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center transition-colors cursor-pointer shrink-0"
                 >
                   <X size={18} />
                 </button>
@@ -2139,7 +2139,7 @@ export default function PatentsPage() {
                           <div className="w-16 h-16 rounded-full bg-[#53B8FF]/20 text-[#53B8FF] mx-auto flex items-center justify-center animate-pulse">
                             <Activity size={32} />
                           </div>
-                          <h4 className="font-display font-black text-lg text-white uppercase">
+                          <h4 className="font-display font-black text-lg text-white uppercase break-words">
                             {vid?.title}
                           </h4>
                           <p className="text-xs text-slate-400 max-w-md mx-auto">
@@ -2150,15 +2150,15 @@ export default function PatentsPage() {
                     </div>
 
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
-                      <div>
-                        <h4 className="font-display font-black text-base uppercase text-white">
+                      <div className="min-w-0">
+                        <h4 className="font-display font-black text-base uppercase text-white break-words">
                           {vid?.title}
                         </h4>
                         <p className="text-xs text-slate-400 mt-0.5 max-w-2xl">
                           {vid?.desc}
                         </p>
                       </div>
-                      <div className="shrink-0 flex items-center gap-2 font-mono text-xs text-[#53B8FF]">
+                      <div className="shrink-0 flex flex-wrap items-center gap-2 font-mono text-xs text-[#53B8FF]">
                         <span className="px-3 py-1 rounded-lg bg-[#53B8FF]/10 border border-[#53B8FF]/30">
                           {vid?.patent}
                         </span>
@@ -2175,7 +2175,7 @@ export default function PatentsPage() {
                 <button
                   type="button"
                   onClick={() => setActiveVideoModal(null)}
-                  className="px-6 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-display font-bold uppercase cursor-pointer"
+                  className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-display font-bold uppercase cursor-pointer"
                 >
                   {ui.modal.closeBtn}
                 </button>
@@ -2190,7 +2190,7 @@ export default function PatentsPage() {
         {enlargedGasImg && (
           <div 
             onClick={() => setEnlargedGasImg(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8 bg-black/95 backdrop-blur-md cursor-zoom-out"
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-8 bg-black/95 backdrop-blur-md cursor-zoom-out"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -2199,8 +2199,8 @@ export default function PatentsPage() {
               onClick={(e) => e.stopPropagation()}
               className="relative max-w-5xl w-full max-h-[90vh] bg-[#151B24] border border-[#53B8FF]/40 rounded-3xl overflow-hidden p-4 sm:p-6 flex flex-col justify-between shadow-2xl cursor-default"
             >
-              <div className="flex items-center justify-between pb-3 border-b border-slate-800 text-xs font-mono text-slate-400">
-                <span className="text-[#53B8FF] font-bold">
+              <div className="flex items-center justify-between gap-2 pb-3 border-b border-slate-800 text-xs font-mono text-slate-400">
+                <span className="text-[#53B8FF] font-bold min-w-0 break-words">
                   {enlargedGasImg?.includes('staticne')
                     ? (isSlovenian ? 'TEHNIČNA DOKUMENTACIJA · ODVOD STATIČNE ELEKTRIKE OD LJUDI' : isIt ? 'DOCUMENTAZIONE TECNICA · SCARICA ELETTROSTATICA DA PERSONE' : 'TECHNICAL BLUEPRINT · CONTROLLED STATIC ELECTRICITY DISCHARGE')
                     : enlargedGasImg?.includes('KARTICA') || enlargedGasImg?.includes('Untitled-1')
@@ -2210,7 +2210,7 @@ export default function PatentsPage() {
                 <button
                   type="button"
                   onClick={() => setEnlargedGasImg(null)}
-                  className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center cursor-pointer transition-colors"
+                  className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center cursor-pointer transition-colors shrink-0"
                 >
                   <X size={18} />
                 </button>
@@ -2220,12 +2220,12 @@ export default function PatentsPage() {
                 <img 
                   src={enlargedGasImg} 
                   alt={isSlovenian ? "Plinski štedilnik ali načrt povečano" : isIt ? "Cucina a gas o schema ingrandito" : "Gas stove or blueprint enlarged"} 
-                  className="max-h-[70vh] w-auto max-w-full object-contain filter drop-shadow-2xl"
+                  className="max-h-[65vh] sm:max-h-[70vh] w-auto max-w-full object-contain filter drop-shadow-2xl"
                 />
               </div>
 
-              <div className="pt-3 border-t border-slate-800 flex items-center justify-between text-xs font-mono text-slate-400">
-                <span>
+              <div className="pt-3 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-slate-400">
+                <span className="min-w-0 break-words">
                   {enlargedGasImg?.includes('staticne')
                     ? 'Tase Lazovski, Emil Benko, Angelo Porcaro'
                     : enlargedGasImg?.includes('KARTICA') || enlargedGasImg?.includes('Untitled-1')
@@ -2235,7 +2235,7 @@ export default function PatentsPage() {
                 <button
                   type="button"
                   onClick={() => setEnlargedGasImg(null)}
-                  className="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-xs font-display font-bold uppercase cursor-pointer"
+                  className="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-xs font-display font-bold uppercase cursor-pointer shrink-0"
                 >
                   {ui.modal.closeBtn}
                 </button>
@@ -2250,7 +2250,7 @@ export default function PatentsPage() {
         {enlargedVitaImg && (
           <div 
             onClick={() => setEnlargedVitaImg(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8 bg-black/95 backdrop-blur-md cursor-zoom-out"
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-8 bg-black/95 backdrop-blur-md cursor-zoom-out"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -2259,12 +2259,12 @@ export default function PatentsPage() {
               onClick={(e) => e.stopPropagation()}
               className="relative max-w-5xl w-full max-h-[90vh] bg-[#151B24] border border-[#53B8FF]/40 rounded-3xl overflow-hidden p-4 sm:p-6 flex flex-col justify-between shadow-2xl cursor-default"
             >
-              <div className="flex items-center justify-between pb-3 border-b border-slate-800 text-xs font-mono text-slate-400">
-                <span className="text-[#53B8FF] font-bold">{isSlovenian ? 'PATENT US 5,051,109 A · INJEKCIJSKA IGLA VITA' : isIt ? 'BREVETTO US 5,051,109 A · AGO PER INIEZIONE VITA' : 'PATENT US 5,051,109 A · VITA SAFETY NEEDLE'}</span>
+              <div className="flex items-center justify-between gap-2 pb-3 border-b border-slate-800 text-xs font-mono text-slate-400">
+                <span className="text-[#53B8FF] font-bold min-w-0 break-words">{isSlovenian ? 'PATENT US 5,051,109 A · INJEKCIJSKA IGLA VITA' : isIt ? 'BREVETTO US 5,051,109 A · AGO PER INIEZIONE VITA' : 'PATENT US 5,051,109 A · VITA SAFETY NEEDLE'}</span>
                 <button
                   type="button"
                   onClick={() => setEnlargedVitaImg(null)}
-                  className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center cursor-pointer transition-colors"
+                  className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center cursor-pointer transition-colors shrink-0"
                 >
                   <X size={18} />
                 </button>
@@ -2274,16 +2274,16 @@ export default function PatentsPage() {
                 <img 
                   src={enlargedVitaImg} 
                   alt={isSlovenian ? "Injekcijska igla VITA načrt povečano" : isIt ? "Disegno dell'ago VITA ingrandito" : "VITA safety needle blueprint enlarged"} 
-                  className="max-h-[70vh] w-auto max-w-full object-contain filter drop-shadow-2xl"
+                  className="max-h-[65vh] sm:max-h-[70vh] w-auto max-w-full object-contain filter drop-shadow-2xl"
                 />
               </div>
 
-              <div className="pt-3 border-t border-slate-800 flex items-center justify-between text-xs font-mono text-slate-400">
-                <span>{isSlovenian ? "Tase Lazovski · EUREKA Bruselj 1993" : isIt ? "Tase Lazovski · EUREKA Bruxelles 1993" : "Tase Lazovski · EUREKA Brussels 1993"}</span>
+              <div className="pt-3 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-slate-400">
+                <span className="min-w-0 break-words">{isSlovenian ? "Tase Lazovski · EUREKA Bruselj 1993" : isIt ? "Tase Lazovski · EUREKA Bruxelles 1993" : "Tase Lazovski · EUREKA Brussels 1993"}</span>
                 <button
                   type="button"
                   onClick={() => setEnlargedVitaImg(null)}
-                  className="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-xs font-display font-bold uppercase cursor-pointer"
+                  className="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-xs font-display font-bold uppercase cursor-pointer shrink-0"
                 >
                   {ui.modal.closeBtn}
                 </button>

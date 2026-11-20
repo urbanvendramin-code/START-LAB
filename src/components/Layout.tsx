@@ -8,7 +8,7 @@ export default function Layout() {
   const isPatentsPage = pathname.startsWith('/patenti');
 
   return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden">
+    <div className="min-h-screen flex flex-col relative overflow-x-clip">
       {!isPatentsPage && <TechBackground />}
       <Navbar />
       <main className="flex-grow">
