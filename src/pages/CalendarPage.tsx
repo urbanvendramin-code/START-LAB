@@ -642,7 +642,38 @@ const getLocalizedEvents = (lang: string): Event[] => {
     image: 'https://ik.imagekit.io/utigodgni/Pametni%20dom.png'
   }));
 
-  return [...smartHomeEvents, ...arduinoEvents, ...occupiedEvents, ...maliKemikEvents, ...racerEvents, ...grapheneEvents, ...printCutEvents];
+  const startizzivDescription = isSl
+    ? 'Hekaton STARTIZZIV, ki ga organiziramo v okviru projekta START, sofinanciranega v sklopu programa Interreg Italija-Slovenija SPF GO! 2025. Projekt povezuje slovenske in italijanske srednje šole ter spodbuja čezmejno sodelovanje mladih na področju podjetništva, tehnologije in trajnosti.'
+    : isIt
+      ? 'Hackathon STARTIZZIV, organizzato nell\'ambito del progetto START, cofinanziato dal programma Interreg Italia-Slovenia SPF GO! 2025. Il progetto collega le scuole superiori slovene e italiane e promuove la cooperazione transfrontaliera dei giovani nei settori dell\'imprenditorialità, della tecnologia e della sostenibilità.'
+      : 'Hackathon STARTIZZIV, organized within the START project, co-financed by the Interreg Italy-Slovenia SPF GO! 2025 programme. The project connects Slovenian and Italian high schools and promotes cross-border youth cooperation in entrepreneurship, technology, and sustainability.';
+
+  const startizzivEvents: Event[] = [
+    {
+      id: 'startizziv-day-1',
+      title: isSl ? 'Hekaton STARTIZZIV (1. dan)' : isIt ? 'Hackathon STARTIZZIV (1° giorno)' : 'Hackathon STARTIZZIV (Day 1)',
+      date: new Date(2026, 10, 26), // Nov 26, 2026
+      time: '08:00 - 14:00',
+      location: 'Start Lab, Solkan',
+      category: 'event' as const,
+      description: startizzivDescription,
+      ageGroup: isSl ? 'Srednje šole (SI & IT)' : isIt ? 'Scuole superiori (SI & IT)' : 'High Schools (SI & IT)',
+      mentors: 'START · Interreg Italija-Slovenija SPF GO! 2025'
+    },
+    {
+      id: 'startizziv-day-2',
+      title: isSl ? 'Hekaton STARTIZZIV (2. dan)' : isIt ? 'Hackathon STARTIZZIV (2° giorno)' : 'Hackathon STARTIZZIV (Day 2)',
+      date: new Date(2026, 10, 27), // Nov 27, 2026
+      time: '08:00 - 14:00',
+      location: 'Start Lab, Solkan',
+      category: 'event' as const,
+      description: startizzivDescription,
+      ageGroup: isSl ? 'Srednje šole (SI & IT)' : isIt ? 'Scuole superiori (SI & IT)' : 'High Schools (SI & IT)',
+      mentors: 'START · Interreg Italija-Slovenija SPF GO! 2025'
+    }
+  ];
+
+  return [...startizzivEvents, ...smartHomeEvents, ...arduinoEvents, ...occupiedEvents, ...maliKemikEvents, ...racerEvents, ...grapheneEvents, ...printCutEvents];
 };
 
 export default function CalendarPage() {
@@ -691,7 +722,7 @@ export default function CalendarPage() {
   const [submitErrorMessage, setSubmitErrorMessage] = useState('');
   const [showMoreDetails, setShowMoreDetails] = useState(false);
   const [viewMode, setViewMode] = useState<'calendar' | 'list'>('calendar');
-  const [categoryFilter, setCategoryFilter] = useState<'all' | 'smarthome' | 'arduino' | 'kemik' | 'occupied' | 'racer' | 'graphene' | 'printcut'>('all');
+  const [categoryFilter, setCategoryFilter] = useState<'all' | 'startizziv' | 'smarthome' | 'arduino' | 'kemik' | 'occupied' | 'racer' | 'graphene' | 'printcut'>('all');
 
   const jumpToDate = (targetDate: Date) => {
     setCurrentMonth(startOfMonth(targetDate));
@@ -739,6 +770,7 @@ export default function CalendarPage() {
 
   const events = getLocalizedEvents(i18n.language);
 
+  const startizzivCount = events.filter(e => e.id.startsWith('startizziv')).length;
   const smartHomeCount = events.filter(e => e.id.startsWith('smart-home')).length;
   const arduinoCount = events.filter(e => e.id.startsWith('arduino')).length;
   const kemikCount = events.filter(e => e.id.includes('kemik')).length;
@@ -749,6 +781,7 @@ export default function CalendarPage() {
 
   const filteredEvents = events.filter(event => {
     if (categoryFilter === 'all') return true;
+    if (categoryFilter === 'startizziv') return event.id.startsWith('startizziv');
     if (categoryFilter === 'smarthome') return event.id.startsWith('smart-home');
     if (categoryFilter === 'arduino') return event.id.startsWith('arduino');
     if (categoryFilter === 'kemik') return event.id.includes('kemik');
@@ -778,6 +811,18 @@ export default function CalendarPage() {
       badgeEn: 'All',
       colorDot: 'bg-slate-900',
       badgeClass: 'bg-slate-100 text-slate-800'
+    },
+    {
+      id: 'startizziv' as const,
+      labelSl: 'Hekaton STARTIZZIV',
+      labelIt: 'Hackathon STARTIZZIV',
+      labelEn: 'Hackathon STARTIZZIV',
+      count: startizzivCount,
+      badgeSl: '26.–27. 11. 2026',
+      badgeIt: '26–27/11/2026',
+      badgeEn: 'Nov 26–27, 2026',
+      colorDot: 'bg-indigo-600',
+      badgeClass: 'bg-indigo-100 text-indigo-800 font-bold'
     },
     {
       id: 'smarthome' as const,
@@ -912,7 +957,7 @@ export default function CalendarPage() {
   ].filter(group => group.items.length > 0);
 
   const openRegisterModal = (event: Event) => {
-    if (event.id.startsWith('smart-home') || event.id.startsWith('printcut') || event.id.startsWith('graphene') || event.id.startsWith('racer') || event.id.startsWith('occupied') || event.id.startsWith('arduino')) {
+    if (event.id.startsWith('startizziv') || event.id.startsWith('smart-home') || event.id.startsWith('printcut') || event.id.startsWith('graphene') || event.id.startsWith('racer') || event.id.startsWith('occupied') || event.id.startsWith('arduino')) {
       return;
     }
     setModalEvent(event);
@@ -1263,6 +1308,7 @@ export default function CalendarPage() {
                       {group.items.map((event) => {
                         const isKemik = event.id.includes('kemik');
                         const isOccupied = event.category === 'occupied' || event.id.startsWith('occupied');
+                        const isStartIzziv = event.id.startsWith('startizziv');
                         const isSmartHome = event.id.startsWith('smart-home');
                         const isArduino = event.id.startsWith('arduino');
                         const isRacer = event.id.startsWith('racer');
@@ -1275,6 +1321,8 @@ export default function CalendarPage() {
                             className={`p-4 md:p-5 rounded-2xl border-2 transition-all hover:shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-4 ${
                               isOccupied 
                                 ? 'bg-rose-50/60 border-rose-200' 
+                                : isStartIzziv
+                                  ? 'bg-indigo-50/50 border-indigo-300 hover:border-indigo-500 hover:shadow-md'
                                 : isSmartHome
                                   ? 'bg-cyan-50/40 border-cyan-300 hover:border-cyan-500 hover:shadow-md'
                                   : isArduino
@@ -1291,6 +1339,8 @@ export default function CalendarPage() {
                               <div className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl flex flex-col items-center justify-center font-display shadow-xs border ${
                                 isOccupied
                                   ? 'bg-rose-600 text-white border-rose-700'
+                                  : isStartIzziv
+                                    ? 'bg-indigo-600 text-white border-indigo-700 shadow-sm'
                                   : isSmartHome
                                     ? 'bg-cyan-600 text-white border-cyan-700 shadow-sm'
                                     : isArduino
@@ -1325,6 +1375,8 @@ export default function CalendarPage() {
                                 <span className={`text-[10px] font-display font-black uppercase tracking-wider px-2 py-0.5 rounded-lg ${
                                   isOccupied
                                     ? 'bg-rose-100 text-rose-800'
+                                    : isStartIzziv
+                                      ? 'bg-indigo-100 text-indigo-800 border border-indigo-300 font-extrabold'
                                     : isSmartHome
                                       ? 'bg-cyan-100 text-cyan-800 border border-cyan-300 font-extrabold'
                                       : isArduino
@@ -1341,6 +1393,8 @@ export default function CalendarPage() {
                                       ? (event.id.includes('ptp-it') || event.title.includes('Primorski')
                                           ? (isSlovenian ? "PTP & Instrumentation Tech · Zasedeno" : isIt ? "PTP & Instrumentation Tech · Occupato" : "PTP & Instrumentation Tech · Booked")
                                           : isSlovenian ? "Start Lab zasedeno" : isIt ? "Start Lab occupato" : "Start Lab booked")
+                                      : isStartIzziv
+                                        ? "Interreg IT-SI · SPF GO! 2025"
                                       : isSmartHome
                                         ? (isSlovenian ? "Pametni dom (Shelly)" : isIt ? "Smart Home (Shelly)" : "Smart Home (Shelly)")
                                         : isArduino
@@ -1369,13 +1423,17 @@ export default function CalendarPage() {
                               <span className={`px-2.5 py-1 rounded-xl text-[10px] font-display font-black uppercase tracking-wider flex items-center gap-1 shadow-xs ${
                                 isOccupied
                                   ? 'bg-rose-600 text-white'
-                                  : 'bg-slate-200 text-slate-700'
+                                  : isStartIzziv
+                                    ? 'bg-indigo-600 text-white'
+                                    : 'bg-slate-200 text-slate-700'
                               }`}>
-                                <Lock size={12} />
+                                {isStartIzziv ? <Rocket size={12} /> : <Lock size={12} />}
                                 <span>
                                   {isOccupied
                                     ? (isSlovenian ? "Zasedeno" : isIt ? "Occupato" : "Booked")
-                                    : (isSlovenian ? "Prijave zaprte" : isIt ? "Iscrizioni chiuse" : "Closed")}
+                                    : isStartIzziv
+                                      ? (isSlovenian ? "Dogodek · Srednje šole" : isIt ? "Evento · Scuole superiori" : "Event · High Schools")
+                                      : (isSlovenian ? "Prijave zaprte" : isIt ? "Iscrizioni chiuse" : "Closed")}
                                 </span>
                               </span>
 
@@ -1486,6 +1544,15 @@ export default function CalendarPage() {
                 <div className="mb-4 sm:mb-6 p-2 sm:p-3 bg-slate-50 border border-slate-200/80 rounded-xl sm:rounded-2xl flex flex-wrap gap-x-2 sm:gap-x-4 gap-y-1.5 sm:gap-y-2 items-center justify-start text-[11px] sm:text-xs text-slate-700 font-bold select-none">
                   <button
                     type="button"
+                    onClick={() => setCategoryFilter(categoryFilter === 'startizziv' ? 'all' : 'startizziv')}
+                    className={`flex items-center gap-1 sm:gap-1.5 px-2 py-0.5 rounded-lg transition-all cursor-pointer ${categoryFilter === 'startizziv' ? 'bg-indigo-100 text-indigo-900 ring-1 ring-indigo-400 font-extrabold' : 'hover:bg-slate-200/60'}`}
+                  >
+                    <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-indigo-600 inline-block shadow-sm" />
+                    <span>{isSlovenian ? "Hekaton STARTIZZIV" : "Hackathon STARTIZZIV"}</span>
+                    <span className="text-[10px] text-slate-500 font-normal">({startizzivCount})</span>
+                  </button>
+                  <button
+                    type="button"
                     onClick={() => setCategoryFilter(categoryFilter === 'smarthome' ? 'all' : 'smarthome')}
                     className={`flex items-center gap-1 sm:gap-1.5 px-2 py-0.5 rounded-lg transition-all cursor-pointer ${categoryFilter === 'smarthome' ? 'bg-cyan-100 text-cyan-900 ring-1 ring-cyan-400 font-extrabold' : 'hover:bg-slate-200/60'}`}
                   >
@@ -1567,6 +1634,7 @@ export default function CalendarPage() {
                     const isCurrentMonth = isSameMonth(date, monthStart);
                     
                     const isOccupiedEvent = dayEvents.some(e => e.category === 'occupied' || e.id.startsWith('occupied'));
+                    const isStartIzzivEvent = dayEvents.some(e => e.id.startsWith('startizziv'));
                     const isSmartHomeEvent = dayEvents.some(e => e.id.startsWith('smart-home'));
                     const isArduinoEvent = dayEvents.some(e => e.id.startsWith('arduino'));
                     const isRacerEvent = dayEvents.some(e => e.id.startsWith('racer'));
@@ -1593,6 +1661,8 @@ export default function CalendarPage() {
                             : hasEvents
                               ? isOccupiedEvent
                                 ? 'bg-rose-50/70 border-rose-300 hover:border-rose-500 hover:bg-rose-100/60'
+                                : isStartIzzivEvent
+                                  ? 'bg-indigo-50/70 border-indigo-400 hover:border-indigo-600 hover:bg-indigo-100/60 ring-1 ring-indigo-400/40'
                                 : isSmartHomeEvent
                                   ? 'bg-cyan-50/60 border-cyan-400 hover:border-cyan-600 hover:bg-cyan-100/60 ring-1 ring-cyan-400/40'
                                   : isArduinoEvent
@@ -1615,6 +1685,8 @@ export default function CalendarPage() {
                                 ? 'bg-white/20 text-white'
                                 : isOccupiedEvent
                                   ? 'bg-rose-600 text-white'
+                                  : isStartIzzivEvent
+                                    ? 'bg-indigo-600 text-white'
                                   : isSmartHomeEvent
                                     ? 'bg-cyan-600 text-white'
                                     : isArduinoEvent
@@ -1633,6 +1705,7 @@ export default function CalendarPage() {
                               {dayEvents.map((ev) => {
                                 const isKemik = ev.id.includes('kemik');
                                 const isGeneralOccupied = (ev.category === 'occupied' || ev.id.startsWith('occupied')) && !isKemik;
+                                const isStartIzziv = ev.id.startsWith('startizziv');
                                 const isSmartHome = ev.id.startsWith('smart-home');
                                 const isArduino = ev.id.startsWith('arduino');
                                 const isRacer = ev.id.startsWith('racer');
@@ -1651,6 +1724,13 @@ export default function CalendarPage() {
                                   return (
                                     <span key={ev.id} className="text-[9px] font-black uppercase tracking-tight px-1.5 py-0.5 rounded truncate block shadow-2xs bg-rose-600 text-white" title={ev.title}>
                                       🔴 {ev.time} {isPtpIt ? 'PTP & Instr. Tech' : isSlovenian ? "Zasedeno" : isIt ? "Occupato" : "Booked"}
+                                    </span>
+                                  );
+                                }
+                                if (isStartIzziv) {
+                                  return (
+                                    <span key={ev.id} className="text-[9px] font-black uppercase tracking-tight px-1.5 py-0.5 rounded truncate block shadow-2xs bg-indigo-600 text-white font-bold" title={ev.title}>
+                                      🚀 08:00–14:00 STARTIZZIV
                                     </span>
                                   );
                                 }
@@ -1698,6 +1778,9 @@ export default function CalendarPage() {
                             <div className="flex md:hidden gap-1 items-center justify-center flex-wrap pt-0.5">
                               {isOccupiedEvent && (
                                 <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-rose-600 border border-white shrink-0 shadow-2xs" />
+                              )}
+                              {isStartIzzivEvent && (
+                                <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-indigo-600 border border-white shrink-0 shadow-2xs" />
                               )}
                               {isSmartHomeEvent && (
                                 <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-cyan-500 border border-white shrink-0 shadow-2xs" />
@@ -1764,6 +1847,7 @@ export default function CalendarPage() {
                         const isKemik = event.id.includes('kemik');
                         const isGeneralOccupied = (event.id.startsWith('occupied') || event.category === 'occupied') && !isKemik;
                         const isOccupied = isKemik || isGeneralOccupied;
+                        const isStartIzziv = event.id.startsWith('startizziv');
                         const isSmartHome = event.id.startsWith('smart-home');
                         const isArduino = event.id.startsWith('arduino');
                         const isRacer = event.id.startsWith('racer');
@@ -1791,9 +1875,14 @@ export default function CalendarPage() {
                               ) : (
                                 <span className={`
                                   px-2.5 py-1 rounded-xl text-[10px] font-display font-black uppercase tracking-wider
-                                  ${isSmartHome ? 'bg-cyan-500/15 text-cyan-700 font-bold border border-cyan-300/40' : isArduino ? 'bg-emerald-600/15 text-emerald-700 font-bold border border-emerald-300/40' : isRacer ? 'bg-amber-500/15 text-amber-600' : isGraphene ? 'bg-brand-red/15 text-brand-red' : isPrintCut ? 'bg-play-teal/15 text-play-teal' : 'bg-slate-100 text-slate-600'}
+                                  ${isStartIzziv ? 'bg-indigo-500/15 text-indigo-700 font-bold border border-indigo-300/40' : isSmartHome ? 'bg-cyan-500/15 text-cyan-700 font-bold border border-cyan-300/40' : isArduino ? 'bg-emerald-600/15 text-emerald-700 font-bold border border-emerald-300/40' : isRacer ? 'bg-amber-500/15 text-amber-600' : isGraphene ? 'bg-brand-red/15 text-brand-red' : isPrintCut ? 'bg-play-teal/15 text-play-teal' : 'bg-slate-100 text-slate-600'}
                                 `}>
-                                  {isSmartHome ? (isSlovenian ? "Pametni dom (Shelly)" : isIt ? "Casa intelligente (Shelly)" : "Smart Home (Shelly)") : isArduino ? (isSlovenian ? "Elektronika in Arduino" : isIt ? "Elettronica e Arduino" : "Electronics & Arduino") : t('calendar_page.workshop')}
+                                  {isStartIzziv ? "Interreg IT-SI · SPF GO! 2025" : isSmartHome ? (isSlovenian ? "Pametni dom (Shelly)" : isIt ? "Casa intelligente (Shelly)" : "Smart Home (Shelly)") : isArduino ? (isSlovenian ? "Elektronika in Arduino" : isIt ? "Elettronica e Arduino" : "Electronics & Arduino") : t('calendar_page.workshop')}
+                                </span>
+                              )}
+                              {isStartIzziv && (
+                                <span className="bg-indigo-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-xl shadow-sm flex items-center gap-1">
+                                  🚀 {isSlovenian ? "Dogodek · Srednje šole" : isIt ? "Evento · Scuole superiori" : "Event · High Schools"}
                                 </span>
                               )}
                               {isSmartHome && (
@@ -1828,7 +1917,9 @@ export default function CalendarPage() {
                               )}
                               {event.ageGroup && (
                                 <span className="px-2.5 py-1 rounded-xl text-[10px] font-display font-semibold bg-slate-100 text-slate-600 uppercase tracking-wider">
-                                  {isSlovenian ? `Starost: ${event.ageGroup}` : isIt ? `Età: ${event.ageGroup}` : `Age: ${event.ageGroup}`}
+                                  {isStartIzziv
+                                    ? event.ageGroup
+                                    : isSlovenian ? `Starost: ${event.ageGroup}` : isIt ? `Età: ${event.ageGroup}` : `Age: ${event.ageGroup}`}
                                 </span>
                               )}
                             </div>
@@ -1860,6 +1951,8 @@ export default function CalendarPage() {
                                         ? (event.title.includes('Primorski')
                                             ? (isSlovenian ? "Celodnevni dogodek · Zaseden celoten laboratorij" : isIt ? "Evento a giornata intera · Laboratorio occupato" : "Full-day event · Entire lab booked")
                                             : isSlovenian ? "Rezerviran termin v Start Labu" : isIt ? "Sessione prenotata presso Start Lab" : "Booked slot at Start Lab")
+                                      : isStartIzziv
+                                        ? (isSlovenian ? "Dvodnevni čezmejni hekaton · 26. in 27. 11. 2026" : isIt ? "Hackathon transfrontaliero · 26 e 27/11/2026" : "Two-day cross-border hackathon · Nov 26–27, 2026")
                                       : isSmartHome
                                         ? (isSlovenian ? "4 srečanja × 2 uri (16:30 – 18:30)" : isIt ? "4 sessioni × 2 ore (16:30 – 18:30)" : "4 sessions × 2 hours (16:30 – 18:30)")
                                       : isArduino
@@ -1883,7 +1976,7 @@ export default function CalendarPage() {
                               </div>
                             </div>
                             
-                            <p className={`text-slate-600 text-sm font-semibold leading-relaxed mb-6 pl-3 py-1.5 ${isOccupied ? 'bg-rose-50/50 border-l-2 border-rose-500 rounded-r-xl' : 'bg-brand-red/[0.02] border-l-2 border-brand-red/40'}`}>
+                            <p className={`text-slate-600 text-sm font-semibold leading-relaxed mb-6 pl-3 py-1.5 ${isOccupied ? 'bg-rose-50/50 border-l-2 border-rose-500 rounded-r-xl' : isStartIzziv ? 'bg-indigo-50/50 border-l-2 border-indigo-500 rounded-r-xl' : 'bg-brand-red/[0.02] border-l-2 border-brand-red/40'}`}>
                               {event.description}
                             </p>
 
@@ -1912,7 +2005,9 @@ export default function CalendarPage() {
                                   <div className="flex items-center gap-2">
                                     <Sparkles size={14} className="stroke-[2.5]" />
                                     <span>
-                                      {isSmartHome
+                                      {isStartIzziv
+                                        ? (isSlovenian ? "Projekt START · Interreg Italija-Slovenija SPF GO! 2025" : isIt ? "Progetto START · Interreg Italia-Slovenia SPF GO! 2025" : "Project START · Interreg Italy-Slovenia SPF GO! 2025")
+                                        : isSmartHome
                                         ? (isSlovenian ? "Popolnoma brezplačna delavnica (4 srečanja × 2 uri)" : isIt ? "Workshop completamente gratuito (4 sessioni × 2 ore)" : "100% Free workshop (4 sessions × 2 hours)")
                                         : isArduino
                                         ? (isSlovenian ? "Cena celotne delavnice: 40 € (8 srečanj × 2 uri)" : isIt ? "Prezzo intero workshop: 40 € (8 sessioni × 2 ore)" : "Full workshop price: 40 € (8 sessions × 2 hours)")
@@ -1921,7 +2016,11 @@ export default function CalendarPage() {
                                           : (isSlovenian ? "Brezplačna udeležba • Število mest je omejeno!" : isIt ? "Partecipazione gratuita • Posti strettamente limitati!" : "Free of charge • Limited slots available!")}
                                     </span>
                                   </div>
-                                  {isSmartHome ? (
+                                  {isStartIzziv ? (
+                                    <span className="bg-indigo-600 text-white text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
+                                      🚀 {isSlovenian ? "Čezmejni dogodek" : isIt ? "Evento transfrontaliero" : "Cross-border event"}
+                                    </span>
+                                  ) : isSmartHome ? (
                                     <span className="bg-slate-800 text-slate-300 text-[10px] font-display font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm border border-slate-700">
                                       🔒 {isSlovenian ? "Prijave zaprte" : isIt ? "Iscrizioni chiuse" : "Registrations closed"}
                                     </span>
@@ -1944,7 +2043,15 @@ export default function CalendarPage() {
                                   ) : null}
                                 </div>
                                 <div className="border-t border-slate-200/60 pt-2.5 space-y-1">
-                                  {isSmartHome ? (
+                                  {isStartIzziv ? (
+                                    <>
+                                      <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Projekt & program:" : isIt ? "Progetto & programma:" : "Project & programme:"}</span> START · Interreg Italija-Slovenija SPF GO! 2025</p>
+                                      <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Datuma in ura:" : isIt ? "Date e orario:" : "Dates & time:"}</span> {isSlovenian ? "26. 11. in 27. 11. 2026 (08:00 – 14:00)" : isIt ? "26 e 27/11/2026 (08:00 – 14:00)" : "Nov 26 & 27, 2026 (08:00 – 14:00)"}</p>
+                                      <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Udeleženci:" : isIt ? "Partecipanti:" : "Participants:"}</span> {isSlovenian ? "Slovenske in italijanske srednje šole" : isIt ? "Scuole superiori slovene e italiane" : "Slovenian and Italian high schools"}</p>
+                                      <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Fokus:" : isIt ? "Focus:" : "Focus:"}</span> {isSlovenian ? "Podjetništvo, tehnologija in trajnost" : isIt ? "Imprenditorialità, tecnologia e sostenibilità" : "Entrepreneurship, technology & sustainability"}</p>
+                                      <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Lokacija:" : isIt ? "Luogo:" : "Location:"}</span> Start Lab, Solkan</p>
+                                    </>
+                                  ) : isSmartHome ? (
                                     <>
                                       <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Starost & Ciljna skupina:" : isIt ? "Fascia d'età:" : "Age Group:"}</span> 10–15 let</p>
                                       <p><span className="text-slate-900 font-extrabold">{isSlovenian ? "Trajanje:" : isIt ? "Durata:" : "Duration:"}</span> 4 srečanja × 2 uri (16:30 – 18:30)</p>
@@ -2603,6 +2710,17 @@ export default function CalendarPage() {
                               <div className="w-full py-3.5 bg-rose-100/70 border border-rose-300 text-rose-800 rounded-2xl font-display font-black uppercase text-xs tracking-wider select-none flex items-center justify-center gap-2 shadow-xs">
                                 <Lock size={16} className="text-rose-600 stroke-[2.5]" />
                                 {isSlovenian ? `Zasedeno (${event.time})` : isIt ? `Occupato (${event.time})` : `Booked (${event.time})`}
+                              </div>
+                            ) : isStartIzziv ? (
+                              <div className="w-full py-3.5 px-4 bg-indigo-50 border border-indigo-200 text-indigo-900 rounded-2xl font-display font-bold text-xs tracking-wide select-none flex items-center justify-center gap-2 text-center">
+                                <Rocket size={16} className="text-indigo-600 stroke-[2.5] shrink-0" />
+                                <span>
+                                  {isSlovenian
+                                    ? "Interreg Italija-Slovenija SPF GO! 2025 · Dogodek za srednje šole"
+                                    : isIt
+                                      ? "Interreg Italia-Slovenia SPF GO! 2025 · Evento per scuole superiori"
+                                      : "Interreg Italy-Slovenia SPF GO! 2025 · High School Hackathon"}
+                                </span>
                               </div>
                             ) : isPrintCut || isGraphene || isRacer || isArduino || isSmartHome ? (
                               <button 
