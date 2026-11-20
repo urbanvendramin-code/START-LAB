@@ -55,5 +55,16 @@
       "/patenti": 1
     },
     "dateCreated": "2026-11-12"
+  },
+  "sid_1px2f2vtx_mwoyfkuk": {
+    "sessionId": "sid_1px2f2vtx_mwoyfkuk",
+    "ipHash": "ODkuMjEyLj",
+    "firstSeen": 1795177696930,
+    "lastSeen": 1795177772578,
+    "durationSeconds": 105,
+    "pages": {
+      "/": 1
+    },
+    "dateCreated": "2026-11-20"
   }
 }

@@ -75,3 +75,32 @@
   animation-play-state: paused;
 }
 
+@keyframes inventor-float {
+  0%, 100% {
+    transform: translate3d(0, -4px, 0);
+  }
+  50% {
+    transform: translate3d(0, 4px, 0);
+  }
+}
+
+@keyframes inventor-scan {
+  0% {
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    transform: translate3d(0, 320%, 0);
+  }
+}
+
+.animate-inventor-float {
+  animation: inventor-float 4.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-inventor-scan {
+  animation: inventor-scan 3.4s linear infinite;
+  will-change: transform;
+}
+
+
