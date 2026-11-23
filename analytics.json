@@ -66,5 +66,16 @@
       "/": 1
     },
     "dateCreated": "2026-11-20"
+  },
+  "sid_cwcoa16ff_mwsxq37e": {
+    "sessionId": "sid_cwcoa16ff_mwsxq37e",
+    "ipHash": "ODkuMjEyLj",
+    "firstSeen": 1795420882931,
+    "lastSeen": 1795420882931,
+    "durationSeconds": 2540,
+    "pages": {
+      "/patenti": 1
+    },
+    "dateCreated": "2026-11-23"
   }
 }

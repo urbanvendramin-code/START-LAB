@@ -76,7 +76,7 @@ export default function PatentsPage() {
     return [
       { ...data[0], image: vitaImg, videoUrl: 'https://ik.imagekit.io/utigodgni/Igla%20VITA1.mp4' },
       { ...data[1], image: parkingImg, videoUrl: 'https://ik.imagekit.io/utigodgni/Parkirni%20avtomat1.mp4' },
-      { ...data[2], image: heroImg, videoUrl: 'https://ik.imagekit.io/utigodgni/IMG_3769.png' },
+      { ...data[2], image: heroImg, videoUrl: 'https://ik.imagekit.io/utigodgni/Odvod%20stati%C4%8Dne%20elektrike%20od%20ljudi%20-%20varnostni%20pas_N9aOYfSbY.mp4' },
     ];
   }, [currentLang]);
 
