@@ -179,6 +179,12 @@
       "label": "Craft & Business Partner",
       "desc": "The Regional Chamber of Craft and Small Business of Ajdovščina supports Start LAB, believing that the development of technical skills and encouraging creativity among youth are key to the future of entrepreneurship and craft industries. Start LAB provides young people with hands-on experience, fostering innovation and exploring modern technologies. At the chamber, we recognize valuable opportunities for cooperation, linking education with the economy, and promoting technical vocations increasingly needed by our region."
     },
+    "item_doberdob": {
+      "name": "Municipality of Doberdob",
+      "fullName": "Municipality of Doberdob",
+      "label": "Institutional Partner",
+      "desc": "The Municipality of Doberdob, as an institutional partner of START LAB, supports bringing science, technology, and innovation closer to children and youth. In the heart of the Karst, where Slovenian and Italian cultures intertwine, it encourages collaboration between schools, research institutions, and the economy. Through this partnership, it opens up opportunities for cross-border initiatives, the development of young talents, and connecting modern technologies with the environment and heritage."
+    },
     "for_companies": {
       "title": "For Companies",
       "desc": "We invite companies to co-create workshops, team-buildings and invest in the region's future personnel. Become part of the open developmental environment in Goriška.",

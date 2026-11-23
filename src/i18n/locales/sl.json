@@ -179,6 +179,12 @@
       "label": "Obrtno-podjetniški partner",
       "desc": "Območna obrtno-podjetniška zbornica Ajdovščina podpira Start LAB, ker verjamemo, da sta razvijanje tehničnih znanj in spodbujanje ustvarjalnosti mladih ključna za prihodnost podjetništva in obrtništva. Start LAB mladim omogoča pridobivanje praktičnih izkušenj, razvijanje inovativnosti in spoznavanje sodobnih tehnologij. V zbornici prepoznavamo priložnosti za sodelovanje, povezovanje izobraževanja z gospodarstvom ter spodbujanje zanimanja za tehnične poklice, ki jih naše gospodarstvo vse bolj potrebuje."
     },
+    "item_doberdob": {
+      "name": "Občina Doberdob",
+      "fullName": "Občina Doberdob",
+      "label": "Institucionalni partner",
+      "desc": "Občina Doberdob kot institucionalni partner START LAB-a podpira približevanje znanosti, tehnologije in inovacij otrokom in mladim. V osrčju Krasa, kjer se prepletata slovenska in italijanska kultura, spodbuja povezovanje šol, raziskovalnih ustanov in gospodarstva. S sodelovanjem odpira priložnosti za čezmejne pobude, razvoj mladih talentov ter povezovanje sodobnih tehnologij z okoljem in dediščino."
+    },
     "for_companies": {
       "title": "Za podjetja",
       "desc": "Vabimo podjetja k soustvarjanju delavnic, team-buildingom in naložbi v prihodnje kadre regije. Postanite del odprtega razvojnega okolja na Goriškem.",

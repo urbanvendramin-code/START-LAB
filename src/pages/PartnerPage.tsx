@@ -127,6 +127,11 @@ const PARTNER_CAROUSEL_LOGOS: CarouselPartner[] = [
     name: "Območna obrtno-podjetniška zbornica Ajdovščina",
     logo: "https://ik.imagekit.io/utigodgni/BARVNI%20POKONCNI%20copy.jpg",
     href: "https://www.ooz-ajdovscina.si/"
+  },
+  {
+    name: "Občina Doberdob",
+    logo: "https://ik.imagekit.io/utigodgni/grb%20vector%20doberdob%20NAPIS_CMYK2.png",
+    href: "https://www.comune.doberdo.go.it/sl"
   }
 ];
 
@@ -1162,6 +1167,13 @@ export default function PartnerPage() {
                      badgeColor: "bg-play-blue/12 text-play-blue", 
                      href: "https://www.ooz-ajdovscina.si/",
                      logo: "https://ik.imagekit.io/utigodgni/BARVNI%20POKONCNI%20copy.jpg"
+                   },
+                   { 
+                     key: 'item_doberdob', 
+                     bg: "bg-play-teal/5 border-play-teal/15 hover:border-play-teal/35 text-play-teal hover:scale-[1.01]", 
+                     badgeColor: "bg-play-teal/12 text-play-teal", 
+                     href: "https://www.comune.doberdo.go.it/sl",
+                     logo: "https://ik.imagekit.io/utigodgni/grb%20vector%20doberdob%20NAPIS_CMYK2.png"
                    }
                  ].map((item, idx) => {
                    const name = t(`partners.${item.key}.name`);

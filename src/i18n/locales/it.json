@@ -179,6 +179,12 @@
       "label": "Partner Imprenditoriale",
       "desc": "La Camera dell'Artigianato e dell'Imprenditoria di Ajdovščina sostiene Start LAB, credendo che lo sviluppo delle competenze tecniche e la promozione della creatività dei giovani siano essenziali per il futuro dell'imprenditoria e dell'artigianato. Start LAB offre ai giovani l'opportunità di acquisire esperienza pratica, sviluppare l'innovazione e scoprire le tecnologie moderne. Nella camera riconosciamo opportunità di collaborazione, collegando l'istruzione con l'economia e promuovendo l'interesse per le professioni tecniche sempre più richieste."
     },
+    "item_doberdob": {
+      "name": "Comune di Doberdò del Lago-Doberdob",
+      "fullName": "Comune di Doberdò del Lago-Doberdob",
+      "label": "Partner Istituzionale",
+      "desc": "Il Comune di Doberdò del Lago-Doberdob, in qualità di partner istituzionale di START LAB, sostiene l'avvicinamento della scienza, della tecnologia e dell'innovazione a bambini e giovani. Nel cuore del Carso, dove si intrecciano la cultura slovena e quella italiana, promuove il collegamento tra scuole, istituti di ricerca ed economia. Attraverso questa collaborazione apre opportunità per iniziative transfrontaliere, lo sviluppo di giovani talenti e l'integrazione delle moderne tecnologie con l'ambiente e il patrimonio."
+    },
     "for_companies": {
       "title": "Per le Aziende",
       "desc": "Invitiamo le aziende a co-creare workshop, team-building e investire nel futuro personale della regione. Diventa parte dell'ambiente di sviluppo aperto della Goriška.",
