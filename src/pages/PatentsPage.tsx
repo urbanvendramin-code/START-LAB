@@ -17,7 +17,6 @@ import {
   CheckCircle2, 
   ArrowRight, 
   X, 
-  Info,
   Activity,
   Radio,
   BookOpen,
@@ -86,6 +85,8 @@ export default function PatentsPage() {
   const [activeExplainerTab, setActiveExplainerTab] = useState<'vita' | 'parking' | 'card' | 'gas'>('vita');
   const [activeStep, setActiveStep] = useState<number>(0);
   const [activeVideoModal, setActiveVideoModal] = useState<string | null>(null);
+  const [vitaMechanismModalOpen, setVitaMechanismModalOpen] = useState<boolean>(false);
+  const [modalVitaStep, setModalVitaStep] = useState<number>(0);
   const [vitaViewMode, setVitaViewMode] = useState<'video' | 'drawing'>('video');
   const [parkingViewMode, setParkingViewMode] = useState<'video' | 'photo'>('video');
   const [vitaVideoActivated, setVitaVideoActivated] = useState<boolean>(false);
@@ -864,9 +865,8 @@ export default function PatentsPage() {
                 <button
                   type="button"
                   onClick={() => {
-                    setActiveExplainerTab('vita');
-                    const el = document.getElementById('tehnicna-razlaga');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    setModalVitaStep(0);
+                    setVitaMechanismModalOpen(true);
                   }}
                   className="px-5 py-3 rounded-xl bg-[#151B24] hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 text-xs font-display font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer text-center"
                 >
@@ -1249,20 +1249,6 @@ export default function PatentsPage() {
                   <div className="font-bold text-white text-xs mt-1 break-words">{isSlovenian ? '< 0.2 s zapora plina' : isIt ? '< 0.2 s arresto gas' : '< 0.2 s gas shutoff'}</div>
                 </div>
               </div>
-
-              <div className="pt-2 flex flex-col sm:flex-row sm:flex-wrap">
-                <button
-                  type="button"
-                  onClick={() => {
-                    const rec = patentRegistry.find(p => p.id === 'gas-timer');
-                    if (rec) setSelectedPatent(rec);
-                  }}
-                  className="px-5 sm:px-6 py-3 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md text-center"
-                >
-                  <FileText size={16} className="shrink-0" />
-                  <span>{ui.featured.gas.docTitle}</span>
-                </button>
-              </div>
             </div>
 
             {/* Visual Column: Interactive 3-Image Showcase */}
@@ -1430,17 +1416,6 @@ export default function PatentsPage() {
                 >
                   <Play size={16} className="text-[#53B8FF] shrink-0" />
                   <span>{isSlovenian ? 'Predvajaj video posnetek' : isIt ? 'Riproduci video' : 'Play video footage'}</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    const rec = patentRegistry.find(p => p.id === 'esd-static');
-                    if (rec) setSelectedPatent(rec);
-                  }}
-                  className="px-5 py-3 rounded-xl bg-[#151B24] hover:bg-slate-800 text-slate-300 border border-slate-800 font-display font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer text-center"
-                >
-                  <Info size={16} className="text-[#53B8FF] shrink-0" />
-                  <span>{isSlovenian ? 'Specifikacije izuma' : isIt ? 'Specifiche dell\'invenzione' : 'Invention specifications'}</span>
                 </button>
               </div>
             </div>
@@ -2088,6 +2063,134 @@ export default function PatentsPage() {
             </motion.div>
           </div>
         )}
+      </AnimatePresence>
+
+      {/* ========================================================================= */}
+      {/* VITA MECHANISM EXPLAINER MODAL */}
+      {/* ========================================================================= */}
+      <AnimatePresence>
+        {vitaMechanismModalOpen && (() => {
+          const vitaData = explainerData.vita;
+          return (
+            <div
+              onClick={() => setVitaMechanismModalOpen(false)}
+              className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md"
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                onClick={(e) => e.stopPropagation()}
+                className="bg-[#151B24] border-2 border-[#53B8FF]/40 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-4 sm:p-8 relative shadow-2xl space-y-5 sm:space-y-6 text-slate-200"
+              >
+                <button
+                  type="button"
+                  onClick={() => setVitaMechanismModalOpen(false)}
+                  className="absolute top-4 right-4 sm:top-5 sm:right-5 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition-colors cursor-pointer z-10"
+                  aria-label={ui.modal.closeBtn}
+                >
+                  <X size={20} />
+                </button>
+
+                <div className="space-y-2 pr-11 sm:pr-12 min-w-0">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="px-3 py-1 rounded-full bg-[#53B8FF]/20 text-[#53B8FF] font-mono text-xs font-bold inline-block max-w-full break-words">
+                      {vitaData.patent}
+                    </span>
+                    <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-mono text-[11px] font-bold">
+                      EUREKA 1993
+                    </span>
+                  </div>
+                  <h3 className="text-xl sm:text-3xl font-display font-black uppercase text-white leading-tight break-words [overflow-wrap:anywhere]">
+                    {vitaData.title}
+                  </h3>
+                  <p className="text-sm text-slate-300 leading-relaxed font-normal pt-1">
+                    {vitaData.desc}
+                  </p>
+                </div>
+
+                {/* Interactive 4-Step Mechanism Grid */}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between gap-2">
+                    <h4 className="text-xs font-mono uppercase tracking-wider text-[#53B8FF] font-bold">
+                      {isSlovenian ? 'Koraki delovanja mehanizma' : isIt ? 'Fasi di funzionamento del meccanismo' : 'Mechanism Operating Steps'}
+                    </h4>
+                    <span className="text-[11px] font-mono text-slate-400">
+                      0{modalVitaStep + 1} / 0{vitaData.steps.length}
+                    </span>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-3.5 sm:gap-4">
+                    {vitaData.steps.map((st, i) => {
+                      const isSelected = modalVitaStep === i;
+                      return (
+                        <button
+                          key={st.num}
+                          type="button"
+                          onClick={() => setModalVitaStep(i)}
+                          className={`min-w-0 text-left p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer ${
+                            isSelected
+                              ? 'bg-[#0E131C] border-[#53B8FF] shadow-[0_0_20px_rgba(83,184,255,0.2)]'
+                              : 'bg-[#0E131C]/60 border-slate-800/90 hover:border-slate-700'
+                          }`}
+                        >
+                          <div className="flex items-center justify-between mb-2.5">
+                            <span className={`font-mono text-lg font-bold ${isSelected ? 'text-[#53B8FF]' : 'text-slate-500'}`}>
+                              {st.num}
+                            </span>
+                            {isSelected && <span className="w-2 h-2 rounded-full bg-[#53B8FF] animate-ping" />}
+                          </div>
+                          <h5 className="font-display font-black text-sm uppercase text-white mb-1.5 leading-snug break-words">
+                            {st.name}
+                          </h5>
+                          <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+                            {st.detail}
+                          </p>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div className="pt-2 flex flex-col sm:flex-row gap-3 border-t border-slate-800/80">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setVitaMechanismModalOpen(false);
+                      setVitaViewMode('video');
+                      setActiveVideoModal('video-vita');
+                    }}
+                    className="flex-1 py-3 px-4 rounded-xl bg-[#53B8FF] hover:bg-[#3ca8f5] text-[#080B10] font-display font-black text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md text-center"
+                  >
+                    <Play size={15} className="fill-[#080B10] shrink-0" />
+                    <span>{isSlovenian ? 'Predvajaj video posnetek' : isIt ? 'Riproduci video' : 'Play video footage'}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const rec = patentRegistry.find(p => p.id === 'us5051109a');
+                      setVitaMechanismModalOpen(false);
+                      if (rec) setSelectedPatent(rec);
+                    }}
+                    className="flex-1 py-3 px-4 rounded-xl bg-[#53B8FF]/15 border border-[#53B8FF]/40 hover:bg-[#53B8FF]/25 text-[#53B8FF] font-display font-black text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2 cursor-pointer text-center"
+                  >
+                    <FileText size={15} className="shrink-0" />
+                    <span>{ui.featured.vita.btnRegistry}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setVitaMechanismModalOpen(false)}
+                    className="sm:w-auto px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-display font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer text-center"
+                  >
+                    {ui.modal.closeBtn}
+                  </button>
+                </div>
+              </motion.div>
+            </div>
+          );
+        })()}
       </AnimatePresence>
 
       {/* ========================================================================= */}

@@ -121,7 +121,7 @@ export function getTimelineEvents(lang: Lang): Milestone[] {
       exactDate: lang === 'sl' ? '24. september 1991' : lang === 'it' ? '24 settembre 1991' : 'September 24, 1991',
       title: lang === 'sl' ? 'Podeljen patent US5051109A' : lang === 'it' ? 'Brevetto concesso US5051109A' : 'Granted US Patent US5051109A',
       desc: lang === 'sl'
-        ? 'Urad ZDA uradno podeli patent US 5,051,109 A za »Safety hypodermic needle assembly« izumitelju Tasu Lazovskemu.'
+        ? 'Urad ZDA uradno podeli patent US 5,051,109 A za »Safety hypodermic needle assembly« izumitelju Tasetu Lazovskemu.'
         : lang === 'it'
           ? 'L\'Ufficio Brevetti USA concede ufficialmente il brevetto US 5,051,109 A per »Safety hypodermic needle assembly« all\'inventore Tase Lazovski.'
           : 'The USPTO officially grants US Patent 5,051,109 A for "Safety hypodermic needle assembly" to inventor Tase Lazovski.',
@@ -250,7 +250,7 @@ export function getPatentRegistry(lang: Lang): PatentRecord[] {
       category: lang === 'sl' ? 'Urbana avtomatizacija' : lang === 'it' ? 'Automazione urbana' : 'Urban Automation',
       jurisdiction: lang === 'sl' ? 'Nova Gorica / Slovenija' : lang === 'it' ? 'Nova Gorica / Slovenia' : 'Nova Gorica / Slovenia',
       inventors: ['Tase Lazovski'],
-      manufacturer: 'Eltrade / Komunala Nova Gorica',
+      manufacturer: 'LF3M d.o.o. Kranj, Impulz d.o.o. Nova Gorica',
       coordination: lang === 'sl' ? 'Mestna občina Nova Gorica' : lang === 'it' ? 'Comune di Nova Gorica' : 'Municipality of Nova Gorica',
       filingDate: '1998',
       grantDate: lang === 'sl' ? '1999 (namestitev v mestu)' : lang === 'it' ? '1999 (installazione urbana)' : '1999 (citywide deployment)',
@@ -362,7 +362,7 @@ export function getAdditionalInventions(lang: Lang): AdditionalInvention[] {
     {
       title: lang === 'sl' ? 'Ključ z označevanjem statusa zaklenjeno/odklenjeno' : lang === 'it' ? 'Chiave con indicatore di stato aperto/chiuso' : 'Key with Locked/Unlocked Status Indicator',
       desc: lang === 'sl'
-        ? 'Inovativna mehanska rešitev v glavi ključa, ki ob zaprtju s premikom mehanizma v smeri ključavnice, nam pokaže odprto ali zaprto.'
+        ? 'Inovativna mehanska rešitev v glavi ključa, ki ob zaprtju s premikom mehanizma v smeri ključavnice, pokaže odprto ali zaprto.'
         : lang === 'it'
           ? 'Soluzione meccanica innovativa nella testa della chiave che, al momento della chiusura spostando il meccanismo verso la serratura, indica aperto o chiuso.'
           : 'Innovative mechanical solution in the key head that, upon locking by moving the mechanism toward the lock, indicates open or locked.',
@@ -698,7 +698,7 @@ export function getPatentsUI(lang: Lang) {
         partnerBadge: 'ISKRA TERMINALI & IMPULZ',
         tokensLabel: lang === 'sl' ? 'Prehod z žetonov:' : lang === 'it' ? 'Transizione dai gettoni:' : 'Transition from Tokens:',
         tokensText: lang === 'sl'
-          ? 'Do sredine devetdesetih let so javne govorilnice delovale na težke kovinske žetone, kar je privedlo do veliko škode ter in vzdrževanja telekomunikacijskega omrežja.'
+          ? 'Do sredine devetdesetih let so javne govorilnice delovale na težke kovinske žetone, kar je privedlo do veliko škode ter vzdrževanja telekomunikacijskega omrežja.'
           : lang === 'it'
             ? 'Fino a metà degli anni \'90 le cabine telefoniche pubbliche funzionavano con pesanti gettoni metallici, provocando molti danni e costi di manutenzione della rete.'
             : 'Until the mid-1990s, public telephone booths operated on heavy metal tokens, resulting in extensive damage and high maintenance for the telecommunications network.',
