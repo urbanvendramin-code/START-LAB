@@ -325,7 +325,7 @@ export function getPatentRegistry(lang: Lang): PatentRecord[] {
 export function getAdditionalInventions(lang: Lang): AdditionalInvention[] {
   return [
     {
-      title: lang === 'sl' ? 'Univerzalni številčnik za obešalnike oblek' : lang === 'it' ? 'Numeratore universale per grucce' : 'Universal Coat Hanger Number Indicator',
+      title: lang === 'sl' ? 'Univerzalni številčnik za obešalnike oblek' : lang === 'it' ? 'Indicatore numerico per grucce apendiabiti' : 'Universal Clothes Hanger Number Indicator',
       desc: lang === 'sl'
         ? 'Praktična mehanska rešitev za vse vrste obešalnikov, ki omogoča, da so številke artiklov vidne.'
         : lang === 'it'
@@ -433,7 +433,7 @@ export function getExplainerData(lang: Lang): Record<string, ExplainerItem> {
         {
           num: '01',
           name: lang === 'sl' ? 'Solarno napajanje' : lang === 'it' ? 'Alimentazione solare' : 'Solar Photovoltaic Power',
-          detail: lang === 'sl' ? 'Zgornji fotovoltaični modul polni vgrajeni akumulator, kar omogoča delovanje brez dragega kopanja in vlečenja električnih kablov po mestu.' : lang === 'it' ? 'Il modulo fotovoltaico superiore ricarica l\'accumulatore, consentendo il funzionamento senza costosi scavi stradali.' : 'Roof-mounted solar PV panel charges deep-cycle battery, avoiding costly trenching and street cabling.'
+          detail: lang === 'sl' ? 'Zgornji fotovoltaični modul polni vgrajeni akumulator, kar omogoča delovanje brez dragega kopanja in vlečenja električnih kablov po mestu.' : lang === 'it' ? 'Il modulo fotovoltaico superiore ricarica l\'accumulatore, consentendo il funzionamento senza costosi scavi stradali.' : 'Roof-mounted solar photovoltaic panel charges battery, avoiding costly trenching and street cabling.'
         },
         {
           num: '02',
@@ -443,7 +443,7 @@ export function getExplainerData(lang: Lang): Record<string, ExplainerItem> {
         {
           num: '03',
           name: lang === 'sl' ? 'Termični tisk listka' : lang === 'it' ? 'Stampa termica del tagliando' : 'Thermal Ticket Printing',
-          detail: lang === 'sl' ? 'Nizkoenergijski termični tiskalnik natisne veljavnost parkiranja, cono in registrsko kodo z visoko kontrastnim tiskom.' : lang === 'it' ? 'La stampante termica a basso consumo stampa scadenza sosta, zona e codice con elevato contrasto.' : 'Low-power thermal mechanism prints parking expiration, zone, and timecode.'
+          detail: lang === 'sl' ? 'Nizkoenergijski termični tiskalnik natisne veljavnost parkiranja, cono in registrsko kodo z visoko kontrastnim tiskom.' : lang === 'it' ? 'La stampante termica a basso consumo stampa scadenza sosta, zona e codice con la stampa ad elevato contrasto.' : 'Low-power thermal mechanism prints parking expiration, zone, and timecode with high-contrast print.'
         },
         {
           num: '04',
@@ -459,22 +459,22 @@ export function getExplainerData(lang: Lang): Record<string, ExplainerItem> {
         ? 'Projekt uvedbe kontaktnih čip kartic je nadomestil kovinske telefonske žetone. Uporabnikom je omogočil preprosto, zanesljivo telefoniranje iz javnih govorilnic brez gotovine.'
         : lang === 'it'
           ? 'Il progetto di introduzione delle schede a chip ha sostituito i gettoni metallici, consentendo agli utenti telefonate semplici e sicure dalle cabine pubbliche senza contanti.'
-          : 'Transitioning from easily jammed brass tokens to secure integrated circuit smart cards, enabling nationwide cashless public payphone communications.',
+          : 'The project introduced contact chip cards that replaced metal telephone tokens. It enabled users to make calls from public payphones easily and reliably, without the use of cash.',
       steps: [
         {
           num: '01',
           name: lang === 'sl' ? 'Sprejem mikrokartice' : lang === 'it' ? 'Inserimento scheda' : 'Contact Card Interface',
-          detail: lang === 'sl' ? 'Pozlačeni kontakti v reži govorilnice vzpostavijo neposredno povezavo z mikrokrmilnikom kartice ob minimalni porabi toka.' : lang === 'it' ? 'I contatti dorati stabiliscono una connessione diretta con il microchip della scheda a consumo minimo.' : 'Gold-plated spring contacts engage ISO 7816 pads, reading stored pulses with zero standby draw.'
+          detail: lang === 'sl' ? 'Pozlačeni kontakti v reži govorilnice vzpostavijo neposredno povezavo z mikrokrmilnikom kartice ob minimalni porabi toka.' : lang === 'it' ? 'I contatti placcati in oro nello slot della cabina telefonica stabiliscono una connessione diretta con il microchip della scheda con un minimo consumo energetico.' : 'Gold-plated contacts in the payphones card slot establish a direct connection with the card’s microchip, consuming minimal power.'
         },
         {
           num: '02',
           name: lang === 'sl' ? 'Preprečevanje zlorab' : lang === 'it' ? 'Prevenzione delle frodi' : 'Tamper-Proof Encryption',
-          detail: lang === 'sl' ? 'Elektronski zapis impulzov preprečuje ponarejanje, mehanske prevare z žicami ali ponovno uporabo porabljenih kartic.' : lang === 'it' ? 'La crittografia elettronica degli scatti impedisce frodi meccaniche o il riutilizzo di schede esaurite.' : 'Hardware write-once fuses prevent card reuse, pulse simulation, or physical string pullbacks.'
+          detail: lang === 'sl' ? 'Elektronski zapis impulzov preprečuje ponarejanje, mehanske prevare z žicami ali ponovno uporabo porabljenih kartic.' : lang === 'it' ? 'La registrazione elettronica degli scatti impedisce la contraffazione, frodi meccaniche con l’utilizzo di fili o il riutilizzo di schede esaurite.' : 'The electronically recorded metering pulses prevents counterfeiting, mechanical fraud using wires, or the reuse of used cards.'
         },
         {
           num: '03',
           name: lang === 'sl' ? 'Zanesljivost terminalov' : lang === 'it' ? 'Affidabilità dei terminali' : 'Terminal Reliability',
-          detail: lang === 'sl' ? 'Iskra Terminali javne govorilnice so s čip karticami dosegle 99,8 % razpoložljivost brez zastojev.' : lang === 'it' ? 'Le cabine pubbliche Iskra Terminali hanno raggiunto il 99,8% di operatività continua con le schede a chip.' : 'Public payphones achieved 99.8% field uptime without coin slot clogs.'
+          detail: lang === 'sl' ? 'Iskra Terminali javne govorilnice so s čip karticami dosegle 99,8 % razpoložljivost brez zastojev.' : lang === 'it' ? 'Le cabine pubbliche Iskra Terminali hanno raggiunto il 99,8% di operatività continua con le schede a chip.' : 'Iskra public payphone terminals using chip cards have achieved 99.8% availability without interruptions.'
         }
       ]
     },
@@ -484,8 +484,8 @@ export function getExplainerData(lang: Lang): Record<string, ExplainerItem> {
       desc: lang === 'sl'
         ? 'V sodelovanju z Emilom Benkom razviti varnostni mehanizem naslavlja enega najpogostejših vzrokov gospodinjskih nesreč: pozabljen prižgan plinski gorilnik.'
         : lang === 'it'
-          ? 'Sviluppato con Emil Benko, questo meccanismo affronta una delle cause più comuni di incidenti domestici: i fornelli a gas lasciati accesi.'
-          : 'Developed with engineer Emil Benko, this safety mechanism addresses home hazards by automatically severing gas flow when burners are left unattended.',
+          ? 'Sviluppato con Emil Benko, questo meccanismo affronta una delle cause più comuni di incidenti domestici: i fornelli a gas dimenticati accesi.'
+          : 'The safety mechanism developed with Emil Benko addresses one of the most common causes of household accidents: a forgotten gas burner left on.',
       steps: []
     }
   };
@@ -764,7 +764,7 @@ export function getPatentsUI(lang: Lang) {
         problemText: lang === 'sl'
           ? 'V določenih atmosferskih pogojih ter ob uporabi sodobnih materialov pri oblačilih, obutvi in opremi se na človeškem telesu lahko nakopiči elektrostatični naboj s potencialom tudi do 25.000 V (25 kV). Ob dotiku ozemljenega predmeta pride do hipne razelektritve, bolečega šoka, preskoka iskre in nevarnosti vžiga ali eksplozije, poleg tega pa ima tak naboj negativen vpliv na zdravje in počutje.'
           : lang === 'it'
-            ? 'In particolari condizioni atmosferiche e con l\'uso di materiali sintetici nell\'abbigliamento, calzature e attrezzature, sul corpo umano si possono accumulare cariche elettrostatiche con potenziale fino a 25.000 V (25 kV). Al contatto con un oggetto a terra si verifica una scarica istantanea, uno shock doloroso, scintillio e rischio di incendio o esplosione, con ripercussioni negative su salute e benessere.'
+            ? 'In particolari condizioni atmosferiche e con l\'uso di materiali sintetici nell\'abbigliamento, calzature e attrezzature, sul corpo umano si possono accumulare cariche elettrostatiche con potenziale fino a 25.000 V (25 kV). Al contatto con un oggetto collegato con la messa a terra si verifica una scarica istantanea, uno shock doloroso, scintillio e rischio di incendio o esplosione, con ripercussioni negative sulla salute e benessere.'
             : 'Under specific atmospheric conditions and modern synthetic clothing/footwear materials, the human body can accumulate electrostatic charges reaching potentials up to 25,000 V (25 kV). Touching a grounded surface causes an instant discharge, painful electric shock, sparks, and fire or explosion risks, alongside negative effects on health and wellbeing.',
         solutionLabel: lang === 'sl' ? 'Patentirana rešitev (EP 2805592 / US 959672):' : lang === 'it' ? 'Soluzione brevettata (EP 2805592 / US 959672):' : 'Patented Solution (EP 2805592 / US 959672):',
         solutionText: lang === 'sl'
@@ -775,8 +775,8 @@ export function getPatentsUI(lang: Lang) {
         commercialText: lang === 'sl'
           ? 'Inovativne rešitve so uveljavljene v komercialnih izdelkih Atemm H-ESD (integracija v varnostni pas vozil z prevodnim šivom) in je unikatna rešitev, saj omogoča kontroliran odvod statične elektrike z dotikom osebe na prevodni material do maksimalno 7 cm² površine, ter Atemm GREEN POINT (delovna mesta in stavbno pohištvo).'
           : lang === 'it'
-            ? 'Le soluzioni innovative sono applicate nei prodotti commerciali Atemm H-ESD (integrazione nella cintura di sicurezza delle automobili con cucitura conduttiva), una soluzione unica che permette la scarica controllata toccando un\'area conduttiva fino a un massimo di 7 cm², e Atemm GREEN POINT (postazioni di lavoro e arredo architettonico).'
-            : 'Innovative solutions are commercialized in Atemm H-ESD (integration into vehicle seatbelts via conductive thread), a unique system enabling controlled static discharge upon touching a conductive surface up to 7 cm², and Atemm GREEN POINT (workstations and architectural furniture).',
+            ? 'Le soluzioni innovative sono applicate nei prodotti commerciali Atemm H-ESD (integrazione nella cintura di sicurezza delle automobili con cucitura conduttiva), una soluzione unica che permette la scarica controllata da persone toccando un\'area conduttiva fino a un massimo di 7 cm², e Atemm GREEN POINT (postazioni di lavoro e arredo architettonico).'
+            : 'Innovative solutions are commercialized in Atemm H-ESD (integration into vehicle seatbelts via conductive thread), a unique system enabling controlled static discharge upon touching a conductive surface of up to 7 cm², and Atemm GREEN POINT (workstations and architectural furniture).',
         stats: {
           time: lang === 'sl' ? 'Čas odvoda' : lang === 'it' ? 'Tempo di scarica' : 'Discharge Duration',
           voltage: lang === 'sl' ? 'Maksimalna napetost' : lang === 'it' ? 'Tensione massima' : 'Max Voltage',
